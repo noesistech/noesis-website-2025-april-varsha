@@ -61,7 +61,7 @@ const StatCard = ({ icon, value, label, delay }: StatCardProps) => {
           ref={counterRef}
           className="text-4xl font-bold mb-2 gradient-text"
           data-value={value}
-          data-suffix={value.includes('+') ? '+' : ''}
+          data-suffix={value.includes('+') ? '+' : value.includes('%') ? '%' : ''}
         >
           0
         </div>
@@ -128,8 +128,8 @@ const AboutSection = () => {
           />
           <StatCard 
             icon={<Award className="h-6 w-6 text-pink-400" />}
-            value="95"
-            label="Client Retention Rate %"
+            value="95%"
+            label="Client Retention Rate"
             delay="0.8s"
           />
         </div>
