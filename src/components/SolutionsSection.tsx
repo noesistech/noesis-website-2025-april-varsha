@@ -1,6 +1,6 @@
 
 import React, { useRef, useEffect } from 'react';
-import { Graduation, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
+import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -15,7 +15,7 @@ type Solution = {
 const solutions: Solution[] = [
   {
     id: 'lms',
-    icon: <Graduation className="h-10 w-10" />,
+    icon: <GraduationCap className="h-10 w-10" />,
     title: 'Learning Management System',
     description: (
       <ul className="list-disc pl-5 space-y-1 text-white/80">
