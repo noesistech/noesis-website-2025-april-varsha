@@ -45,7 +45,7 @@ const serviceCards = [
 ];
 
 // Duplicate the cards to ensure smooth continuous scrolling
-const duplicatedServiceCards = [...serviceCards, ...serviceCards];
+const duplicatedServiceCards = [...serviceCards, ...serviceCards, ...serviceCards];
 
 const HeroSection = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -75,22 +75,22 @@ const HeroSection = () => {
     };
   }, []);
   
-  // Animation for continuous vertical scrolling
+  // Animation for continuous horizontal scrolling
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
     
-    const height = scrollContainer.offsetHeight / 2;
+    const width = scrollContainer.scrollWidth / 3;
     let animationId: number;
     let scrollPos = 0;
     
     const scroll = () => {
       scrollPos += 0.5; // Speed of scrolling
-      if (scrollPos >= height) {
+      if (scrollPos >= width) {
         scrollPos = 0;
       }
       
-      scrollContainer.style.transform = `translateY(-${scrollPos}px)`;
+      scrollContainer.style.transform = `translateX(-${scrollPos}px)`;
       animationId = requestAnimationFrame(scroll);
     };
     
@@ -139,19 +139,23 @@ const HeroSection = () => {
             </div>
           </div>
           
-          <div className="relative h-[500px] overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-t from-noesis-dark/80 to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/80 to-transparent z-10 pointer-events-none"></div>
+          <div className="relative h-[400px] overflow-hidden">
+            {/* Horizontal fade masks */}
+            <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-noesis-dark to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-noesis-dark to-transparent z-10 pointer-events-none"></div>
             
             <div 
               ref={scrollContainerRef} 
-              className="grid grid-cols-2 gap-4 transition-transform"
+              className="flex space-x-6 py-12 transition-transform"
             >
               {duplicatedServiceCards.map((card, index) => (
                 <div 
                   key={index} 
-                  className="glass-card h-48 glow-element flex flex-col items-center justify-center p-6 text-center"
-                  style={{ animationDelay: `${0.1 * index}s` }}
+                  className="glass-card h-64 w-64 flex-shrink-0 glow-element flex flex-col items-center justify-center p-6 text-center bg-white/5 backdrop-blur-md border border-white/10"
+                  style={{ 
+                    animationDelay: `${0.1 * index}s`,
+                    transform: `translateY(${index % 2 === 0 ? '0' : '20px'})` // Offset every second card
+                  }}
                 >
                   {card.icon}
                   <h3 className="text-lg font-semibold">{card.title}</h3>
