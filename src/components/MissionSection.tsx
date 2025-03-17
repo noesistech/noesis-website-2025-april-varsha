@@ -46,11 +46,20 @@ const MissionSection = () => {
   
   return (
     <section id="mission" className="py-32 relative overflow-hidden" ref={sectionRef}>
-      {/* Fixed background pattern */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none bg-pattern">
+      {/* Background pattern with actual icons rather than SVG data URLs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="pattern-fade-top"></div>
         <div className="pattern-fade-bottom"></div>
-        <div className="pattern-grid"></div>
+        <div className="icon-grid">
+          <div className="icon-row">
+            {Array(12).fill(0).map((_, i) => (
+              <React.Fragment key={`sparkle-${i}`}>
+                <Sparkles className="icon icon-sparkle" />
+                <Zap className="icon icon-zap" />
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
       </div>
       
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/80 via-noesis-purple/5 to-noesis-dark/80 pointer-events-none"></div>
@@ -98,12 +107,6 @@ const MissionSection = () => {
       
       <style>
         {`
-          .bg-pattern {
-            position: absolute;
-            inset: 0;
-            background-color: transparent;
-          }
-          
           .pattern-fade-top {
             position: absolute;
             top: 0;
@@ -111,7 +114,7 @@ const MissionSection = () => {
             right: 0;
             height: 200px;
             background: linear-gradient(to bottom, #1A1F2C, transparent);
-            z-index: 1;
+            z-index: 2;
           }
           
           .pattern-fade-bottom {
@@ -121,22 +124,38 @@ const MissionSection = () => {
             right: 0;
             height: 200px;
             background: linear-gradient(to top, #1A1F2C, transparent);
+            z-index: 2;
+          }
+          
+          .icon-grid {
+            position: absolute;
+            inset: 0;
+            animation: moveUp 60s linear infinite;
             z-index: 1;
           }
           
-          .pattern-grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M30 30c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm16 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z' fill='rgba(161, 116, 255, 0.15)'/%3E%3C/g%3E%3C/svg%3E"),
-                        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm-18-4v2h4v-2h-4zm0 6v2h12v-2H18z' fill='rgba(78, 167, 255, 0.15)'/%3E%3C/g%3E%3C/svg%3E");
-            background-position: 0 0, 30px 30px;
-            animation: patternMove 60s linear infinite;
+          .icon-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
           }
           
-          @keyframes patternMove {
+          .icon {
+            opacity: 0.15;
+            margin: 20px;
+            transform: scale(1.5);
+          }
+          
+          .icon-sparkle {
+            color: #a074ff;
+          }
+          
+          .icon-zap {
+            color: #4ea7ff;
+          }
+          
+          @keyframes moveUp {
             from {
               transform: translateY(0);
             }
