@@ -140,3 +140,34 @@
 .glow-element:hover::after {
   opacity: 1;
 }
+
+/* Mobile menu animations */
+@keyframes scaleIn {
+  0% { transform: scale(0.95); opacity: 0; }
+  70% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes scaleOut {
+  0% { transform: scale(1); opacity: 1; }
+  30% { transform: scale(1.05); }
+  100% { transform: scale(0.95); opacity: 0; }
+}
+
+.animate-in {
+  animation-duration: 150ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation-name: fadeIn;
+}
+
+.slide-in-from-top {
+  animation-name: scaleIn;
+}
+
+.slide-out-to-top {
+  animation-name: scaleOut;
+}

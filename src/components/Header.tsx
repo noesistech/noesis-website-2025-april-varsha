@@ -115,20 +115,34 @@ const Header = () => {
         </button>
       </div>
       
-      {/* Mobile menu */}
+      {/* Mobile menu with animation */}
       {mobileMenuOpen && (
-        <div className="md:hidden glass absolute top-full left-0 right-0 p-4 flex flex-col gap-4">
+        <div 
+          className={cn(
+            "md:hidden fixed top-[60px] left-0 right-0 p-4 flex flex-col gap-4 animate-in",
+            scrolled ? 'glass shadow-lg' : 'bg-gradient-to-b from-[rgba(26,31,44,0.95)] to-[rgba(50,30,80,0.95)]',
+            "slide-in-from-top duration-300 ease-out"
+          )}
+          style={{
+            animationFillMode: 'forwards',
+            animationDuration: '300ms'
+          }}
+        >
           {navLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-white/80 hover:text-white py-2 transition-colors"
+              className="text-white/80 hover:text-white py-2 transition-colors animate-in fade-in duration-300"
+              style={{ animationDelay: `${navLinks.indexOf(link) * 50}ms` }}
               onClick={() => setMobileMenuOpen(false)}
             >
               {link.name}
             </a>
           ))}
-          <Button className="bg-noesis-purple hover:bg-noesis-darkpurple text-white w-full">
+          <Button 
+            className="bg-noesis-purple hover:bg-noesis-darkpurple text-white w-full animate-in fade-in duration-300"
+            style={{ animationDelay: `${navLinks.length * 50}ms` }}
+          >
             Get in Touch
           </Button>
         </div>
