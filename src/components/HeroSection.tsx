@@ -1,8 +1,7 @@
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, BrainCircuit, Code, Server, Palette, Globe, Users } from 'lucide-react';
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 
 // Define our service cards data
 const serviceCards = [
@@ -45,9 +44,12 @@ const serviceCards = [
   }
 ];
 
+// Duplicate the cards to ensure smooth continuous scrolling
+const duplicatedServiceCards = [...serviceCards, ...serviceCards];
+
 const HeroSection = () => {
   const heroRef = useRef<HTMLDivElement>(null);
-  const [autoPlay, setAutoPlay] = useState(true);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -70,6 +72,32 @@ const HeroSection = () => {
     
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+  
+  // Animation for continuous vertical scrolling
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+    
+    const height = scrollContainer.offsetHeight / 2;
+    let animationId: number;
+    let scrollPos = 0;
+    
+    const scroll = () => {
+      scrollPos += 0.5; // Speed of scrolling
+      if (scrollPos >= height) {
+        scrollPos = 0;
+      }
+      
+      scrollContainer.style.transform = `translateY(-${scrollPos}px)`;
+      animationId = requestAnimationFrame(scroll);
+    };
+    
+    scroll();
+    
+    return () => {
+      cancelAnimationFrame(animationId);
     };
   }, []);
   
@@ -111,41 +139,31 @@ const HeroSection = () => {
             </div>
           </div>
           
-          <div className="relative">
+          <div className="relative h-[500px] overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-t from-noesis-dark/80 to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/80 to-transparent z-10 pointer-events-none"></div>
+            
             <div 
-              className="relative max-w-lg mx-auto"
-              onMouseEnter={() => setAutoPlay(false)}
-              onMouseLeave={() => setAutoPlay(true)}
+              ref={scrollContainerRef} 
+              className="grid grid-cols-2 gap-4 transition-transform"
             >
-              <Carousel
-                opts={{
-                  align: "start",
-                  loop: true,
-                  inViewThreshold: 0,
-                  skipSnaps: true,
-                }}
-                className="w-full"
-                autoplay={autoPlay}
-                interval={2000}
-              >
-                <CarouselContent className="-mt-1">
-                  {serviceCards.map((card, index) => (
-                    <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/2 lg:basis-1/2 pt-1">
-                      <div className="glass-card h-48 glow-element animate-fade-in flex flex-col items-center justify-center p-6 text-center" style={{ animationDelay: `${0.4 + (index * 0.2)}s` }}>
-                        {card.icon}
-                        <h3 className="text-lg font-semibold">{card.title}</h3>
-                        <p className="text-sm text-white/70">{card.description}</p>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-              </Carousel>
+              {duplicatedServiceCards.map((card, index) => (
+                <div 
+                  key={index} 
+                  className="glass-card h-48 glow-element flex flex-col items-center justify-center p-6 text-center"
+                  style={{ animationDelay: `${0.1 * index}s` }}
+                >
+                  {card.icon}
+                  <h3 className="text-lg font-semibold">{card.title}</h3>
+                  <p className="text-sm text-white/70">{card.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
       
-      {/* Moved the scroll arrow further down */}
+      {/* Scroll arrow */}
       <div className="absolute -bottom-6 left-0 right-0 flex justify-center animate-bounce z-20">
         <a href="#about" className="text-white/70 hover:text-white transition-colors">
           <ArrowDown className="h-8 w-8" />
