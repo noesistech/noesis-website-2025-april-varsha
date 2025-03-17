@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, BrainCircuit, Code, Server } from 'lucide-react';
@@ -44,6 +43,9 @@ const HeroSection = () => {
         <div className="absolute top-3/4 left-3/4 h-60 w-60 rounded-full bg-noesis-blue/20 blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
         <div className="absolute top-1/2 left-1/2 h-32 w-32 rounded-full bg-purple-400/20 blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
       </div>
+      
+      {/* Gradient overlay for smooth section transition */}
+      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-b from-transparent to-noesis-dark/90 pointer-events-none"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
