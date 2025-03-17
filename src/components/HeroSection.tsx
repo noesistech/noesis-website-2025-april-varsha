@@ -143,12 +143,13 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
-        
-        <div className="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce">
-          <a href="#about" className="text-white/70 hover:text-white transition-colors">
-            <ArrowDown className="h-8 w-8" />
-          </a>
-        </div>
+      </div>
+      
+      {/* Moved the scroll arrow further down */}
+      <div className="absolute -bottom-6 left-0 right-0 flex justify-center animate-bounce z-20">
+        <a href="#about" className="text-white/70 hover:text-white transition-colors">
+          <ArrowDown className="h-8 w-8" />
+        </a>
       </div>
     </div>
   );
