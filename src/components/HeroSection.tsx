@@ -75,22 +75,22 @@ const HeroSection = () => {
     };
   }, []);
   
-  // Animation for continuous horizontal scrolling
+  // Animation for continuous vertical scrolling
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
     
-    const width = scrollContainer.scrollWidth / 3;
+    const height = scrollContainer.scrollHeight / 3;
     let animationId: number;
     let scrollPos = 0;
     
     const scroll = () => {
       scrollPos += 0.5; // Speed of scrolling
-      if (scrollPos >= width) {
+      if (scrollPos >= height) {
         scrollPos = 0;
       }
       
-      scrollContainer.style.transform = `translateX(-${scrollPos}px)`;
+      scrollContainer.style.transform = `translateY(-${scrollPos}px)`;
       animationId = requestAnimationFrame(scroll);
     };
     
@@ -139,22 +139,24 @@ const HeroSection = () => {
             </div>
           </div>
           
-          <div className="relative h-[400px] overflow-hidden">
-            {/* Horizontal fade masks */}
-            <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-noesis-dark to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-noesis-dark to-transparent z-10 pointer-events-none"></div>
+          <div className="relative h-[500px] overflow-hidden">
+            {/* Vertical fade masks */}
+            <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-noesis-dark to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-noesis-dark to-transparent z-10 pointer-events-none"></div>
             
             <div 
               ref={scrollContainerRef} 
-              className="flex space-x-6 py-12 transition-transform"
+              className="grid grid-cols-2 gap-x-6 gap-y-4 transition-transform"
+              style={{ padding: '1rem 0' }}
             >
               {duplicatedServiceCards.map((card, index) => (
                 <div 
                   key={index} 
-                  className="glass-card h-64 w-64 flex-shrink-0 glow-element flex flex-col items-center justify-center p-6 text-center bg-white/5 backdrop-blur-md border border-white/10"
+                  className="glow-element flex flex-col items-center justify-center p-6 text-center backdrop-blur-sm border border-white/10 rounded-2xl"
                   style={{ 
-                    animationDelay: `${0.1 * index}s`,
-                    transform: `translateY(${index % 2 === 0 ? '0' : '20px'})` // Offset every second card
+                    height: '160px',
+                    marginTop: index % 2 === 0 ? '0' : '40px', // Offset every second card in the same row
+                    animationDelay: `${0.1 * index}s`
                   }}
                 >
                   {card.icon}
