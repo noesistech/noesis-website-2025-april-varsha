@@ -51,38 +51,42 @@ const MissionSection = () => {
         <div className="pattern-fade-top"></div>
         <div className="pattern-fade-bottom"></div>
         
-        {/* Pattern elements */}
-        {Array.from({ length: 16 }).map((_, index) => (
-          <div 
-            key={`sparkle-${index}`} 
-            className="absolute animate-float"
-            style={{ 
-              left: `${Math.random() * 100}%`, 
-              top: `${Math.random() * 150}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${10 + Math.random() * 10}s`,
-              opacity: 0.2 + Math.random() * 0.3
-            }}
-          >
-            <Sparkles className="text-noesis-purple w-8 h-8 md:w-12 md:h-12" />
-          </div>
-        ))}
+        {/* Pattern elements with smoother animation */}
+        <div className="pattern-row">
+          {Array.from({ length: 5 }).map((_, rowIndex) => (
+            <div key={`pattern-row-${rowIndex}`} className="pattern-column" style={{ animationDelay: `${rowIndex * 0.8}s` }}>
+              {Array.from({ length: 8 }).map((_, colIndex) => (
+                <div 
+                  key={`sparkle-${rowIndex}-${colIndex}`} 
+                  className="pattern-icon sparkle-icon"
+                  style={{ 
+                    animationDelay: `${(rowIndex * 0.8) + (colIndex * 0.3)}s`,
+                  }}
+                >
+                  <Sparkles className="text-noesis-purple w-8 h-8 md:w-10 md:h-10 opacity-20" />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
         
-        {Array.from({ length: 16 }).map((_, index) => (
-          <div 
-            key={`zap-${index}`} 
-            className="absolute animate-float"
-            style={{ 
-              left: `${Math.random() * 100}%`, 
-              top: `${Math.random() * 150}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${10 + Math.random() * 10}s`,
-              opacity: 0.2 + Math.random() * 0.3
-            }}
-          >
-            <Zap className="text-noesis-blue w-6 h-6 md:w-10 md:h-10" />
-          </div>
-        ))}
+        <div className="pattern-row" style={{ left: '25%' }}>
+          {Array.from({ length: 5 }).map((_, rowIndex) => (
+            <div key={`pattern-row-zap-${rowIndex}`} className="pattern-column" style={{ animationDelay: `${rowIndex * 0.5 + 1.2}s` }}>
+              {Array.from({ length: 8 }).map((_, colIndex) => (
+                <div 
+                  key={`zap-${rowIndex}-${colIndex}`} 
+                  className="pattern-icon zap-icon"
+                  style={{ 
+                    animationDelay: `${(rowIndex * 0.5) + (colIndex * 0.4) + 1.2}s`,
+                  }}
+                >
+                  <Zap className="text-noesis-blue w-6 h-6 md:w-8 md:h-8 opacity-20" />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
       
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/80 via-noesis-purple/5 to-noesis-dark/80 pointer-events-none"></div>
@@ -141,7 +145,7 @@ const MissionSection = () => {
             top: 0;
             left: 0;
             right: 0;
-            height: 150px;
+            height: 200px;
             background: linear-gradient(to bottom, #1A1F2C, transparent);
             z-index: 1;
           }
@@ -151,22 +155,66 @@ const MissionSection = () => {
             bottom: 0;
             left: 0;
             right: 0;
-            height: 150px;
+            height: 200px;
             background: linear-gradient(to top, #1A1F2C, transparent);
             z-index: 1;
           }
           
-          .animate-float {
-            animation: float 20s linear infinite;
-            transform: translateY(0);
+          .pattern-row {
+            position: absolute;
+            width: 100%;
+            height: 200%;
+            top: 0;
+            left: 0;
           }
           
-          @keyframes float {
+          .pattern-column {
+            position: absolute;
+            width: 60px;
+            height: 100%;
+            animation: float-column 40s linear infinite;
+            transform: translateY(100%);
+          }
+          
+          .pattern-icon {
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            animation: float-icon 40s linear infinite, fade-in-out 10s ease-in-out infinite;
+          }
+          
+          .sparkle-icon {
+            transform: rotate(5deg);
+          }
+          
+          .zap-icon {
+            transform: rotate(-5deg);
+          }
+          
+          @keyframes float-column {
             from {
               transform: translateY(100%);
             }
             to {
               transform: translateY(-100%);
+            }
+          }
+          
+          @keyframes float-icon {
+            from {
+              transform: translateY(0) rotate(0deg);
+            }
+            to {
+              transform: translateY(-1000%) rotate(10deg);
+            }
+          }
+          
+          @keyframes fade-in-out {
+            0%, 100% {
+              opacity: 0;
+            }
+            30%, 70% {
+              opacity: 0.3;
             }
           }
           
