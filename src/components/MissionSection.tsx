@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { Flag, Gem, Sparkles, Zap } from 'lucide-react';
 
@@ -70,22 +71,37 @@ const MissionSection = () => {
     const handleMouseLeave = () => {
       if (!promiseContainerRef.current) return;
       
-      promiseContainerRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+      // Reset to the current scroll-based tilt instead of flat
+      handleScroll();
     };
     
     const handleScroll = () => {
       if (!promiseContainerRef.current || !sectionRef.current) return;
       
       const rect = sectionRef.current.getBoundingClientRect();
-      const scrollProgress = Math.max(0, Math.min(1, 1 - (rect.top / window.innerHeight)));
+      const windowHeight = window.innerHeight;
       
-      const tiltAngle = scrollProgress * 3;
-      promiseContainerRef.current.style.transform = `perspective(1000px) rotateX(${tiltAngle}deg)`;
+      // Calculate how far the section is from the center of the viewport
+      const distanceFromCenter = (rect.top + rect.height / 2) - (windowHeight / 2);
+      const maxDistance = windowHeight / 2 + rect.height / 2;
+      
+      // Normalize to a value between -1 and 1
+      const normalizedDistance = Math.max(-1, Math.min(1, distanceFromCenter / maxDistance));
+      
+      // Create a more dramatic tilt effect (up to 15 degrees)
+      const tiltAngle = normalizedDistance * 15;
+      
+      if (promiseContainerRef.current) {
+        promiseContainerRef.current.style.transform = `perspective(1000px) rotateX(${tiltAngle}deg)`;
+      }
     };
     
     promiseContainerRef.current.addEventListener('mousemove', handleMouseMove);
     promiseContainerRef.current.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('scroll', handleScroll);
+    
+    // Trigger initial scroll handling
+    handleScroll();
     
     return () => {
       if (promiseContainerRef.current) {
