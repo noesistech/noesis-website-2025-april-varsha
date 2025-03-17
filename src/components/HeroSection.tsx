@@ -50,6 +50,7 @@ const duplicatedServiceCards = [...serviceCards, ...serviceCards, ...serviceCard
 const HeroSection = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number>();
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -75,29 +76,37 @@ const HeroSection = () => {
     };
   }, []);
   
-  // Animation for continuous vertical scrolling
+  // Animation for continuous infinite vertical scrolling
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
     
-    const height = scrollContainer.scrollHeight / 3;
-    let animationId: number;
+    const totalCards = serviceCards.length;
+    const cardHeight = 160 + 16; // card height + gap
+    const totalHeight = totalCards * cardHeight;
+    
     let scrollPos = 0;
+    const scrollSpeed = 0.5; // Speed of scrolling
     
     const scroll = () => {
-      scrollPos += 0.5; // Speed of scrolling
-      if (scrollPos >= height) {
+      scrollPos += scrollSpeed;
+      
+      // When we've scrolled the height of the original set of cards, 
+      // reset position to create the illusion of infinite scrolling
+      if (scrollPos >= totalHeight) {
         scrollPos = 0;
       }
       
       scrollContainer.style.transform = `translateY(-${scrollPos}px)`;
-      animationId = requestAnimationFrame(scroll);
+      animationRef.current = requestAnimationFrame(scroll);
     };
     
-    scroll();
+    animationRef.current = requestAnimationFrame(scroll);
     
     return () => {
-      cancelAnimationFrame(animationId);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
     };
   }, []);
   
@@ -140,26 +149,28 @@ const HeroSection = () => {
           </div>
           
           <div className="relative h-[500px] overflow-hidden">
-            <div 
-              ref={scrollContainerRef} 
-              className="grid grid-cols-2 gap-x-6 gap-y-4 transition-transform"
-              style={{ padding: '1rem 0' }}
-            >
-              {duplicatedServiceCards.map((card, index) => (
-                <div 
-                  key={index} 
-                  className="glow-element flex flex-col items-center justify-center p-6 text-center backdrop-blur-sm border border-white/10 rounded-2xl"
-                  style={{ 
-                    height: '160px',
-                    marginTop: index % 2 === 0 ? '0' : '40px', // Offset every second card in the same row
-                    animationDelay: `${0.1 * index}s`
-                  }}
-                >
-                  {card.icon}
-                  <h3 className="text-lg font-semibold">{card.title}</h3>
-                  <p className="text-sm text-white/70">{card.description}</p>
-                </div>
-              ))}
+            <div className="absolute inset-0 overflow-hidden">
+              <div 
+                ref={scrollContainerRef} 
+                className="grid grid-cols-2 gap-x-6 gap-y-4 transition-transform"
+                style={{ padding: '1rem 0' }}
+              >
+                {duplicatedServiceCards.map((card, index) => (
+                  <div 
+                    key={index} 
+                    className="glow-element flex flex-col items-center justify-center p-6 text-center backdrop-blur-sm border border-white/10 rounded-2xl"
+                    style={{ 
+                      height: '160px',
+                      marginTop: index % 2 === 0 ? '0' : '40px', // Offset every second card in the same row
+                      animationDelay: `${0.1 * index}s`
+                    }}
+                  >
+                    {card.icon}
+                    <h3 className="text-lg font-semibold">{card.title}</h3>
+                    <p className="text-sm text-white/70">{card.description}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
