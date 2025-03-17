@@ -80,8 +80,8 @@ const AboutSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
           <div className="glass rounded-2xl overflow-hidden animate-fade-in">
             <img 
-              src="https://images.unsplash.com/photo-1531297484001-80022131f5a1" 
-              alt="Team collaboration" 
+              src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d" 
+              alt="Digital workspace" 
               className="w-full h-auto"
             />
           </div>
