@@ -46,19 +46,22 @@ const MissionSection = () => {
   
   return (
     <section id="mission" className="py-32 relative overflow-hidden" ref={sectionRef}>
-      {/* Background pattern with actual icons rather than SVG data URLs */}
+      {/* Background pattern grid with repeating icons */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="pattern-fade-top"></div>
         <div className="pattern-fade-bottom"></div>
-        <div className="icon-grid">
-          <div className="icon-row">
-            {Array(12).fill(0).map((_, i) => (
-              <React.Fragment key={`sparkle-${i}`}>
-                <Sparkles className="icon icon-sparkle" />
-                <Zap className="icon icon-zap" />
-              </React.Fragment>
-            ))}
-          </div>
+        
+        <div className="pattern-container">
+          {Array.from({ length: 8 }).map((_, rowIndex) => (
+            <div className="pattern-row" key={`row-${rowIndex}`}>
+              {Array.from({ length: 12 }).map((_, colIndex) => (
+                <React.Fragment key={`icon-${rowIndex}-${colIndex}`}>
+                  <Sparkles className={`pattern-icon sparkle-icon ${(rowIndex + colIndex) % 2 === 0 ? 'offset' : ''}`} />
+                  <Zap className={`pattern-icon zap-icon ${(rowIndex + colIndex) % 2 !== 0 ? 'offset' : ''}`} />
+                </React.Fragment>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
       
@@ -127,31 +130,41 @@ const MissionSection = () => {
             z-index: 2;
           }
           
-          .icon-grid {
+          .pattern-container {
             position: absolute;
-            inset: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
             animation: moveUp 60s linear infinite;
             z-index: 1;
           }
           
-          .icon-row {
+          .pattern-row {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px;
+            justify-content: space-between;
+            padding: 10px 0;
           }
           
-          .icon {
+          .pattern-icon {
             opacity: 0.15;
             margin: 20px;
             transform: scale(1.5);
+            transition: all 0.5s ease;
           }
           
-          .icon-sparkle {
+          .pattern-icon.offset {
+            margin-top: 40px;
+          }
+          
+          .sparkle-icon {
             color: #a074ff;
           }
           
-          .icon-zap {
+          .zap-icon {
             color: #4ea7ff;
           }
           
@@ -160,7 +173,7 @@ const MissionSection = () => {
               transform: translateY(0);
             }
             to {
-              transform: translateY(-100%);
+              transform: translateY(-50%);
             }
           }
           
