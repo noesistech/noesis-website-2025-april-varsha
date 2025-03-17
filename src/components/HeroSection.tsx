@@ -104,7 +104,7 @@ const HeroSection = () => {
   return (
     <div 
       ref={heroRef}
-      className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-20"
+      className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-20 font-inter"
       style={{
         background: 'linear-gradient(135deg, rgba(26,31,44,1) 0%, rgba(50,30,80,1) 100%)'
       }}
@@ -140,10 +140,6 @@ const HeroSection = () => {
           </div>
           
           <div className="relative h-[500px] overflow-hidden">
-            {/* Vertical fade masks */}
-            <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-noesis-dark to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-noesis-dark to-transparent z-10 pointer-events-none"></div>
-            
             <div 
               ref={scrollContainerRef} 
               className="grid grid-cols-2 gap-x-6 gap-y-4 transition-transform"
