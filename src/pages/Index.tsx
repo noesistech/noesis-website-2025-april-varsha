@@ -14,6 +14,9 @@ import ContactSection from "@/components/ContactSection";
 const Index = () => {
   useEffect(() => {
     document.title = "Noesis.tech - Creative Technology Solutions";
+    
+    // Adding debug log to check if component is mounting
+    console.log("Index component mounted");
   }, []);
 
   return (
