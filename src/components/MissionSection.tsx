@@ -44,6 +44,10 @@ const MissionSection = () => {
     return () => observer.disconnect();
   }, []);
   
+  // Generate a grid of icons
+  const gridRows = 8;
+  const gridCols = 12;
+  
   return (
     <section id="mission" className="py-32 relative overflow-hidden" ref={sectionRef}>
       {/* Background pattern grid with repeating icons */}
@@ -51,17 +55,28 @@ const MissionSection = () => {
         <div className="pattern-fade-top"></div>
         <div className="pattern-fade-bottom"></div>
         
-        <div className="pattern-container">
-          {Array.from({ length: 8 }).map((_, rowIndex) => (
-            <div className="pattern-row" key={`row-${rowIndex}`}>
-              {Array.from({ length: 12 }).map((_, colIndex) => (
-                <React.Fragment key={`icon-${rowIndex}-${colIndex}`}>
-                  <Sparkles className={`pattern-icon sparkle-icon ${(rowIndex + colIndex) % 2 === 0 ? 'offset' : ''}`} />
-                  <Zap className={`pattern-icon zap-icon ${(rowIndex + colIndex) % 2 !== 0 ? 'offset' : ''}`} />
-                </React.Fragment>
-              ))}
-            </div>
-          ))}
+        <div className="pattern-grid">
+          {Array.from({ length: gridRows * gridCols }).map((_, index) => {
+            const row = Math.floor(index / gridCols);
+            const col = index % gridCols;
+            const isEven = (row + col) % 2 === 0;
+            const Icon = isEven ? Sparkles : Zap;
+            const iconClass = isEven ? "sparkle-icon" : "zap-icon";
+            
+            return (
+              <div 
+                key={`grid-icon-${index}`} 
+                className={`grid-cell ${iconClass}`}
+                style={{
+                  gridRow: row + 1,
+                  gridColumn: col + 1,
+                  animationDelay: `${(row * col) % 10}s`
+                }}
+              >
+                <Icon />
+              </div>
+            );
+          })}
         </div>
       </div>
       
@@ -130,34 +145,31 @@ const MissionSection = () => {
             z-index: 2;
           }
           
-          .pattern-container {
+          .pattern-grid {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(8, 1fr);
             animation: moveUp 60s linear infinite;
             z-index: 1;
           }
           
-          .pattern-row {
+          .grid-cell {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            padding: 10px 0;
-          }
-          
-          .pattern-icon {
+            justify-content: center;
+            align-items: center;
             opacity: 0.15;
-            margin: 20px;
-            transform: scale(1.5);
             transition: all 0.5s ease;
+            animation: pulseOpacity 8s ease-in-out infinite;
           }
           
-          .pattern-icon.offset {
-            margin-top: 40px;
+          .grid-cell svg {
+            width: 32px;
+            height: 32px;
           }
           
           .sparkle-icon {
@@ -174,6 +186,15 @@ const MissionSection = () => {
             }
             to {
               transform: translateY(-50%);
+            }
+          }
+          
+          @keyframes pulseOpacity {
+            0%, 100% {
+              opacity: 0.05;
+            }
+            50% {
+              opacity: 0.25;
             }
           }
           
