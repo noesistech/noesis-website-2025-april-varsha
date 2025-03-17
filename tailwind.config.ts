@@ -63,7 +63,6 @@ const config = {
       },
       fontFamily: {
         sans: ["Inter var", ...fontFamily.sans],
-        manrope: ["Manrope", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
