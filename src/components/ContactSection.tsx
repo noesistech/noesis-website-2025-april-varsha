@@ -78,66 +78,47 @@ const ContactSection = () => {
             </div>
           </Card>
           
-          <div className="flex flex-col gap-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <Card className="glass-card flex-1">
-              <div className="p-8">
-                <h3 className="text-2xl font-bold gradient-text mb-6">Contact Information</h3>
+          <Card className="glass-card animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <div className="p-8">
+              <h3 className="text-2xl font-bold gradient-text mb-6">Contact Information</h3>
+              
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="bg-noesis-purple/20 p-3 rounded-full">
+                    <Mail className="h-6 w-6 text-noesis-purple" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white">Email</p>
+                    <a href="mailto:yukti@noesis.tech" className="text-white/70 hover:text-white transition-colors">yukti@noesis.tech</a>
+                    <br />
+                    <a href="mailto:sales@noesis.tech" className="text-white/70 hover:text-white transition-colors">sales@noesis.tech</a>
+                  </div>
+                </div>
                 
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="bg-noesis-purple/20 p-3 rounded-full">
-                      <Mail className="h-6 w-6 text-noesis-purple" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-white">Email</p>
-                      <a href="mailto:yukti@noesis.tech" className="text-white/70 hover:text-white transition-colors">yukti@noesis.tech</a>
-                      <br />
-                      <a href="mailto:sales@noesis.tech" className="text-white/70 hover:text-white transition-colors">sales@noesis.tech</a>
-                    </div>
+                <div className="flex items-start gap-4">
+                  <div className="bg-noesis-blue/20 p-3 rounded-full">
+                    <Phone className="h-6 w-6 text-noesis-blue" />
                   </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="bg-noesis-blue/20 p-3 rounded-full">
-                      <Phone className="h-6 w-6 text-noesis-blue" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-white">Phone</p>
-                      <a href="tel:+916378652266" className="text-white/70 hover:text-white transition-colors">+91 6378652266</a>
-                    </div>
+                  <div>
+                    <p className="font-semibold text-white">Phone</p>
+                    <a href="tel:+916378652266" className="text-white/70 hover:text-white transition-colors">+91 6378652266</a>
                   </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="bg-purple-400/20 p-3 rounded-full">
-                      <MapPin className="h-6 w-6 text-purple-400" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-white">Address</p>
-                      <p className="text-white/70">
-                        C, Wing, 209, Floral Deck Plaza, 23rd Rd, M.I.D.C, Santacruz Electronic Export Processing Zone, Andheri East, Mumbai, Maharashtra 400093
-                      </p>
-                    </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="bg-purple-400/20 p-3 rounded-full">
+                    <MapPin className="h-6 w-6 text-purple-400" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white">Address</p>
+                    <p className="text-white/70">
+                      C, Wing, 209, Floral Deck Plaza, 23rd Rd, M.I.D.C, Santacruz Electronic Export Processing Zone, Andheri East, Mumbai, Maharashtra 400093
+                    </p>
                   </div>
                 </div>
               </div>
-            </Card>
-            
-            <Card className="glass-card flex-1">
-              <div className="p-8">
-                <h3 className="text-2xl font-bold gradient-text mb-6">Visit Our Website</h3>
-                <p className="text-white/70 mb-4">
-                  Explore more about our services, solutions, and company on our official website.
-                </p>
-                <a 
-                  href="https://www.noesis.tech" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-noesis-purple hover:text-noesis-darkpurple transition-colors font-semibold"
-                >
-                  www.noesis.tech
-                </a>
-              </div>
-            </Card>
-          </div>
+            </div>
+          </Card>
         </div>
       </div>
     </section>
