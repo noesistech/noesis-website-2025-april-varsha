@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, BrainCircuit, Code, Server, Palette, Globe, Users } from 'lucide-react';
@@ -122,8 +123,8 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Design for experiences,<br />
-              <span className="gradient-text">Build for outcomes.</span>
+              Transform ideas into<br />
+              <span className="gradient-text">digital excellence.</span>
             </h1>
             <p className="text-xl text-white/80 mb-8">
               Creatively combining content, media, data and technology to build digital solutions that deliver business results.
