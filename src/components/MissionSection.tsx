@@ -46,47 +46,11 @@ const MissionSection = () => {
   
   return (
     <section id="mission" className="py-32 relative overflow-hidden" ref={sectionRef}>
-      {/* Animated background pattern */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none pattern-container">
+      {/* Fixed background pattern */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none bg-pattern">
         <div className="pattern-fade-top"></div>
         <div className="pattern-fade-bottom"></div>
-        
-        {/* Pattern elements with smoother animation */}
-        <div className="pattern-row">
-          {Array.from({ length: 5 }).map((_, rowIndex) => (
-            <div key={`pattern-row-${rowIndex}`} className="pattern-column" style={{ animationDelay: `${rowIndex * 0.8}s` }}>
-              {Array.from({ length: 8 }).map((_, colIndex) => (
-                <div 
-                  key={`sparkle-${rowIndex}-${colIndex}`} 
-                  className="pattern-icon sparkle-icon"
-                  style={{ 
-                    animationDelay: `${(rowIndex * 0.8) + (colIndex * 0.3)}s`,
-                  }}
-                >
-                  <Sparkles className="text-noesis-purple w-8 h-8 md:w-10 md:h-10 opacity-20" />
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-        
-        <div className="pattern-row" style={{ left: '25%' }}>
-          {Array.from({ length: 5 }).map((_, rowIndex) => (
-            <div key={`pattern-row-zap-${rowIndex}`} className="pattern-column" style={{ animationDelay: `${rowIndex * 0.5 + 1.2}s` }}>
-              {Array.from({ length: 8 }).map((_, colIndex) => (
-                <div 
-                  key={`zap-${rowIndex}-${colIndex}`} 
-                  className="pattern-icon zap-icon"
-                  style={{ 
-                    animationDelay: `${(rowIndex * 0.5) + (colIndex * 0.4) + 1.2}s`,
-                  }}
-                >
-                  <Zap className="text-noesis-blue w-6 h-6 md:w-8 md:h-8 opacity-20" />
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+        <div className="pattern-grid"></div>
       </div>
       
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/80 via-noesis-purple/5 to-noesis-dark/80 pointer-events-none"></div>
@@ -134,10 +98,10 @@ const MissionSection = () => {
       
       <style>
         {`
-          .pattern-container {
+          .bg-pattern {
             position: absolute;
             inset: 0;
-            overflow: hidden;
+            background-color: transparent;
           }
           
           .pattern-fade-top {
@@ -160,61 +124,24 @@ const MissionSection = () => {
             z-index: 1;
           }
           
-          .pattern-row {
+          .pattern-grid {
             position: absolute;
-            width: 100%;
-            height: 200%;
             top: 0;
             left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M30 30c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm16 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z' fill='rgba(161, 116, 255, 0.15)'/%3E%3C/g%3E%3C/svg%3E"),
+                        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm-18-4v2h4v-2h-4zm0 6v2h12v-2H18z' fill='rgba(78, 167, 255, 0.15)'/%3E%3C/g%3E%3C/svg%3E");
+            background-position: 0 0, 30px 30px;
+            animation: patternMove 60s linear infinite;
           }
           
-          .pattern-column {
-            position: absolute;
-            width: 60px;
-            height: 100%;
-            animation: float-column 40s linear infinite;
-            transform: translateY(100%);
-          }
-          
-          .pattern-icon {
-            position: absolute;
-            left: 0;
-            opacity: 0;
-            animation: float-icon 40s linear infinite, fade-in-out 10s ease-in-out infinite;
-          }
-          
-          .sparkle-icon {
-            transform: rotate(5deg);
-          }
-          
-          .zap-icon {
-            transform: rotate(-5deg);
-          }
-          
-          @keyframes float-column {
+          @keyframes patternMove {
             from {
-              transform: translateY(100%);
+              transform: translateY(0);
             }
             to {
               transform: translateY(-100%);
-            }
-          }
-          
-          @keyframes float-icon {
-            from {
-              transform: translateY(0) rotate(0deg);
-            }
-            to {
-              transform: translateY(-1000%) rotate(10deg);
-            }
-          }
-          
-          @keyframes fade-in-out {
-            0%, 100% {
-              opacity: 0;
-            }
-            30%, 70% {
-              opacity: 0.3;
             }
           }
           
