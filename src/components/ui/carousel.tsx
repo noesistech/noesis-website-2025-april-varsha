@@ -17,6 +17,8 @@ type CarouselProps = {
   plugins?: CarouselPlugin
   orientation?: "horizontal" | "vertical"
   setApi?: (api: CarouselApi) => void
+  autoplay?: boolean
+  interval?: number
 }
 
 type CarouselContextProps = {
@@ -52,6 +54,8 @@ const Carousel = React.forwardRef<
       plugins,
       className,
       children,
+      autoplay = false,
+      interval = 3000,
       ...props
     },
     ref
@@ -65,6 +69,7 @@ const Carousel = React.forwardRef<
     )
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
+    const autoplayTimerRef = React.useRef<number | null>(null)
 
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
@@ -82,6 +87,27 @@ const Carousel = React.forwardRef<
     const scrollNext = React.useCallback(() => {
       api?.scrollNext()
     }, [api])
+
+    React.useEffect(() => {
+      if (api && autoplay) {
+        const startAutoplay = () => {
+          stopAutoplay();
+          autoplayTimerRef.current = window.setInterval(() => {
+            api.scrollNext();
+          }, interval);
+        };
+
+        const stopAutoplay = () => {
+          if (autoplayTimerRef.current !== null) {
+            clearInterval(autoplayTimerRef.current);
+            autoplayTimerRef.current = null;
+          }
+        };
+
+        startAutoplay();
+        return () => stopAutoplay();
+      }
+    }, [api, autoplay, interval]);
 
     const handleKeyDown = React.useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -130,6 +156,8 @@ const Carousel = React.forwardRef<
           scrollNext,
           canScrollPrev,
           canScrollNext,
+          autoplay,
+          interval,
         }}
       >
         <div

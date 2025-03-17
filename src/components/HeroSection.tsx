@@ -1,9 +1,53 @@
-import React, { useEffect, useRef } from 'react';
+
+import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowDown, BrainCircuit, Code, Server } from 'lucide-react';
+import { ArrowDown, BrainCircuit, Code, Server, Palette, Globe, Users } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+
+// Define our service cards data
+const serviceCards = [
+  {
+    icon: <BrainCircuit className="h-12 w-12 text-noesis-purple mb-4" />,
+    title: "AI Solutions",
+    description: "Customized intelligent experiences"
+  },
+  {
+    icon: <Code className="h-12 w-12 text-noesis-blue mb-4" />,
+    title: "Web Development",
+    description: "Dynamic websites & applications"
+  },
+  {
+    icon: <svg className="h-12 w-12 text-purple-400 mb-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 9H21M7 3V5M17 3V5M6 13H8M11 13H13M16 13H18M6 17H8M11 17H13M16 17H18M5 21H19C20.1046 21 21 20.1046 21 19V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V19C3 20.1046 3.89543 21 5 21Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>,
+    title: "UI/UX Design",
+    description: "Captivating interfaces"
+  },
+  {
+    icon: <Server className="h-12 w-12 text-pink-400 mb-4" />,
+    title: "Cloud Services",
+    description: "Flexible, high-performance hosting"
+  },
+  {
+    icon: <Palette className="h-12 w-12 text-green-400 mb-4" />,
+    title: "Creative Design",
+    description: "Eye-catching visuals & branding"
+  },
+  {
+    icon: <Globe className="h-12 w-12 text-yellow-400 mb-4" />,
+    title: "Digital Marketing",
+    description: "Reach your target audience"
+  },
+  {
+    icon: <Users className="h-12 w-12 text-blue-400 mb-4" />,
+    title: "Staff Augmentation",
+    description: "Expert teams on demand"
+  }
+];
 
 const HeroSection = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const [autoPlay, setAutoPlay] = useState(true);
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -68,29 +112,34 @@ const HeroSection = () => {
           </div>
           
           <div className="relative">
-            <div className="relative grid grid-cols-2 gap-4 max-w-lg mx-auto">
-              <div className="glass-card h-48 glow-element animate-fade-in flex flex-col items-center justify-center p-6 text-center" style={{ animationDelay: '0.4s' }}>
-                <BrainCircuit className="h-12 w-12 text-noesis-purple mb-4" />
-                <h3 className="text-lg font-semibold">AI Solutions</h3>
-                <p className="text-sm text-white/70">Customized intelligent experiences</p>
-              </div>
-              <div className="glass-card h-48 glow-element animate-fade-in flex flex-col items-center justify-center p-6 text-center" style={{ animationDelay: '0.6s', marginTop: '2rem' }}>
-                <Code className="h-12 w-12 text-noesis-blue mb-4" />
-                <h3 className="text-lg font-semibold">Web Development</h3>
-                <p className="text-sm text-white/70">Dynamic websites & applications</p>
-              </div>
-              <div className="glass-card h-48 glow-element animate-fade-in flex flex-col items-center justify-center p-6 text-center" style={{ animationDelay: '0.8s' }}>
-                <svg className="h-12 w-12 text-purple-400 mb-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 9H21M7 3V5M17 3V5M6 13H8M11 13H13M16 13H18M6 17H8M11 17H13M16 17H18M5 21H19C20.1046 21 21 20.1046 21 19V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V19C3 20.1046 3.89543 21 5 21Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <h3 className="text-lg font-semibold">UI/UX Design</h3>
-                <p className="text-sm text-white/70">Captivating interfaces</p>
-              </div>
-              <div className="glass-card h-48 glow-element animate-fade-in flex flex-col items-center justify-center p-6 text-center" style={{ animationDelay: '1s', marginTop: '2rem' }}>
-                <Server className="h-12 w-12 text-pink-400 mb-4" />
-                <h3 className="text-lg font-semibold">Cloud Services</h3>
-                <p className="text-sm text-white/70">Flexible, high-performance hosting</p>
-              </div>
+            <div 
+              className="relative max-w-lg mx-auto"
+              onMouseEnter={() => setAutoPlay(false)}
+              onMouseLeave={() => setAutoPlay(true)}
+            >
+              <Carousel
+                opts={{
+                  align: "start",
+                  loop: true,
+                  inViewThreshold: 0,
+                  skipSnaps: true,
+                }}
+                className="w-full"
+                autoplay={autoPlay}
+                interval={2000}
+              >
+                <CarouselContent className="-mt-1">
+                  {serviceCards.map((card, index) => (
+                    <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/2 lg:basis-1/2 pt-1">
+                      <div className="glass-card h-48 glow-element animate-fade-in flex flex-col items-center justify-center p-6 text-center" style={{ animationDelay: `${0.4 + (index * 0.2)}s` }}>
+                        {card.icon}
+                        <h3 className="text-lg font-semibold">{card.title}</h3>
+                        <p className="text-sm text-white/70">{card.description}</p>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
             </div>
           </div>
         </div>
