@@ -1,9 +1,10 @@
 
 import React, { useRef, useEffect } from 'react';
-import { Flag, Gem } from 'lucide-react';
+import { Flag, Gem, Sparkles, Zap } from 'lucide-react';
 
 const MissionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const promiseTextRef = useRef<HTMLParagraphElement>(null);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +25,23 @@ const MissionSection = () => {
     
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
+  // Animation for the promise text
+  useEffect(() => {
+    if (!promiseTextRef.current) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    observer.observe(promiseTextRef.current);
+    
+    return () => observer.disconnect();
   }, []);
   
   return (
@@ -59,12 +77,64 @@ const MissionSection = () => {
           <h3 className="text-3xl md:text-4xl font-bold mb-8">
             Our <span className="gradient-text">Promise</span>
           </h3>
-          <p className="text-2xl md:text-3xl font-light">
-            Design for experiences,<br />
-            <span className="font-bold gradient-text">Build for outcomes.</span>
-          </p>
+          <div className="promise-container overflow-hidden relative">
+            <p ref={promiseTextRef} className="text-2xl md:text-3xl relative promise-text">
+              <Sparkles className="inline-block h-6 w-6 mr-2 text-noesis-purple animate-pulse" />
+              <span className="text-word">Design</span> for 
+              <span className="text-word-highlight"> experiences</span>,<br />
+              <Zap className="inline-block h-6 w-6 mr-2 text-noesis-blue animate-pulse" />
+              <span className="font-bold gradient-text text-word">Build</span> for 
+              <span className="font-bold gradient-text text-word-highlight"> outcomes.</span>
+            </p>
+          </div>
         </div>
       </div>
+      
+      {/* Add some CSS for the animations */}
+      <style jsx>{`
+        .promise-text {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .promise-text.animate-in {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        .text-word {
+          display: inline-block;
+          transition: transform 0.3s ease;
+        }
+        
+        .text-word:hover {
+          transform: translateY(-5px);
+        }
+        
+        .text-word-highlight {
+          display: inline-block;
+          position: relative;
+        }
+        
+        .text-word-highlight::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, #a074ff, #4ea7ff);
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.5s ease;
+        }
+        
+        .promise-text.animate-in .text-word-highlight::after {
+          transform: scaleX(1);
+          transition-delay: 0.5s;
+        }
+      `}</style>
     </section>
   );
 };
