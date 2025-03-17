@@ -4,6 +4,7 @@ import { Flag, Gem, Sparkles, Zap } from 'lucide-react';
 const MissionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const promiseTextRef = useRef<HTMLParagraphElement>(null);
+  const promiseContainerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -42,10 +43,63 @@ const MissionSection = () => {
     return () => observer.disconnect();
   }, []);
   
-  const gridRows = 16;  // Increased from 8
-  const gridCols = 24;  // Increased from 12
+  useEffect(() => {
+    if (!promiseContainerRef.current) return;
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      const panel = promiseContainerRef.current;
+      if (!panel) return;
+      
+      const rect = panel.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
+      
+      panel.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      
+      const percentX = Math.round((x / rect.width) * 100);
+      const percentY = Math.round((y / rect.height) * 100);
+      panel.style.setProperty('--x', `${percentX}%`);
+      panel.style.setProperty('--y', `${percentY}%`);
+    };
+    
+    const handleMouseLeave = () => {
+      if (!promiseContainerRef.current) return;
+      
+      promiseContainerRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    };
+    
+    const handleScroll = () => {
+      if (!promiseContainerRef.current || !sectionRef.current) return;
+      
+      const rect = sectionRef.current.getBoundingClientRect();
+      const scrollProgress = Math.max(0, Math.min(1, 1 - (rect.top / window.innerHeight)));
+      
+      const tiltAngle = scrollProgress * 3;
+      promiseContainerRef.current.style.transform = `perspective(1000px) rotateX(${tiltAngle}deg)`;
+    };
+    
+    promiseContainerRef.current.addEventListener('mousemove', handleMouseMove);
+    promiseContainerRef.current.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      if (promiseContainerRef.current) {
+        promiseContainerRef.current.removeEventListener('mousemove', handleMouseMove);
+        promiseContainerRef.current.removeEventListener('mouseleave', handleMouseLeave);
+      }
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   
-  const totalRows = gridRows * 2;  // Double the rows to ensure continuity
+  const gridRows = 16;
+  const gridCols = 24;
+  
+  const totalRows = gridRows * 2;
   
   return (
     <section id="mission" className="py-32 relative overflow-hidden" ref={sectionRef}>
@@ -109,8 +163,13 @@ const MissionSection = () => {
           <h3 className="text-4xl md:text-5xl font-bold mb-12">
             Our <span className="gradient-text">Promise</span>
           </h3>
-          <div className="promise-container overflow-hidden relative p-10 glass-card">
-            <p ref={promiseTextRef} className="text-3xl md:text-4xl relative promise-text font-light tracking-wide">
+          <div 
+            ref={promiseContainerRef}
+            className="promise-glass-panel relative overflow-hidden p-10 transition-transform duration-300 ease-out"
+          >
+            <div className="refraction-layer"></div>
+            <div className="glass-highlight"></div>
+            <p ref={promiseTextRef} className="text-3xl md:text-4xl relative promise-text font-light tracking-wide z-10">
               <span className="text-word block md:inline-block mb-6 md:mb-0">Design</span> for 
               <span className="text-word-highlight block md:inline-block mx-2 font-medium"> experiences</span>,
               
@@ -154,7 +213,7 @@ const MissionSection = () => {
             grid-template-rows: repeat(${totalRows}, 1fr);
             animation: moveUp 60s linear infinite;
             z-index: 1;
-            height: 200%; /* Make the grid twice as tall to ensure continuous animation */
+            height: 200%;
             transform-origin: top center;
           }
           
@@ -162,14 +221,14 @@ const MissionSection = () => {
             display: flex;
             justify-content: center;
             align-items: center;
-            opacity: 0.15;  /* Reduced from 0.25 */
+            opacity: 0.15;
             transition: all 0.5s ease;
             animation: pulseOpacity 8s ease-in-out infinite;
           }
           
           .grid-cell svg {
-            width: 38px;  /* Increased from 32px */
-            height: 38px;  /* Increased from 32px */
+            width: 38px;
+            height: 38px;
           }
           
           .sparkle-icon {
@@ -185,16 +244,16 @@ const MissionSection = () => {
               transform: translateY(0);
             }
             100% {
-              transform: translateY(-50%); /* Only move up by half, since we're repeating the pattern */
+              transform: translateY(-50%);
             }
           }
           
           @keyframes pulseOpacity {
             0%, 100% {
-              opacity: 0.08;  /* Reduced from 0.15 */
+              opacity: 0.08;
             }
             50% {
-              opacity: 0.2;  /* Reduced from 0.4 */
+              opacity: 0.2;
             }
           }
           
@@ -239,6 +298,59 @@ const MissionSection = () => {
           .promise-text.animate-in .text-word-highlight::after {
             transform: scaleX(1);
             transition-delay: 0.5s;
+          }
+          
+          .promise-glass-panel {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 
+              0 4px 30px rgba(0, 0, 0, 0.1),
+              inset 0 0 20px rgba(255, 255, 255, 0.05);
+            transform-style: preserve-3d;
+            will-change: transform;
+            position: relative;
+            overflow: hidden;
+          }
+          
+          .refraction-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+              135deg,
+              rgba(255, 255, 255, 0.1),
+              rgba(255, 255, 255, 0.05),
+              rgba(134, 123, 255, 0.05),
+              rgba(64, 153, 255, 0.08)
+            );
+            transform: translateZ(-10px);
+            pointer-events: none;
+            opacity: 0.7;
+            mix-blend-mode: screen;
+          }
+          
+          .glass-highlight {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            background: radial-gradient(
+              circle at var(--x, 50%) var(--y, 50%),
+              rgba(255, 255, 255, 0.15),
+              transparent 40%
+            );
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+          }
+          
+          .promise-glass-panel:hover .glass-highlight {
+            opacity: 1;
           }
         `}
       </style>
