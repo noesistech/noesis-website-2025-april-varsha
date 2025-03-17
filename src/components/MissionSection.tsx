@@ -48,6 +48,9 @@ const MissionSection = () => {
   const gridRows = 16;  // Increased from 8
   const gridCols = 24;  // Increased from 12
   
+  // Create two sets of icons to ensure continuous animation
+  const totalRows = gridRows * 2;  // Double the rows to ensure continuity
+  
   return (
     <section id="mission" className="py-32 relative overflow-hidden" ref={sectionRef}>
       {/* Background pattern grid with repeating icons */}
@@ -56,7 +59,7 @@ const MissionSection = () => {
         <div className="pattern-fade-bottom"></div>
         
         <div className="pattern-grid">
-          {Array.from({ length: gridRows * gridCols }).map((_, index) => {
+          {Array.from({ length: totalRows * gridCols }).map((_, index) => {
             const row = Math.floor(index / gridCols);
             const col = index % gridCols;
             const isEven = (row + col) % 2 === 0;
@@ -153,9 +156,11 @@ const MissionSection = () => {
             bottom: 0;
             display: grid;
             grid-template-columns: repeat(${gridCols}, 1fr);
-            grid-template-rows: repeat(${gridRows}, 1fr);
+            grid-template-rows: repeat(${totalRows}, 1fr);
             animation: moveUp 60s linear infinite;
             z-index: 1;
+            height: 200%; /* Make the grid twice as tall to ensure continuous animation */
+            transform-origin: top center;
           }
           
           .grid-cell {
@@ -181,11 +186,11 @@ const MissionSection = () => {
           }
           
           @keyframes moveUp {
-            from {
+            0% {
               transform: translateY(0);
             }
-            to {
-              transform: translateY(-50%);
+            100% {
+              transform: translateY(-50%); /* Only move up by half, since we're repeating the pattern */
             }
           }
           
