@@ -52,7 +52,7 @@ const HeroSection = () => {
               Design for experiences,<br />
               <span className="gradient-text">Build for outcomes.</span>
             </h1>
-            <p className="text-xl text-white/80 mb-8">
+            <p className="text-xl text-white/80 mb-8 font-manrope leading-relaxed">
               Creatively combining content, media, data and technology to build digital solutions that deliver business results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
