@@ -90,51 +90,52 @@ const MissionSection = () => {
         </div>
       </div>
       
-      {/* Add some CSS for the animations */}
-      <style jsx>{`
-        .promise-text {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        .promise-text.animate-in {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        
-        .text-word {
-          display: inline-block;
-          transition: transform 0.3s ease;
-        }
-        
-        .text-word:hover {
-          transform: translateY(-5px);
-        }
-        
-        .text-word-highlight {
-          display: inline-block;
-          position: relative;
-        }
-        
-        .text-word-highlight::after {
-          content: '';
-          position: absolute;
-          bottom: -2px;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background: linear-gradient(90deg, #a074ff, #4ea7ff);
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: transform 0.5s ease;
-        }
-        
-        .promise-text.animate-in .text-word-highlight::after {
-          transform: scaleX(1);
-          transition-delay: 0.5s;
-        }
-      `}</style>
+      <style>
+        {`
+          .promise-text {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          
+          .promise-text.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          
+          .text-word {
+            display: inline-block;
+            transition: transform 0.3s ease;
+          }
+          
+          .text-word:hover {
+            transform: translateY(-5px);
+          }
+          
+          .text-word-highlight {
+            display: inline-block;
+            position: relative;
+          }
+          
+          .text-word-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #a074ff, #4ea7ff);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+          }
+          
+          .promise-text.animate-in .text-word-highlight::after {
+            transform: scaleX(1);
+            transition-delay: 0.5s;
+          }
+        `}
+      </style>
     </section>
   );
 };
