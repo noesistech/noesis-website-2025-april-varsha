@@ -123,8 +123,8 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Transform ideas into<br />
-              <span className="gradient-text">digital excellence.</span>
+              <span>Creating digital solutions</span><br />
+              <span className="gradient-text">that drive results.</span>
             </h1>
             <p className="text-xl text-white/80 mb-8">
               Creatively combining content, media, data and technology to build digital solutions that deliver business results.
