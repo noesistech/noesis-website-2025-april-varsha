@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, BrainCircuit, Code, Server, Palette, Globe, Users } from 'lucide-react';
@@ -165,9 +164,9 @@ const HeroSection = () => {
         </div>
       </div>
       
-      {/* Scroll arrow */}
-      <div className="absolute -bottom-6 left-0 right-0 flex justify-center animate-bounce z-20">
-        <a href="#about" className="text-white/70 hover:text-white transition-colors">
+      {/* Scroll arrow - adjusted position to be more visible */}
+      <div className="absolute bottom-6 left-0 right-0 flex justify-center animate-bounce z-20">
+        <a href="#about" className="text-white/70 hover:text-white transition-colors bg-noesis-dark/40 p-2 rounded-full backdrop-blur-sm">
           <ArrowDown className="h-8 w-8" />
         </a>
       </div>
