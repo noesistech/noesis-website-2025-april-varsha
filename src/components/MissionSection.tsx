@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { Flag, Gem, Sparkles, Zap } from 'lucide-react';
 
@@ -27,7 +26,6 @@ const MissionSection = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Animation for the promise text
   useEffect(() => {
     if (!promiseTextRef.current) return;
     
@@ -44,16 +42,13 @@ const MissionSection = () => {
     return () => observer.disconnect();
   }, []);
   
-  // Generate a denser grid of icons
   const gridRows = 16;  // Increased from 8
   const gridCols = 24;  // Increased from 12
   
-  // Create two sets of icons to ensure continuous animation
   const totalRows = gridRows * 2;  // Double the rows to ensure continuity
   
   return (
     <section id="mission" className="py-32 relative overflow-hidden" ref={sectionRef}>
-      {/* Background pattern grid with repeating icons */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="pattern-fade-top"></div>
         <div className="pattern-fade-bottom"></div>
@@ -73,7 +68,7 @@ const MissionSection = () => {
                 style={{
                   gridRow: row + 1,
                   gridColumn: col + 1,
-                  animationDelay: `${(row * col) % 5}s`  // Shorter animation delay for more variation
+                  animationDelay: `${(row * col) % 5}s`
                 }}
               >
                 <Icon />
@@ -167,7 +162,7 @@ const MissionSection = () => {
             display: flex;
             justify-content: center;
             align-items: center;
-            opacity: 0.25;  /* Increased from 0.15 */
+            opacity: 0.15;  /* Reduced from 0.25 */
             transition: all 0.5s ease;
             animation: pulseOpacity 8s ease-in-out infinite;
           }
@@ -196,10 +191,10 @@ const MissionSection = () => {
           
           @keyframes pulseOpacity {
             0%, 100% {
-              opacity: 0.15;  /* Increased from 0.05 */
+              opacity: 0.08;  /* Reduced from 0.15 */
             }
             50% {
-              opacity: 0.4;  /* Increased from 0.25 */
+              opacity: 0.2;  /* Reduced from 0.4 */
             }
           }
           
