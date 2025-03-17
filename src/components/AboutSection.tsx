@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Users, Briefcase, Calendar, Award } from 'lucide-react';
 
@@ -18,17 +17,19 @@ const StatCard = ({ icon, value, label, delay }: StatCardProps) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const target = entry.target as HTMLElement;
-            const countTo = parseInt(target.getAttribute('data-value') || '0', 10);
+            const numericValue = target.getAttribute('data-numeric-value') || '0';
+            const countTo = parseInt(numericValue, 10);
+            const suffix = target.getAttribute('data-suffix') || '';
             let count = 0;
             const increment = Math.ceil(countTo / 50);
             
             const updateCount = () => {
               count += increment;
               if (count < countTo) {
-                target.textContent = count.toString() + (target.getAttribute('data-suffix') || '');
+                target.textContent = count.toString() + suffix;
                 requestAnimationFrame(updateCount);
               } else {
-                target.textContent = target.getAttribute('data-value') + (target.getAttribute('data-suffix') || '');
+                target.textContent = numericValue + suffix;
               }
             };
             
@@ -51,6 +52,9 @@ const StatCard = ({ icon, value, label, delay }: StatCardProps) => {
     };
   }, []);
   
+  const numericValue = value.replace(/[^0-9]/g, '');
+  const suffix = value.replace(/[0-9]/g, '');
+  
   return (
     <div className={`glass-card animate-fade-in`} style={{ animationDelay: delay }}>
       <div className="flex flex-col items-center">
@@ -61,7 +65,8 @@ const StatCard = ({ icon, value, label, delay }: StatCardProps) => {
           ref={counterRef}
           className="text-4xl font-bold mb-2 gradient-text"
           data-value={value}
-          data-suffix={value.includes('+') ? '+' : value.includes('%') ? '%' : ''}
+          data-numeric-value={numericValue}
+          data-suffix={suffix}
         >
           0
         </div>
@@ -74,7 +79,6 @@ const StatCard = ({ icon, value, label, delay }: StatCardProps) => {
 const AboutSection = () => {
   return (
     <section id="about" className="py-20 relative">
-      {/* Gradient overlay for blending with HeroSection */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-noesis-dark/90 to-transparent pointer-events-none"></div>
       
       <div className="container mx-auto px-6">
