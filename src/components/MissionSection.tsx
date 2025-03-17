@@ -1,6 +1,6 @@
 
 import React, { useRef, useEffect } from 'react';
-import { Target, Lightbulb } from 'lucide-react';
+import { Flag, Gem } from 'lucide-react';
 
 const MissionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -35,8 +35,8 @@ const MissionSection = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
           <div id="mission-card" className="glass-card animate-fade-in relative transition-transform duration-500 ease-out transform">
-            <div className="absolute -top-10 -left-4 p-4 rounded-full glass text-noesis-purple">
-              <Target className="h-8 w-8" />
+            <div className="absolute -top-10 -left-4 p-4 rounded-full bg-noesis-purple/10 text-noesis-purple">
+              <Flag className="h-8 w-8" />
             </div>
             <h3 className="text-2xl font-bold gradient-text mb-6 pt-8">Mission</h3>
             <p className="text-white/80 text-lg">
@@ -45,8 +45,8 @@ const MissionSection = () => {
           </div>
           
           <div id="vision-card" className="glass-card animate-fade-in relative transition-transform duration-500 ease-out transform" style={{ animationDelay: '0.2s' }}>
-            <div className="absolute -top-10 -left-4 p-4 rounded-full glass text-noesis-blue">
-              <Lightbulb className="h-8 w-8" />
+            <div className="absolute -top-10 -left-4 p-4 rounded-full bg-noesis-blue/10 text-noesis-blue">
+              <Gem className="h-8 w-8" />
             </div>
             <h3 className="text-2xl font-bold gradient-text mb-6 pt-8">Vision</h3>
             <p className="text-white/80 text-lg">
