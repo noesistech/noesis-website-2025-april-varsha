@@ -44,9 +44,9 @@ const MissionSection = () => {
     return () => observer.disconnect();
   }, []);
   
-  // Generate a grid of icons
-  const gridRows = 8;
-  const gridCols = 12;
+  // Generate a denser grid of icons
+  const gridRows = 16;  // Increased from 8
+  const gridCols = 24;  // Increased from 12
   
   return (
     <section id="mission" className="py-32 relative overflow-hidden" ref={sectionRef}>
@@ -70,7 +70,7 @@ const MissionSection = () => {
                 style={{
                   gridRow: row + 1,
                   gridColumn: col + 1,
-                  animationDelay: `${(row * col) % 10}s`
+                  animationDelay: `${(row * col) % 5}s`  // Shorter animation delay for more variation
                 }}
               >
                 <Icon />
@@ -152,8 +152,8 @@ const MissionSection = () => {
             right: 0;
             bottom: 0;
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-template-rows: repeat(8, 1fr);
+            grid-template-columns: repeat(${gridCols}, 1fr);
+            grid-template-rows: repeat(${gridRows}, 1fr);
             animation: moveUp 60s linear infinite;
             z-index: 1;
           }
@@ -162,14 +162,14 @@ const MissionSection = () => {
             display: flex;
             justify-content: center;
             align-items: center;
-            opacity: 0.15;
+            opacity: 0.25;  /* Increased from 0.15 */
             transition: all 0.5s ease;
             animation: pulseOpacity 8s ease-in-out infinite;
           }
           
           .grid-cell svg {
-            width: 32px;
-            height: 32px;
+            width: 38px;  /* Increased from 32px */
+            height: 38px;  /* Increased from 32px */
           }
           
           .sparkle-icon {
@@ -191,10 +191,10 @@ const MissionSection = () => {
           
           @keyframes pulseOpacity {
             0%, 100% {
-              opacity: 0.05;
+              opacity: 0.15;  /* Increased from 0.05 */
             }
             50% {
-              opacity: 0.25;
+              opacity: 0.4;  /* Increased from 0.25 */
             }
           }
           
