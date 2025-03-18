@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { Users, Briefcase, Calendar, Award } from 'lucide-react';
+import { Users, Trophy, Calendar, Award } from 'lucide-react';
 import P5Animation from './P5Animation';
 import { useContent } from '@/contexts/ContentContext';
 
@@ -118,7 +118,7 @@ const AboutSection = () => {
               key={stat.id}
               icon={
                 stat.icon_name === 'Users' ? <Users className="h-6 w-6 text-noesis-purple" /> :
-                stat.icon_name === 'Briefcase' ? <Briefcase className="h-6 w-6 text-noesis-blue" /> :
+                stat.icon_name === 'Trophy' ? <Trophy className="h-6 w-6 text-noesis-blue" /> :
                 stat.icon_name === 'Calendar' ? <Calendar className="h-6 w-6 text-purple-400" /> :
                 <Award className="h-6 w-6 text-pink-400" />
               }

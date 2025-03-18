@@ -117,7 +117,7 @@ export const statsData: Stat[] = [
   },
   {
     id: 'stat-2',
-    icon_name: 'Briefcase',
+    icon_name: 'Trophy',
     value: '15+',
     label: 'Innovation Awards',
     sort_order: 2,
