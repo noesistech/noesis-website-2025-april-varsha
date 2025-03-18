@@ -130,7 +130,7 @@ const HeroSection = () => {
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               <span>Where AI and human talent</span><br />
               <span className="gradient-text">create breakthrough solutions.</span>

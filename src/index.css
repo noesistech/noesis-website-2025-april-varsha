@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -102,6 +101,7 @@
 
 .animate-fade-in {
   animation: customFadeIn 1.2s ease-in-out forwards;
+  opacity: 0; /* Start with opacity 0 to prevent initial flash */
 }
 
 @keyframes customFadeIn {
@@ -163,6 +163,7 @@
 .fade-in {
   animation-name: customFadeIn;
   animation-duration: 1.2s;
+  opacity: 0; /* Start with opacity 0 to prevent initial flash */
 }
 
 .slide-in-from-top {
