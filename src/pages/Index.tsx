@@ -10,12 +10,14 @@ import SolutionsSection from "@/components/SolutionsSection";
 import TechStackSection from "@/components/TechStackSection";
 import ClientsSection from "@/components/ClientsSection";
 import ContactSection from "@/components/ContactSection";
-import { ServiceItem } from "@/types/supabase";
-import { SolutionItem } from "@/types/supabase";
+import { useContent } from "@/contexts/ContentContext";
+import { ServiceItem, SolutionItem, TechCategory } from "@/types/supabase";
 import { Toaster } from "@/components/ui/sonner";
 import { LoadingSkeleton } from "@/components/ui/loading";
+import { ErrorDisplay } from "@/components/ui/error";
 
-const sampleTechCategories = [
+// Fallback data in case content fails to load from Supabase
+const fallbackTechCategories: TechCategory[] = [
   {
     id: '1',
     key: 'frontend',
@@ -60,7 +62,7 @@ const sampleTechCategories = [
   }
 ];
 
-const sampleServiceItems: ServiceItem[] = [
+const fallbackServiceItems: ServiceItem[] = [
   {
     id: 'ui-ux',
     icon_name: 'palette',
@@ -81,7 +83,7 @@ const sampleServiceItems: ServiceItem[] = [
   },
 ];
 
-const sampleSolutionItems: SolutionItem[] = [
+const fallbackSolutionItems: SolutionItem[] = [
   {
     id: 'lms',
     icon_name: 'graduation-cap',
@@ -105,7 +107,8 @@ const sampleSolutionItems: SolutionItem[] = [
 ];
 
 const Index = () => {
-  const [loading, setLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const { loading, error, techCategories, serviceItems, solutionItems, hasLoadedAnyContent } = useContent();
   
   useEffect(() => {
     document.title = "Noesis.tech - Creative Technology Solutions";
@@ -115,34 +118,53 @@ const Index = () => {
     
     // Reduced loading time to 1.5 seconds, just enough to show loading state
     const timer = setTimeout(() => {
-      setLoading(false);
+      setInitialLoading(false);
     }, 1500);
     
     return () => clearTimeout(timer);
   }, []);
 
-  if (loading) {
+  if (initialLoading || (loading && !hasLoadedAnyContent)) {
     return <LoadingSkeleton />;
   }
+
+  // Use content from context if available, otherwise use fallback data
+  const displayTechCategories = techCategories && techCategories.length > 0 
+    ? techCategories 
+    : fallbackTechCategories;
+    
+  const displayServiceItems = serviceItems && serviceItems.length > 0
+    ? serviceItems
+    : fallbackServiceItems;
+    
+  const displaySolutionItems = solutionItems && solutionItems.length > 0
+    ? solutionItems
+    : fallbackSolutionItems;
 
   return (
     <div className="min-h-screen bg-noesis-dark text-white">
       <Header />
       <main>
+        {error && <div className="container mx-auto px-6 pt-4 mt-20">
+          <div className="p-4 bg-yellow-800/30 border border-yellow-700 rounded-md text-yellow-200 mb-8">
+            <p className="font-medium">Note: {error}</p>
+          </div>
+        </div>}
+        
         <HeroSection />
         <AboutSection />
         <MissionSection />
         <ServicesSection 
           title="Our Services" 
-          services={sampleServiceItems}
+          services={displayServiceItems}
         />
         <SolutionsSection 
           title="Our Solutions" 
-          solutions={sampleSolutionItems}
+          solutions={displaySolutionItems}
         />
         <TechStackSection 
           title="Our Technology Stack" 
-          categories={sampleTechCategories} 
+          categories={displayTechCategories} 
         />
         <ClientsSection />
         <ContactSection />

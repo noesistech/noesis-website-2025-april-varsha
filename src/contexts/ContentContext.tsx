@@ -20,6 +20,7 @@ import {
   Testimonial
 } from '@/types/supabase';
 import { toast } from "sonner";
+import { ErrorDisplay } from '@/components/ui/error';
 
 interface ContentContextType {
   heroSection: HeroSection | null;
@@ -40,6 +41,7 @@ interface ContentContextType {
   loading: boolean;
   error: string | null;
   refreshContent: () => Promise<void>;
+  hasLoadedAnyContent: boolean;
 }
 
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
@@ -62,74 +64,152 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [hasLoadedAnyContent, setHasLoadedAnyContent] = useState(false);
 
   const fetchAllContent = async (forceRefresh = false) => {
     try {
       setLoading(true);
       
-      // Initialize cache from localStorage if available and not forcing refresh
-      if (!forceRefresh) {
-        contentCacheService.initializeCache();
-      } else {
-        // For force refresh, we'll completely clear the cache
+      // Initialize cache from localStorage if available
+      contentCacheService.initializeCache();
+      
+      // Only clear the cache if forcing a refresh
+      if (forceRefresh) {
         contentCacheService.invalidateCache();
       }
       
       // Check for content updates in the background
-      const hasUpdates = await contentService.checkForContentUpdates();
-      console.log(`Content updates available: ${hasUpdates}`);
+      try {
+        const hasUpdates = await contentService.checkForContentUpdates();
+        console.log(`Content updates available: ${hasUpdates}`);
+      } catch (err) {
+        console.warn("Error checking for content updates:", err);
+        // Continue even if update check fails
+      }
       
+      // Helper function to safely fetch content with fallbacks
+      const safelyFetchContent = async <T,>(
+        fetchFn: () => Promise<T>, 
+        setStateFn: (data: T) => void, 
+        defaultValue: T
+      ) => {
+        try {
+          const data = await fetchFn();
+          if (data) {
+            setStateFn(data);
+            return true;
+          }
+        } catch (err) {
+          console.error("Error fetching content item:", err);
+        }
+        return false;
+      };
+
+      // Fetch all content with individual error handling
+      let loadedAny = false;
+
       // Fetch hero section
-      const heroData = await contentService.getHeroSection(forceRefresh);
-      setHeroSection(heroData);
+      loadedAny = await safelyFetchContent(
+        () => contentService.getHeroSection(forceRefresh),
+        (data) => setHeroSection(data),
+        null
+      ) || loadedAny;
       
       // Fetch service cards
-      const serviceCardsData = await contentService.getServiceCards(forceRefresh);
-      setServiceCards(serviceCardsData);
+      loadedAny = await safelyFetchContent(
+        () => contentService.getServiceCards(forceRefresh),
+        (data) => setServiceCards(data),
+        []
+      ) || loadedAny;
       
       // Fetch about section
-      const aboutData = await contentService.getAboutSection(forceRefresh);
-      setAboutSection(aboutData);
+      loadedAny = await safelyFetchContent(
+        () => contentService.getAboutSection(forceRefresh),
+        (data) => setAboutSection(data),
+        null
+      ) || loadedAny;
       
       // Fetch stats
-      const statsData = await contentService.getStats(forceRefresh);
-      setStats(statsData);
+      loadedAny = await safelyFetchContent(
+        () => contentService.getStats(forceRefresh),
+        (data) => setStats(data),
+        []
+      ) || loadedAny;
       
       // Fetch mission section
-      const missionData = await contentService.getMissionSection(forceRefresh);
-      setMissionSection(missionData);
+      loadedAny = await safelyFetchContent(
+        () => contentService.getMissionSection(forceRefresh),
+        (data) => setMissionSection(data),
+        null
+      ) || loadedAny;
       
       // Fetch services section and items
-      const servicesData = await contentService.getServicesSection(forceRefresh);
-      setServicesSection(servicesData.section);
-      setServiceItems(servicesData.items);
+      try {
+        const servicesData = await contentService.getServicesSection(forceRefresh);
+        if (servicesData.section) setServicesSection(servicesData.section);
+        if (servicesData.items) setServiceItems(servicesData.items);
+        loadedAny = true;
+      } catch (err) {
+        console.error("Error fetching services:", err);
+      }
       
       // Fetch solutions section and items
-      const solutionsData = await contentService.getSolutionsSection(forceRefresh);
-      setSolutionsSection(solutionsData.section);
-      setSolutionItems(solutionsData.items);
+      try {
+        const solutionsData = await contentService.getSolutionsSection(forceRefresh);
+        if (solutionsData.section) setSolutionsSection(solutionsData.section);
+        if (solutionsData.items) setSolutionItems(solutionsData.items);
+        loadedAny = true;
+      } catch (err) {
+        console.error("Error fetching solutions:", err);
+      }
       
       // Fetch tech stack section and categories
-      const techStackData = await contentService.getTechStackSection(forceRefresh);
-      setTechStackSection(techStackData.section);
-      setTechCategories(techStackData.categories);
+      try {
+        const techStackData = await contentService.getTechStackSection(forceRefresh);
+        if (techStackData.section) setTechStackSection(techStackData.section);
+        if (techStackData.categories) setTechCategories(techStackData.categories);
+        loadedAny = true;
+      } catch (err) {
+        console.error("Error fetching tech stack:", err);
+      }
       
       // Fetch clients section
-      const clientsData = await contentService.getClientsSection(forceRefresh);
-      setClientsSection(clientsData.section);
-      setClientLogos(clientsData.clientLogos);
-      setPartnerLogos(clientsData.partnerLogos);
-      setTestimonials(clientsData.testimonials);
+      try {
+        const clientsData = await contentService.getClientsSection(forceRefresh);
+        if (clientsData.section) setClientsSection(clientsData.section);
+        if (clientsData.clientLogos) setClientLogos(clientsData.clientLogos);
+        if (clientsData.partnerLogos) setPartnerLogos(clientsData.partnerLogos);
+        if (clientsData.testimonials) setTestimonials(clientsData.testimonials);
+        loadedAny = true;
+      } catch (err) {
+        console.error("Error fetching clients section:", err);
+      }
+      
+      if (loadedAny) {
+        setHasLoadedAnyContent(true);
+        setError(null);
+      } else if (!hasLoadedAnyContent) {
+        // Only set error if we've never successfully loaded content
+        setError("Unable to load content. Using fallback content instead.");
+      }
       
       setLoading(false);
       
-      if (forceRefresh) {
+      if (forceRefresh && loadedAny) {
         toast.success("Content refreshed successfully");
+      } else if (forceRefresh) {
+        toast.error("Failed to refresh content");
       }
     } catch (err) {
       console.error("Error fetching content:", err);
-      setError("Failed to load content. Please refresh the page.");
+      
+      // Only set error if we've never loaded any content
+      if (!hasLoadedAnyContent) {
+        setError("Failed to load content. Using fallback content.");
+      }
+      
       setLoading(false);
+      
       if (forceRefresh) {
         toast.error("Failed to refresh content");
       }
@@ -139,10 +219,15 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   // Set up a periodic check for content updates
   useEffect(() => {
     const checkForUpdates = async () => {
-      const hasUpdates = await contentService.checkForContentUpdates();
-      if (hasUpdates) {
-        console.log("Content updates detected, refreshing content");
-        fetchAllContent(true);
+      try {
+        const hasUpdates = await contentService.checkForContentUpdates();
+        if (hasUpdates) {
+          console.log("Content updates detected, refreshing content");
+          fetchAllContent(true);
+        }
+      } catch (err) {
+        console.warn("Error checking for content updates:", err);
+        // Continue even if update check fails
       }
     };
     
@@ -179,7 +264,8 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
         testimonials,
         loading,
         error,
-        refreshContent
+        refreshContent,
+        hasLoadedAnyContent
       }}
     >
       {children}

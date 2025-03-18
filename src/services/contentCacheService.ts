@@ -61,24 +61,38 @@ export const contentCacheService = {
       return cachedItem.data as T;
     }
     
-    // Fetch fresh data
-    console.log(`Fetching fresh ${key} data`);
-    const freshData = await fetcher();
-    
-    // Update cache
-    contentCache[key] = {
-      data: freshData,
-      timestamp: now
-    };
-    
-    // Store in localStorage for persistence across sessions
     try {
-      localStorage.setItem('noesis_content_cache', JSON.stringify(contentCache));
-    } catch (e) {
-      console.error('Failed to save cache to localStorage:', e);
+      // Fetch fresh data
+      console.log(`Fetching fresh ${key} data`);
+      const freshData = await fetcher();
+      
+      // Update cache
+      contentCache[key] = {
+        data: freshData,
+        timestamp: now
+      };
+      
+      // Store in localStorage for persistence across sessions
+      try {
+        localStorage.setItem('noesis_content_cache', JSON.stringify(contentCache));
+      } catch (e) {
+        console.error('Failed to save cache to localStorage:', e);
+      }
+      
+      return freshData;
+    } catch (error) {
+      console.error(`Error fetching fresh data for ${key}:`, error);
+      
+      // If we have a cached item, return it even if it's expired
+      // This allows the app to function with stale data when network request fails
+      if (cachedItem) {
+        console.log(`Using expired cached ${key} data as fallback`);
+        return cachedItem.data as T;
+      }
+      
+      // If we don't have any cached data, propagate the error
+      throw error;
     }
-    
-    return freshData;
   },
   
   initializeCache(): void {
