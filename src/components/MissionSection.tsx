@@ -154,7 +154,7 @@ const MissionSection = () => {
             </div>
             <h3 className="text-3xl md:text-4xl font-bold gradient-text mb-8 pt-8">Mission</h3>
             <p className="text-white/80 text-xl md:text-2xl leading-relaxed">
-              Creatively combine content, media, data and technology to build digital solutions that deliver business results.
+              Harness the synergy of AI capabilities and human expertise to create digital solutions that deliver exceptional business results and transform industries.
             </p>
           </div>
           
@@ -164,7 +164,7 @@ const MissionSection = () => {
             </div>
             <h3 className="text-3xl md:text-4xl font-bold gradient-text mb-8 pt-8">Vision</h3>
             <p className="text-white/80 text-xl md:text-2xl leading-relaxed">
-              To design, build and sustain breakthrough digital solutions for the world's leading brands and organizations.
+              To lead the AI revolution in digital solutions, pioneering the perfect balance of artificial intelligence and human creativity for the world's most innovative organizations.
             </p>
           </div>
         </div>
@@ -180,11 +180,11 @@ const MissionSection = () => {
             <div className="refraction-layer"></div>
             <div className="glass-highlight"></div>
             <p ref={promiseTextRef} className="text-3xl md:text-4xl relative promise-text font-light tracking-wide z-10">
-              <span className="text-word block md:inline-block mb-6 md:mb-0">Design</span> for 
-              <span className="text-word-highlight block md:inline-block mx-2 font-medium"> experiences</span>,
+              <span className="text-word block md:inline-block mb-6 md:mb-0">Human</span> 
+              <span className="text-word-highlight block md:inline-block mx-2 font-medium"> creativity</span>,
               
-              <span className="text-word block md:inline-block mt-6 md:mt-0 md:ml-2">Build</span> for 
-              <span className="text-word-highlight block md:inline-block mx-2 font-medium"> outcomes.</span>
+              <span className="text-word block md:inline-block mt-6 md:mt-0 md:ml-2">AI</span> 
+              <span className="text-word-highlight block md:inline-block mx-2 font-medium"> precision</span>.
             </p>
           </div>
         </div>

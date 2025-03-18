@@ -16,13 +16,13 @@ const services: Service[] = [
     id: 'ui-ux',
     icon: <Palette className="h-12 w-12 text-noesis-purple" />,
     title: 'UI/UX',
-    description: 'Design captivating, user-friendly interfaces for websites, apps, and software.',
+    description: 'Create exceptional user experiences through the perfect blend of human-centered design principles and AI-powered insights.',
   },
   {
     id: 'web-dev',
     icon: <Globe className="h-12 w-12 text-noesis-blue" />,
     title: 'Web and Application Development',
-    description: 'Build dynamic websites, microsites, web apps and captivating landing pages.',
+    description: 'Build cutting-edge digital solutions with our AI-enhanced development process that combines human creativity with machine efficiency.',
   },
   {
     id: 'graphics',
@@ -30,8 +30,8 @@ const services: Service[] = [
     title: 'Graphics and Content Creation',
     description: (
       <ul className="list-disc pl-5 mt-2 space-y-1">
-        <li>Writing compelling website copy, blog articles, and interface content.</li>
-        <li>Designing eye-catching banners and visually appealing infographics.</li>
+        <li>AI-assisted content creation balanced with human editorial expertise for compelling website copy and articles.</li>
+        <li>Human creativity enhanced by AI tools to design captivating visuals and infographics that resonate with audiences.</li>
       </ul>
     ),
   },
@@ -41,9 +41,9 @@ const services: Service[] = [
     title: 'Cloud Services & DevOps',
     description: (
       <ul className="list-disc pl-5 mt-2 space-y-1">
-        <li>Ensure reliable website and app hosting.</li>
-        <li>Optimize servers for peak performance, including advanced configurations like autoscaling.</li>
-        <li>Flexibility with "Bring Your Own Cloud," supporting AWS, Digital Ocean, Heroku, etc., and offering dedicated bare metal servers for control.</li>
+        <li>AI-optimized hosting solutions managed by experienced human engineers.</li>
+        <li>Intelligent performance tuning that leverages machine learning for predictive scaling while maintaining human oversight.</li>
+        <li>Cloud flexibility with AI-enhanced configuration across AWS, Digital Ocean, Heroku, and dedicated servers managed by expert teams.</li>
       </ul>
     ),
   },
@@ -53,22 +53,22 @@ const services: Service[] = [
     title: 'AI Customized Solutions',
     description: (
       <ul className="list-disc pl-5 mt-2 space-y-1">
-        <li>Intelligent Insights: Extract meaningful patterns from unstructured data.</li>
-        <li>Personalized Content: Generate tailored, brand-aligned content at scale.</li>
-        <li>Next-Gen Experiences: Transform audience engagement with advanced AI.</li>
+        <li>Human-guided AI systems that extract meaningful insights from complex data.</li>
+        <li>Content generation that combines AI efficiency with human creativity for brand-perfect messaging.</li>
+        <li>Next-generation experiences where human expertise directs AI capabilities for truly transformative engagement.</li>
       </ul>
     ),
   },
   {
     id: 'staff',
     icon: <Users className="h-12 w-12 text-yellow-400" />,
-    title: 'Staff Augmentation / Offshoring',
+    title: 'AI-Enhanced Staff Solutions',
     description: (
       <ul className="list-disc pl-5 mt-2 space-y-1">
-        <li>Access to over 500+ high quality bench resources.</li>
-        <li>Expertise in wide range of Frontend, Backend, Fullstack, AI & ML, DevOps & AWS and many more technologies.</li>
-        <li>Retention rate of more than 90%.</li>
-        <li>Remote and On-site both kind of deployments.</li>
+        <li>Access to 500+ high-quality professionals trained in AI-human collaboration methodologies.</li>
+        <li>Teams skilled in AI integration across Frontend, Backend, Fullstack, ML, DevOps and cloud technologies.</li>
+        <li>90%+ retention rate thanks to our unique AI-human work environment.</li>
+        <li>Flexible remote and on-site deployment options with AI productivity enablement.</li>
       </ul>
     ),
   },

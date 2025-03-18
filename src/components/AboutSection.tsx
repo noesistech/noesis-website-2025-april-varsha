@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Users, Briefcase, Calendar, Award } from 'lucide-react';
 
@@ -95,17 +96,17 @@ const AboutSection = () => {
           
           <div>
             <h3 className="text-2xl md:text-3xl font-bold mb-6 animate-fade-in">
-              Founded in <span className="gradient-text">2009</span>
+              An AI-Native Agency Since <span className="gradient-text">2009</span>
             </h3>
             <div className="space-y-4">
               <p className="text-white/80 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                Our 40+ member strong team consists of some of the most skilled creative technologists, engineers, project managers and business analysts in the industry.
+                Our 40+ member team combines talented human experts with cutting-edge AI tools to deliver solutions that blend the best of human creativity and artificial intelligence.
               </p>
               <p className="text-white/80 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-                With a combined experience of 175+ years in delivering strategic and tactical digital technology services, we've established ourselves as a trusted partner for businesses worldwide.
+                With 175+ years of combined experience, we've pioneered the integration of human expertise and AI capabilities, establishing ourselves as leaders in AI-enhanced digital technology services.
               </p>
               <p className="text-white/80 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                We take pride in our 95% client retention rate and average client relationships exceeding 4 years, serving as an innovation partner to leading agencies and consultancies across the globe.
+                Our 95% client retention rate and 4+ year average relationships demonstrate how our unique AI-human partnership approach consistently delivers breakthrough solutions that exceed expectations.
               </p>
             </div>
           </div>
@@ -115,7 +116,7 @@ const AboutSection = () => {
           <StatCard 
             icon={<Users className="h-6 w-6 text-noesis-purple" />}
             value="40"
-            label="Team Members"
+            label="Human + AI Experts"
             delay="0.2s"
           />
           <StatCard 

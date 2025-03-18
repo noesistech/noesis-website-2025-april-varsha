@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,15 +13,15 @@ const ContactSection = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Ready to Experience <span className="gradient-text">Technology Leadership?</span>
+            Experience the <span className="gradient-text">AI-Human Partnership</span>
           </h2>
-          <p className="text-xl text-white/70">Get in touch with us</p>
+          <p className="text-xl text-white/70">Let's combine our expertise with cutting-edge AI to solve your challenges</p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           <Card className="glass-card animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <div className="p-8">
-              <h3 className="text-2xl font-bold gradient-text mb-6">Send us a message</h3>
+              <h3 className="text-2xl font-bold gradient-text mb-6">Start the conversation</h3>
               
               <form className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -72,7 +71,7 @@ const ContactSection = () => {
                 </div>
                 
                 <Button className="w-full bg-noesis-purple hover:bg-noesis-darkpurple text-white">
-                  Send Message
+                  Connect With Our Team
                 </Button>
               </form>
             </div>
@@ -80,7 +79,7 @@ const ContactSection = () => {
           
           <Card className="glass-card animate-fade-in" style={{ animationDelay: '0.4s' }}>
             <div className="p-8">
-              <h3 className="text-2xl font-bold gradient-text mb-6">Contact Information</h3>
+              <h3 className="text-2xl font-bold gradient-text mb-6">Reach Our AI-Human Team</h3>
               
               <div className="space-y-6">
                 <div className="flex items-start gap-4">

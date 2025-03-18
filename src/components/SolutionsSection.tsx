@@ -16,13 +16,13 @@ const solutions: Solution[] = [
   {
     id: 'lms',
     icon: <GraduationCap className="h-10 w-10" />,
-    title: 'Learning Management System',
+    title: 'AI-Powered Learning Management',
     description: (
       <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>User friendly interface with features like Course creation and Management</li>
-        <li>Create different types of assessments with automated grading systems</li>
-        <li>Detailed Analytics and Reporting feature</li>
-        <li>Provides Third party integrations and Custom Branding</li>
+        <li>Human-centered interface enhanced by AI for intuitive course creation and management</li>
+        <li>Smart assessment tools that combine AI grading with human educational expertise</li>
+        <li>AI-driven analytics with human-interpreted reporting for actionable insights</li>
+        <li>Customizable branding and integrations overseen by human design specialists</li>
       </ul>
     ),
     color: 'from-blue-500/20 to-blue-600/20',
@@ -33,10 +33,10 @@ const solutions: Solution[] = [
     title: 'Brainstormer',
     description: (
       <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>Our proprietary AI platform</li>
-        <li>Brainstormer Pro: Building customised chatGPTs for businesses</li>
-        <li>Brainstormer Studio: A low code/No code tool to rapidly build generative AI bots</li>
-        <li>Create AI agents that automate tasks and workflows in strategy, finance, and HR for global organisations</li>
+        <li>Our proprietary AI platform developed by human AI experts</li>
+        <li>Brainstormer Pro: Human-designed customized ChatGPT solutions for business needs</li>
+        <li>Brainstormer Studio: Low-code environment where human creativity directs AI capabilities</li>
+        <li>AI agents orchestrated by human strategists to automate workflows in finance, HR, and strategy</li>
       </ul>
     ),
     color: 'from-purple-500/20 to-purple-600/20',
@@ -44,13 +44,13 @@ const solutions: Solution[] = [
   {
     id: 'ecommerce',
     icon: <ShoppingBag className="h-10 w-10" />,
-    title: 'eCommerce',
+    title: 'AI-Enhanced eCommerce',
     description: (
       <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>We excel in website design, platform development, integrations, and performance optimization</li>
-        <li>Expertise in building Theme-based, Shopify and Magento based e-commerce websites</li>
-        <li>Our team members have played pivotal roles in the growth of renowned companies like MamaEarth, HyugaLife, Nykaa, Zomato, The Body Shop, The Souled Store, CaratLane, and more</li>
-        <li>Outstanding average ROAS of 8-9%</li>
+        <li>Expert human designers directing AI tools for optimized website design and platform development</li>
+        <li>Specialized teams combining AI efficiency with human creativity for Shopify and Magento solutions</li>
+        <li>Our human experts with AI support have contributed to brands like MamaEarth, HyugaLife, Nykaa, and more</li>
+        <li>Exceptional 8-9% ROAS achieved through AI-human optimization strategies</li>
       </ul>
     ),
     color: 'from-pink-500/20 to-pink-600/20',
@@ -58,13 +58,13 @@ const solutions: Solution[] = [
   {
     id: 'chatbots',
     icon: <MessageSquare className="h-10 w-10" />,
-    title: 'ChatBots',
+    title: 'Human-Directed AI Chatbots',
     description: (
       <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>Customized Chatbots specific to your use case</li>
-        <li>Experience features like Team Collaboration and Web Search</li>
-        <li>Upload documents in the Knowledge base for the bot to leverage the information while giving answers</li>
-        <li>Available in more than 14+ Indic Languages</li>
+        <li>Bespoke AI solutions crafted by human experts for your specific business needs</li>
+        <li>Team collaboration features designed by humans to enhance AI workflow integration</li>
+        <li>Knowledge base management combining AI document processing with human curation</li>
+        <li>Human-supervised AI translation services enabling support in 14+ Indic languages</li>
       </ul>
     ),
     color: 'from-green-500/20 to-green-600/20',
@@ -72,13 +72,13 @@ const solutions: Solution[] = [
   {
     id: 'creative',
     icon: <Wand2 className="h-10 w-10" />,
-    title: 'Creative Technology',
+    title: 'AI-Augmented Creative Technology',
     description: (
       <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>AI powered Chatbots integrable with Websites, WhatsApp, Instagram and Facebook</li>
-        <li>Fun and interactive solutions to support marketing campaigns like Quizzes, Instagram Filters and much more</li>
-        <li>AR/VR solutions</li>
-        <li>Educatainment Mobile Apps/Web Apps</li>
+        <li>Chatbots that blend AI capabilities with human warmth for social media and website integration</li>
+        <li>Interactive marketing solutions where human creativity guides AI tools for quizzes and social filters</li>
+        <li>AR/VR experiences crafted through human-AI collaboration</li>
+        <li>Educational apps that combine human teaching expertise with AI engagement mechanics</li>
       </ul>
     ),
     color: 'from-yellow-500/20 to-yellow-600/20',
