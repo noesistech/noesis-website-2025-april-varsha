@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -156,19 +157,26 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({ title, solutions })
 };
 
 const getIconByName = (iconName: string) => {
-  switch (iconName) {
+  // Convert to lowercase to handle case inconsistencies in the database
+  const normalizedIconName = iconName.toLowerCase();
+  
+  switch (normalizedIconName) {
     case 'graduation-cap':
+    case 'graduationcap':
       return <GraduationCap className="h-10 w-10 text-blue-400" />;
     case 'cpu':
       return <Cpu className="h-10 w-10 text-noesis-purple" />;
     case 'shopping-bag':
+    case 'shoppingbag':
       return <ShoppingBag className="h-10 w-10 text-pink-400" />;
     case 'message-square':
+    case 'messagesquare':
       return <MessageSquare className="h-10 w-10 text-green-400" />;
     case 'wand':
     case 'wand2':
       return <Wand2 className="h-10 w-10 text-yellow-400" />;
     default:
+      console.warn(`Icon name not recognized: ${iconName}`);
       return <Cpu className="h-10 w-10" />;
   }
 };

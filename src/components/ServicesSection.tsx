@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card } from '@/components/ui/card';
-import { Palette, Globe, Laptop, Cloud, BrainCircuit, Users, Code, PenTool, Database, TrendingUp } from 'lucide-react';
+import { Palette, Globe, Laptop, Cloud, BrainCircuit, Users, Code, PenTool, Database, TrendingUp, Image } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ServiceItem } from '@/types/supabase';
 
@@ -128,7 +128,10 @@ const ServicesSection: React.FC<ServicesProps> = ({ title, services }) => {
 };
 
 const getIconByName = (iconName: string) => {
-  switch (iconName) {
+  // Convert to lowercase to handle case inconsistencies in the database
+  const normalizedIconName = iconName.toLowerCase();
+  
+  switch (normalizedIconName) {
     case 'palette':
       return <Palette className="h-12 w-12 text-noesis-purple" />;
     case 'globe':
@@ -144,14 +147,20 @@ const getIconByName = (iconName: string) => {
       return <Database className="h-12 w-12 text-pink-400" />;
     case 'brain':
     case 'brain-circuit':
+    case 'braincircuit':
       return <BrainCircuit className="h-12 w-12 text-green-400" />;
     case 'users':
       return <Users className="h-12 w-12 text-yellow-400" />;
     case 'pen-tool':
+    case 'pentool':
       return <PenTool className="h-12 w-12 text-noesis-purple" />;
     case 'trending-up':
+    case 'trendingup':
       return <TrendingUp className="h-12 w-12 text-blue-400" />;
+    case 'image':
+      return <Image className="h-12 w-12 text-purple-400" />;
     default:
+      console.warn(`Icon name not recognized: ${iconName}`);
       return <Palette className="h-12 w-12 text-noesis-purple" />;
   }
 };
