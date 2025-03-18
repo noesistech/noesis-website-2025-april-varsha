@@ -61,7 +61,6 @@ const Footer = () => {
                   className="text-white"
                 />
               </svg>
-              <span className="text-xl font-bold gradient-text">NOESIS.TECH</span>
             </div>
             <p className="text-white/70 mb-4">
               Creatively combining content, media, data and technology to build digital solutions that deliver business results.
