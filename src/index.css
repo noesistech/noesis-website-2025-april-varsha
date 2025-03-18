@@ -79,7 +79,7 @@
   }
   
   .glass-card {
-    @apply glass rounded-2xl p-6 transition-all duration-300 hover:bg-white/10;
+    @apply glass rounded-2xl p-6 transition-all duration-500 hover:bg-white/10;
   }
   
   .section-title {
@@ -101,15 +101,15 @@
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
+  animation: customFadeIn 1.2s ease-in-out forwards;
 }
 
-@keyframes fadeIn {
-  from {
+@keyframes customFadeIn {
+  0% {
     opacity: 0;
     transform: translateY(20px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
@@ -134,40 +134,43 @@
     transparent
   );
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.6s ease-in-out;
 }
 
 .glow-element:hover::after {
   opacity: 1;
 }
 
-/* Mobile menu animations */
+/* Mobile menu animations - slowed down */
 @keyframes scaleIn {
   0% { transform: scale(0.95); opacity: 0; }
-  70% { transform: scale(1.05); }
+  70% { transform: scale(1.03); }
   100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes scaleOut {
   0% { transform: scale(1); opacity: 1; }
-  30% { transform: scale(1.05); }
+  30% { transform: scale(1.03); }
   100% { transform: scale(0.95); opacity: 0; }
 }
 
 .animate-in {
-  animation-duration: 150ms;
+  animation-duration: 250ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   animation-fill-mode: both;
 }
 
 .fade-in {
-  animation-name: fadeIn;
+  animation-name: customFadeIn;
+  animation-duration: 1.2s;
 }
 
 .slide-in-from-top {
   animation-name: scaleIn;
+  animation-duration: 350ms;
 }
 
 .slide-out-to-top {
   animation-name: scaleOut;
+  animation-duration: 350ms;
 }
