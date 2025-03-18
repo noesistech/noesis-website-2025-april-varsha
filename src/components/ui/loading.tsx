@@ -8,34 +8,29 @@ export function LoadingSkeleton({
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [progress, setProgress] = useState(0);
   
-  // Simulate loading progress - dramatically slowed down
+  // Simulate loading progress - much faster now
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
-        // Very slow progress increments
-        const increment = Math.random() * 0.8; // Even slower increment
+        const increment = Math.random() * 5; // Much faster increment
         const next = prev + increment;
         return next > 100 ? 100 : next;
       });
-    }, 1500); // longer interval between updates
+    }, 150); // Much shorter interval between updates
     
     return () => clearInterval(interval);
   }, []);
 
-  // Force minimum display time of 15 seconds
+  // Force maximum display time of 3 seconds
   useEffect(() => {
-    const minDisplayTime = 15000; // 15 seconds minimum
+    const maxDisplayTime = 3000; // 3 seconds maximum
     
-    // Ensure progress doesn't reach 100% too quickly
-    const slowProgressTimeout = setTimeout(() => {
-      if (progress > 80) {
-        // Slow down even more at the end
-        setProgress(85);
-      }
-    }, minDisplayTime - 4000);
+    const forceCompleteTimeout = setTimeout(() => {
+      setProgress(100);
+    }, maxDisplayTime);
     
-    return () => clearTimeout(slowProgressTimeout);
-  }, [progress]);
+    return () => clearTimeout(forceCompleteTimeout);
+  }, []);
 
   return (
     <div
@@ -61,8 +56,8 @@ export function LoadingSkeleton({
             <div className="w-1/2 h-1/2 border border-white/10 rounded-lg opacity-50" />
           </div>
 
-          {/* Content sections outlines - no animations to ensure visibility */}
-          {[1, 2, 3, 4, 5].map((_, index) => (
+          {/* Content sections outlines */}
+          {[1, 2, 3].map((_, index) => (
             <div 
               key={index} 
               className="h-48 border border-white/20 rounded-lg mb-8 opacity-50 flex"
@@ -93,10 +88,10 @@ export function LoadingSkeleton({
           </h3>
         </div>
         
-        {/* Progress bar with subtle gradient */}
+        {/* Progress bar with subtle gradient - faster transition */}
         <div className="w-64 h-1 bg-white/10 rounded-full overflow-hidden">
           <div 
-            className="h-full bg-gradient-to-r from-white/60 to-white/80 rounded-full transition-all duration-1500 ease-in-out"
+            className="h-full bg-gradient-to-r from-white/60 to-white/80 rounded-full transition-all duration-300 ease-in-out"
             style={{ width: `${progress}%` }}
           />
         </div>

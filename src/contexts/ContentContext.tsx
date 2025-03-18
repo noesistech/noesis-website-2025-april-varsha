@@ -1,6 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { contentService } from '@/services/contentService';
+import { contentCacheService } from '@/services/contentCacheService';
 import {
   HeroSection,
   ServiceCard,
@@ -37,6 +38,7 @@ interface ContentContextType {
   testimonials: Testimonial[];
   loading: boolean;
   error: string | null;
+  refreshContent: () => Promise<void>;
 }
 
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
@@ -60,63 +62,92 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const fetchAllContent = async (forceRefresh = false) => {
+    try {
+      setLoading(true);
+      
+      // Initialize cache from localStorage if available
+      if (!forceRefresh) {
+        contentCacheService.initializeCache();
+      }
+      
+      // Check for content updates in the background
+      const hasUpdates = await contentService.checkForContentUpdates();
+      console.log(`Content updates available: ${hasUpdates}`);
+      
+      // Fetch hero section
+      const heroData = await contentService.getHeroSection();
+      setHeroSection(heroData);
+      
+      // Fetch service cards
+      const serviceCardsData = await contentService.getServiceCards();
+      setServiceCards(serviceCardsData);
+      
+      // Fetch about section
+      const aboutData = await contentService.getAboutSection();
+      setAboutSection(aboutData);
+      
+      // Fetch stats
+      const statsData = await contentService.getStats();
+      setStats(statsData);
+      
+      // Fetch mission section
+      const missionData = await contentService.getMissionSection();
+      setMissionSection(missionData);
+      
+      // Fetch services section and items
+      const servicesData = await contentService.getServicesSection();
+      setServicesSection(servicesData.section);
+      setServiceItems(servicesData.items);
+      
+      // Fetch solutions section and items
+      const solutionsData = await contentService.getSolutionsSection();
+      setSolutionsSection(solutionsData.section);
+      setSolutionItems(solutionsData.items);
+      
+      // Fetch tech stack section and categories
+      const techStackData = await contentService.getTechStackSection();
+      setTechStackSection(techStackData.section);
+      setTechCategories(techStackData.categories);
+      
+      // Fetch clients section
+      const clientsData = await contentService.getClientsSection();
+      setClientsSection(clientsData.section);
+      setClientLogos(clientsData.clientLogos);
+      setPartnerLogos(clientsData.partnerLogos);
+      setTestimonials(clientsData.testimonials);
+      
+      setLoading(false);
+    } catch (err) {
+      console.error("Error fetching content:", err);
+      setError("Failed to load content. Please refresh the page.");
+      setLoading(false);
+    }
+  };
+
+  // Set up a periodic check for content updates
   useEffect(() => {
-    const fetchAllContent = async () => {
-      try {
-        setLoading(true);
-        
-        // Fetch hero section
-        const heroData = await contentService.getHeroSection();
-        setHeroSection(heroData);
-        
-        // Fetch service cards
-        const serviceCardsData = await contentService.getServiceCards();
-        setServiceCards(serviceCardsData);
-        
-        // Fetch about section
-        const aboutData = await contentService.getAboutSection();
-        setAboutSection(aboutData);
-        
-        // Fetch stats
-        const statsData = await contentService.getStats();
-        setStats(statsData);
-        
-        // Fetch mission section
-        const missionData = await contentService.getMissionSection();
-        setMissionSection(missionData);
-        
-        // Fetch services section and items
-        const servicesData = await contentService.getServicesSection();
-        setServicesSection(servicesData.section);
-        setServiceItems(servicesData.items);
-        
-        // Fetch solutions section and items
-        const solutionsData = await contentService.getSolutionsSection();
-        setSolutionsSection(solutionsData.section);
-        setSolutionItems(solutionsData.items);
-        
-        // Fetch tech stack section and categories
-        const techStackData = await contentService.getTechStackSection();
-        setTechStackSection(techStackData.section);
-        setTechCategories(techStackData.categories);
-        
-        // Fetch clients section
-        const clientsData = await contentService.getClientsSection();
-        setClientsSection(clientsData.section);
-        setClientLogos(clientsData.clientLogos);
-        setPartnerLogos(clientsData.partnerLogos);
-        setTestimonials(clientsData.testimonials);
-        
-        setLoading(false);
-      } catch (err) {
-        console.error("Error fetching content:", err);
-        setError("Failed to load content. Please refresh the page.");
-        setLoading(false);
+    const checkForUpdates = async () => {
+      const hasUpdates = await contentService.checkForContentUpdates();
+      if (hasUpdates) {
+        console.log("Content updates detected, refreshing content");
+        fetchAllContent(true);
       }
     };
+    
+    // Check for updates every 5 minutes
+    const intervalId = setInterval(checkForUpdates, 5 * 60 * 1000);
+    
+    return () => clearInterval(intervalId);
+  }, []);
 
+  useEffect(() => {
     fetchAllContent();
   }, []);
+
+  const refreshContent = async () => {
+    await fetchAllContent(true);
+  };
 
   return (
     <ContentContext.Provider
@@ -137,7 +168,8 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
         partnerLogos,
         testimonials,
         loading,
-        error
+        error,
+        refreshContent
       }}
     >
       {children}

@@ -79,7 +79,7 @@
   }
   
   .glass-card {
-    @apply glass rounded-2xl p-6 transition-all duration-500 hover:bg-white/10;
+    @apply glass rounded-2xl p-6 transition-all duration-300 hover:bg-white/10;
   }
   
   .section-title {
@@ -101,14 +101,14 @@
 }
 
 .animate-fade-in {
-  animation: customFadeIn 2.5s ease-in-out forwards;
+  animation: customFadeIn 0.8s ease-in-out forwards;
   opacity: 0; /* Start with opacity 0 to prevent initial flash */
 }
 
 @keyframes customFadeIn {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
   100% {
     opacity: 1;
@@ -135,51 +135,51 @@
     transparent
   );
   opacity: 0;
-  transition: opacity 0.6s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .glow-element:hover::after {
   opacity: 1;
 }
 
-/* Mobile menu animations - slowed down */
+/* Mobile menu animations - faster now */
 @keyframes scaleIn {
   0% { transform: scale(0.95); opacity: 0; }
-  70% { transform: scale(1.03); }
+  70% { transform: scale(1.02); }
   100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes scaleOut {
   0% { transform: scale(1); opacity: 1; }
-  30% { transform: scale(1.03); }
+  30% { transform: scale(1.02); }
   100% { transform: scale(0.95); opacity: 0; }
 }
 
 .animate-in {
-  animation-duration: 350ms;
+  animation-duration: 200ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   animation-fill-mode: both;
 }
 
 .fade-in {
   animation-name: customFadeIn;
-  animation-duration: 2.5s;
+  animation-duration: 0.8s;
   opacity: 0; /* Start with opacity 0 to prevent initial flash */
 }
 
 .slide-in-from-top {
   animation-name: scaleIn;
-  animation-duration: 650ms;
+  animation-duration: 250ms;
 }
 
 .slide-out-to-top {
   animation-name: scaleOut;
-  animation-duration: 650ms;
+  animation-duration: 200ms;
 }
 
-/* Significantly slower fadeIn animation */
+/* Faster fadeIn animation */
 @keyframes fadeIn {
   0% { opacity: 0; }
-  20% { opacity: 0; } /* Hold at 0 opacity for 20% of the time */
   100% { opacity: 1; }
 }
+

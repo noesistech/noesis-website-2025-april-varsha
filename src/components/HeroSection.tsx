@@ -130,7 +130,7 @@ const HeroSection = () => {
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="animate-fade-in">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               <span>Where AI and human talent</span><br />
               <span className="gradient-text">create breakthrough solutions.</span>
@@ -148,7 +148,7 @@ const HeroSection = () => {
             </div>
           </div>
           
-          <div className="relative h-[500px] overflow-hidden opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="relative h-[500px] overflow-hidden animate-fade-in">
             <div className="absolute inset-0 overflow-hidden">
               <div 
                 ref={scrollContainerRef} 
@@ -161,8 +161,7 @@ const HeroSection = () => {
                     className="glow-element flex flex-col items-center justify-center p-6 text-center backdrop-blur-sm border border-white/10 rounded-2xl"
                     style={{ 
                       height: '160px',
-                      marginTop: index % 2 === 0 ? '0' : '40px', // Offset every second card in the same row
-                      animationDelay: `${0.1 * index}s`
+                      marginTop: index % 2 === 0 ? '0' : '40px' // Offset every second card in the same row
                     }}
                   >
                     {card.icon}

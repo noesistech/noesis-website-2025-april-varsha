@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -112,10 +113,10 @@ const Index = () => {
     // Adding debug log to check if component is mounting
     console.log("Index component mounted");
     
-    // Simulate loading time to show the lithograph animation
+    // Reduced loading time to 1.5 seconds, just enough to show loading state
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 15000); // 15 seconds to ensure animation is visible
+    }, 1500);
     
     return () => clearTimeout(timer);
   }, []);
