@@ -118,11 +118,26 @@ const HeroSection = () => {
         background: 'linear-gradient(135deg, rgba(26,31,44,1) 0%, rgba(50,30,80,1) 100%)'
       }}
     >
-      {/* Background particles/orbs */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-        <div className="absolute top-1/4 left-1/5 h-40 w-40 rounded-full bg-noesis-purple/20 blur-3xl animate-float"></div>
-        <div className="absolute top-3/4 left-3/4 h-60 w-60 rounded-full bg-noesis-blue/20 blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 h-32 w-32 rounded-full bg-purple-400/20 blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+      {/* Background particles/orbs - Modified to prevent rendering artifacts */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[25%] left-[20%] h-40 w-40 rounded-full bg-noesis-purple/20 blur-[40px] will-change-transform" 
+             style={{ 
+               animation: 'float 6s ease-in-out infinite',
+               transform: 'translate3d(0, 0, 0)', // Force hardware acceleration
+               backfaceVisibility: 'hidden' // Prevent flicker
+             }}></div>
+        <div className="absolute top-[75%] left-[75%] h-60 w-60 rounded-full bg-noesis-blue/20 blur-[40px] will-change-transform" 
+             style={{ 
+               animation: 'float 6s ease-in-out infinite 1s',
+               transform: 'translate3d(0, 0, 0)', 
+               backfaceVisibility: 'hidden'
+             }}></div>
+        <div className="absolute top-[50%] left-[50%] h-32 w-32 rounded-full bg-purple-400/20 blur-[40px] will-change-transform" 
+             style={{ 
+               animation: 'float 6s ease-in-out infinite 2s',
+               transform: 'translate3d(0, 0, 0)', 
+               backfaceVisibility: 'hidden'
+             }}></div>
       </div>
       
       {/* Gradient overlay for smooth section transition */}
@@ -156,8 +171,8 @@ const HeroSection = () => {
             <div className="absolute inset-0 overflow-hidden">
               <div 
                 ref={scrollContainerRef} 
-                className="grid grid-cols-2 gap-x-6 gap-y-4 transition-transform"
-                style={{ padding: '1rem 0' }}
+                className="grid grid-cols-2 gap-x-6 gap-y-4 transition-transform will-change-transform"
+                style={{ padding: '1rem 0', transform: 'translate3d(0,0,0)' }}
               >
                 {duplicatedServiceCards.map((card, index) => (
                   <div 
@@ -165,7 +180,9 @@ const HeroSection = () => {
                     className="glow-element flex flex-col items-center justify-center p-6 text-center backdrop-blur-sm border border-white/10 rounded-2xl"
                     style={{ 
                       height: '160px',
-                      marginTop: index % 2 === 0 ? '0' : '40px' // Offset every second card in the same row
+                      marginTop: index % 2 === 0 ? '0' : '40px', // Offset every second card in the same row
+                      transform: 'translate3d(0,0,0)', // Force hardware acceleration
+                      backfaceVisibility: 'hidden'
                     }}
                   >
                     {card.icon}
