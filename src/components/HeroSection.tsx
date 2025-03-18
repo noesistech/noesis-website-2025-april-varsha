@@ -148,7 +148,7 @@ const HeroSection = () => {
             </div>
           </div>
           
-          <div className="relative h-[500px] overflow-hidden">
+          <div className="relative h-[500px] overflow-hidden opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <div className="absolute inset-0 overflow-hidden">
               <div 
                 ref={scrollContainerRef} 
