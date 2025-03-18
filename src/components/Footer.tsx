@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -90,28 +91,36 @@ const Footer = () => {
           
           <div>
             <h3 className="text-white text-xl font-bold mb-4">Contact Us</h3>
-            <div className="flex flex-col gap-3">
-              <div className="flex items-start gap-3">
-                <Mail className="h-6 w-6 text-noesis-purple mt-1" />
-                <div>
-                  <p className="text-white">Email us</p>
-                  <a href="mailto:yukti@noesis.tech" className="text-white/70 hover:text-white transition-colors">yukti@noesis.tech</a> or <a href="mailto:sales@noesis.tech" className="text-white/70 hover:text-white transition-colors">sales@noesis.tech</a>
+            <div className="space-y-4">
+              <a href="mailto:yukti@noesis.tech" className="flex items-center gap-3 group transition-colors">
+                <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors">
+                  <Mail className="h-5 w-5 text-noesis-purple" />
                 </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Phone className="h-6 w-6 text-noesis-purple mt-1" />
                 <div>
-                  <p className="text-white">Call us</p>
-                  <a href="tel:+916378652266" className="text-white/70 hover:text-white transition-colors">+91 6378652266</a>
+                  <p className="text-white font-medium">Email</p>
+                  <p className="text-white/70 group-hover:text-white transition-colors">yukti@noesis.tech</p>
                 </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <MapPin className="h-6 w-6 text-noesis-purple mt-1" />
+              </a>
+              
+              <a href="tel:+916378652266" className="flex items-center gap-3 group transition-colors">
+                <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors">
+                  <Phone className="h-5 w-5 text-noesis-purple" />
+                </div>
                 <div>
-                  <p className="text-white">Visit us</p>
-                  <p className="text-white/70">C, Wing, 209, Floral Deck Plaza, 23rd Rd, M.I.D.C, Santacruz Electronic Export Processing Zone, Andheri East, Mumbai, Maharashtra 400093</p>
+                  <p className="text-white font-medium">Phone</p>
+                  <p className="text-white/70 group-hover:text-white transition-colors">+91 6378652266</p>
                 </div>
-              </div>
+              </a>
+              
+              <a href="https://maps.app.goo.gl/8NJdNEnD4RjRbN897" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group transition-colors">
+                <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors">
+                  <MapPin className="h-5 w-5 text-noesis-purple" />
+                </div>
+                <div>
+                  <p className="text-white font-medium">Location</p>
+                  <p className="text-white/70 group-hover:text-white transition-colors">Mumbai, Maharashtra 400093</p>
+                </div>
+              </a>
             </div>
           </div>
           
@@ -137,4 +146,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
