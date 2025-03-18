@@ -21,7 +21,7 @@ import {
 import { contentCacheService } from "@/services/contentCacheService";
 
 export const contentService = {
-  async getHeroSection(): Promise<HeroSection | null> {
+  async getHeroSection(forceRefresh = false): Promise<HeroSection | null> {
     return contentCacheService.getCachedData('heroSection', async () => {
       const { data, error } = await supabase
         .from('hero_section')
@@ -34,10 +34,10 @@ export const contentService = {
       }
       
       return data;
-    });
+    }, forceRefresh);
   },
 
-  async getServiceCards(): Promise<ServiceCard[]> {
+  async getServiceCards(forceRefresh = false): Promise<ServiceCard[]> {
     return contentCacheService.getCachedData('serviceCards', async () => {
       const { data, error } = await supabase
         .from('service_cards')
@@ -50,10 +50,10 @@ export const contentService = {
       }
       
       return data || [];
-    });
+    }, forceRefresh);
   },
 
-  async getAboutSection(): Promise<AboutSection | null> {
+  async getAboutSection(forceRefresh = false): Promise<AboutSection | null> {
     return contentCacheService.getCachedData('aboutSection', async () => {
       const { data, error } = await supabase
         .from('about_section')
@@ -66,10 +66,10 @@ export const contentService = {
       }
       
       return data;
-    });
+    }, forceRefresh);
   },
 
-  async getStats(): Promise<Stat[]> {
+  async getStats(forceRefresh = false): Promise<Stat[]> {
     return contentCacheService.getCachedData('stats', async () => {
       const { data, error } = await supabase
         .from('stats')
@@ -82,10 +82,10 @@ export const contentService = {
       }
       
       return data || [];
-    });
+    }, forceRefresh);
   },
 
-  async getMissionSection(): Promise<MissionSection | null> {
+  async getMissionSection(forceRefresh = false): Promise<MissionSection | null> {
     return contentCacheService.getCachedData('missionSection', async () => {
       const { data, error } = await supabase
         .from('mission_section')
@@ -98,10 +98,10 @@ export const contentService = {
       }
       
       return data;
-    });
+    }, forceRefresh);
   },
 
-  async getServicesSection(): Promise<{ section: ServicesSection | null, items: ServiceItem[] }> {
+  async getServicesSection(forceRefresh = false): Promise<{ section: ServicesSection | null, items: ServiceItem[] }> {
     const section = await contentCacheService.getCachedData('servicesSection', async () => {
       const sectionResult = await supabase
         .from('services_section')
@@ -113,7 +113,7 @@ export const contentService = {
       }
       
       return sectionResult.data;
-    });
+    }, forceRefresh);
     
     const items = await contentCacheService.getCachedData('serviceItems', async () => {
       const itemsResult = await supabase
@@ -126,12 +126,12 @@ export const contentService = {
       }
       
       return itemsResult.data || [];
-    });
+    }, forceRefresh);
     
     return { section, items };
   },
 
-  async getSolutionsSection(): Promise<{ section: SolutionsSection | null, items: SolutionItem[] }> {
+  async getSolutionsSection(forceRefresh = false): Promise<{ section: SolutionsSection | null, items: SolutionItem[] }> {
     const section = await contentCacheService.getCachedData('solutionsSection', async () => {
       const sectionResult = await supabase
         .from('solutions_section')
@@ -143,7 +143,7 @@ export const contentService = {
       }
       
       return sectionResult.data;
-    });
+    }, forceRefresh);
     
     const items = await contentCacheService.getCachedData('solutionItems', async () => {
       const itemsResult = await supabase
@@ -156,12 +156,12 @@ export const contentService = {
       }
       
       return itemsResult.data || [];
-    });
+    }, forceRefresh);
     
     return { section, items };
   },
 
-  async getTechStackSection(): Promise<{ section: TechStackSection | null, categories: TechCategory[] }> {
+  async getTechStackSection(forceRefresh = false): Promise<{ section: TechStackSection | null, categories: TechCategory[] }> {
     const section = await contentCacheService.getCachedData('techStackSection', async () => {
       const sectionResult = await supabase
         .from('tech_stack_section')
@@ -173,7 +173,7 @@ export const contentService = {
       }
       
       return sectionResult.data;
-    });
+    }, forceRefresh);
     
     const categories = await contentCacheService.getCachedData('techCategories', async () => {
       const categoriesResult = await supabase
@@ -204,12 +204,12 @@ export const contentService = {
       }
       
       return categories;
-    });
+    }, forceRefresh);
     
     return { section, categories };
   },
 
-  async getClientsSection(): Promise<{ 
+  async getClientsSection(forceRefresh = false): Promise<{ 
     section: ClientsSection | null, 
     clientLogos: ClientLogo[], 
     partnerLogos: PartnerLogo[],
@@ -226,7 +226,7 @@ export const contentService = {
       }
       
       return sectionResult.data;
-    });
+    }, forceRefresh);
     
     const clientLogos = await contentCacheService.getCachedData('clientLogos', async () => {
       const clientLogosResult = await supabase
@@ -239,7 +239,7 @@ export const contentService = {
       }
       
       return clientLogosResult.data || [];
-    });
+    }, forceRefresh);
     
     const partnerLogos = await contentCacheService.getCachedData('partnerLogos', async () => {
       const partnerLogosResult = await supabase
@@ -252,7 +252,7 @@ export const contentService = {
       }
       
       return partnerLogosResult.data || [];
-    });
+    }, forceRefresh);
     
     const testimonials = await contentCacheService.getCachedData('testimonials', async () => {
       const testimonialsResult = await supabase
@@ -265,7 +265,7 @@ export const contentService = {
       }
       
       return testimonialsResult.data || [];
-    });
+    }, forceRefresh);
     
     return {
       section,

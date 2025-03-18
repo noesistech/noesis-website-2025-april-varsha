@@ -19,6 +19,7 @@ import {
   PartnerLogo,
   Testimonial
 } from '@/types/supabase';
+import { toast } from "sonner";
 
 interface ContentContextType {
   heroSection: HeroSection | null;
@@ -66,9 +67,12 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
     try {
       setLoading(true);
       
-      // Initialize cache from localStorage if available
+      // Initialize cache from localStorage if available and not forcing refresh
       if (!forceRefresh) {
         contentCacheService.initializeCache();
+      } else {
+        // For force refresh, we'll completely clear the cache
+        contentCacheService.invalidateCache();
       }
       
       // Check for content updates in the background
@@ -76,52 +80,59 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
       console.log(`Content updates available: ${hasUpdates}`);
       
       // Fetch hero section
-      const heroData = await contentService.getHeroSection();
+      const heroData = await contentService.getHeroSection(forceRefresh);
       setHeroSection(heroData);
       
       // Fetch service cards
-      const serviceCardsData = await contentService.getServiceCards();
+      const serviceCardsData = await contentService.getServiceCards(forceRefresh);
       setServiceCards(serviceCardsData);
       
       // Fetch about section
-      const aboutData = await contentService.getAboutSection();
+      const aboutData = await contentService.getAboutSection(forceRefresh);
       setAboutSection(aboutData);
       
       // Fetch stats
-      const statsData = await contentService.getStats();
+      const statsData = await contentService.getStats(forceRefresh);
       setStats(statsData);
       
       // Fetch mission section
-      const missionData = await contentService.getMissionSection();
+      const missionData = await contentService.getMissionSection(forceRefresh);
       setMissionSection(missionData);
       
       // Fetch services section and items
-      const servicesData = await contentService.getServicesSection();
+      const servicesData = await contentService.getServicesSection(forceRefresh);
       setServicesSection(servicesData.section);
       setServiceItems(servicesData.items);
       
       // Fetch solutions section and items
-      const solutionsData = await contentService.getSolutionsSection();
+      const solutionsData = await contentService.getSolutionsSection(forceRefresh);
       setSolutionsSection(solutionsData.section);
       setSolutionItems(solutionsData.items);
       
       // Fetch tech stack section and categories
-      const techStackData = await contentService.getTechStackSection();
+      const techStackData = await contentService.getTechStackSection(forceRefresh);
       setTechStackSection(techStackData.section);
       setTechCategories(techStackData.categories);
       
       // Fetch clients section
-      const clientsData = await contentService.getClientsSection();
+      const clientsData = await contentService.getClientsSection(forceRefresh);
       setClientsSection(clientsData.section);
       setClientLogos(clientsData.clientLogos);
       setPartnerLogos(clientsData.partnerLogos);
       setTestimonials(clientsData.testimonials);
       
       setLoading(false);
+      
+      if (forceRefresh) {
+        toast.success("Content refreshed successfully");
+      }
     } catch (err) {
       console.error("Error fetching content:", err);
       setError("Failed to load content. Please refresh the page.");
       setLoading(false);
+      if (forceRefresh) {
+        toast.error("Failed to refresh content");
+      }
     }
   };
 
@@ -135,14 +146,13 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
       }
     };
     
-    // Check for updates every 5 minutes
-    const intervalId = setInterval(checkForUpdates, 5 * 60 * 1000);
+    // Initial fetch
+    fetchAllContent();
+    
+    // Check for updates every minute
+    const intervalId = setInterval(checkForUpdates, 60 * 1000);
     
     return () => clearInterval(intervalId);
-  }, []);
-
-  useEffect(() => {
-    fetchAllContent();
   }, []);
 
   const refreshContent = async () => {

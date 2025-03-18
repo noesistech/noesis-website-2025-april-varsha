@@ -28,8 +28,8 @@ interface CachedContent {
 // In-memory cache
 let contentCache: CachedContent = {};
 
-// Cache expiration time (10 minutes)
-const CACHE_EXPIRATION = 10 * 60 * 1000;
+// Cache expiration time (2 minutes in production, shorter for development)
+const CACHE_EXPIRATION = process.env.NODE_ENV === 'production' ? 2 * 60 * 1000 : 30 * 1000;
 
 export const contentCacheService = {
   async getCachedData<T>(key: keyof CachedContent, fetcher: () => Promise<T>, forceRefresh = false): Promise<T> {
@@ -74,54 +74,107 @@ export const contentCacheService = {
     }
   },
   
-  invalidateCache(): void {
-    contentCache = {};
+  invalidateCache(specificKey?: keyof CachedContent): void {
+    if (specificKey) {
+      // Invalidate only a specific key
+      if (contentCache[specificKey]) {
+        delete contentCache[specificKey];
+        console.log(`Cache for ${specificKey} invalidated`);
+      }
+    } else {
+      // Invalidate entire cache
+      contentCache = {};
+      console.log('Entire content cache invalidated');
+    }
+    
     try {
-      localStorage.removeItem('noesis_content_cache');
+      localStorage.setItem('noesis_content_cache', JSON.stringify(contentCache));
     } catch (e) {
-      console.error('Failed to clear localStorage cache:', e);
+      console.error('Failed to update localStorage cache:', e);
     }
   },
   
   async checkForUpdates(): Promise<boolean> {
     try {
-      // Check the last updated timestamp in any content table
-      const { data, error } = await supabase
-        .from('hero_section')
-        .select('updated_at')
-        .order('updated_at', { ascending: false })
-        .limit(1)
-        .single();
+      // Check multiple tables for updates
+      const tablesToCheck = [
+        'hero_section',
+        'service_cards',
+        'about_section',
+        'stats',
+        'mission_section',
+        'services_section',
+        'service_items',
+        'solutions_section',
+        'solution_items',
+        'tech_stack_section',
+        'tech_categories',
+        'clients_section',
+        'client_logos',
+        'partner_logos',
+        'testimonials'
+      ];
       
-      if (error) {
-        console.error("Error checking for updates:", error);
-        return false;
-      }
+      let hasUpdates = false;
       
-      if (!data) return false;
-      
-      // Convert to timestamps for comparison
-      const serverUpdateTime = new Date(data.updated_at).getTime();
-      
-      // Find the most recent cache timestamp
-      let mostRecentCacheTime = 0;
-      Object.values(contentCache).forEach(item => {
-        if (item && item.timestamp > mostRecentCacheTime) {
-          mostRecentCacheTime = item.timestamp;
+      for (const table of tablesToCheck) {
+        const { data, error } = await supabase
+          .from(table)
+          .select('updated_at')
+          .order('updated_at', { ascending: false })
+          .limit(1)
+          .single();
+        
+        if (error) {
+          console.error(`Error checking for updates in ${table}:`, error);
+          continue;
         }
-      });
-      
-      // If server data is newer than our cache, invalidate the cache
-      if (serverUpdateTime > mostRecentCacheTime) {
-        console.log('Server has newer content, invalidating cache');
-        this.invalidateCache();
-        return true;
+        
+        if (!data) continue;
+        
+        // Convert to timestamps for comparison
+        const serverUpdateTime = new Date(data.updated_at).getTime();
+        
+        // Find the corresponding cache key
+        const cacheKey = this.tableToCacheKey(table);
+        if (!cacheKey) continue;
+        
+        const cachedItem = contentCache[cacheKey];
+        
+        // If we don't have a cached item or server data is newer than our cache
+        if (!cachedItem || serverUpdateTime > cachedItem.timestamp) {
+          console.log(`Server has newer content for ${table}, invalidating cache for ${cacheKey}`);
+          this.invalidateCache(cacheKey);
+          hasUpdates = true;
+        }
       }
       
-      return false;
+      return hasUpdates;
     } catch (e) {
       console.error('Failed to check for updates:', e);
       return false;
     }
+  },
+  
+  tableToCacheKey(tableName: string): keyof CachedContent | null {
+    const mapping: Record<string, keyof CachedContent> = {
+      'hero_section': 'heroSection',
+      'service_cards': 'serviceCards',
+      'about_section': 'aboutSection',
+      'stats': 'stats',
+      'mission_section': 'missionSection',
+      'services_section': 'servicesSection',
+      'service_items': 'serviceItems',
+      'solutions_section': 'solutionsSection',
+      'solution_items': 'solutionItems',
+      'tech_stack_section': 'techStackSection',
+      'tech_categories': 'techCategories',
+      'clients_section': 'clientsSection',
+      'client_logos': 'clientLogos',
+      'partner_logos': 'partnerLogos',
+      'testimonials': 'testimonials'
+    };
+    
+    return mapping[tableName] || null;
   }
 };
