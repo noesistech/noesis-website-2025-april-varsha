@@ -1,11 +1,9 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -41,28 +39,12 @@ const ContactSection = () => {
     try {
       setIsSubmitting(true);
 
-      // 1. Save form submission to Supabase - ensure all required fields are present
-      const { error: dbError } = await supabase
-        .from('contact_submissions')
-        .insert({
-          name: data.name,
-          email: data.email,
-          subject: data.subject,
-          message: data.message
-        });
+      // Simulate a network request
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      console.log("Form submitted with data:", data);
 
-      if (dbError) throw new Error(`Database error: ${dbError.message}`);
-
-      // 2. Send notification emails via edge function
-      const response = await supabase.functions.invoke('send-contact-email', {
-        body: data,
-      });
-
-      if (!response.data?.success) {
-        throw new Error('Email sending failed');
-      }
-
-      // 3. Show success message and reset form
+      // Show success message and reset form
       toast.success("Message sent successfully! We'll get back to you soon.");
       setShowSuccessDialog(true);
       form.reset();

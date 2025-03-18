@@ -5,17 +5,6 @@ import { useContent } from '@/contexts/ContentContext';
 const ClientsSection = () => {
   const { clientsSection, clientLogos, partnerLogos, testimonials } = useContent();
   
-  // Check if we have data to display
-  const hasClientsData = Boolean(
-    clientsSection && 
-    (clientLogos?.length > 0 || partnerLogos?.length > 0 || testimonials?.length > 0)
-  );
-  
-  // If no data, don't render the section
-  if (!hasClientsData) {
-    return null;
-  }
-  
   return (
     <section id="clients" className="py-20 bg-gradient-to-b from-noesis-darkest to-noesis-dark">
       <div className="container mx-auto px-4">

@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import { useContent } from '@/contexts/ContentContext';
 import { LoadingSkeleton } from '@/components/ui/loading';
-import { ErrorDisplay } from '@/components/ui/error';
 
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
@@ -17,18 +16,14 @@ import Header from '@/components/Header';
 
 const ContentPage: React.FC = () => {
   const { 
-    loading, 
-    error,
+    loading,
     heroSection,
-    aboutSection,
-    missionSection,
     servicesSection,
     serviceItems,
     solutionsSection,
     solutionItems,
     techStackSection,
-    techCategories,
-    clientsSection
+    techCategories
   } = useContent();
 
   useEffect(() => {
@@ -50,51 +45,26 @@ const ContentPage: React.FC = () => {
     return <LoadingSkeleton />;
   }
 
-  if (error) {
-    return <ErrorDisplay message={error} />;
-  }
-
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow">
-        {heroSection && (
-          <HeroSection />
-        )}
-        
-        {aboutSection && (
-          <AboutSection />
-        )}
-        
-        {missionSection && (
-          <MissionSection />
-        )}
-        
-        {servicesSection && (
-          <ServicesSection 
-            title={servicesSection.title}
-            services={serviceItems}
-          />
-        )}
-        
-        {solutionsSection && (
-          <SolutionsSection 
-            title={solutionsSection.title}
-            solutions={solutionItems}
-          />
-        )}
-        
-        {techStackSection && techCategories && (
-          <TechStackSection 
-            title={techStackSection.title}
-            categories={techCategories}
-          />
-        )}
-        
-        {clientsSection && (
-          <ClientsSection />
-        )}
-        
+        <HeroSection />
+        <AboutSection />
+        <MissionSection />
+        <ServicesSection 
+          title={servicesSection.title}
+          services={serviceItems}
+        />
+        <SolutionsSection 
+          title={solutionsSection.title}
+          solutions={solutionItems}
+        />
+        <TechStackSection 
+          title={techStackSection.title}
+          categories={techCategories}
+        />
+        <ClientsSection />
         <ContactSection />
       </main>
       <Footer />
