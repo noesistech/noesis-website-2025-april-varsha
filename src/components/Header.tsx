@@ -3,10 +3,18 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useContent } from '@/contexts/ContentContext';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { clientsSection, clientLogos, partnerLogos, testimonials } = useContent();
+  
+  // Check if we have clients data to display
+  const hasClientsData = Boolean(
+    clientsSection && 
+    (clientLogos?.length > 0 || partnerLogos?.length > 0 || testimonials?.length > 0)
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,15 +30,22 @@ const Header = () => {
     };
   }, [scrolled]);
 
+  // Define nav links with conditional inclusion of Clients link
   const navLinks = [
     { name: 'About', href: '#about' },
     { name: 'Mission', href: '#mission' },
     { name: 'Services', href: '#services' },
     { name: 'Solutions', href: '#solutions' },
     { name: 'Tech Stack', href: '#tech-stack' },
-    { name: 'Clients', href: '#clients' },
-    { name: 'Contact', href: '#contact' }
   ];
+  
+  // Conditionally add Clients link if data exists
+  if (hasClientsData) {
+    navLinks.push({ name: 'Clients', href: '#clients' });
+  }
+  
+  // Always add Contact link at the end
+  navLinks.push({ name: 'Contact', href: '#contact' });
 
   return (
     <header className={cn(
@@ -86,7 +101,7 @@ const Header = () => {
               className="text-white"
             />
             <path 
-              d="M138.24,25.09l1.88-3.74a1,1,0,0,1,1.59-.49A15.48,15.48,0,0,0,148,22.52c1.38,0,2.35-.55,2.35-1.73s-1-2-4.64-3.46c-5.34-2.08-7.83-4.93-7.83-9.15S141,0,148.08,0a16,16,0,0,1,8.53,2.15A1.47,1.47,0,0,1,157.23,4L155.5,7.55a1.32,1.32,0,0,1-1.66.49,16.4,16.4,0,0,0-5.76-1.46c-1.66,0-2.35.7-2.35,1.6,0,1.25,1.25,1.66,3.81,2.7,5.34,2.08,9.36,4.37,9.36,9.77,0,4.58-4,8.46-11,8.46a15.68,15.68,0,0,1-9.22-2.57A1.19,1.19,0,0,1,138.24,25.09Z"
+              d="M138.24,25.09l1.88-3.74a1,1,0,0,1,1.59-.49A15.48,15.48,0,0,0,148,22.52c1.38,0,2.35-.55,2.35-1.73s-1-2-4.64-3.46c-5.34-2.08-7.83-4.93-7.83-9.15S141,0,148.08,0a16,16,0,0,1,8.53,2.15A1.47,1.47,0,0,1,157.23,4L155.5,7.55a1.32,1.32,0,0,1-1.66.49,16.4,16.4,0,0,0-5.76-1.46c-1.66,0-2.36.7-2.36,1.6,0,1.25,1.25,1.66,3.81,2.7,5.34,2.08,9.36,4.37,9.36,9.77,0,4.58-4,8.46-11,8.46a15.68,15.68,0,0,1-9.22-2.57A1.19,1.19,0,0,1,138.24,25.09Z"
               className="text-white"
             />
           </svg>
