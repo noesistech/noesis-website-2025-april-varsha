@@ -174,9 +174,10 @@ const ContactSection = () => {
                   
                   <Button 
                     type="submit" 
-                    className="w-full bg-noesis-purple hover:bg-noesis-purple/90 text-white"
+                    className="w-full"
                     disabled={isSubmitting}
                     size="lg"
+                    variant="noesis"
                   >
                     {isSubmitting ? (
                       <div className="flex items-center gap-2">
@@ -254,7 +255,7 @@ const ContactSection = () => {
           <div className="flex justify-center mt-4">
             <Button 
               onClick={() => setShowSuccessDialog(false)} 
-              className="bg-noesis-purple hover:bg-noesis-purple/90 text-white"
+              variant="noesis"
             >
               Close
             </Button>

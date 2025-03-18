@@ -102,7 +102,7 @@ const Header = () => {
               {link.name}
             </a>
           ))}
-          <Button className="bg-noesis-purple hover:bg-noesis-darkpurple text-white">
+          <Button href="#contact" className="text-white" variant="noesis">
             Get in Touch
           </Button>
         </nav>
@@ -140,8 +140,10 @@ const Header = () => {
             </a>
           ))}
           <Button 
-            className="bg-noesis-purple hover:bg-noesis-darkpurple text-white w-full animate-in fade-in duration-300"
+            href="#contact"
+            className="w-full text-white animate-in fade-in duration-300"
             style={{ animationDelay: `${navLinks.length * 50}ms` }}
+            variant="noesis"
           >
             Get in Touch
           </Button>

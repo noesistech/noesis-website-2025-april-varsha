@@ -139,10 +139,10 @@ const HeroSection = () => {
               As an AI-native agency, we combine cutting-edge artificial intelligence with human expertise to deliver digital solutions that transform businesses and exceed expectations.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-noesis-purple hover:bg-noesis-darkpurple text-white text-lg py-6 px-8">
+              <Button href="#contact" className="text-white text-lg py-6 px-8" variant="noesis">
                 Get in Touch
               </Button>
-              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 text-lg py-6 px-8">
+              <Button href="#services" variant="outline" className="border-white/20 text-white hover:bg-white/10 text-lg py-6 px-8">
                 Our Services
               </Button>
             </div>

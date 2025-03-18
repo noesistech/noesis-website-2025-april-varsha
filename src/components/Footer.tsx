@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Layers, Mail, Phone, MapPin } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const Footer = () => {
   return (
