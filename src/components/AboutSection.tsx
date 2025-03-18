@@ -96,7 +96,7 @@ const AboutSection = () => {
           
           <div>
             <h3 className="text-2xl md:text-3xl font-bold mb-6 animate-fade-in">
-              An AI-Native Agency Since <span className="gradient-text">2009</span>
+              Evolving Since <span className="gradient-text">2009</span>, Leading in AI Today
             </h3>
             <div className="space-y-4">
               <p className="text-white/80 animate-fade-in" style={{ animationDelay: '0.2s' }}>
