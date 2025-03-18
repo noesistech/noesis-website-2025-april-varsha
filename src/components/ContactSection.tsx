@@ -39,10 +39,15 @@ const ContactSection = () => {
     try {
       setIsSubmitting(true);
 
-      // 1. Save form submission to Supabase - FIX: Pass a single object not an array
+      // 1. Save form submission to Supabase - ensure all required fields are present
       const { error: dbError } = await supabase
         .from('contact_submissions')
-        .insert(data); // Changed from insert([data]) to insert(data)
+        .insert({
+          name: data.name,
+          email: data.email,
+          subject: data.subject,
+          message: data.message
+        });
 
       if (dbError) throw new Error(`Database error: ${dbError.message}`);
 
