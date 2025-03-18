@@ -1,6 +1,7 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Users, Briefcase, Calendar, Award } from 'lucide-react';
+import P5Animation from './P5Animation';
+import { useContent } from '@/contexts/ContentContext';
 
 type StatCardProps = {
   icon: React.ReactNode;
@@ -78,6 +79,8 @@ const StatCard = ({ icon, value, label, delay }: StatCardProps) => {
 };
 
 const AboutSection = () => {
+  const { aboutSection, stats } = useContent();
+
   return (
     <section id="about" className="py-20 relative bg-noesis-dark">
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-noesis-dark/90 to-noesis-dark/0 pointer-events-none"></div>
@@ -86,12 +89,8 @@ const AboutSection = () => {
         <h2 className="section-title mb-12">About <span className="gradient-text">Noesis</span></h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-          <div className="glass rounded-2xl overflow-hidden animate-fade-in">
-            <img 
-              src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d" 
-              alt="Digital workspace" 
-              className="w-full h-auto"
-            />
+          <div className="glass rounded-2xl overflow-hidden animate-fade-in" style={{ height: '500px' }}>
+            <P5Animation className="w-full h-full" />
           </div>
           
           <div>
@@ -113,30 +112,20 @@ const AboutSection = () => {
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard 
-            icon={<Users className="h-6 w-6 text-noesis-purple" />}
-            value="40"
-            label="Human + AI Experts"
-            delay="0.2s"
-          />
-          <StatCard 
-            icon={<Briefcase className="h-6 w-6 text-noesis-blue" />}
-            value="175+"
-            label="Years of Experience"
-            delay="0.4s"
-          />
-          <StatCard 
-            icon={<Calendar className="h-6 w-6 text-purple-400" />}
-            value="4+"
-            label="Avg. Client Relationship"
-            delay="0.6s"
-          />
-          <StatCard 
-            icon={<Award className="h-6 w-6 text-pink-400" />}
-            value="95%"
-            label="Client Retention Rate"
-            delay="0.8s"
-          />
+          {stats.map((stat, index) => (
+            <StatCard 
+              key={stat.id}
+              icon={
+                stat.icon_name === 'Users' ? <Users className="h-6 w-6 text-noesis-purple" /> :
+                stat.icon_name === 'Briefcase' ? <Briefcase className="h-6 w-6 text-noesis-blue" /> :
+                stat.icon_name === 'Calendar' ? <Calendar className="h-6 w-6 text-purple-400" /> :
+                <Award className="h-6 w-6 text-pink-400" />
+              }
+              value={stat.value}
+              label={stat.label}
+              delay={`${0.2 * (index + 1)}s`}
+            />
+          ))}
         </div>
       </div>
       

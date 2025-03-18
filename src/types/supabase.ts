@@ -95,6 +95,15 @@ export interface TechStackSection {
   updated_at: string;
 }
 
+export interface Technology {
+  id: string;
+  category_id: string;
+  name: string;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface TechCategory {
   id: string;
   title: string;
@@ -104,15 +113,6 @@ export interface TechCategory {
   created_at: string;
   updated_at: string;
   technologies?: Technology[];
-}
-
-export interface Technology {
-  id: string;
-  category_id: string;
-  name: string;
-  sort_order: number;
-  created_at: string;
-  updated_at: string;
 }
 
 export interface ClientsSection {
