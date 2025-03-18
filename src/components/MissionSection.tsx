@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { Flag, Gem, Sparkles, Zap } from 'lucide-react';
 
@@ -143,7 +142,7 @@ const MissionSection = () => {
         </div>
       </div>
       
-      <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/80 via-noesis-purple/5 to-noesis-dark/80 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-noesis-purple/5 to-transparent pointer-events-none"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <h2 className="section-title text-4xl md:text-5xl mb-24">Mission & Vision</h2>
@@ -198,9 +197,10 @@ const MissionSection = () => {
             top: 0;
             left: 0;
             right: 0;
-            height: 200px;
-            background: linear-gradient(to bottom, #1A1F2C, transparent);
+            height: 300px;
+            background: linear-gradient(to bottom, #1A1F2C 0%, transparent 100%);
             z-index: 2;
+            opacity: 0.95;
           }
           
           .pattern-fade-bottom {
@@ -208,9 +208,10 @@ const MissionSection = () => {
             bottom: 0;
             left: 0;
             right: 0;
-            height: 200px;
-            background: linear-gradient(to top, #1A1F2C, transparent);
+            height: 300px;
+            background: linear-gradient(to top, #1A1F2C 0%, transparent 100%);
             z-index: 2;
+            opacity: 0.95;
           }
           
           .pattern-grid {
@@ -226,13 +227,14 @@ const MissionSection = () => {
             z-index: 1;
             height: 200%;
             transform-origin: top center;
+            opacity: 0.6;
           }
           
           .grid-cell {
             display: flex;
             justify-content: center;
             align-items: center;
-            opacity: 0.15;
+            opacity: 0.1;
             transition: all 0.5s ease;
             animation: pulseOpacity 8s ease-in-out infinite;
           }
@@ -261,10 +263,10 @@ const MissionSection = () => {
           
           @keyframes pulseOpacity {
             0%, 100% {
-              opacity: 0.08;
+              opacity: 0.05;
             }
             50% {
-              opacity: 0.2;
+              opacity: 0.15;
             }
           }
           
