@@ -16,7 +16,8 @@ import {
   ClientsSection,
   ClientLogo,
   PartnerLogo,
-  Testimonial
+  Testimonial,
+  Technology
 } from '@/types/supabase';
 import { toast } from "sonner";
 
@@ -230,6 +231,9 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
         
         // Fetch technologies for each category
         for (const category of categories) {
+          // Initialize technologies as an empty array
+          category.technologies = [];
+          
           const { data: techData, error: techError } = await supabase
             .from('technologies')
             .select('*')
@@ -238,7 +242,6 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
           
           if (techError) {
             console.error(`Error fetching technologies for category ${category.id}:`, techError);
-            category.technologies = []; // Initialize technologies as empty array to prevent undefined errors
           } else {
             category.technologies = techData || [];
           }
