@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { Flag, Gem, Sparkles, Zap } from 'lucide-react';
 
@@ -184,7 +185,7 @@ const MissionSection = () => {
               <span className="text-word-highlight block md:inline-block mx-2 font-medium"> creativity</span>,
               
               <span className="text-word block md:inline-block mt-6 md:mt-0 md:ml-2">AI</span> 
-              <span className="text-word-highlight block md:inline-block mx-2 font-medium"> precision</span>.
+              <span className="text-word-highlight block md:inline-block mx-2 font-medium"> innovation</span>.
             </p>
           </div>
         </div>
