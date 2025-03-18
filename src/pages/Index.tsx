@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,6 +9,8 @@ import SolutionsSection from "@/components/SolutionsSection";
 import TechStackSection from "@/components/TechStackSection";
 import ClientsSection from "@/components/ClientsSection";
 import ContactSection from "@/components/ContactSection";
+import { ServiceItem } from "@/types/supabase";
+import { SolutionItem } from "@/types/supabase";
 
 // Sample data for TechStackSection to use when not getting data from Supabase
 const sampleTechCategories = [
@@ -57,6 +58,52 @@ const sampleTechCategories = [
   }
 ];
 
+// Sample data for ServiceItems
+const sampleServiceItems: ServiceItem[] = [
+  {
+    id: 'ui-ux',
+    icon_name: 'palette',
+    title: 'UI/UX',
+    description: 'Create exceptional user experiences through the perfect blend of human-centered design principles and AI-powered insights.',
+    sort_order: 1,
+    created_at: '',
+    updated_at: '',
+  },
+  {
+    id: 'web-dev',
+    icon_name: 'globe',
+    title: 'Web and Application Development',
+    description: 'Build cutting-edge digital solutions with our AI-enhanced development process that combines human creativity with machine efficiency.',
+    sort_order: 2,
+    created_at: '',
+    updated_at: '',
+  },
+];
+
+// Sample data for SolutionItems
+const sampleSolutionItems: SolutionItem[] = [
+  {
+    id: 'lms',
+    icon_name: 'graduation-cap',
+    title: 'AI-Powered Learning Management',
+    description: 'Human-centered interface enhanced by AI for intuitive course creation and management',
+    color: 'from-blue-500/20 to-blue-600/20',
+    sort_order: 1,
+    created_at: '',
+    updated_at: '',
+  },
+  {
+    id: 'brainstormer',
+    icon_name: 'cpu',
+    title: 'Brainstormer',
+    description: 'Our proprietary AI platform developed by human AI experts',
+    color: 'from-purple-500/20 to-purple-600/20',
+    sort_order: 2,
+    created_at: '',
+    updated_at: '',
+  },
+];
+
 const Index = () => {
   useEffect(() => {
     document.title = "Noesis.tech - Creative Technology Solutions";
@@ -72,8 +119,14 @@ const Index = () => {
         <HeroSection />
         <AboutSection />
         <MissionSection />
-        <ServicesSection />
-        <SolutionsSection />
+        <ServicesSection 
+          title="Our Services" 
+          services={sampleServiceItems}
+        />
+        <SolutionsSection 
+          title="Our Solutions" 
+          solutions={sampleSolutionItems}
+        />
         <TechStackSection 
           title="Our Technology Stack" 
           categories={sampleTechCategories} 
