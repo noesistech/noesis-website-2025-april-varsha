@@ -11,8 +11,8 @@ import ClientsSection from "@/components/ClientsSection";
 import ContactSection from "@/components/ContactSection";
 import { ServiceItem } from "@/types/supabase";
 import { SolutionItem } from "@/types/supabase";
+import { Toaster } from "@/components/ui/sonner";
 
-// Sample data for TechStackSection to use when not getting data from Supabase
 const sampleTechCategories = [
   {
     id: '1',
@@ -58,7 +58,6 @@ const sampleTechCategories = [
   }
 ];
 
-// Sample data for ServiceItems
 const sampleServiceItems: ServiceItem[] = [
   {
     id: 'ui-ux',
@@ -80,7 +79,6 @@ const sampleServiceItems: ServiceItem[] = [
   },
 ];
 
-// Sample data for SolutionItems
 const sampleSolutionItems: SolutionItem[] = [
   {
     id: 'lms',
@@ -135,6 +133,7 @@ const Index = () => {
         <ContactSection />
       </main>
       <Footer />
+      <Toaster position="top-right" />
     </div>
   );
 };

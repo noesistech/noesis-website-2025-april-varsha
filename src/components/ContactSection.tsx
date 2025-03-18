@@ -1,11 +1,71 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { useForm } from "react-hook-form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+// Form validation schema
+const contactFormSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters" }),
+  email: z.string().email({ message: "Please enter a valid email address" }),
+  subject: z.string().min(3, { message: "Subject must be at least 3 characters" }),
+  message: z.string().min(10, { message: "Message must be at least 10 characters" }),
+});
+
+type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 const ContactSection = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const form = useForm<ContactFormValues>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: ""
+    }
+  });
+
+  const onSubmit = async (data: ContactFormValues) => {
+    try {
+      setIsSubmitting(true);
+
+      // 1. Save form submission to Supabase
+      const { error: dbError } = await supabase
+        .from('contact_submissions')
+        .insert([data]);
+
+      if (dbError) throw new Error(`Database error: ${dbError.message}`);
+
+      // 2. Send notification emails via edge function
+      const response = await supabase.functions.invoke('send-contact-email', {
+        body: data,
+      });
+
+      if (!response.data?.success) {
+        throw new Error('Email sending failed');
+      }
+
+      // 3. Show success message and reset form
+      toast.success("Message sent successfully! We'll get back to you soon.");
+      form.reset();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("There was a problem sending your message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-20 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
@@ -23,57 +83,96 @@ const ContactSection = () => {
             <div className="p-8">
               <h3 className="text-2xl font-bold gradient-text mb-6">Start the conversation</h3>
               
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-white/70 mb-1">
-                      Your Name
-                    </label>
-                    <Input 
-                      id="name" 
-                      className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
-                      placeholder="John Doe"
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-medium text-white/70">Your Name</FormLabel>
+                          <FormControl>
+                            <Input 
+                              {...field}
+                              className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
+                              placeholder="John Doe"
+                              disabled={isSubmitting}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-400" />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-medium text-white/70">Email Address</FormLabel>
+                          <FormControl>
+                            <Input 
+                              {...field}
+                              className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
+                              placeholder="john@example.com"
+                              type="email"
+                              disabled={isSubmitting}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-400" />
+                        </FormItem>
+                      )}
                     />
                   </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-white/70 mb-1">
-                      Email Address
-                    </label>
-                    <Input 
-                      id="email" 
-                      className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
-                      placeholder="john@example.com"
-                      type="email"
-                    />
-                  </div>
-                </div>
-                
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-white/70 mb-1">
-                    Subject
-                  </label>
-                  <Input 
-                    id="subject" 
-                    className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
-                    placeholder="How can we help you?"
+                  
+                  <FormField
+                    control={form.control}
+                    name="subject"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium text-white/70">Subject</FormLabel>
+                        <FormControl>
+                          <Input 
+                            {...field}
+                            className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
+                            placeholder="How can we help you?"
+                            disabled={isSubmitting}
+                          />
+                        </FormControl>
+                        <FormMessage className="text-red-400" />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-white/70 mb-1">
-                    Message
-                  </label>
-                  <Textarea 
-                    id="message" 
-                    className="bg-white/5 border-white/10 focus:border-noesis-purple text-white h-32"
-                    placeholder="Tell us about your project..."
+                  
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium text-white/70">Message</FormLabel>
+                        <FormControl>
+                          <Textarea 
+                            {...field}
+                            className="bg-white/5 border-white/10 focus:border-noesis-purple text-white h-32"
+                            placeholder="Tell us about your project..."
+                            disabled={isSubmitting}
+                          />
+                        </FormControl>
+                        <FormMessage className="text-red-400" />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                
-                <Button className="w-full bg-noesis-purple hover:bg-noesis-darkpurple text-white">
-                  Connect With Our Team
-                </Button>
-              </form>
+                  
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-noesis-purple hover:bg-noesis-darkpurple text-white"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Connect With Our Team"}
+                  </Button>
+                </form>
+              </Form>
             </div>
           </Card>
           
