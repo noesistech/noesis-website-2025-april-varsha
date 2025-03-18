@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { Flag, Gem, Sparkles, Zap } from 'lucide-react';
 
@@ -112,7 +113,8 @@ const MissionSection = () => {
   const totalRows = gridRows * 2;
   
   return (
-    <section id="mission" className="py-32 relative overflow-hidden" ref={sectionRef}>
+    <section id="mission" className="py-32 relative overflow-hidden bg-noesis-dark" ref={sectionRef}>
+      {/* Extended fade transitions with more overlap */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="pattern-fade-top"></div>
         <div className="pattern-fade-bottom"></div>
@@ -142,7 +144,7 @@ const MissionSection = () => {
         </div>
       </div>
       
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-noesis-purple/5 to-transparent pointer-events-none"></div>
+      {/* Removed bg-gradient and replaced with a seamless transition */}
       
       <div className="container mx-auto px-6 relative z-10">
         <h2 className="section-title text-4xl md:text-5xl mb-24">Mission & Vision</h2>
@@ -194,38 +196,36 @@ const MissionSection = () => {
         {`
           .pattern-fade-top {
             position: absolute;
-            top: 0;
+            top: -150px; /* Extend fade beyond section boundaries */
             left: 0;
             right: 0;
-            height: 300px;
-            background: linear-gradient(to bottom, #1A1F2C 0%, transparent 100%);
+            height: 450px; /* Much taller fade */
+            background: linear-gradient(to bottom, #1A1F2C 0%, rgba(26, 31, 44, 0.8) 40%, rgba(26, 31, 44, 0) 100%);
             z-index: 2;
-            opacity: 0.95;
           }
           
           .pattern-fade-bottom {
             position: absolute;
-            bottom: 0;
+            bottom: -150px; /* Extend fade beyond section boundaries */
             left: 0;
             right: 0;
-            height: 300px;
-            background: linear-gradient(to top, #1A1F2C 0%, transparent 100%);
+            height: 450px; /* Much taller fade */
+            background: linear-gradient(to top, #1A1F2C 0%, rgba(26, 31, 44, 0.8) 40%, rgba(26, 31, 44, 0) 100%);
             z-index: 2;
-            opacity: 0.95;
           }
           
           .pattern-grid {
             position: absolute;
-            top: 0;
+            top: -100px; /* Start above the section */
             left: 0;
             right: 0;
-            bottom: 0;
+            bottom: -100px; /* Extend below the section */
             display: grid;
             grid-template-columns: repeat(${gridCols}, 1fr);
             grid-template-rows: repeat(${totalRows}, 1fr);
             animation: moveUp 60s linear infinite;
             z-index: 1;
-            height: 200%;
+            height: calc(200% + 200px); /* Extend grid beyond top and bottom */
             transform-origin: top center;
             opacity: 0.6;
           }
