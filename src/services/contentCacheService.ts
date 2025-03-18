@@ -25,6 +25,25 @@ interface CachedContent {
   testimonials?: CacheItem<any>;
 }
 
+// Define a type for our table names based on the Database
+type TableName = 
+  | 'hero_section'
+  | 'service_cards'
+  | 'about_section'
+  | 'stats'
+  | 'mission_section'
+  | 'services_section'
+  | 'service_items'
+  | 'solutions_section'
+  | 'solution_items'
+  | 'tech_stack_section'
+  | 'tech_categories'
+  | 'clients_section'
+  | 'client_logos'
+  | 'partner_logos'
+  | 'testimonials'
+  | 'technologies';
+
 // In-memory cache
 let contentCache: CachedContent = {};
 
@@ -97,7 +116,7 @@ export const contentCacheService = {
   async checkForUpdates(): Promise<boolean> {
     try {
       // Check multiple tables for updates
-      const tablesToCheck = [
+      const tablesToCheck: TableName[] = [
         'hero_section',
         'service_cards',
         'about_section',
@@ -118,34 +137,38 @@ export const contentCacheService = {
       let hasUpdates = false;
       
       for (const table of tablesToCheck) {
-        const { data, error } = await supabase
-          .from(table)
-          .select('updated_at')
-          .order('updated_at', { ascending: false })
-          .limit(1)
-          .single();
-        
-        if (error) {
-          console.error(`Error checking for updates in ${table}:`, error);
-          continue;
-        }
-        
-        if (!data) continue;
-        
-        // Convert to timestamps for comparison
-        const serverUpdateTime = new Date(data.updated_at).getTime();
-        
-        // Find the corresponding cache key
-        const cacheKey = this.tableToCacheKey(table);
-        if (!cacheKey) continue;
-        
-        const cachedItem = contentCache[cacheKey];
-        
-        // If we don't have a cached item or server data is newer than our cache
-        if (!cachedItem || serverUpdateTime > cachedItem.timestamp) {
-          console.log(`Server has newer content for ${table}, invalidating cache for ${cacheKey}`);
-          this.invalidateCache(cacheKey);
-          hasUpdates = true;
+        try {
+          const { data, error } = await supabase
+            .from(table)
+            .select('updated_at')
+            .order('updated_at', { ascending: false })
+            .limit(1)
+            .single();
+          
+          if (error) {
+            console.error(`Error checking for updates in ${table}:`, error);
+            continue;
+          }
+          
+          if (!data || !data.updated_at) continue;
+          
+          // Convert to timestamps for comparison
+          const serverUpdateTime = new Date(data.updated_at).getTime();
+          
+          // Find the corresponding cache key
+          const cacheKey = this.tableToCacheKey(table);
+          if (!cacheKey) continue;
+          
+          const cachedItem = contentCache[cacheKey];
+          
+          // If we don't have a cached item or server data is newer than our cache
+          if (!cachedItem || serverUpdateTime > cachedItem.timestamp) {
+            console.log(`Server has newer content for ${table}, invalidating cache for ${cacheKey}`);
+            this.invalidateCache(cacheKey);
+            hasUpdates = true;
+          }
+        } catch (error) {
+          console.error(`Error processing updates for table ${table}:`, error);
         }
       }
       
@@ -156,8 +179,8 @@ export const contentCacheService = {
     }
   },
   
-  tableToCacheKey(tableName: string): keyof CachedContent | null {
-    const mapping: Record<string, keyof CachedContent> = {
+  tableToCacheKey(tableName: TableName): keyof CachedContent | null {
+    const mapping: Record<TableName, keyof CachedContent> = {
       'hero_section': 'heroSection',
       'service_cards': 'serviceCards',
       'about_section': 'aboutSection',
@@ -172,7 +195,8 @@ export const contentCacheService = {
       'clients_section': 'clientsSection',
       'client_logos': 'clientLogos',
       'partner_logos': 'partnerLogos',
-      'testimonials': 'testimonials'
+      'testimonials': 'testimonials',
+      'technologies': 'techCategories' // Map technologies to tech categories as they're related
     };
     
     return mapping[tableName] || null;
