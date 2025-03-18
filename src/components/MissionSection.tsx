@@ -106,13 +106,14 @@ const MissionSection = () => {
     };
   }, []);
   
-  const gridRows = 24;
+  const gridRows = 16;
   const gridCols = 24;
   
   const totalRows = gridRows * 2;
   
   return (
     <section id="mission" className="py-32 relative overflow-hidden bg-noesis-dark" ref={sectionRef}>
+      {/* Extended fade transitions with more overlap */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="pattern-fade-top"></div>
         <div className="pattern-fade-bottom"></div>
@@ -192,36 +193,36 @@ const MissionSection = () => {
         {`
           .pattern-fade-top {
             position: absolute;
-            top: -200px;
+            top: -150px; /* Extend fade beyond section boundaries */
             left: 0;
             right: 0;
-            height: 550px;
+            height: 450px; /* Much taller fade */
             background: linear-gradient(to bottom, #1A1F2C 100%, rgba(26, 31, 44, 0.8) 100%, rgba(26, 31, 44, 0) 100%);
             z-index: 2;
           }
           
           .pattern-fade-bottom {
             position: absolute;
-            bottom: -200px;
+            bottom: -150px; /* Extend fade beyond section boundaries */
             left: 0;
             right: 0;
-            height: 550px;
+            height: 450px; /* Much taller fade */
             background: linear-gradient(to top, #1A1F2C 100%, rgba(26, 31, 44, 0.8) 100%, rgba(26, 31, 44, 0) 100%);
             z-index: 2;
           }
           
           .pattern-grid {
             position: absolute;
-            top: -150px;
+            top: -100px; /* Start above the section */
             left: 0;
             right: 0;
-            bottom: -150px;
+            bottom: -100px; /* Extend below the section */
             display: grid;
             grid-template-columns: repeat(${gridCols}, 1fr);
             grid-template-rows: repeat(${totalRows}, 1fr);
-            animation: moveUp 80s linear infinite;
+            animation: moveUp 60s linear infinite;
             z-index: 1;
-            height: calc(100% + 300px);
+            height: calc(200% + 200px); /* Extend grid beyond top and bottom */
             transform-origin: top center;
             opacity: 0.6;
           }
