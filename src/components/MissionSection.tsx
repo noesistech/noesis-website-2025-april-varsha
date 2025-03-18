@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { Flag, Gem, Sparkles, Zap } from 'lucide-react';
 
@@ -144,8 +143,6 @@ const MissionSection = () => {
         </div>
       </div>
       
-      {/* Removed bg-gradient and replaced with a seamless transition */}
-      
       <div className="container mx-auto px-6 relative z-10">
         <h2 className="section-title text-4xl md:text-5xl mb-24">Mission & Vision</h2>
         
@@ -200,7 +197,7 @@ const MissionSection = () => {
             left: 0;
             right: 0;
             height: 450px; /* Much taller fade */
-            background: linear-gradient(to bottom, #1A1F2C 0%, rgba(26, 31, 44, 0.8) 40%, rgba(26, 31, 44, 0) 100%);
+            background: linear-gradient(to bottom, #1A1F2C 100%, rgba(26, 31, 44, 0.8) 100%, rgba(26, 31, 44, 0) 100%);
             z-index: 2;
           }
           
@@ -210,7 +207,7 @@ const MissionSection = () => {
             left: 0;
             right: 0;
             height: 450px; /* Much taller fade */
-            background: linear-gradient(to top, #1A1F2C 0%, rgba(26, 31, 44, 0.8) 40%, rgba(26, 31, 44, 0) 100%);
+            background: linear-gradient(to top, #1A1F2C 100%, rgba(26, 31, 44, 0.8) 100%, rgba(26, 31, 44, 0) 100%);
             z-index: 2;
           }
           

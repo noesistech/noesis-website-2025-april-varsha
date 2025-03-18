@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, BrainCircuit, Code, Server, Palette, Globe, Users } from 'lucide-react';
@@ -125,7 +126,7 @@ const HeroSection = () => {
       </div>
       
       {/* Gradient overlay for smooth section transition */}
-      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-b from-transparent to-noesis-dark/90 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-b from-transparent to-noesis-dark pointer-events-none"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

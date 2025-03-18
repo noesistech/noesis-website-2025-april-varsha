@@ -79,8 +79,8 @@ const StatCard = ({ icon, value, label, delay }: StatCardProps) => {
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-20 relative">
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-noesis-dark/90 to-transparent pointer-events-none"></div>
+    <section id="about" className="py-20 relative bg-noesis-dark">
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-noesis-dark/90 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-6">
         <h2 className="section-title mb-12">About <span className="gradient-text">Noesis</span></h2>
@@ -139,6 +139,9 @@ const AboutSection = () => {
           />
         </div>
       </div>
+      
+      {/* Bottom gradient for smooth transition to next section */}
+      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-b from-noesis-dark/0 to-noesis-dark pointer-events-none"></div>
     </section>
   );
 };
