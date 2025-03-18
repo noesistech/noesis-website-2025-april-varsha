@@ -2,23 +2,55 @@
 import { contentCacheService } from '@/services/contentCacheService';
 import { supabase } from '@/integrations/supabase/client';
 
+// Define type for table names to ensure type safety with Supabase
+type TableName = 
+  | 'hero_section'
+  | 'service_cards'
+  | 'about_section'
+  | 'stats'
+  | 'mission_section'
+  | 'services_section'
+  | 'service_items'
+  | 'solutions_section'
+  | 'solution_items'
+  | 'tech_stack_section'
+  | 'tech_categories'
+  | 'technologies'
+  | 'clients_section'
+  | 'client_logos'
+  | 'partner_logos'
+  | 'testimonials';
+
+// Interface for options
+interface FetchOptions {
+  isSingle?: boolean;
+  orderBy?: string | null;
+  orderDirection?: 'asc' | 'desc';
+}
+
 // Base utility functions for content services
 export const baseContentService = {
   // Generic fetch method that can be reused across content types
   async fetchContent<T>(
-    tableName: string,
+    tableName: TableName,
     cacheKey: keyof typeof contentCacheService.contentCache,
     forceRefresh = false,
-    options = { 
-      isSingle: false, 
-      orderBy: null as string | null,
-      orderDirection: 'asc' as 'asc' | 'desc'
-    }
+    options?: Partial<FetchOptions>
   ): Promise<T | null> {
+    // Set default options
+    const defaultOptions: FetchOptions = {
+      isSingle: false,
+      orderBy: null,
+      orderDirection: 'asc'
+    };
+    
+    // Merge provided options with defaults
+    const mergedOptions = { ...defaultOptions, ...options };
+    
     return contentCacheService.getCachedData(cacheKey, async () => {
       let query = supabase.from(tableName).select('*');
       
-      if (options.isSingle) {
+      if (mergedOptions.isSingle) {
         const { data, error } = await query.single();
         
         if (error) {
@@ -28,8 +60,8 @@ export const baseContentService = {
         
         return data as T;
       } else {
-        if (options.orderBy) {
-          query = query.order(options.orderBy, { ascending: options.orderDirection === 'asc' });
+        if (mergedOptions.orderBy) {
+          query = query.order(mergedOptions.orderBy, { ascending: mergedOptions.orderDirection === 'asc' });
         }
         
         const { data, error } = await query;

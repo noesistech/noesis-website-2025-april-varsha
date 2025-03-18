@@ -7,7 +7,7 @@ interface CacheItem<T> {
   etag?: string;
 }
 
-interface CachedContent {
+export interface CachedContent {
   heroSection?: CacheItem<any>;
   serviceCards?: CacheItem<any>;
   aboutSection?: CacheItem<any>;
@@ -51,6 +51,9 @@ let contentCache: CachedContent = {};
 const CACHE_EXPIRATION = process.env.NODE_ENV === 'production' ? 2 * 60 * 1000 : 30 * 1000;
 
 export const contentCacheService = {
+  // For TypeScript to know this exists
+  contentCache,
+  
   async getCachedData<T>(key: keyof CachedContent, fetcher: () => Promise<T>, forceRefresh = false): Promise<T> {
     const cachedItem = contentCache[key];
     const now = Date.now();
