@@ -20,23 +20,47 @@ const StatCard = ({ icon, value, label, delay }: StatCardProps) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const target = entry.target as HTMLElement;
-            const numericValue = target.getAttribute('data-numeric-value') || '0';
-            const countTo = parseInt(numericValue, 10);
-            const suffix = target.getAttribute('data-suffix') || '';
-            let count = 0;
-            const increment = Math.ceil(countTo / 50);
             
-            const updateCount = () => {
-              count += increment;
-              if (count < countTo) {
-                target.textContent = count.toString() + suffix;
-                requestAnimationFrame(updateCount);
-              } else {
-                target.textContent = numericValue + suffix;
-              }
-            };
+            // Special case handling for values with ">"
+            if (value.includes('>')) {
+              // Extract only numeric part for the counter
+              const numericPart = value.replace(/[^0-9]/g, '');
+              const countTo = parseInt(numericPart, 10);
+              let count = 0;
+              const increment = Math.ceil(countTo / 50);
+              
+              const updateCount = () => {
+                count += increment;
+                if (count < countTo) {
+                  target.textContent = "> " + count.toString() + (value.includes('Year') ? ' Years' : '');
+                  requestAnimationFrame(updateCount);
+                } else {
+                  target.textContent = value;
+                }
+              };
+              
+              requestAnimationFrame(updateCount);
+            } else {
+              // Original logic for normal numbers
+              const numericValue = target.getAttribute('data-numeric-value') || '0';
+              const countTo = parseInt(numericValue, 10);
+              const suffix = target.getAttribute('data-suffix') || '';
+              let count = 0;
+              const increment = Math.ceil(countTo / 50);
+              
+              const updateCount = () => {
+                count += increment;
+                if (count < countTo) {
+                  target.textContent = count.toString() + suffix;
+                  requestAnimationFrame(updateCount);
+                } else {
+                  target.textContent = numericValue + suffix;
+                }
+              };
+              
+              requestAnimationFrame(updateCount);
+            }
             
-            requestAnimationFrame(updateCount);
             observer.unobserve(target);
           }
         });
@@ -53,8 +77,9 @@ const StatCard = ({ icon, value, label, delay }: StatCardProps) => {
         observer.unobserve(counterRef.current);
       }
     };
-  }, []);
+  }, [value]);
   
+  // Extract numeric and non-numeric parts for data attributes
   const numericValue = value.replace(/[^0-9]/g, '');
   const suffix = value.replace(/[0-9]/g, '');
   
@@ -71,7 +96,7 @@ const StatCard = ({ icon, value, label, delay }: StatCardProps) => {
           data-numeric-value={numericValue}
           data-suffix={suffix}
         >
-          0
+          {value.includes('>') ? '> 0' : '0'}
         </div>
         <p className="text-white/70">{label}</p>
       </div>
