@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
@@ -12,6 +12,7 @@ import ContactSection from "@/components/ContactSection";
 import { ServiceItem } from "@/types/supabase";
 import { SolutionItem } from "@/types/supabase";
 import { Toaster } from "@/components/ui/sonner";
+import { LoadingSkeleton } from "@/components/ui/loading";
 
 const sampleTechCategories = [
   {
@@ -103,12 +104,25 @@ const sampleSolutionItems: SolutionItem[] = [
 ];
 
 const Index = () => {
+  const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
     document.title = "Noesis.tech - Creative Technology Solutions";
     
     // Adding debug log to check if component is mounting
     console.log("Index component mounted");
+    
+    // Simulate loading time to show the lithograph animation
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 15000); // 15 seconds to ensure animation is visible
+    
+    return () => clearTimeout(timer);
   }, []);
+
+  if (loading) {
+    return <LoadingSkeleton />;
+  }
 
   return (
     <div className="min-h-screen bg-noesis-dark text-white">
