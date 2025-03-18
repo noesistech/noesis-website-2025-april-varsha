@@ -1,25 +1,6 @@
 
-import { contentCacheService } from '@/services/contentCacheService';
+import { contentCacheService, TableName, CachedContent } from '@/services/contentCacheService';
 import { supabase } from '@/integrations/supabase/client';
-
-// Define type for table names to ensure type safety with Supabase
-type TableName = 
-  | 'hero_section'
-  | 'service_cards'
-  | 'about_section'
-  | 'stats'
-  | 'mission_section'
-  | 'services_section'
-  | 'service_items'
-  | 'solutions_section'
-  | 'solution_items'
-  | 'tech_stack_section'
-  | 'tech_categories'
-  | 'technologies'
-  | 'clients_section'
-  | 'client_logos'
-  | 'partner_logos'
-  | 'testimonials';
 
 // Interface for options
 interface FetchOptions {
@@ -33,7 +14,7 @@ export const baseContentService = {
   // Generic fetch method that can be reused across content types
   async fetchContent<T>(
     tableName: TableName,
-    cacheKey: keyof typeof contentCacheService.contentCache,
+    cacheKey: keyof CachedContent,
     forceRefresh = false,
     options?: Partial<FetchOptions>
   ): Promise<T | null> {
