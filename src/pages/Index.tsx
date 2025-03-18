@@ -108,10 +108,21 @@ const fallbackSolutionItems: SolutionItem[] = [
 
 const Index = () => {
   const [initialLoading, setInitialLoading] = useState(true);
-  const { loading, error, techCategories, serviceItems, solutionItems, hasLoadedAnyContent } = useContent();
+  const { loading, error, heroSection, techCategories, serviceItems, solutionItems, hasLoadedAnyContent } = useContent();
   
   useEffect(() => {
-    document.title = "Noesis.tech - Creative Technology Solutions";
+    // Update document title and description based on content
+    const siteTitle = heroSection?.title 
+      ? `${heroSection.title} | Noesis.tech`
+      : "Noesis.tech - Creative Technology Solutions";
+    
+    document.title = siteTitle;
+    
+    // Update meta description dynamically if we have content
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription && heroSection?.subtitle) {
+      metaDescription.setAttribute('content', heroSection.subtitle);
+    }
     
     // Adding debug log to check if component is mounting
     console.log("Index component mounted");
@@ -122,7 +133,7 @@ const Index = () => {
     }, 1500);
     
     return () => clearTimeout(timer);
-  }, []);
+  }, [heroSection]);
 
   if (initialLoading || (loading && !hasLoadedAnyContent)) {
     return <LoadingSkeleton />;

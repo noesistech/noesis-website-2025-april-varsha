@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useContent } from '@/contexts/ContentContext';
 import { LoadingSkeleton } from '@/components/ui/loading';
 import { ErrorDisplay } from '@/components/ui/error';
@@ -35,6 +35,21 @@ const ContentPage: React.FC = () => {
     partnerLogos,
     testimonials
   } = useContent();
+
+  useEffect(() => {
+    // Update document title and description based on content
+    const siteTitle = heroSection?.title 
+      ? `${heroSection.title} | Noesis.tech`
+      : "Noesis.tech - Creative Technology Solutions";
+    
+    document.title = siteTitle;
+    
+    // Update meta description dynamically if we have content
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription && heroSection?.subtitle) {
+      metaDescription.setAttribute('content', heroSection.subtitle);
+    }
+  }, [heroSection]);
 
   if (loading) {
     return <LoadingSkeleton />;
