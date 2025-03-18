@@ -1,94 +1,97 @@
-
 import React, { useRef, useEffect } from 'react';
 import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { SolutionItem } from '@/types/supabase';
 
-type Solution = {
-  id: string;
-  icon: React.ReactNode;
+interface SolutionsSectionProps {
   title: string;
-  description: React.ReactNode;
-  color: string;
-};
+  solutions: SolutionItem[];
+}
 
-const solutions: Solution[] = [
-  {
-    id: 'lms',
-    icon: <GraduationCap className="h-10 w-10" />,
-    title: 'AI-Powered Learning Management',
-    description: (
-      <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>Human-centered interface enhanced by AI for intuitive course creation and management</li>
-        <li>Smart assessment tools that combine AI grading with human educational expertise</li>
-        <li>AI-driven analytics with human-interpreted reporting for actionable insights</li>
-        <li>Customizable branding and integrations overseen by human design specialists</li>
-      </ul>
-    ),
-    color: 'from-blue-500/20 to-blue-600/20',
-  },
-  {
-    id: 'brainstormer',
-    icon: <Cpu className="h-10 w-10" />,
-    title: 'Brainstormer',
-    description: (
-      <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>Our proprietary AI platform developed by human AI experts</li>
-        <li>Brainstormer Pro: Human-designed customized ChatGPT solutions for business needs</li>
-        <li>Brainstormer Studio: Low-code environment where human creativity directs AI capabilities</li>
-        <li>AI agents orchestrated by human strategists to automate workflows in finance, HR, and strategy</li>
-      </ul>
-    ),
-    color: 'from-purple-500/20 to-purple-600/20',
-  },
-  {
-    id: 'ecommerce',
-    icon: <ShoppingBag className="h-10 w-10" />,
-    title: 'AI-Enhanced eCommerce',
-    description: (
-      <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>Expert human designers directing AI tools for optimized website design and platform development</li>
-        <li>Specialized teams combining AI efficiency with human creativity for Shopify and Magento solutions</li>
-        <li>Our human experts with AI support have contributed to brands like MamaEarth, HyugaLife, Nykaa, and more</li>
-        <li>Exceptional 8-9% ROAS achieved through AI-human optimization strategies</li>
-      </ul>
-    ),
-    color: 'from-pink-500/20 to-pink-600/20',
-  },
-  {
-    id: 'chatbots',
-    icon: <MessageSquare className="h-10 w-10" />,
-    title: 'Human-Directed AI Chatbots',
-    description: (
-      <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>Bespoke AI solutions crafted by human experts for your specific business needs</li>
-        <li>Team collaboration features designed by humans to enhance AI workflow integration</li>
-        <li>Knowledge base management combining AI document processing with human curation</li>
-        <li>Human-supervised AI translation services enabling support in 14+ Indic languages</li>
-      </ul>
-    ),
-    color: 'from-green-500/20 to-green-600/20',
-  },
-  {
-    id: 'creative',
-    icon: <Wand2 className="h-10 w-10" />,
-    title: 'AI-Augmented Creative Technology',
-    description: (
-      <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>Chatbots that blend AI capabilities with human warmth for social media and website integration</li>
-        <li>Interactive marketing solutions where human creativity guides AI tools for quizzes and social filters</li>
-        <li>AR/VR experiences crafted through human-AI collaboration</li>
-        <li>Educational apps that combine human teaching expertise with AI engagement mechanics</li>
-      </ul>
-    ),
-    color: 'from-yellow-500/20 to-yellow-600/20',
-  },
-];
-
-const SolutionsSection = () => {
+const SolutionsSection: React.FC<SolutionsSectionProps> = ({ title, solutions }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   
+  const displaySolutions = solutions && solutions.length > 0 ? solutions.map(solution => ({
+    id: solution.id,
+    icon: getIconByName(solution.icon_name),
+    title: solution.title,
+    description: solution.description,
+    color: solution.color || 'from-purple-500/20 to-purple-600/20',
+  })) : [
+    {
+      id: 'lms',
+      icon: <GraduationCap className="h-10 w-10" />,
+      title: 'AI-Powered Learning Management',
+      description: (
+        <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Human-centered interface enhanced by AI for intuitive course creation and management</li>
+          <li>Smart assessment tools that combine AI grading with human educational expertise</li>
+          <li>AI-driven analytics with human-interpreted reporting for actionable insights</li>
+          <li>Customizable branding and integrations overseen by human design specialists</li>
+        </ul>
+      ),
+      color: 'from-blue-500/20 to-blue-600/20',
+    },
+    {
+      id: 'brainstormer',
+      icon: <Cpu className="h-10 w-10" />,
+      title: 'Brainstormer',
+      description: (
+        <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Our proprietary AI platform developed by human AI experts</li>
+          <li>Brainstormer Pro: Human-designed customized ChatGPT solutions for business needs</li>
+          <li>Brainstormer Studio: Low-code environment where human creativity directs AI capabilities</li>
+          <li>AI agents orchestrated by human strategists to automate workflows in finance, HR, and strategy</li>
+        </ul>
+      ),
+      color: 'from-purple-500/20 to-purple-600/20',
+    },
+    {
+      id: 'ecommerce',
+      icon: <ShoppingBag className="h-10 w-10" />,
+      title: 'AI-Enhanced eCommerce',
+      description: (
+        <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Expert human designers directing AI tools for optimized website design and platform development</li>
+          <li>Specialized teams combining AI efficiency with human creativity for Shopify and Magento solutions</li>
+          <li>Our human experts with AI support have contributed to brands like MamaEarth, HyugaLife, Nykaa, and more</li>
+          <li>Exceptional 8-9% ROAS achieved through AI-human optimization strategies</li>
+        </ul>
+      ),
+      color: 'from-pink-500/20 to-pink-600/20',
+    },
+    {
+      id: 'chatbots',
+      icon: <MessageSquare className="h-10 w-10" />,
+      title: 'Human-Directed AI Chatbots',
+      description: (
+        <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Bespoke AI solutions crafted by human experts for your specific business needs</li>
+          <li>Team collaboration features designed by humans to enhance AI workflow integration</li>
+          <li>Knowledge base management combining AI document processing with human curation</li>
+          <li>Human-supervised AI translation services enabling support in 14+ Indic languages</li>
+        </ul>
+      ),
+      color: 'from-green-500/20 to-green-600/20',
+    },
+    {
+      id: 'creative',
+      icon: <Wand2 className="h-10 w-10" />,
+      title: 'AI-Augmented Creative Technology',
+      description: (
+        <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Chatbots that blend AI capabilities with human warmth for social media and website integration</li>
+          <li>Interactive marketing solutions where human creativity guides AI tools for quizzes and social filters</li>
+          <li>AR/VR experiences crafted through human-AI collaboration</li>
+          <li>Educational apps that combine human teaching expertise with AI engagement mechanics</li>
+        </ul>
+      ),
+      color: 'from-yellow-500/20 to-yellow-600/20',
+    },
+  ];
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -119,10 +122,10 @@ const SolutionsSection = () => {
   return (
     <section id="solutions" className="py-20" ref={sectionRef}>
       <div className="container mx-auto px-6">
-        <h2 className="section-title mb-16">Our Solutions</h2>
+        <h2 className="section-title mb-16">{title || "Our Solutions"}</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {solutions.map((solution, index) => (
+          {displaySolutions.map((solution, index) => (
             <div
               key={solution.id}
               ref={(el) => (cardsRef.current[index] = el)}
@@ -134,16 +137,7 @@ const SolutionsSection = () => {
               )}></div>
               <div className="relative z-10 p-6">
                 <div className="bg-white/10 p-3 rounded-full w-fit mb-4">
-                  {React.cloneElement(solution.icon as React.ReactElement, {
-                    className: cn(
-                      "h-10 w-10",
-                      solution.id === 'lms' ? "text-blue-400" :
-                      solution.id === 'brainstormer' ? "text-noesis-purple" :
-                      solution.id === 'ecommerce' ? "text-pink-400" :
-                      solution.id === 'chatbots' ? "text-green-400" :
-                      "text-yellow-400"
-                    )
-                  })}
+                  {solution.icon}
                 </div>
                 <h3 className="text-2xl font-bold mb-4">{solution.title}</h3>
                 <div className="mb-6">
@@ -159,6 +153,24 @@ const SolutionsSection = () => {
       </div>
     </section>
   );
+};
+
+const getIconByName = (iconName: string) => {
+  switch (iconName) {
+    case 'graduation-cap':
+      return <GraduationCap className="h-10 w-10 text-blue-400" />;
+    case 'cpu':
+      return <Cpu className="h-10 w-10 text-noesis-purple" />;
+    case 'shopping-bag':
+      return <ShoppingBag className="h-10 w-10 text-pink-400" />;
+    case 'message-square':
+      return <MessageSquare className="h-10 w-10 text-green-400" />;
+    case 'wand':
+    case 'wand2':
+      return <Wand2 className="h-10 w-10 text-yellow-400" />;
+    default:
+      return <Cpu className="h-10 w-10" />;
+  }
 };
 
 export default SolutionsSection;

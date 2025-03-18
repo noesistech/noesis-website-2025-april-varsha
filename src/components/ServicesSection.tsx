@@ -1,91 +1,94 @@
-
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Palette, Globe, Image, Cloud, BrainCircuit, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ServiceItem } from '@/types/supabase';
 
-type Service = {
-  id: string;
-  icon: React.ReactNode;
+interface ServicesProps {
   title: string;
-  description: React.ReactNode;
-};
+  services: ServiceItem[];
+}
 
-const services: Service[] = [
-  {
-    id: 'ui-ux',
-    icon: <Palette className="h-12 w-12 text-noesis-purple" />,
-    title: 'UI/UX',
-    description: 'Create exceptional user experiences through the perfect blend of human-centered design principles and AI-powered insights.',
-  },
-  {
-    id: 'web-dev',
-    icon: <Globe className="h-12 w-12 text-noesis-blue" />,
-    title: 'Web and Application Development',
-    description: 'Build cutting-edge digital solutions with our AI-enhanced development process that combines human creativity with machine efficiency.',
-  },
-  {
-    id: 'graphics',
-    icon: <Image className="h-12 w-12 text-purple-400" />,
-    title: 'Graphics and Content Creation',
-    description: (
-      <ul className="list-disc pl-5 mt-2 space-y-1">
-        <li>AI-assisted content creation balanced with human editorial expertise for compelling website copy and articles.</li>
-        <li>Human creativity enhanced by AI tools to design captivating visuals and infographics that resonate with audiences.</li>
-      </ul>
-    ),
-  },
-  {
-    id: 'cloud',
-    icon: <Cloud className="h-12 w-12 text-pink-400" />,
-    title: 'Cloud Services & DevOps',
-    description: (
-      <ul className="list-disc pl-5 mt-2 space-y-1">
-        <li>AI-optimized hosting solutions managed by experienced human engineers.</li>
-        <li>Intelligent performance tuning that leverages machine learning for predictive scaling while maintaining human oversight.</li>
-        <li>Cloud flexibility with AI-enhanced configuration across AWS, Digital Ocean, Heroku, and dedicated servers managed by expert teams.</li>
-      </ul>
-    ),
-  },
-  {
-    id: 'ai',
-    icon: <BrainCircuit className="h-12 w-12 text-green-400" />,
-    title: 'AI Customized Solutions',
-    description: (
-      <ul className="list-disc pl-5 mt-2 space-y-1">
-        <li>Human-guided AI systems that extract meaningful insights from complex data.</li>
-        <li>Content generation that combines AI efficiency with human creativity for brand-perfect messaging.</li>
-        <li>Next-generation experiences where human expertise directs AI capabilities for truly transformative engagement.</li>
-      </ul>
-    ),
-  },
-  {
-    id: 'staff',
-    icon: <Users className="h-12 w-12 text-yellow-400" />,
-    title: 'AI-Enhanced Staff Solutions',
-    description: (
-      <ul className="list-disc pl-5 mt-2 space-y-1">
-        <li>Access to 500+ high-quality professionals trained in AI-human collaboration methodologies.</li>
-        <li>Teams skilled in AI integration across Frontend, Backend, Fullstack, ML, DevOps and cloud technologies.</li>
-        <li>90%+ retention rate thanks to our unique AI-human work environment.</li>
-        <li>Flexible remote and on-site deployment options with AI productivity enablement.</li>
-      </ul>
-    ),
-  },
-];
-
-const ServicesSection = () => {
+const ServicesSection: React.FC<ServicesProps> = ({ title, services }) => {
   const [activeService, setActiveService] = useState<string | null>(null);
   
+  const displayServices = services && services.length > 0 ? services.map(service => ({
+    id: service.id,
+    icon: getIconByName(service.icon_name),
+    title: service.title,
+    description: service.description,
+  })) : [
+    {
+      id: 'ui-ux',
+      icon: <Palette className="h-12 w-12 text-noesis-purple" />,
+      title: 'UI/UX',
+      description: 'Create exceptional user experiences through the perfect blend of human-centered design principles and AI-powered insights.',
+    },
+    {
+      id: 'web-dev',
+      icon: <Globe className="h-12 w-12 text-noesis-blue" />,
+      title: 'Web and Application Development',
+      description: 'Build cutting-edge digital solutions with our AI-enhanced development process that combines human creativity with machine efficiency.',
+    },
+    {
+      id: 'graphics',
+      icon: <Image className="h-12 w-12 text-purple-400" />,
+      title: 'Graphics and Content Creation',
+      description: (
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>AI-assisted content creation balanced with human editorial expertise for compelling website copy and articles.</li>
+          <li>Human creativity enhanced by AI tools to design captivating visuals and infographics that resonate with audiences.</li>
+        </ul>
+      ),
+    },
+    {
+      id: 'cloud',
+      icon: <Cloud className="h-12 w-12 text-pink-400" />,
+      title: 'Cloud Services & DevOps',
+      description: (
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>AI-optimized hosting solutions managed by experienced human engineers.</li>
+          <li>Intelligent performance tuning that leverages machine learning for predictive scaling while maintaining human oversight.</li>
+          <li>Cloud flexibility with AI-enhanced configuration across AWS, Digital Ocean, Heroku, and dedicated servers managed by expert teams.</li>
+        </ul>
+      ),
+    },
+    {
+      id: 'ai',
+      icon: <BrainCircuit className="h-12 w-12 text-green-400" />,
+      title: 'AI Customized Solutions',
+      description: (
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Human-guided AI systems that extract meaningful insights from complex data.</li>
+          <li>Content generation that combines AI efficiency with human creativity for brand-perfect messaging.</li>
+          <li>Next-generation experiences where human expertise directs AI capabilities for truly transformative engagement.</li>
+        </ul>
+      ),
+    },
+    {
+      id: 'staff',
+      icon: <Users className="h-12 w-12 text-yellow-400" />,
+      title: 'AI-Enhanced Staff Solutions',
+      description: (
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Access to 500+ high-quality professionals trained in AI-human collaboration methodologies.</li>
+          <li>Teams skilled in AI integration across Frontend, Backend, Fullstack, ML, DevOps and cloud technologies.</li>
+          <li>90%+ retention rate thanks to our unique AI-human work environment.</li>
+          <li>Flexible remote and on-site deployment options with AI productivity enablement.</li>
+        </ul>
+      ),
+    },
+  ];
+
   return (
     <section id="services" className="py-20 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="section-title mb-16">Our Services</h2>
+        <h2 className="section-title mb-16">{title || "Our Services"}</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
+          {displayServices.map((service, index) => (
             <Card 
               key={service.id}
               className={cn(
@@ -119,6 +122,26 @@ const ServicesSection = () => {
       </div>
     </section>
   );
+};
+
+const getIconByName = (iconName: string) => {
+  switch (iconName) {
+    case 'palette':
+      return <Palette className="h-12 w-12 text-noesis-purple" />;
+    case 'globe':
+      return <Globe className="h-12 w-12 text-noesis-blue" />;
+    case 'image':
+      return <Image className="h-12 w-12 text-purple-400" />;
+    case 'cloud':
+      return <Cloud className="h-12 w-12 text-pink-400" />;
+    case 'brain':
+    case 'brain-circuit':
+      return <BrainCircuit className="h-12 w-12 text-green-400" />;
+    case 'users':
+      return <Users className="h-12 w-12 text-yellow-400" />;
+    default:
+      return <Palette className="h-12 w-12 text-noesis-purple" />;
+  }
 };
 
 export default ServicesSection;
