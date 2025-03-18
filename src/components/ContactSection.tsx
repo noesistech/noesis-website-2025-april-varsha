@@ -25,7 +25,6 @@ type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isTesting, setIsTesting] = useState(false);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -73,27 +72,6 @@ const ContactSection = () => {
     }
   };
 
-  // Function to handle test email sending
-  const handleTestEmail = async () => {
-    const testEmail = "siddkb@gmail.com";
-    
-    try {
-      setIsTesting(true);
-      const result = await sendTestEmail(testEmail);
-      
-      if (result.success) {
-        toast.success(`Test email sent to ${testEmail}! Check your inbox.`);
-      } else {
-        toast.error(`Failed to send test email: ${result.error}`);
-      }
-    } catch (error) {
-      console.error("Error sending test email:", error);
-      toast.error("An unexpected error occurred while sending the test email.");
-    } finally {
-      setIsTesting(false);
-    }
-  };
-
   return (
     <section id="contact" className="py-20 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
@@ -104,19 +82,6 @@ const ContactSection = () => {
             Experience the <span className="gradient-text">AI-Human Partnership</span>
           </h2>
           <p className="text-xl text-white/70">Let's combine our expertise with cutting-edge AI to solve your challenges</p>
-          
-          {/* Add Test Email Button for development purposes */}
-          <div className="mt-4">
-            <Button 
-              onClick={handleTestEmail} 
-              variant="outline" 
-              className="bg-noesis-purple/20 border-noesis-purple hover:bg-noesis-purple/30 text-white"
-              disabled={isTesting}
-            >
-              <Send className="w-4 h-4 mr-2" />
-              {isTesting ? "Sending Test Email..." : "Send Test Email to siddkb@gmail.com"}
-            </Button>
-          </div>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
@@ -207,9 +172,11 @@ const ContactSection = () => {
                   
                   <Button 
                     type="submit" 
-                    className="w-full bg-noesis-purple hover:bg-noesis-darkpurple text-white"
+                    variant="outline"
+                    className="w-full bg-noesis-purple/20 border-noesis-purple hover:bg-noesis-purple/30 text-white"
                     disabled={isSubmitting}
                   >
+                    <Send className="w-4 h-4 mr-2" />
                     {isSubmitting ? "Sending..." : "Connect With Our Team"}
                   </Button>
                 </form>
