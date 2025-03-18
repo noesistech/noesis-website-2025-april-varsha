@@ -159,7 +159,7 @@ export const contentService = {
       console.error("Error fetching tech categories:", categoriesResult.error);
     }
     
-    const categories = categoriesResult.data || [];
+    const categories: TechCategory[] = categoriesResult.data || [];
     
     // Fetch technologies for each category
     for (const category of categories) {
@@ -171,6 +171,7 @@ export const contentService = {
       
       if (techResult.error) {
         console.error(`Error fetching technologies for category ${category.id}:`, techResult.error);
+        category.technologies = []; // Initialize technologies as empty array to prevent undefined errors
       } else {
         category.technologies = techResult.data || [];
       }

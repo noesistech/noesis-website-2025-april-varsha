@@ -31,6 +31,8 @@ const ContentPage: React.FC = () => {
     techStackSection,
     techCategories,
     clientsSection,
+    clientLogos,
+    partnerLogos,
     testimonials
   } = useContent();
 
@@ -48,34 +50,21 @@ const ContentPage: React.FC = () => {
       <main className="flex-grow">
         {heroSection && (
           <HeroSection 
-            title={heroSection.title}
-            subtitle={heroSection.subtitle}
-            ctaPrimaryText={heroSection.cta_primary_text}
-            ctaSecondaryText={heroSection.cta_secondary_text}
+            {...heroSection}
             serviceCards={serviceCards}
           />
         )}
         
         {aboutSection && (
           <AboutSection 
-            title={aboutSection.title}
-            subtitle={aboutSection.subtitle}
-            description1={aboutSection.description_1}
-            description2={aboutSection.description_2}
-            description3={aboutSection.description_3}
-            imageUrl={aboutSection.image_url}
+            {...aboutSection}
             stats={stats}
           />
         )}
         
         {missionSection && (
           <MissionSection 
-            missionTitle={missionSection.mission_title}
-            missionDescription={missionSection.mission_description}
-            visionTitle={missionSection.vision_title}
-            visionDescription={missionSection.vision_description}
-            promiseTitle={missionSection.promise_title}
-            promiseText={missionSection.promise_text}
+            {...missionSection}
           />
         )}
         
@@ -106,8 +95,8 @@ const ContentPage: React.FC = () => {
             clientsSubtitle={clientsSection.clients_subtitle}
             partnersSubtitle={clientsSection.partners_subtitle}
             testimonialsSubtitle={clientsSection.testimonials_subtitle}
-            clientLogos={[]}  // We need to add client logos later
-            partnerLogos={[]} // We need to add partner logos later
+            clientLogos={clientLogos}
+            partnerLogos={partnerLogos}
             testimonials={testimonials}
           />
         )}

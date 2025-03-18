@@ -1,68 +1,26 @@
 
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { TechCategory } from '@/types/supabase';
 
-type TechCategory = {
+interface TechStackSectionProps {
   title: string;
-  key: string;
-  technologies: string[];
-};
+  categories: TechCategory[];
+}
 
-const techStack: TechCategory[] = [
-  {
-    title: 'Interface and Front End Development',
-    key: 'frontend',
-    technologies: ['React', 'Angular', 'Vue.js', 'Next.js', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS']
-  },
-  {
-    title: 'Serverless, Server-side and Back End Development',
-    key: 'backend',
-    technologies: ['Node.js', 'Python', 'Java', 'PHP', 'ASP.NET', 'Firebase', 'AWS Lambda', 'Express.js', 'Django']
-  },
-  {
-    title: 'Mobile App Development',
-    key: 'mobile',
-    technologies: ['React Native', 'Flutter', 'iOS (Swift)', 'Android (Kotlin)', 'Xamarin']
-  },
-  {
-    title: 'Databases',
-    key: 'databases',
-    technologies: ['MongoDB', 'MySQL', 'PostgreSQL', 'Firebase Realtime DB', 'Redis', 'Elasticsearch', 'DynamoDB']
-  },
-  {
-    title: 'Content/Commerce Management Systems',
-    key: 'cms',
-    technologies: ['WordPress', 'Shopify', 'Magento', 'WooCommerce', 'Contentful', 'Strapi', 'Sanity']
-  },
-  {
-    title: 'Frameworks',
-    key: 'frameworks',
-    technologies: ['Laravel', 'Flask', '.NET Core', 'Spring Boot', 'Ruby on Rails', 'Django']
-  },
-];
-
-const cloudStack: TechCategory[] = [
-  {
-    title: 'Cloudstack',
-    key: 'cloudstack',
-    technologies: ['AWS', 'Google Cloud Platform', 'Microsoft Azure', 'Digital Ocean', 'Heroku', 'Vercel', 'Netlify']
-  },
-  {
-    title: 'DevOps',
-    key: 'devops',
-    technologies: ['Docker', 'Kubernetes', 'Jenkins', 'GitHub Actions', 'CircleCI', 'Terraform', 'Ansible', 'Prometheus', 'Grafana']
-  }
-];
-
-const TechStackSection = () => {
+const TechStackSection: React.FC<TechStackSectionProps> = ({ title, categories }) => {
   const [activeTab, setActiveTab] = useState('tech');
+  
+  // Filter categories into tech stack and cloud stack
+  const techStack = categories.filter(category => !category.is_cloud_stack);
+  const cloudStack = categories.filter(category => category.is_cloud_stack);
   
   return (
     <section id="tech-stack" className="py-20 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="section-title mb-16">Our Technology Stack</h2>
+        <h2 className="section-title mb-16">{title}</h2>
         
         <Tabs defaultValue="tech" className="max-w-5xl mx-auto">
           <div className="flex justify-center mb-8">
@@ -92,12 +50,12 @@ const TechStackSection = () => {
                     {category.title}
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {category.technologies.map((tech) => (
+                    {category.technologies?.map((tech) => (
                       <span 
-                        key={tech} 
+                        key={tech.id} 
                         className="bg-white/10 px-3 py-1 rounded-full text-sm text-white/80 hover:bg-noesis-purple/20 transition-colors"
                       >
-                        {tech}
+                        {tech.name}
                       </span>
                     ))}
                   </div>
@@ -114,12 +72,12 @@ const TechStackSection = () => {
                     {category.title}
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {category.technologies.map((tech) => (
+                    {category.technologies?.map((tech) => (
                       <span 
-                        key={tech} 
+                        key={tech.id} 
                         className="bg-white/10 px-3 py-1 rounded-full text-sm text-white/80 hover:bg-noesis-blue/20 transition-colors"
                       >
-                        {tech}
+                        {tech.name}
                       </span>
                     ))}
                   </div>
