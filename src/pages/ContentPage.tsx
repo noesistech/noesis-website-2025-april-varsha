@@ -49,23 +49,15 @@ const ContentPage: React.FC = () => {
       <Header />
       <main className="flex-grow">
         {heroSection && (
-          <HeroSection 
-            {...heroSection}
-            serviceCards={serviceCards}
-          />
+          <HeroSection />
         )}
         
         {aboutSection && (
-          <AboutSection 
-            {...aboutSection}
-            stats={stats}
-          />
+          <AboutSection />
         )}
         
         {missionSection && (
-          <MissionSection 
-            {...missionSection}
-          />
+          <MissionSection />
         )}
         
         {servicesSection && (
@@ -82,7 +74,7 @@ const ContentPage: React.FC = () => {
           />
         )}
         
-        {techStackSection && (
+        {techStackSection && techCategories && (
           <TechStackSection 
             title={techStackSection.title}
             categories={techCategories}
@@ -90,15 +82,7 @@ const ContentPage: React.FC = () => {
         )}
         
         {clientsSection && (
-          <ClientsSection 
-            title={clientsSection.title}
-            clientsSubtitle={clientsSection.clients_subtitle}
-            partnersSubtitle={clientsSection.partners_subtitle}
-            testimonialsSubtitle={clientsSection.testimonials_subtitle}
-            clientLogos={clientLogos}
-            partnerLogos={partnerLogos}
-            testimonials={testimonials}
-          />
+          <ClientsSection />
         )}
         
         <ContactSection />

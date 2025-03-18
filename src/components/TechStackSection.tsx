@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TechCategory } from '@/types/supabase';
 
-interface TechStackSectionProps {
+export interface TechStackSectionProps {
   title: string;
   categories: TechCategory[];
 }
