@@ -1,7 +1,5 @@
-
 import React, { useRef, useEffect } from 'react';
 import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { SolutionItem } from '@/types/supabase';
 
@@ -144,9 +142,6 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({ title, solutions })
                 <div className="mb-6">
                   {solution.description}
                 </div>
-                <Button variant="outline" className="border-white/20 hover:bg-white/10">
-                  Learn More
-                </Button>
               </div>
             </div>
           ))}
