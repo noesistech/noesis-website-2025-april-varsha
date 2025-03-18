@@ -1,10 +1,13 @@
+
+import { supabase } from "@/integrations/supabase/client";
+
 interface CacheItem<T> {
   data: T;
   timestamp: number;
   etag?: string;
 }
 
-export interface CachedContent {
+interface CachedContent {
   heroSection?: CacheItem<any>;
   serviceCards?: CacheItem<any>;
   aboutSection?: CacheItem<any>;
@@ -22,11 +25,8 @@ export interface CachedContent {
   testimonials?: CacheItem<any>;
 }
 
-// Cache structure
-const contentCache: CachedContent = {};
-
-// The tableName to cacheKey mapping
-export type TableName = 
+// Define a type for our table names based on the Database
+type TableName = 
   | 'hero_section'
   | 'service_cards'
   | 'about_section'
@@ -38,161 +38,181 @@ export type TableName =
   | 'solution_items'
   | 'tech_stack_section'
   | 'tech_categories'
-  | 'technologies'
   | 'clients_section'
   | 'client_logos'
   | 'partner_logos'
-  | 'testimonials';
+  | 'testimonials'
+  | 'technologies';
 
-const tableToCacheKeyMap: Record<TableName, keyof CachedContent> = {
-  'hero_section': 'heroSection',
-  'service_cards': 'serviceCards',
-  'about_section': 'aboutSection',
-  'stats': 'stats',
-  'mission_section': 'missionSection',
-  'services_section': 'servicesSection',
-  'service_items': 'serviceItems',
-  'solutions_section': 'solutionsSection',
-  'solution_items': 'solutionItems',
-  'tech_stack_section': 'techStackSection',
-  'tech_categories': 'techCategories',
-  'technologies': 'techCategories', // Note: This maps to the same key
-  'clients_section': 'clientsSection',
-  'client_logos': 'clientLogos',
-  'partner_logos': 'partnerLogos',
-  'testimonials': 'testimonials'
-};
+// In-memory cache
+let contentCache: CachedContent = {};
 
-// Cache expiration time (2 minutes in production, 30 seconds in development)
+// Cache expiration time (2 minutes in production, shorter for development)
 const CACHE_EXPIRATION = process.env.NODE_ENV === 'production' ? 2 * 60 * 1000 : 30 * 1000;
 
 export const contentCacheService = {
-  // Expose the content cache for TypeScript to know it exists
-  contentCache,
-
-  // Get data from cache or fetch it
   async getCachedData<T>(key: keyof CachedContent, fetcher: () => Promise<T>, forceRefresh = false): Promise<T> {
     const cachedItem = contentCache[key];
     const now = Date.now();
     
-    // If we have a cached item, it's not expired and we're not forcing a refresh, return it
-    if (cachedItem && !forceRefresh && now - cachedItem.timestamp < CACHE_EXPIRATION) {
-      console.log(`Using cached data for ${key}`);
+    // If we have a cached item that's not expired and we're not forcing a refresh
+    if (cachedItem && !forceRefresh && (now - cachedItem.timestamp < CACHE_EXPIRATION)) {
+      console.log(`Using cached ${key} data`);
       return cachedItem.data as T;
     }
     
     try {
-      // Otherwise fetch fresh data
-      console.log(`Fetching fresh data for ${key}`);
+      // Fetch fresh data
+      console.log(`Fetching fresh ${key} data`);
       const freshData = await fetcher();
       
-      // Update cache with fresh data
+      // Update cache
       contentCache[key] = {
         data: freshData,
         timestamp: now
       };
       
+      // Store in localStorage for persistence across sessions
+      try {
+        localStorage.setItem('noesis_content_cache', JSON.stringify(contentCache));
+      } catch (e) {
+        console.error('Failed to save cache to localStorage:', e);
+      }
+      
       return freshData;
     } catch (error) {
-      console.error(`Error fetching data for ${key}:`, error);
+      console.error(`Error fetching fresh data for ${key}:`, error);
       
-      // If fetch fails but we have cached data (even if expired), return it
+      // If we have a cached item, return it even if it's expired
+      // This allows the app to function with stale data when network request fails
       if (cachedItem) {
-        console.log(`Using stale cached data for ${key} after fetch failure`);
+        console.log(`Using expired cached ${key} data as fallback`);
         return cachedItem.data as T;
       }
       
-      // No cached data, re-throw the error
+      // If we don't have any cached data, propagate the error
       throw error;
     }
   },
   
-  // Initialize cache from localStorage if available
   initializeCache(): void {
     try {
-      const savedCache = localStorage.getItem('contentCache');
+      const savedCache = localStorage.getItem('noesis_content_cache');
       if (savedCache) {
-        const parsedCache = JSON.parse(savedCache);
-        
-        // Only restore valid cache items
-        Object.keys(parsedCache).forEach(key => {
-          if (parsedCache[key] && parsedCache[key].data) {
-            contentCache[key as keyof CachedContent] = parsedCache[key];
-          }
-        });
-        
-        console.log('Restored content cache from localStorage');
+        contentCache = JSON.parse(savedCache);
+        console.log('Content cache loaded from localStorage');
       }
-    } catch (err) {
-      console.warn('Failed to restore content cache from localStorage', err);
+    } catch (e) {
+      console.error('Failed to load cache from localStorage:', e);
     }
   },
   
-  // Invalidate the entire cache or a specific key
   invalidateCache(specificKey?: keyof CachedContent): void {
     if (specificKey) {
-      delete contentCache[specificKey];
-      console.log(`Invalidated cache for ${specificKey}`);
-    } else {
-      Object.keys(contentCache).forEach(key => {
-        delete contentCache[key as keyof CachedContent];
-      });
-      console.log('Invalidated all content cache');
-    }
-    
-    // Update localStorage
-    try {
-      localStorage.setItem('contentCache', JSON.stringify(contentCache));
-    } catch (err) {
-      console.warn('Failed to update localStorage cache', err);
-    }
-  },
-  
-  // Check if any content has been updated more recently than our cache
-  async checkForUpdates(): Promise<boolean> {
-    let hasUpdates = false;
-    
-    for (const [tableName, cacheKey] of Object.entries(tableToCacheKeyMap)) {
-      const cachedItem = contentCache[cacheKey];
-      
-      // Skip if we don't have this item cached
-      if (!cachedItem) continue;
-      
-      try {
-        const { data, error } = await supabase
-          .from(tableName as TableName)
-          .select('updated_at')
-          .order('updated_at', { ascending: false })
-          .limit(1)
-          .single();
-        
-        if (error) {
-          console.warn(`Error checking updates for ${tableName}:`, error);
-          continue;
-        }
-        
-        if (data) {
-          const updatedAt = new Date(data.updated_at).getTime();
-          
-          // If the content was updated after our cache timestamp, we need to refresh
-          if (updatedAt > cachedItem.timestamp) {
-            console.log(`Content updates detected for ${tableName}`);
-            hasUpdates = true;
-            break;
-          }
-        }
-      } catch (err) {
-        console.warn(`Error checking for updates on ${tableName}:`, err);
+      // Invalidate only a specific key
+      if (contentCache[specificKey]) {
+        delete contentCache[specificKey];
+        console.log(`Cache for ${specificKey} invalidated`);
       }
+    } else {
+      // Invalidate entire cache
+      contentCache = {};
+      console.log('Entire content cache invalidated');
     }
     
-    return hasUpdates;
+    try {
+      localStorage.setItem('noesis_content_cache', JSON.stringify(contentCache));
+    } catch (e) {
+      console.error('Failed to update localStorage cache:', e);
+    }
   },
   
-  // Map a table name to its corresponding cache key
-  tableToCacheKey(tableName: TableName): keyof CachedContent {
-    return tableToCacheKeyMap[tableName];
+  async checkForUpdates(): Promise<boolean> {
+    try {
+      // Check multiple tables for updates
+      const tablesToCheck: TableName[] = [
+        'hero_section',
+        'service_cards',
+        'about_section',
+        'stats',
+        'mission_section',
+        'services_section',
+        'service_items',
+        'solutions_section',
+        'solution_items',
+        'tech_stack_section',
+        'tech_categories',
+        'clients_section',
+        'client_logos',
+        'partner_logos',
+        'testimonials'
+      ];
+      
+      let hasUpdates = false;
+      
+      for (const table of tablesToCheck) {
+        try {
+          const { data, error } = await supabase
+            .from(table)
+            .select('updated_at')
+            .order('updated_at', { ascending: false })
+            .limit(1)
+            .single();
+          
+          if (error) {
+            console.error(`Error checking for updates in ${table}:`, error);
+            continue;
+          }
+          
+          if (!data || !data.updated_at) continue;
+          
+          // Convert to timestamps for comparison
+          const serverUpdateTime = new Date(data.updated_at).getTime();
+          
+          // Find the corresponding cache key
+          const cacheKey = this.tableToCacheKey(table);
+          if (!cacheKey) continue;
+          
+          const cachedItem = contentCache[cacheKey];
+          
+          // If we don't have a cached item or server data is newer than our cache
+          if (!cachedItem || serverUpdateTime > cachedItem.timestamp) {
+            console.log(`Server has newer content for ${table}, invalidating cache for ${cacheKey}`);
+            this.invalidateCache(cacheKey);
+            hasUpdates = true;
+          }
+        } catch (error) {
+          console.error(`Error processing updates for table ${table}:`, error);
+        }
+      }
+      
+      return hasUpdates;
+    } catch (e) {
+      console.error('Failed to check for updates:', e);
+      return false;
+    }
+  },
+  
+  tableToCacheKey(tableName: TableName): keyof CachedContent | null {
+    const mapping: Record<TableName, keyof CachedContent> = {
+      'hero_section': 'heroSection',
+      'service_cards': 'serviceCards',
+      'about_section': 'aboutSection',
+      'stats': 'stats',
+      'mission_section': 'missionSection',
+      'services_section': 'servicesSection',
+      'service_items': 'serviceItems',
+      'solutions_section': 'solutionsSection',
+      'solution_items': 'solutionItems',
+      'tech_stack_section': 'techStackSection',
+      'tech_categories': 'techCategories',
+      'clients_section': 'clientsSection',
+      'client_logos': 'clientLogos',
+      'partner_logos': 'partnerLogos',
+      'testimonials': 'testimonials',
+      'technologies': 'techCategories' // Map technologies to tech categories as they're related
+    };
+    
+    return mapping[tableName] || null;
   }
 };
-
-import { supabase } from '@/integrations/supabase/client';
