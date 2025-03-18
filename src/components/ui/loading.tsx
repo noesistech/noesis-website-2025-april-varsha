@@ -8,17 +8,34 @@ export function LoadingSkeleton({
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [progress, setProgress] = useState(0);
   
-  // Simulate loading progress - significantly slowed down
+  // Simulate loading progress - dramatically slowed down
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
-        const next = prev + Math.random() * 2.5; // slower progress increments
+        // Very slow progress increments
+        const increment = Math.random() * 1.2;
+        const next = prev + increment;
         return next > 100 ? 100 : next;
       });
-    }, 800); // much longer interval between updates
+    }, 1200); // much longer interval between updates
     
     return () => clearInterval(interval);
   }, []);
+
+  // Force minimum display time of 10 seconds
+  useEffect(() => {
+    const minDisplayTime = 10000; // 10 seconds minimum
+    
+    // Ensure progress doesn't reach 100% too quickly
+    const slowProgressTimeout = setTimeout(() => {
+      if (progress > 80) {
+        // Slow down even more at the end
+        setProgress(85);
+      }
+    }, minDisplayTime - 4000);
+    
+    return () => clearTimeout(slowProgressTimeout);
+  }, [progress]);
 
   return (
     <div
@@ -34,30 +51,30 @@ export function LoadingSkeleton({
         <div className="relative overflow-hidden">
           {/* Header outline */}
           <div 
-            className="h-16 border-b border-white/20 mb-8 opacity-0 animate-[fadeIn_1.8s_ease-in-out_forwards]" 
-            style={{ animationDelay: "0.8s" }}
+            className="h-16 border-b border-white/20 mb-8 opacity-0 animate-[fadeIn_2.5s_ease-in-out_forwards]" 
+            style={{ animationDelay: "1.5s" }}
           />
 
           {/* Hero section outline */}
           <div 
-            className="h-80 border border-white/20 rounded-lg mb-12 opacity-0 animate-[fadeIn_2s_ease-in-out_forwards] flex items-center justify-center"
-            style={{ animationDelay: "1.6s" }}
+            className="h-80 border border-white/20 rounded-lg mb-12 opacity-0 animate-[fadeIn_2.8s_ease-in-out_forwards] flex items-center justify-center"
+            style={{ animationDelay: "2.4s" }}
           >
-            <div className="w-1/2 h-1/2 border border-white/10 rounded-lg opacity-0 animate-[fadeIn_2s_ease-in-out_forwards]" style={{ animationDelay: "2.4s" }} />
+            <div className="w-1/2 h-1/2 border border-white/10 rounded-lg opacity-0 animate-[fadeIn_2.8s_ease-in-out_forwards]" style={{ animationDelay: "3.3s" }} />
           </div>
 
-          {/* Content sections outlines - animates in sequence with slower timing */}
+          {/* Content sections outlines - animates in sequence with much slower timing */}
           {[1, 2, 3, 4, 5].map((_, index) => (
             <div 
               key={index} 
-              className="h-48 border border-white/20 rounded-lg mb-8 opacity-0 animate-[fadeIn_2s_ease-in-out_forwards] flex"
-              style={{ animationDelay: `${3.2 + index * 0.7}s` }}
+              className="h-48 border border-white/20 rounded-lg mb-8 opacity-0 animate-[fadeIn_2.8s_ease-in-out_forwards] flex"
+              style={{ animationDelay: `${4.2 + index * 1.2}s` }}
             >
-              <div className="w-1/3 border-r border-white/10 opacity-0 animate-[fadeIn_2s_ease-in-out_forwards]" style={{ animationDelay: `${3.6 + index * 0.7}s` }} />
+              <div className="w-1/3 border-r border-white/10 opacity-0 animate-[fadeIn_2.8s_ease-in-out_forwards]" style={{ animationDelay: `${4.8 + index * 1.2}s` }} />
               <div className="w-2/3 flex flex-wrap p-4">
                 {[1, 2, 3, 4].map((_, i) => (
                   <div key={i} className="w-1/2 h-16 p-2">
-                    <div className="h-full border border-white/10 rounded-md opacity-0 animate-[fadeIn_2s_ease-in-out_forwards]" style={{ animationDelay: `${4.0 + index * 0.7 + i * 0.3}s` }} />
+                    <div className="h-full border border-white/10 rounded-md opacity-0 animate-[fadeIn_2.8s_ease-in-out_forwards]" style={{ animationDelay: `${5.4 + index * 1.2 + i * 0.6}s` }} />
                   </div>
                 ))}
               </div>
@@ -66,24 +83,24 @@ export function LoadingSkeleton({
 
           {/* Footer outline */}
           <div 
-            className="h-24 border-t border-white/20 mt-8 opacity-0 animate-[fadeIn_2s_ease-in-out_forwards]"
-            style={{ animationDelay: "8s" }}
+            className="h-24 border-t border-white/20 mt-8 opacity-0 animate-[fadeIn_2.8s_ease-in-out_forwards]"
+            style={{ animationDelay: "14s" }}
           />
         </div>
       </div>
       
       {/* Loading message and progress - gradually appears */}
-      <div className="absolute bottom-12 left-0 right-0 flex flex-col items-center justify-center gap-6 z-10 opacity-0 animate-[fadeIn_2s_ease-in-out_forwards]" style={{ animationDelay: "1s" }}>
+      <div className="absolute bottom-12 left-0 right-0 flex flex-col items-center justify-center gap-6 z-10 opacity-0 animate-[fadeIn_2.8s_ease-in-out_forwards]" style={{ animationDelay: "1.8s" }}>
         <div className="text-center">
           <h3 className="text-xl font-medium mb-3 text-white/90">
             Loading your experience
           </h3>
         </div>
         
-        {/* Progress bar with subtle gradient - smoother animation */}
+        {/* Progress bar with subtle gradient - much smoother animation */}
         <div className="w-64 h-1 bg-white/10 rounded-full overflow-hidden">
           <div 
-            className="h-full bg-gradient-to-r from-white/60 to-white/80 rounded-full transition-all duration-1000 ease-in-out"
+            className="h-full bg-gradient-to-r from-white/60 to-white/80 rounded-full transition-all duration-1500 ease-in-out"
             style={{ width: `${progress}%` }}
           />
         </div>

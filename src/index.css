@@ -101,7 +101,7 @@
 }
 
 .animate-fade-in {
-  animation: customFadeIn 1.8s ease-in-out forwards;
+  animation: customFadeIn 2.5s ease-in-out forwards;
   opacity: 0; /* Start with opacity 0 to prevent initial flash */
 }
 
@@ -163,16 +163,23 @@
 
 .fade-in {
   animation-name: customFadeIn;
-  animation-duration: 1.8s;
+  animation-duration: 2.5s;
   opacity: 0; /* Start with opacity 0 to prevent initial flash */
 }
 
 .slide-in-from-top {
   animation-name: scaleIn;
-  animation-duration: 450ms;
+  animation-duration: 650ms;
 }
 
 .slide-out-to-top {
   animation-name: scaleOut;
-  animation-duration: 450ms;
+  animation-duration: 650ms;
+}
+
+/* Significantly slower fadeIn animation */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  20% { opacity: 0; } /* Hold at 0 opacity for 20% of the time */
+  100% { opacity: 1; }
 }
