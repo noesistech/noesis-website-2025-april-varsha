@@ -4,13 +4,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { sendTestEmail } from '@/utils/test-contact-form';
 
 // Form validation schema
 const contactFormSchema = z.object({
@@ -24,6 +25,7 @@ type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isTesting, setIsTesting] = useState(false);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -71,6 +73,27 @@ const ContactSection = () => {
     }
   };
 
+  // Function to handle test email sending
+  const handleTestEmail = async () => {
+    const testEmail = "siddkb@gmail.com";
+    
+    try {
+      setIsTesting(true);
+      const result = await sendTestEmail(testEmail);
+      
+      if (result.success) {
+        toast.success(`Test email sent to ${testEmail}! Check your inbox.`);
+      } else {
+        toast.error(`Failed to send test email: ${result.error}`);
+      }
+    } catch (error) {
+      console.error("Error sending test email:", error);
+      toast.error("An unexpected error occurred while sending the test email.");
+    } finally {
+      setIsTesting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-20 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
@@ -81,6 +104,19 @@ const ContactSection = () => {
             Experience the <span className="gradient-text">AI-Human Partnership</span>
           </h2>
           <p className="text-xl text-white/70">Let's combine our expertise with cutting-edge AI to solve your challenges</p>
+          
+          {/* Add Test Email Button for development purposes */}
+          <div className="mt-4">
+            <Button 
+              onClick={handleTestEmail} 
+              variant="outline" 
+              className="bg-noesis-purple/20 border-noesis-purple hover:bg-noesis-purple/30 text-white"
+              disabled={isTesting}
+            >
+              <Send className="w-4 h-4 mr-2" />
+              {isTesting ? "Sending Test Email..." : "Send Test Email to siddkb@gmail.com"}
+            </Button>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
