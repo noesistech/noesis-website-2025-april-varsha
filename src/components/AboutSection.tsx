@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Users, Trophy, Calendar, Award } from 'lucide-react';
 import P5Animation from './P5Animation';
@@ -121,7 +122,7 @@ const AboutSection = () => {
                 stat.icon_name === 'Calendar' ? <Calendar className="h-6 w-6 text-purple-400" /> :
                 <Award className="h-6 w-6 text-pink-400" />
               }
-              value={stat.id === 'stat-3' ? '> 4 Years' : stat.value}
+              value={stat.id === 'stat-3' ? "> 4 Years" : stat.value}
               label={stat.label}
               delay={`${0.2 * (index + 1)}s`}
             />
