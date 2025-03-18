@@ -102,9 +102,11 @@ const Header = () => {
               {link.name}
             </a>
           ))}
-          <Button href="#contact" className="text-white" variant="noesis">
-            Get in Touch
-          </Button>
+          <a href="#contact">
+            <Button className="text-white" variant="noesis">
+              Get in Touch
+            </Button>
+          </a>
         </nav>
         
         <button 
@@ -139,14 +141,15 @@ const Header = () => {
               {link.name}
             </a>
           ))}
-          <Button 
-            href="#contact"
-            className="w-full text-white animate-in fade-in duration-300"
-            style={{ animationDelay: `${navLinks.length * 50}ms` }}
-            variant="noesis"
-          >
-            Get in Touch
-          </Button>
+          <a href="#contact">
+            <Button 
+              className="w-full text-white animate-in fade-in duration-300"
+              style={{ animationDelay: `${navLinks.length * 50}ms` }}
+              variant="noesis"
+            >
+              Get in Touch
+            </Button>
+          </a>
         </div>
       )}
     </header>
