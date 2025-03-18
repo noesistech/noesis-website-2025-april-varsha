@@ -103,7 +103,7 @@ const AboutSection = () => {
                 Our 40+ member team combines talented human experts with cutting-edge AI tools to deliver solutions that blend the best of human creativity and artificial intelligence.
               </p>
               <p className="text-white/80 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-                With 175+ years of combined experience, we've pioneered the integration of human expertise and AI capabilities, establishing ourselves as leaders in AI-enhanced digital technology services.
+                With over a decade of experience in digital innovation, we've grown alongside emerging technologies to establish ourselves as leaders in AI-enhanced digital services.
               </p>
               <p className="text-white/80 animate-fade-in" style={{ animationDelay: '0.4s' }}>
                 Our 95% client retention rate and 4+ year average relationships demonstrate how our unique AI-human partnership approach consistently delivers breakthrough solutions that exceed expectations.
