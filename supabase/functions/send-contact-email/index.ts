@@ -30,7 +30,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Email to the company
     const companyEmailResponse = await resend.emails.send({
-      from: "Noesis Contact Form <onboarding@resend.dev>",
+      from: "Noesis Contact Form <web@updates.noesis.tech>",
       to: ["sales@noesis.tech"],
       subject: `New Contact Form Submission: ${subject}`,
       html: `
@@ -45,7 +45,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Confirmation email to the sender
     const senderEmailResponse = await resend.emails.send({
-      from: "Noesis.tech <onboarding@resend.dev>",
+      from: "Noesis.tech <web@updates.noesis.tech>",
       to: [email],
       subject: "We've received your message!",
       html: `
