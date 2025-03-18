@@ -20,9 +20,7 @@ const ContentPage: React.FC = () => {
     loading, 
     error,
     heroSection,
-    serviceCards,
     aboutSection,
-    stats,
     missionSection,
     servicesSection,
     serviceItems,
@@ -30,10 +28,7 @@ const ContentPage: React.FC = () => {
     solutionItems,
     techStackSection,
     techCategories,
-    clientsSection,
-    clientLogos,
-    partnerLogos,
-    testimonials
+    clientsSection
   } = useContent();
 
   useEffect(() => {

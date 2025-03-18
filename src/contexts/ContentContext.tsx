@@ -1,7 +1,6 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { contentService } from '@/services/contentService';
-import { contentCacheService } from '@/services/contentCacheService';
+import { supabase } from '@/integrations/supabase/client';
 import {
   HeroSection,
   ServiceCard,
@@ -20,7 +19,6 @@ import {
   Testimonial
 } from '@/types/supabase';
 import { toast } from "sonner";
-import { ErrorDisplay } from '@/components/ui/error';
 
 interface ContentContextType {
   heroSection: HeroSection | null;
@@ -66,26 +64,9 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   const [error, setError] = useState<string | null>(null);
   const [hasLoadedAnyContent, setHasLoadedAnyContent] = useState(false);
 
-  const fetchAllContent = async (forceRefresh = false) => {
+  const fetchAllContent = async () => {
     try {
       setLoading(true);
-      
-      // Initialize cache from localStorage if available
-      contentCacheService.initializeCache();
-      
-      // Only clear the cache if forcing a refresh
-      if (forceRefresh) {
-        contentCacheService.invalidateCache();
-      }
-      
-      // Check for content updates in the background
-      try {
-        const hasUpdates = await contentService.checkForContentUpdates();
-        console.log(`Content updates available: ${hasUpdates}`);
-      } catch (err) {
-        console.warn("Error checking for content updates:", err);
-        // Continue even if update check fails
-      }
       
       // Helper function to safely fetch content with fallbacks
       const safelyFetchContent = async <T,>(
@@ -105,49 +86,101 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
         return false;
       };
 
-      // Fetch all content with individual error handling
       let loadedAny = false;
 
       // Fetch hero section
       loadedAny = await safelyFetchContent(
-        () => contentService.getHeroSection(forceRefresh),
+        async () => {
+          const { data, error } = await supabase
+            .from('hero_section')
+            .select('*')
+            .single();
+            
+          if (error) throw error;
+          return data;
+        },
         (data) => setHeroSection(data),
         null
       ) || loadedAny;
       
       // Fetch service cards
       loadedAny = await safelyFetchContent(
-        () => contentService.getServiceCards(forceRefresh),
+        async () => {
+          const { data, error } = await supabase
+            .from('service_cards')
+            .select('*')
+            .order('sort_order', { ascending: true });
+            
+          if (error) throw error;
+          return data || [];
+        },
         (data) => setServiceCards(data),
         []
       ) || loadedAny;
       
       // Fetch about section
       loadedAny = await safelyFetchContent(
-        () => contentService.getAboutSection(forceRefresh),
+        async () => {
+          const { data, error } = await supabase
+            .from('about_section')
+            .select('*')
+            .single();
+            
+          if (error) throw error;
+          return data;
+        },
         (data) => setAboutSection(data),
         null
       ) || loadedAny;
       
       // Fetch stats
       loadedAny = await safelyFetchContent(
-        () => contentService.getStats(forceRefresh),
+        async () => {
+          const { data, error } = await supabase
+            .from('stats')
+            .select('*')
+            .order('sort_order', { ascending: true });
+            
+          if (error) throw error;
+          return data || [];
+        },
         (data) => setStats(data),
         []
       ) || loadedAny;
       
       // Fetch mission section
       loadedAny = await safelyFetchContent(
-        () => contentService.getMissionSection(forceRefresh),
+        async () => {
+          const { data, error } = await supabase
+            .from('mission_section')
+            .select('*')
+            .single();
+            
+          if (error) throw error;
+          return data;
+        },
         (data) => setMissionSection(data),
         null
       ) || loadedAny;
       
       // Fetch services section and items
       try {
-        const servicesData = await contentService.getServicesSection(forceRefresh);
-        if (servicesData.section) setServicesSection(servicesData.section);
-        if (servicesData.items) setServiceItems(servicesData.items);
+        const { data: sectionData, error: sectionError } = await supabase
+          .from('services_section')
+          .select('*')
+          .single();
+          
+        if (sectionError) throw sectionError;
+        setServicesSection(sectionData);
+        
+        const { data: itemsData, error: itemsError } = await supabase
+          .from('service_items')
+          .select('*')
+          .order('sort_order', { ascending: true });
+          
+        if (itemsError) throw itemsError;
+        setServiceItems(itemsData || []);
+        
         loadedAny = true;
       } catch (err) {
         console.error("Error fetching services:", err);
@@ -155,9 +188,22 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
       
       // Fetch solutions section and items
       try {
-        const solutionsData = await contentService.getSolutionsSection(forceRefresh);
-        if (solutionsData.section) setSolutionsSection(solutionsData.section);
-        if (solutionsData.items) setSolutionItems(solutionsData.items);
+        const { data: sectionData, error: sectionError } = await supabase
+          .from('solutions_section')
+          .select('*')
+          .single();
+          
+        if (sectionError) throw sectionError;
+        setSolutionsSection(sectionData);
+        
+        const { data: itemsData, error: itemsError } = await supabase
+          .from('solution_items')
+          .select('*')
+          .order('sort_order', { ascending: true });
+          
+        if (itemsError) throw itemsError;
+        setSolutionItems(itemsData || []);
+        
         loadedAny = true;
       } catch (err) {
         console.error("Error fetching solutions:", err);
@@ -165,9 +211,40 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
       
       // Fetch tech stack section and categories
       try {
-        const techStackData = await contentService.getTechStackSection(forceRefresh);
-        if (techStackData.section) setTechStackSection(techStackData.section);
-        if (techStackData.categories) setTechCategories(techStackData.categories);
+        const { data: sectionData, error: sectionError } = await supabase
+          .from('tech_stack_section')
+          .select('*')
+          .single();
+          
+        if (sectionError) throw sectionError;
+        setTechStackSection(sectionData);
+        
+        const { data: categoriesData, error: categoriesError } = await supabase
+          .from('tech_categories')
+          .select('*')
+          .order('sort_order', { ascending: true });
+          
+        if (categoriesError) throw categoriesError;
+        
+        const categories = categoriesData || [];
+        
+        // Fetch technologies for each category
+        for (const category of categories) {
+          const { data: techData, error: techError } = await supabase
+            .from('technologies')
+            .select('*')
+            .eq('category_id', category.id)
+            .order('sort_order', { ascending: true });
+          
+          if (techError) {
+            console.error(`Error fetching technologies for category ${category.id}:`, techError);
+            category.technologies = []; // Initialize technologies as empty array to prevent undefined errors
+          } else {
+            category.technologies = techData || [];
+          }
+        }
+        
+        setTechCategories(categories);
         loadedAny = true;
       } catch (err) {
         console.error("Error fetching tech stack:", err);
@@ -175,11 +252,38 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
       
       // Fetch clients section
       try {
-        const clientsData = await contentService.getClientsSection(forceRefresh);
-        if (clientsData.section) setClientsSection(clientsData.section);
-        if (clientsData.clientLogos) setClientLogos(clientsData.clientLogos);
-        if (clientsData.partnerLogos) setPartnerLogos(clientsData.partnerLogos);
-        if (clientsData.testimonials) setTestimonials(clientsData.testimonials);
+        const { data: sectionData, error: sectionError } = await supabase
+          .from('clients_section')
+          .select('*')
+          .single();
+          
+        if (sectionError) throw sectionError;
+        setClientsSection(sectionData);
+        
+        const { data: clientLogosData, error: clientLogosError } = await supabase
+          .from('client_logos')
+          .select('*')
+          .order('sort_order', { ascending: true });
+          
+        if (clientLogosError) throw clientLogosError;
+        setClientLogos(clientLogosData || []);
+        
+        const { data: partnerLogosData, error: partnerLogosError } = await supabase
+          .from('partner_logos')
+          .select('*')
+          .order('sort_order', { ascending: true });
+          
+        if (partnerLogosError) throw partnerLogosError;
+        setPartnerLogos(partnerLogosData || []);
+        
+        const { data: testimonialsData, error: testimonialsError } = await supabase
+          .from('testimonials')
+          .select('*')
+          .order('sort_order', { ascending: true });
+          
+        if (testimonialsError) throw testimonialsError;
+        setTestimonials(testimonialsData || []);
+        
         loadedAny = true;
       } catch (err) {
         console.error("Error fetching clients section:", err);
@@ -190,58 +294,31 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
         setError(null);
       } else if (!hasLoadedAnyContent) {
         // Only set error if we've never successfully loaded content
-        setError("Unable to load content. Using fallback content instead.");
+        setError("Unable to load content. Please try again later.");
       }
       
       setLoading(false);
-      
-      if (forceRefresh && loadedAny) {
-        toast.success("Content refreshed successfully");
-      } else if (forceRefresh) {
-        toast.error("Failed to refresh content");
-      }
     } catch (err) {
       console.error("Error fetching content:", err);
       
       // Only set error if we've never loaded any content
       if (!hasLoadedAnyContent) {
-        setError("Failed to load content. Using fallback content.");
+        setError("Failed to load content. Please try again later.");
       }
       
       setLoading(false);
-      
-      if (forceRefresh) {
-        toast.error("Failed to refresh content");
-      }
     }
   };
 
-  // Set up a periodic check for content updates
+  // Initial data fetch on component mount
   useEffect(() => {
-    const checkForUpdates = async () => {
-      try {
-        const hasUpdates = await contentService.checkForContentUpdates();
-        if (hasUpdates) {
-          console.log("Content updates detected, refreshing content");
-          fetchAllContent(true);
-        }
-      } catch (err) {
-        console.warn("Error checking for content updates:", err);
-        // Continue even if update check fails
-      }
-    };
-    
-    // Initial fetch
     fetchAllContent();
-    
-    // Check for updates every minute
-    const intervalId = setInterval(checkForUpdates, 60 * 1000);
-    
-    return () => clearInterval(intervalId);
   }, []);
 
   const refreshContent = async () => {
-    await fetchAllContent(true);
+    setLoading(true);
+    await fetchAllContent();
+    toast.success("Content refreshed successfully");
   };
 
   return (
