@@ -94,21 +94,21 @@ const Footer = () => {
             <h3 className="text-white text-xl font-bold mb-4">Contact Us</h3>
             <div className="flex flex-col gap-3">
               <div className="flex items-start gap-3">
-                <Mail className="h-5 w-5 text-noesis-purple mt-1" />
+                <Mail className="h-6 w-6 text-noesis-purple mt-1" />
                 <div>
                   <p className="text-white">Email us</p>
                   <a href="mailto:yukti@noesis.tech" className="text-white/70 hover:text-white transition-colors">yukti@noesis.tech</a> or <a href="mailto:sales@noesis.tech" className="text-white/70 hover:text-white transition-colors">sales@noesis.tech</a>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Phone className="h-5 w-5 text-noesis-purple mt-1" />
+                <Phone className="h-6 w-6 text-noesis-purple mt-1" />
                 <div>
                   <p className="text-white">Call us</p>
                   <a href="tel:+916378652266" className="text-white/70 hover:text-white transition-colors">+91 6378652266</a>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-noesis-purple mt-1" />
+                <MapPin className="h-6 w-6 text-noesis-purple mt-1" />
                 <div>
                   <p className="text-white">Visit us</p>
                   <p className="text-white/70">C, Wing, 209, Floral Deck Plaza, 23rd Rd, M.I.D.C, Santacruz Electronic Export Processing Zone, Andheri East, Mumbai, Maharashtra 400093</p>
@@ -139,3 +139,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
