@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+
+import React from 'react';
 import { Card } from '@/components/ui/card';
-import { Palette, Globe, Image, Cloud, BrainCircuit, Users } from 'lucide-react';
+import { Palette, Globe, Laptop, Cloud, BrainCircuit, Users, Code, PenTool, Database, TrendingUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ServiceItem } from '@/types/supabase';
 
@@ -10,8 +11,6 @@ interface ServicesProps {
 }
 
 const ServicesSection: React.FC<ServicesProps> = ({ title, services }) => {
-  const [activeService, setActiveService] = useState<string | null>(null);
-  
   const displayServices = services && services.length > 0 ? services.map(service => ({
     id: service.id,
     icon: getIconByName(service.icon_name),
@@ -20,19 +19,25 @@ const ServicesSection: React.FC<ServicesProps> = ({ title, services }) => {
   })) : [
     {
       id: 'ui-ux',
-      icon: <Palette className="h-12 w-12 text-noesis-purple" />,
+      icon: <PenTool className="h-12 w-12 text-noesis-purple" />,
       title: 'UI/UX',
       description: 'Create exceptional user experiences through the perfect blend of human-centered design principles and AI-powered insights.',
     },
     {
       id: 'web-dev',
-      icon: <Globe className="h-12 w-12 text-noesis-blue" />,
+      icon: <Code className="h-12 w-12 text-noesis-blue" />,
       title: 'Web and Application Development',
-      description: 'Build cutting-edge digital solutions with our AI-enhanced development process that combines human creativity with machine efficiency.',
+      description: (
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Build cutting-edge digital solutions with our AI-enhanced development process</li>
+          <li>Combine human creativity with machine efficiency for optimal results</li>
+          <li>Create responsive, accessible, and user-friendly applications</li>
+        </ul>
+      ),
     },
     {
       id: 'graphics',
-      icon: <Image className="h-12 w-12 text-purple-400" />,
+      icon: <Palette className="h-12 w-12 text-purple-400" />,
       title: 'Graphics and Content Creation',
       description: (
         <ul className="list-disc pl-5 mt-2 space-y-1">
@@ -43,7 +48,7 @@ const ServicesSection: React.FC<ServicesProps> = ({ title, services }) => {
     },
     {
       id: 'cloud',
-      icon: <Cloud className="h-12 w-12 text-pink-400" />,
+      icon: <Database className="h-12 w-12 text-pink-400" />,
       title: 'Cloud Services & DevOps',
       description: (
         <ul className="list-disc pl-5 mt-2 space-y-1">
@@ -78,6 +83,18 @@ const ServicesSection: React.FC<ServicesProps> = ({ title, services }) => {
         </ul>
       ),
     },
+    {
+      id: 'digital-marketing',
+      icon: <TrendingUp className="h-12 w-12 text-blue-400" />,
+      title: 'Digital Marketing',
+      description: (
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>Data-driven marketing strategies powered by AI analytics</li>
+          <li>SEO optimization that combines machine learning with human expertise</li>
+          <li>Targeted advertising campaigns that leverage AI for personalization</li>
+        </ul>
+      )
+    },
   ];
 
   return (
@@ -88,32 +105,18 @@ const ServicesSection: React.FC<ServicesProps> = ({ title, services }) => {
         <h2 className="section-title mb-16">{title || "Our Services"}</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayServices.map((service, index) => (
+          {displayServices.map((service) => (
             <Card 
               key={service.id}
-              className={cn(
-                "glass-card group transition-all duration-300 hover:bg-white/10 cursor-pointer transform hover:-translate-y-2",
-                activeService === service.id ? "ring-2 ring-noesis-purple" : ""
-              )}
-              onClick={() => setActiveService(activeService === service.id ? null : service.id)}
+              className="glass-card group transition-all duration-300 hover:bg-white/10 h-full"
             >
               <div className="p-6 flex flex-col items-center text-center h-full">
                 <div className="mb-6 transform group-hover:scale-110 transition-transform duration-300">
                   {service.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-4 gradient-text">{service.title}</h3>
-                <div className={cn(
-                  "overflow-hidden transition-all duration-500",
-                  activeService === service.id ? "max-h-96" : "max-h-16"
-                )}>
-                  <div className="text-white/80">
-                    {service.description}
-                  </div>
-                </div>
-                <div className="mt-auto pt-4">
-                  <span className="text-noesis-purple text-sm">
-                    {activeService === service.id ? "Show less" : "Learn more"}
-                  </span>
+                <div className="text-white/80 flex-grow">
+                  {service.description}
                 </div>
               </div>
             </Card>
@@ -130,15 +133,24 @@ const getIconByName = (iconName: string) => {
       return <Palette className="h-12 w-12 text-noesis-purple" />;
     case 'globe':
       return <Globe className="h-12 w-12 text-noesis-blue" />;
-    case 'image':
-      return <Image className="h-12 w-12 text-purple-400" />;
+    case 'laptop':
+    case 'computer':
+      return <Laptop className="h-12 w-12 text-purple-400" />;
+    case 'code':
+      return <Code className="h-12 w-12 text-purple-400" />;
     case 'cloud':
       return <Cloud className="h-12 w-12 text-pink-400" />;
+    case 'database':
+      return <Database className="h-12 w-12 text-pink-400" />;
     case 'brain':
     case 'brain-circuit':
       return <BrainCircuit className="h-12 w-12 text-green-400" />;
     case 'users':
       return <Users className="h-12 w-12 text-yellow-400" />;
+    case 'pen-tool':
+      return <PenTool className="h-12 w-12 text-noesis-purple" />;
+    case 'trending-up':
+      return <TrendingUp className="h-12 w-12 text-blue-400" />;
     default:
       return <Palette className="h-12 w-12 text-noesis-purple" />;
   }
