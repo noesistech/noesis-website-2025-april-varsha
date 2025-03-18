@@ -4,14 +4,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { sendTestEmail } from '@/utils/test-contact-form';
+import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 
 // Form validation schema
 const contactFormSchema = z.object({
@@ -25,6 +25,7 @@ type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -63,6 +64,7 @@ const ContactSection = () => {
 
       // 3. Show success message and reset form
       toast.success("Message sent successfully! We'll get back to you soon.");
+      setShowSuccessDialog(true);
       form.reset();
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -172,12 +174,21 @@ const ContactSection = () => {
                   
                   <Button 
                     type="submit" 
-                    variant="outline"
-                    className="w-full bg-noesis-purple/20 border-noesis-purple hover:bg-noesis-purple/30 text-white"
+                    className="w-full bg-noesis-purple hover:bg-noesis-purple/90 text-white"
                     disabled={isSubmitting}
+                    size="lg"
                   >
-                    <Send className="w-4 h-4 mr-2" />
-                    {isSubmitting ? "Sending..." : "Connect With Our Team"}
+                    {isSubmitting ? (
+                      <div className="flex items-center gap-2">
+                        <div className="h-4 w-4 border-2 border-white/30 border-t-white/80 rounded-full animate-spin"></div>
+                        <span>Sending...</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <Send className="w-4 h-4" />
+                        <span>Connect With Our Team</span>
+                      </div>
+                    )}
                   </Button>
                 </form>
               </Form>
@@ -227,6 +238,29 @@ const ContactSection = () => {
           </Card>
         </div>
       </div>
+
+      {/* Success Dialog */}
+      <AlertDialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <AlertDialogContent className="bg-noesis-dark border-noesis-purple">
+          <AlertDialogHeader className="text-center">
+            <div className="flex justify-center mb-4">
+              <CheckCircle className="h-16 w-16 text-green-500" />
+            </div>
+            <AlertDialogTitle className="text-xl text-white">Message Sent Successfully!</AlertDialogTitle>
+            <AlertDialogDescription className="text-white/70">
+              Thank you for reaching out to us. Our team will review your message and get back to you soon.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="flex justify-center mt-4">
+            <Button 
+              onClick={() => setShowSuccessDialog(false)} 
+              className="bg-noesis-purple hover:bg-noesis-purple/90 text-white"
+            >
+              Close
+            </Button>
+          </div>
+        </AlertDialogContent>
+      </AlertDialog>
     </section>
   );
 };
