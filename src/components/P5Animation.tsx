@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Sketch from 'react-p5';
 import p5Types from 'p5';
@@ -15,6 +16,8 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
     '#8257e6', // noesis-darkpurple
     '#4ea7ff', // noesis-blue
     '#2fcbcf', // noesis-teal
+    '#D946EF', // magenta pink
+    '#F97316', // bright orange
   ];
 
   const setup = (p5: p5Types, canvasParentRef: Element) => {
@@ -37,8 +40,8 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
   const draw = (p5: p5Types) => {
     p5.background(26, 31, 44, 10); // noesis-dark with low alpha for trail effect
     
-    // Draw grid
-    p5.stroke(255, 255, 255, 10);
+    // Draw grid with increased visibility
+    p5.stroke(255, 255, 255, 20);
     p5.strokeWeight(1);
     const gridSize = 30;
     for (let x = 0; x < p5.width; x += gridSize) {
@@ -48,7 +51,7 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
       p5.line(0, y, p5.width, y);
     }
     
-    // Update and display particles
+    // Update and display particles with increased visibility
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
       
@@ -64,23 +67,23 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
       p.x = p5.constrain(p.x, 0, p5.width);
       p.y = p5.constrain(p.y, 0, p5.height);
       
-      // Draw particle
+      // Draw particle with higher visibility
       p5.noStroke();
       p5.fill(p.color);
       p5.ellipse(p.x, p.y, p.size, p.size);
       
-      // Draw connections between nearby particles
+      // Draw connections between nearby particles with higher visibility
       for (let j = i + 1; j < particles.length; j++) {
         const other = particles[j];
         const d = p5.dist(p.x, p.y, other.x, other.y);
         if (d < 100) {
-          p5.stroke(255, 255, 255, p5.map(d, 0, 100, 50, 0));
+          p5.stroke(255, 255, 255, p5.map(d, 0, 100, 80, 10));
           p5.line(p.x, p.y, other.x, other.y);
         }
       }
     }
     
-    // Draw symmetrical pattern in the center
+    // Draw bold symmetrical pattern in the center
     p5.push();
     p5.translate(p5.width / 2, p5.height / 2);
     

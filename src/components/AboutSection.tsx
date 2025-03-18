@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Users, Briefcase, Calendar, Award } from 'lucide-react';
 import P5Animation from './P5Animation';
@@ -89,8 +90,8 @@ const AboutSection = () => {
         <h2 className="section-title mb-12">About <span className="gradient-text">Noesis</span></h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-          <div className="glass rounded-2xl overflow-hidden animate-fade-in" style={{ height: '500px' }}>
-            <P5Animation className="w-full h-full" />
+          <div className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden animate-fade-in" style={{ minHeight: '500px' }}>
+            <P5Animation className="w-full h-full absolute inset-0" />
           </div>
           
           <div>
