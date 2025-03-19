@@ -71,7 +71,7 @@ const ContactSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           <Card className="glass-card animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <div className="p-8">
-              <h3 className="text-2xl font-bold gradient-text mb-6">Start the conversation</h3>
+              <h3 className="text-2xl font-bold gradient-text mb-6">Start The Conversation</h3>
               
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
