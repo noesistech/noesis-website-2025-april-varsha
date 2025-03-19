@@ -1,12 +1,13 @@
 
+import * as React from "react";
 import { Toast, ToastActionElement, ToastProps } from "@/components/ui/toast";
-import { useToast as useToastOriginal } from "@radix-ui/react-toast";
 
 type ToastType = ToastProps & {
   id: string;
   title?: React.ReactNode;
   description?: React.ReactNode;
   action?: ToastActionElement;
+  onDismiss?: () => void;
 }
 
 const TOAST_LIMIT = 7;
@@ -95,8 +96,6 @@ function removeToast(id: string) {
 }
 
 export function useToast(): UseToastType {
-  useToastOriginal();
-  
   const [state, setState] = React.useState<ToastType[]>(toasts);
 
   React.useEffect(() => {
