@@ -51,12 +51,13 @@ const serviceCards = [
   }
 ];
 
-// Duplicate the cards to ensure smooth continuous scrolling
+// Create three sets of cards to ensure smooth continuous scrolling
 const duplicatedServiceCards = [...serviceCards, ...serviceCards, ...serviceCards];
 
 const ServiceCardsContainer = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>();
+  const animationFrameRef = useRef<number>();
+  const scrollPositionRef = useRef<number>(0);
   const isMobile = useIsMobile();
   
   // Improved animation for continuous infinite vertical scrolling
@@ -68,31 +69,27 @@ const ServiceCardsContainer = () => {
     const cardHeight = isMobile ? 140 + 16 : 160 + 16; // Adjusted card height for mobile with spacing
     const totalHeight = totalCards * cardHeight;
     
-    let scrollPos = 0;
-    const scrollSpeed = 0.4; // Slightly reduced for smoother animation
-    
-    const scroll = () => {
-      scrollPos += scrollSpeed;
+    const animate = () => {
+      scrollPositionRef.current += 0.5; // Slower, smoother scroll
       
       // When we've scrolled the height of the original set of cards, 
       // reset position to create the illusion of infinite scrolling
-      if (scrollPos >= totalHeight) {
-        scrollPos = 0;
+      if (scrollPositionRef.current >= totalHeight) {
+        scrollPositionRef.current = 0;
       }
       
       if (scrollContainer) {
-        // Using translateZ(0) for better performance
-        scrollContainer.style.transform = `translateY(-${scrollPos}px) translateZ(0)`;
+        scrollContainer.style.transform = `translateY(-${scrollPositionRef.current}px) translateZ(0)`;
       }
       
-      animationRef.current = requestAnimationFrame(scroll);
+      animationFrameRef.current = requestAnimationFrame(animate);
     };
     
-    animationRef.current = requestAnimationFrame(scroll);
+    animationFrameRef.current = requestAnimationFrame(animate);
     
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
       }
     };
   }, [isMobile]);
@@ -102,17 +99,18 @@ const ServiceCardsContainer = () => {
       <div className="absolute inset-0 overflow-hidden">
         <div 
           ref={scrollContainerRef} 
-          className="grid grid-cols-2 gap-x-6 gap-y-4 transition-transform will-change-transform"
+          className="grid grid-cols-2 gap-x-6 gap-y-4 transition-transform"
           style={{ 
             padding: '1rem 0', 
             transform: 'translateZ(0)', // Force hardware acceleration
             backfaceVisibility: 'hidden', // Prevent flicker
-            willChange: 'transform' // Tell the browser to optimize
+            willChange: 'transform', // Tell the browser to optimize
+            transition: 'transform 0.1s linear' // Smooth transition between frames
           }}
         >
           {duplicatedServiceCards.map((card, index) => (
             <ServiceCard 
-              key={index} 
+              key={`card-${index}`} 
               icon={card.icon} 
               title={card.title} 
               description={card.description} 

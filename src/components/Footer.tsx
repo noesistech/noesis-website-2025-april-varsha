@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Mail, Phone, MapPin, Instagram, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -19,7 +20,7 @@ const Footer = () => {
                 <path d="M80.45,0a12.71,12.71,0,0,1,13,12.89,16.63,16.63,0,0,1-.14,1.87A1.34,1.34,0,0,1,92,15.94H74.22a6.6,6.6,0,0,0,6.65,6,9.6,9.6,0,0,0,5.4-1.73c.7-.42,1.32-.56,1.81,0l2.84,3.25a1.16,1.16,0,0,1-.07,1.81,15,15,0,0,1-10.33,3.81c-8.31,0-14.2-6.59-14.2-14.56S72.21,0,80.45,0ZM85.3,11.09a5.16,5.16,0,0,0-5.06-4.71,5.46,5.46,0,0,0-5.4,4.71Z" className="text-white" />
                 <path d="M97.71,25.09l1.87-3.74a1,1,0,0,1,1.59-.49,15.48,15.48,0,0,0,6.31,1.66c1.38,0,2.35-.55,2.35-1.73s-1-2-4.64-3.46c-5.34-2.08-7.83-4.93-7.83-9.15S100.48,0,107.55,0a15.94,15.94,0,0,1,8.52,2.15A1.47,1.47,0,0,1,116.69,4L115,7.55A1.32,1.32,0,0,1,113.3,8a16.39,16.39,0,0,0-5.75-1.46c-1.67,0-2.36.7-2.36,1.6,0,1.25,1.25,1.66,3.81,2.7,5.34,2.08,9.36,4.37,9.36,9.77,0,4.58-4,8.46-11,8.46a15.71,15.71,0,0,1-9.22-2.57A1.18,1.18,0,0,1,97.71,25.09Z" className="text-white" />
                 <path d="M123.07,2A1.32,1.32,0,0,1,124.39.69h5.75A1.32,1.32,0,0,1,131.45,2V27.1a1.36,1.36,0,0,1-1.31,1.31h-5.75a1.36,1.36,0,0,1-1.32-1.31Z" className="text-white" />
-                <path d="M138.24,25.09l1.88-3.74a1,1,0,0,1,1.59-.49A15.48,15.48,0,0,0,148,22.52c1.38,0,2.35-.55,2.35-1.73s-1-2-4.64-3.46c-5.34-2.08-7.83-4.93-7.83-9.15S141,0,148.08,0a16,16,0,0,1,8.53,2.15A1.47,1.47,0,0,1,157.23,4L155.5,7.55a1.32,1.32,0,0,1-1.66.49,16.4,16.4,0,0,0-5.76-1.46c-1.66,0-2.35.7-2.35,1.6,0,1.25,1.25,1.66,3.81,2.7,5.34,2.08,9.36,4.37,9.36,9.77,0,4.58-4,8.46-11,8.46a15.68,15.68,0,0,1-9.22-2.57A1.19,1.19,0,0,1,138.24,25.09Z" className="text-white" />
+                <path d="M138.24,25.09l1.88-3.74a1,1,0,0,1,1.59-.49A15.48,15.48,0,0,0,148,22.52c1.38,0,2.35-.55,2.35-1.73s-1-2-4.64-3.46c-5.34-2.08-7.83-4.93-7.83-9.15S141,0,148.08,0a16,16,0,0,1,8.53,2.15A1.47,1.47,0,0,1,157.23,4L155.5,7.55a1.32,1.32,0,0,1-1.66.49,16.4,16.4,0,0,0-5.76-1.46c-1.66,0-2.36.7-2.36,1.6,0,1.25,1.25,1.66,3.81,2.7,5.34,2.08,9.36,4.37,9.36,9.77,0,4.58-4,8.46-11,8.46a15.68,15.68,0,0,1-9.22-2.57A1.19,1.19,0,0,1,138.24,25.09Z" className="text-white" />
               </svg>
             </div>
             <p className="text-white/70 mb-4">
@@ -38,7 +39,7 @@ const Footer = () => {
           <div>
             <h3 className="text-white text-xl font-bold mb-4">Contact Us</h3>
             <div className="space-y-4">
-              <a href="mailto:yukti@noesis.tech" className="flex items-center gap-3 group transition-colors">
+              <a href="mailto:sales@noesis.tech" className="flex items-center gap-3 group transition-colors">
                 <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors">
                   <Mail className="h-5 w-5 text-noesis-purple" />
                 </div>
@@ -48,17 +49,17 @@ const Footer = () => {
                 </div>
               </a>
               
-              <a href="tel:+916378652266" className="flex items-center gap-3 group transition-colors">
+              <a href="tel:+919152810101" className="flex items-center gap-3 group transition-colors">
                 <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors">
                   <Phone className="h-5 w-5 text-noesis-purple" />
                 </div>
                 <div>
                   <p className="text-white font-medium">Phone</p>
-                  <p className="text-white/70 group-hover:text-white transition-colors">+91 91 5281 010 1</p>
+                  <p className="text-white/70 group-hover:text-white transition-colors">+919152810101</p>
                 </div>
               </a>
               
-              <a href="https://maps.app.goo.gl/8NJdNEnD4RjRbN897" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group transition-colors">
+              <a href="https://g.co/kgs/iHpQtxs" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group transition-colors">
                 <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors">
                   <MapPin className="h-5 w-5 text-noesis-purple" />
                 </div>
@@ -90,4 +91,3 @@ const Footer = () => {
     </footer>;
 };
 export default Footer;
-

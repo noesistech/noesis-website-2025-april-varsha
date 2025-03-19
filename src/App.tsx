@@ -1,20 +1,35 @@
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ContentPage from "@/pages/ContentPage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "@/components/ui/sonner";
+import { ContentProvider } from "@/contexts/ContentContext";
 import NotFound from "./pages/NotFound";
-import ContentPage from "./pages/ContentPage";
-import { Toaster } from "@/components/ui/toaster";
+
+// Create a client
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/content" element={<ContentPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Toaster />
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <ContentProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<ContentPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Toaster />
+        </Router>
+      </ContentProvider>
+    </QueryClientProvider>
   );
 }
 

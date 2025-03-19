@@ -51,6 +51,10 @@
     @apply border-border;
   }
 
+  html {
+    @apply scroll-smooth;
+  }
+
   html, body {
     @apply overflow-x-hidden;
     width: 100%;
@@ -94,12 +98,12 @@
   }
   
   .section-title {
-    @apply text-3xl md:text-4xl font-bold mb-6 text-center relative;
+    @apply text-3xl md:text-4xl font-bold mb-8 text-center relative;
   }
   
   .section-title::after {
     content: '';
-    @apply absolute left-1/2 -translate-x-1/2 bottom-0 w-20 h-1 bg-noesis-purple rounded-full mt-2;
+    @apply absolute left-1/2 -translate-x-1/2 bottom-0 w-24 h-1 bg-noesis-purple rounded-full mt-2;
   }
   
   .gradient-text {

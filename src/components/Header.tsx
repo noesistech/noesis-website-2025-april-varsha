@@ -53,7 +53,7 @@ const Header = () => {
       scrolled ? 'glass shadow-lg py-2' : 'bg-transparent'
     )}>
       <div className="container mx-auto flex justify-between items-center">
-        <a href="#" className="flex items-center gap-2">
+        <a href="/" className="flex items-center gap-2">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 300.48 54.12" 
