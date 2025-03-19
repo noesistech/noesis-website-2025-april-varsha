@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { toast } from "sonner";
 import {
@@ -19,23 +18,19 @@ import {
   Testimonial
 } from '@/types/contentTypes';
 
-import {
-  heroSectionData,
-  serviceCardsData,
-  aboutSectionData,
-  statsData,
-  missionSectionData,
-  servicesSectionData,
-  serviceItemsData,
-  solutionsSectionData,
-  solutionItemsData,
-  techStackSectionData,
-  techCategoriesData,
-  clientsSectionData,
-  clientLogosData,
-  partnerLogosData,
-  testimonialsData
-} from '@/data/staticContent';
+// Import data from the new modular files
+import { heroSectionData, serviceCardsData } from '@/data/content/hero';
+import { aboutSectionData, statsData } from '@/data/content/about';
+import { missionSectionData } from '@/data/content/mission';
+import { servicesSectionData, serviceItemsData } from '@/data/content/services';
+import { solutionsSectionData, solutionItemsData } from '@/data/content/solutions';
+import { techStackSectionData, techCategoriesData } from '@/data/content/techstack';
+import { 
+  clientsSectionData, 
+  clientLogosData, 
+  partnerLogosData, 
+  testimonialsData 
+} from '@/data/content/clients';
 
 interface ContentContextType {
   heroSection: HeroSection;
