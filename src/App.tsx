@@ -2,6 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ContentPage from "@/pages/ContentPage";
+import Index from "@/pages/Index";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/sonner";
 import { ContentProvider } from "@/contexts/ContentContext";
@@ -23,7 +24,8 @@ function App() {
       <ContentProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<ContentPage />} />
+            <Route path="/" element={<Index />} />
+            <Route path="/content" element={<ContentPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Toaster />
