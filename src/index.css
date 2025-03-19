@@ -51,6 +51,12 @@
     @apply border-border;
   }
 
+  html, body {
+    @apply overflow-x-hidden;
+    width: 100%;
+    position: relative;
+  }
+
   body {
     @apply bg-background text-foreground;
     scroll-behavior: smooth;
@@ -98,6 +104,7 @@
 
 #root {
   @apply max-w-full p-0 m-0 overflow-x-hidden;
+  width: 100%;
 }
 
 .animate-fade-in {
@@ -183,3 +190,16 @@
   100% { opacity: 1; }
 }
 
+/* Fix for mobile horizontal scroll */
+.container {
+  @apply px-4 sm:px-6;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

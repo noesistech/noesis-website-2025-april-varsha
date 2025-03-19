@@ -16,10 +16,10 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({ title, categories }
   const cloudStack = categories.filter(category => category.is_cloud_stack);
   
   return (
-    <section id="tech-stack" className="py-20 relative">
+    <section id="tech-stack" className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto relative z-10">
         <h2 className="section-title mb-16">{title}</h2>
         
         <Tabs defaultValue="tech" className="max-w-5xl mx-auto">
@@ -43,7 +43,7 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({ title, categories }
           </div>
           
           <TabsContent value="tech" className="animate-fade-in">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {techStack.map((category) => (
                 <div key={category.key} className="glass-card">
                   <h3 className="text-xl font-bold mb-4 gradient-text">
@@ -65,7 +65,7 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({ title, categories }
           </TabsContent>
           
           <TabsContent value="cloud" className="animate-fade-in">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {cloudStack.map((category) => (
                 <div key={category.key} className="glass-card">
                   <h3 className="text-xl font-bold mb-4 gradient-text">

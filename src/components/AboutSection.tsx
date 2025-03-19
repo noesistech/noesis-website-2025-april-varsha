@@ -84,7 +84,7 @@ const StatCard = ({ icon, value, label, delay }: StatCardProps) => {
   const suffix = value.replace(/[0-9]/g, '');
   
   return (
-    <div className={`glass-card animate-fade-in`} style={{ animationDelay: delay }}>
+    <div className={`glass-card animate-fade-in w-full`} style={{ animationDelay: delay }}>
       <div className="flex flex-col items-center">
         <div className="p-4 rounded-full bg-noesis-purple/20 mb-4">
           {icon}
@@ -108,13 +108,13 @@ const AboutSection = () => {
   const { aboutSection, stats } = useContent();
 
   return (
-    <section id="about" className="py-20 relative bg-noesis-dark">
+    <section id="about" className="py-20 relative bg-noesis-dark overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-noesis-dark/90 to-noesis-dark/0 pointer-events-none"></div>
       
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto">
         <h2 className="section-title mb-12">About <span className="gradient-text">Noesis</span></h2>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-16">
           <div className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden animate-fade-in" style={{ minHeight: '500px' }}>
             <P5Animation className="w-full h-full absolute inset-0" />
           </div>
@@ -137,7 +137,7 @@ const AboutSection = () => {
           </div>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {stats.map((stat, index) => (
             <StatCard 
               key={stat.id}

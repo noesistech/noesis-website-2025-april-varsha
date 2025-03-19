@@ -24,9 +24,9 @@ const Index = () => {
   } = useContent();
 
   return (
-    <div className="min-h-screen bg-noesis-dark text-white">
+    <div className="min-h-screen bg-noesis-dark text-white overflow-x-hidden">
       <Header />
-      <main>
+      <main className="overflow-x-hidden">
         <HeroSection />
         <AboutSection />
         <MissionSection />
