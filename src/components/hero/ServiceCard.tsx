@@ -43,9 +43,10 @@ export const getIconByName = (iconName: string): React.ReactNode => {
 const ServiceCard = ({ icon, title, description, index, isMobile }: ServiceCardProps) => {
   return (
     <div 
-      className="glow-element flex flex-col items-center justify-center p-6 text-center backdrop-blur-sm border border-white/10 rounded-2xl"
+      className="glow-element flex flex-col items-center justify-center text-center backdrop-blur-sm border border-white/10 rounded-2xl"
       style={{ 
         height: isMobile ? '140px' : '160px',
+        padding: isMobile ? '16px 12px' : '24px',
         marginTop: index % 2 === 0 ? '0' : '40px', // Offset every second card in the same row
         transform: 'translateZ(0)', // Force hardware acceleration with better cross-browser support
         backfaceVisibility: 'hidden', // Prevent flicker

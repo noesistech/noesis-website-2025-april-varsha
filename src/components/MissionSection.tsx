@@ -113,7 +113,6 @@ const MissionSection = () => {
   
   return (
     <section id="mission" className="py-32 relative overflow-hidden bg-noesis-dark" ref={sectionRef}>
-      {/* Extended fade transitions with more overlap */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="pattern-fade-top"></div>
         <div className="pattern-fade-bottom"></div>
@@ -148,7 +147,7 @@ const MissionSection = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl mx-auto">
           <div id="mission-card" className="glass-card animate-fade-in relative transition-transform duration-500 ease-out transform p-8 md:p-10">
-            <div className="absolute -top-14 -left-6 p-6 rounded-full bg-noesis-purple/15 text-noesis-purple">
+            <div className="absolute -top-14 left-0 md:-left-6 p-6 rounded-full bg-noesis-purple/15 text-noesis-purple">
               <Flag className="h-10 w-10 md:h-12 md:w-12" />
             </div>
             <h3 className="text-3xl md:text-4xl font-bold gradient-text mb-8 pt-8">Mission</h3>
@@ -158,7 +157,7 @@ const MissionSection = () => {
           </div>
           
           <div id="vision-card" className="glass-card animate-fade-in relative transition-transform duration-500 ease-out transform p-8 md:p-10" style={{ animationDelay: '0.2s' }}>
-            <div className="absolute -top-14 -left-6 p-6 rounded-full bg-noesis-blue/15 text-noesis-blue">
+            <div className="absolute -top-14 left-0 md:-left-6 p-6 rounded-full bg-noesis-blue/15 text-noesis-blue">
               <Gem className="h-10 w-10 md:h-12 md:w-12" />
             </div>
             <h3 className="text-3xl md:text-4xl font-bold gradient-text mb-8 pt-8">Vision</h3>
@@ -179,10 +178,10 @@ const MissionSection = () => {
             <div className="refraction-layer"></div>
             <div className="glass-highlight"></div>
             <p ref={promiseTextRef} className="text-3xl md:text-4xl relative promise-text font-light tracking-wide z-10">
-              <span className="text-word block md:inline-block mb-6 md:mb-0">Human</span> 
+              <span className="text-word block md:inline-block mb-4 md:mb-0">Human</span> 
               <span className="text-word-highlight block md:inline-block mx-2 font-medium"> creativity</span>,
               
-              <span className="text-word block md:inline-block mt-6 md:mt-0 md:ml-2">AI</span> 
+              <span className="text-word block md:inline-block mt-4 md:mt-0 md:ml-2">AI</span> 
               <span className="text-word-highlight block md:inline-block mx-2 font-medium"> innovation</span>.
             </p>
           </div>
@@ -237,8 +236,15 @@ const MissionSection = () => {
           }
           
           .grid-cell svg {
-            width: 38px;
-            height: 38px;
+            width: 28px;
+            height: 28px;
+          }
+          
+          @media (min-width: 768px) {
+            .grid-cell svg {
+              width: 38px;
+              height: 38px;
+            }
           }
           
           .sparkle-icon {
@@ -271,6 +277,7 @@ const MissionSection = () => {
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            line-height: 1.2;
           }
           
           .promise-text.animate-in {
