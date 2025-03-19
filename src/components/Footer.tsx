@@ -1,8 +1,6 @@
-
 import React from 'react';
 import { Mail, Phone, MapPin, Instagram, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
 const Footer = () => {
   return <footer className="bg-noesis-dark py-12 mt-20">
       <div className="container mx-auto">
@@ -55,7 +53,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <p className="text-white font-medium">Phone</p>
-                  <p className="text-white/70 group-hover:text-white transition-colors">+919152810101</p>
+                  <p className="text-white/70 group-hover:text-white transition-colors">+91 9152810101</p>
                 </div>
               </a>
               
