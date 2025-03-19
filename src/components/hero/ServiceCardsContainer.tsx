@@ -65,7 +65,7 @@ const ServiceCardsContainer = () => {
     if (!scrollContainer) return;
     
     const totalCards = serviceCards.length;
-    const cardHeight = isMobile ? 140 + 16 : 160 + 16; // Adjusted card height with spacing
+    const cardHeight = isMobile ? 160 + 20 : 180 + 20; // Adjusted card height with spacing
     const totalHeight = totalCards * cardHeight;
     
     // Reset scroll position to ensure smooth loop
@@ -101,7 +101,7 @@ const ServiceCardsContainer = () => {
       <div className="absolute inset-0 overflow-hidden">
         <div 
           ref={scrollContainerRef} 
-          className="grid grid-cols-2 gap-x-4 md:gap-x-6 gap-y-4 transition-transform"
+          className="grid grid-cols-2 gap-x-4 md:gap-x-6 gap-y-5" // Increased gap-y for more vertical spacing
           style={{ 
             padding: '1rem 0', 
             transform: 'translateZ(0)', // Force hardware acceleration
