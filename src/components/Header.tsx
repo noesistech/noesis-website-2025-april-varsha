@@ -132,12 +132,14 @@ const Header = () => {
         </button>
       </div>
       
-      {/* Mobile menu with animation */}
+      {/* Mobile menu with improved readability */}
       {mobileMenuOpen && (
         <div 
           className={cn(
             "md:hidden fixed top-[60px] left-0 right-0 p-4 flex flex-col gap-4 animate-in",
-            scrolled ? 'glass shadow-lg' : 'bg-gradient-to-b from-[rgba(26,31,44,0.95)] to-[rgba(50,30,80,0.95)]',
+            scrolled 
+              ? 'bg-[#1A1F2C] shadow-lg' 
+              : 'bg-[#1A1F2C]',
             "slide-in-from-top duration-300 ease-out"
           )}
           style={{
@@ -149,7 +151,7 @@ const Header = () => {
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-white/80 hover:text-white py-2 transition-colors animate-in fade-in duration-300"
+              className="text-white py-2 transition-colors animate-in fade-in duration-300 hover:text-noesis-purple"
               style={{ animationDelay: `${navLinks.indexOf(link) * 50}ms` }}
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -161,6 +163,7 @@ const Header = () => {
               className="w-full text-white animate-in fade-in duration-300"
               style={{ animationDelay: `${navLinks.length * 50}ms` }}
               variant="noesis"
+              onClick={() => setMobileMenuOpen(false)}
             >
               Get in Touch
             </Button>
