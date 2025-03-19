@@ -1,6 +1,17 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowDown, BrainCircuit, Code, Server, Palette, Globe, Users, LayoutGrid } from 'lucide-react';
+import { 
+  ArrowDown, 
+  BrainCircuit, 
+  Code, 
+  Server, 
+  Palette, 
+  Globe, 
+  Users, 
+  LayoutGrid 
+} from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Define our service cards data
 const serviceCards = [
@@ -48,6 +59,7 @@ const HeroSection = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>();
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -79,7 +91,7 @@ const HeroSection = () => {
     if (!scrollContainer) return;
     
     const totalCards = serviceCards.length;
-    const cardHeight = 160 + 16; // card height + gap
+    const cardHeight = isMobile ? 130 + 16 : 160 + 16; // Adjust card height for mobile
     const totalHeight = totalCards * cardHeight;
     
     let scrollPos = 0;
@@ -105,7 +117,7 @@ const HeroSection = () => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, []);
+  }, [isMobile]);
   
   return (
     <div 
@@ -176,7 +188,7 @@ const HeroSection = () => {
                     key={index} 
                     className="glow-element flex flex-col items-center justify-center p-6 text-center backdrop-blur-sm border border-white/10 rounded-2xl"
                     style={{ 
-                      height: '160px',
+                      height: isMobile ? '130px' : '160px',
                       marginTop: index % 2 === 0 ? '0' : '40px', // Offset every second card in the same row
                       transform: 'translate3d(0,0,0)', // Force hardware acceleration
                       backfaceVisibility: 'hidden'
