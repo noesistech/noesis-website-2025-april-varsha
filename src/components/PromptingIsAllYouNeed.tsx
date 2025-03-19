@@ -4,10 +4,10 @@
 import React, { useEffect, useRef } from "react"
 
 const COLOR = "#FFFFFF"
-const HIT_COLOR = "#333333"
-const BACKGROUND_COLOR = "#000000"
-const BALL_COLOR = "#FFFFFF"
-const PADDLE_COLOR = "#FFFFFF"
+const HIT_COLOR = "#8257e6" // Updated to match Noesis purple
+const BACKGROUND_COLOR = "rgba(20, 24, 33, 0.7)" // Semi-transparent dark background
+const BALL_COLOR = "#4ea7ff" // Noesis blue
+const PADDLE_COLOR = "#a074ff" // Noesis purple
 const LETTER_SPACING = 1
 const WORD_SPACING = 3
 
@@ -408,23 +408,56 @@ export function PromptingIsAllYouNeed() {
     const drawGame = () => {
       if (!ctx) return
 
-      ctx.fillStyle = BACKGROUND_COLOR
+      // Create gradient background
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height)
+      gradient.addColorStop(0, "rgba(20, 24, 33, 0.7)")
+      gradient.addColorStop(1, "rgba(26, 31, 44, 0.7)")
+      ctx.fillStyle = gradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
+      // Draw subtle grid for glassmorphism effect
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.05)"
+      ctx.lineWidth = 1
+      const gridSize = 30 * scaleRef.current
+      for (let x = 0; x < canvas.width; x += gridSize) {
+        ctx.beginPath()
+        ctx.moveTo(x, 0)
+        ctx.lineTo(x, canvas.height)
+        ctx.stroke()
+      }
+      for (let y = 0; y < canvas.height; y += gridSize) {
+        ctx.beginPath()
+        ctx.moveTo(0, y)
+        ctx.lineTo(canvas.width, y)
+        ctx.stroke()
+      }
+
+      // Draw glowing pixels
       pixelsRef.current.forEach((pixel) => {
         ctx.fillStyle = pixel.hit ? HIT_COLOR : COLOR
+        ctx.shadowColor = pixel.hit ? HIT_COLOR : COLOR
+        ctx.shadowBlur = pixel.hit ? 10 : 5
         ctx.fillRect(pixel.x, pixel.y, pixel.size, pixel.size)
+        ctx.shadowBlur = 0
       })
 
+      // Draw glowing ball
       ctx.fillStyle = BALL_COLOR
+      ctx.shadowColor = BALL_COLOR
+      ctx.shadowBlur = 15
       ctx.beginPath()
       ctx.arc(ballRef.current.x, ballRef.current.y, ballRef.current.radius, 0, Math.PI * 2)
       ctx.fill()
+      ctx.shadowBlur = 0
 
+      // Draw paddles with glow effect
       ctx.fillStyle = PADDLE_COLOR
+      ctx.shadowColor = PADDLE_COLOR
+      ctx.shadowBlur = 10
       paddlesRef.current.forEach((paddle) => {
         ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height)
       })
+      ctx.shadowBlur = 0
     }
 
     const gameLoop = () => {
@@ -443,12 +476,16 @@ export function PromptingIsAllYouNeed() {
   }, [])
 
   return (
-    <section id="prompting-game" className="py-16 bg-noesis-darker">
-      <div className="container px-4">
+    <section id="prompting-game" className="py-16 bg-noesis-darker relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-noesis-darker to-black opacity-70"></div>
+      <div className="container px-4 relative z-10">
         <h2 className="section-title mb-12">Interactive Demo</h2>
+        <div className="text-center text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p>Experience our interactive pong game powered by AI. The paddles are controlled automatically while the ball interacts with the text.</p>
+        </div>
         <div 
           ref={containerRef} 
-          className="relative w-full aspect-video max-w-4xl mx-auto rounded-lg overflow-hidden"
+          className="relative w-full aspect-video max-w-5xl mx-auto rounded-2xl overflow-hidden glass"
         >
           <canvas
             ref={canvasRef}
