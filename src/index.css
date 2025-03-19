@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -81,6 +82,11 @@
 @layer components {
   .glass {
     @apply backdrop-blur-lg bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
+  }
+  
+  /* Matching glass style for header and mobile menu */
+  .header-glass {
+    @apply backdrop-blur-lg bg-background/80 border-b border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
   }
   
   .glass-card {

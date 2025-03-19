@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
@@ -131,14 +132,14 @@ const Header = () => {
         </button>
       </div>
       
-      {/* Mobile menu with glass morphism and improved animation */}
+      {/* Mobile menu with matching glass morphism */}
       {mobileMenuOpen && (
         <div 
           className={cn(
             "md:hidden fixed top-[60px] left-0 right-0 p-4 flex flex-col gap-4",
             scrolled 
-              ? 'glass shadow-lg' 
-              : 'glass',
+              ? 'header-glass shadow-lg' 
+              : 'header-glass',
             "origin-top animate-mobile-menu-slide-down"
           )}
         >
@@ -146,7 +147,7 @@ const Header = () => {
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-white/90 hover:text-white py-2 transition-colors animate-in fade-in duration-300"
+              className="text-white hover:text-white py-2 transition-colors animate-in fade-in duration-300"
               style={{ animationDelay: `${navLinks.indexOf(link) * 50}ms` }}
               onClick={() => setMobileMenuOpen(false)}
             >
