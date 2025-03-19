@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -149,17 +148,15 @@
   opacity: 1;
 }
 
-/* Mobile menu animations - faster now */
+/* Mobile menu animations - enhanced */
 @keyframes scaleIn {
-  0% { transform: scale(0.95); opacity: 0; }
-  70% { transform: scale(1.02); }
-  100% { transform: scale(1); opacity: 1; }
+  0% { transform: scaleY(0); opacity: 0; transform-origin: top; }
+  100% { transform: scaleY(1); opacity: 1; transform-origin: top; }
 }
 
 @keyframes scaleOut {
-  0% { transform: scale(1); opacity: 1; }
-  30% { transform: scale(1.02); }
-  100% { transform: scale(0.95); opacity: 0; }
+  0% { transform: scaleY(1); opacity: 1; transform-origin: top; }
+  100% { transform: scaleY(0); opacity: 0; transform-origin: top; }
 }
 
 .animate-in {

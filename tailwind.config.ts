@@ -88,6 +88,10 @@ const config = {
         "fadeIn": {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" }
+        },
+        "mobile-menu-slide-down": {
+          "0%": { transform: "scaleY(0)", opacity: "0", transformOrigin: "top" },
+          "100%": { transform: "scaleY(1)", opacity: "1", transformOrigin: "top" }
         }
       },
       animation: {
@@ -96,6 +100,7 @@ const config = {
         "float": "float 6s ease-in-out infinite",
         "fade-in": "fade-in 0.9s ease-out forwards",
         "slide-in": "slide-in 0.8s ease-out forwards",
+        "mobile-menu-slide-down": "mobile-menu-slide-down 0.3s ease-out forwards"
       },
     },
   },

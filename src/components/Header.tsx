@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
@@ -132,26 +131,22 @@ const Header = () => {
         </button>
       </div>
       
-      {/* Mobile menu with improved readability */}
+      {/* Mobile menu with glass morphism and improved animation */}
       {mobileMenuOpen && (
         <div 
           className={cn(
-            "md:hidden fixed top-[60px] left-0 right-0 p-4 flex flex-col gap-4 animate-in",
+            "md:hidden fixed top-[60px] left-0 right-0 p-4 flex flex-col gap-4",
             scrolled 
-              ? 'bg-[#1A1F2C] shadow-lg' 
-              : 'bg-[#1A1F2C]',
-            "slide-in-from-top duration-300 ease-out"
+              ? 'glass shadow-lg' 
+              : 'glass',
+            "origin-top animate-mobile-menu-slide-down"
           )}
-          style={{
-            animationFillMode: 'forwards',
-            animationDuration: '300ms'
-          }}
         >
           {navLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-white py-2 transition-colors animate-in fade-in duration-300 hover:text-noesis-purple"
+              className="text-white/90 hover:text-white py-2 transition-colors animate-in fade-in duration-300"
               style={{ animationDelay: `${navLinks.indexOf(link) * 50}ms` }}
               onClick={() => setMobileMenuOpen(false)}
             >
