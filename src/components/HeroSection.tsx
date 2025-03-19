@@ -25,10 +25,24 @@ const HeroSection = () => {
       });
     };
     
-    window.addEventListener('mousemove', handleMouseMove);
+    // Debounced version of mouse move handler to improve performance
+    let requestId: number;
+    const debouncedHandleMouseMove = (e: MouseEvent) => {
+      if (requestId) {
+        cancelAnimationFrame(requestId);
+      }
+      requestId = requestAnimationFrame(() => {
+        handleMouseMove(e);
+      });
+    };
+    
+    window.addEventListener('mousemove', debouncedHandleMouseMove);
     
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', debouncedHandleMouseMove);
+      if (requestId) {
+        cancelAnimationFrame(requestId);
+      }
     };
   }, []);
   

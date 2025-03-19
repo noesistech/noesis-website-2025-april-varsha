@@ -15,14 +15,17 @@ const ServiceCard = ({ icon, title, description, index, isMobile }: ServiceCardP
     <div 
       className="glow-element flex flex-col items-center justify-center p-6 text-center backdrop-blur-sm border border-white/10 rounded-2xl"
       style={{ 
-        height: isMobile ? '130px' : '160px',
+        height: isMobile ? '140px' : '160px',
         marginTop: index % 2 === 0 ? '0' : '40px', // Offset every second card in the same row
-        transform: 'translate3d(0,0,0)', // Force hardware acceleration
-        backfaceVisibility: 'hidden' // Prevent flicker
+        transform: 'translateZ(0)', // Force hardware acceleration with better cross-browser support
+        backfaceVisibility: 'hidden', // Prevent flicker
+        willChange: 'transform' // Hint to browser for optimization
       }}
     >
-      {icon}
-      <h3 className="text-lg font-semibold">{title}</h3>
+      <div className="mb-3">
+        {icon}
+      </div>
+      <h3 className="text-lg font-semibold mb-1">{title}</h3>
       <p className="text-sm text-white/70">{description}</p>
     </div>
   );
