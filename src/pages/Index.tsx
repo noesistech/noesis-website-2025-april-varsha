@@ -42,9 +42,9 @@ const Index = () => {
           title={techStackSection.title} 
           categories={techCategories} 
         />
+        <PromptingIsAllYouNeed />
         <ClientsSection />
         <ContactSection />
-        <PromptingIsAllYouNeed />
       </main>
       <Footer />
     </div>

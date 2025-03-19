@@ -178,17 +178,20 @@ export function PromptingIsAllYouNeed() {
   const ballRef = useRef<Ball>({ x: 0, y: 0, dx: 0, dy: 0, radius: 0 })
   const paddlesRef = useRef<Paddle[]>([])
   const scaleRef = useRef(1)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas) return
+    const container = containerRef.current
+    if (!canvas || !container) return
 
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      const containerRect = container.getBoundingClientRect()
+      canvas.width = containerRect.width
+      canvas.height = containerRect.height
       scaleRef.current = Math.min(canvas.width / 1000, canvas.height / 1000)
       initializeGame()
     }
@@ -440,11 +443,21 @@ export function PromptingIsAllYouNeed() {
   }, [])
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full z-50 pointer-events-auto"
-      aria-label="Prompting Is All You Need: Fullscreen Pong game with pixel text"
-    />
+    <section id="prompting-game" className="py-16 bg-noesis-darker">
+      <div className="container px-4">
+        <h2 className="section-title mb-12">Interactive Demo</h2>
+        <div 
+          ref={containerRef} 
+          className="relative w-full aspect-video max-w-4xl mx-auto rounded-lg overflow-hidden"
+        >
+          <canvas
+            ref={canvasRef}
+            className="w-full h-full"
+            aria-label="Prompting Is All You Need: Pong game with pixel text"
+          />
+        </div>
+      </div>
+    </section>
   )
 }
 
