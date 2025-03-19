@@ -10,6 +10,7 @@ import SolutionsSection from "@/components/SolutionsSection";
 import TechStackSection from "@/components/TechStackSection";
 import ClientsSection from "@/components/ClientsSection";
 import ContactSection from "@/components/ContactSection";
+import PromptingIsAllYouNeed from "@/components/PromptingIsAllYouNeed";
 import { useContent } from "@/contexts/ContentContext";
 
 const Index = () => {
@@ -43,6 +44,7 @@ const Index = () => {
         />
         <ClientsSection />
         <ContactSection />
+        <PromptingIsAllYouNeed />
       </main>
       <Footer />
     </div>
