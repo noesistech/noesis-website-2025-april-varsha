@@ -11,7 +11,6 @@ import TechStackSection from "@/components/TechStackSection";
 import ClientsSection from "@/components/ClientsSection";
 import ContactSection from "@/components/ContactSection";
 import { useContent } from "@/contexts/ContentContext";
-import { Toaster } from "@/components/ui/sonner";
 
 const Index = () => {
   const { 
@@ -46,7 +45,6 @@ const Index = () => {
         <ContactSection />
       </main>
       <Footer />
-      <Toaster position="top-right" />
     </div>
   );
 };
