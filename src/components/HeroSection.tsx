@@ -1,7 +1,6 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowDown, BrainCircuit, Code, Server, Palette, Globe, Users } from 'lucide-react';
+import { ArrowDown, BrainCircuit, Code, Server, Palette, Globe, Users, LayoutGrid } from 'lucide-react';
 
 // Define our service cards data
 const serviceCards = [
@@ -16,9 +15,7 @@ const serviceCards = [
     description: "AI-powered digital experiences"
   },
   {
-    icon: <svg className="h-12 w-12 md:h-12 md:w-12 text-purple-400 mb-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M3 9H21M7 3V5M17 3V5M6 13H8M11 13H13M16 13H18M6 17H8M11 17H13M16 17H18M5 21H19C20.1046 21 21 20.1046 21 19V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V19C3 20.1046 3.89543 21 5 21Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>,
+    icon: <LayoutGrid className="h-12 w-12 md:h-12 md:w-12 text-purple-400 mb-4" />,
     title: "UI/UX Design",
     description: "Human-centered, AI-enhanced"
   },
