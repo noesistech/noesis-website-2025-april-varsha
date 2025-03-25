@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Mail, Phone, MapPin, Instagram, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -57,13 +58,13 @@ const Footer = () => {
                 </div>
               </a>
               
-              <a href="https://g.co/kgs/iHpQtxs" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group transition-colors">
+              <a href="https://maps.app.goo.gl/CkqvvqT73buV1keWA" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group transition-colors">
                 <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors">
                   <MapPin className="h-5 w-5 text-noesis-purple" />
                 </div>
                 <div>
                   <p className="text-white font-medium">Location</p>
-                  <p className="text-white/70 group-hover:text-white transition-colors">Mumbai, Maharashtra 400093</p>
+                  <p className="text-white/70 group-hover:text-white transition-colors">Unit 209, 2nd Floor, C Wing, Floral Deck Plaza, MIDC Road, Andheri (East), Mumbai 400093</p>
                 </div>
               </a>
             </div>
