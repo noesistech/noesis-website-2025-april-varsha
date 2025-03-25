@@ -132,23 +132,17 @@ const Header = () => {
         </button>
       </div>
       
-      {/* Mobile menu with matching glass morphism */}
+      {/* Mobile menu with solid background color and proper alignment */}
       {mobileMenuOpen && (
         <div 
-          className={cn(
-            "md:hidden fixed top-[60px] left-0 right-0 p-4 flex flex-col gap-4",
-            scrolled 
-              ? 'header-glass shadow-lg' 
-              : 'header-glass',
-            "origin-top animate-mobile-menu-slide-down"
-          )}
+          className="fixed inset-x-0 top-[60px] bottom-0 z-50 bg-[#1A1F2C] flex flex-col p-4 gap-4 overflow-y-auto"
         >
-          {navLinks.map((link) => (
+          {navLinks.map((link, index) => (
             <a 
               key={link.name} 
               href={link.href} 
               className="text-white hover:text-white py-2 transition-colors animate-in fade-in duration-300"
-              style={{ animationDelay: `${navLinks.indexOf(link) * 50}ms` }}
+              style={{ animationDelay: `${index * 50}ms` }}
               onClick={() => setMobileMenuOpen(false)}
             >
               {link.name}
