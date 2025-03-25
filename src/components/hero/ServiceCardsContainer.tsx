@@ -74,11 +74,10 @@ const ServiceCardsContainer = () => {
     const animate = () => {
       scrollPositionRef.current += 0.5; // Slower, smoother scroll
       
-      // Reset position when we've scrolled the height of one set of cards
-      // This creates a seamless loop by resetting back to the equivalent position
-      // in the first set when we've moved through one complete set
+      // Reset position when we reach the end of one set of cards
+      // Using modulo to ensure it loops back seamlessly at exactly the right position
       if (scrollPositionRef.current >= totalHeight) {
-        scrollPositionRef.current = 0;
+        scrollPositionRef.current = scrollPositionRef.current % totalHeight;
       }
       
       if (scrollContainer) {
