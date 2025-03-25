@@ -74,13 +74,15 @@ const ServiceCardsContainer = () => {
     const animate = () => {
       scrollPositionRef.current += 0.5; // Slower, smoother scroll
       
-      // When we've scrolled the height of the original set of cards, 
-      // reset position to create the illusion of infinite scrolling
+      // Reset position when we've scrolled the height of one set of cards
+      // This creates a seamless loop by resetting back to the equivalent position
+      // in the first set when we've moved through one complete set
       if (scrollPositionRef.current >= totalHeight) {
         scrollPositionRef.current = 0;
       }
       
       if (scrollContainer) {
+        // Apply the transform to create the scrolling effect
         scrollContainer.style.transform = `translateY(-${scrollPositionRef.current}px) translateZ(0)`;
       }
       
