@@ -62,7 +62,7 @@ const ContactSection = () => {
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="section-title">
             Experience the <span className="gradient-text">AI-Human Partnership</span>
           </h2>
           <p className="text-xl text-white/70">Let's combine our expertise with cutting-edge AI to solve your challenges</p>

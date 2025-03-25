@@ -97,13 +97,16 @@
     @apply glass rounded-2xl p-6 transition-all duration-300 hover:bg-white/10;
   }
   
+  /* Updated consistent section title style */
   .section-title {
-    @apply text-3xl md:text-4xl font-bold mb-8 text-center relative;
+    @apply text-3xl md:text-4xl font-bold mb-10 text-center relative;
+    color: white;
   }
   
   .section-title::after {
     content: '';
-    @apply absolute left-1/2 -translate-x-1/2 bottom-0 w-24 h-1 bg-noesis-purple rounded-full mt-2;
+    @apply absolute left-1/2 -translate-x-1/2 bottom-0 w-24 h-1 bg-gradient-to-r from-noesis-purple to-noesis-blue rounded-full;
+    bottom: -15px;
   }
   
   .gradient-text {

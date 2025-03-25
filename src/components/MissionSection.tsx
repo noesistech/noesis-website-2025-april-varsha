@@ -143,7 +143,7 @@ const MissionSection = () => {
       </div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="section-title text-4xl md:text-5xl mb-24">Mission & Vision</h2>
+        <h2 className="section-title">Mission & Vision</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl mx-auto">
           <div id="mission-card" className="glass-card animate-fade-in relative transition-transform duration-500 ease-out transform p-8 md:p-10">
@@ -192,36 +192,36 @@ const MissionSection = () => {
         {`
           .pattern-fade-top {
             position: absolute;
-            top: -150px; /* Extend fade beyond section boundaries */
+            top: -150px;
             left: 0;
             right: 0;
-            height: 450px; /* Much taller fade */
+            height: 450px;
             background: linear-gradient(to bottom, #1A1F2C 100%, rgba(26, 31, 44, 0.8) 100%, rgba(26, 31, 44, 0) 100%);
             z-index: 2;
           }
           
           .pattern-fade-bottom {
             position: absolute;
-            bottom: -150px; /* Extend fade beyond section boundaries */
+            bottom: -150px;
             left: 0;
             right: 0;
-            height: 450px; /* Much taller fade */
+            height: 450px;
             background: linear-gradient(to top, #1A1F2C 100%, rgba(26, 31, 44, 0.8) 100%, rgba(26, 31, 44, 0) 100%);
             z-index: 2;
           }
           
           .pattern-grid {
             position: absolute;
-            top: -100px; /* Start above the section */
+            top: -100px;
             left: 0;
             right: 0;
-            bottom: -100px; /* Extend below the section */
+            bottom: -100px;
             display: grid;
             grid-template-columns: repeat(${gridCols}, 1fr);
             grid-template-rows: repeat(${totalRows}, 1fr);
             animation: moveUp 60s linear infinite;
             z-index: 1;
-            height: calc(200% + 200px); /* Extend grid beyond top and bottom */
+            height: calc(200% + 200px);
             transform-origin: top center;
             opacity: 0.6;
           }

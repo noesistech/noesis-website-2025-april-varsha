@@ -112,7 +112,7 @@ const AboutSection = () => {
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-noesis-dark/90 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto">
-        <h2 className="section-title mb-12">About <span className="gradient-text">Noesis</span></h2>
+        <h2 className="section-title">About <span className="gradient-text">Noesis</span></h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-16">
           <div className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden animate-fade-in" style={{ minHeight: '500px' }}>

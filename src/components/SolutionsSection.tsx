@@ -121,7 +121,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({ title, solutions })
   return (
     <section id="solutions" className="py-20" ref={sectionRef}>
       <div className="container mx-auto px-6">
-        <h2 className="section-title mb-16">{title || "Our Solutions"}</h2>
+        <h2 className="section-title">{title || "Our Solutions"}</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {displaySolutions.map((solution, index) => (
@@ -152,7 +152,6 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({ title, solutions })
 };
 
 const getIconByName = (iconName: string) => {
-  // Convert to lowercase to handle case inconsistencies in the database
   const normalizedIconName = iconName.toLowerCase();
   
   switch (normalizedIconName) {

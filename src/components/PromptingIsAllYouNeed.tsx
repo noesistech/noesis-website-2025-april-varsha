@@ -1,485 +1,253 @@
-
-"use client"
-
 import React, { useEffect, useRef } from "react"
 
-const COLOR = "#FFFFFF"
-const HIT_COLOR = "#8257e6" // Updated to match Noesis purple
-const BACKGROUND_COLOR = "rgba(20, 24, 33, 0.7)" // Semi-transparent dark background
-const BALL_COLOR = "#4ea7ff" // Noesis blue
-const PADDLE_COLOR = "#a074ff" // Noesis purple
-const LETTER_SPACING = 1
-const WORD_SPACING = 3
+// Constants for the game
+const BALL_RADIUS = 10;
+const PADDLE_HEIGHT = 100;
+const PADDLE_WIDTH = 15;
+const PADDLE_OFFSET = 30;
+const BALL_SPEED = 5;
+const TEXT_SIZE = 36;
 
-const PIXEL_MAP = {
-  P: [
-    [1, 1, 1, 1],
-    [1, 0, 0, 1],
-    [1, 1, 1, 1],
-    [1, 0, 0, 0],
-    [1, 0, 0, 0],
-  ],
-  R: [
-    [1, 1, 1, 1],
-    [1, 0, 0, 1],
-    [1, 1, 1, 1],
-    [1, 0, 1, 0],
-    [1, 0, 0, 1],
-  ],
-  O: [
-    [1, 1, 1, 1],
-    [1, 0, 0, 1],
-    [1, 0, 0, 1],
-    [1, 0, 0, 1],
-    [1, 1, 1, 1],
-  ],
-  M: [
-    [1, 0, 0, 0, 1],
-    [1, 1, 0, 1, 1],
-    [1, 0, 1, 0, 1],
-    [1, 0, 0, 0, 1],
-    [1, 0, 0, 0, 1],
-  ],
-  T: [
-    [1, 1, 1, 1, 1],
-    [0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0],
-  ],
-  I: [
-    [1, 1, 1],
-    [0, 1, 0],
-    [0, 1, 0],
-    [0, 1, 0],
-    [1, 1, 1],
-  ],
-  N: [
-    [1, 0, 0, 0, 1],
-    [1, 1, 0, 0, 1],
-    [1, 0, 1, 0, 1],
-    [1, 0, 0, 1, 1],
-    [1, 0, 0, 0, 1],
-  ],
-  G: [
-    [1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0],
-    [1, 0, 1, 1, 1],
-    [1, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1],
-  ],
-  S: [
-    [1, 1, 1, 1],
-    [1, 0, 0, 0],
-    [1, 1, 1, 1],
-    [0, 0, 0, 1],
-    [1, 1, 1, 1],
-  ],
-  A: [
-    [0, 1, 1, 0],
-    [1, 0, 0, 1],
-    [1, 1, 1, 1],
-    [1, 0, 0, 1],
-    [1, 0, 0, 1],
-  ],
-  L: [
-    [1, 0, 0, 0],
-    [1, 0, 0, 0],
-    [1, 0, 0, 0],
-    [1, 0, 0, 0],
-    [1, 1, 1, 1],
-  ],
-  Y: [
-    [1, 0, 0, 0, 1],
-    [0, 1, 0, 1, 0],
-    [0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0],
-  ],
-  U: [
-    [1, 0, 0, 1],
-    [1, 0, 0, 1],
-    [1, 0, 0, 1],
-    [1, 0, 0, 1],
-    [1, 1, 1, 1],
-  ],
-  D: [
-    [1, 1, 1, 0],
-    [1, 0, 0, 1],
-    [1, 0, 0, 1],
-    [1, 0, 0, 1],
-    [1, 1, 1, 0],
-  ],
-  E: [
-    [1, 1, 1, 1],
-    [1, 0, 0, 0],
-    [1, 1, 1, 1],
-    [1, 0, 0, 0],
-    [1, 1, 1, 1],
-  ],
-  W: [
-    [1, 0, 0, 0, 1],
-    [1, 0, 0, 0, 1],
-    [1, 0, 1, 0, 1],
-    [1, 1, 0, 1, 1],
-    [1, 0, 0, 0, 1],
-  ],
-  C: [
-    [1, 1, 1, 1],
-    [1, 0, 0, 0],
-    [1, 0, 0, 0],
-    [1, 0, 0, 0],
-    [1, 1, 1, 1],
-  ],
-  H: [
-    [1, 0, 0, 1],
-    [1, 0, 0, 1],
-    [1, 1, 1, 1],
-    [1, 0, 0, 1],
-    [1, 0, 0, 1],
-  ],
-  K: [
-    [1, 0, 0, 1],
-    [1, 0, 1, 0],
-    [1, 1, 0, 0],
-    [1, 0, 1, 0],
-    [1, 0, 0, 1],
-  ],
-  ".": [[0], [0], [0], [0], [1]],
+// Helper classes
+class Ball {
+  constructor(x, y, radius, dx, dy) {
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.dx = dx;
+    this.dy = dy;
+    this.color = "#a074ff";
+  }
+
+  draw(ctx) {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  update(width, height, leftPaddle, rightPaddle, textPositions) {
+    // Wall collision (top/bottom)
+    if (this.y + this.dy < this.radius || this.y + this.dy > height - this.radius) {
+      this.dy = -this.dy;
+    }
+
+    // Paddle collision
+    if (
+      (this.x - this.radius < PADDLE_OFFSET + PADDLE_WIDTH &&
+        this.y > leftPaddle.y &&
+        this.y < leftPaddle.y + PADDLE_HEIGHT) ||
+      (this.x + this.radius > width - PADDLE_OFFSET - PADDLE_WIDTH &&
+        this.y > rightPaddle.y &&
+        this.y < rightPaddle.y + PADDLE_HEIGHT)
+    ) {
+      this.dx = -this.dx;
+      this.color = `hsl(${Math.random() * 360}, 80%, 70%)`;
+    }
+
+    // Text collision
+    for (const pos of textPositions) {
+      const dx = this.x - pos.x;
+      const dy = this.y - pos.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < this.radius + 20) {
+        // Simple bounce
+        const angle = Math.atan2(dy, dx);
+        this.dx = Math.cos(angle) * BALL_SPEED;
+        this.dy = Math.sin(angle) * BALL_SPEED;
+        this.color = `hsl(${Math.random() * 360}, 80%, 70%)`;
+        break;
+      }
+    }
+
+    // Reset if ball goes out of bounds
+    if (this.x + this.dx < 0 || this.x + this.dx > width) {
+      this.x = width / 2;
+      this.y = height / 2;
+      this.dx = Math.random() > 0.5 ? BALL_SPEED : -BALL_SPEED;
+      this.dy = Math.random() > 0.5 ? BALL_SPEED : -BALL_SPEED;
+    }
+
+    this.x += this.dx;
+    this.y += this.dy;
+  }
 }
 
-interface Pixel {
-  x: number
-  y: number
-  size: number
-  hit: boolean
+class Paddle {
+  constructor(x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.targetY = y;
+  }
+
+  draw(ctx) {
+    ctx.beginPath();
+    ctx.rect(this.x, this.y, this.width, this.height);
+    ctx.fillStyle = "#4ea7ff";
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  update(ballY, canvasHeight) {
+    // AI movement - follow the ball with slight delay
+    this.targetY = ballY - this.height / 2;
+    
+    // Keep paddle within canvas
+    if (this.targetY < 0) {
+      this.targetY = 0;
+    } else if (this.targetY + this.height > canvasHeight) {
+      this.targetY = canvasHeight - this.height;
+    }
+    
+    // Smooth movement
+    this.y += (this.targetY - this.y) * 0.1;
+  }
 }
 
-interface Ball {
-  x: number
-  y: number
-  dx: number
-  dy: number
-  radius: number
-}
-
-interface Paddle {
-  x: number
-  y: number
-  width: number
-  height: number
-  targetY: number
-  isVertical: boolean
-}
-
-export function PromptingIsAllYouNeed() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const pixelsRef = useRef<Pixel[]>([])
-  const ballRef = useRef<Ball>({ x: 0, y: 0, dx: 0, dy: 0, radius: 0 })
-  const paddlesRef = useRef<Paddle[]>([])
-  const scaleRef = useRef(1)
-  const containerRef = useRef<HTMLDivElement>(null)
+const PromptingIsAllYouNeed = () => {
+  const canvasRef = useRef(null);
+  const containerRef = useRef(null);
+  const animationRef = useRef(null);
+  const gameObjectsRef = useRef({
+    ball: null,
+    leftPaddle: null,
+    rightPaddle: null,
+    textPositions: []
+  });
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    const container = containerRef.current
-    if (!canvas || !container) return
-
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
+    const canvas = canvasRef.current;
+    const container = containerRef.current;
+    const ctx = canvas.getContext("2d");
+    
     const resizeCanvas = () => {
-      const containerRect = container.getBoundingClientRect()
-      canvas.width = containerRect.width
-      canvas.height = containerRect.height
-      scaleRef.current = Math.min(canvas.width / 1000, canvas.height / 1000)
-      initializeGame()
-    }
-
-    const initializeGame = () => {
-      const scale = scaleRef.current
-      const LARGE_PIXEL_SIZE = 8 * scale
-      const SMALL_PIXEL_SIZE = 4 * scale
-      const BALL_SPEED = 6 * scale
-
-      pixelsRef.current = []
-      const words = ["WELCOME TO", "NOESIS.TECH"]
-
-      const calculateWordWidth = (word: string, pixelSize: number) => {
-        return (
-          word.split("").reduce((width, letter) => {
-            const letterWidth = PIXEL_MAP[letter as keyof typeof PIXEL_MAP]?.[0]?.length ?? 0
-            return width + letterWidth * pixelSize + LETTER_SPACING * pixelSize
-          }, 0) -
-          LETTER_SPACING * pixelSize
-        )
+      const { width, height } = container.getBoundingClientRect();
+      canvas.width = width;
+      canvas.height = height;
+      
+      // Initialize game objects after resize
+      const ball = new Ball(
+        width / 2,
+        height / 2,
+        BALL_RADIUS,
+        BALL_SPEED,
+        BALL_SPEED
+      );
+      
+      const leftPaddle = new Paddle(
+        PADDLE_OFFSET,
+        height / 2 - PADDLE_HEIGHT / 2,
+        PADDLE_WIDTH,
+        PADDLE_HEIGHT
+      );
+      
+      const rightPaddle = new Paddle(
+        width - PADDLE_OFFSET - PADDLE_WIDTH,
+        height / 2 - PADDLE_HEIGHT / 2,
+        PADDLE_WIDTH,
+        PADDLE_HEIGHT
+      );
+      
+      // Create text positions
+      const text = "PROMPTING IS ALL YOU NEED";
+      const textPositions = [];
+      
+      ctx.font = `${TEXT_SIZE}px Arial`;
+      ctx.fillStyle = "white";
+      ctx.textAlign = "center";
+      
+      const textWidth = ctx.measureText(text).width;
+      const startX = width / 2 - textWidth / 2;
+      
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const charWidth = ctx.measureText(char).width;
+        const x = startX + ctx.measureText(text.substring(0, i)).width + charWidth / 2;
+        textPositions.push({
+          x,
+          y: height / 2,
+          char
+        });
       }
-
-      const totalWidthLarge = calculateWordWidth(words[0], LARGE_PIXEL_SIZE)
-      const totalWidthSmall = words[1].split(" ").reduce((width, word, index) => {
-        return width + calculateWordWidth(word, SMALL_PIXEL_SIZE) + (index > 0 ? WORD_SPACING * SMALL_PIXEL_SIZE : 0)
-      }, 0)
-      const totalWidth = Math.max(totalWidthLarge, totalWidthSmall)
-      const scaleFactor = (canvas.width * 0.8) / totalWidth
-
-      const adjustedLargePixelSize = LARGE_PIXEL_SIZE * scaleFactor
-      const adjustedSmallPixelSize = SMALL_PIXEL_SIZE * scaleFactor
-
-      const largeTextHeight = 5 * adjustedLargePixelSize
-      const smallTextHeight = 5 * adjustedSmallPixelSize
-      const spaceBetweenLines = 5 * adjustedLargePixelSize
-      const totalTextHeight = largeTextHeight + spaceBetweenLines + smallTextHeight
-
-      let startY = (canvas.height - totalTextHeight) / 2
-
-      words.forEach((word, wordIndex) => {
-        const pixelSize = wordIndex === 0 ? adjustedLargePixelSize : adjustedSmallPixelSize
-        const totalWidth =
-          wordIndex === 0
-            ? calculateWordWidth(word, adjustedLargePixelSize)
-            : words[1].split(" ").reduce((width, w, index) => {
-                return (
-                  width +
-                  calculateWordWidth(w, adjustedSmallPixelSize) +
-                  (index > 0 ? WORD_SPACING * adjustedSmallPixelSize : 0)
-                )
-              }, 0)
-
-        let startX = (canvas.width - totalWidth) / 2
-
-        if (wordIndex === 1) {
-          word.split(" ").forEach((subWord) => {
-            subWord.split("").forEach((letter) => {
-              const pixelMap = PIXEL_MAP[letter as keyof typeof PIXEL_MAP]
-              if (!pixelMap) return
-
-              for (let i = 0; i < pixelMap.length; i++) {
-                for (let j = 0; j < pixelMap[i].length; j++) {
-                  if (pixelMap[i][j]) {
-                    const x = startX + j * pixelSize
-                    const y = startY + i * pixelSize
-                    pixelsRef.current.push({ x, y, size: pixelSize, hit: false })
-                  }
-                }
-              }
-              startX += (pixelMap[0].length + LETTER_SPACING) * pixelSize
-            })
-            startX += WORD_SPACING * adjustedSmallPixelSize
-          })
-        } else {
-          word.split("").forEach((letter) => {
-            const pixelMap = PIXEL_MAP[letter as keyof typeof PIXEL_MAP]
-            if (!pixelMap) return
-
-            for (let i = 0; i < pixelMap.length; i++) {
-              for (let j = 0; j < pixelMap[i].length; j++) {
-                if (pixelMap[i][j]) {
-                  const x = startX + j * pixelSize
-                  const y = startY + i * pixelSize
-                  pixelsRef.current.push({ x, y, size: pixelSize, hit: false })
-                }
-              }
-            }
-            startX += (pixelMap[0].length + LETTER_SPACING) * pixelSize
-          })
+      
+      gameObjectsRef.current = {
+        ball,
+        leftPaddle,
+        rightPaddle,
+        textPositions
+      };
+    };
+    
+    const animate = () => {
+      const { width, height } = canvas;
+      const { ball, leftPaddle, rightPaddle, textPositions } = gameObjectsRef.current;
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, width, height);
+      
+      // Draw background
+      ctx.fillStyle = "rgba(20, 24, 33, 0.8)";
+      ctx.fillRect(0, 0, width, height);
+      
+      // Update game objects
+      leftPaddle.update(ball.y, height);
+      rightPaddle.update(ball.y, height);
+      ball.update(width, height, leftPaddle, rightPaddle, textPositions);
+      
+      // Draw text
+      ctx.font = `${TEXT_SIZE}px Arial`;
+      ctx.textAlign = "center";
+      
+      textPositions.forEach(pos => {
+        // Calculate distance to ball for glow effect
+        const dx = ball.x - pos.x;
+        const dy = ball.y - pos.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const glow = Math.max(0, 1 - distance / 200);
+        
+        // Draw glow
+        if (glow > 0) {
+          ctx.fillStyle = `rgba(160, 116, 255, ${glow * 0.8})`;
+          ctx.font = `${TEXT_SIZE + glow * 10}px Arial`;
+          ctx.fillText(pos.char, pos.x, pos.y);
         }
-        startY += wordIndex === 0 ? largeTextHeight + spaceBetweenLines : 0
-      })
-
-      // Initialize ball position near the top right corner
-      const ballStartX = canvas.width * 0.9
-      const ballStartY = canvas.height * 0.1
-
-      ballRef.current = {
-        x: ballStartX,
-        y: ballStartY,
-        dx: -BALL_SPEED,
-        dy: BALL_SPEED,
-        radius: adjustedLargePixelSize / 2,
-      }
-
-      const paddleWidth = adjustedLargePixelSize
-      const paddleLength = 10 * adjustedLargePixelSize
-
-      paddlesRef.current = [
-        {
-          x: 0,
-          y: canvas.height / 2 - paddleLength / 2,
-          width: paddleWidth,
-          height: paddleLength,
-          targetY: canvas.height / 2 - paddleLength / 2,
-          isVertical: true,
-        },
-        {
-          x: canvas.width - paddleWidth,
-          y: canvas.height / 2 - paddleLength / 2,
-          width: paddleWidth,
-          height: paddleLength,
-          targetY: canvas.height / 2 - paddleLength / 2,
-          isVertical: true,
-        },
-        {
-          x: canvas.width / 2 - paddleLength / 2,
-          y: 0,
-          width: paddleLength,
-          height: paddleWidth,
-          targetY: canvas.width / 2 - paddleLength / 2,
-          isVertical: false,
-        },
-        {
-          x: canvas.width / 2 - paddleLength / 2,
-          y: canvas.height - paddleWidth,
-          width: paddleLength,
-          height: paddleWidth,
-          targetY: canvas.width / 2 - paddleLength / 2,
-          isVertical: false,
-        },
-      ]
-    }
-
-    const updateGame = () => {
-      const ball = ballRef.current
-      const paddles = paddlesRef.current
-
-      ball.x += ball.dx
-      ball.y += ball.dy
-
-      if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
-        ball.dy = -ball.dy
-      }
-      if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) {
-        ball.dx = -ball.dx
-      }
-
-      paddles.forEach((paddle) => {
-        if (paddle.isVertical) {
-          if (
-            ball.x - ball.radius < paddle.x + paddle.width &&
-            ball.x + ball.radius > paddle.x &&
-            ball.y > paddle.y &&
-            ball.y < paddle.y + paddle.height
-          ) {
-            ball.dx = -ball.dx
-          }
-        } else {
-          if (
-            ball.y - ball.radius < paddle.y + paddle.height &&
-            ball.y + ball.radius > paddle.y &&
-            ball.x > paddle.x &&
-            ball.x < paddle.x + paddle.width
-          ) {
-            ball.dy = -ball.dy
-          }
-        }
-      })
-
-      paddles.forEach((paddle) => {
-        if (paddle.isVertical) {
-          paddle.targetY = ball.y - paddle.height / 2
-          paddle.targetY = Math.max(0, Math.min(canvas.height - paddle.height, paddle.targetY))
-          paddle.y += (paddle.targetY - paddle.y) * 0.1
-        } else {
-          paddle.targetY = ball.x - paddle.width / 2
-          paddle.targetY = Math.max(0, Math.min(canvas.width - paddle.width, paddle.targetY))
-          paddle.x += (paddle.targetY - paddle.x) * 0.1
-        }
-      })
-
-      pixelsRef.current.forEach((pixel) => {
-        if (
-          !pixel.hit &&
-          ball.x + ball.radius > pixel.x &&
-          ball.x - ball.radius < pixel.x + pixel.size &&
-          ball.y + ball.radius > pixel.y &&
-          ball.y - ball.radius < pixel.y + pixel.size
-        ) {
-          pixel.hit = true
-          const centerX = pixel.x + pixel.size / 2
-          const centerY = pixel.y + pixel.size / 2
-          if (Math.abs(ball.x - centerX) > Math.abs(ball.y - centerY)) {
-            ball.dx = -ball.dx
-          } else {
-            ball.dy = -ball.dy
-          }
-        }
-      })
-    }
-
-    const drawGame = () => {
-      if (!ctx) return
-
-      // Create gradient background
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height)
-      gradient.addColorStop(0, "rgba(20, 24, 33, 0.7)")
-      gradient.addColorStop(1, "rgba(26, 31, 44, 0.7)")
-      ctx.fillStyle = gradient
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-      // Draw subtle grid for glassmorphism effect
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.05)"
-      ctx.lineWidth = 1
-      const gridSize = 30 * scaleRef.current
-      for (let x = 0; x < canvas.width; x += gridSize) {
-        ctx.beginPath()
-        ctx.moveTo(x, 0)
-        ctx.lineTo(x, canvas.height)
-        ctx.stroke()
-      }
-      for (let y = 0; y < canvas.height; y += gridSize) {
-        ctx.beginPath()
-        ctx.moveTo(0, y)
-        ctx.lineTo(canvas.width, y)
-        ctx.stroke()
-      }
-
-      // Draw glowing pixels
-      pixelsRef.current.forEach((pixel) => {
-        ctx.fillStyle = pixel.hit ? HIT_COLOR : COLOR
-        ctx.shadowColor = pixel.hit ? HIT_COLOR : COLOR
-        ctx.shadowBlur = pixel.hit ? 10 : 5
-        ctx.fillRect(pixel.x, pixel.y, pixel.size, pixel.size)
-        ctx.shadowBlur = 0
-      })
-
-      // Draw glowing ball
-      ctx.fillStyle = BALL_COLOR
-      ctx.shadowColor = BALL_COLOR
-      ctx.shadowBlur = 15
-      ctx.beginPath()
-      ctx.arc(ballRef.current.x, ballRef.current.y, ballRef.current.radius, 0, Math.PI * 2)
-      ctx.fill()
-      ctx.shadowBlur = 0
-
-      // Draw paddles with glow effect
-      ctx.fillStyle = PADDLE_COLOR
-      ctx.shadowColor = PADDLE_COLOR
-      ctx.shadowBlur = 10
-      paddlesRef.current.forEach((paddle) => {
-        ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height)
-      })
-      ctx.shadowBlur = 0
-    }
-
-    const gameLoop = () => {
-      updateGame()
-      drawGame()
-      requestAnimationFrame(gameLoop)
-    }
-
-    resizeCanvas()
-    window.addEventListener("resize", resizeCanvas)
-    gameLoop()
-
+        
+        // Draw text
+        ctx.fillStyle = "white";
+        ctx.font = `${TEXT_SIZE}px Arial`;
+        ctx.fillText(pos.char, pos.x, pos.y);
+      });
+      
+      // Draw game objects
+      ball.draw(ctx);
+      leftPaddle.draw(ctx);
+      rightPaddle.draw(ctx);
+      
+      animationRef.current = requestAnimationFrame(animate);
+    };
+    
+    // Initial setup
+    resizeCanvas();
+    animate();
+    
+    // Handle resize
+    window.addEventListener("resize", resizeCanvas);
+    
     return () => {
-      window.removeEventListener("resize", resizeCanvas)
-    }
-  }, [])
+      window.removeEventListener("resize", resizeCanvas);
+      cancelAnimationFrame(animationRef.current);
+    };
+  }, []);
 
   return (
     <section id="prompting-game" className="py-16 bg-noesis-darker relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-noesis-darker to-black opacity-70"></div>
       <div className="container px-4 relative z-10">
-        <h2 className="section-title mb-12">Interactive Demo</h2>
+        <h2 className="section-title">Interactive Demo</h2>
         <div className="text-center text-gray-300 mb-8 max-w-2xl mx-auto">
           <p>Experience our interactive pong game powered by AI. The paddles are controlled automatically while the ball interacts with the text.</p>
         </div>
@@ -489,13 +257,12 @@ export function PromptingIsAllYouNeed() {
         >
           <canvas
             ref={canvasRef}
-            className="w-full h-full"
-            aria-label="Prompting Is All You Need: Pong game with pixel text"
+            className="absolute top-0 left-0 w-full h-full"
           />
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default PromptingIsAllYouNeed
+export default PromptingIsAllYouNeed;
