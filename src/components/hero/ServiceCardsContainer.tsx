@@ -51,7 +51,7 @@ const serviceCards = [
   }
 ];
 
-// Create three sets of cards to ensure smooth continuous scrolling
+// Create three sets of cards for smooth infinite scrolling
 const duplicatedServiceCards = [...serviceCards, ...serviceCards, ...serviceCards];
 
 const ServiceCardsContainer = () => {
@@ -74,10 +74,13 @@ const ServiceCardsContainer = () => {
     const animate = () => {
       scrollPositionRef.current += 0.5; // Slower, smoother scroll
       
-      // Reset position when we reach the end of one set of cards
-      // Using modulo to ensure it loops back seamlessly at exactly the right position
+      // When we've scrolled through the first set of cards completely,
+      // reset the position to the beginning of the second set
+      // This creates the illusion of infinite scrolling without jumping
       if (scrollPositionRef.current >= totalHeight) {
-        scrollPositionRef.current = scrollPositionRef.current % totalHeight;
+        // Instead of using modulo which can cause visual jumps,
+        // we just reset to exactly where the second set begins
+        scrollPositionRef.current = 0;
       }
       
       if (scrollContainer) {
@@ -99,6 +102,7 @@ const ServiceCardsContainer = () => {
   
   return (
     <div className="relative h-[500px] overflow-hidden animate-fade-in">
+      {/* We'll create a wrapper for the scroll container for better scroll management */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
           ref={scrollContainerRef} 
