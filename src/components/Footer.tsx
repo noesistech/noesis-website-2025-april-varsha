@@ -2,6 +2,7 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Instagram, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+
 const Footer = () => {
   return <footer className="bg-noesis-dark py-12 mt-20">
       <div className="container mx-auto">
@@ -58,8 +59,8 @@ const Footer = () => {
                 </div>
               </a>
               
-              <a href="https://maps.app.goo.gl/CkqvvqT73buV1keWA" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group transition-colors">
-                <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors">
+              <a href="https://maps.app.goo.gl/CkqvvqT73buV1keWA" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group transition-colors">
+                <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors flex-shrink-0 mt-0.5">
                   <MapPin className="h-5 w-5 text-noesis-purple" />
                 </div>
                 <div>
@@ -89,4 +90,5 @@ const Footer = () => {
       </div>
     </footer>;
 };
+
 export default Footer;
