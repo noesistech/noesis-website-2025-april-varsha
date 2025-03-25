@@ -43,6 +43,11 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Added consistent spacing variables */
+    --section-padding-y: 5rem;  /* 80px */
+    --section-spacing: 5rem;    /* 80px */
+    --heading-spacing: 2.5rem;  /* 40px */
   }
 }
 
@@ -66,8 +71,9 @@
     scroll-behavior: smooth;
   }
   
+  /* Updated consistent heading styles */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
+    @apply font-bold tracking-tight;
   }
   
   h1 {
@@ -75,11 +81,23 @@
   }
   
   h2 {
-    @apply text-3xl md:text-4xl;
+    @apply text-3xl md:text-4xl lg:text-5xl;
   }
   
   h3 {
     @apply text-2xl md:text-3xl;
+  }
+  
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+  
+  h5 {
+    @apply text-lg md:text-xl;
+  }
+  
+  h6 {
+    @apply text-base md:text-lg;
   }
 }
 
@@ -97,10 +115,11 @@
     @apply glass rounded-2xl p-6 transition-all duration-300 hover:bg-white/10;
   }
   
-  /* Updated consistent section title style */
+  /* Updated consistent section title style with improved spacing */
   .section-title {
-    @apply text-3xl md:text-4xl font-bold mb-10 text-center relative;
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold mb-heading text-center relative;
     color: white;
+    margin-bottom: var(--heading-spacing);
   }
   
   .section-title::after {
@@ -111,6 +130,13 @@
   
   .gradient-text {
     @apply bg-gradient-to-r from-noesis-purple to-noesis-blue bg-clip-text text-transparent;
+  }
+  
+  /* Added consistent section styling */
+  .page-section {
+    @apply py-section;
+    padding-top: var(--section-padding-y);
+    padding-bottom: var(--section-padding-y);
   }
 }
 

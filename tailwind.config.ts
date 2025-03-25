@@ -51,6 +51,7 @@ const config = {
         },
         "noesis-dark": "#1A1F2C",
         "noesis-darker": "#141821",
+        "noesis-darkest": "#0F111A", /* Added darker background color */
         "noesis-purple": "#a074ff",
         "noesis-darkpurple": "#8257e6",
         "noesis-blue": "#4ea7ff",
@@ -63,6 +64,13 @@ const config = {
       },
       fontFamily: {
         sans: ["Inter var", ...fontFamily.sans],
+      },
+      spacing: {
+        'section': 'var(--section-spacing)',
+        'heading': 'var(--heading-spacing)',
+      },
+      padding: {
+        'section': 'var(--section-padding-y)',
       },
       keyframes: {
         "accordion-down": {
