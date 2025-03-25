@@ -58,7 +58,7 @@ const Header = () => {
       scrolled ? 'glass shadow-lg py-2' : 'bg-transparent'
     )}>
       <div className="container mx-auto flex justify-between items-center">
-        <a href="/" className="flex items-center gap-2">
+        <a href="/" className="flex items-center gap-2 z-[60]">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 300.48 54.12" 
@@ -133,7 +133,7 @@ const Header = () => {
         <div className="md:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
-              <button className="text-white">
+              <button className="text-white z-[60]">
                 {mobileMenuOpen ? <X /> : <Menu />}
               </button>
             </SheetTrigger>
@@ -141,7 +141,7 @@ const Header = () => {
               side="top" 
               className="bg-[#1A1F2C] border-b border-white/10 pt-16 h-auto max-h-[80vh] rounded-b-xl"
             >
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 mt-8">
                 {navLinks.map((link, index) => (
                   <a 
                     key={link.name} 
