@@ -4,6 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useContent } from '@/contexts/ContentContext';
+import { 
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -124,42 +129,45 @@ const Header = () => {
           </a>
         </nav>
         
-        <button 
-          className="md:hidden text-white" 
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X /> : <Menu />}
-        </button>
-      </div>
-      
-      {/* Mobile menu with solid background color and proper alignment */}
-      {mobileMenuOpen && (
-        <div 
-          className="fixed inset-x-0 top-[60px] bottom-0 z-50 bg-[#1A1F2C] flex flex-col p-4 gap-4 overflow-y-auto"
-        >
-          {navLinks.map((link, index) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
-              className="text-white hover:text-white py-2 transition-colors animate-in fade-in duration-300"
-              style={{ animationDelay: `${index * 50}ms` }}
-              onClick={() => setMobileMenuOpen(false)}
+        {/* Mobile menu button - now using Sheet component */}
+        <div className="md:hidden">
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <button className="text-white">
+                {mobileMenuOpen ? <X /> : <Menu />}
+              </button>
+            </SheetTrigger>
+            <SheetContent 
+              side="top" 
+              className="bg-[#1A1F2C] border-b border-white/10 pt-16 h-auto max-h-[80vh] rounded-b-xl"
             >
-              {link.name}
-            </a>
-          ))}
-          <a href="#contact">
-            <Button 
-              className="w-full text-white animate-in fade-in duration-300"
-              style={{ animationDelay: `${navLinks.length * 50}ms` }}
-              variant="noesis"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Get in Touch
-            </Button>
-          </a>
+              <div className="flex flex-col gap-4">
+                {navLinks.map((link, index) => (
+                  <a 
+                    key={link.name} 
+                    href={link.href} 
+                    className="text-white hover:text-white py-2 transition-colors animate-in fade-in duration-300"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                ))}
+                <a href="#contact">
+                  <Button 
+                    className="w-full text-white animate-in fade-in duration-300 mt-2"
+                    style={{ animationDelay: `${navLinks.length * 50}ms` }}
+                    variant="noesis"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Get in Touch
+                  </Button>
+                </a>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
-      )}
+      </div>
     </header>
   );
 };
