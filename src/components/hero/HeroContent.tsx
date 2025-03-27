@@ -6,7 +6,12 @@ const HeroContent = () => {
   return (
     <div className="animate-fade-in">
       <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
-        <span>Where AI and human talent</span><br />
+        <span className="relative inline-block">
+          Where 
+          <span className="magical-text relative mx-1">AI</span> 
+          and human talent
+          <span className="magical-glow absolute"></span>
+        </span><br />
         <span className="gradient-text">create breakthrough solutions.</span>
       </h1>
       <p className="text-lg sm:text-xl text-white/80 mb-6 md:mb-8 max-w-2xl">
