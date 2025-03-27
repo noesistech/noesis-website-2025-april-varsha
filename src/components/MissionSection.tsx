@@ -1,6 +1,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import { Flag, Gem, Sparkles, Zap } from 'lucide-react';
+import { missionSectionData } from '@/data/content/mission';
 
 const MissionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -144,33 +145,37 @@ const MissionSection = () => {
       </div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="section-title mb-20">Mission & Vision</h2>
+        <h2 className="section-title mb-36">Mission & Vision</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl mx-auto">
-          <div id="mission-card" className="glass-card animate-fade-in relative transition-transform duration-500 ease-out transform p-8 md:p-10">
-            <div className="absolute -top-14 left-0 md:-left-6 p-6 rounded-full bg-noesis-purple/15 text-noesis-purple">
+          <div id="mission-card" className="glass-card animate-fade-in relative transition-transform duration-500 ease-out transform p-8 md:p-10 mt-14">
+            <div className="absolute -top-20 left-0 md:-left-6 p-6 rounded-full bg-noesis-purple/15 text-noesis-purple">
               <Flag className="h-10 w-10 md:h-12 md:w-12" />
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold gradient-text mb-8 pt-16">Mission</h3>
+            <h3 className="text-3xl md:text-4xl font-bold gradient-text mb-8 pt-6">
+              {missionSectionData.mission_title}
+            </h3>
             <p className="text-white/80 text-xl md:text-2xl leading-relaxed">
-              Harness the synergy of AI capabilities and human expertise to create digital solutions that deliver exceptional business results and transform industries.
+              {missionSectionData.mission_description}
             </p>
           </div>
           
-          <div id="vision-card" className="glass-card animate-fade-in relative transition-transform duration-500 ease-out transform p-8 md:p-10" style={{ animationDelay: '0.2s' }}>
-            <div className="absolute -top-14 left-0 md:-left-6 p-6 rounded-full bg-noesis-blue/15 text-noesis-blue">
+          <div id="vision-card" className="glass-card animate-fade-in relative transition-transform duration-500 ease-out transform p-8 md:p-10 mt-14" style={{ animationDelay: '0.2s' }}>
+            <div className="absolute -top-20 left-0 md:-left-6 p-6 rounded-full bg-noesis-blue/15 text-noesis-blue">
               <Gem className="h-10 w-10 md:h-12 md:w-12" />
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold gradient-text mb-8 pt-16">Vision</h3>
+            <h3 className="text-3xl md:text-4xl font-bold gradient-text mb-8 pt-6">
+              {missionSectionData.vision_title}
+            </h3>
             <p className="text-white/80 text-xl md:text-2xl leading-relaxed">
-              To lead the AI revolution in digital solutions, pioneering the perfect balance of artificial intelligence and human creativity for the world's most innovative organizations.
+              {missionSectionData.vision_description}
             </p>
           </div>
         </div>
         
         <div className="mt-32 max-w-4xl mx-auto text-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
           <h3 className="text-4xl md:text-5xl font-bold mb-12">
-            Our <span className="gradient-text">Promise</span>
+            Our <span className="gradient-text">{missionSectionData.promise_title}</span>
           </h3>
           <div 
             ref={promiseContainerRef}
@@ -179,11 +184,7 @@ const MissionSection = () => {
             <div className="refraction-layer"></div>
             <div className="glass-highlight"></div>
             <p ref={promiseTextRef} className="text-3xl md:text-4xl relative promise-text font-light tracking-wide z-10">
-              <span className="text-word block md:inline-block mb-4 md:mb-0">Human</span> 
-              <span className="text-word-highlight block md:inline-block mx-2 font-medium"> creativity</span>,
-              
-              <span className="text-word block md:inline-block mt-4 md:mt-0 md:ml-2">AI</span> 
-              <span className="text-word-highlight block md:inline-block mx-2 font-medium"> precision</span>.
+              {missionSectionData.promise_text}
             </p>
           </div>
         </div>
