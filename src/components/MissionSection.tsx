@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { Flag, Gem, Sparkles, Zap } from 'lucide-react';
 import { missionSectionData } from '@/data/content/mission';
@@ -175,7 +174,7 @@ const MissionSection = () => {
         
         <div className="mt-32 max-w-4xl mx-auto text-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
           <h3 className="text-4xl md:text-5xl font-bold mb-12">
-            Our <span className="gradient-text">{missionSectionData.promise_title}</span>
+            <span className="gradient-text">{missionSectionData.promise_title}</span>
           </h3>
           <div 
             ref={promiseContainerRef}
