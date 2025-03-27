@@ -52,12 +52,16 @@ const Header = () => {
   // Always add Contact link at the end
   navLinks.push({ name: 'Contact', href: '#contact' });
 
+  // Fixed header height to prevent shrinking
+  const HEADER_HEIGHT = '60px';
+
   return (
     <header className={cn(
-      'fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4',
-      scrolled ? 'glass shadow-lg py-2' : 'bg-transparent'
-    )}>
-      <div className="container mx-auto flex justify-between items-center">
+      'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+      scrolled ? 'glass shadow-lg' : 'bg-transparent'
+    )}
+    style={{ height: HEADER_HEIGHT }}>
+      <div className="container mx-auto flex justify-between items-center h-full">
         <a href="/" className="flex items-center gap-2 z-[60]">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
@@ -139,7 +143,8 @@ const Header = () => {
             </SheetTrigger>
             <SheetContent 
               side="top" 
-              className="bg-[#1A1F2C] border-b border-white/10 h-[calc(100vh-60px)] mt-[60px] p-0 rounded-none"
+              className="bg-[#1A1F2C] border-b border-white/10 h-[calc(100vh-60px)] p-0 rounded-none"
+              style={{ marginTop: HEADER_HEIGHT }}
             >
               <div className="flex flex-col px-4 py-6">
                 {navLinks.map((link, index) => (
