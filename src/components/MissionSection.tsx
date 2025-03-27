@@ -145,10 +145,10 @@ const MissionSection = () => {
       </div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="section-title mb-36">Mission & Vision</h2>
+        <h2 className="section-title mb-48">Mission & Vision</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl mx-auto">
-          <div id="mission-card" className="glass-card animate-fade-in relative transition-transform duration-500 ease-out transform p-8 md:p-10 mt-14">
+          <div id="mission-card" className="glass-card animate-fade-in relative transition-transform duration-500 ease-out transform p-8 md:p-10 mt-20">
             <div className="absolute -top-20 left-0 md:-left-6 p-6 rounded-full bg-noesis-purple/15 text-noesis-purple">
               <Flag className="h-10 w-10 md:h-12 md:w-12" />
             </div>
@@ -160,7 +160,7 @@ const MissionSection = () => {
             </p>
           </div>
           
-          <div id="vision-card" className="glass-card animate-fade-in relative transition-transform duration-500 ease-out transform p-8 md:p-10 mt-14" style={{ animationDelay: '0.2s' }}>
+          <div id="vision-card" className="glass-card animate-fade-in relative transition-transform duration-500 ease-out transform p-8 md:p-10 mt-20" style={{ animationDelay: '0.2s' }}>
             <div className="absolute -top-20 left-0 md:-left-6 p-6 rounded-full bg-noesis-blue/15 text-noesis-blue">
               <Gem className="h-10 w-10 md:h-12 md:w-12" />
             </div>
