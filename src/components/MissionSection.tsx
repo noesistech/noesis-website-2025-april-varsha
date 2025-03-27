@@ -151,7 +151,7 @@ const MissionSection = () => {
             <div className="absolute -top-14 left-0 md:-left-6 p-6 rounded-full bg-noesis-purple/15 text-noesis-purple">
               <Flag className="h-10 w-10 md:h-12 md:w-12" />
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold gradient-text mb-8 pt-8">Mission</h3>
+            <h3 className="text-3xl md:text-4xl font-bold gradient-text mb-8 pt-16">Mission</h3>
             <p className="text-white/80 text-xl md:text-2xl leading-relaxed">
               Harness the synergy of AI capabilities and human expertise to create digital solutions that deliver exceptional business results and transform industries.
             </p>
@@ -161,7 +161,7 @@ const MissionSection = () => {
             <div className="absolute -top-14 left-0 md:-left-6 p-6 rounded-full bg-noesis-blue/15 text-noesis-blue">
               <Gem className="h-10 w-10 md:h-12 md:w-12" />
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold gradient-text mb-8 pt-8">Vision</h3>
+            <h3 className="text-3xl md:text-4xl font-bold gradient-text mb-8 pt-16">Vision</h3>
             <p className="text-white/80 text-xl md:text-2xl leading-relaxed">
               To lead the AI revolution in digital solutions, pioneering the perfect balance of artificial intelligence and human creativity for the world's most innovative organizations.
             </p>
@@ -183,7 +183,7 @@ const MissionSection = () => {
               <span className="text-word-highlight block md:inline-block mx-2 font-medium"> creativity</span>,
               
               <span className="text-word block md:inline-block mt-4 md:mt-0 md:ml-2">AI</span> 
-              <span className="text-word-highlight block md:inline-block mx-2 font-medium"> innovation</span>.
+              <span className="text-word-highlight block md:inline-block mx-2 font-medium"> precision</span>.
             </p>
           </div>
         </div>
