@@ -268,7 +268,7 @@
 
 .magical-text {
   position: relative;
-  color: white;
+  color: transparent;
   z-index: 1;
   font-weight: 700;
 }
