@@ -101,12 +101,12 @@ const ServiceCardsContainer = () => {
   }, [isMobile]);
   
   return (
-    <div className="relative h-[500px] overflow-hidden animate-fade-in">
+    <div className="relative h-[400px] md:h-[450px] lg:h-[500px] overflow-hidden animate-fade-in">
       {/* We'll create a wrapper for the scroll container for better scroll management */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
           ref={scrollContainerRef} 
-          className="grid grid-cols-2 gap-x-4 md:gap-x-6 gap-y-5" // Increased gap-y for more vertical spacing
+          className="grid grid-cols-2 gap-x-3 sm:gap-x-4 md:gap-x-5 lg:gap-x-6 gap-y-4 sm:gap-y-5" 
           style={{ 
             padding: '1rem 0', 
             transform: 'translateZ(0)', // Force hardware acceleration

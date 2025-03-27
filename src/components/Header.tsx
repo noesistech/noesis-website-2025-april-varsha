@@ -116,7 +116,7 @@ const Header = () => {
           </svg>
         </a>
         
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-4 lg:gap-6">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
@@ -151,14 +151,14 @@ const Header = () => {
                   <a 
                     key={link.name} 
                     href={link.href} 
-                    className="text-white py-4 text-xl transition-colors animate-in fade-in duration-300"
+                    className="text-white py-3 text-lg transition-colors animate-in fade-in duration-300"
                     style={{ animationDelay: `${index * 50}ms` }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.name}
                   </a>
                 ))}
-                <div className="mt-4 pb-4">
+                <div className="mt-4 pb-6">
                   <a href="#contact" className="block w-full">
                     <Button 
                       className="w-full text-white animate-in fade-in duration-300"

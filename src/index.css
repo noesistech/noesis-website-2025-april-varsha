@@ -112,7 +112,7 @@
   }
   
   .glass-card {
-    @apply glass rounded-2xl p-6 transition-all duration-300 hover:bg-white/10;
+    @apply glass rounded-2xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-white/10;
   }
   
   /* Updated consistent section title style with improved spacing */
@@ -237,5 +237,46 @@
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+}
+
+/* iPad specific adjustments */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  /* Improved text readability on iPad */
+  p {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  
+  /* Better spacing for sections on iPad */
+  .page-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  
+  /* Adjusted card layouts for iPad */
+  .glass-card {
+    padding: 1.25rem;
+  }
+}
+
+/* iPad landscape specific */
+@media only screen 
+  and (min-width: 1024px) 
+  and (max-width: 1366px) 
+  and (orientation: landscape) {
+  
+  .section-title {
+    margin-bottom: 2rem;
+  }
+  
+  /* Improved spacing in landscape mode */
+  .glass-card {
+    padding: 1.5rem;
   }
 }

@@ -45,19 +45,19 @@ const ServiceCard = ({ icon, title, description, index, isMobile }: ServiceCardP
     <div 
       className="glow-element flex flex-col items-center justify-center text-center backdrop-blur-sm border border-white/10 rounded-2xl"
       style={{ 
-        height: isMobile ? '160px' : '180px', // Increased height for better spacing
-        padding: isMobile ? '20px 16px' : '28px 24px', // Increased padding on all sides
-        marginTop: index % 2 === 0 ? '0' : '40px', // Offset every second card in the same row
+        height: isMobile ? '150px' : '170px', 
+        padding: isMobile ? '16px 12px' : '22px 18px',
+        marginTop: index % 2 === 0 ? '0' : '35px', // Reduced offset for better spacing on smaller screens
         transform: 'translateZ(0)', // Force hardware acceleration with better cross-browser support
         backfaceVisibility: 'hidden', // Prevent flicker
         willChange: 'transform' // Hint to browser for optimization
       }}
     >
-      <div className="mb-4">
+      <div className="mb-3">
         {icon}
       </div>
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-sm text-white/70">{description}</p>
+      <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">{title}</h3>
+      <p className="text-xs sm:text-sm text-white/70">{description}</p>
     </div>
   );
 };

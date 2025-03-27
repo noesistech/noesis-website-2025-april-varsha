@@ -56,10 +56,12 @@ const HeroSection = () => {
     >
       <HeroBackground />
       
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
           <HeroContent />
-          <ServiceCardsContainer />
+          <div className="hidden sm:block">
+            <ServiceCardsContainer />
+          </div>
         </div>
       </div>
       

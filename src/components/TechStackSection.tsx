@@ -16,25 +16,25 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({ title, categories }
   const cloudStack = categories.filter(category => category.is_cloud_stack);
   
   return (
-    <section id="tech-stack" className="py-20 relative overflow-hidden">
+    <section id="tech-stack" className="py-16 md:py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
-      <div className="container mx-auto relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <h2 className="section-title">{title}</h2>
         
         <Tabs defaultValue="tech" className="max-w-5xl mx-auto">
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-6 sm:mb-8">
             <TabsList className="glass">
               <TabsTrigger 
                 value="tech" 
-                className="data-[state=active]:bg-noesis-purple data-[state=active]:text-white"
+                className="data-[state=active]:bg-noesis-purple data-[state=active]:text-white px-4 sm:px-6"
                 onClick={() => setActiveTab('tech')}
               >
                 Tech Stack
               </TabsTrigger>
               <TabsTrigger 
                 value="cloud"
-                className="data-[state=active]:bg-noesis-blue data-[state=active]:text-white"
+                className="data-[state=active]:bg-noesis-blue data-[state=active]:text-white px-4 sm:px-6"
                 onClick={() => setActiveTab('cloud')}
               >
                 Cloud Stack
@@ -43,17 +43,17 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({ title, categories }
           </div>
           
           <TabsContent value="tech" className="animate-fade-in">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {techStack.map((category) => (
                 <div key={category.key} className="glass-card">
-                  <h3 className="text-xl font-bold mb-4 gradient-text">
+                  <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 gradient-text">
                     {category.title}
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {category.technologies?.map((tech) => (
                       <span 
                         key={tech.id} 
-                        className="bg-white/10 px-3 py-1 rounded-full text-sm text-white/80 hover:bg-noesis-purple/20 transition-colors"
+                        className="bg-white/10 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm text-white/80 hover:bg-noesis-purple/20 transition-colors"
                       >
                         {tech.name}
                       </span>
@@ -65,17 +65,17 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({ title, categories }
           </TabsContent>
           
           <TabsContent value="cloud" className="animate-fade-in">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {cloudStack.map((category) => (
                 <div key={category.key} className="glass-card">
-                  <h3 className="text-xl font-bold mb-4 gradient-text">
+                  <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 gradient-text">
                     {category.title}
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {category.technologies?.map((tech) => (
                       <span 
                         key={tech.id} 
-                        className="bg-white/10 px-3 py-1 rounded-full text-sm text-white/80 hover:bg-noesis-blue/20 transition-colors"
+                        className="bg-white/10 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm text-white/80 hover:bg-noesis-blue/20 transition-colors"
                       >
                         {tech.name}
                       </span>
