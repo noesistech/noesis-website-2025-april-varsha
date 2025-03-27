@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { Flag, Gem, Sparkles, Zap } from 'lucide-react';
 
@@ -143,7 +144,7 @@ const MissionSection = () => {
       </div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="section-title">Mission & Vision</h2>
+        <h2 className="section-title mb-20">Mission & Vision</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl mx-auto">
           <div id="mission-card" className="glass-card animate-fade-in relative transition-transform duration-500 ease-out transform p-8 md:p-10">
