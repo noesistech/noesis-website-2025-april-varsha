@@ -129,7 +129,7 @@ const Header = () => {
           </a>
         </nav>
         
-        {/* Mobile menu button - now using Sheet component */}
+        {/* Mobile menu button - using Sheet component */}
         <div className="md:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
@@ -139,30 +139,32 @@ const Header = () => {
             </SheetTrigger>
             <SheetContent 
               side="top" 
-              className="bg-[#1A1F2C] border-b border-white/10 pt-16 h-auto max-h-[80vh] rounded-b-xl"
+              className="bg-[#1A1F2C] border-b border-white/10 h-[calc(100vh-60px)] mt-[60px] p-0 rounded-none"
             >
-              <div className="flex flex-col gap-4 mt-8">
+              <div className="flex flex-col px-4 py-6">
                 {navLinks.map((link, index) => (
                   <a 
                     key={link.name} 
                     href={link.href} 
-                    className="text-white hover:text-white py-2 transition-colors animate-in fade-in duration-300"
+                    className="text-white py-4 text-xl transition-colors animate-in fade-in duration-300"
                     style={{ animationDelay: `${index * 50}ms` }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.name}
                   </a>
                 ))}
-                <a href="#contact">
-                  <Button 
-                    className="w-full text-white animate-in fade-in duration-300 mt-2"
-                    style={{ animationDelay: `${navLinks.length * 50}ms` }}
-                    variant="noesis"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Get in Touch
-                  </Button>
-                </a>
+                <div className="mt-4 pb-4">
+                  <a href="#contact" className="block w-full">
+                    <Button 
+                      className="w-full text-white animate-in fade-in duration-300"
+                      style={{ animationDelay: `${navLinks.length * 50}ms` }}
+                      variant="noesis"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Get in Touch
+                    </Button>
+                  </a>
+                </div>
               </div>
             </SheetContent>
           </Sheet>
