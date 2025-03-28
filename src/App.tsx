@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ContentPage from "@/pages/ContentPage";
 import Index from "@/pages/Index";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/toaster";
 import { ContentProvider } from "@/contexts/ContentContext";
 import NotFound from "./pages/NotFound";
 
