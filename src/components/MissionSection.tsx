@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { Flag, Gem, Sparkles, Zap } from 'lucide-react';
 import { missionSectionData } from '@/data/content/mission';
@@ -113,6 +112,24 @@ const MissionSection = () => {
   
   const totalRows = gridRows * 2;
   
+  // Function to split the promise text and apply highlighting to specific words
+  const renderPromiseText = () => {
+    const text = missionSectionData.promise_text;
+    const words = text.split(' ');
+    
+    return words.map((word, index) => {
+      // Add gradient underline class only to "creativity" and "precision"
+      if (word.includes('creativity')) {
+        return <span key={index} className="gradient-word">creativity</span>;
+      } else if (word.includes('precision')) {
+        return <span key={index} className="gradient-word">precision</span>;
+      }
+      
+      // Return other words normally
+      return <span key={index}>{word} </span>;
+    });
+  };
+  
   return (
     <section id="mission" className="py-32 relative overflow-hidden bg-noesis-dark" ref={sectionRef}>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -183,8 +200,8 @@ const MissionSection = () => {
           >
             <div className="refraction-layer"></div>
             <div className="glass-highlight"></div>
-            <p ref={promiseTextRef} className="text-3xl md:text-4xl relative promise-text font-light tracking-wide z-10 gradient-underline">
-              {missionSectionData.promise_text}
+            <p ref={promiseTextRef} className="text-3xl md:text-4xl relative promise-text font-light tracking-wide z-10">
+              Human <span className="gradient-word">creativity</span>, AI <span className="gradient-word">precision</span>.
             </p>
           </div>
         </div>
@@ -287,12 +304,12 @@ const MissionSection = () => {
             transform: translateY(0);
           }
           
-          .gradient-underline {
+          .gradient-word {
             position: relative;
             display: inline-block;
           }
           
-          .gradient-underline::after {
+          .gradient-word::after {
             content: '';
             position: absolute;
             bottom: -4px;
@@ -305,7 +322,7 @@ const MissionSection = () => {
             transition: transform 1.2s ease;
           }
           
-          .promise-text.animate-in.gradient-underline::after {
+          .promise-text.animate-in .gradient-word::after {
             transform: scaleX(1);
             transition-delay: 0.8s;
           }
