@@ -38,6 +38,8 @@ serve(async (req) => {
       );
     }
 
+    console.log("Calling OpenAI API with requirements:", requirements);
+
     // Call OpenAI API to enhance the requirements
     const openAIResponse = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -66,7 +68,7 @@ serve(async (req) => {
       console.error("OpenAI API error:", errorData);
       
       return new Response(
-        JSON.stringify({ error: "Failed to enhance requirements" }),
+        JSON.stringify({ error: `Failed to enhance requirements: ${JSON.stringify(errorData)}` }),
         { 
           status: openAIResponse.status,
           headers: { ...corsHeaders, "Content-Type": "application/json" }
@@ -75,6 +77,8 @@ serve(async (req) => {
     }
 
     const data = await openAIResponse.json();
+    console.log("OpenAI API response:", data);
+    
     const enhancedRequirements = data.choices[0].message.content;
 
     return new Response(
@@ -87,7 +91,7 @@ serve(async (req) => {
     console.error("Error processing request:", error);
     
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: `Unexpected error: ${error.message}` }),
       { 
         status: 500, 
         headers: { ...corsHeaders, "Content-Type": "application/json" } 
