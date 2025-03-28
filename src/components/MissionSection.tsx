@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { Flag, Gem, Sparkles, Zap } from 'lucide-react';
 import { missionSectionData } from '@/data/content/mission';
@@ -182,7 +183,7 @@ const MissionSection = () => {
           >
             <div className="refraction-layer"></div>
             <div className="glass-highlight"></div>
-            <p ref={promiseTextRef} className="text-3xl md:text-4xl relative promise-text font-light tracking-wide z-10">
+            <p ref={promiseTextRef} className="text-3xl md:text-4xl relative promise-text font-light tracking-wide z-10 gradient-underline">
               {missionSectionData.promise_text}
             </p>
           </div>
@@ -284,6 +285,29 @@ const MissionSection = () => {
           .promise-text.animate-in {
             opacity: 1;
             transform: translateY(0);
+          }
+          
+          .gradient-underline {
+            position: relative;
+            display: inline-block;
+          }
+          
+          .gradient-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #a074ff, #4ea7ff, #2fcbcf);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 1.2s ease;
+          }
+          
+          .promise-text.animate-in.gradient-underline::after {
+            transform: scaleX(1);
+            transition-delay: 0.8s;
           }
           
           .text-word {
