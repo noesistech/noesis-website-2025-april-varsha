@@ -42,12 +42,8 @@ port = 54327
 vector_port = 54328
 backend = "postgres"
 
-[[functions]]
-name = "submit-contact-form"
+[functions.submit-contact-form]
 verify_jwt = false
-no_verify_jwt = true
 
-[[functions]]
-name = "enhance-requirements"
+[functions.enhance-requirements]
 verify_jwt = false
-no_verify_jwt = true
