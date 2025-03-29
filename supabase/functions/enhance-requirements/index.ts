@@ -47,38 +47,79 @@ serve(async (req) => {
     console.log("Calling OpenAI API...");
     
     // Prepare the conversation history for OpenAI
-    const conversationHistory = [];
+    const messages = [
+      {
+        role: "system",
+        content: currentStep >= 5 
+          ? "You are an AI assistant that helps enhance project requirements for a tech consulting company. Based on the conversation so far, create a comprehensive, well-structured project specification. Format your response with Markdown. Do not ask any more questions."
+          : "You are an AI assistant that helps gather project requirements. Based on the conversation so far, generate exactly ONE specific follow-up question that will help you better understand the project requirements. The question should be concise and direct. Do not include any other text besides the question."
+      },
+      {
+        role: "user",
+        content: requirements
+      }
+    ];
     
-    // Add previous conversation context
+    // Add previous conversation context - make sure to add them in the correct order
+    // Process all entries, both direct field values and question_X entries
+    const orderedConversation = [];
+    
+    // First add the basic fields
+    if (conversation.name) {
+      orderedConversation.push({
+        step: -2,
+        role: "user",
+        content: `My name is ${conversation.name}`
+      });
+    }
+    
+    if (conversation.email) {
+      orderedConversation.push({
+        step: -1,
+        role: "user",
+        content: `My email is ${conversation.email}`
+      });
+    }
+    
+    // Add the initial requirements if they exist
+    if (conversation.requirements) {
+      orderedConversation.push({
+        step: 0,
+        role: "user",
+        content: conversation.requirements
+      });
+    }
+    
+    // Then add all question_X entries
     Object.entries(conversation).forEach(([key, value]) => {
       if (key.startsWith("question_")) {
         const stepNum = parseInt(key.split("_")[1]);
-        conversationHistory.push({
+        orderedConversation.push({
+          step: stepNum,
           role: "user",
           content: value as string
         });
       }
     });
     
-    // Determine if this is a final requirements compilation or a next question request
+    // Sort by step number and add to messages
+    orderedConversation
+      .sort((a, b) => a.step - b.step)
+      .forEach(item => {
+        messages.push({
+          role: item.role,
+          content: item.content
+        });
+      });
+    
+    console.log("OpenAI messages payload:", JSON.stringify(messages));
+    
     const isLastStep = currentStep >= 5; // Assuming we want at most 6 questions (0-5)
     
     const systemPrompt = isLastStep 
       ? "You are an AI assistant that helps enhance project requirements for a tech consulting company. Based on the conversation so far, create a comprehensive, well-structured project specification. Format your response with Markdown. Do not ask any more questions."
       : "You are an AI assistant that helps gather project requirements. Based on the conversation so far, generate exactly ONE specific follow-up question that will help you better understand the project requirements. The question should be concise and direct. Do not include any other text besides the question.";
       
-    const messages = [
-      {
-        role: "system",
-        content: systemPrompt
-      },
-      {
-        role: "user",
-        content: requirements
-      },
-      ...conversationHistory
-    ];
-    
     console.log("OpenAI system prompt:", systemPrompt);
     
     const requestBody = {
