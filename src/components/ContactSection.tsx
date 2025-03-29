@@ -166,7 +166,6 @@ const ContactSection = () => {
         setEnhancedRequirements(data.enhancedRequirements);
         form.setValue("requirements", data.enhancedRequirements);
         setShowEnhancedDialog(true);
-        setShowFeedbackDialog(true);
         
         setSteps(prevSteps => {
           const updatedSteps = [...prevSteps];
@@ -220,7 +219,6 @@ const ContactSection = () => {
     setUserFeedback('continue');
     setShowFeedbackDialog(false);
     
-    // Reset to start a new conversation but keep the context
     setCurrentStep(currentStep + 1);
     
     const continueStep: RequirementsStep = {
@@ -393,6 +391,11 @@ const ContactSection = () => {
         isComplete: false,
       }
     ]);
+  };
+
+  const handleEnhancedDialogClose = () => {
+    setShowEnhancedDialog(false);
+    setShowFeedbackDialog(true);
   };
 
   return (
@@ -700,7 +703,7 @@ const ContactSection = () => {
         </AlertDialogContent>
       </AlertDialog>
 
-      <AlertDialog open={showEnhancedDialog} onOpenChange={setShowEnhancedDialog}>
+      <AlertDialog open={showEnhancedDialog} onOpenChange={handleEnhancedDialogClose}>
         <AlertDialogContent className="bg-noesis-dark border-noesis-purple max-w-3xl max-h-[80vh] overflow-y-auto">
           <AlertDialogHeader className="text-center">
             <div className="flex justify-center mb-4">
@@ -708,7 +711,7 @@ const ContactSection = () => {
             </div>
             <AlertDialogTitle className="text-xl text-white">Enhanced Requirements</AlertDialogTitle>
             <AlertDialogDescription className="text-white/70">
-              Your requirements have been enhanced and added to the message field. You can continue editing them before submitting.
+              Your requirements have been enhanced and added to the message field.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <div className="mt-4 p-4 bg-white/5 rounded-md text-white overflow-auto whitespace-pre-wrap">
@@ -718,10 +721,10 @@ const ContactSection = () => {
           </div>
           <div className="flex justify-center mt-4">
             <Button 
-              onClick={() => setShowEnhancedDialog(false)} 
+              onClick={handleEnhancedDialogClose} 
               variant="noesis"
             >
-              Back to Form
+              Continue
             </Button>
           </div>
         </AlertDialogContent>
