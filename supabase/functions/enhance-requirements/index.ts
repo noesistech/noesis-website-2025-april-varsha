@@ -18,7 +18,10 @@ serve(async (req) => {
   try {
     const { requirements } = await req.json();
 
+    console.log("Received requirements:", requirements);
+
     if (!requirements) {
+      console.error("No requirements provided");
       return new Response(
         JSON.stringify({ error: "No requirements provided" }),
         { 
@@ -29,6 +32,7 @@ serve(async (req) => {
     }
 
     if (!OPENAI_API_KEY) {
+      console.error("OpenAI API key not configured");
       return new Response(
         JSON.stringify({ error: "OpenAI API key not configured" }),
         {
@@ -38,7 +42,24 @@ serve(async (req) => {
       );
     }
 
-    console.log("Calling OpenAI API with requirements:", requirements);
+    console.log("Calling OpenAI API...");
+    
+    const requestBody = {
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: "You are an AI assistant that helps enhance project requirements for a tech consulting company. You need to take brief requirements and expand them into comprehensive, well-structured project specifications. Ask up to 3 clarifying questions if the requirements are too vague. Format your response with Markdown."
+        },
+        {
+          role: "user",
+          content: requirements
+        }
+      ],
+      temperature: 0.7,
+    };
+    
+    console.log("OpenAI request payload:", JSON.stringify(requestBody));
 
     // Call OpenAI API to enhance the requirements
     const openAIResponse = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -47,28 +68,31 @@ serve(async (req) => {
         "Authorization": `Bearer ${OPENAI_API_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          {
-            role: "system",
-            content: "You are an AI assistant that helps enhance project requirements for a tech consulting company. You need to take brief requirements and expand them into comprehensive, well-structured project specifications. Ask up to 3 clarifying questions if the requirements are too vague. Format your response with Markdown."
-          },
-          {
-            role: "user",
-            content: requirements
-          }
-        ],
-        temperature: 0.7,
-      }),
+      body: JSON.stringify(requestBody),
     });
 
+    // Log the raw response for debugging
+    console.log("OpenAI API status:", openAIResponse.status);
+    
+    const responseText = await openAIResponse.text();
+    console.log("OpenAI API raw response:", responseText);
+
     if (!openAIResponse.ok) {
-      const errorData = await openAIResponse.json();
-      console.error("OpenAI API error:", errorData);
+      let errorMessage = "Failed to enhance requirements";
+      
+      try {
+        const errorData = JSON.parse(responseText);
+        console.error("OpenAI API error:", errorData);
+        
+        if (errorData.error) {
+          errorMessage = `OpenAI error: ${errorData.error.message || errorData.error.type || "Unknown error"}`;
+        }
+      } catch (parseError) {
+        console.error("Error parsing OpenAI error response:", parseError);
+      }
       
       return new Response(
-        JSON.stringify({ error: `Failed to enhance requirements: ${JSON.stringify(errorData)}` }),
+        JSON.stringify({ error: errorMessage }),
         { 
           status: openAIResponse.status,
           headers: { ...corsHeaders, "Content-Type": "application/json" }
@@ -76,17 +100,33 @@ serve(async (req) => {
       );
     }
 
-    const data = await openAIResponse.json();
-    console.log("OpenAI API response:", data);
-    
-    const enhancedRequirements = data.choices[0].message.content;
-
-    return new Response(
-      JSON.stringify({ enhancedRequirements }),
-      { 
-        headers: { ...corsHeaders, "Content-Type": "application/json" } 
+    try {
+      const data = JSON.parse(responseText);
+      console.log("Parsed OpenAI response:", data);
+      
+      if (!data.choices || !data.choices[0] || !data.choices[0].message || !data.choices[0].message.content) {
+        throw new Error("Unexpected response format from OpenAI API");
       }
-    );
+      
+      const enhancedRequirements = data.choices[0].message.content;
+      console.log("Enhanced requirements successfully generated");
+
+      return new Response(
+        JSON.stringify({ enhancedRequirements }),
+        { 
+          headers: { ...corsHeaders, "Content-Type": "application/json" } 
+        }
+      );
+    } catch (parseError) {
+      console.error("Error parsing successful OpenAI response:", parseError);
+      return new Response(
+        JSON.stringify({ error: "Error processing OpenAI response" }),
+        { 
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" }
+        }
+      );
+    }
   } catch (error) {
     console.error("Error processing request:", error);
     

@@ -52,23 +52,51 @@ const ContactSection = () => {
 
     try {
       setIsEnhancing(true);
+      toast({
+        title: "Enhancing requirements...",
+        description: "This may take a few seconds.",
+      });
 
+      console.log("Calling enhance-requirements function with:", { requirements: message });
+      
       const { data, error } = await supabase.functions.invoke('enhance-requirements', {
         body: { requirements: message },
       });
 
+      console.log("Function response:", { data, error });
+
       if (error) {
-        throw new Error(error.message);
+        throw new Error(error.message || "Error invoking enhance-requirements function");
+      }
+
+      if (!data || !data.enhancedRequirements) {
+        throw new Error("No enhanced requirements returned");
       }
 
       setEnhancedRequirements(data.enhancedRequirements);
       setShowEnhancedDialog(true);
       form.setValue("message", data.enhancedRequirements);
+      
+      toast({
+        title: "Requirements Enhanced",
+        description: "Your requirements have been enhanced with AI.",
+      });
     } catch (error) {
       console.error("Error enhancing requirements:", error);
+      
+      let errorMessage = "There was a problem enhancing your requirements. Please try again.";
+      
+      if (error instanceof Error) {
+        console.error("Error details:", error.message);
+        // Only show specific error messages in development
+        if (process.env.NODE_ENV === 'development') {
+          errorMessage = `Error: ${error.message}`;
+        }
+      }
+      
       toast({
         title: "Enhancement Failed",
-        description: "There was a problem enhancing your requirements. Please try again.",
+        description: errorMessage,
         variant: "destructive"
       });
     } finally {
