@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
-import { Mail, Phone, MapPin, Send, CheckCircle, Wand, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Wand, ArrowRight, ArrowLeft, ThumbsUp, ThumbsDown, MessageSquare } from 'lucide-react';
 import { toast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -35,6 +35,9 @@ const ContactSection = () => {
   const [isEnhancing, setIsEnhancing] = useState(false);
   const [enhancedRequirements, setEnhancedRequirements] = useState<string | null>(null);
   const [showEnhancedDialog, setShowEnhancedDialog] = useState(false);
+  const [userFeedback, setUserFeedback] = useState<'satisfied' | 'continue' | null>(null);
+  const [additionalFeedback, setAdditionalFeedback] = useState("");
+  const [showFeedbackDialog, setShowFeedbackDialog] = useState(false);
   
   const [isTypeformMode, setIsTypeformMode] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
@@ -163,6 +166,7 @@ const ContactSection = () => {
         setEnhancedRequirements(data.enhancedRequirements);
         form.setValue("requirements", data.enhancedRequirements);
         setShowEnhancedDialog(true);
+        setShowFeedbackDialog(true);
         
         setSteps(prevSteps => {
           const updatedSteps = [...prevSteps];
@@ -212,6 +216,33 @@ const ContactSection = () => {
     }
   };
 
+  const handleContinueConversation = async () => {
+    setUserFeedback('continue');
+    setShowFeedbackDialog(false);
+    
+    // Reset to start a new conversation but keep the context
+    setCurrentStep(currentStep + 1);
+    
+    const continueStep: RequirementsStep = {
+      question: "What additional information or changes would you like to see in the specification?",
+      fieldName: null,
+      answerType: "textarea",
+      placeholder: "Please tell us what you'd like to change or add...",
+      isComplete: false
+    };
+    
+    setSteps(prevSteps => [...prevSteps, continueStep]);
+    setCurrentAnswer("");
+    setAdditionalFeedback("");
+    setShowEnhancedDialog(false);
+  };
+
+  const handleSubmitFeedback = () => {
+    setUserFeedback('satisfied');
+    setShowFeedbackDialog(false);
+    form.handleSubmit(onSubmit)();
+  };
+
   const onSubmit = async (data: ContactFormValues) => {
     try {
       setIsSubmitting(true);
@@ -220,7 +251,9 @@ const ContactSection = () => {
         body: {
           name: data.name,
           email: data.email,
-          message: data.requirements
+          message: data.requirements,
+          userFeedback: userFeedback || 'satisfied',
+          additionalFeedback: additionalFeedback
         },
       });
       
@@ -239,6 +272,8 @@ const ContactSection = () => {
       setCurrentStep(0);
       setResponses({});
       setCurrentAnswer("");
+      setUserFeedback(null);
+      setAdditionalFeedback("");
       setSteps([
         {
           question: "What is your name?",
@@ -691,6 +726,62 @@ const ContactSection = () => {
           </div>
         </AlertDialogContent>
       </AlertDialog>
+
+      <Dialog open={showFeedbackDialog} onOpenChange={setShowFeedbackDialog}>
+        <DialogContent className="bg-noesis-dark border-noesis-purple sm:max-w-xl">
+          <DialogHeader>
+            <DialogTitle className="text-xl text-white">How would you like to proceed?</DialogTitle>
+            <DialogDescription className="text-white/70">
+              Are you satisfied with the generated specification or would you like to continue the conversation?
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="flex flex-col gap-4 mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Button 
+                variant="outline" 
+                onClick={handleContinueConversation}
+                className="flex flex-col items-center p-6 h-auto border-white/10 hover:bg-white/5"
+              >
+                <MessageSquare className="h-10 w-10 mb-2 text-noesis-blue" />
+                <span className="text-lg font-medium">Continue Conversation</span>
+                <span className="text-sm text-white/60 mt-1">I'd like to provide more feedback</span>
+              </Button>
+              
+              <Button 
+                variant="outline" 
+                onClick={handleSubmitFeedback}
+                className="flex flex-col items-center p-6 h-auto border-white/10 hover:bg-white/5"
+              >
+                <ThumbsUp className="h-10 w-10 mb-2 text-green-500" />
+                <span className="text-lg font-medium">Submit Now</span>
+                <span className="text-sm text-white/60 mt-1">I'm satisfied with the specification</span>
+              </Button>
+            </div>
+            
+            {userFeedback === 'continue' && (
+              <div className="mt-2">
+                <Textarea
+                  placeholder="What additional information or changes would you like to see in the specification?"
+                  className="bg-white/5 border-white/10 focus:border-noesis-purple text-white h-32"
+                  value={additionalFeedback}
+                  onChange={(e) => setAdditionalFeedback(e.target.value)}
+                />
+                <div className="flex justify-end mt-2">
+                  <Button 
+                    onClick={handleContinueConversation}
+                    variant="noesis"
+                    className="mt-2"
+                  >
+                    <ArrowRight className="w-4 h-4 mr-2" />
+                    Continue
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
