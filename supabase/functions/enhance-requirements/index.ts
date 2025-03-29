@@ -52,7 +52,7 @@ serve(async (req) => {
         role: "system",
         content: currentStep >= 5 
           ? "You are an AI assistant that helps enhance project requirements for a tech consulting company. Based on the conversation so far, create a comprehensive, well-structured project specification. Format your response with Markdown. Do not ask any more questions."
-          : "You are an AI assistant that helps gather project requirements. Based on the conversation so far, generate exactly ONE specific follow-up question that will help you better understand the project requirements. The question should be concise and direct. Do not include any other text besides the question."
+          : "You are an AI assistant that helps gather business requirements for a tech consulting company. Ask ONE strategic, consultative question that will help you understand the client's business objectives, challenges, or expected outcomes better. Focus on business goals rather than specific technical features. Avoid asking about specific website features, technologies, or implementation details. The question should be concise and direct. Do not include any other text besides the question."
       },
       {
         role: "user",
@@ -97,7 +97,7 @@ serve(async (req) => {
         orderedConversation.push({
           step: stepNum,
           role: "assistant",
-          content: key.startsWith("question_") ? conversation[`answer_${stepNum-1}`] || "" : value as string
+          content: value as string
         });
         
         // If there's a corresponding answer, add it too
@@ -127,7 +127,7 @@ serve(async (req) => {
     
     const systemPrompt = isLastStep 
       ? "You are an AI assistant that helps enhance project requirements for a tech consulting company. Based on the conversation so far, create a comprehensive, well-structured project specification. Format your response with Markdown. Do not ask any more questions."
-      : "You are an AI assistant that helps gather project requirements. Based on the conversation so far, generate exactly ONE specific follow-up question that will help you better understand the project requirements. The question should be concise and direct. Do not include any other text besides the question.";
+      : "You are an AI assistant that helps gather business requirements for a tech consulting company. Ask ONE strategic, consultative question that will help you understand the client's business objectives, challenges, or expected outcomes better. Focus on business goals rather than specific technical features. Avoid asking about specific website features, technologies, or implementation details. The question should be concise and direct. Do not include any other text besides the question.";
       
     console.log("OpenAI system prompt:", systemPrompt);
     
