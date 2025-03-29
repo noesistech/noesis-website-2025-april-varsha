@@ -1,9 +1,10 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
-import { Mail, Phone, MapPin, Send, CheckCircle, Wand, ArrowRight, ArrowLeft, ThumbsUp, ThumbsDown, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Wand, ArrowRight, ArrowLeft, ThumbsUp, MessageSquare } from 'lucide-react';
 import { toast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -38,6 +39,8 @@ const ContactSection = () => {
   const [userFeedback, setUserFeedback] = useState<'satisfied' | 'continue' | null>(null);
   const [additionalFeedback, setAdditionalFeedback] = useState("");
   const [showFeedbackDialog, setShowFeedbackDialog] = useState(false);
+  const [showCombinedView, setShowCombinedView] = useState(false);
+  const [updatedRequirements, setUpdatedRequirements] = useState<string | null>(null);
   
   const [isTypeformMode, setIsTypeformMode] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
@@ -119,7 +122,8 @@ const ContactSection = () => {
         body: { 
           requirements: message,
           conversation: conversationContext,
-          currentStep: currentStep
+          currentStep: currentStep,
+          additionalFeedback: additionalFeedback || null
         },
       });
 
@@ -163,30 +167,37 @@ const ContactSection = () => {
         setCurrentStep(prevStep => prevStep + 1);
         setCurrentAnswer("");
       } else if (data?.enhancedRequirements) {
-        setEnhancedRequirements(data.enhancedRequirements);
-        form.setValue("requirements", data.enhancedRequirements);
-        setShowEnhancedDialog(true);
+        // If this is an update to an existing specification
+        if (additionalFeedback && enhancedRequirements) {
+          setUpdatedRequirements(data.enhancedRequirements);
+          setShowCombinedView(true);
+        } else {
+          // Initial enhancement
+          setEnhancedRequirements(data.enhancedRequirements);
+          form.setValue("requirements", data.enhancedRequirements);
+          setShowEnhancedDialog(true);
         
-        setSteps(prevSteps => {
-          const updatedSteps = [...prevSteps];
-          if (updatedSteps[currentStep]) {
-            updatedSteps[currentStep] = {
-              ...updatedSteps[currentStep],
-              isComplete: true
-            };
-          }
-          return updatedSteps;
-        });
-        
-        const finalStep: RequirementsStep = {
-          question: "Great! I've gathered all the information needed. Would you like to submit your requirements now?",
-          fieldName: null,
-          answerType: "info",
-          isComplete: true
-        };
-        
-        setSteps(prevSteps => [...prevSteps, finalStep]);
-        setCurrentStep(prevSteps => prevSteps + 1);
+          setSteps(prevSteps => {
+            const updatedSteps = [...prevSteps];
+            if (updatedSteps[currentStep]) {
+              updatedSteps[currentStep] = {
+                ...updatedSteps[currentStep],
+                isComplete: true
+              };
+            }
+            return updatedSteps;
+          });
+          
+          const finalStep: RequirementsStep = {
+            question: "Great! I've gathered all the information needed. Would you like to submit your requirements now?",
+            fieldName: null,
+            answerType: "info",
+            isComplete: true
+          };
+          
+          setSteps(prevSteps => [...prevSteps, finalStep]);
+          setCurrentStep(prevSteps => prevSteps + 1);
+        }
       }
       
       toast({
@@ -215,29 +226,34 @@ const ContactSection = () => {
     }
   };
 
-  const handleContinueConversation = async () => {
+  const handleContinueConversation = () => {
     setUserFeedback('continue');
     setShowFeedbackDialog(false);
-    
-    setCurrentStep(currentStep + 1);
-    
-    const continueStep: RequirementsStep = {
-      question: "What additional information or changes would you like to see in the specification?",
-      fieldName: null,
-      answerType: "textarea",
-      placeholder: "Please tell us what you'd like to change or add...",
-      isComplete: false
-    };
-    
-    setSteps(prevSteps => [...prevSteps, continueStep]);
-    setCurrentAnswer("");
-    setAdditionalFeedback("");
-    setShowEnhancedDialog(false);
+    setShowCombinedView(true);
+  };
+
+  const handleApplyChanges = async () => {
+    if (!additionalFeedback || additionalFeedback.trim().length < 5) {
+      toast({
+        title: "Feedback Required",
+        description: "Please provide specific feedback about what you'd like to change.",
+        variant: "destructive"
+      });
+      return;
+    }
+    await enhanceRequirements(enhancedRequirements || form.getValues("requirements"));
   };
 
   const handleSubmitFeedback = () => {
     setUserFeedback('satisfied');
+    
+    // If we're in the combined view, use the updated requirements
+    if (showCombinedView && updatedRequirements) {
+      form.setValue("requirements", updatedRequirements);
+    }
+    
     setShowFeedbackDialog(false);
+    setShowCombinedView(false);
     form.handleSubmit(onSubmit)();
   };
 
@@ -266,12 +282,16 @@ const ContactSection = () => {
       setShowSuccessDialog(true);
       form.reset();
       
+      // Reset all state
       setIsTypeformMode(false);
       setCurrentStep(0);
       setResponses({});
       setCurrentAnswer("");
       setUserFeedback(null);
       setAdditionalFeedback("");
+      setEnhancedRequirements(null);
+      setUpdatedRequirements(null);
+      setShowCombinedView(false);
       setSteps([
         {
           question: "What is your name?",
@@ -761,27 +781,88 @@ const ContactSection = () => {
                 <span className="text-sm text-white/60 mt-1">I'm satisfied with the specification</span>
               </Button>
             </div>
-            
-            {userFeedback === 'continue' && (
-              <div className="mt-2">
-                <Textarea
-                  placeholder="What additional information or changes would you like to see in the specification?"
-                  className="bg-white/5 border-white/10 focus:border-noesis-purple text-white h-32"
-                  value={additionalFeedback}
-                  onChange={(e) => setAdditionalFeedback(e.target.value)}
-                />
-                <div className="flex justify-end mt-2">
-                  <Button 
-                    onClick={handleContinueConversation}
-                    variant="noesis"
-                    className="mt-2"
-                  >
-                    <ArrowRight className="w-4 h-4 mr-2" />
-                    Continue
-                  </Button>
-                </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showCombinedView} onOpenChange={(open) => {
+        if (!open && !isEnhancing) setShowCombinedView(false);
+      }}>
+        <DialogContent className="bg-noesis-dark border-noesis-purple sm:max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-xl text-white">Project Specification Review</DialogTitle>
+            <DialogDescription className="text-white/70">
+              Review the current specification and provide your feedback below.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="flex flex-col gap-6 mt-4">
+            {/* Project Specification Container */}
+            <div className="w-full">
+              <h3 className="text-lg font-semibold text-white mb-2">Current Project Specification</h3>
+              <div className="p-4 bg-white/5 rounded-md text-white overflow-auto whitespace-pre-wrap max-h-[40vh]">
+                {(updatedRequirements || enhancedRequirements) && (
+                  <div dangerouslySetInnerHTML={{ 
+                    __html: (updatedRequirements || enhancedRequirements).replace(/\n/g, '<br/>') 
+                  }} />
+                )}
               </div>
-            )}
+            </div>
+            
+            {/* Feedback Input */}
+            <div className="w-full">
+              <h3 className="text-lg font-semibold text-white mb-2">Your Feedback</h3>
+              <Textarea
+                placeholder="What additional information or changes would you like to see in the specification?"
+                className="bg-white/5 border-white/10 focus:border-noesis-purple text-white h-32 w-full"
+                value={additionalFeedback}
+                onChange={(e) => setAdditionalFeedback(e.target.value)}
+                disabled={isEnhancing}
+              />
+            </div>
+            
+            {/* Action Buttons */}
+            <div className="flex flex-wrap justify-end gap-4 mt-2">
+              <Button 
+                onClick={() => setShowCombinedView(false)}
+                variant="outline"
+                className="border-white/10 text-white"
+                disabled={isEnhancing}
+              >
+                Cancel
+              </Button>
+              
+              <Button 
+                onClick={handleApplyChanges}
+                variant="noesis"
+                disabled={isEnhancing || !additionalFeedback.trim()}
+                className="min-w-[120px]"
+              >
+                {isEnhancing ? (
+                  <div className="flex items-center gap-2">
+                    <div className="h-4 w-4 border-2 border-white/30 border-t-white/80 rounded-full animate-spin"></div>
+                    <span>Processing...</span>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Wand className="w-4 h-4" />
+                    <span>Apply Changes</span>
+                  </div>
+                )}
+              </Button>
+              
+              <Button 
+                onClick={handleSubmitFeedback}
+                variant="noesis"
+                disabled={isEnhancing}
+                className="min-w-[120px]"
+              >
+                <div className="flex items-center gap-2">
+                  <Send className="w-4 h-4" />
+                  <span>Submit Requirements</span>
+                </div>
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
