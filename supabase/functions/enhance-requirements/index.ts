@@ -96,9 +96,18 @@ serve(async (req) => {
         const stepNum = parseInt(key.split("_")[1]);
         orderedConversation.push({
           step: stepNum,
-          role: "user",
-          content: value as string
+          role: "assistant",
+          content: key.startsWith("question_") ? conversation[`answer_${stepNum-1}`] || "" : value as string
         });
+        
+        // If there's a corresponding answer, add it too
+        if (conversation[`answer_${stepNum}`]) {
+          orderedConversation.push({
+            step: stepNum + 0.5, // Use fractional step to ensure it comes after the question
+            role: "user",
+            content: conversation[`answer_${stepNum}`]
+          });
+        }
       }
     });
     

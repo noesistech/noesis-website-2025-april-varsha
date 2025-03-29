@@ -92,12 +92,30 @@ const ContactSection = () => {
         description: "This may take a few seconds.",
       });
 
-      console.log("Calling enhance-requirements function with:", { requirements: message, conversation: responses });
+      const conversationContext = { ...responses };
+      
+      if (currentStep >= 0 && currentStep <= 2) {
+        conversationContext.name = conversationContext.name || responses.name || "";
+        conversationContext.email = conversationContext.email || responses.email || "";
+        conversationContext.requirements = conversationContext.requirements || responses.requirements || message;
+      }
+      
+      if (currentStep > 2) {
+        if (steps[currentStep] && steps[currentStep].question) {
+          conversationContext[`question_${currentStep}`] = steps[currentStep].question;
+        }
+        
+        if (currentAnswer) {
+          conversationContext[`answer_${currentStep}`] = currentAnswer;
+        }
+      }
+      
+      console.log("Calling enhance-requirements function with:", { requirements: message, conversation: conversationContext, currentStep });
       
       const { data, error } = await supabase.functions.invoke('enhance-requirements', {
         body: { 
           requirements: message,
-          conversation: responses,
+          conversation: conversationContext,
           currentStep: currentStep
         },
       });
@@ -118,25 +136,25 @@ const ContactSection = () => {
         };
         
         setSteps(prevSteps => {
-          if (currentStep < 3) {
-            const updatedInitialSteps = [...prevSteps];
-            updatedInitialSteps[currentStep] = {
-              ...updatedInitialSteps[currentStep],
-              isComplete: true
-            };
-            
-            if (currentStep === 2) {
-              return [...updatedInitialSteps, newStep];
-            }
-            return updatedInitialSteps;
-          } else {
-            const updatedSteps = [...prevSteps];
+          const updatedSteps = [...prevSteps];
+          
+          if (currentStep < updatedSteps.length) {
             updatedSteps[currentStep] = {
               ...updatedSteps[currentStep],
               isComplete: true
             };
-            return [...updatedSteps, newStep];
           }
+          
+          if (currentStep >= 2) {
+            if (currentStep >= updatedSteps.length) {
+              return [...updatedSteps, newStep];
+            } else {
+              updatedSteps[currentStep + 1] = newStep;
+              return updatedSteps.slice(0, currentStep + 2);
+            }
+          }
+          
+          return updatedSteps;
         });
         
         setCurrentStep(prevStep => prevStep + 1);
@@ -271,8 +289,8 @@ const ContactSection = () => {
     if (steps[currentStep].fieldName) {
       updatedResponses[steps[currentStep].fieldName] = currentAnswer;
       form.setValue(steps[currentStep].fieldName, currentAnswer);
-    } else {
-      updatedResponses[`question_${currentStep}`] = currentAnswer;
+    } else if (currentStep >= 2) {
+      updatedResponses[`answer_${currentStep}`] = currentAnswer;
     }
     
     setResponses(updatedResponses);
@@ -300,10 +318,13 @@ const ContactSection = () => {
   const handlePreviousStep = () => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
+      
       if (steps[currentStep - 1].fieldName) {
         setCurrentAnswer(responses[steps[currentStep - 1].fieldName] || "");
+      } else if (currentStep > 2) {
+        setCurrentAnswer(responses[`answer_${currentStep - 1}`] || "");
       } else {
-        setCurrentAnswer(responses[`question_${currentStep - 1}`] || "");
+        setCurrentAnswer("");
       }
     }
   };
