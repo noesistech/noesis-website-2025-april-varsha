@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
-import { Mail, Phone, MapPin, Send, CheckCircle, Wand } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Wand, ArrowRight, ArrowLeft } from 'lucide-react';
 import { toast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -12,15 +11,23 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { supabase } from "@/integrations/supabase/client";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
-// Form validation schema
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters" }),
+  requirements: z.string().min(10, { message: "Requirements must be at least 10 characters" }),
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
+
+interface RequirementsStep {
+  question: string;
+  fieldName: keyof ContactFormValues | null;
+  answerType: 'text' | 'textarea' | 'info';
+  placeholder?: string;
+  isComplete: boolean;
+}
 
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -28,18 +35,46 @@ const ContactSection = () => {
   const [isEnhancing, setIsEnhancing] = useState(false);
   const [enhancedRequirements, setEnhancedRequirements] = useState<string | null>(null);
   const [showEnhancedDialog, setShowEnhancedDialog] = useState(false);
+  
+  const [isTypeformMode, setIsTypeformMode] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [responses, setResponses] = useState<Record<string, string>>({});
+  const [currentAnswer, setCurrentAnswer] = useState("");
+  const [steps, setSteps] = useState<RequirementsStep[]>([
+    {
+      question: "What is your name?",
+      fieldName: "name",
+      answerType: "text",
+      placeholder: "John Doe",
+      isComplete: false,
+    },
+    {
+      question: "What's your email address?",
+      fieldName: "email",
+      answerType: "text",
+      placeholder: "john@example.com",
+      isComplete: false,
+    },
+    {
+      question: "Tell me briefly about your project requirements.",
+      fieldName: "requirements",
+      answerType: "textarea",
+      placeholder: "I need a website for my jewelry business...",
+      isComplete: false,
+    }
+  ]);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
       name: "",
       email: "",
-      message: ""
+      requirements: ""
     }
   });
 
-  const enhanceRequirements = async () => {
-    const message = form.getValues("message");
+  const enhanceRequirements = async (initialRequirements?: string) => {
+    const message = initialRequirements || form.getValues("requirements");
     
     if (!message || message.length < 10) {
       toast({
@@ -57,10 +92,14 @@ const ContactSection = () => {
         description: "This may take a few seconds.",
       });
 
-      console.log("Calling enhance-requirements function with:", { requirements: message });
+      console.log("Calling enhance-requirements function with:", { requirements: message, conversation: responses });
       
       const { data, error } = await supabase.functions.invoke('enhance-requirements', {
-        body: { requirements: message },
+        body: { 
+          requirements: message,
+          conversation: responses,
+          currentStep: currentStep
+        },
       });
 
       console.log("Function response:", { data, error });
@@ -69,33 +108,84 @@ const ContactSection = () => {
         throw new Error(error.message || "Error invoking enhance-requirements function");
       }
 
-      if (!data || !data.enhancedRequirements) {
-        throw new Error("No enhanced requirements returned");
+      if (data?.nextQuestion) {
+        const newStep: RequirementsStep = {
+          question: data.nextQuestion,
+          fieldName: null,
+          answerType: "textarea",
+          placeholder: "Type your answer here...",
+          isComplete: false
+        };
+        
+        setSteps(prevSteps => {
+          if (currentStep < 3) {
+            const updatedInitialSteps = [...prevSteps];
+            updatedInitialSteps[currentStep] = {
+              ...updatedInitialSteps[currentStep],
+              isComplete: true
+            };
+            
+            if (currentStep === 2) {
+              return [...updatedInitialSteps, newStep];
+            }
+            return updatedInitialSteps;
+          } else {
+            const updatedSteps = [...prevSteps];
+            updatedSteps[currentStep] = {
+              ...updatedSteps[currentStep],
+              isComplete: true
+            };
+            return [...updatedSteps, newStep];
+          }
+        });
+        
+        setCurrentStep(prevStep => prevStep + 1);
+        setCurrentAnswer("");
+      } else if (data?.enhancedRequirements) {
+        setEnhancedRequirements(data.enhancedRequirements);
+        form.setValue("requirements", data.enhancedRequirements);
+        setShowEnhancedDialog(true);
+        
+        setSteps(prevSteps => {
+          const updatedSteps = [...prevSteps];
+          if (updatedSteps[currentStep]) {
+            updatedSteps[currentStep] = {
+              ...updatedSteps[currentStep],
+              isComplete: true
+            };
+          }
+          return updatedSteps;
+        });
+        
+        const finalStep: RequirementsStep = {
+          question: "Great! I've gathered all the information needed. Would you like to submit your requirements now?",
+          fieldName: null,
+          answerType: "info",
+          isComplete: true
+        };
+        
+        setSteps(prevSteps => [...prevSteps, finalStep]);
+        setCurrentStep(prevSteps => prevSteps + 1);
       }
-
-      setEnhancedRequirements(data.enhancedRequirements);
-      setShowEnhancedDialog(true);
-      form.setValue("message", data.enhancedRequirements);
       
       toast({
-        title: "Requirements Enhanced",
-        description: "Your requirements have been enhanced with AI.",
+        title: "Process Successful",
+        description: data?.enhancedRequirements ? "Your requirements have been enhanced." : "Next question prepared.",
       });
     } catch (error) {
       console.error("Error enhancing requirements:", error);
       
-      let errorMessage = "There was a problem enhancing your requirements. Please try again.";
+      let errorMessage = "There was a problem processing your requirements. Please try again.";
       
       if (error instanceof Error) {
         console.error("Error details:", error.message);
-        // Only show specific error messages in development
         if (process.env.NODE_ENV === 'development') {
           errorMessage = `Error: ${error.message}`;
         }
       }
       
       toast({
-        title: "Enhancement Failed",
+        title: "Process Failed",
         description: errorMessage,
         variant: "destructive"
       });
@@ -108,12 +198,11 @@ const ContactSection = () => {
     try {
       setIsSubmitting(true);
 
-      // Send data to Brevo via edge function
       const { error } = await supabase.functions.invoke('submit-contact-form', {
         body: {
           name: data.name,
           email: data.email,
-          message: data.message
+          message: data.requirements
         },
       });
       
@@ -121,13 +210,40 @@ const ContactSection = () => {
         throw new Error(error.message);
       }
       
-      // Show success message and reset form
       toast({
         title: "Message sent successfully!",
         description: "We'll get back to you soon.",
       });
       setShowSuccessDialog(true);
       form.reset();
+      
+      setIsTypeformMode(false);
+      setCurrentStep(0);
+      setResponses({});
+      setCurrentAnswer("");
+      setSteps([
+        {
+          question: "What is your name?",
+          fieldName: "name",
+          answerType: "text",
+          placeholder: "John Doe",
+          isComplete: false,
+        },
+        {
+          question: "What's your email address?",
+          fieldName: "email",
+          answerType: "text",
+          placeholder: "john@example.com",
+          isComplete: false,
+        },
+        {
+          question: "Tell me briefly about your project requirements.",
+          fieldName: "requirements",
+          answerType: "textarea",
+          placeholder: "I need a website for my jewelry business...",
+          isComplete: false,
+        }
+      ]);
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
@@ -138,6 +254,89 @@ const ContactSection = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleNextStep = async () => {
+    if (!currentAnswer && steps[currentStep].answerType !== 'info') {
+      toast({
+        title: "Input required",
+        description: "Please provide an answer to continue.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const updatedResponses = { ...responses };
+    
+    if (steps[currentStep].fieldName) {
+      updatedResponses[steps[currentStep].fieldName] = currentAnswer;
+      form.setValue(steps[currentStep].fieldName, currentAnswer);
+    } else {
+      updatedResponses[`question_${currentStep}`] = currentAnswer;
+    }
+    
+    setResponses(updatedResponses);
+    
+    const updatedSteps = [...steps];
+    updatedSteps[currentStep] = {
+      ...updatedSteps[currentStep],
+      isComplete: true
+    };
+    setSteps(updatedSteps);
+
+    if (currentStep < 2) {
+      setCurrentStep(currentStep + 1);
+      setCurrentAnswer("");
+    } else if (currentStep === 2) {
+      form.setValue("requirements", currentAnswer);
+      await enhanceRequirements(currentAnswer);
+    } else if (steps[currentStep].answerType !== 'info') {
+      await enhanceRequirements();
+    } else {
+      form.handleSubmit(onSubmit)();
+    }
+  };
+
+  const handlePreviousStep = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+      if (steps[currentStep - 1].fieldName) {
+        setCurrentAnswer(responses[steps[currentStep - 1].fieldName] || "");
+      } else {
+        setCurrentAnswer(responses[`question_${currentStep - 1}`] || "");
+      }
+    }
+  };
+
+  const startTypeformFlow = () => {
+    setIsTypeformMode(true);
+    setCurrentStep(0);
+    setCurrentAnswer("");
+    setResponses({});
+    
+    setSteps([
+      {
+        question: "What is your name?",
+        fieldName: "name",
+        answerType: "text",
+        placeholder: "John Doe",
+        isComplete: false,
+      },
+      {
+        question: "What's your email address?",
+        fieldName: "email",
+        answerType: "text",
+        placeholder: "john@example.com",
+        isComplete: false,
+      },
+      {
+        question: "Tell me briefly about your project requirements.",
+        fieldName: "requirements",
+        answerType: "textarea",
+        placeholder: "I need a website for my jewelry business...",
+        isComplete: false,
+      }
+    ]);
   };
 
   return (
@@ -157,105 +356,225 @@ const ContactSection = () => {
             <div className="p-8">
               <h3 className="text-2xl font-bold gradient-text mb-6">Start The Conversation</h3>
               
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-sm font-medium text-white/70">Your Name</FormLabel>
-                          <FormControl>
-                            <Input 
-                              {...field}
-                              className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
-                              placeholder="John Doe"
-                              disabled={isSubmitting}
-                            />
-                          </FormControl>
-                          <FormMessage className="text-red-400" />
-                        </FormItem>
-                      )}
-                    />
+              {isTypeformMode ? (
+                <div className="space-y-8">
+                  <div className="relative min-h-[320px]">
+                    <div className="mb-6">
+                      <div className="flex justify-between items-center mb-2">
+                        <div className="text-white/50 text-sm">Step {currentStep + 1} of {steps.length}</div>
+                        <div className="text-white/50 text-sm">{Math.round(((currentStep + 1) / steps.length) * 100)}% Complete</div>
+                      </div>
+                      <div className="w-full bg-white/10 h-1 rounded-full">
+                        <div 
+                          className="bg-gradient-to-r from-noesis-purple to-noesis-blue h-1 rounded-full transition-all duration-500"
+                          style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+                        />
+                      </div>
+                    </div>
                     
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-sm font-medium text-white/70">Email Address</FormLabel>
-                          <FormControl>
-                            <Input 
-                              {...field}
-                              className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
-                              placeholder="john@example.com"
-                              type="email"
-                              disabled={isSubmitting}
-                            />
-                          </FormControl>
-                          <FormMessage className="text-red-400" />
-                        </FormItem>
+                    <div className="mb-6">
+                      <h4 className="text-xl font-semibold text-white mb-4">{steps[currentStep]?.question}</h4>
+                      
+                      {steps[currentStep]?.answerType === 'text' && (
+                        <Input
+                          value={currentAnswer}
+                          onChange={(e) => setCurrentAnswer(e.target.value)}
+                          placeholder={steps[currentStep]?.placeholder || ""}
+                          className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
+                          disabled={isEnhancing}
+                        />
                       )}
-                    />
+                      
+                      {steps[currentStep]?.answerType === 'textarea' && (
+                        <Textarea
+                          value={currentAnswer}
+                          onChange={(e) => setCurrentAnswer(e.target.value)}
+                          placeholder={steps[currentStep]?.placeholder || ""}
+                          className="bg-white/5 border-white/10 focus:border-noesis-purple text-white h-32"
+                          disabled={isEnhancing}
+                        />
+                      )}
+                      
+                      {steps[currentStep]?.answerType === 'info' && (
+                        <div className="p-4 bg-white/5 rounded-md text-white/80">
+                          <p>Your requirements have been gathered and enhanced with AI. Review and submit when ready.</p>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="flex justify-between mt-8">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={handlePreviousStep}
+                        disabled={currentStep === 0 || isEnhancing || isSubmitting}
+                        className="border-white/10 text-white"
+                      >
+                        <ArrowLeft className="w-4 h-4 mr-2" />
+                        Back
+                      </Button>
+                      
+                      <Button
+                        type="button"
+                        variant="noesis"
+                        onClick={handleNextStep}
+                        disabled={isEnhancing || isSubmitting}
+                        className="min-w-[120px]"
+                      >
+                        {isEnhancing ? (
+                          <div className="flex items-center gap-2">
+                            <div className="h-4 w-4 border-2 border-white/30 border-t-white/80 rounded-full animate-spin"></div>
+                            <span>Processing...</span>
+                          </div>
+                        ) : isSubmitting ? (
+                          <div className="flex items-center gap-2">
+                            <div className="h-4 w-4 border-2 border-white/30 border-t-white/80 rounded-full animate-spin"></div>
+                            <span>Submitting...</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-2">
+                            {steps[currentStep]?.answerType === 'info' ? (
+                              <>
+                                <Send className="w-4 h-4" />
+                                <span>Submit</span>
+                              </>
+                            ) : (
+                              <>
+                                <span>Continue</span>
+                                <ArrowRight className="w-4 h-4" />
+                              </>
+                            )}
+                          </div>
+                        )}
+                      </Button>
+                    </div>
                   </div>
                   
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-sm font-medium text-white/70">Project Requirements</FormLabel>
-                        <div className="relative">
-                          <FormControl>
-                            <Textarea 
-                              {...field}
-                              className="bg-white/5 border-white/10 focus:border-noesis-purple text-white h-32 pr-12"
-                              placeholder="Briefly describe your project requirements..."
-                              disabled={isSubmitting || isEnhancing}
-                            />
-                          </FormControl>
-                          <Button
-                            type="button"
-                            variant="ghost"
-                            size="icon"
-                            className="absolute right-2 top-2"
-                            onClick={enhanceRequirements}
-                            disabled={isSubmitting || isEnhancing}
-                          >
-                            {isEnhancing ? (
+                  <div className="pt-4 text-center">
+                    <Button 
+                      variant="ghost" 
+                      className="text-white/50 text-sm hover:text-white"
+                      onClick={() => setIsTypeformMode(false)}
+                      disabled={isEnhancing || isSubmitting}
+                    >
+                      Switch to standard form
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <FormField
+                          control={form.control}
+                          name="name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-sm font-medium text-white/70">Your Name</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  {...field}
+                                  className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
+                                  placeholder="John Doe"
+                                  disabled={isSubmitting}
+                                />
+                              </FormControl>
+                              <FormMessage className="text-red-400" />
+                            </FormItem>
+                          )}
+                        />
+                        
+                        <FormField
+                          control={form.control}
+                          name="email"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-sm font-medium text-white/70">Email Address</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  {...field}
+                                  className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
+                                  placeholder="john@example.com"
+                                  type="email"
+                                  disabled={isSubmitting}
+                                />
+                              </FormControl>
+                              <FormMessage className="text-red-400" />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      
+                      <FormField
+                        control={form.control}
+                        name="requirements"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-sm font-medium text-white/70">Project Requirements</FormLabel>
+                            <div className="relative">
+                              <FormControl>
+                                <Textarea 
+                                  {...field}
+                                  className="bg-white/5 border-white/10 focus:border-noesis-purple text-white h-32 pr-12"
+                                  placeholder="Briefly describe your project requirements..."
+                                  disabled={isSubmitting || isEnhancing}
+                                />
+                              </FormControl>
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="icon"
+                                className="absolute right-2 top-2"
+                                onClick={() => enhanceRequirements()}
+                                disabled={isSubmitting || isEnhancing}
+                              >
+                                {isEnhancing ? (
+                                  <div className="h-4 w-4 border-2 border-white/30 border-t-white/80 rounded-full animate-spin"></div>
+                                ) : (
+                                  <Wand className="h-4 w-4 text-noesis-purple" />
+                                )}
+                              </Button>
+                            </div>
+                            <FormMessage className="text-red-400" />
+                          </FormItem>
+                        )}
+                      />
+                      
+                      <div className="flex flex-col sm:flex-row gap-4 justify-between">
+                        <Button 
+                          type="button" 
+                          variant="outline"
+                          onClick={startTypeformFlow}
+                          disabled={isSubmitting || isEnhancing}
+                          className="border-white/10 text-white"
+                        >
+                          Switch to step-by-step mode
+                        </Button>
+                        
+                        <Button 
+                          type="submit" 
+                          disabled={isSubmitting || isEnhancing}
+                          size="lg"
+                          variant="noesis"
+                        >
+                          {isSubmitting ? (
+                            <div className="flex items-center gap-2">
                               <div className="h-4 w-4 border-2 border-white/30 border-t-white/80 rounded-full animate-spin"></div>
-                            ) : (
-                              <Wand className="h-4 w-4 text-noesis-purple" />
-                            )}
-                          </Button>
-                        </div>
-                        <FormMessage className="text-red-400" />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <Button 
-                    type="submit" 
-                    className="w-full"
-                    disabled={isSubmitting || isEnhancing}
-                    size="lg"
-                    variant="noesis"
-                  >
-                    {isSubmitting ? (
-                      <div className="flex items-center gap-2">
-                        <div className="h-4 w-4 border-2 border-white/30 border-t-white/80 rounded-full animate-spin"></div>
-                        <span>Sending...</span>
+                              <span>Sending...</span>
+                            </div>
+                          ) : (
+                            <div className="flex items-center gap-2">
+                              <Send className="w-4 h-4" />
+                              <span>Connect With Our Team</span>
+                            </div>
+                          )}
+                        </Button>
                       </div>
-                    ) : (
-                      <div className="flex items-center gap-2">
-                        <Send className="w-4 h-4" />
-                        <span>Connect With Our Team</span>
-                      </div>
-                    )}
-                  </Button>
-                </form>
-              </Form>
+                    </form>
+                  </Form>
+                </>
+              )}
             </div>
           </Card>
           
@@ -303,7 +622,6 @@ const ContactSection = () => {
         </div>
       </div>
 
-      {/* Success Dialog */}
       <AlertDialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
         <AlertDialogContent className="bg-noesis-dark border-noesis-purple">
           <AlertDialogHeader className="text-center">
@@ -326,7 +644,6 @@ const ContactSection = () => {
         </AlertDialogContent>
       </AlertDialog>
 
-      {/* Enhanced Requirements Dialog */}
       <AlertDialog open={showEnhancedDialog} onOpenChange={setShowEnhancedDialog}>
         <AlertDialogContent className="bg-noesis-dark border-noesis-purple max-w-3xl max-h-[80vh] overflow-y-auto">
           <AlertDialogHeader className="text-center">

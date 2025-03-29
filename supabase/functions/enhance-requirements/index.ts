@@ -16,9 +16,11 @@ serve(async (req) => {
   }
 
   try {
-    const { requirements } = await req.json();
+    const { requirements, conversation = {}, currentStep = 0 } = await req.json();
 
     console.log("Received requirements:", requirements);
+    console.log("Conversation context:", conversation);
+    console.log("Current step:", currentStep);
 
     if (!requirements) {
       console.error("No requirements provided");
@@ -44,24 +46,50 @@ serve(async (req) => {
 
     console.log("Calling OpenAI API...");
     
+    // Prepare the conversation history for OpenAI
+    const conversationHistory = [];
+    
+    // Add previous conversation context
+    Object.entries(conversation).forEach(([key, value]) => {
+      if (key.startsWith("question_")) {
+        const stepNum = parseInt(key.split("_")[1]);
+        conversationHistory.push({
+          role: "user",
+          content: value as string
+        });
+      }
+    });
+    
+    // Determine if this is a final requirements compilation or a next question request
+    const isLastStep = currentStep >= 5; // Assuming we want at most 6 questions (0-5)
+    
+    const systemPrompt = isLastStep 
+      ? "You are an AI assistant that helps enhance project requirements for a tech consulting company. Based on the conversation so far, create a comprehensive, well-structured project specification. Format your response with Markdown. Do not ask any more questions."
+      : "You are an AI assistant that helps gather project requirements. Based on the conversation so far, generate exactly ONE specific follow-up question that will help you better understand the project requirements. The question should be concise and direct. Do not include any other text besides the question.";
+      
+    const messages = [
+      {
+        role: "system",
+        content: systemPrompt
+      },
+      {
+        role: "user",
+        content: requirements
+      },
+      ...conversationHistory
+    ];
+    
+    console.log("OpenAI system prompt:", systemPrompt);
+    
     const requestBody = {
       model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "system",
-          content: "You are an AI assistant that helps enhance project requirements for a tech consulting company. You need to take brief requirements and expand them into comprehensive, well-structured project specifications. Ask up to 3 clarifying questions if the requirements are too vague. Format your response with Markdown."
-        },
-        {
-          role: "user",
-          content: requirements
-        }
-      ],
+      messages,
       temperature: 0.7,
     };
     
     console.log("OpenAI request payload:", JSON.stringify(requestBody));
 
-    // Call OpenAI API to enhance the requirements
+    // Call OpenAI API
     const openAIResponse = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -108,15 +136,27 @@ serve(async (req) => {
         throw new Error("Unexpected response format from OpenAI API");
       }
       
-      const enhancedRequirements = data.choices[0].message.content;
-      console.log("Enhanced requirements successfully generated");
-
-      return new Response(
-        JSON.stringify({ enhancedRequirements }),
-        { 
-          headers: { ...corsHeaders, "Content-Type": "application/json" } 
-        }
-      );
+      const content = data.choices[0].message.content;
+      
+      if (isLastStep) {
+        // Final step - return enhanced requirements
+        console.log("Enhanced requirements successfully generated");
+        return new Response(
+          JSON.stringify({ enhancedRequirements: content }),
+          { 
+            headers: { ...corsHeaders, "Content-Type": "application/json" } 
+          }
+        );
+      } else {
+        // Return the next question
+        console.log("Next question generated:", content);
+        return new Response(
+          JSON.stringify({ nextQuestion: content }),
+          { 
+            headers: { ...corsHeaders, "Content-Type": "application/json" } 
+          }
+        );
+      }
     } catch (parseError) {
       console.error("Error parsing successful OpenAI response:", parseError);
       return new Response(
