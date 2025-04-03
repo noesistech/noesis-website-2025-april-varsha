@@ -69,24 +69,24 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 relative">
+    <section id="contact" className="py-10 sm:py-16 md:py-20 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
       
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16 animate-fade-in">
+      <div className="container mx-auto px-3 sm:px-6 relative z-10">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16 animate-fade-in">
           <h2 className="section-title">
             Experience the <span className="gradient-text">AI-Human Partnership</span>
           </h2>
-          <p className="text-xl text-white/70">Let's combine our expertise with cutting-edge AI to solve your challenges</p>
+          <p className="text-lg sm:text-xl text-white/70">Let's combine our expertise with cutting-edge AI to solve your challenges</p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 max-w-6xl mx-auto">
           <Card className="glass-card animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <div className="p-8">
-              <h3 className="text-2xl font-bold gradient-text mb-6">Start The Conversation</h3>
+            <div className="p-4 sm:p-6 md:p-8">
+              <h3 className="text-xl sm:text-2xl font-bold gradient-text mb-4 sm:mb-6">Start The Conversation</h3>
               
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
@@ -137,7 +137,7 @@ const ContactSection = () => {
                         <FormControl>
                           <Textarea 
                             {...field}
-                            className="bg-white/5 border-white/10 focus:border-noesis-purple text-white h-32"
+                            className="bg-white/5 border-white/10 focus:border-noesis-purple text-white h-24 sm:h-32"
                             placeholder="Briefly describe your project requirements..."
                             disabled={isSubmitting}
                           />
@@ -172,13 +172,13 @@ const ContactSection = () => {
           </Card>
           
           <Card className="glass-card animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <div className="p-8">
-              <h3 className="text-2xl font-bold gradient-text mb-6">Reach Our AI-Human Team</h3>
+            <div className="p-4 sm:p-6 md:p-8">
+              <h3 className="text-xl sm:text-2xl font-bold gradient-text mb-4 sm:mb-6">Reach Our AI-Human Team</h3>
               
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="bg-noesis-purple/20 p-3 rounded-full">
-                    <Mail className="h-6 w-6 text-noesis-purple" />
+                  <div className="bg-noesis-purple/20 p-2 sm:p-3 rounded-full">
+                    <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-noesis-purple" />
                   </div>
                   <div>
                     <p className="font-semibold text-white">Email</p>
@@ -189,8 +189,8 @@ const ContactSection = () => {
                 </div>
                 
                 <div className="flex items-start gap-4">
-                  <div className="bg-noesis-blue/20 p-3 rounded-full">
-                    <Phone className="h-6 w-6 text-noesis-blue" />
+                  <div className="bg-noesis-blue/20 p-2 sm:p-3 rounded-full">
+                    <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-noesis-blue" />
                   </div>
                   <div>
                     <p className="font-semibold text-white">Phone</p>
@@ -199,8 +199,8 @@ const ContactSection = () => {
                 </div>
                 
                 <div className="flex items-start gap-4">
-                  <div className="bg-purple-400/20 p-3 rounded-full">
-                    <MapPin className="h-6 w-6 text-purple-400" />
+                  <div className="bg-purple-400/20 p-2 sm:p-3 rounded-full">
+                    <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-purple-400" />
                   </div>
                   <div>
                     <p className="font-semibold text-white">Address</p>
@@ -219,7 +219,7 @@ const ContactSection = () => {
         <AlertDialogContent className="bg-noesis-dark border-noesis-purple">
           <AlertDialogHeader className="text-center">
             <div className="flex justify-center mb-4">
-              <CheckCircle className="h-16 w-16 text-green-500" />
+              <CheckCircle className="h-12 w-12 sm:h-16 sm:w-16 text-green-500" />
             </div>
             <AlertDialogTitle className="text-xl text-white">Message Sent Successfully!</AlertDialogTitle>
             <AlertDialogDescription className="text-white/70">

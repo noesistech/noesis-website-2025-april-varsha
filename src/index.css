@@ -44,10 +44,18 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
     
-    /* Added consistent spacing variables */
-    --section-padding-y: 5rem;  /* 80px */
-    --section-spacing: 5rem;    /* 80px */
-    --heading-spacing: 2.5rem;  /* 40px */
+    /* Adjusted spacing variables for better responsiveness */
+    --section-padding-y: 5rem;           /* Desktop: 80px */
+    --section-padding-y-tablet: 3.5rem;  /* Tablet: 56px */
+    --section-padding-y-mobile: 2.5rem;  /* Mobile: 40px */
+    
+    --section-spacing: 5rem;             /* Desktop: 80px */
+    --section-spacing-tablet: 3.5rem;    /* Tablet: 56px */
+    --section-spacing-mobile: 2.5rem;    /* Mobile: 40px */
+    
+    --heading-spacing: 2.5rem;           /* Desktop: 40px */
+    --heading-spacing-tablet: 2rem;      /* Tablet: 32px */
+    --heading-spacing-mobile: 1.5rem;    /* Mobile: 24px */
   }
 }
 
@@ -115,28 +123,65 @@
     @apply glass rounded-2xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-white/10;
   }
   
-  /* Updated consistent section title style with improved spacing */
+  /* Updated section title style with improved responsive spacing */
   .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold mb-heading text-center relative;
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-center relative;
     color: white;
-    margin-bottom: var(--heading-spacing);
+    margin-bottom: var(--heading-spacing-mobile);
+  }
+  
+  @media (min-width: 768px) {
+    .section-title {
+      margin-bottom: var(--heading-spacing-tablet);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .section-title {
+      margin-bottom: var(--heading-spacing);
+    }
   }
   
   .section-title::after {
     content: '';
-    @apply absolute left-1/2 -translate-x-1/2 bottom-0 w-24 h-1 bg-gradient-to-r from-noesis-purple to-noesis-blue rounded-full;
-    bottom: -15px;
+    @apply absolute left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-noesis-purple to-noesis-blue rounded-full;
+    bottom: -10px;
+  }
+  
+  @media (min-width: 768px) {
+    .section-title::after {
+      bottom: -12px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .section-title::after {
+      bottom: -15px;
+    }
   }
   
   .gradient-text {
     @apply bg-gradient-to-r from-noesis-purple to-noesis-blue bg-clip-text text-transparent;
   }
   
-  /* Added consistent section styling */
+  /* Added responsive section styling */
   .page-section {
-    @apply py-section;
-    padding-top: var(--section-padding-y);
-    padding-bottom: var(--section-padding-y);
+    padding-top: var(--section-padding-y-mobile);
+    padding-bottom: var(--section-padding-y-mobile);
+  }
+  
+  @media (min-width: 768px) {
+    .page-section {
+      padding-top: var(--section-padding-y-tablet);
+      padding-bottom: var(--section-padding-y-tablet);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .page-section {
+      padding-top: var(--section-padding-y);
+      padding-bottom: var(--section-padding-y);
+    }
   }
 }
 
@@ -233,30 +278,30 @@
   max-width: 100%;
 }
 
+/* Mobile optimizations - reduced spacing */
 @media (max-width: 640px) {
   .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Tighter vertical spacing for mobile */
+  .section-title {
+    margin-top: 0.5rem;
   }
 }
 
-/* iPad specific adjustments */
+/* iPad specific adjustments - better spacing */
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
   
   /* Improved text readability on iPad */
   p {
     font-size: 1.0625rem;
     line-height: 1.6;
-  }
-  
-  /* Better spacing for sections on iPad */
-  .page-section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
   }
   
   /* Adjusted card layouts for iPad */
@@ -270,10 +315,6 @@
   and (min-width: 1024px) 
   and (max-width: 1366px) 
   and (orientation: landscape) {
-  
-  .section-title {
-    margin-bottom: 2rem;
-  }
   
   /* Improved spacing in landscape mode */
   .glass-card {
