@@ -16,7 +16,7 @@ serve(async (req) => {
   }
 
   try {
-    const { name, email, message } = await req.json();
+    const { name, email, message, subject } = await req.json();
 
     if (!name || !email || !message) {
       return new Response(
@@ -51,6 +51,7 @@ serve(async (req) => {
           FIRSTNAME: name.split(" ")[0],
           LASTNAME: name.split(" ").length > 1 ? name.split(" ").slice(1).join(" ") : "",
           MESSAGE: message,
+          SUBJECT: subject || "Website Inquiry",
         },
         listIds: [2], // Default list ID, update as needed
         updateEnabled: true, // Update the contact if it already exists

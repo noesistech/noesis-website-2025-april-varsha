@@ -16,6 +16,7 @@ import { supabase } from "@/integrations/supabase/client";
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
+  subject: z.string().min(2, { message: "Subject is required" }),
   message: z.string().min(10, { message: "Message must be at least 10 characters" }),
 });
 
@@ -30,6 +31,7 @@ const ContactSection = () => {
     defaultValues: {
       name: "",
       email: "",
+      subject: "",
       message: ""
     }
   });
@@ -37,8 +39,9 @@ const ContactSection = () => {
   const onSubmit = async (data: ContactFormValues) => {
     try {
       setIsSubmitting(true);
-
-      const { error } = await supabase.functions.invoke('submit-contact-form', {
+      
+      // First, save to Brevo via the submit-contact-form edge function
+      const brevoResult = await supabase.functions.invoke('submit-contact-form', {
         body: {
           name: data.name,
           email: data.email,
@@ -46,14 +49,33 @@ const ContactSection = () => {
         },
       });
       
-      if (error) {
-        throw new Error(error.message);
+      if (brevoResult.error) {
+        throw new Error(`Error saving to Brevo: ${brevoResult.error.message}`);
       }
+      
+      console.log("Successfully saved to Brevo:", brevoResult);
+      
+      // Then, send email notification using send-contact-email edge function
+      const emailResult = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: data.name,
+          email: data.email,
+          subject: data.subject,
+          message: data.message
+        },
+      });
+      
+      if (emailResult.error) {
+        throw new Error(`Error sending email: ${emailResult.error.message}`);
+      }
+      
+      console.log("Email sent successfully:", emailResult);
       
       toast({
         title: "Message sent successfully!",
         description: "We'll get back to you soon.",
       });
+      
       setShowSuccessDialog(true);
       form.reset();
     } catch (error) {
@@ -127,6 +149,25 @@ const ContactSection = () => {
                       )}
                     />
                   </div>
+                  
+                  <FormField
+                    control={form.control}
+                    name="subject"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium text-white/70">Subject</FormLabel>
+                        <FormControl>
+                          <Input 
+                            {...field}
+                            className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
+                            placeholder="Project Inquiry"
+                            disabled={isSubmitting}
+                          />
+                        </FormControl>
+                        <FormMessage className="text-red-400" />
+                      </FormItem>
+                    )}
+                  />
                   
                   <FormField
                     control={form.control}
