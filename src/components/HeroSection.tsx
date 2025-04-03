@@ -51,7 +51,7 @@ const HeroSection = () => {
   return (
     <div 
       ref={heroRef}
-      className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-16 sm:pt-20 font-inter"
+      className="min-h-[85vh] md:min-h-[90vh] flex flex-col justify-center relative overflow-hidden pt-12 sm:pt-16 pb-2 font-inter"
       style={{
         background: 'linear-gradient(135deg, rgba(26,31,44,1) 0%, rgba(50,30,80,1) 100%)'
       }}
@@ -59,7 +59,7 @@ const HeroSection = () => {
       <HeroBackground />
       
       <div className="container mx-auto px-3 sm:px-6 md:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-5 lg:gap-10 items-center">
           <HeroContent />
           <div className="hidden sm:block">
             <ServiceCardsContainer />
@@ -68,9 +68,9 @@ const HeroSection = () => {
       </div>
       
       {/* Scroll arrow - adjusted position to be more visible */}
-      <div className="absolute bottom-4 sm:bottom-6 left-0 right-0 flex justify-center animate-bounce z-20">
+      <div className="absolute bottom-2 sm:bottom-4 left-0 right-0 flex justify-center animate-bounce z-20">
         <a href="#about" className="text-white/70 hover:text-white transition-colors bg-noesis-dark/40 p-2 rounded-full backdrop-blur-sm">
-          <ArrowDown className="h-6 w-6 sm:h-8 sm:w-8" />
+          <ArrowDown className="h-5 w-5 sm:h-6 sm:w-6" />
         </a>
       </div>
     </div>
