@@ -1,16 +1,19 @@
 
 import React from 'react';
 import { Users, Award, Clock, Percent } from 'lucide-react';
+import P5Animation from './P5Animation';
 
 const AboutStatsSection = () => {
   return (
     <section className="w-full py-16 md:py-24 bg-[#1A1F2C] text-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row gap-10">
-          {/* Left side: Network visualization (placeholder) */}
+          {/* Left side: Network visualization with P5Animation */}
           <div className="md:w-1/2 animate-fade-in">
             <div className="bg-[#1A1F2C] border border-purple-500/20 p-1 rounded-lg h-full">
-              <div className="w-full h-full min-h-[400px] bg-[url('/lovable-uploads/f978ba3e-c95c-4138-a33c-7c0b2348d58f.png')] bg-cover bg-center rounded"></div>
+              <div className="w-full h-full min-h-[400px] rounded relative overflow-hidden">
+                <P5Animation className="absolute inset-0" />
+              </div>
             </div>
           </div>
           
