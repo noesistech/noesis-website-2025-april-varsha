@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Sketch from 'react-p5';
 import p5Types from 'p5';
 
@@ -8,6 +8,33 @@ interface P5AnimationProps {
 }
 
 const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
+  // Track the container size for responsive canvas
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  
+  // Update dimensions when container size changes
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (containerRef.current) {
+        setDimensions({
+          width: containerRef.current.offsetWidth,
+          height: containerRef.current.offsetHeight
+        });
+      }
+    };
+    
+    // Initial size
+    updateDimensions();
+    
+    // Add resize listener
+    window.addEventListener('resize', updateDimensions);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', updateDimensions);
+    };
+  }, []);
+  
   // Animation configuration
   const particleCount = 100;
   const particles: { x: number; y: number; size: number; color: string; speedX: number; speedY: number }[] = [];
@@ -21,7 +48,8 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
   ];
 
   const setup = (p5: p5Types, canvasParentRef: Element) => {
-    const canvas = p5.createCanvas(800, 500).parent(canvasParentRef);
+    // Create responsive canvas that fills its container
+    const canvas = p5.createCanvas(dimensions.width || 800, dimensions.height || 500).parent(canvasParentRef);
     canvas.class(className || '');
     
     // Initialize particles
@@ -38,6 +66,18 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
   };
 
   const draw = (p5: p5Types) => {
+    // Update canvas size if container dimensions change
+    if (dimensions.width > 0 && dimensions.height > 0 && 
+        (p5.width !== dimensions.width || p5.height !== dimensions.height)) {
+      p5.resizeCanvas(dimensions.width, dimensions.height);
+      
+      // Reposition particles when canvas resizes
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].x = p5.constrain(particles[i].x, 0, p5.width);
+        particles[i].y = p5.constrain(particles[i].y, 0, p5.height);
+      }
+    }
+    
     p5.background(26, 31, 44, 10); // noesis-dark with low alpha for trail effect
     
     // Draw grid with increased visibility
@@ -89,7 +129,7 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
     
     const time = p5.frameCount * 0.02;
     const sides = 6;
-    const radius = 80 + Math.sin(time) * 20;
+    const radius = Math.min(p5.width, p5.height) * 0.15 + Math.sin(time) * 20;
     
     for (let i = 0; i < sides; i++) {
       const angle = p5.TWO_PI / sides * i;
@@ -104,7 +144,7 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
       p5.push();
       p5.translate(x, y);
       p5.rotate(time + i);
-      const innerRadius = 30 + Math.sin(time * 2) * 10;
+      const innerRadius = Math.min(p5.width, p5.height) * 0.05 + Math.sin(time * 2) * 10;
       p5.ellipse(0, 0, innerRadius * 2, innerRadius * 2);
       p5.pop();
       
@@ -126,7 +166,13 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
     p5.pop();
   };
 
-  return <Sketch setup={setup} draw={draw} />;
+  return (
+    <div ref={containerRef} className={`w-full h-full ${className || ''}`}>
+      {dimensions.width > 0 && dimensions.height > 0 && (
+        <Sketch setup={setup} draw={draw} />
+      )}
+    </div>
+  );
 };
 
 export default P5Animation;

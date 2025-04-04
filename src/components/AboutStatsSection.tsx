@@ -12,7 +12,7 @@ const AboutStatsSection = () => {
           <div className="md:w-1/2 animate-fade-in">
             <div className="bg-[#1A1F2C] border border-purple-500/20 p-1 rounded-lg h-full">
               <div className="w-full h-full min-h-[400px] rounded relative overflow-hidden">
-                <P5Animation className="absolute inset-0" />
+                <P5Animation />
               </div>
             </div>
           </div>
