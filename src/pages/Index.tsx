@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import ServicesSection from '../components/ServicesSection';
 import SolutionsSection from '../components/SolutionsSection';
@@ -15,6 +16,7 @@ import { techStackSectionData, techCategoriesData } from '@/data/content/techsta
 const Index = () => {
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
+      <Header />
       <HeroSection />
       <AboutStatsSection />
       <ServicesSection title={servicesSectionData.title} services={serviceItemsData} />
