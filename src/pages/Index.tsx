@@ -1,49 +1,24 @@
 
-import React from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-import MissionSection from "@/components/MissionSection";
-import ServicesSection from "@/components/ServicesSection";
-import SolutionsSection from "@/components/SolutionsSection";
-import TechStackSection from "@/components/TechStackSection";
-import ClientsSection from "@/components/ClientsSection";
-import ContactSection from "@/components/ContactSection";
-import { useContent } from "@/contexts/ContentContext";
+import React from 'react';
+import HeroSection from '../components/HeroSection';
+import ServicesSection from '../components/ServicesSection';
+import SolutionsSection from '../components/SolutionsSection';
+import ClientsSection from '../components/ClientsSection';
+import TechStackSection from '../components/TechStackSection';
+import ContactSection from '../components/ContactSection';
+import Footer from '../components/Footer';
+import AboutStatsSection from '../components/AboutStatsSection';
 
 const Index = () => {
-  const { 
-    serviceItems, 
-    solutionItems, 
-    techCategories,
-    servicesSection,
-    solutionsSection,
-    techStackSection 
-  } = useContent();
-
   return (
-    <div className="min-h-screen bg-noesis-dark text-white overflow-x-hidden">
-      <Header />
-      <main className="overflow-x-hidden">
-        <HeroSection />
-        <AboutSection />
-        <MissionSection />
-        <ServicesSection 
-          title={servicesSection.title} 
-          services={serviceItems}
-        />
-        <SolutionsSection 
-          title={solutionsSection.title} 
-          solutions={solutionItems}
-        />
-        <TechStackSection 
-          title={techStackSection.title} 
-          categories={techCategories} 
-        />
-        <ClientsSection />
-        <ContactSection />
-      </main>
+    <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
+      <HeroSection />
+      <AboutStatsSection />
+      <ServicesSection />
+      <SolutionsSection />
+      <ClientsSection />
+      <TechStackSection />
+      <ContactSection />
       <Footer />
     </div>
   );
