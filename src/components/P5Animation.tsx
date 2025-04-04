@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Sketch from 'react-p5';
 import p5Types from 'p5';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface P5AnimationProps {
   className?: string;
@@ -11,14 +12,23 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
   // Track the container size for responsive canvas
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const isMobile = useIsMobile();
   
   // Update dimensions when container size changes
   useEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        let containerHeight = containerRef.current.offsetHeight;
+        
+        // On mobile, limit the height to 50vh maximum
+        if (isMobile && containerHeight > window.innerHeight * 0.5) {
+          containerHeight = window.innerHeight * 0.5;
+        }
+        
         setDimensions({
-          width: containerRef.current.offsetWidth,
-          height: containerRef.current.offsetHeight
+          width: containerWidth,
+          height: containerHeight
         });
       }
     };
@@ -33,7 +43,7 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
     return () => {
       window.removeEventListener('resize', updateDimensions);
     };
-  }, []);
+  }, [isMobile]);
   
   // Animation configuration
   const particleCount = 100;
@@ -167,7 +177,11 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
   };
 
   return (
-    <div ref={containerRef} className={`w-full h-full ${className || ''}`}>
+    <div 
+      ref={containerRef} 
+      className={`w-full ${isMobile ? 'max-h-[50vh]' : 'h-full'} ${className || ''}`}
+      style={{ height: isMobile ? '50vh' : '100%' }}
+    >
       {dimensions.width > 0 && dimensions.height > 0 && (
         <Sketch setup={setup} draw={draw} />
       )}
@@ -176,3 +190,4 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
 };
 
 export default P5Animation;
+
