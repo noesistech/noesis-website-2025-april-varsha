@@ -63,7 +63,7 @@ const AboutStatsSection = () => {
                 <div className="bg-purple-900/30 p-3 rounded-full mb-4">
                   <Clock className="w-6 h-6 text-purple-400" />
                 </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-purple-300">> 4 Years</h3>
+                <h3 className="text-3xl md:text-4xl font-bold text-purple-300">{"> 4"} Years</h3>
                 <p className="text-sm text-gray-400 text-center">Avg. Client Relationship</p>
               </div>
               
