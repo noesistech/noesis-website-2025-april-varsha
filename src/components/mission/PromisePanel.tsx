@@ -1,5 +1,6 @@
 
 import React, { useRef, useEffect } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface PromisePanelProps {
   title: string;
@@ -9,6 +10,7 @@ interface PromisePanelProps {
 const PromisePanel = ({ title, text }: PromisePanelProps) => {
   const promiseTextRef = useRef<HTMLParagraphElement>(null);
   const promiseContainerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     if (!promiseTextRef.current) return;
@@ -90,28 +92,24 @@ const PromisePanel = ({ title, text }: PromisePanelProps) => {
   
   // Function to split the promise text and apply highlighting to specific words
   const renderPromiseText = () => {
-    const words = text.split(' ');
+    // If mobile, render with a line break after "creativity,"
+    if (isMobile) {
+      return (
+        <>
+          <span className="gradient-word">Human</span> <span className="gradient-word">creativity</span><span>,</span>
+          <br />
+          <span className="gradient-word">AI</span> <span className="gradient-word">precision</span>
+        </>
+      );
+    }
     
-    return words.map((word, index) => {
-      // Add gradient underline class for specific highlighted words
-      if (word.includes('creativity')) {
-        return <span key={index} className="gradient-word">creativity,</span>;
-      } else if (word.includes('precision')) {
-        return <span key={index} className="gradient-word">precision</span>;
-      } else if (word.includes('Human')) {
-        return <span key={index}>Human </span>;
-      } else if (word === 'AI') {
-        return <span key={index}> AI </span>;
-      }
-      
-      // Special handling for comma to add proper spacing
-      if (word === ',') {
-        return <span key={index}>, </span>;
-      }
-      
-      // Return other words normally
-      return <span key={index}>{word} </span>;
-    });
+    // For desktop, render as a single line
+    return (
+      <>
+        <span className="gradient-word">Human</span> <span className="gradient-word">creativity</span><span>, </span>
+        <span className="gradient-word">AI</span> <span className="gradient-word">precision</span>
+      </>
+    );
   };
   
   return (
