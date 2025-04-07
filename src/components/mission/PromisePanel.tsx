@@ -95,7 +95,7 @@ const PromisePanel = ({ title, text }: PromisePanelProps) => {
     return words.map((word, index) => {
       // Add gradient underline class for specific highlighted words
       if (word.includes('creativity')) {
-        return <span key={index} className="gradient-word">creativity</span>;
+        return <span key={index} className="gradient-word">creativity,</span>;
       } else if (word.includes('precision')) {
         return <span key={index} className="gradient-word">precision</span>;
       } else if (word.includes('Human')) {
