@@ -1,5 +1,5 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import ServiceCard from './ServiceCard';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { 
@@ -59,6 +59,7 @@ const ServiceCardsContainer = () => {
   const animationFrameRef = useRef<number>();
   const scrollPositionRef = useRef<number>(0);
   const isMobile = useIsMobile();
+  const [isVisible, setIsVisible] = useState(false);
   
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
@@ -71,11 +72,15 @@ const ServiceCardsContainer = () => {
     // Reset scroll position to ensure smooth loop
     scrollPositionRef.current = 0;
     
+    const checkVisibility = () => {
+      if (scrollContainer) {
+        const rect = scrollContainer.getBoundingClientRect();
+        const visible = rect.top < window.innerHeight && rect.bottom >= 0;
+        setIsVisible(visible);
+      }
+    };
+    
     const animate = () => {
-      // Only animate if the element is visible in viewport
-      const rect = scrollContainer.getBoundingClientRect();
-      const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
-      
       if (isVisible) {
         scrollPositionRef.current += 0.5; // Slower, smoother scroll
         
@@ -88,20 +93,32 @@ const ServiceCardsContainer = () => {
         }
         
         // Apply the transform to create the scrolling effect
-        scrollContainer.style.transform = `translateY(-${scrollPositionRef.current}px) translateZ(0)`;
+        if (scrollContainer) {
+          scrollContainer.style.transform = `translateY(-${scrollPositionRef.current}px) translateZ(0)`;
+        }
       }
       
       animationFrameRef.current = requestAnimationFrame(animate);
     };
     
+    // Initial visibility check
+    checkVisibility();
+    
+    // Set up visibility checking on scroll
+    window.addEventListener('scroll', checkVisibility);
+    window.addEventListener('resize', checkVisibility);
+    
+    // Start animation
     animationFrameRef.current = requestAnimationFrame(animate);
     
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
+      window.removeEventListener('scroll', checkVisibility);
+      window.removeEventListener('resize', checkVisibility);
     };
-  }, [isMobile]);
+  }, [isMobile, isVisible]);
   
   return (
     <div className="relative h-[400px] md:h-[450px] lg:h-[500px] overflow-hidden animate-fade-in">
@@ -126,6 +143,7 @@ const ServiceCardsContainer = () => {
               description={card.description} 
               index={index} 
               isMobile={isMobile} 
+              isVisible={isVisible}
             />
           ))}
         </div>
