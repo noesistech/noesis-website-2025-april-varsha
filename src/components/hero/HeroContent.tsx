@@ -6,8 +6,8 @@ const HeroContent = () => {
   return (
     <div className="animate-fade-in py-0 sm:py-2">
       <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-3">
-        <span>Where AI and human talent</span><br />
-        <span className="gradient-text">create breakthrough solutions.</span>
+        <span className="block">Where AI and human talent create</span>
+        <span className="gradient-text block">breakthrough solutions.</span>
       </h1>
       <p className="text-lg sm:text-xl text-white/80 mb-3 sm:mb-4 md:mb-5 max-w-2xl">
         As an AI-native agency, we combine cutting-edge artificial intelligence with human expertise to deliver digital solutions that transform businesses and exceed expectations.
