@@ -72,18 +72,21 @@ const ServiceCardsContainer = () => {
     scrollPositionRef.current = 0;
     
     const animate = () => {
-      scrollPositionRef.current += 0.5; // Slower, smoother scroll
+      // Only animate if the element is visible in viewport
+      const rect = scrollContainer.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
       
-      // When we've scrolled through the first set of cards completely,
-      // reset the position to the beginning of the second set
-      // This creates the illusion of infinite scrolling without jumping
-      if (scrollPositionRef.current >= totalHeight) {
-        // Instead of using modulo which can cause visual jumps,
-        // we just reset to exactly where the second set begins
-        scrollPositionRef.current = 0;
-      }
-      
-      if (scrollContainer) {
+      if (isVisible) {
+        scrollPositionRef.current += 0.5; // Slower, smoother scroll
+        
+        // When we've scrolled through the first set of cards completely,
+        // reset the position to the beginning of the second set
+        if (scrollPositionRef.current >= totalHeight) {
+          // Instead of using modulo which can cause visual jumps,
+          // we just reset to exactly where the second set begins
+          scrollPositionRef.current = 0;
+        }
+        
         // Apply the transform to create the scrolling effect
         scrollContainer.style.transform = `translateY(-${scrollPositionRef.current}px) translateZ(0)`;
       }
