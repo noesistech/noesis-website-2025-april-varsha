@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { ContentProvider } from "@/contexts/ContentContext";
 import NotFound from "./pages/NotFound";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Create a client
 const queryClient = new QueryClient({
@@ -28,6 +29,7 @@ function App() {
             <Route path="/content" element={<ContentPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <ScrollToTop />
           <Toaster />
         </Router>
       </ContentProvider>

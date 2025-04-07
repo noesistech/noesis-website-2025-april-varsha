@@ -19,7 +19,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        noesis: "bg-noesis-purple/20 border border-noesis-purple hover:bg-noesis-purple/30 text-white",
+        noesis: "bg-noesis-purple/30 border border-noesis-purple hover:bg-noesis-purple/40 text-white hover:scale-105 shadow-[0_0_10px_rgba(160,116,255,0.3)]",
       },
       size: {
         default: "h-10 px-4 py-2",
