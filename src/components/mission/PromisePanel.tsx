@@ -100,6 +100,11 @@ const PromisePanel = ({ title, text }: PromisePanelProps) => {
         return <span key={index} className="gradient-word">precision</span>;
       }
       
+      // Special handling for comma to add more space after it on mobile
+      if (word === ',') {
+        return <span key={index} className="inline-block sm:hidden">, </span>;
+      }
+      
       // Return other words normally
       return <span key={index}>{word} </span>;
     });
