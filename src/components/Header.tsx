@@ -146,29 +146,31 @@ const Header = () => {
               className="bg-[#1A1F2C] border-b border-white/10 h-[calc(100vh-60px)] p-0 rounded-none"
               style={{ marginTop: HEADER_HEIGHT }}
             >
-              <div className="flex flex-col px-4 py-6">
-                {navLinks.map((link, index) => (
-                  <a 
-                    key={link.name} 
-                    href={link.href} 
-                    className="text-white py-4 text-lg transition-colors animate-in fade-in duration-300"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </a>
-                ))}
-                <div className="mt-4 pb-6">
-                  <a href="#contact" className="block w-full">
-                    <Button 
-                      className="w-full text-white animate-in fade-in duration-300"
-                      style={{ animationDelay: `${navLinks.length * 50}ms` }}
-                      variant="noesis"
+              <div className="flex flex-col items-center justify-center px-4 py-6 h-full">
+                <div className="flex flex-col items-center w-full">
+                  {navLinks.map((link, index) => (
+                    <a 
+                      key={link.name} 
+                      href={link.href} 
+                      className="text-white py-4 text-lg text-center w-full transition-colors animate-in fade-in duration-300"
+                      style={{ animationDelay: `${index * 50}ms` }}
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Get in Touch
-                    </Button>
-                  </a>
+                      {link.name}
+                    </a>
+                  ))}
+                  <div className="mt-4 w-full">
+                    <a href="#contact" className="block w-full">
+                      <Button 
+                        className="w-full text-white animate-in fade-in duration-300"
+                        style={{ animationDelay: `${navLinks.length * 50}ms` }}
+                        variant="noesis"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Get in Touch
+                      </Button>
+                    </a>
+                  </div>
                 </div>
               </div>
             </SheetContent>
