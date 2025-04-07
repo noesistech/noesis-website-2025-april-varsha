@@ -51,6 +51,9 @@ const serviceCards = [
   }
 ];
 
+// Create duplicated cards for seamless infinite scrolling
+const duplicatedServiceCards = [...serviceCards, ...serviceCards];
+
 const ServiceCardsContainer = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const animationFrameRef = useRef<number>();
@@ -63,7 +66,7 @@ const ServiceCardsContainer = () => {
     if (!scrollContainer) return;
     
     const cardHeight = isMobile ? 160 + 20 : 180 + 20; // Adjusted card height with spacing
-    const totalHeight = serviceCards.length * cardHeight;
+    const originalSetHeight = serviceCards.length * cardHeight;
     
     // Reset scroll position to ensure smooth loop
     scrollPositionRef.current = 0;
@@ -80,21 +83,16 @@ const ServiceCardsContainer = () => {
       if (isVisible) {
         scrollPositionRef.current += 0.5; // Slower, smoother scroll
         
-        // When we've scrolled through all the cards completely,
-        // reset the position to the beginning
-        if (scrollPositionRef.current >= totalHeight) {
-          // Reset to the beginning with a small offset to avoid visual jump
+        // When we've scrolled through the first full set of cards
+        if (scrollPositionRef.current >= originalSetHeight) {
+          // Reset to beginning of the second set, which visually matches the first set
+          // This creates the illusion of continuous scrolling
           scrollPositionRef.current = 0;
-          
-          // Apply the reset position immediately
-          if (scrollContainer) {
-            scrollContainer.style.transform = `translateY(0px) translateZ(0)`;
-          }
-        } else {
-          // Apply the transform to create the scrolling effect
-          if (scrollContainer) {
-            scrollContainer.style.transform = `translateY(-${scrollPositionRef.current}px) translateZ(0)`;
-          }
+        }
+        
+        // Apply the transform to create the scrolling effect
+        if (scrollContainer) {
+          scrollContainer.style.transform = `translateY(-${scrollPositionRef.current}px) translateZ(0)`;
         }
       }
       
@@ -135,13 +133,13 @@ const ServiceCardsContainer = () => {
             transition: 'transform 0.1s linear' // Smooth transition between frames
           }}
         >
-          {serviceCards.map((card, index) => (
+          {duplicatedServiceCards.map((card, index) => (
             <ServiceCard 
               key={`card-${index}`} 
               icon={card.icon} 
               title={card.title} 
               description={card.description} 
-              index={index} 
+              index={index % serviceCards.length} // Use modulo to keep the staggered effect consistent 
               isMobile={isMobile} 
               isVisible={isVisible}
             />
