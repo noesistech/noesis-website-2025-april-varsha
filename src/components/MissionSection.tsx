@@ -36,11 +36,11 @@ const MissionSection = () => {
   const gridCols = 24;
   
   return (
-    <section id="mission" className="py-20 relative overflow-hidden bg-noesis-dark" ref={sectionRef}>
+    <section id="mission" className="py-10 relative overflow-hidden bg-noesis-dark" ref={sectionRef}>
       <BackgroundPattern gridRows={gridRows} gridCols={gridCols} />
       
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="section-title mb-24">Mission & Vision</h2>
+        <h2 className="section-title mb-20">Mission & Vision</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl mx-auto">
           <MissionCard 
