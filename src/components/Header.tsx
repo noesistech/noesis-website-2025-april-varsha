@@ -146,7 +146,7 @@ const Header = () => {
               className="bg-[#1A1F2C] border-b border-white/10 h-[calc(100vh-60px)] p-0 rounded-none"
               style={{ marginTop: HEADER_HEIGHT }}
             >
-              <div className="flex flex-col items-center justify-center px-4 py-6 h-full">
+              <div className="flex flex-col items-center justify-center px-4 py-2 h-full">
                 <div className="flex flex-col items-center w-full">
                   {navLinks.map((link, index) => (
                     <a 
