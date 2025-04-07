@@ -18,9 +18,9 @@ const HeroContent = () => {
 
   return (
     <div className={`${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'} transition-all duration-700 ease-out py-0 sm:py-0`}>
-      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-5 md:mb-7 leading-tight">
         <span className="block">Where AI and human talent create</span>
-        <span className="gradient-text block">breakthrough solutions.</span>
+        <span className="gradient-text block pb-2">breakthrough solutions.</span>
       </h1>
       <p className="text-lg sm:text-xl text-white/80 mb-3 sm:mb-3 md:mb-4 max-w-2xl">
         As an AI-native agency, we combine cutting-edge artificial intelligence with human expertise to deliver digital solutions that transform businesses and exceed expectations.
