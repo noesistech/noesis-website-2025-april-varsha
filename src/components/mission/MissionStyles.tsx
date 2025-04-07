@@ -214,13 +214,13 @@ const MissionStyles = ({ gridRows, gridCols }: MissionStylesProps) => {
         }
         
         .section-title {
-          @apply text-3xl md:text-4xl font-bold mb-6 text-center relative;
+          @apply text-3xl md:text-4xl font-bold text-center relative;
         }
         
         .section-title::after {
           content: '';
-          @apply absolute left-1/2 -translate-x-1/2 bottom-0 w-20 h-1 bg-noesis-purple rounded-full mt-2;
-          bottom: -12px;
+          @apply absolute left-1/2 -translate-x-1/2 bottom-0 w-20 h-1 bg-noesis-purple rounded-full;
+          bottom: -8px;
         }
       `}
     </style>
