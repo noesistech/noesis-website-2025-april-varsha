@@ -93,16 +93,20 @@ const PromisePanel = ({ title, text }: PromisePanelProps) => {
     const words = text.split(' ');
     
     return words.map((word, index) => {
-      // Add gradient underline class only to "creativity" and "precision"
+      // Add gradient underline class for specific highlighted words
       if (word.includes('creativity')) {
         return <span key={index} className="gradient-word">creativity</span>;
       } else if (word.includes('precision')) {
         return <span key={index} className="gradient-word">precision</span>;
+      } else if (word.includes('Human')) {
+        return <span key={index}>Human </span>;
+      } else if (word === 'AI') {
+        return <span key={index}> AI </span>;
       }
       
-      // Special handling for comma to add more space after it on mobile
+      // Special handling for comma to add proper spacing
       if (word === ',') {
-        return <span key={index} className="inline-block sm:hidden">, </span>;
+        return <span key={index}>, </span>;
       }
       
       // Return other words normally
