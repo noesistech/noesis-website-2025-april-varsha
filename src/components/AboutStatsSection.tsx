@@ -23,7 +23,7 @@ const AboutStatsSection = () => {
           {/* Right side: About text and stats */}
           <div className="md:w-1/2 flex flex-col justify-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <h2 className="text-2xl md:text-4xl font-bold mb-4">
-              Evolving Since <span className="text-purple-400">2009</span>, Leading in AI Today
+              Evolving Since <span className="gradient-text">2009</span>, Leading in AI Today
             </h2>
             <div className="h-1 w-24 bg-purple-500 mb-8"></div>
             
