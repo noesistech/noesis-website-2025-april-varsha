@@ -1,10 +1,23 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const HeroContent = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobile();
+  
+  useEffect(() => {
+    // Small delay to ensure animation triggers after component mounts
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="animate-fade-in py-0 sm:py-2">
+    <div className={`${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'} transition-all duration-700 ease-out py-0 sm:py-2`}>
       <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-3">
         <span className="block">Where AI and human talent create</span>
         <span className="gradient-text block">breakthrough solutions.</span>
