@@ -9,6 +9,7 @@ import TechStackSection from '../components/TechStackSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 import AboutStatsSection from '../components/AboutStatsSection';
+import MissionSection from '../components/MissionSection';
 import { servicesSectionData, serviceItemsData } from '@/data/content/services';
 import { solutionsSectionData, solutionItemsData } from '@/data/content/solutions';
 import { techStackSectionData, techCategoriesData } from '@/data/content/techstack';
@@ -19,6 +20,7 @@ const Index = () => {
       <Header />
       <HeroSection />
       <AboutStatsSection />
+      <MissionSection />
       <ServicesSection title={servicesSectionData.title} services={serviceItemsData} />
       <SolutionsSection title={solutionsSectionData.title} solutions={solutionItemsData} />
       <ClientsSection />
