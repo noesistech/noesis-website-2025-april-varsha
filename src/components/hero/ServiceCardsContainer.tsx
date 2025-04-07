@@ -51,9 +51,9 @@ const serviceCards = [
   }
 ];
 
-// Create a triple set of cards to ensure seamless infinite scrolling
-// The middle set is what we'll normally see, while the first and last sets enable the looping effect
-const tripleServiceCards = [...serviceCards, ...serviceCards, ...serviceCards];
+// Create enough copies to ensure seamless infinite scrolling
+// We need at least 3 full sets to ensure continuous appearance
+const extendedServiceCards = [...serviceCards, ...serviceCards, ...serviceCards, ...serviceCards];
 
 const ServiceCardsContainer = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -67,12 +67,13 @@ const ServiceCardsContainer = () => {
     if (!scrollContainer) return;
     
     const cardHeight = isMobile ? 160 + 20 : 180 + 20; // Adjusted card height with spacing
+    const totalHeight = extendedServiceCards.length * cardHeight;
     const singleSetHeight = serviceCards.length * cardHeight;
     
-    // Start with the second set of cards (middle section)
+    // Start with showing the second set of cards
     scrollPositionRef.current = singleSetHeight;
     
-    // Initial positioning at the middle set
+    // Initial positioning
     if (scrollContainer) {
       scrollContainer.style.transform = `translateY(-${scrollPositionRef.current}px) translateZ(0)`;
     }
@@ -89,10 +90,13 @@ const ServiceCardsContainer = () => {
       if (isVisible) {
         scrollPositionRef.current += 0.5; // Slower, smoother scroll
         
-        // When we reach the end of the middle set
+        // When we've scrolled past the second set into the third set
         if (scrollPositionRef.current >= singleSetHeight * 2) {
-          // Jump back to the first card of the middle set
-          scrollPositionRef.current = singleSetHeight;
+          // This is where the trick happens:
+          // We reposition back to the first set + the excess we've scrolled into the third set
+          // This creates a completely seamless effect because we're showing the exact same cards
+          const excess = scrollPositionRef.current - (singleSetHeight * 2);
+          scrollPositionRef.current = singleSetHeight + excess;
         }
         
         // Apply the transform to create the scrolling effect
@@ -138,7 +142,7 @@ const ServiceCardsContainer = () => {
             transition: 'transform 0.1s linear' // Smooth transition between frames
           }}
         >
-          {tripleServiceCards.map((card, index) => (
+          {extendedServiceCards.map((card, index) => (
             <ServiceCard 
               key={`card-${index}`} 
               icon={card.icon} 
