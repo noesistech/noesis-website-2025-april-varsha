@@ -51,7 +51,7 @@ const HeroSection = () => {
   return (
     <div 
       ref={heroRef}
-      className="min-h-[85vh] md:min-h-[90vh] flex flex-col justify-center relative overflow-hidden pt-12 sm:pt-16 pb-2 font-inter"
+      className="min-h-[80vh] md:min-h-[85vh] flex flex-col justify-center relative overflow-hidden pt-8 sm:pt-10 pb-1 font-inter"
       style={{
         background: 'linear-gradient(135deg, rgba(26,31,44,1) 0%, rgba(50,30,80,1) 100%)'
       }}
@@ -68,7 +68,7 @@ const HeroSection = () => {
       </div>
       
       {/* Scroll arrow - adjusted position to be more visible */}
-      <div className="absolute bottom-2 sm:bottom-4 left-0 right-0 flex justify-center animate-bounce z-20">
+      <div className="absolute bottom-2 sm:bottom-3 left-0 right-0 flex justify-center animate-bounce z-20">
         <a href="#about" className="text-white/70 hover:text-white transition-colors bg-noesis-dark/40 p-2 rounded-full backdrop-blur-sm">
           <ArrowDown className="h-5 w-5 sm:h-6 sm:w-6" />
         </a>
