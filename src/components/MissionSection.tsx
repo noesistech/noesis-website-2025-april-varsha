@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { missionSectionData } from '@/data/content/mission';
 import MissionCard from './mission/MissionCard';
@@ -31,7 +32,9 @@ const MissionSection = () => {
       <BackgroundPattern gridRows={gridRows} gridCols={gridCols} />
       
       <div className="container mx-auto px-6 relative z-10 py-[15px]">
-        <h2 className="section-title mb-20">Mission & Vision</h2>
+        <h2 className="section-title mb-20">
+          Our <span className="gradient-text">Mission & Vision</span>
+        </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl mx-auto">
           <MissionCard title={missionSectionData.mission_title} description={missionSectionData.mission_description} />
