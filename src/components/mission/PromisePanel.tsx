@@ -90,24 +90,21 @@ const PromisePanel = ({ title, text }: PromisePanelProps) => {
     };
   }, []);
   
-  // Function to split the promise text and apply highlighting to specific words
+  // Function to render the promise text without any gradient word highlighting
   const renderPromiseText = () => {
-    // If mobile, render with a line break after "creativity,"
     if (isMobile) {
       return (
         <>
-          <span>Human </span><span className="gradient-word">creativity</span><span>,</span>
+          <span>Human creativity,</span>
           <br />
-          <span>AI </span><span className="gradient-word">precision</span>
+          <span>AI precision</span>
         </>
       );
     }
     
-    // For desktop, render as a single line
     return (
       <>
-        <span>Human </span><span className="gradient-word">creativity</span><span>, </span>
-        <span>AI </span><span className="gradient-word">precision</span>
+        <span>Human creativity, AI precision</span>
       </>
     );
   };
@@ -115,7 +112,7 @@ const PromisePanel = ({ title, text }: PromisePanelProps) => {
   return (
     <div className="mt-32 max-w-4xl mx-auto text-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
       <h3 className="text-4xl md:text-5xl font-bold mb-12">
-        <span className="gradient-text">{title}</span>
+        <span>Our </span><span className="gradient-text">Promise</span>
       </h3>
       <div 
         ref={promiseContainerRef}
