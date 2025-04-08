@@ -23,8 +23,8 @@ const Index = () => {
       <MissionSection />
       <ServicesSection title={servicesSectionData.title} services={serviceItemsData} />
       <SolutionsSection title={solutionsSectionData.title} solutions={solutionItemsData} />
-      <ClientsSection />
       <TechStackSection title={techStackSectionData.title} categories={techCategoriesData} />
+      <ClientsSection />
       <ContactSection />
       <Footer />
     </div>
