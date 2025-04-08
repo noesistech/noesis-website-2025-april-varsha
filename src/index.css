@@ -122,16 +122,25 @@
     @apply glass rounded-2xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-white/10;
   }
   
-  /* Updated section title style with improved consistent spacing */
+  /* Standardized section title style with consistent spacing and divider */
   .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-center relative;
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-center relative mb-12;
     color: white;
-    margin-bottom: var(--heading-spacing-mobile);
+  }
+  
+  .section-title::after {
+    content: '';
+    @apply absolute left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-noesis-purple to-noesis-blue rounded-full;
+    bottom: -20px;
   }
   
   @media (min-width: 768px) {
     .section-title {
       margin-bottom: var(--heading-spacing-tablet);
+    }
+    
+    .section-title::after {
+      bottom: -22px;
     }
   }
   
@@ -139,23 +148,9 @@
     .section-title {
       margin-bottom: var(--heading-spacing);
     }
-  }
-  
-  .section-title::after {
-    content: '';
-    @apply absolute left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-noesis-purple to-noesis-blue rounded-full;
-    bottom: -20px; /* Increased from -15px for more space */
-  }
-  
-  @media (min-width: 768px) {
+    
     .section-title::after {
-      bottom: -22px; /* Increased from -12px for more space */
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    .section-title::after {
-      bottom: -25px; /* Increased from -15px for more space */
+      bottom: -25px;
     }
   }
   

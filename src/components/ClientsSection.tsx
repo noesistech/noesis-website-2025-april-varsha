@@ -12,7 +12,7 @@ const ClientsSection = () => {
 
   return <section id="clients" className="bg-gradient-to-b from-noesis-darkest to-noesis-dark py-[50px]">
       <div className="container mx-auto px-4">
-        {clientsSection && <div className="mb-16 text-center">
+        {clientsSection && <div className="text-center">
             <h2 className="section-title">Our <span className="gradient-text">Clients & Partners</span></h2>
           </div>}
         

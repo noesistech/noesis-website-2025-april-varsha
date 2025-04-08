@@ -2,9 +2,12 @@ import React from 'react';
 import { Users, Award, Clock, Percent } from 'lucide-react';
 import P5Animation from './P5Animation';
 import { useIsMobile } from '@/hooks/use-mobile';
+
 const AboutStatsSection = () => {
   const isMobile = useIsMobile();
-  return <section className="w-full py-12 bg-[#1A1F2C] text-white md:py-[70px]">
+  
+  return (
+    <section className="w-full py-12 bg-[#1A1F2C] text-white md:py-[70px]">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row gap-10">
           {/* Left side: Network visualization with P5Animation */}
@@ -20,12 +23,12 @@ const AboutStatsSection = () => {
           <div className="md:w-1/2 flex flex-col justify-center animate-fade-in" style={{
           animationDelay: '0.2s'
         }}>
-            <h2 className="text-2xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 relative">
               Evolving Since <span className="gradient-text">2009</span>, Leading in AI Today
+              <span className="absolute left-0 bottom-[-15px] w-24 h-1 bg-purple-500 rounded-full"></span>
             </h2>
-            <div className="h-1 w-24 bg-purple-500 mb-8"></div>
             
-            <div className="space-y-6">
+            <div className="space-y-6 mt-8">
               <p className="text-gray-300">
                 Our 40+ member team combines talented human experts with cutting-edge AI tools to deliver 
                 solutions that blend the best of human creativity and artificial intelligence.
@@ -91,6 +94,8 @@ const AboutStatsSection = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default AboutStatsSection;

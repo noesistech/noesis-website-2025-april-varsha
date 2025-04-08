@@ -212,16 +212,6 @@ const MissionStyles = ({ gridRows, gridCols }: MissionStylesProps) => {
         .promise-glass-panel:hover .glass-highlight {
           opacity: 1;
         }
-        
-        .section-title {
-          @apply text-3xl md:text-4xl font-bold text-center relative;
-        }
-        
-        .section-title::after {
-          content: '';
-          @apply absolute left-1/2 -translate-x-1/2 bottom-0 w-20 h-1 bg-noesis-purple rounded-full;
-          bottom: -8px;
-        }
       `}
     </style>
   );
