@@ -1,17 +1,21 @@
+
 import React, { useRef, useEffect } from 'react';
 import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SolutionItem } from '@/types/supabase';
+
 interface SolutionsSectionProps {
   title: string;
   solutions: SolutionItem[];
 }
+
 const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   title,
   solutions
 }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
   const displaySolutions = solutions && solutions.length > 0 ? solutions.map(solution => ({
     id: solution.id,
     icon: getIconByName(solution.icon_name),
@@ -74,6 +78,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         </ul>,
     color: 'from-yellow-500/20 to-yellow-600/20'
   }];
+
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -86,18 +91,35 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       root: null,
       threshold: 0.1
     });
+
     cardsRef.current.forEach(card => {
       if (card) observer.observe(card);
     });
+
     return () => {
       cardsRef.current.forEach(card => {
         if (card) observer.unobserve(card);
       });
     };
   }, []);
+
+  // Split the title to apply gradient to "Solutions" part
+  const renderTitle = () => {
+    if (!title) return "Our Solutions";
+    
+    const words = title.split(' ');
+    const lastWordIndex = words.length - 1;
+    
+    return (
+      <>
+        {words.slice(0, lastWordIndex).join(' ')} <span className="gradient-text">{words[lastWordIndex]}</span>
+      </>
+    );
+  };
+
   return <section id="solutions" ref={sectionRef} className="py-10 sm:py-16 md:py-[20px]">
       <div className="container mx-auto px-3 sm:px-6">
-        <h2 className="section-title">{title || "Our Solutions"}</h2>
+        <h2 className="section-title">{renderTitle()}</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           {displaySolutions.map((solution, index) => <div key={solution.id} ref={el => cardsRef.current[index] = el} className="glass relative overflow-hidden rounded-2xl opacity-0 transition-all duration-500 hover:shadow-lg">
@@ -106,8 +128,8 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
                 <div className="bg-white/10 p-2 sm:p-3 rounded-full w-fit mb-3 sm:mb-4">
                   {solution.icon}
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{solution.title}</h3>
-                <div className="mb-3 sm:mb-6">
+                <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-left">{solution.title}</h3>
+                <div className="mb-3 sm:mb-6 text-left">
                   {solution.description}
                 </div>
               </div>
@@ -116,6 +138,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       </div>
     </section>;
 };
+
 const getIconByName = (iconName: string) => {
   const normalizedIconName = iconName.toLowerCase();
   switch (normalizedIconName) {
@@ -138,4 +161,5 @@ const getIconByName = (iconName: string) => {
       return <Cpu className="h-10 w-10" />;
   }
 };
+
 export default SolutionsSection;
