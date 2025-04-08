@@ -16,7 +16,7 @@ const HeroContent = () => {
         <span className="block">Where AI and human talent create</span>
         <span className="gradient-text block pb-2 my-0">breakthrough solutions.</span>
       </h1>
-      <p className="text-lg sm:text-xl text-white/80 mb-3 sm:mb-3 md:mb-4 max-w-2xl mx-0 py-0 px-0 my-[20px]">
+      <p className="text-lg sm:text-xl text-white/80 mb-3 sm:mb-3 md:mb-4 max-w-2xl mx-0 py-0 px-0 my-[30px]">
         As an AI-native agency, we combine cutting-edge artificial intelligence with human expertise to deliver digital solutions that transform businesses and exceed expectations.
       </p>
       <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
