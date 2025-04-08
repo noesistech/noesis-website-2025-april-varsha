@@ -72,9 +72,9 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   const renderTitle = () => {
     if (!title) return "Our AI Capabilities";
     
-    // Wrap the entire title in the gradient-text class to highlight it
+    // Only wrap "AI Capabilities" in the gradient-text class to highlight it
     return (
-      <span className="gradient-text font-bold">{title}</span>
+      <span>Our <span className="gradient-text font-bold">AI Capabilities</span></span>
     );
   };
 
@@ -86,7 +86,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-3 sm:px-6 relative z-10">
-        <h2 className="section-title">
+        <h2 className="section-title mb-12">
           {renderTitle()}
         </h2>
         

@@ -144,18 +144,18 @@
   .section-title::after {
     content: '';
     @apply absolute left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-noesis-purple to-noesis-blue rounded-full;
-    bottom: -10px;
+    bottom: -20px; /* Increased from -15px for more space */
   }
   
   @media (min-width: 768px) {
     .section-title::after {
-      bottom: -12px;
+      bottom: -22px; /* Increased from -12px for more space */
     }
   }
   
   @media (min-width: 1024px) {
     .section-title::after {
-      bottom: -15px;
+      bottom: -25px; /* Increased from -15px for more space */
     }
   }
   
