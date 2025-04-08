@@ -1,7 +1,6 @@
 
-import React, { useState } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Brain, BrainCircuit, Bot, Microscope, Settings, Zap, Sparkles, Layers } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { Brain, BrainCircuit, Microscope, Settings, Zap, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import AIProductCard from './AIProductCard';
 
@@ -11,7 +10,7 @@ export interface AICapability {
   icon: string;
   description: string;
   tools: string[];
-  color?: string;
+  color: string;
 }
 
 export interface AIProduct {
@@ -19,16 +18,16 @@ export interface AIProduct {
   title: string;
   description: string;
   icon: string;
-  logoUrl?: string;
-  ctaUrl?: string;
-  ctaText?: string;
+  logoUrl: string;
+  ctaUrl: string;
+  ctaText: string;
 }
 
-export interface AICapabilitiesSectionProps {
+interface AICapabilitiesSectionProps {
   title: string;
   capabilities: AICapability[];
-  products?: AIProduct[];
-  productsSection?: {
+  products: AIProduct[];
+  productsSection: {
     title: string;
     subtitle: string;
   };
@@ -36,167 +35,125 @@ export interface AICapabilitiesSectionProps {
 
 const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   title,
-  capabilities = [],
-  products = [],
+  capabilities,
+  products,
   productsSection
 }) => {
-  const [activeTab, setActiveTab] = useState('development');
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const renderIcon = (iconName: string) => {
-    switch(iconName.toLowerCase()) {
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            (entry.target as HTMLElement).classList.add('animate-fade-in');
+          }, index * 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.1
+    });
+    
+    cardsRef.current.forEach(card => {
+      if (card) observer.observe(card);
+    });
+    
+    return () => {
+      cardsRef.current.forEach(card => {
+        if (card) observer.unobserve(card);
+      });
+    };
+  }, []);
+
+  // Helper function to get icon by name
+  const getIconByName = (iconName: string) => {
+    const normalizedIconName = iconName.toLowerCase();
+    switch (normalizedIconName) {
       case 'brain':
-        return <Brain className="h-10 w-10 text-noesis-purple" />;
+        return <Brain className="h-8 w-8 text-purple-400" />;
       case 'brain-circuit':
-        return <BrainCircuit className="h-10 w-10 text-noesis-blue" />;
-      case 'bot':
-        return <Bot className="h-10 w-10 text-orange-400" />; 
+        return <BrainCircuit className="h-8 w-8 text-blue-400" />;
       case 'microscope':
-        return <Microscope className="h-10 w-10 text-pink-400" />;
+        return <Microscope className="h-8 w-8 text-pink-400" />;
       case 'settings':
-        return <Settings className="h-10 w-10 text-yellow-400" />;
+        return <Settings className="h-8 w-8 text-yellow-400" />;
       case 'zap':
-        return <Zap className="h-10 w-10 text-green-400" />;
-      case 'sparkles':
-        return <Sparkles className="h-10 w-10 text-cyan-400" />;
-      case 'layers':
-        return <Layers className="h-10 w-10 text-indigo-400" />;
+        return <Zap className="h-8 w-8 text-green-400" />;
+      case 'bot':
+        return <Bot className="h-8 w-8 text-orange-400" />;
       default:
-        return <Brain className="h-10 w-10 text-noesis-purple" />;
+        console.warn(`Icon name not recognized: ${iconName}`);
+        return <Brain className="h-8 w-8" />;
     }
   };
 
-  // Group capabilities into Development and Deployment categories
-  const developmentCapabilities = capabilities.filter(cap => !cap.id.includes('deploy'));
-  const deploymentCapabilities = capabilities.filter(cap => cap.id.includes('deploy'));
-
-  const renderTitle = () => {
-    if (!title) return "Our AI Capabilities";
-    
-    // Only wrap "AI Capabilities" in the gradient-text class to highlight it
-    return (
-      <span>Our <span className="gradient-text font-bold">AI Capabilities</span></span>
-    );
-  };
-
-  console.log("Products data:", products);
-  console.log("Products section data:", productsSection);
+  // Log AI products data for debugging
+  console.info('Products data:', products);
+  console.info('Products section data:', productsSection);
 
   return (
-    <section id="ai-capabilities" className="py-10 sm:py-16 md:py-[40px] relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
-      
-      <div className="container mx-auto px-3 sm:px-6 relative z-10">
-        <h2 className="section-title mb-12">
-          {renderTitle()}
-        </h2>
+    <section id="ai-capabilities" className="page-section">
+      <div className="container mx-auto px-4 sm:px-6">
+        <h2 className="section-title">{title}</h2>
         
-        <Tabs defaultValue="development" className="max-w-5xl mx-auto">
-          <div className="flex justify-center mb-4 sm:mb-6 md:mb-8">
-            <TabsList className="glass">
-              <TabsTrigger 
-                value="development" 
-                className="data-[state=active]:bg-noesis-purple data-[state=active]:text-white px-3 sm:px-4 md:px-6" 
-                onClick={() => setActiveTab('development')}
-              >
-                AI Development
-              </TabsTrigger>
-              <TabsTrigger 
-                value="deployment" 
-                className="data-[state=active]:bg-noesis-blue data-[state=active]:text-white px-3 sm:px-4 md:px-6" 
-                onClick={() => setActiveTab('deployment')}
-              >
-                AI Deployment
-              </TabsTrigger>
-            </TabsList>
-          </div>
-          
-          <TabsContent value="development" className="animate-fade-in">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-              {developmentCapabilities.map((capability) => (
-                <div 
-                  key={capability.id} 
-                  className="glass-card h-full"
-                >
-                  <div className="flex items-start mb-4">
-                    <div className="bg-white/10 p-2 sm:p-3 rounded-full w-fit mr-4">
-                      {renderIcon(capability.icon)}
-                    </div>
-                    <h3 className="text-lg sm:text-xl font-bold gradient-text mt-2">
-                      {capability.title}
-                    </h3>
-                  </div>
-                  <p className="mb-4 text-white/80 text-base">
-                    {capability.description}
-                  </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+          {capabilities.map((capability, index) => (
+            <div
+              key={capability.id}
+              ref={el => cardsRef.current[index] = el}
+              className="glass-card opacity-0 relative overflow-hidden"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", capability.color)}></div>
+              <div className="relative z-10">
+                <div className="bg-white/10 p-3 rounded-lg w-fit mb-4">
+                  {getIconByName(capability.icon)}
+                </div>
+                <h3 className="text-xl font-bold mb-3">{capability.title}</h3>
+                <p className="text-white/80 mb-6">{capability.description}</p>
+                <div>
+                  <h4 className="text-sm uppercase tracking-wider text-white/60 mb-2">Technologies</h4>
                   <div className="flex flex-wrap gap-2">
-                    {capability.tools.map((tool, index) => (
+                    {capability.tools.map((tool) => (
                       <span 
-                        key={`${capability.id}-tool-${index}`} 
-                        className="bg-white/10 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm text-white/80 hover:bg-noesis-purple/20 transition-colors"
+                        key={`${capability.id}-${tool}`}
+                        className="bg-white/10 text-white/90 text-xs px-2 py-1 rounded"
                       >
                         {tool}
                       </span>
                     ))}
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
-          </TabsContent>
-          
-          <TabsContent value="deployment" className="animate-fade-in">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-              {deploymentCapabilities.map((capability) => (
-                <div 
-                  key={capability.id} 
-                  className="glass-card h-full"
-                >
-                  <div className="flex items-start mb-4">
-                    <div className="bg-white/10 p-2 sm:p-3 rounded-full w-fit mr-4">
-                      {renderIcon(capability.icon)}
-                    </div>
-                    <h3 className="text-lg sm:text-xl font-bold gradient-text mt-2">
-                      {capability.title}
-                    </h3>
-                  </div>
-                  <p className="mb-4 text-white/80 text-base">
-                    {capability.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {capability.tools.map((tool, index) => (
-                      <span 
-                        key={`${capability.id}-tool-${index}`} 
-                        className="bg-white/10 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm text-white/80 hover:bg-noesis-blue/20 transition-colors"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </TabsContent>
-        </Tabs>
-      </div>
-      
-      {/* AI Products Section */}
-      {products && products.length > 0 && productsSection && (
-        <div className="mt-24 container mx-auto px-3 sm:px-6 relative z-10">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold">
-                <span className="gradient-text">{productsSection.title}</span>
-              </h2>
-              <p className="text-white/70 mt-3 text-lg md:text-xl">{productsSection.subtitle}</p>
-            </div>
+          ))}
+        </div>
+        
+        {products && products.length > 0 && (
+          <div className="mt-24">
+            <h2 className="section-title">{productsSection.subtitle}</h2>
+            <h3 className="text-2xl font-semibold text-center mt-2 mb-12 text-white/80">{productsSection.title}</h3>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {products.map((product) => (
-                <AIProductCard key={product.id} product={product} />
-              ))}
+              {products.map((product) => {
+                console.info(`Attempting to load image for ${product.title}: ${product.logoUrl}`);
+                return (
+                  <AIProductCard
+                    key={product.id}
+                    title={product.title}
+                    description={product.description}
+                    logoUrl={product.logoUrl}
+                    ctaText={product.ctaText}
+                    ctaUrl={product.ctaUrl}
+                  />
+                );
+              })}
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 };
