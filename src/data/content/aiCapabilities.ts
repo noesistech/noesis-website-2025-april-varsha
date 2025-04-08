@@ -82,7 +82,7 @@ export const aiProductsData: AIProduct[] = [
     title: 'Brainstormer Studio',
     description: 'Brainstormer Studio empowers you to create AI agents effortlessly. Our intuitive low-code/no-code platform is ideal for creative and enterprise environments, simplifying AI development and deployment.',
     icon: 'sparkles',
-    logoUrl: '/images/brainstormer-pro-logo.svg',
+    logoUrl: '/images/brainstormer-studio-logo.svg',
     ctaText: 'Try Studio',
     ctaUrl: '/brainstormer-studio'
   }
