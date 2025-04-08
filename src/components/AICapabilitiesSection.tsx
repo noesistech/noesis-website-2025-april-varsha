@@ -1,8 +1,10 @@
 
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Brain, BrainCircuit, Bot, Microscope, Settings, Zap, Sparkles, Layers } from 'lucide-react';
+import { Brain, BrainCircuit, Bot, Microscope, Settings, Zap, Sparkles, Layers, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 
 export interface AICapability {
   id: string;
@@ -18,18 +20,26 @@ export interface AIProduct {
   title: string;
   description: string;
   icon: string;
+  logoUrl?: string;
+  ctaUrl?: string;
+  ctaText?: string;
 }
 
 export interface AICapabilitiesSectionProps {
   title: string;
   capabilities: AICapability[];
   products?: AIProduct[];
+  productsSection?: {
+    title: string;
+    subtitle: string;
+  };
 }
 
 const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   title,
   capabilities = [],
-  products = []
+  products = [],
+  productsSection
 }) => {
   const [activeTab, setActiveTab] = useState('development');
 
@@ -39,14 +49,14 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         return <Brain className="h-10 w-10 text-noesis-purple" />;
       case 'brain-circuit':
         return <BrainCircuit className="h-10 w-10 text-noesis-blue" />;
-      case 'robot':
-        return <Bot className="h-10 w-10 text-green-400" />; 
+      case 'bot':
+        return <Bot className="h-10 w-10 text-orange-400" />; 
       case 'microscope':
         return <Microscope className="h-10 w-10 text-pink-400" />;
       case 'settings':
         return <Settings className="h-10 w-10 text-yellow-400" />;
       case 'zap':
-        return <Zap className="h-10 w-10 text-orange-400" />;
+        return <Zap className="h-10 w-10 text-green-400" />;
       case 'sparkles':
         return <Sparkles className="h-10 w-10 text-cyan-400" />;
       case 'layers':
@@ -164,33 +174,62 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
             </div>
           </TabsContent>
         </Tabs>
-        
-        {/* Brainstormer Products Section */}
-        {products && products.length > 0 && (
-          <div className="mt-16 max-w-5xl mx-auto">
-            <h3 className="text-2xl font-bold text-center mb-8">
-              <span className="gradient-text">Brainstormer Suite</span> - Our AI Products
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      </div>
+      
+      {/* AI Products Section */}
+      {products && products.length > 0 && productsSection && (
+        <div className="mt-24 container mx-auto px-3 sm:px-6 relative z-10">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold">
+                <span className="gradient-text">{productsSection.title}</span>
+              </h2>
+              <p className="text-white/70 mt-3 text-lg md:text-xl">{productsSection.subtitle}</p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {products.map((product) => (
-                <div key={product.id} className="glass-card h-full">
-                  <div className="flex items-start mb-4">
-                    <div className="bg-white/10 p-2 sm:p-3 rounded-full w-fit mr-4">
-                      {renderIcon(product.icon)}
+                <Card key={product.id} className="bg-[#1E2335] border-[#2A304B] overflow-hidden">
+                  <CardContent className="p-0">
+                    <div className="p-6 flex flex-col h-full">
+                      {/* Product Logo */}
+                      {product.logoUrl && (
+                        <div className="mb-6 max-w-[250px]">
+                          <img 
+                            src={product.logoUrl} 
+                            alt={`${product.title} logo`} 
+                            className="w-full h-auto"
+                          />
+                        </div>
+                      )}
+                      
+                      {/* Product Description */}
+                      <p className="text-white/80 mb-6 flex-grow">
+                        {product.description}
+                      </p>
+                      
+                      {/* CTA Button */}
+                      {product.ctaUrl && product.ctaText && (
+                        <div className="mt-auto">
+                          <Button
+                            variant="noesis"
+                            asChild
+                            className="group"
+                          >
+                            <a href={product.ctaUrl}>
+                              {product.ctaText} <ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            </a>
+                          </Button>
+                        </div>
+                      )}
                     </div>
-                    <h4 className="text-xl font-bold gradient-text mt-2">
-                      {product.title}
-                    </h4>
-                  </div>
-                  <p className="text-white/80">
-                    {product.description}
-                  </p>
-                </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 };

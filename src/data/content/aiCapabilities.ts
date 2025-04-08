@@ -59,17 +59,31 @@ export const aiCapabilitiesData: AICapability[] = [
   },
 ];
 
+export const aiProductsSectionData = {
+  id: 'ai-products-section-1',
+  title: 'Brainstormer Suite',
+  subtitle: 'Our AI Products',
+  created_at: '',
+  updated_at: '',
+};
+
 export const aiProductsData: AIProduct[] = [
   {
     id: 'brainstormer-pro',
     title: 'Brainstormer Pro',
     description: 'Our advanced AI engine for content, marketing, and business process automation tailored for enterprise needs. Leverage Brainstormer Pro to enhance workflow and drive productivity within a secure, collaborative environment.',
-    icon: 'brain'
+    icon: 'brain',
+    logoUrl: '/lovable-uploads/6b081ef6-8346-43a6-914b-2d88e9f5bef1.png',
+    ctaUrl: '/brainstormer-pro',
+    ctaText: 'Explore Pro'
   },
   {
     id: 'brainstormer-studio',
     title: 'Brainstormer Studio',
     description: 'Brainstormer Studio empowers you to create AI agents effortlessly. Our intuitive low-code/no-code platform is ideal for creative and enterprise environments, simplifying AI development and deployment.',
-    icon: 'sparkles'
+    icon: 'sparkles',
+    logoUrl: '/lovable-uploads/736acdd7-53ea-4297-a0a2-06aac8a6b605.png',
+    ctaUrl: '/brainstormer-studio',
+    ctaText: 'Try Studio'
   }
 ];

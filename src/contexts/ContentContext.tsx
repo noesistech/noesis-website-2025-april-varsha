@@ -27,7 +27,12 @@ import { missionSectionData } from '@/data/content/mission';
 import { servicesSectionData, serviceItemsData } from '@/data/content/services';
 import { solutionsSectionData, solutionItemsData } from '@/data/content/solutions';
 import { techStackSectionData, techCategoriesData } from '@/data/content/techstack';
-import { aiCapabilitiesSectionData, aiCapabilitiesData, aiProductsData } from '@/data/content/aiCapabilities';
+import { 
+  aiCapabilitiesSectionData, 
+  aiCapabilitiesData, 
+  aiProductsData,
+  aiProductsSectionData 
+} from '@/data/content/aiCapabilities';
 import { 
   clientsSectionData, 
   clientLogosData, 
@@ -55,6 +60,13 @@ interface ContentContextType {
   };
   aiCapabilities: AICapability[];
   aiProducts: AIProduct[];
+  aiProductsSection: {
+    id: string;
+    title: string;
+    subtitle: string;
+    created_at: string;
+    updated_at: string;
+  };
   clientsSection: ClientsSection;
   clientLogos: ClientLogo[];
   partnerLogos: PartnerLogo[];
@@ -85,6 +97,7 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   const [aiCapabilitiesSection] = useState(aiCapabilitiesSectionData);
   const [aiCapabilities] = useState<AICapability[]>(aiCapabilitiesData);
   const [aiProducts] = useState<AIProduct[]>(aiProductsData);
+  const [aiProductsSection] = useState(aiProductsSectionData);
   const [clientsSection] = useState<ClientsSection>(clientsSectionData);
   const [clientLogos] = useState<ClientLogo[]>(clientLogosData);
   const [partnerLogos] = useState<PartnerLogo[]>(partnerLogosData);
@@ -116,6 +129,7 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
         aiCapabilitiesSection,
         aiCapabilities,
         aiProducts,
+        aiProductsSection,
         clientsSection,
         clientLogos,
         partnerLogos,

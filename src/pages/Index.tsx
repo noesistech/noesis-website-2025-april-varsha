@@ -23,7 +23,8 @@ const Index = () => {
     techCategories,
     aiCapabilitiesSection,
     aiCapabilities,
-    aiProducts
+    aiProducts,
+    aiProductsSection
   } = useContent();
 
   return (
@@ -35,7 +36,12 @@ const Index = () => {
       <ServicesSection title={servicesSection.title} services={serviceItems} />
       <SolutionsSection title={solutionsSection.title} solutions={solutionItems} />
       <TechStackSection title={techStackSection.title} categories={techCategories} />
-      <AICapabilitiesSection title={aiCapabilitiesSection.title} capabilities={aiCapabilities} products={aiProducts} />
+      <AICapabilitiesSection 
+        title={aiCapabilitiesSection.title} 
+        capabilities={aiCapabilities} 
+        products={aiProducts}
+        productsSection={aiProductsSection}
+      />
       <ClientsSection />
       <ContactSection />
       <Footer />

@@ -21,7 +21,12 @@ export { solutionsSectionData as solutionsSection, solutionItemsData as solution
 export { techStackSectionData as techStackSection, techCategoriesData as techCategories } from './content/techstack';
 
 // AI capabilities section
-export { aiCapabilitiesSectionData, aiCapabilitiesData, aiProductsData } from './content/aiCapabilities';
+export { 
+  aiCapabilitiesSectionData, 
+  aiCapabilitiesData, 
+  aiProductsData, 
+  aiProductsSectionData 
+} from './content/aiCapabilities';
 
 // Clients section
 export { 
