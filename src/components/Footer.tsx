@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator';
 const Footer = () => {
   return <footer className="bg-noesis-dark py-12 mt-20">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
           {/* Company Logo and Social Links */}
           <div className="lg:col-span-3 order-1">
             <div className="flex items-center gap-2 mb-4">
@@ -58,7 +58,7 @@ const Footer = () => {
           {/* Contact Us - Combined section with Email, Phone and Location */}
           <div className="lg:col-span-6 order-3">
             <h3 className="text-white text-xl font-bold mb-4">Contact Us</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
               {/* Email and Phone */}
               <div className="flex flex-col gap-3">
                 <a href="mailto:sales@noesis.tech" className="flex items-center gap-3 group transition-colors">
@@ -83,7 +83,7 @@ const Footer = () => {
               </div>
               
               {/* Location */}
-              <div>
+              <div className="-ml-4 md:ml-0">
                 <a href="https://maps.app.goo.gl/CkqvvqT73buV1keWA" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group transition-colors">
                   <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors flex-shrink-0 mt-0.5">
                     <MapPin className="h-5 w-5 text-noesis-purple" />
