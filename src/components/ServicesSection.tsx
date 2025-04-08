@@ -112,7 +112,7 @@ const ServicesSection: React.FC<ServicesProps> = ({ title, services }) => {
               key={service.id}
               className="glass-card group transition-all duration-300 hover:bg-white/10 h-full"
             >
-              <div className="p-4 sm:p-6 flex flex-col items-center text-center h-full">
+              <div className="p-4 sm:p-6 flex flex-col items-start text-left h-full">
                 <div className="mb-3 sm:mb-6 transform group-hover:scale-110 transition-transform duration-300">
                   {service.icon}
                 </div>
