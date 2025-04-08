@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -10,17 +10,12 @@ interface AIProductCardProps {
 }
 
 const AIProductCard: React.FC<AIProductCardProps> = ({ product }) => {
+  const [imageError, setImageError] = useState(false);
+  
   // Function to handle image loading errors
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const imgElement = e.currentTarget;
-    console.error(`Failed to load image from ${imgElement.src}`);
-    
-    // Try the lovable-uploads folder if the regular path fails
-    if (product.id === 'brainstormer-pro') {
-      imgElement.src = '/lovable-uploads/6b081ef6-8346-43a6-914b-2d88e9f5bef1.png';
-    } else if (product.id === 'brainstormer-studio') {
-      imgElement.src = '/lovable-uploads/736acdd7-53ea-4297-a0a2-06aac8a6b605.png';
-    }
+    console.error(`Failed to load image from ${e.currentTarget.src}`);
+    setImageError(true);
   };
 
   return (
