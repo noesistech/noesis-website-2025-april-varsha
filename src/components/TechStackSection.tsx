@@ -23,7 +23,9 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-3 sm:px-6 relative z-10">
-        <h2 className="section-title">{title}</h2>
+        <h2 className="section-title">
+          Our <span className="gradient-text">Technology Stack</span>
+        </h2>
         
         <Tabs defaultValue="tech" className="max-w-5xl mx-auto">
           <div className="flex justify-center mb-4 sm:mb-6 md:mb-8">
