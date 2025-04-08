@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Brain, BrainCircuit, Microscope, Settings, Zap, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -44,17 +43,14 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [activeTab, setActiveTab] = useState('development');
 
-  // Define capability categories
   const categories = [
     { id: 'development', name: 'AI Development' },
     { id: 'deployment', name: 'AI Deployment' }
   ];
 
-  // Filter capabilities based on selected category
   const filteredCapabilities = capabilities.filter(cap => cap.category === activeTab);
   
   useEffect(() => {
-    // Reset the refs array when filtered capabilities change
     cardsRef.current = cardsRef.current.slice(0, filteredCapabilities.length);
     
     const observer = new IntersectionObserver(entries => {
@@ -71,17 +67,14 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       threshold: 0.1
     });
     
-    // Ensure all cards are visible on initial load
     setTimeout(() => {
       cardsRef.current.forEach(card => {
         if (card) {
-          // Force initial opacity to ensure animation works
           card.style.opacity = '0';
           observer.observe(card);
         }
       });
       
-      // Force all cards to be visible even if not in viewport initially
       setTimeout(() => {
         cardsRef.current.forEach(card => {
           if (card) {
@@ -98,7 +91,6 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
     };
   }, [filteredCapabilities, activeTab]);
 
-  // Helper function to get icon by name
   const getIconByName = (iconName: string) => {
     const normalizedIconName = iconName.toLowerCase();
     switch (normalizedIconName) {
@@ -187,8 +179,8 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         
         {products && products.length > 0 && (
           <div className="mt-16 sm:mt-20">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center relative mb-2">
-              {productsSection.title}
+            <h2 className="section-title">
+              <span className="gradient-text">{productsSection.title}</span>
             </h2>
             <h3 className="text-lg md:text-xl text-center mb-8 sm:mb-10 text-white/80">{productsSection.subtitle}</h3>
             
