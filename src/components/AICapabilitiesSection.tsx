@@ -1,10 +1,9 @@
 
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Brain, BrainCircuit, Bot, Microscope, Settings, Zap, Sparkles, Layers, ArrowRight } from 'lucide-react';
+import { Brain, BrainCircuit, Bot, Microscope, Settings, Zap, Sparkles, Layers } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import AIProductCard from './AIProductCard';
 
 export interface AICapability {
   id: string;
@@ -78,6 +77,9 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       <span className="gradient-text font-bold">{title}</span>
     );
   };
+
+  console.log("Products data:", products);
+  console.log("Products section data:", productsSection);
 
   return (
     <section id="ai-capabilities" className="py-10 sm:py-16 md:py-[40px] relative overflow-hidden">
@@ -189,42 +191,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {products.map((product) => (
-                <Card key={product.id} className="bg-[#1E2335] border-[#2A304B] overflow-hidden">
-                  <CardContent className="p-0">
-                    <div className="p-6 flex flex-col h-full">
-                      {/* Product Logo */}
-                      {product.logoUrl && (
-                        <div className="mb-6 max-w-[250px]">
-                          <img 
-                            src={product.logoUrl} 
-                            alt={`${product.title} logo`} 
-                            className="w-full h-auto"
-                          />
-                        </div>
-                      )}
-                      
-                      {/* Product Description */}
-                      <p className="text-white/80 mb-6 flex-grow">
-                        {product.description}
-                      </p>
-                      
-                      {/* CTA Button */}
-                      {product.ctaUrl && product.ctaText && (
-                        <div className="mt-auto">
-                          <Button
-                            variant="noesis"
-                            asChild
-                            className="group"
-                          >
-                            <a href={product.ctaUrl}>
-                              {product.ctaText} <ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                            </a>
-                          </Button>
-                        </div>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
+                <AIProductCard key={product.id} product={product} />
               ))}
             </div>
           </div>
