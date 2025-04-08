@@ -44,7 +44,7 @@ const ClientsSection = () => {
                   <blockquote className="text-lg mb-4 text-white/90">{testimonial.quote}</blockquote>
                   <div className="flex items-center">
                     <div>
-                      <div className="font-semibold">{testimonial.author}</div>
+                      <div className="font-semibold"><span className="gradient-text">{testimonial.author}</span></div>
                       <div className="text-sm text-white/70">{testimonial.position}, {testimonial.company}</div>
                     </div>
                   </div>
