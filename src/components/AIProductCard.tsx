@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -50,7 +51,7 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
                 </div>}
               
               {imageError ? <h3 className="text-xl font-bold text-white">{product.title}</h3> : <img src={product.logoUrl} alt={`${product.title} logo`} style={{
-              maxWidth: '200px'
+              maxWidth: '400px'
             }} onLoad={() => setImageLoaded(true)} onError={() => setImageError(true)} className="object-fill" />}
             </div>
           </div>
