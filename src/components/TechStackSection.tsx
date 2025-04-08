@@ -14,7 +14,7 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
   // Filter categories into tech stack and cloud stack
   const techStack = categories.filter(category => !category.is_cloud_stack);
   const cloudStack = categories.filter(category => category.is_cloud_stack);
-  return <section id="tech-stack" className="py-10 sm:py-16 relative overflow-hidden md:py-[50px]">
+  return <section id="tech-stack" className="py-10 sm:py-16 relative overflow-hidden md:py-[30px]">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-3 sm:px-6 relative z-10">
