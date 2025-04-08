@@ -49,12 +49,10 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
 
   const renderTitle = () => {
     if (!title) return "Our AI Capabilities";
-    const words = title.split(' ');
-    const lastWordIndex = words.length - 1;
+    
+    // Wrap the entire title in the gradient-text class to highlight it
     return (
-      <>
-        {words.slice(0, lastWordIndex).join(' ')} <span className="gradient-text">{words[lastWordIndex]}</span>
-      </>
+      <span className="gradient-text font-bold">{title}</span>
     );
   };
 
