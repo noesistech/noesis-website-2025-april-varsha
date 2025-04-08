@@ -26,31 +26,56 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
     id: 'lms',
     icon: <GraduationCap className="h-10 w-10" />,
     title: 'AI-Powered Learning Management',
-    description: 'Human-centered interface enhanced by AI for intuitive course creation',
+    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Human-centered interface enhanced by AI for intuitive course creation and management</li>
+          <li>Smart assessment tools that combine AI grading with human educational expertise</li>
+          <li>AI-driven analytics with human-interpreted reporting for actionable insights</li>
+          <li>Customizable branding and integrations overseen by human design specialists</li>
+        </ul>,
     color: 'from-blue-500/20 to-blue-600/20'
   }, {
     id: 'brainstormer',
     icon: <Cpu className="h-10 w-10" />,
     title: 'Brainstormer',
-    description: 'Our proprietary AI platform developed by human AI experts',
+    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Our proprietary AI platform developed by human AI experts</li>
+          <li>Brainstormer Pro: Human-designed customized ChatGPT solutions for business needs</li>
+          <li>Brainstormer Studio: Low-code environment where human creativity directs AI capabilities</li>
+          <li>AI agents orchestrated by human strategists to automate workflows in finance, HR, and strategy</li>
+        </ul>,
     color: 'from-purple-500/20 to-purple-600/20'
   }, {
     id: 'ecommerce',
     icon: <ShoppingBag className="h-10 w-10" />,
     title: 'AI-Enhanced eCommerce',
-    description: 'Expert human designers directing AI tools for website design',
+    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Expert human designers directing AI tools for optimized website design and platform development</li>
+          <li>Specialized teams combining AI efficiency with human creativity for Shopify and Magento solutions</li>
+          <li>Our human experts with AI support have contributed to brands like MamaEarth, HyugaLife, Nykaa, and more</li>
+          <li>Exceptional 8-9% ROAS achieved through AI-human optimization strategies</li>
+        </ul>,
     color: 'from-pink-500/20 to-pink-600/20'
   }, {
     id: 'chatbots',
     icon: <MessageSquare className="h-10 w-10" />,
     title: 'Human-Directed AI Chatbots',
-    description: 'Bespoke AI solutions for your specific business needs',
+    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Bespoke AI solutions crafted by human experts for your specific business needs</li>
+          <li>Team collaboration features designed by humans to enhance AI workflow integration</li>
+          <li>Knowledge base management combining AI document processing with human curation</li>
+          <li>Human-supervised AI translation services enabling support in 14+ Indic languages</li>
+        </ul>,
     color: 'from-green-500/20 to-green-600/20'
   }, {
     id: 'creative',
     icon: <Wand2 className="h-10 w-10" />,
-    title: 'Creative Technology',
-    description: 'Chatbots that blend AI capabilities with human warmth',
+    title: 'AI-Augmented Creative Technology',
+    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Chatbots that blend AI capabilities with human warmth for social media and website integration</li>
+          <li>Interactive marketing solutions where human creativity guides AI tools for quizzes and social filters</li>
+          <li>AR/VR experiences crafted through human-AI collaboration</li>
+          <li>Educational apps that combine human teaching expertise with AI engagement mechanics</li>
+        </ul>,
     color: 'from-yellow-500/20 to-yellow-600/20'
   }];
 
@@ -94,26 +119,18 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
 
   return <section id="solutions" ref={sectionRef} className="py-10 sm:py-16 md:py-[20px]">
       <div className="container mx-auto px-3 sm:px-6">
-        <h2 className="section-title text-left">{renderTitle()}</h2>
+        <h2 className="section-title">{renderTitle()}</h2>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-          {displaySolutions.map((solution, index) => <div 
-            key={solution.id} 
-            ref={el => cardsRef.current[index] = el} 
-            className="glass relative overflow-hidden rounded-2xl opacity-0 transition-all duration-500 hover:shadow-lg h-full"
-          >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+          {displaySolutions.map((solution, index) => <div key={solution.id} ref={el => cardsRef.current[index] = el} className="glass relative overflow-hidden rounded-2xl opacity-0 transition-all duration-500 hover:shadow-lg">
               <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", solution.color)}></div>
-              <div className="relative z-10 p-5 h-full flex flex-col">
-                <div className="bg-white/10 p-2 rounded-full w-fit mb-4">
+              <div className="relative z-10 p-4 sm:p-6">
+                <div className="bg-white/10 p-2 sm:p-3 rounded-full w-fit mb-3 sm:mb-4">
                   {solution.icon}
                 </div>
-                <h3 className="text-lg font-bold mb-3 text-left">{solution.title}</h3>
-                <div className="text-left text-white/80 text-sm flex-grow">
-                  {typeof solution.description === 'string' ? (
-                    <p>{solution.description}</p>
-                  ) : (
-                    solution.description
-                  )}
+                <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-left">{solution.title}</h3>
+                <div className="mb-3 sm:mb-6 text-left">
+                  {solution.description}
                 </div>
               </div>
             </div>)}
@@ -123,7 +140,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
 };
 
 const getIconByName = (iconName: string) => {
-  const normalizedIconName = iconName?.toLowerCase() || '';
+  const normalizedIconName = iconName.toLowerCase();
   switch (normalizedIconName) {
     case 'graduation-cap':
     case 'graduationcap':
