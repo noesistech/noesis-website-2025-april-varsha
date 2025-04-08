@@ -124,33 +124,36 @@
   
   /* Standardized section title style with consistent spacing and divider */
   .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-center relative mb-12;
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-center relative mb-10;
     color: white;
   }
   
   .section-title::after {
     content: '';
     @apply absolute left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-noesis-purple to-noesis-blue rounded-full;
-    bottom: -20px;
+    bottom: -18px;
+    margin-bottom: 2px;
   }
   
   @media (min-width: 768px) {
     .section-title {
-      margin-bottom: var(--heading-spacing-tablet);
+      margin-bottom: calc(var(--heading-spacing-tablet) - 2px);
     }
     
     .section-title::after {
-      bottom: -22px;
+      bottom: -20px;
+      margin-bottom: 2px;
     }
   }
   
   @media (min-width: 1024px) {
     .section-title {
-      margin-bottom: var(--heading-spacing);
+      margin-bottom: calc(var(--heading-spacing) - 2px);
     }
     
     .section-title::after {
-      bottom: -25px;
+      bottom: -23px;
+      margin-bottom: 2px;
     }
   }
   
