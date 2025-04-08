@@ -1,11 +1,16 @@
+
 import React from 'react';
 import { Mail, Phone, MapPin, Instagram, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+
 const Footer = () => {
-  return <footer className="bg-noesis-dark py-12 mt-20">
+  console.log('Footer component is rendering');
+
+  return (
+    <footer className="bg-noesis-dark py-12 mt-20">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Company Logo and Social Links */}
           <div className="lg:col-span-3 order-1">
             <div className="flex items-center gap-2 mb-4">
@@ -80,8 +85,8 @@ const Footer = () => {
                 </a>
               </div>
               
-              {/* Location */}
-              <div className="-ml-4 md:ml-0">
+              {/* Location - Reduced left margin */}
+              <div className="-ml-2 md:ml-0">
                 <a href="https://maps.app.goo.gl/CkqvvqT73buV1keWA" target="_blank" rel="noopener noreferrer" className="flex items-start gap-0 group transition-colors px-0 mx-0">
                   <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors flex-shrink-0 mt-0.5">
                     <MapPin className="h-5 w-5 text-noesis-purple" />
@@ -102,6 +107,8 @@ const Footer = () => {
           <p>© {new Date().getFullYear()} Noesis.tech. All rights reserved.</p>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
 export default Footer;
