@@ -1,5 +1,5 @@
 
-import React, { Suspense, ErrorBoundary } from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ContentPage from "@/pages/ContentPage";
 import Index from "@/pages/Index";
@@ -10,15 +10,27 @@ import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import { ErrorDisplay } from "./components/ui/error";
 
-// Error boundary wrapper component
-class ErrorBoundaryWrapper extends React.Component {
-  state = { hasError: false, error: null };
+// Error boundary wrapper component with proper TypeScript interface
+interface ErrorBoundaryProps {
+  children: React.ReactNode;
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+class ErrorBoundaryWrapper extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  state: ErrorBoundaryState = { 
+    hasError: false, 
+    error: null 
+  };
   
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return { hasError: true, error };
   }
   
-  componentDidCatch(error, info) {
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
     console.error("React Error Boundary caught an error:", error, info);
   }
   
