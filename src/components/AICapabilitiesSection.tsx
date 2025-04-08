@@ -145,7 +145,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         </div>
         
         {products && products.length > 0 && (
-          <div className="mt-24">
+          <div className="mt-36">
             <h2 className="section-title">
               {formatSectionTitle(productsSection.subtitle, ["AI", "Products"])}
             </h2>
