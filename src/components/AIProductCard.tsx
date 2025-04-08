@@ -23,17 +23,22 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
     if (product.logoUrl) {
       console.log(`Attempting to load image for ${product.title}: ${product.logoUrl}`);
       
-      // Preload the image
-      const img = new Image();
-      img.src = product.logoUrl;
-      img.onload = () => {
-        console.log(`Successfully loaded image for ${product.title}`);
+      // For SVG files, we can immediately set loaded to true since they render well
+      if (product.logoUrl.endsWith('.svg')) {
         setImageLoaded(true);
-      };
-      img.onerror = (e) => {
-        console.error(`Failed to load image for ${product.title}:`, product.logoUrl, e);
-        setImageError(true);
-      };
+      } else {
+        // For other file types, preload the image
+        const img = new Image();
+        img.src = product.logoUrl;
+        img.onload = () => {
+          console.log(`Successfully loaded image for ${product.title}`);
+          setImageLoaded(true);
+        };
+        img.onerror = (e) => {
+          console.error(`Failed to load image for ${product.title}:`, product.logoUrl, e);
+          setImageError(true);
+        };
+      }
     } else {
       setImageError(true);
     }
