@@ -102,7 +102,9 @@ const ServicesSection: React.FC<ServicesProps> = ({ title, services }) => {
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-3 sm:px-6 relative z-10">
-        <h2 className="section-title">{title || "Our Services"}</h2>
+        <h2 className="section-title">
+          Our <span className="gradient-text">Services</span>
+        </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {displayServices.map((service) => (
