@@ -8,8 +8,8 @@ const Footer = () => {
   return <footer className="bg-noesis-dark py-12 mt-20">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Logo and Description - Moved to first position on large screens */}
-          <div className="lg:col-span-1 order-3 lg:order-1">
+          {/* Company Logo and Description - Two column layout */}
+          <div className="md:col-span-2 order-3 md:order-1">
             <div className="flex items-center gap-2 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300.48 54.12" className="h-8 w-auto" fill="currentColor">
                 <path d="M172.28,18.21a5.4,5.4,0,0,1,5.33,5.33,5.34,5.34,0,0,1-5.33,5.26A5.29,5.29,0,0,1,167,23.54,5.35,5.35,0,0,1,172.28,18.21Z" className="text-noesis-purple" />
@@ -25,65 +25,79 @@ const Footer = () => {
                 <path d="M138.24,25.09l1.88-3.74a1,1,0,0,1,1.59-.49A15.48,15.48,0,0,0,148,22.52c1.38,0,2.35-.55,2.35-1.73s-1-2-4.64-3.46c-5.34-2.08-7.83-4.93-7.83-9.15S141,0,148.08,0a16,16,0,0,1,8.53,2.15A1.47,1.47,0,0,1,157.23,4L155.5,7.55a1.32,1.32,0,0,1-1.66.49,16.4,16.4,0,0,0-5.76-1.46c-1.66,0-2.36.7-2.36,1.6,0,1.25,1.25,1.66,3.81,2.7,5.34,2.08,9.36,4.37,9.36,9.77,0,4.58-4,8.46-11,8.46a15.68,15.68,0,0,1-9.22-2.57A1.19,1.19,0,0,1,138.24,25.09Z" className="text-white" />
               </svg>
             </div>
-            <p className="text-white/70 mb-4">
-              Creatively combining content, media, data and technology to build digital solutions that deliver business results.
-            </p>
-            <div className="flex gap-4">
-              <a href="https://www.instagram.com/noesis.tech/?hl=en" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-noesis-purple/20 transition-colors">
-                <Instagram className="h-5 w-5 text-white" />
-              </a>
-              <a href="https://www.linkedin.com/company/noesis-tech/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-noesis-purple/20 transition-colors">
-                <Linkedin className="h-5 w-5 text-white" />
-              </a>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <p className="text-white/70 mb-4">
+                  Creatively combining content, media, data and technology to build digital solutions that deliver business results.
+                </p>
+              </div>
+              <div className="flex md:justify-end">
+                <div className="flex gap-4">
+                  <a href="https://www.instagram.com/noesis.tech/?hl=en" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-noesis-purple/20 transition-colors">
+                    <Instagram className="h-5 w-5 text-white" />
+                  </a>
+                  <a href="https://www.linkedin.com/company/noesis-tech/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-noesis-purple/20 transition-colors">
+                    <Linkedin className="h-5 w-5 text-white" />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
           
-          {/* Quick Links Column - First on mobile, second on large screens */}
-          <div className="order-1 lg:order-2">
+          {/* Quick Links Column - Two column layout */}
+          <div className="md:col-span-2 order-1 md:order-2">
             <h3 className="text-white text-xl font-bold mb-4">Quick Links</h3>
-            <div className="grid grid-cols-2 gap-2">
-              <a href="#about" className="text-white/70 hover:text-white transition-colors">About</a>
-              <a href="#mission" className="text-white/70 hover:text-white transition-colors">Mission & Vision</a>
-              <a href="#services" className="text-white/70 hover:text-white transition-colors">Services</a>
-              <a href="#solutions" className="text-white/70 hover:text-white transition-colors">Solutions</a>
-              <a href="#tech-stack" className="text-white/70 hover:text-white transition-colors">Tech Stack</a>
-              <a href="#contact" className="text-white/70 hover:text-white transition-colors">Contact</a>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <a href="#about" className="text-white/70 hover:text-white transition-colors block mb-2">About</a>
+                <a href="#mission" className="text-white/70 hover:text-white transition-colors block mb-2">Mission & Vision</a>
+                <a href="#services" className="text-white/70 hover:text-white transition-colors block mb-2">Services</a>
+              </div>
+              <div>
+                <a href="#solutions" className="text-white/70 hover:text-white transition-colors block mb-2">Solutions</a>
+                <a href="#tech-stack" className="text-white/70 hover:text-white transition-colors block mb-2">Tech Stack</a>
+                <a href="#contact" className="text-white/70 hover:text-white transition-colors block mb-2">Contact</a>
+              </div>
             </div>
           </div>
           
-          {/* Contact Us Column - Second on mobile, third on large screens */}
-          <div className="order-2 lg:order-3 lg:col-span-2">
+          {/* Contact Us columns - split into two columns */}
+          <div className="md:col-span-2 lg:col-span-2 order-2 md:order-3">
             <h3 className="text-white text-xl font-bold mb-4">Contact Us</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <a href="mailto:sales@noesis.tech" className="flex items-center gap-3 group transition-colors">
-                <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors">
-                  <Mail className="h-5 w-5 text-noesis-purple" />
-                </div>
-                <div>
-                  <p className="text-white font-medium">Email</p>
-                  <p className="text-white/70 group-hover:text-white transition-colors">sales@noesis.tech</p>
-                </div>
-              </a>
+              <div>
+                <a href="mailto:sales@noesis.tech" className="flex items-center gap-3 group transition-colors mb-4">
+                  <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors">
+                    <Mail className="h-5 w-5 text-noesis-purple" />
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">Email</p>
+                    <p className="text-white/70 group-hover:text-white transition-colors">sales@noesis.tech</p>
+                  </div>
+                </a>
+                
+                <a href="tel:+919152810101" className="flex items-center gap-3 group transition-colors">
+                  <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors">
+                    <Phone className="h-5 w-5 text-noesis-purple" />
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">Phone</p>
+                    <p className="text-white/70 group-hover:text-white transition-colors">+91 9152810101</p>
+                  </div>
+                </a>
+              </div>
               
-              <a href="tel:+919152810101" className="flex items-center gap-3 group transition-colors">
-                <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors">
-                  <Phone className="h-5 w-5 text-noesis-purple" />
-                </div>
-                <div>
-                  <p className="text-white font-medium">Phone</p>
-                  <p className="text-white/70 group-hover:text-white transition-colors">+91 9152810101</p>
-                </div>
-              </a>
-              
-              <a href="https://maps.app.goo.gl/CkqvvqT73buV1keWA" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group transition-colors md:col-span-2">
-                <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors flex-shrink-0 mt-0.5">
-                  <MapPin className="h-5 w-5 text-noesis-purple" />
-                </div>
-                <div>
-                  <p className="text-white font-medium">Location</p>
-                  <p className="text-white/70 group-hover:text-white transition-colors">Unit 209, 2nd Floor, C Wing, Floral Deck Plaza, MIDC Road, Andheri (East), Mumbai 400093</p>
-                </div>
-              </a>
+              <div>
+                <a href="https://maps.app.goo.gl/CkqvvqT73buV1keWA" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group transition-colors">
+                  <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors flex-shrink-0 mt-0.5">
+                    <MapPin className="h-5 w-5 text-noesis-purple" />
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">Location</p>
+                    <p className="text-white/70 group-hover:text-white transition-colors">Unit 209, 2nd Floor, C Wing, Floral Deck Plaza, MIDC Road, Andheri (East), Mumbai 400093</p>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -98,3 +112,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
