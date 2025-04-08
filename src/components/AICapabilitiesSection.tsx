@@ -47,9 +47,8 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   // Define capability categories
   const categories = [
     { id: 'all', name: 'All Capabilities' },
-    { id: 'nlp', name: 'Language Processing' },
-    { id: 'vision', name: 'Computer Vision' },
-    { id: 'engineering', name: 'AI Engineering' }
+    { id: 'development', name: 'AI Development' },
+    { id: 'deployment', name: 'AI Deployment' }
   ];
 
   // Filter capabilities based on selected category
@@ -57,15 +56,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
     if (activeTab === 'all') {
       return capabilities;
     }
-    
-    const categoryMapping: Record<string, string[]> = {
-      'nlp': ['nlp'],
-      'vision': ['cv'],
-      'engineering': ['aiops', 'deploy-cloud', 'deploy-edge', 'ml']
-    };
-    
-    const relevantIds = categoryMapping[activeTab] || [];
-    return capabilities.filter(cap => relevantIds.includes(cap.id));
+    return capabilities.filter(cap => cap.category === activeTab);
   };
 
   const filteredCapabilities = getFilteredCapabilities();
