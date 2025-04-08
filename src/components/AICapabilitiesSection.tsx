@@ -91,13 +91,35 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
 
   // Format the section titles to highlight specific words
   const formatSectionTitle = (titleText: string, highlightWords: string[]) => {
-    const words = titleText.split(' ');
-    return words.map((word, index) => {
-      if (highlightWords.includes(word)) {
-        return <span key={index} className="gradient-text">{word}</span>;
+    // Instead of checking for exact matches to highlight,
+    // we'll split the title by each highlight word and join with spaces
+    let result: React.ReactNode[] = [];
+    let remainingText = titleText;
+    
+    highlightWords.forEach((word, wordIndex) => {
+      if (remainingText.includes(word)) {
+        // Find the position of the highlight word
+        const wordPos = remainingText.indexOf(word);
+        
+        // Push text before the word
+        if (wordPos > 0) {
+          result.push(<span key={`pre-${wordIndex}`}>{remainingText.substring(0, wordPos)}</span>);
+        }
+        
+        // Push the highlight word with a space after it
+        result.push(<span key={`highlight-${wordIndex}`} className="gradient-text">{word}</span>);
+        
+        // Update remaining text
+        remainingText = remainingText.substring(wordPos + word.length);
       }
-      return <span key={index}>{word}{index < words.length - 1 ? ' ' : ''}</span>;
     });
+    
+    // Add any remaining text
+    if (remainingText.length > 0) {
+      result.push(<span key="remaining">{remainingText}</span>);
+    }
+    
+    return result;
   };
 
   // Log AI products data for debugging
@@ -108,7 +130,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
     <section id="ai-capabilities" className="page-section">
       <div className="container mx-auto px-4 sm:px-6">
         <h2 className="section-title">
-          {formatSectionTitle(title, ["AI", "Capabilities"])}
+          Our <span className="gradient-text">AI</span> <span>Capabilities</span>
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
@@ -147,7 +169,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         {products && products.length > 0 && (
           <div className="mt-36">
             <h2 className="section-title">
-              {formatSectionTitle(productsSection.subtitle, ["AI", "Products"])}
+              Our <span className="gradient-text">AI</span> <span>Products</span>
             </h2>
             <h3 className="text-2xl font-semibold text-center mt-2 mb-12 text-white/80">{productsSection.title}</h3>
             
