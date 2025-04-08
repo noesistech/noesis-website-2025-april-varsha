@@ -4,14 +4,17 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { AIProduct } from './AICapabilitiesSection';
+
 interface AIProductCardProps {
   product: AIProduct;
 }
+
 const AIProductCard: React.FC<AIProductCardProps> = ({
   product
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+
   useEffect(() => {
     setImageLoaded(false);
     setImageError(false);
@@ -40,6 +43,7 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
       setImageError(true);
     }
   }, [product.logoUrl, product.title]);
+
   return <Card className="bg-[#1E2335] border-[#2A304B] overflow-hidden">
       <CardContent className="p-0">
         <div className="p-6 flex flex-col h-full">
@@ -51,7 +55,7 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
                 </div>}
               
               {imageError ? <h3 className="text-xl font-bold text-white">{product.title}</h3> : <img src={product.logoUrl} alt={`${product.title} logo`} style={{
-              maxWidth: '400px'
+              maxWidth: '800px'
             }} onLoad={() => setImageLoaded(true)} onError={() => setImageError(true)} className="object-fill" />}
             </div>
           </div>
@@ -73,4 +77,5 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
       </CardContent>
     </Card>;
 };
+
 export default AIProductCard;
