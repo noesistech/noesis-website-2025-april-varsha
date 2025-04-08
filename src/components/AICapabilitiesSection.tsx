@@ -121,20 +121,22 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   };
 
   return (
-    <section id="ai-capabilities" className="page-section py-6">
-      <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="section-title mb-6">
+    <section id="ai-capabilities" className="py-12 sm:py-16 md:py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
+      
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <h2 className="section-title">
           Our <span className="gradient-text">AI</span> <span className="gradient-text">Capabilities</span>
         </h2>
         
         <Tabs defaultValue="development" className="max-w-6xl mx-auto">
-          <div className="flex justify-center mb-6">
-            <TabsList className="glass-card border border-white/20 shadow-lg bg-[#1A1F2C]/80 p-1">
+          <div className="flex justify-center mb-8 sm:mb-10 md:mb-12">
+            <TabsList className="glass p-1">
               {categories.map(category => (
                 <TabsTrigger 
                   key={category.id}
                   value={category.id} 
-                  className="px-4 py-2 text-base font-medium data-[state=active]:bg-gradient-to-r data-[state=active]:from-noesis-purple/70 data-[state=active]:to-noesis-blue/70 data-[state=active]:text-white transition-all" 
+                  className="px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 data-[state=active]:bg-noesis-purple data-[state=active]:text-white text-base sm:text-lg" 
                   onClick={() => setActiveTab(category.id)}
                 >
                   {category.name}
