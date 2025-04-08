@@ -89,6 +89,17 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
     }
   };
 
+  // Format the section titles to highlight specific words
+  const formatSectionTitle = (titleText: string, highlightWords: string[]) => {
+    const words = titleText.split(' ');
+    return words.map((word, index) => {
+      if (highlightWords.includes(word)) {
+        return <span key={index} className="gradient-text">{word}</span>;
+      }
+      return <span key={index}>{word}{index < words.length - 1 ? ' ' : ''}</span>;
+    });
+  };
+
   // Log AI products data for debugging
   console.info('Products data:', products);
   console.info('Products section data:', productsSection);
@@ -96,7 +107,9 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   return (
     <section id="ai-capabilities" className="page-section">
       <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="section-title">{title}</h2>
+        <h2 className="section-title">
+          {formatSectionTitle(title, ["AI", "Capabilities"])}
+        </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {capabilities.map((capability, index) => (
@@ -133,7 +146,9 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         
         {products && products.length > 0 && (
           <div className="mt-24">
-            <h2 className="section-title">{productsSection.subtitle}</h2>
+            <h2 className="section-title">
+              {formatSectionTitle(productsSection.subtitle, ["AI", "Products"])}
+            </h2>
             <h3 className="text-2xl font-semibold text-center mt-2 mb-12 text-white/80">{productsSection.title}</h3>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
