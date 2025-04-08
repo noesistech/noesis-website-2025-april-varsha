@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
           {/* Company Logo and Social Links */}
-          <div className="lg:col-span-4 order-1">
+          <div className="lg:col-span-3 order-1">
             <div className="flex items-center gap-2 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300.48 54.12" className="h-8 w-auto" fill="currentColor">
                 <path d="M172.28,18.21a5.4,5.4,0,0,1,5.33,5.33,5.34,5.34,0,0,1-5.33,5.26A5.29,5.29,0,0,1,167,23.54,5.35,5.35,0,0,1,172.28,18.21Z" className="text-noesis-purple" />
@@ -39,7 +39,7 @@ const Footer = () => {
           </div>
           
           {/* Quick Links - Two Columns */}
-          <div className="lg:col-span-4 order-2">
+          <div className="lg:col-span-3 order-2">
             <h3 className="text-white text-xl font-bold mb-4">Quick Links</h3>
             <div className="grid grid-cols-2 gap-x-4 gap-y-2">
               <div>
@@ -55,8 +55,8 @@ const Footer = () => {
             </div>
           </div>
           
-          {/* Contact Us - with reduced spacing */}
-          <div className="lg:col-span-4 order-3">
+          {/* Contact Us - Email and Phone */}
+          <div className="lg:col-span-3 order-3">
             <h3 className="text-white text-xl font-bold mb-4">Contact Us</h3>
             <div className="flex flex-col gap-3">
               <a href="mailto:sales@noesis.tech" className="flex items-center gap-3 group transition-colors">
@@ -78,17 +78,21 @@ const Footer = () => {
                   <p className="text-white/70 group-hover:text-white transition-colors">+91 9152810101</p>
                 </div>
               </a>
-              
-              <a href="https://maps.app.goo.gl/CkqvvqT73buV1keWA" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group transition-colors">
-                <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors flex-shrink-0 mt-0.5">
-                  <MapPin className="h-5 w-5 text-noesis-purple" />
-                </div>
-                <div>
-                  <p className="text-white font-medium">Location</p>
-                  <p className="text-white/70 group-hover:text-white transition-colors">Unit 209, 2nd Floor, C Wing, Floral Deck Plaza, MIDC Road, Andheri (East), Mumbai 400093</p>
-                </div>
-              </a>
             </div>
+          </div>
+          
+          {/* Location - Separate Column */}
+          <div className="lg:col-span-3 order-4">
+            <h3 className="text-white text-xl font-bold mb-4">Location</h3>
+            <a href="https://maps.app.goo.gl/CkqvvqT73buV1keWA" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group transition-colors">
+              <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors flex-shrink-0 mt-0.5">
+                <MapPin className="h-5 w-5 text-noesis-purple" />
+              </div>
+              <div>
+                <p className="text-white font-medium">Visit Us</p>
+                <p className="text-white/70 group-hover:text-white transition-colors">Unit 209, 2nd Floor, C Wing, Floral Deck Plaza, MIDC Road, Andheri (East), Mumbai 400093</p>
+              </div>
+            </a>
           </div>
         </div>
         
