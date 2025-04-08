@@ -12,13 +12,13 @@ export { aboutSectionData, statsData } from './content/about';
 export { missionSectionData } from './content/mission';
 
 // Services section
-export { servicesSectionData, serviceItemsData } from './content/services';
+export { servicesSectionData as servicesSection, serviceItemsData as serviceItems } from './content/services';
 
 // Solutions section
-export { solutionsSectionData, solutionItemsData } from './content/solutions';
+export { solutionsSectionData as solutionsSection, solutionItemsData as solutionItems } from './content/solutions';
 
 // Tech stack section
-export { techStackSectionData, techCategoriesData } from './content/techstack';
+export { techStackSectionData as techStackSection, techCategoriesData as techCategories } from './content/techstack';
 
 // AI capabilities section
 export { aiCapabilitiesSectionData, aiCapabilitiesData } from './content/aiCapabilities';

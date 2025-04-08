@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Brain, BrainCircuit, Robot, Microscope, Settings, Zap } from 'lucide-react';
+import { Brain, BrainCircuit, Bot, Microscope, Settings, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export interface AICapability {
@@ -31,7 +31,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       case 'brain-circuit':
         return <BrainCircuit className="h-10 w-10 text-noesis-blue" />;
       case 'robot':
-        return <Robot className="h-10 w-10 text-green-400" />;
+        return <Bot className="h-10 w-10 text-green-400" />; // Changed Robot to Bot
       case 'microscope':
         return <Microscope className="h-10 w-10 text-pink-400" />;
       case 'settings':

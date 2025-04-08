@@ -52,7 +52,7 @@ export const aiCapabilitiesData: AICapability[] = [
   {
     id: 'deploy-edge',
     title: 'Edge AI & Embedded Systems',
-    icon: 'robot',
+    icon: 'bot', // Changed from 'robot' to 'bot'
     description: 'We implement AI capabilities directly on edge devices, enabling real-time processing without cloud connectivity for IoT, mobile, and embedded systems.',
     tools: ['TensorFlow Lite', 'ONNX', 'Edge TPU', 'Model Compression', 'Quantization', 'IoT Integration'],
     color: 'from-orange-500/20 to-orange-600/20'

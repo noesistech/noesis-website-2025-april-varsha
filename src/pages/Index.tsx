@@ -15,12 +15,12 @@ import { useContent } from '@/contexts/ContentContext';
 
 const Index = () => {
   const { 
-    servicesSectionData, 
-    serviceItemsData, 
-    solutionsSectionData, 
-    solutionItemsData, 
-    techStackSectionData, 
-    techCategoriesData,
+    servicesSection, 
+    serviceItems, 
+    solutionsSection, 
+    solutionItems, 
+    techStackSection, 
+    techCategories,
     aiCapabilitiesSection,
     aiCapabilities
   } = useContent();
@@ -31,9 +31,9 @@ const Index = () => {
       <HeroSection />
       <AboutStatsSection />
       <MissionSection />
-      <ServicesSection title={servicesSectionData.title} services={serviceItemsData} />
-      <SolutionsSection title={solutionsSectionData.title} solutions={solutionItemsData} />
-      <TechStackSection title={techStackSectionData.title} categories={techCategoriesData} />
+      <ServicesSection title={servicesSection.title} services={serviceItems} />
+      <SolutionsSection title={solutionsSection.title} solutions={solutionItems} />
+      <TechStackSection title={techStackSection.title} categories={techCategories} />
       <AICapabilitiesSection title={aiCapabilitiesSection.title} capabilities={aiCapabilities} />
       <ClientsSection />
       <ContactSection />
