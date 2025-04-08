@@ -1,14 +1,10 @@
-
 import React from 'react';
 import { Users, Award, Clock, Percent } from 'lucide-react';
 import P5Animation from './P5Animation';
 import { useIsMobile } from '@/hooks/use-mobile';
-
 const AboutStatsSection = () => {
   const isMobile = useIsMobile();
-  
-  return (
-    <section className="w-full py-12 md:py-24 bg-[#1A1F2C] text-white">
+  return <section className="w-full py-12 bg-[#1A1F2C] text-white md:py-[70px]">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row gap-10">
           {/* Left side: Network visualization with P5Animation */}
@@ -21,7 +17,9 @@ const AboutStatsSection = () => {
           </div>
           
           {/* Right side: About text and stats */}
-          <div className="md:w-1/2 flex flex-col justify-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="md:w-1/2 flex flex-col justify-center animate-fade-in" style={{
+          animationDelay: '0.2s'
+        }}>
             <h2 className="text-2xl md:text-4xl font-bold mb-4">
               Evolving Since <span className="gradient-text">2009</span>, Leading in AI Today
             </h2>
@@ -47,7 +45,9 @@ const AboutStatsSection = () => {
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-6 mt-10">
               {/* Stat 1 */}
-              <div className="bg-[#242836] p-6 rounded-lg flex flex-col items-center justify-center animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <div className="bg-[#242836] p-6 rounded-lg flex flex-col items-center justify-center animate-fade-in" style={{
+              animationDelay: '0.3s'
+            }}>
                 <div className="bg-purple-900/30 p-3 rounded-full mb-4">
                   <Users className="w-6 h-6 text-purple-400" />
                 </div>
@@ -56,7 +56,9 @@ const AboutStatsSection = () => {
               </div>
               
               {/* Stat 2 */}
-              <div className="bg-[#242836] p-6 rounded-lg flex flex-col items-center justify-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <div className="bg-[#242836] p-6 rounded-lg flex flex-col items-center justify-center animate-fade-in" style={{
+              animationDelay: '0.4s'
+            }}>
                 <div className="bg-purple-900/30 p-3 rounded-full mb-4">
                   <Award className="w-6 h-6 text-purple-400" />
                 </div>
@@ -65,7 +67,9 @@ const AboutStatsSection = () => {
               </div>
               
               {/* Stat 3 */}
-              <div className="bg-[#242836] p-6 rounded-lg flex flex-col items-center justify-center animate-fade-in" style={{ animationDelay: '0.5s' }}>
+              <div className="bg-[#242836] p-6 rounded-lg flex flex-col items-center justify-center animate-fade-in" style={{
+              animationDelay: '0.5s'
+            }}>
                 <div className="bg-purple-900/30 p-3 rounded-full mb-4">
                   <Clock className="w-6 h-6 text-purple-400" />
                 </div>
@@ -74,7 +78,9 @@ const AboutStatsSection = () => {
               </div>
               
               {/* Stat 4 */}
-              <div className="bg-[#242836] p-6 rounded-lg flex flex-col items-center justify-center animate-fade-in" style={{ animationDelay: '0.6s' }}>
+              <div className="bg-[#242836] p-6 rounded-lg flex flex-col items-center justify-center animate-fade-in" style={{
+              animationDelay: '0.6s'
+            }}>
                 <div className="bg-purple-900/30 p-3 rounded-full mb-4">
                   <Percent className="w-6 h-6 text-purple-400" />
                 </div>
@@ -85,8 +91,6 @@ const AboutStatsSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default AboutStatsSection;
