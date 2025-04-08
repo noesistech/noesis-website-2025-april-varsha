@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,20 +11,24 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { supabase } from "@/integrations/supabase/client";
-
 const contactFormSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters" }),
-  email: z.string().email({ message: "Please enter a valid email address" }),
-  subject: z.string().min(2, { message: "Subject is required" }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters" }),
+  name: z.string().min(2, {
+    message: "Name must be at least 2 characters"
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address"
+  }),
+  subject: z.string().min(2, {
+    message: "Subject is required"
+  }),
+  message: z.string().min(10, {
+    message: "Message must be at least 10 characters"
+  })
 });
-
 type ContactFormValues = z.infer<typeof contactFormSchema>;
-
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
-
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -35,26 +38,23 @@ const ContactSection = () => {
       message: ""
     }
   });
-
   const onSubmit = async (data: ContactFormValues) => {
     try {
       setIsSubmitting(true);
-      
+
       // First, save to Brevo via the submit-contact-form edge function
       const brevoResult = await supabase.functions.invoke('submit-contact-form', {
         body: {
           name: data.name,
           email: data.email,
           message: data.message
-        },
+        }
       });
-      
       if (brevoResult.error) {
         throw new Error(`Error saving to Brevo: ${brevoResult.error.message}`);
       }
-      
       console.log("Successfully saved to Brevo:", brevoResult);
-      
+
       // Then, send email notification using send-contact-email edge function
       const emailResult = await supabase.functions.invoke('send-contact-email', {
         body: {
@@ -62,20 +62,16 @@ const ContactSection = () => {
           email: data.email,
           subject: data.subject,
           message: data.message
-        },
+        }
       });
-      
       if (emailResult.error) {
         throw new Error(`Error sending email: ${emailResult.error.message}`);
       }
-      
       console.log("Email sent successfully:", emailResult);
-      
       toast({
         title: "Message sent successfully!",
-        description: "We'll get back to you soon.",
+        description: "We'll get back to you soon."
       });
-      
       setShowSuccessDialog(true);
       form.reset();
     } catch (error) {
@@ -89,9 +85,7 @@ const ContactSection = () => {
       setIsSubmitting(false);
     }
   };
-
-  return (
-    <section id="contact" className="py-10 sm:py-16 md:py-20 relative">
+  return <section id="contact" className="py-10 sm:py-16 relative md:py-[50px]">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-3 sm:px-6 relative z-10">
@@ -103,116 +97,73 @@ const ContactSection = () => {
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 max-w-6xl mx-auto">
-          <Card className="glass-card animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <Card className="glass-card animate-fade-in" style={{
+          animationDelay: '0.2s'
+        }}>
             <div className="p-4 sm:p-6 md:p-8">
               <h3 className="text-xl sm:text-2xl font-bold gradient-text mb-4 sm:mb-6">Start The Conversation</h3>
               
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
+                    <FormField control={form.control} name="name" render={({
+                    field
+                  }) => <FormItem>
                           <FormLabel className="text-sm font-medium text-white/70">Your Name</FormLabel>
                           <FormControl>
-                            <Input 
-                              {...field}
-                              className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
-                              placeholder="John Doe"
-                              disabled={isSubmitting}
-                            />
+                            <Input {...field} className="bg-white/5 border-white/10 focus:border-noesis-purple text-white" placeholder="John Doe" disabled={isSubmitting} />
                           </FormControl>
                           <FormMessage className="text-red-400" />
-                        </FormItem>
-                      )}
-                    />
+                        </FormItem>} />
                     
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
+                    <FormField control={form.control} name="email" render={({
+                    field
+                  }) => <FormItem>
                           <FormLabel className="text-sm font-medium text-white/70">Email Address</FormLabel>
                           <FormControl>
-                            <Input 
-                              {...field}
-                              className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
-                              placeholder="john@example.com"
-                              type="email"
-                              disabled={isSubmitting}
-                            />
+                            <Input {...field} className="bg-white/5 border-white/10 focus:border-noesis-purple text-white" placeholder="john@example.com" type="email" disabled={isSubmitting} />
                           </FormControl>
                           <FormMessage className="text-red-400" />
-                        </FormItem>
-                      )}
-                    />
+                        </FormItem>} />
                   </div>
                   
-                  <FormField
-                    control={form.control}
-                    name="subject"
-                    render={({ field }) => (
-                      <FormItem>
+                  <FormField control={form.control} name="subject" render={({
+                  field
+                }) => <FormItem>
                         <FormLabel className="text-sm font-medium text-white/70">Subject</FormLabel>
                         <FormControl>
-                          <Input 
-                            {...field}
-                            className="bg-white/5 border-white/10 focus:border-noesis-purple text-white"
-                            placeholder="Project Inquiry"
-                            disabled={isSubmitting}
-                          />
+                          <Input {...field} className="bg-white/5 border-white/10 focus:border-noesis-purple text-white" placeholder="Project Inquiry" disabled={isSubmitting} />
                         </FormControl>
                         <FormMessage className="text-red-400" />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
                   
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
+                  <FormField control={form.control} name="message" render={({
+                  field
+                }) => <FormItem>
                         <FormLabel className="text-sm font-medium text-white/70">Project Requirements</FormLabel>
                         <FormControl>
-                          <Textarea 
-                            {...field}
-                            className="bg-white/5 border-white/10 focus:border-noesis-purple text-white h-24 sm:h-32"
-                            placeholder="Briefly describe your project requirements..."
-                            disabled={isSubmitting}
-                          />
+                          <Textarea {...field} className="bg-white/5 border-white/10 focus:border-noesis-purple text-white h-24 sm:h-32" placeholder="Briefly describe your project requirements..." disabled={isSubmitting} />
                         </FormControl>
                         <FormMessage className="text-red-400" />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
                   
-                  <Button 
-                    type="submit" 
-                    disabled={isSubmitting}
-                    size="lg"
-                    variant="noesis"
-                    className="w-full sm:w-auto"
-                  >
-                    {isSubmitting ? (
-                      <div className="flex items-center gap-2">
+                  <Button type="submit" disabled={isSubmitting} size="lg" variant="noesis" className="w-full sm:w-auto">
+                    {isSubmitting ? <div className="flex items-center gap-2">
                         <div className="h-4 w-4 border-2 border-white/30 border-t-white/80 rounded-full animate-spin"></div>
                         <span>Sending...</span>
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-2">
+                      </div> : <div className="flex items-center gap-2">
                         <Send className="w-4 h-4" />
                         <span>Connect With Our Team</span>
-                      </div>
-                    )}
+                      </div>}
                   </Button>
                 </form>
               </Form>
             </div>
           </Card>
           
-          <Card className="glass-card animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <Card className="glass-card animate-fade-in" style={{
+          animationDelay: '0.4s'
+        }}>
             <div className="p-4 sm:p-6 md:p-8">
               <h3 className="text-xl sm:text-2xl font-bold gradient-text mb-4 sm:mb-6">Reach Our AI-Human Team</h3>
               
@@ -268,17 +219,12 @@ const ContactSection = () => {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <div className="flex justify-center mt-4">
-            <Button 
-              onClick={() => setShowSuccessDialog(false)} 
-              variant="noesis"
-            >
+            <Button onClick={() => setShowSuccessDialog(false)} variant="noesis">
               Close
             </Button>
           </div>
         </AlertDialogContent>
       </AlertDialog>
-    </section>
-  );
+    </section>;
 };
-
 export default ContactSection;

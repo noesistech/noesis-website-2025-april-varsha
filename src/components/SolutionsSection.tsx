@@ -1,21 +1,17 @@
-
 import React, { useRef, useEffect } from 'react';
 import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SolutionItem } from '@/types/supabase';
-
 interface SolutionsSectionProps {
   title: string;
   solutions: SolutionItem[];
 }
-
 const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   title,
   solutions
 }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-
   const displaySolutions = solutions && solutions.length > 0 ? solutions.map(solution => ({
     id: solution.id,
     icon: getIconByName(solution.icon_name),
@@ -78,7 +74,6 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         </ul>,
     color: 'from-yellow-500/20 to-yellow-600/20'
   }];
-
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -91,11 +86,9 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       root: null,
       threshold: 0.1
     });
-
     cardsRef.current.forEach(card => {
       if (card) observer.observe(card);
     });
-
     return () => {
       cardsRef.current.forEach(card => {
         if (card) observer.unobserve(card);
@@ -106,15 +99,11 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   // Split the title to apply gradient to "Solutions" part
   const renderTitle = () => {
     if (!title) return "Our Solutions";
-    
     const words = title.split(' ');
     const lastWordIndex = words.length - 1;
-    
-    return (
-      <>
+    return <>
         {words.slice(0, lastWordIndex).join(' ')} <span className="gradient-text">{words[lastWordIndex]}</span>
-      </>
-    );
+      </>;
   };
 
   // Create rows of solutions with 3 items per row
@@ -122,19 +111,12 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   for (let i = 0; i < displaySolutions.length; i += 3) {
     solutionRows.push(displaySolutions.slice(i, i + 3));
   }
-
-  return <section id="solutions" ref={sectionRef} className="py-10 sm:py-16 md:py-[20px]">
+  return <section id="solutions" ref={sectionRef} className="py-10 sm:py-16 md:py-[50px]">
       <div className="container mx-auto px-3 sm:px-6">
         <h2 className="section-title">{renderTitle()}</h2>
         
-        {solutionRows.map((row, rowIndex) => (
-          <div key={`row-${rowIndex}`} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 last:mb-0">
-            {row.map((solution, index) => (
-              <div 
-                key={solution.id} 
-                ref={el => cardsRef.current[rowIndex * 3 + index] = el} 
-                className="glass relative overflow-hidden rounded-2xl opacity-0 transition-all duration-500 hover:shadow-lg h-full"
-              >
+        {solutionRows.map((row, rowIndex) => <div key={`row-${rowIndex}`} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 last:mb-0">
+            {row.map((solution, index) => <div key={solution.id} ref={el => cardsRef.current[rowIndex * 3 + index] = el} className="glass relative overflow-hidden rounded-2xl opacity-0 transition-all duration-500 hover:shadow-lg h-full">
                 <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", solution.color)}></div>
                 <div className="relative z-10 p-4 sm:p-6">
                   <div className="bg-white/10 p-2 sm:p-3 rounded-full w-fit mb-3 sm:mb-4">
@@ -145,14 +127,11 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
                     {solution.description}
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        ))}
+              </div>)}
+          </div>)}
       </div>
     </section>;
 };
-
 const getIconByName = (iconName: string) => {
   const normalizedIconName = iconName.toLowerCase();
   switch (normalizedIconName) {
@@ -175,5 +154,4 @@ const getIconByName = (iconName: string) => {
       return <Cpu className="h-10 w-10" />;
   }
 };
-
 export default SolutionsSection;
