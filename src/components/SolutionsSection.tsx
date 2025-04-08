@@ -117,24 +117,38 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
     );
   };
 
+  // Create rows of solutions with 3 items per row
+  const solutionRows = [];
+  for (let i = 0; i < displaySolutions.length; i += 3) {
+    solutionRows.push(displaySolutions.slice(i, i + 3));
+  }
+
   return <section id="solutions" ref={sectionRef} className="py-10 sm:py-16 md:py-[20px]">
       <div className="container mx-auto px-3 sm:px-6">
         <h2 className="section-title">{renderTitle()}</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-          {displaySolutions.map((solution, index) => <div key={solution.id} ref={el => cardsRef.current[index] = el} className="glass relative overflow-hidden rounded-2xl opacity-0 transition-all duration-500 hover:shadow-lg">
-              <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", solution.color)}></div>
-              <div className="relative z-10 p-4 sm:p-6">
-                <div className="bg-white/10 p-2 sm:p-3 rounded-full w-fit mb-3 sm:mb-4">
-                  {solution.icon}
-                </div>
-                <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-left">{solution.title}</h3>
-                <div className="mb-3 sm:mb-6 text-left">
-                  {solution.description}
+        {solutionRows.map((row, rowIndex) => (
+          <div key={`row-${rowIndex}`} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 last:mb-0">
+            {row.map((solution, index) => (
+              <div 
+                key={solution.id} 
+                ref={el => cardsRef.current[rowIndex * 3 + index] = el} 
+                className="glass relative overflow-hidden rounded-2xl opacity-0 transition-all duration-500 hover:shadow-lg h-full"
+              >
+                <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", solution.color)}></div>
+                <div className="relative z-10 p-4 sm:p-6">
+                  <div className="bg-white/10 p-2 sm:p-3 rounded-full w-fit mb-3 sm:mb-4">
+                    {solution.icon}
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-left">{solution.title}</h3>
+                  <div className="mb-3 sm:mb-6 text-left">
+                    {solution.description}
+                  </div>
                 </div>
               </div>
-            </div>)}
-        </div>
+            ))}
+          </div>
+        ))}
       </div>
     </section>;
 };
