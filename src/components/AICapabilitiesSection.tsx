@@ -42,20 +42,16 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   productsSection
 }) => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const [activeTab, setActiveTab] = useState('all');
+  const [activeTab, setActiveTab] = useState('development');
 
-  // Define capability categories
+  // Define capability categories - removed "all" option
   const categories = [
-    { id: 'all', name: 'All Capabilities' },
     { id: 'development', name: 'AI Development' },
     { id: 'deployment', name: 'AI Deployment' }
   ];
 
   // Filter capabilities based on selected category
   const getFilteredCapabilities = () => {
-    if (activeTab === 'all') {
-      return capabilities;
-    }
     return capabilities.filter(cap => cap.category === activeTab);
   };
 
@@ -120,7 +116,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
           Our <span className="gradient-text">AI</span> <span className="gradient-text">Capabilities</span>
         </h2>
         
-        <Tabs defaultValue="all" className="max-w-6xl mx-auto">
+        <Tabs defaultValue="development" className="max-w-6xl mx-auto">
           <div className="flex justify-center mb-8 sm:mb-10 md:mb-12">
             <TabsList className="glass p-1">
               {categories.map(category => (
