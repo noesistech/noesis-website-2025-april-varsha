@@ -71,7 +71,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       threshold: 0.1
     });
     
-    // Small delay to ensure DOM is ready
+    // Ensure all cards are visible on initial load
     setTimeout(() => {
       cardsRef.current.forEach(card => {
         if (card) {
@@ -80,6 +80,15 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
           observer.observe(card);
         }
       });
+      
+      // Force all cards to be visible even if not in viewport initially
+      setTimeout(() => {
+        cardsRef.current.forEach(card => {
+          if (card) {
+            card.classList.add('animate-fade-in');
+          }
+        });
+      }, 100);
     }, 100);
     
     return () => {
@@ -112,20 +121,20 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   };
 
   return (
-    <section id="ai-capabilities" className="page-section py-12">
+    <section id="ai-capabilities" className="page-section py-8">
       <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="section-title mb-8">
+        <h2 className="section-title mb-6">
           Our <span className="gradient-text">AI</span> <span className="gradient-text">Capabilities</span>
         </h2>
         
         <Tabs defaultValue="development" className="max-w-6xl mx-auto">
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-4">
             <TabsList className="glass p-1">
               {categories.map(category => (
                 <TabsTrigger 
                   key={category.id}
                   value={category.id} 
-                  className="px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 data-[state=active]:bg-noesis-purple data-[state=active]:text-white text-base sm:text-lg" 
+                  className="px-4 py-2 sm:px-6 sm:py-2 text-base" 
                   onClick={() => setActiveTab(category.id)}
                 >
                   {category.name}
@@ -136,30 +145,30 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
           
           {categories.map((category) => (
             <TabsContent key={category.id} value={category.id} className="animate-fade-in">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid grid-cols-2 gap-4">
                 {capabilities
                   .filter(cap => cap.category === category.id)
                   .map((capability, index) => (
                     <div
                       key={capability.id}
                       ref={el => cardsRef.current[index] = el}
-                      className="glass-card opacity-0 relative overflow-hidden min-h-[280px]"
+                      className="glass-card opacity-0 relative overflow-hidden min-h-[200px]"
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
                       <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", capability.color)}></div>
-                      <div className="relative z-10 p-5">
-                        <div className="bg-white/10 p-3 rounded-lg w-fit mb-4">
+                      <div className="relative z-10 p-4">
+                        <div className="bg-white/10 p-2 rounded-lg w-fit mb-3">
                           {getIconByName(capability.icon)}
                         </div>
-                        <h3 className="text-xl font-bold mb-2">{capability.title}</h3>
-                        <p className="text-white/80 mb-4 text-sm">{capability.description}</p>
+                        <h3 className="text-lg font-bold mb-2">{capability.title}</h3>
+                        <p className="text-white/80 mb-3 text-xs sm:text-sm">{capability.description}</p>
                         <div>
-                          <h4 className="text-xs uppercase tracking-wider text-white/60 mb-2">Technologies</h4>
-                          <div className="flex flex-wrap gap-1.5">
+                          <h4 className="text-xs uppercase tracking-wider text-white/60 mb-1">Technologies</h4>
+                          <div className="flex flex-wrap gap-1">
                             {capability.tools.map((tool) => (
                               <span 
                                 key={`${capability.id}-${tool}`}
-                                className="bg-white/10 text-white/90 text-xs px-2.5 py-1 rounded-full hover:bg-white/20 transition-colors"
+                                className="bg-white/10 text-white/90 text-xs px-2 py-0.5 rounded-full hover:bg-white/20 transition-colors"
                               >
                                 {tool}
                               </span>
@@ -175,13 +184,13 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         </Tabs>
         
         {products && products.length > 0 && (
-          <div className="mt-16">
+          <div className="mt-10">
             <h2 className="section-title mb-2">
               Our <span className="gradient-text">AI</span> <span className="gradient-text">Products</span>
             </h2>
-            <h3 className="text-xl font-semibold text-center mb-8 text-white/80">{productsSection.subtitle}</h3>
+            <h3 className="text-xl font-semibold text-center mb-6 text-white/80">{productsSection.subtitle}</h3>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-4">
               {products.map((product) => {
                 // Fallback to a default image if the logo URL fails to load
                 const fallbackLogoUrl = '/placeholder.svg';

@@ -51,38 +51,52 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
     }
   }, [logoUrl, title]);
 
-  return <Card className="bg-[#1E2335] border-[#2A304B] overflow-hidden">
+  return (
+    <Card className="bg-[#1E2335] border-[#2A304B] overflow-hidden h-full">
       <CardContent className="p-0">
-        <div className="p-6 flex flex-col h-full">
+        <div className="p-4 flex flex-col h-full">
           {/* Product Logo */}
-          <div className="mb-6">
-            <div className="relative h-16 sm:h-20">
-              {!imageLoaded && !imageError && <div className="absolute inset-0 flex items-center justify-start">
-                  <div className="animate-pulse bg-gray-700 h-12 w-48 rounded"></div>
-                </div>}
+          <div className="mb-4">
+            <div className="relative h-12 sm:h-16">
+              {!imageLoaded && !imageError && 
+                <div className="absolute inset-0 flex items-center justify-start">
+                  <div className="animate-pulse bg-gray-700 h-8 w-32 rounded"></div>
+                </div>
+              }
               
-              {imageError ? <h3 className="text-xl font-bold text-white">{title}</h3> : <img src={logoUrl} alt={`${title} logo`} style={{
-              maxWidth: '800px'
-            }} onLoad={() => setImageLoaded(true)} onError={() => setImageError(true)} className="object-fill" />}
+              {imageError ? 
+                <h3 className="text-lg font-bold text-white">{title}</h3> : 
+                <img 
+                  src={logoUrl} 
+                  alt={`${title} logo`} 
+                  style={{ maxWidth: '150px' }}
+                  onLoad={() => setImageLoaded(true)} 
+                  onError={() => setImageError(true)} 
+                  className="object-fill h-10" 
+                />
+              }
             </div>
           </div>
           
           {/* Product Description */}
-          <p className="text-white/80 mb-6 flex-grow">
+          <p className="text-white/80 mb-4 flex-grow text-sm">
             {description}
           </p>
           
           {/* CTA Button */}
-          {ctaUrl && ctaText && <div className="mt-auto">
-              <Button variant="noesis" asChild className="group">
+          {ctaUrl && ctaText && 
+            <div className="mt-auto">
+              <Button variant="noesis" size="sm" asChild className="group">
                 <a href={ctaUrl}>
-                  {ctaText} <ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  {ctaText} <ArrowRight className="ml-1 w-3 h-3 transition-transform group-hover:translate-x-1" />
                 </a>
               </Button>
-            </div>}
+            </div>
+          }
         </div>
       </CardContent>
-    </Card>;
+    </Card>
+  );
 };
 
 export default AIProductCard;
