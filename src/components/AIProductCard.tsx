@@ -54,9 +54,9 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
   return (
     <Card className="bg-[#1E2335] border-[#2A304B] overflow-hidden h-full glass-card">
       <CardContent className="p-0">
-        <div className="p-4 flex flex-col h-full">
+        <div className="p-5 flex flex-col h-full">
           {/* Product Logo */}
-          <div className="mb-3">
+          <div className="mb-4">
             <div className="relative h-12">
               {!imageLoaded && !imageError && 
                 <div className="absolute inset-0 flex items-center justify-start">
@@ -79,7 +79,7 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
           </div>
           
           {/* Product Description */}
-          <p className="text-white/80 mb-4 flex-grow text-sm">
+          <p className="text-white/80 mb-4 flex-grow text-sm leading-relaxed">
             {description}
           </p>
           

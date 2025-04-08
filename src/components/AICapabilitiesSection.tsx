@@ -186,13 +186,13 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         </Tabs>
         
         {products && products.length > 0 && (
-          <div className="mt-10">
-            <h2 className="section-title mb-2">
-              Our <span className="gradient-text">AI</span> <span className="gradient-text">Products</span>
+          <div className="mt-16 sm:mt-20">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center relative mb-2">
+              {productsSection.title}
             </h2>
-            <h3 className="text-xl font-semibold text-center mb-6 text-white/80">{productsSection.subtitle}</h3>
+            <h3 className="text-lg md:text-xl text-center mb-8 sm:mb-10 text-white/80">{productsSection.subtitle}</h3>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 max-w-6xl mx-auto">
               {products.map((product) => {
                 return (
                   <AIProductCard
