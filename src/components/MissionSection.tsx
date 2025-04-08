@@ -6,8 +6,10 @@ import VisionCard from './mission/VisionCard';
 import PromisePanel from './mission/PromisePanel';
 import BackgroundPattern from './mission/BackgroundPattern';
 import MissionStyles from './mission/MissionStyles';
+
 const MissionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
@@ -28,11 +30,13 @@ const MissionSection = () => {
   // Configuration for the grid pattern
   const gridRows = 16;
   const gridCols = 24;
-  return <section id="mission" className="py-10 relative overflow-hidden bg-noesis-dark" ref={sectionRef}>
+  
+  return (
+    <section id="mission" className="py-10 sm:py-16 md:py-[40px] relative overflow-hidden bg-noesis-dark" ref={sectionRef}>
       <BackgroundPattern gridRows={gridRows} gridCols={gridCols} />
       
-      <div className="container mx-auto px-6 relative z-10 py-[15px]">
-        <h2 className="section-title mb-20">
+      <div className="container mx-auto px-6 relative z-10">
+        <h2 className="section-title">
           Our <span className="gradient-text">Mission & Vision</span>
         </h2>
         
@@ -46,6 +50,8 @@ const MissionSection = () => {
       </div>
       
       <MissionStyles gridRows={gridRows} gridCols={gridCols} />
-    </section>;
+    </section>
+  );
 };
+
 export default MissionSection;

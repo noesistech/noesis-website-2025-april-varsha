@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -44,13 +43,13 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
     
-    /* Adjusted spacing variables for better responsiveness */
+    /* Standardized spacing variables for better consistency */
     --section-padding-y: 5rem;           /* Desktop: 80px */
-    --section-padding-y-tablet: 3.5rem;  /* Tablet: 56px */
+    --section-padding-y-tablet: 4rem;    /* Tablet: 64px */
     --section-padding-y-mobile: 2.5rem;  /* Mobile: 40px */
     
     --section-spacing: 5rem;             /* Desktop: 80px */
-    --section-spacing-tablet: 3.5rem;    /* Tablet: 56px */
+    --section-spacing-tablet: 4rem;      /* Tablet: 64px */
     --section-spacing-mobile: 2.5rem;    /* Mobile: 40px */
     
     --heading-spacing: 2.5rem;           /* Desktop: 40px */
@@ -123,7 +122,7 @@
     @apply glass rounded-2xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-white/10;
   }
   
-  /* Updated section title style with improved responsive spacing */
+  /* Updated section title style with improved consistent spacing */
   .section-title {
     @apply text-3xl md:text-4xl lg:text-5xl font-bold text-center relative;
     color: white;
@@ -164,7 +163,7 @@
     @apply bg-gradient-to-r from-noesis-purple to-noesis-blue bg-clip-text text-transparent;
   }
   
-  /* Added responsive section styling */
+  /* Updated responsive section styling with standardized spacing */
   .page-section {
     padding-top: var(--section-padding-y-mobile);
     padding-bottom: var(--section-padding-y-mobile);
@@ -291,11 +290,11 @@
   }
 }
 
-/* iPad specific adjustments - better spacing */
+/* iPad specific adjustments - consistent padding */
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .container {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
   
   /* Improved text readability on iPad */
@@ -308,6 +307,12 @@
   .glass-card {
     padding: 1.25rem;
   }
+  
+  /* Consistent section spacing */
+  section {
+    padding-top: var(--section-padding-y-tablet);
+    padding-bottom: var(--section-padding-y-tablet);
+  }
 }
 
 /* iPad landscape specific */
@@ -319,5 +324,11 @@
   /* Improved spacing in landscape mode */
   .glass-card {
     padding: 1.5rem;
+  }
+  
+  /* Consistent section spacing */
+  section {
+    padding-top: var(--section-padding-y);
+    padding-bottom: var(--section-padding-y);
   }
 }
