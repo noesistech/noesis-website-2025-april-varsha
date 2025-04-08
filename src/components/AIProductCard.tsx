@@ -3,14 +3,21 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import { AIProduct } from './AICapabilitiesSection';
 
 interface AIProductCardProps {
-  product: AIProduct;
+  title: string;
+  description: string;
+  logoUrl: string;
+  ctaText: string;
+  ctaUrl: string;
 }
 
 const AIProductCard: React.FC<AIProductCardProps> = ({
-  product
+  title,
+  description,
+  logoUrl,
+  ctaText,
+  ctaUrl
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -20,29 +27,29 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
     setImageError(false);
 
     // Check if the logoUrl is available and not empty
-    if (product.logoUrl) {
-      console.log(`Attempting to load image for ${product.title}: ${product.logoUrl}`);
+    if (logoUrl) {
+      console.log(`Attempting to load image for ${title}: ${logoUrl}`);
 
       // For SVG files, we can immediately set loaded to true since they render well
-      if (product.logoUrl.endsWith('.svg')) {
+      if (logoUrl.endsWith('.svg')) {
         setImageLoaded(true);
       } else {
         // For other file types, preload the image
         const img = new Image();
-        img.src = product.logoUrl;
+        img.src = logoUrl;
         img.onload = () => {
-          console.log(`Successfully loaded image for ${product.title}`);
+          console.log(`Successfully loaded image for ${title}`);
           setImageLoaded(true);
         };
         img.onerror = e => {
-          console.error(`Failed to load image for ${product.title}:`, product.logoUrl, e);
+          console.error(`Failed to load image for ${title}:`, logoUrl, e);
           setImageError(true);
         };
       }
     } else {
       setImageError(true);
     }
-  }, [product.logoUrl, product.title]);
+  }, [logoUrl, title]);
 
   return <Card className="bg-[#1E2335] border-[#2A304B] overflow-hidden">
       <CardContent className="p-0">
@@ -54,7 +61,7 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
                   <div className="animate-pulse bg-gray-700 h-12 w-48 rounded"></div>
                 </div>}
               
-              {imageError ? <h3 className="text-xl font-bold text-white">{product.title}</h3> : <img src={product.logoUrl} alt={`${product.title} logo`} style={{
+              {imageError ? <h3 className="text-xl font-bold text-white">{title}</h3> : <img src={logoUrl} alt={`${title} logo`} style={{
               maxWidth: '800px'
             }} onLoad={() => setImageLoaded(true)} onError={() => setImageError(true)} className="object-fill" />}
             </div>
@@ -62,14 +69,14 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
           
           {/* Product Description */}
           <p className="text-white/80 mb-6 flex-grow">
-            {product.description}
+            {description}
           </p>
           
           {/* CTA Button */}
-          {product.ctaUrl && product.ctaText && <div className="mt-auto">
+          {ctaUrl && ctaText && <div className="mt-auto">
               <Button variant="noesis" asChild className="group">
-                <a href={product.ctaUrl}>
-                  {product.ctaText} <ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <a href={ctaUrl}>
+                  {ctaText} <ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </Button>
             </div>}
