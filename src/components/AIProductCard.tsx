@@ -15,18 +15,23 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   
-  // Reset image states when product changes
   useEffect(() => {
     setImageLoaded(false);
     setImageError(false);
     
-    // Preload the image
+    // Check if the logoUrl is available and not empty
     if (product.logoUrl) {
+      console.log(`Attempting to load image for ${product.title}: ${product.logoUrl}`);
+      
+      // Preload the image
       const img = new Image();
       img.src = product.logoUrl;
-      img.onload = () => setImageLoaded(true);
-      img.onerror = () => {
-        console.error(`Failed to load image for ${product.title}:`, product.logoUrl);
+      img.onload = () => {
+        console.log(`Successfully loaded image for ${product.title}`);
+        setImageLoaded(true);
+      };
+      img.onerror = (e) => {
+        console.error(`Failed to load image for ${product.title}:`, product.logoUrl, e);
         setImageError(true);
       };
     }
