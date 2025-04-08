@@ -90,7 +90,7 @@ const ServicesSection: React.FC<ServicesProps> = ({
                 <div className="mb-3 sm:mb-6 transform group-hover:scale-110 transition-transform duration-300">
                   {service.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-3 sm:mb-4 gradient-text">{service.title}</h3>
+                <h3 className="font-bold mb-3 sm:mb-4 gradient-text text-2xl">{service.title}</h3>
                 <div className="text-white/80 flex-grow">
                   {service.description}
                 </div>
