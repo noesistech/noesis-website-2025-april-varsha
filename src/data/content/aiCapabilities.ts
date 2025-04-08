@@ -73,7 +73,7 @@ export const aiProductsData: AIProduct[] = [
     title: 'Brainstormer Pro',
     description: 'Our advanced AI engine for content, marketing, and business process automation tailored for enterprise needs. Leverage Brainstormer Pro to enhance workflow and drive productivity within a secure, collaborative environment.',
     icon: 'brain',
-    logoUrl: '/images/brainstormer-pro-logo.png',
+    logoUrl: '/lovable-uploads/b12425e8-8ca8-40a0-8654-0f23ec004674.png',
     ctaUrl: '/brainstormer-pro',
     ctaText: 'Explore Pro'
   },
