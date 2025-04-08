@@ -2,78 +2,88 @@ import React, { useRef, useEffect } from 'react';
 import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SolutionItem } from '@/types/supabase';
+
 interface SolutionsSectionProps {
   title: string;
   solutions: SolutionItem[];
 }
+
 const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   title,
   solutions
 }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
   const displaySolutions = solutions && solutions.length > 0 ? solutions.map(solution => ({
     id: solution.id,
     icon: getIconByName(solution.icon_name),
     title: solution.title,
     description: solution.description,
     color: solution.color || 'from-purple-500/20 to-purple-600/20'
-  })) : [{
-    id: 'lms',
-    icon: <GraduationCap className="h-10 w-10" />,
-    title: 'AI-Powered Learning Management',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
-          <li>Human-centered interface enhanced by AI for intuitive course creation and management</li>
-          <li>Smart assessment tools that combine AI grading with human educational expertise</li>
-          <li>AI-driven analytics with human-interpreted reporting for actionable insights</li>
-          <li>Customizable branding and integrations overseen by human design specialists</li>
-        </ul>,
-    color: 'from-blue-500/20 to-blue-600/20'
-  }, {
-    id: 'brainstormer',
-    icon: <Cpu className="h-10 w-10" />,
-    title: 'Brainstormer',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
-          <li>Our proprietary AI platform developed by human AI experts</li>
-          <li>Brainstormer Pro: Human-designed customized ChatGPT solutions for business needs</li>
-          <li>Brainstormer Studio: Low-code environment where human creativity directs AI capabilities</li>
-          <li>AI agents orchestrated by human strategists to automate workflows in finance, HR, and strategy</li>
-        </ul>,
-    color: 'from-purple-500/20 to-purple-600/20'
-  }, {
-    id: 'ecommerce',
-    icon: <ShoppingBag className="h-10 w-10" />,
-    title: 'AI-Enhanced eCommerce',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
-          <li>Expert human designers directing AI tools for optimized website design and platform development</li>
-          <li>Specialized teams combining AI efficiency with human creativity for Shopify and Magento solutions</li>
-          <li>Our human experts with AI support have contributed to brands like MamaEarth, HyugaLife, Nykaa, and more</li>
-          <li>Exceptional 8-9% ROAS achieved through AI-human optimization strategies</li>
-        </ul>,
-    color: 'from-pink-500/20 to-pink-600/20'
-  }, {
-    id: 'chatbots',
-    icon: <MessageSquare className="h-10 w-10" />,
-    title: 'Human-Directed AI Chatbots',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
-          <li>Bespoke AI solutions crafted by human experts for your specific business needs</li>
-          <li>Team collaboration features designed by humans to enhance AI workflow integration</li>
-          <li>Knowledge base management combining AI document processing with human curation</li>
-          <li>Human-supervised AI translation services enabling support in 14+ Indic languages</li>
-        </ul>,
-    color: 'from-green-500/20 to-green-600/20'
-  }, {
-    id: 'creative',
-    icon: <Wand2 className="h-10 w-10" />,
-    title: 'AI-Augmented Creative Technology',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
-          <li>Chatbots that blend AI capabilities with human warmth for social media and website integration</li>
-          <li>Interactive marketing solutions where human creativity guides AI tools for quizzes and social filters</li>
-          <li>AR/VR experiences crafted through human-AI collaboration</li>
-          <li>Educational apps that combine human teaching expertise with AI engagement mechanics</li>
-        </ul>,
-    color: 'from-yellow-500/20 to-yellow-600/20'
-  }];
+  })) : [
+    {
+      id: 'lms',
+      icon: <GraduationCap className="h-10 w-10" />,
+      title: 'AI-Powered Learning Management',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+        <li>Human-centered interface enhanced by AI for intuitive course creation and management</li>
+        <li>Smart assessment tools that combine AI grading with human educational expertise</li>
+        <li>AI-driven analytics with human-interpreted reporting for actionable insights</li>
+        <li>Customizable branding and integrations overseen by human design specialists</li>
+      </ul>,
+      color: 'from-blue-500/20 to-blue-600/20'
+    },
+    {
+      id: 'brainstormer',
+      icon: <Cpu className="h-10 w-10" />,
+      title: 'Brainstormer',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+        <li>Our proprietary AI platform developed by human AI experts</li>
+        <li>Brainstormer Pro: Human-designed customized ChatGPT solutions for business needs</li>
+        <li>Brainstormer Studio: Low-code environment where human creativity directs AI capabilities</li>
+        <li>AI agents orchestrated by human strategists to automate workflows in finance, HR, and strategy</li>
+      </ul>,
+      color: 'from-purple-500/20 to-purple-600/20'
+    },
+    {
+      id: 'ecommerce',
+      icon: <ShoppingBag className="h-10 w-10" />,
+      title: 'AI-Enhanced eCommerce',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+        <li>Expert human designers directing AI tools for optimized website design and platform development</li>
+        <li>Specialized teams combining AI efficiency with human creativity for Shopify and Magento solutions</li>
+        <li>Our human experts with AI support have contributed to brands like MamaEarth, HyugaLife, Nykaa, and more</li>
+        <li>Exceptional 8-9% ROAS achieved through AI-human optimization strategies</li>
+      </ul>,
+      color: 'from-pink-500/20 to-pink-600/20'
+    },
+    {
+      id: 'chatbots',
+      icon: <MessageSquare className="h-10 w-10" />,
+      title: 'Human-Directed AI Chatbots',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+        <li>Bespoke AI solutions crafted by human experts for your specific business needs</li>
+        <li>Team collaboration features designed by humans to enhance AI workflow integration</li>
+        <li>Knowledge base management combining AI document processing with human curation</li>
+        <li>Human-supervised AI translation services enabling support in 14+ Indic languages</li>
+      </ul>,
+      color: 'from-green-500/20 to-green-600/20'
+    },
+    {
+      id: 'creative',
+      icon: <Wand2 className="h-10 w-10" />,
+      title: 'AI-Augmented Creative Technology',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+        <li>Chatbots that blend AI capabilities with human warmth for social media and website integration</li>
+        <li>Interactive marketing solutions where human creativity guides AI tools for quizzes and social filters</li>
+        <li>AR/VR experiences crafted through human-AI collaboration</li>
+        <li>Educational apps that combine human teaching expertise with AI engagement mechanics</li>
+      </ul>,
+      color: 'from-yellow-500/20 to-yellow-600/20'
+    }
+  ];
+
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -86,9 +96,11 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       root: null,
       threshold: 0.1
     });
+
     cardsRef.current.forEach(card => {
       if (card) observer.observe(card);
     });
+
     return () => {
       cardsRef.current.forEach(card => {
         if (card) observer.unobserve(card);
@@ -96,7 +108,6 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
     };
   }, []);
 
-  // Split the title to apply gradient to "Solutions" part
   const renderTitle = () => {
     if (!title) return "Our Solutions";
     const words = title.split(' ');
@@ -106,17 +117,24 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       </>;
   };
 
-  // Create rows of solutions with 3 items per row
   const solutionRows = [];
   for (let i = 0; i < displaySolutions.length; i += 3) {
     solutionRows.push(displaySolutions.slice(i, i + 3));
   }
-  return <section id="solutions" ref={sectionRef} className="py-10 sm:py-16 md:py-[50px]">
+
+  return (
+    <section id="solutions" ref={sectionRef} className="py-10 sm:py-16 md:py-[50px] mb-12 sm:mb-16 md:mb-20">
       <div className="container mx-auto px-3 sm:px-6">
         <h2 className="section-title">{renderTitle()}</h2>
         
-        {solutionRows.map((row, rowIndex) => <div key={`row-${rowIndex}`} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 last:mb-0">
-            {row.map((solution, index) => <div key={solution.id} ref={el => cardsRef.current[rowIndex * 3 + index] = el} className="glass relative overflow-hidden rounded-2xl opacity-0 transition-all duration-500 hover:shadow-lg h-full">
+        {solutionRows.map((row, rowIndex) => (
+          <div key={`row-${rowIndex}`} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 last:mb-0">
+            {row.map((solution, index) => (
+              <div 
+                key={solution.id} 
+                ref={el => cardsRef.current[rowIndex * 3 + index] = el} 
+                className="glass relative overflow-hidden rounded-2xl opacity-0 transition-all duration-500 hover:shadow-lg h-full"
+              >
                 <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", solution.color)}></div>
                 <div className="relative z-10 p-4 sm:p-6">
                   <div className="bg-white/10 p-2 sm:p-3 rounded-full w-fit mb-3 sm:mb-4">
@@ -127,11 +145,15 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
                     {solution.description}
                   </div>
                 </div>
-              </div>)}
-          </div>)}
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
-    </section>;
+    </section>
+  );
 };
+
 const getIconByName = (iconName: string) => {
   const normalizedIconName = iconName.toLowerCase();
   switch (normalizedIconName) {
@@ -154,4 +176,5 @@ const getIconByName = (iconName: string) => {
       return <Cpu className="h-10 w-10" />;
   }
 };
+
 export default SolutionsSection;
