@@ -28,7 +28,7 @@ const ServicesSection: React.FC<ServicesProps> = ({
     id: 'web-dev',
     icon: <Code className="h-10 w-10 text-noesis-blue" />,
     title: 'Web and Application Development',
-    description: <ul className="list-disc pl-5 mt-1 space-y-0.5 text-sm">
+    description: <ul className="list-disc pl-5 mt-1 space-y-0.5 text-base">
           <li>Build cutting-edge digital solutions with our AI-enhanced development process</li>
           <li>Combine human creativity with machine efficiency for optimal results</li>
           <li>Create responsive, accessible, and user-friendly applications</li>
@@ -37,7 +37,7 @@ const ServicesSection: React.FC<ServicesProps> = ({
     id: 'graphics',
     icon: <Palette className="h-10 w-10 text-purple-400" />,
     title: 'Graphics and Content Creation',
-    description: <ul className="list-disc pl-5 mt-1 space-y-0.5 text-sm">
+    description: <ul className="list-disc pl-5 mt-1 space-y-0.5 text-base">
           <li>AI-assisted content creation balanced with human editorial expertise for compelling website copy and articles.</li>
           <li>Human creativity enhanced by AI tools to design captivating visuals and infographics that resonate with audiences.</li>
         </ul>
@@ -45,7 +45,7 @@ const ServicesSection: React.FC<ServicesProps> = ({
     id: 'cloud',
     icon: <Database className="h-10 w-10 text-pink-400" />,
     title: 'Cloud Services & DevOps',
-    description: <ul className="list-disc pl-5 mt-1 space-y-0.5 text-sm">
+    description: <ul className="list-disc pl-5 mt-1 space-y-0.5 text-base">
           <li>AI-optimized hosting solutions managed by experienced human engineers.</li>
           <li>Intelligent performance tuning that leverages machine learning for predictive scaling while maintaining human oversight.</li>
           <li>Cloud flexibility with AI-enhanced configuration across AWS, Digital Ocean, Heroku, and dedicated servers managed by expert teams.</li>
@@ -54,7 +54,7 @@ const ServicesSection: React.FC<ServicesProps> = ({
     id: 'ai',
     icon: <BrainCircuit className="h-10 w-10 text-green-400" />,
     title: 'AI Customized Solutions',
-    description: <ul className="list-disc pl-5 mt-1 space-y-0.5 text-sm">
+    description: <ul className="list-disc pl-5 mt-1 space-y-0.5 text-base">
           <li>Human-guided AI systems that extract meaningful insights from complex data.</li>
           <li>Content generation that combines AI efficiency with human creativity for brand-perfect messaging.</li>
           <li>Next-generation experiences where human expertise directs AI capabilities for truly transformative engagement.</li>
@@ -63,7 +63,7 @@ const ServicesSection: React.FC<ServicesProps> = ({
     id: 'staff',
     icon: <Users className="h-10 w-10 text-yellow-400" />,
     title: 'AI-Enhanced Staff Solutions',
-    description: <ul className="list-disc pl-5 mt-1 space-y-0.5 text-sm">
+    description: <ul className="list-disc pl-5 mt-1 space-y-0.5 text-base">
           <li>Access to 500+ high-quality professionals trained in AI-human collaboration methodologies.</li>
           <li>Teams skilled in AI integration across Frontend, Backend, Fullstack, ML, DevOps and cloud technologies.</li>
           <li>90%+ retention rate thanks to our unique AI-human work environment.</li>
@@ -73,7 +73,7 @@ const ServicesSection: React.FC<ServicesProps> = ({
     id: 'digital-marketing',
     icon: <TrendingUp className="h-10 w-10 text-blue-400" />,
     title: 'Digital Marketing',
-    description: <ul className="list-disc pl-5 mt-1 space-y-0.5 text-sm">
+    description: <ul className="list-disc pl-5 mt-1 space-y-0.5 text-base">
           <li>Data-driven marketing strategies powered by AI analytics</li>
           <li>SEO optimization that combines machine learning with human expertise</li>
           <li>Targeted advertising campaigns that leverage AI for personalization</li>
@@ -95,7 +95,7 @@ const ServicesSection: React.FC<ServicesProps> = ({
                   {service.icon}
                 </div>
                 <h3 className="font-bold mb-1 sm:mb-2 gradient-text text-lg sm:text-xl">{service.title}</h3>
-                <div className="text-white/80 flex-grow text-sm">
+                <div className="text-white/80 flex-grow text-base">
                   {service.description}
                 </div>
               </div>
