@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -107,7 +108,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   for (let i = 0; i < displaySolutions.length; i += 3) {
     solutionRows.push(displaySolutions.slice(i, i + 3));
   }
-  return <section id="solutions" ref={sectionRef} className="py-10 sm:py-16 mb-12 sm:mb-16 md:mb-20 md:py-[40px]">
+  return <section id="solutions" ref={sectionRef} className="py-10 sm:py-16 md:py-[40px]">
       <div className="container mx-auto px-3 sm:px-6">
         <h2 className="section-title">{renderTitle()}</h2>
         
