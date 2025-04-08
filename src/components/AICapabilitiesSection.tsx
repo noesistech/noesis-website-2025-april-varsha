@@ -121,20 +121,20 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   };
 
   return (
-    <section id="ai-capabilities" className="page-section py-8">
+    <section id="ai-capabilities" className="page-section py-6">
       <div className="container mx-auto px-4 sm:px-6">
         <h2 className="section-title mb-6">
           Our <span className="gradient-text">AI</span> <span className="gradient-text">Capabilities</span>
         </h2>
         
         <Tabs defaultValue="development" className="max-w-6xl mx-auto">
-          <div className="flex justify-center mb-4">
-            <TabsList className="glass p-1">
+          <div className="flex justify-center mb-6">
+            <TabsList className="glass-card border border-white/20 shadow-lg bg-[#1A1F2C]/80 p-1">
               {categories.map(category => (
                 <TabsTrigger 
                   key={category.id}
                   value={category.id} 
-                  className="px-4 py-2 sm:px-6 sm:py-2 text-base" 
+                  className="px-4 py-2 text-base font-medium data-[state=active]:bg-gradient-to-r data-[state=active]:from-noesis-purple/70 data-[state=active]:to-noesis-blue/70 data-[state=active]:text-white transition-all" 
                   onClick={() => setActiveTab(category.id)}
                 >
                   {category.name}
@@ -161,7 +161,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
                           {getIconByName(capability.icon)}
                         </div>
                         <h3 className="text-lg font-bold mb-2">{capability.title}</h3>
-                        <p className="text-white/80 mb-3 text-xs sm:text-sm">{capability.description}</p>
+                        <p className="text-white/80 mb-3 text-sm">{capability.description}</p>
                         <div>
                           <h4 className="text-xs uppercase tracking-wider text-white/60 mb-1">Technologies</h4>
                           <div className="flex flex-wrap gap-1">
@@ -192,14 +192,12 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
             
             <div className="grid grid-cols-2 gap-4">
               {products.map((product) => {
-                // Fallback to a default image if the logo URL fails to load
-                const fallbackLogoUrl = '/placeholder.svg';
                 return (
                   <AIProductCard
                     key={product.id}
                     title={product.title}
                     description={product.description}
-                    logoUrl={fallbackLogoUrl}
+                    logoUrl={product.logoUrl || '/placeholder.svg'}
                     ctaText={product.ctaText}
                     ctaUrl={product.ctaUrl}
                   />

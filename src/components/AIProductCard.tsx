@@ -52,12 +52,12 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
   }, [logoUrl, title]);
 
   return (
-    <Card className="bg-[#1E2335] border-[#2A304B] overflow-hidden h-full">
+    <Card className="bg-[#1E2335] border-[#2A304B] overflow-hidden h-full glass-card">
       <CardContent className="p-0">
         <div className="p-4 flex flex-col h-full">
           {/* Product Logo */}
-          <div className="mb-4">
-            <div className="relative h-12 sm:h-16">
+          <div className="mb-3">
+            <div className="relative h-12">
               {!imageLoaded && !imageError && 
                 <div className="absolute inset-0 flex items-center justify-start">
                   <div className="animate-pulse bg-gray-700 h-8 w-32 rounded"></div>
@@ -86,7 +86,12 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
           {/* CTA Button */}
           {ctaUrl && ctaText && 
             <div className="mt-auto">
-              <Button variant="noesis" size="sm" asChild className="group">
+              <Button 
+                variant="noesis" 
+                size="sm" 
+                asChild 
+                className="group bg-gradient-to-r from-noesis-purple/80 to-noesis-blue/80 hover:from-noesis-purple hover:to-noesis-blue text-sm font-medium"
+              >
                 <a href={ctaUrl}>
                   {ctaText} <ArrowRight className="ml-1 w-3 h-3 transition-transform group-hover:translate-x-1" />
                 </a>
