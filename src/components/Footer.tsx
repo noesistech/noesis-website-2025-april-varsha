@@ -58,7 +58,7 @@ const Footer = () => {
           {/* Contact Us - Combined section with Email, Phone and Location */}
           <div className="lg:col-span-6 order-3">
             <h3 className="text-white text-xl font-bold mb-4">Contact Us</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {/* Email and Phone */}
               <div className="flex flex-col gap-3">
                 <a href="mailto:sales@noesis.tech" className="flex items-center gap-3 group transition-colors">
