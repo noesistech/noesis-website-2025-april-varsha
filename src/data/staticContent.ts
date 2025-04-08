@@ -20,6 +20,9 @@ export { solutionsSectionData, solutionItemsData } from './content/solutions';
 // Tech stack section
 export { techStackSectionData, techCategoriesData } from './content/techstack';
 
+// AI capabilities section
+export { aiCapabilitiesSectionData, aiCapabilitiesData } from './content/aiCapabilities';
+
 // Clients section
 export { 
   clientsSectionData, 

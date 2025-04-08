@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { toast } from "sonner";
 import {
@@ -17,6 +18,7 @@ import {
   PartnerLogo,
   Testimonial
 } from '@/types/contentTypes';
+import { AICapability } from '@/components/AICapabilitiesSection';
 
 // Import data from the new modular files
 import { heroSectionData, serviceCardsData } from '@/data/content/hero';
@@ -25,6 +27,7 @@ import { missionSectionData } from '@/data/content/mission';
 import { servicesSectionData, serviceItemsData } from '@/data/content/services';
 import { solutionsSectionData, solutionItemsData } from '@/data/content/solutions';
 import { techStackSectionData, techCategoriesData } from '@/data/content/techstack';
+import { aiCapabilitiesSectionData, aiCapabilitiesData } from '@/data/content/aiCapabilities';
 import { 
   clientsSectionData, 
   clientLogosData, 
@@ -44,6 +47,13 @@ interface ContentContextType {
   solutionItems: SolutionItem[];
   techStackSection: TechStackSection;
   techCategories: TechCategory[];
+  aiCapabilitiesSection: {
+    id: string;
+    title: string;
+    created_at: string;
+    updated_at: string;
+  };
+  aiCapabilities: AICapability[];
   clientsSection: ClientsSection;
   clientLogos: ClientLogo[];
   partnerLogos: PartnerLogo[];
@@ -71,6 +81,8 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   const [solutionItems] = useState<SolutionItem[]>(solutionItemsData);
   const [techStackSection] = useState<TechStackSection>(techStackSectionData);
   const [techCategories] = useState<TechCategory[]>(techCategoriesData);
+  const [aiCapabilitiesSection] = useState(aiCapabilitiesSectionData);
+  const [aiCapabilities] = useState<AICapability[]>(aiCapabilitiesData);
   const [clientsSection] = useState<ClientsSection>(clientsSectionData);
   const [clientLogos] = useState<ClientLogo[]>(clientLogosData);
   const [partnerLogos] = useState<PartnerLogo[]>(partnerLogosData);
@@ -99,6 +111,8 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
         solutionItems,
         techStackSection,
         techCategories,
+        aiCapabilitiesSection,
+        aiCapabilities,
         clientsSection,
         clientLogos,
         partnerLogos,
