@@ -130,7 +130,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
     <section id="ai-capabilities" className="page-section">
       <div className="container mx-auto px-4 sm:px-6">
         <h2 className="section-title">
-          Our <span className="gradient-text">AI</span> <span>Capabilities</span>
+          Our <span className="gradient-text">AI</span> <span className="gradient-text">Capabilities</span>
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
@@ -167,9 +167,9 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         </div>
         
         {products && products.length > 0 && (
-          <div className="mt-36">
+          <div className="mt-24">
             <h2 className="section-title">
-              Our <span className="gradient-text">AI</span> <span>Products</span>
+              Our <span className="gradient-text">AI</span> <span className="gradient-text">Products</span>
             </h2>
             <h3 className="text-2xl font-semibold text-center mt-2 mb-12 text-white/80">{productsSection.title}</h3>
             
