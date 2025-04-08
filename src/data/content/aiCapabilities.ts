@@ -1,4 +1,3 @@
-
 import { AICapability, AIProduct } from '@/components/AICapabilitiesSection';
 
 export const aiCapabilitiesSectionData = {
@@ -74,7 +73,7 @@ export const aiProductsData: AIProduct[] = [
     description: 'Our advanced AI engine for content, marketing, and business process automation tailored for enterprise needs. Leverage Brainstormer Pro to enhance workflow and drive productivity within a secure, collaborative environment.',
     icon: 'brain',
     // Use the direct path to the uploaded image
-    logoUrl: '/brainstormer-pro-logo.png',
+    logoUrl: '/lovable-uploads/c73033b4-5381-4ab6-bc76-0239af483970.png',
     ctaUrl: '/brainstormer-pro',
     ctaText: 'Explore Pro'
   },
@@ -83,7 +82,8 @@ export const aiProductsData: AIProduct[] = [
     title: 'Brainstormer Studio',
     description: 'Brainstormer Studio empowers you to create AI agents effortlessly. Our intuitive low-code/no-code platform is ideal for creative and enterprise environments, simplifying AI development and deployment.',
     icon: 'sparkles',
-    // Use the direct path to the uploaded image
+    // Use the direct path to the uploaded image - for the second product, we're keeping the previous path
+    // since you've only provided one new image
     logoUrl: '/brainstormer-studio-logo.png',
     ctaText: 'Try Studio',
     ctaUrl: '/brainstormer-studio'
