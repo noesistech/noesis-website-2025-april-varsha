@@ -1,8 +1,9 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Brain, BrainCircuit, Microscope, Settings, Zap, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import AIProductCard from './AIProductCard';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export interface AICapability {
   id: string;
@@ -11,6 +12,7 @@ export interface AICapability {
   description: string;
   tools: string[];
   color: string;
+  category?: string;
 }
 
 export interface AIProduct {
@@ -40,6 +42,33 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   productsSection
 }) => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [activeTab, setActiveTab] = useState('all');
+
+  // Define capability categories
+  const categories = [
+    { id: 'all', name: 'All Capabilities' },
+    { id: 'nlp', name: 'Language Processing' },
+    { id: 'vision', name: 'Computer Vision' },
+    { id: 'engineering', name: 'AI Engineering' }
+  ];
+
+  // Filter capabilities based on selected category
+  const getFilteredCapabilities = () => {
+    if (activeTab === 'all') {
+      return capabilities;
+    }
+    
+    const categoryMapping: Record<string, string[]> = {
+      'nlp': ['nlp'],
+      'vision': ['cv'],
+      'engineering': ['aiops', 'deploy-cloud', 'deploy-edge', 'ml']
+    };
+    
+    const relevantIds = categoryMapping[activeTab] || [];
+    return capabilities.filter(cap => relevantIds.includes(cap.id));
+  };
+
+  const filteredCapabilities = getFilteredCapabilities();
 
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
@@ -65,7 +94,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         if (card) observer.unobserve(card);
       });
     };
-  }, []);
+  }, [activeTab]);
 
   // Helper function to get icon by name
   const getIconByName = (iconName: string) => {
@@ -89,39 +118,6 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
     }
   };
 
-  // Format the section titles to highlight specific words
-  const formatSectionTitle = (titleText: string, highlightWords: string[]) => {
-    // Instead of checking for exact matches to highlight,
-    // we'll split the title by each highlight word and join with spaces
-    let result: React.ReactNode[] = [];
-    let remainingText = titleText;
-    
-    highlightWords.forEach((word, wordIndex) => {
-      if (remainingText.includes(word)) {
-        // Find the position of the highlight word
-        const wordPos = remainingText.indexOf(word);
-        
-        // Push text before the word
-        if (wordPos > 0) {
-          result.push(<span key={`pre-${wordIndex}`}>{remainingText.substring(0, wordPos)}</span>);
-        }
-        
-        // Push the highlight word with a space after it
-        result.push(<span key={`highlight-${wordIndex}`} className="gradient-text">{word}</span>);
-        
-        // Update remaining text
-        remainingText = remainingText.substring(wordPos + word.length);
-      }
-    });
-    
-    // Add any remaining text
-    if (remainingText.length > 0) {
-      result.push(<span key="remaining">{remainingText}</span>);
-    }
-    
-    return result;
-  };
-
   // Log AI products data for debugging
   console.info('Products data:', products);
   console.info('Products section data:', productsSection);
@@ -133,45 +129,64 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
           Our <span className="gradient-text">AI</span> <span className="gradient-text">Capabilities</span>
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-          {capabilities.map((capability, index) => (
-            <div
-              key={capability.id}
-              ref={el => cardsRef.current[index] = el}
-              className="glass-card opacity-0 relative overflow-hidden"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", capability.color)}></div>
-              <div className="relative z-10">
-                <div className="bg-white/10 p-3 rounded-lg w-fit mb-4">
-                  {getIconByName(capability.icon)}
-                </div>
-                <h3 className="text-xl font-bold mb-3">{capability.title}</h3>
-                <p className="text-white/80 mb-6">{capability.description}</p>
-                <div>
-                  <h4 className="text-sm uppercase tracking-wider text-white/60 mb-2">Technologies</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {capability.tools.map((tool) => (
-                      <span 
-                        key={`${capability.id}-${tool}`}
-                        className="bg-white/10 text-white/90 text-xs px-2 py-1 rounded"
-                      >
-                        {tool}
-                      </span>
-                    ))}
+        <Tabs defaultValue="all" className="max-w-6xl mx-auto">
+          <div className="flex justify-center mb-8 sm:mb-10 md:mb-12">
+            <TabsList className="glass p-1">
+              {categories.map(category => (
+                <TabsTrigger 
+                  key={category.id}
+                  value={category.id} 
+                  className="px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 data-[state=active]:bg-noesis-purple data-[state=active]:text-white text-base sm:text-lg" 
+                  onClick={() => setActiveTab(category.id)}
+                >
+                  {category.name}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </div>
+          
+          <TabsContent value={activeTab} className="animate-fade-in">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredCapabilities.map((capability, index) => (
+                <div
+                  key={capability.id}
+                  ref={el => cardsRef.current[index] = el}
+                  className="glass-card opacity-0 relative overflow-hidden min-h-[320px]"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", capability.color)}></div>
+                  <div className="relative z-10 p-6">
+                    <div className="bg-white/10 p-3 rounded-lg w-fit mb-4">
+                      {getIconByName(capability.icon)}
+                    </div>
+                    <h3 className="text-xl font-bold mb-3">{capability.title}</h3>
+                    <p className="text-white/80 mb-6">{capability.description}</p>
+                    <div>
+                      <h4 className="text-sm uppercase tracking-wider text-white/60 mb-2">Technologies</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {capability.tools.map((tool) => (
+                          <span 
+                            key={`${capability.id}-${tool}`}
+                            className="bg-white/10 text-white/90 text-xs px-3 py-1.5 rounded-full hover:bg-white/20 transition-colors"
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </TabsContent>
+        </Tabs>
         
         {products && products.length > 0 && (
           <div className="mt-24">
             <h2 className="section-title">
               Our <span className="gradient-text">AI</span> <span className="gradient-text">Products</span>
             </h2>
-            <h3 className="text-2xl font-semibold text-center mt-2 mb-12 text-white/80">{productsSection.title}</h3>
+            <h3 className="text-2xl font-semibold text-center mt-2 mb-12 text-white/80">{productsSection.subtitle}</h3>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {products.map((product) => {
