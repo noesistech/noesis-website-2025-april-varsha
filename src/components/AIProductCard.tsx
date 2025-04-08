@@ -19,18 +19,18 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
   useEffect(() => {
     setImageLoaded(false);
     setImageError(false);
-  }, [product.logoUrl]);
-
-  // Function to handle image loading errors
-  const handleImageError = () => {
-    console.error(`Failed to load image for ${product.title}`, product.logoUrl);
-    setImageError(true);
-  };
-
-  const handleImageLoad = () => {
-    console.log(`Successfully loaded image for ${product.title}`);
-    setImageLoaded(true);
-  };
+    
+    // Preload the image
+    if (product.logoUrl) {
+      const img = new Image();
+      img.src = product.logoUrl;
+      img.onload = () => setImageLoaded(true);
+      img.onerror = () => {
+        console.error(`Failed to load image for ${product.title}:`, product.logoUrl);
+        setImageError(true);
+      };
+    }
+  }, [product.logoUrl, product.title]);
 
   // Select the appropriate icon based on product.icon
   const renderIcon = () => {
@@ -49,21 +49,21 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
       <CardContent className="p-0">
         <div className="p-6 flex flex-col h-full">
           {/* Product Logo or Fallback Icon */}
-          <div className="mb-6 max-w-[250px]">
+          <div className="mb-6">
             {product.logoUrl && !imageError ? (
-              <div className="relative">
-                <img 
-                  src={product.logoUrl} 
-                  alt={`${product.title} logo`} 
-                  onError={handleImageError}
-                  onLoad={handleImageLoad}
-                  className={`w-full h-auto object-contain ${!imageLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
-                />
+              <div className="relative h-16 sm:h-20">
                 {!imageLoaded && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="animate-pulse bg-gray-700 h-16 w-3/4 rounded"></div>
+                  <div className="absolute inset-0 flex items-center justify-start">
+                    <div className="animate-pulse bg-gray-700 h-12 w-48 rounded"></div>
                   </div>
                 )}
+                <img 
+                  src={product.logoUrl} 
+                  alt={`${product.title} logo`}
+                  className={`h-full object-contain ${imageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+                  onLoad={() => setImageLoaded(true)}
+                  onError={() => setImageError(true)}
+                />
               </div>
             ) : (
               <div className="flex items-center">
