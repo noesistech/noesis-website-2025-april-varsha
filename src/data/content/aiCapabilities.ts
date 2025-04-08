@@ -73,7 +73,7 @@ export const aiProductsData: AIProduct[] = [
     title: 'Brainstormer Pro',
     description: 'Our advanced AI engine for content, marketing, and business process automation tailored for enterprise needs. Leverage Brainstormer Pro to enhance workflow and drive productivity within a secure, collaborative environment.',
     icon: 'brain',
-    logoUrl: '/lovable-uploads/e759740b-6099-4706-96ce-b014b6a79aa2.png',
+    logoUrl: '/images/brainstormer-pro-logo.png',
     ctaUrl: '/brainstormer-pro',
     ctaText: 'Explore Pro'
   },
@@ -82,7 +82,7 @@ export const aiProductsData: AIProduct[] = [
     title: 'Brainstormer Studio',
     description: 'Brainstormer Studio empowers you to create AI agents effortlessly. Our intuitive low-code/no-code platform is ideal for creative and enterprise environments, simplifying AI development and deployment.',
     icon: 'sparkles',
-    logoUrl: '/lovable-uploads/e759740b-6099-4706-96ce-b014b6a79aa2.png',
+    logoUrl: '/images/brainstormer-studio-logo.png',
     ctaUrl: '/brainstormer-studio',
     ctaText: 'Try Studio'
   }

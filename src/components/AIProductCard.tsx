@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Brain, Sparkles } from 'lucide-react';
@@ -14,10 +14,16 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  
+  // Reset image states when product changes
+  useEffect(() => {
+    setImageLoaded(false);
+    setImageError(false);
+  }, [product.logoUrl]);
 
   // Function to handle image loading errors
   const handleImageError = () => {
-    console.error(`Failed to load image for ${product.title}`);
+    console.error(`Failed to load image for ${product.title}`, product.logoUrl);
     setImageError(true);
   };
 
@@ -45,13 +51,20 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
           {/* Product Logo or Fallback Icon */}
           <div className="mb-6 max-w-[250px]">
             {product.logoUrl && !imageError ? (
-              <img 
-                src={product.logoUrl} 
-                alt={`${product.title} logo`} 
-                onError={handleImageError}
-                onLoad={handleImageLoad}
-                className={`w-full h-auto object-contain ${!imageLoaded ? 'hidden' : 'block'}`}
-              />
+              <div className="relative">
+                <img 
+                  src={product.logoUrl} 
+                  alt={`${product.title} logo`} 
+                  onError={handleImageError}
+                  onLoad={handleImageLoad}
+                  className={`w-full h-auto object-contain ${!imageLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+                />
+                {!imageLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="animate-pulse bg-gray-700 h-16 w-3/4 rounded"></div>
+                  </div>
+                )}
+              </div>
             ) : (
               <div className="flex items-center">
                 {renderIcon()}
