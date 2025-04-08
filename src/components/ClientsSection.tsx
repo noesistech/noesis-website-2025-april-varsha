@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { useContent } from '@/contexts/ContentContext';
+
 const ClientsSection = () => {
   const {
     clientsSection,
@@ -7,10 +9,11 @@ const ClientsSection = () => {
     partnerLogos,
     testimonials
   } = useContent();
+
   return <section id="clients" className="bg-gradient-to-b from-noesis-darkest to-noesis-dark py-[50px]">
       <div className="container mx-auto px-4">
         {clientsSection && <div className="mb-16 text-center">
-            <h2 className="section-title">{clientsSection.title}</h2>
+            <h2 className="section-title">Our <span className="gradient-text">Clients & Partners</span></h2>
           </div>}
         
         {/* Clients Logos */}
@@ -38,7 +41,7 @@ const ClientsSection = () => {
             <h3 className="text-2xl font-semibold mb-12 text-center">{clientsSection?.testimonials_subtitle}</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {testimonials.map(testimonial => <div key={testimonial.id} className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 p-6 rounded-xl backdrop-blur-sm border border-gray-700/50">
-                  <blockquote className="text-lg italic mb-4 text-white/90">"{testimonial.quote}"</blockquote>
+                  <blockquote className="text-lg mb-4 text-white/90">{testimonial.quote}</blockquote>
                   <div className="flex items-center">
                     <div>
                       <div className="font-semibold">{testimonial.author}</div>
@@ -51,4 +54,5 @@ const ClientsSection = () => {
       </div>
     </section>;
 };
+
 export default ClientsSection;
