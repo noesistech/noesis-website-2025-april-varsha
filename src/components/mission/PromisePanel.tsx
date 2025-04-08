@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -90,21 +89,21 @@ const PromisePanel = ({ title, text }: PromisePanelProps) => {
     };
   }, []);
   
-  // Function to render the promise text without any gradient word highlighting
   const renderPromiseText = () => {
     if (isMobile) {
       return (
         <>
-          <span>Human creativity,</span>
+          <span>Human </span><span className="gradient-word">creativity</span><span>,</span>
           <br />
-          <span>AI precision</span>
+          <span>AI </span><span className="gradient-word">precision</span>
         </>
       );
     }
     
     return (
       <>
-        <span>Human creativity, AI precision</span>
+        <span>Human </span><span className="gradient-word">creativity</span><span>, </span>
+        <span>AI </span><span className="gradient-word">precision</span>
       </>
     );
   };
