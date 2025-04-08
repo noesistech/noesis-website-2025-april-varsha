@@ -63,7 +63,8 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
                 <img 
                   src={product.logoUrl} 
                   alt={`${product.title} logo`}
-                  className={`h-full object-contain ${imageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+                  className={`h-full max-h-20 object-contain ${imageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+                  style={{maxWidth: '200px'}}
                   onLoad={() => setImageLoaded(true)}
                   onError={() => setImageError(true)}
                 />
