@@ -44,20 +44,19 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [activeTab, setActiveTab] = useState('development');
 
-  // Define capability categories - removed "all" option
+  // Define capability categories
   const categories = [
     { id: 'development', name: 'AI Development' },
     { id: 'deployment', name: 'AI Deployment' }
   ];
 
   // Filter capabilities based on selected category
-  const getFilteredCapabilities = () => {
-    return capabilities.filter(cap => cap.category === activeTab);
-  };
-
-  const filteredCapabilities = getFilteredCapabilities();
-
+  const filteredCapabilities = capabilities.filter(cap => cap.category === activeTab);
+  
   useEffect(() => {
+    // Reset the refs array when filtered capabilities change
+    cardsRef.current = cardsRef.current.slice(0, filteredCapabilities.length);
+    
     const observer = new IntersectionObserver(entries => {
       entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
@@ -72,16 +71,23 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       threshold: 0.1
     });
     
-    cardsRef.current.forEach(card => {
-      if (card) observer.observe(card);
-    });
+    // Small delay to ensure DOM is ready
+    setTimeout(() => {
+      cardsRef.current.forEach(card => {
+        if (card) {
+          // Force initial opacity to ensure animation works
+          card.style.opacity = '0';
+          observer.observe(card);
+        }
+      });
+    }, 100);
     
     return () => {
       cardsRef.current.forEach(card => {
         if (card) observer.unobserve(card);
       });
     };
-  }, [activeTab]);
+  }, [filteredCapabilities, activeTab]);
 
   // Helper function to get icon by name
   const getIconByName = (iconName: string) => {
@@ -105,19 +111,15 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
     }
   };
 
-  // Log AI products data for debugging
-  console.info('Products data:', products);
-  console.info('Products section data:', productsSection);
-
   return (
-    <section id="ai-capabilities" className="page-section">
+    <section id="ai-capabilities" className="page-section py-12">
       <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="section-title">
+        <h2 className="section-title mb-8">
           Our <span className="gradient-text">AI</span> <span className="gradient-text">Capabilities</span>
         </h2>
         
         <Tabs defaultValue="development" className="max-w-6xl mx-auto">
-          <div className="flex justify-center mb-8 sm:mb-10 md:mb-12">
+          <div className="flex justify-center mb-6">
             <TabsList className="glass p-1">
               {categories.map(category => (
                 <TabsTrigger 
@@ -132,58 +134,63 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
             </TabsList>
           </div>
           
-          <TabsContent value={activeTab} className="animate-fade-in">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredCapabilities.map((capability, index) => (
-                <div
-                  key={capability.id}
-                  ref={el => cardsRef.current[index] = el}
-                  className="glass-card opacity-0 relative overflow-hidden min-h-[320px]"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", capability.color)}></div>
-                  <div className="relative z-10 p-6">
-                    <div className="bg-white/10 p-3 rounded-lg w-fit mb-4">
-                      {getIconByName(capability.icon)}
-                    </div>
-                    <h3 className="text-xl font-bold mb-3">{capability.title}</h3>
-                    <p className="text-white/80 mb-6">{capability.description}</p>
-                    <div>
-                      <h4 className="text-sm uppercase tracking-wider text-white/60 mb-2">Technologies</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {capability.tools.map((tool) => (
-                          <span 
-                            key={`${capability.id}-${tool}`}
-                            className="bg-white/10 text-white/90 text-xs px-3 py-1.5 rounded-full hover:bg-white/20 transition-colors"
-                          >
-                            {tool}
-                          </span>
-                        ))}
+          {categories.map((category) => (
+            <TabsContent key={category.id} value={category.id} className="animate-fade-in">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {capabilities
+                  .filter(cap => cap.category === category.id)
+                  .map((capability, index) => (
+                    <div
+                      key={capability.id}
+                      ref={el => cardsRef.current[index] = el}
+                      className="glass-card opacity-0 relative overflow-hidden min-h-[280px]"
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", capability.color)}></div>
+                      <div className="relative z-10 p-5">
+                        <div className="bg-white/10 p-3 rounded-lg w-fit mb-4">
+                          {getIconByName(capability.icon)}
+                        </div>
+                        <h3 className="text-xl font-bold mb-2">{capability.title}</h3>
+                        <p className="text-white/80 mb-4 text-sm">{capability.description}</p>
+                        <div>
+                          <h4 className="text-xs uppercase tracking-wider text-white/60 mb-2">Technologies</h4>
+                          <div className="flex flex-wrap gap-1.5">
+                            {capability.tools.map((tool) => (
+                              <span 
+                                key={`${capability.id}-${tool}`}
+                                className="bg-white/10 text-white/90 text-xs px-2.5 py-1 rounded-full hover:bg-white/20 transition-colors"
+                              >
+                                {tool}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </TabsContent>
+                  ))}
+              </div>
+            </TabsContent>
+          ))}
         </Tabs>
         
         {products && products.length > 0 && (
-          <div className="mt-24">
-            <h2 className="section-title">
+          <div className="mt-16">
+            <h2 className="section-title mb-2">
               Our <span className="gradient-text">AI</span> <span className="gradient-text">Products</span>
             </h2>
-            <h3 className="text-2xl font-semibold text-center mt-2 mb-12 text-white/80">{productsSection.subtitle}</h3>
+            <h3 className="text-xl font-semibold text-center mb-8 text-white/80">{productsSection.subtitle}</h3>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {products.map((product) => {
-                console.info(`Attempting to load image for ${product.title}: ${product.logoUrl}`);
+                // Fallback to a default image if the logo URL fails to load
+                const fallbackLogoUrl = '/placeholder.svg';
                 return (
                   <AIProductCard
                     key={product.id}
                     title={product.title}
                     description={product.description}
-                    logoUrl={product.logoUrl}
+                    logoUrl={fallbackLogoUrl}
                     ctaText={product.ctaText}
                     ctaUrl={product.ctaUrl}
                   />
