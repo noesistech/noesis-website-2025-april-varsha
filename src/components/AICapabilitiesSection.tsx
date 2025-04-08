@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Brain, BrainCircuit, Bot, Microscope, Settings, Zap } from 'lucide-react';
+import { Brain, BrainCircuit, Bot, Microscope, Settings, Zap, Sparkles, Layers } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export interface AICapability {
@@ -13,14 +13,23 @@ export interface AICapability {
   color?: string;
 }
 
+export interface AIProduct {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+}
+
 export interface AICapabilitiesSectionProps {
   title: string;
   capabilities: AICapability[];
+  products?: AIProduct[];
 }
 
 const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   title,
-  capabilities = []
+  capabilities = [],
+  products = []
 }) => {
   const [activeTab, setActiveTab] = useState('development');
 
@@ -31,13 +40,17 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       case 'brain-circuit':
         return <BrainCircuit className="h-10 w-10 text-noesis-blue" />;
       case 'robot':
-        return <Bot className="h-10 w-10 text-green-400" />; // Changed Robot to Bot
+        return <Bot className="h-10 w-10 text-green-400" />; 
       case 'microscope':
         return <Microscope className="h-10 w-10 text-pink-400" />;
       case 'settings':
         return <Settings className="h-10 w-10 text-yellow-400" />;
       case 'zap':
         return <Zap className="h-10 w-10 text-orange-400" />;
+      case 'sparkles':
+        return <Sparkles className="h-10 w-10 text-cyan-400" />;
+      case 'layers':
+        return <Layers className="h-10 w-10 text-indigo-400" />;
       default:
         return <Brain className="h-10 w-10 text-noesis-purple" />;
     }
@@ -151,6 +164,32 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
             </div>
           </TabsContent>
         </Tabs>
+        
+        {/* Brainstormer Products Section */}
+        {products && products.length > 0 && (
+          <div className="mt-16 max-w-5xl mx-auto">
+            <h3 className="text-2xl font-bold text-center mb-8">
+              <span className="gradient-text">Brainstormer Suite</span> - Our AI Products
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {products.map((product) => (
+                <div key={product.id} className="glass-card h-full">
+                  <div className="flex items-start mb-4">
+                    <div className="bg-white/10 p-2 sm:p-3 rounded-full w-fit mr-4">
+                      {renderIcon(product.icon)}
+                    </div>
+                    <h4 className="text-xl font-bold gradient-text mt-2">
+                      {product.title}
+                    </h4>
+                  </div>
+                  <p className="text-white/80">
+                    {product.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

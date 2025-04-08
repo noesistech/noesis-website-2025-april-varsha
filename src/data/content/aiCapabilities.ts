@@ -1,5 +1,5 @@
 
-import { AICapability } from '@/components/AICapabilitiesSection';
+import { AICapability, AIProduct } from '@/components/AICapabilitiesSection';
 
 export const aiCapabilitiesSectionData = {
   id: 'ai-capabilities-section-1',
@@ -52,9 +52,24 @@ export const aiCapabilitiesData: AICapability[] = [
   {
     id: 'deploy-edge',
     title: 'Edge AI & Embedded Systems',
-    icon: 'bot', // Changed from 'robot' to 'bot'
+    icon: 'bot', 
     description: 'We implement AI capabilities directly on edge devices, enabling real-time processing without cloud connectivity for IoT, mobile, and embedded systems.',
     tools: ['TensorFlow Lite', 'ONNX', 'Edge TPU', 'Model Compression', 'Quantization', 'IoT Integration'],
     color: 'from-orange-500/20 to-orange-600/20'
   },
+];
+
+export const aiProductsData: AIProduct[] = [
+  {
+    id: 'brainstormer-pro',
+    title: 'Brainstormer Pro',
+    description: 'Our advanced AI engine for content, marketing, and business process automation tailored for enterprise needs. Leverage Brainstormer Pro to enhance workflow and drive productivity within a secure, collaborative environment.',
+    icon: 'brain'
+  },
+  {
+    id: 'brainstormer-studio',
+    title: 'Brainstormer Studio',
+    description: 'Brainstormer Studio empowers you to create AI agents effortlessly. Our intuitive low-code/no-code platform is ideal for creative and enterprise environments, simplifying AI development and deployment.',
+    icon: 'sparkles'
+  }
 ];

@@ -18,7 +18,7 @@ import {
   PartnerLogo,
   Testimonial
 } from '@/types/contentTypes';
-import { AICapability } from '@/components/AICapabilitiesSection';
+import { AICapability, AIProduct } from '@/components/AICapabilitiesSection';
 
 // Import data from the new modular files
 import { heroSectionData, serviceCardsData } from '@/data/content/hero';
@@ -27,7 +27,7 @@ import { missionSectionData } from '@/data/content/mission';
 import { servicesSectionData, serviceItemsData } from '@/data/content/services';
 import { solutionsSectionData, solutionItemsData } from '@/data/content/solutions';
 import { techStackSectionData, techCategoriesData } from '@/data/content/techstack';
-import { aiCapabilitiesSectionData, aiCapabilitiesData } from '@/data/content/aiCapabilities';
+import { aiCapabilitiesSectionData, aiCapabilitiesData, aiProductsData } from '@/data/content/aiCapabilities';
 import { 
   clientsSectionData, 
   clientLogosData, 
@@ -54,6 +54,7 @@ interface ContentContextType {
     updated_at: string;
   };
   aiCapabilities: AICapability[];
+  aiProducts: AIProduct[];
   clientsSection: ClientsSection;
   clientLogos: ClientLogo[];
   partnerLogos: PartnerLogo[];
@@ -83,6 +84,7 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   const [techCategories] = useState<TechCategory[]>(techCategoriesData);
   const [aiCapabilitiesSection] = useState(aiCapabilitiesSectionData);
   const [aiCapabilities] = useState<AICapability[]>(aiCapabilitiesData);
+  const [aiProducts] = useState<AIProduct[]>(aiProductsData);
   const [clientsSection] = useState<ClientsSection>(clientsSectionData);
   const [clientLogos] = useState<ClientLogo[]>(clientLogosData);
   const [partnerLogos] = useState<PartnerLogo[]>(partnerLogosData);
@@ -113,6 +115,7 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
         techCategories,
         aiCapabilitiesSection,
         aiCapabilities,
+        aiProducts,
         clientsSection,
         clientLogos,
         partnerLogos,
