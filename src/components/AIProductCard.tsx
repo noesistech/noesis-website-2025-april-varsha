@@ -34,6 +34,8 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
         console.error(`Failed to load image for ${product.title}:`, product.logoUrl, e);
         setImageError(true);
       };
+    } else {
+      setImageError(true);
     }
   }, [product.logoUrl, product.title]);
 
@@ -50,7 +52,7 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
                 </div>
               )}
               
-              {(imageError || !product.logoUrl) ? (
+              {imageError ? (
                 <h3 className="text-xl font-bold text-white">{product.title}</h3>
               ) : (
                 <img 
