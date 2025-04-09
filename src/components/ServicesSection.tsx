@@ -1,9 +1,16 @@
 
 import React from 'react';
 import { Card } from '@/components/ui/card';
-import { Palette, Globe, Laptop, Cloud, BrainCircuit, Users, Code, PenTool, Database, TrendingUp, Image } from 'lucide-react';
+import { Palette, Globe, Laptop, Cloud, BrainCircuit, Users, Code, PenTool, Database, TrendingUp, Image, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ServiceItem } from '@/types/supabase';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface ServicesProps {
   title: string;
@@ -14,6 +21,8 @@ const ServicesSection: React.FC<ServicesProps> = ({
   title,
   services
 }) => {
+  const isMobile = useIsMobile();
+  
   const displayServices = services && services.length > 0 ? services.map(service => ({
     id: service.id,
     icon: getIconByName(service.icon_name),
@@ -88,19 +97,41 @@ const ServicesSection: React.FC<ServicesProps> = ({
           Our <span className="gradient-text">Services</span>
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {displayServices.map(service => <Card key={service.id} className="glass-card group transition-all duration-300 hover:bg-white/10 h-full">
-              <div className="p-3 sm:p-4 flex flex-col items-start text-left h-full">
-                <div className="mb-2 transform group-hover:scale-110 transition-transform duration-300">
-                  {service.icon}
+        {isMobile ? (
+          <Accordion type="single" collapsible className="w-full">
+            {displayServices.map(service => (
+              <AccordionItem key={service.id} value={service.id} className="glass-card mb-4 border-none">
+                <AccordionTrigger className="p-3 flex items-center text-left">
+                  <div className="flex items-center">
+                    <div className="mr-3 transform group-hover:scale-110 transition-transform duration-300">
+                      {service.icon}
+                    </div>
+                    <h3 className="font-bold gradient-text text-lg">{service.title}</h3>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="p-3 pt-0">
+                  <div className="text-white/80 text-base">
+                    {service.description}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {displayServices.map(service => <Card key={service.id} className="glass-card group transition-all duration-300 hover:bg-white/10 h-full">
+                <div className="p-3 sm:p-4 flex flex-col items-start text-left h-full">
+                  <div className="mb-2 transform group-hover:scale-110 transition-transform duration-300">
+                    {service.icon}
+                  </div>
+                  <h3 className="font-bold mb-1 sm:mb-2 gradient-text text-lg sm:text-xl">{service.title}</h3>
+                  <div className="text-white/80 flex-grow text-base">
+                    {service.description}
+                  </div>
                 </div>
-                <h3 className="font-bold mb-1 sm:mb-2 gradient-text text-lg sm:text-xl">{service.title}</h3>
-                <div className="text-white/80 flex-grow text-base">
-                  {service.description}
-                </div>
-              </div>
-            </Card>)}
-        </div>
+              </Card>)}
+          </div>
+        )}
       </div>
     </section>;
 };
