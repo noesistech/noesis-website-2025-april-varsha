@@ -1,3 +1,4 @@
+
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
@@ -107,7 +108,7 @@ const config = {
           "100%": { transform: "translateX(100%)" }
         },
         "border-rainbow": {
-          "0%": { borderColor: "#a074ff" },
+          "0%": { backgroundPosition: "0% 50%", borderColor: "#a074ff" },
           "12.5%": { borderColor: "#8257e6" },
           "25%": { borderColor: "#4ea7ff" },
           "37.5%": { borderColor: "#2fcbcf" },
@@ -115,16 +116,7 @@ const config = {
           "62.5%": { borderColor: "#f6e05e" },
           "75%": { borderColor: "#f472b6" },
           "87.5%": { borderColor: "#d946ef" },
-          "100%": { borderColor: "#a074ff" }
-        },
-        "gradient-x": {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
-        },
-        "border-flow": {
-          "0%": { backgroundPosition: "0% 0%" },
-          "50%": { backgroundPosition: "100% 0%" },
-          "100%": { backgroundPosition: "200% 0%" }
+          "100%": { backgroundPosition: "0% 50%", borderColor: "#a074ff" }
         },
       },
       animation: {
@@ -136,12 +128,9 @@ const config = {
         "mobile-menu-slide-down": "mobile-menu-slide-down 0.3s ease-out forwards",
         "shine": "shine 1.5s ease-in-out infinite",
         "border-rainbow": "border-rainbow 10s ease-in-out infinite",
-        "gradient-flow": "gradient-x 8s ease-in-out infinite",
-        "border-flow": "border-flow 8s ease-in-out infinite",
       },
       backgroundImage: {
         'rainbow-gradient': 'linear-gradient(60deg, #a074ff, #8257e6, #4ea7ff, #2fcbcf, #4ade80, #f6e05e, #f472b6, #d946ef, #a074ff)',
-        'gradient-rainbow': 'linear-gradient(90deg, #a074ff, #8257e6, #4ea7ff, #2fcbcf, #4ade80, #f6e05e, #f472b6, #d946ef, #a074ff)',
       },
     },
   },
