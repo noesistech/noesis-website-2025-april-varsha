@@ -1,5 +1,4 @@
-
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface PromisePanelProps {
@@ -7,83 +6,122 @@ interface PromisePanelProps {
   text: string;
 }
 
-const PromisePanel = ({
-  title,
-  text
-}: PromisePanelProps) => {
-  const panelRef = useRef<HTMLDivElement>(null);
+const PromisePanel = ({ title, text }: PromisePanelProps) => {
+  const promiseTextRef = useRef<HTMLParagraphElement>(null);
+  const promiseContainerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.3,
-      }
-    );
+    if (!promiseTextRef.current) return;
     
-    if (panelRef.current) {
-      observer.observe(panelRef.current);
-    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, { threshold: 0.5 });
     
-    return () => {
-      if (panelRef.current) {
-        observer.unobserve(panelRef.current);
-      }
-    };
+    observer.observe(promiseTextRef.current);
+    
+    return () => observer.disconnect();
   }, []);
   
   useEffect(() => {
-    const panel = panelRef.current;
-    if (!panel) return;
+    if (!promiseContainerRef.current) return;
     
     const handleMouseMove = (e: MouseEvent) => {
-      if (isMobile) return;
+      const panel = promiseContainerRef.current;
+      if (!panel) return;
       
       const rect = panel.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
       
-      const highlight = panel.querySelector('.glass-highlight') as HTMLElement;
-      if (highlight) {
-        highlight.style.setProperty('--x', `${x}%`);
-        highlight.style.setProperty('--y', `${y}%`);
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
+      
+      panel.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      
+      const percentX = Math.round((x / rect.width) * 100);
+      const percentY = Math.round((y / rect.height) * 100);
+      panel.style.setProperty('--x', `${percentX}%`);
+      panel.style.setProperty('--y', `${percentY}%`);
+    };
+    
+    const handleMouseLeave = () => {
+      if (!promiseContainerRef.current) return;
+      handleScroll();
+    };
+    
+    const handleScroll = () => {
+      if (!promiseContainerRef.current) return;
+      
+      const windowHeight = window.innerHeight;
+      const rect = promiseContainerRef.current.getBoundingClientRect();
+      
+      const distanceFromCenter = (rect.top + rect.height / 2) - (windowHeight / 2);
+      const maxDistance = windowHeight / 2 + rect.height / 2;
+      
+      const normalizedDistance = Math.max(-1, Math.min(1, distanceFromCenter / maxDistance));
+      
+      const tiltAngle = normalizedDistance * 15;
+      
+      if (promiseContainerRef.current) {
+        promiseContainerRef.current.style.transform = `perspective(1000px) rotateX(${tiltAngle}deg)`;
       }
     };
     
-    panel.addEventListener('mousemove', handleMouseMove);
+    promiseContainerRef.current.addEventListener('mousemove', handleMouseMove);
+    promiseContainerRef.current.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('scroll', handleScroll);
+    
+    handleScroll();
+    
     return () => {
-      panel.removeEventListener('mousemove', handleMouseMove);
+      if (promiseContainerRef.current) {
+        promiseContainerRef.current.removeEventListener('mousemove', handleMouseMove);
+        promiseContainerRef.current.removeEventListener('mouseleave', handleMouseLeave);
+      }
+      window.removeEventListener('scroll', handleScroll);
     };
-  }, [isMobile]);
+  }, []);
   
-  const textWords = text.split(' ');
+  const renderPromiseText = () => {
+    if (isMobile) {
+      return (
+        <>
+          <span>Human </span><span className="gradient-word">creativity</span><span>,</span>
+          <br />
+          <span>AI </span><span className="gradient-word">precision</span>
+        </>
+      );
+    }
+    
+    return (
+      <>
+        <span>Human </span><span className="gradient-word">creativity</span><span>, </span>
+        <span>AI </span><span className="gradient-word">precision</span>
+      </>
+    );
+  };
   
   return (
-    <div 
-      ref={panelRef}
-      className={`promise-glass-panel mx-auto my-8 sm:my-16 max-w-3xl p-4 sm:p-8 text-center promise-text ${isMobile ? 'py-6' : 'py-10'}`}
-    >
-      <div className="refraction-layer"></div>
-      <div className="glass-highlight"></div>
-      
-      <h3 className={`mb-4 sm:mb-6 text-xl sm:text-2xl font-medium tracking-wide uppercase text-white/80`}>
-        {title}
+    <div className="mt-32 max-w-4xl mx-auto text-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
+      <h3 className="text-4xl md:text-5xl font-bold mb-12">
+        <span>Our </span><span className="gradient-text">Promise</span>
       </h3>
-      
-      <div className={`gradient-text font-bold ${isMobile ? 'text-2xl sm:text-4xl' : 'text-2xl sm:text-3xl md:text-5xl'}`}>
-        {textWords.map((word, i) => (
-          <span key={i} className="gradient-word mx-1 md:mx-2 inline-block">
-            <span className="text-word">{word}</span>
-          </span>
-        ))}
+      <div 
+        ref={promiseContainerRef}
+        className="promise-glass-panel relative overflow-hidden p-10 transition-transform duration-300 ease-out"
+      >
+        <div className="refraction-layer"></div>
+        <div className="glass-highlight"></div>
+        <p ref={promiseTextRef} className="text-3xl md:text-4xl relative promise-text font-light tracking-wide z-10">
+          {renderPromiseText()}
+        </p>
       </div>
     </div>
   );
