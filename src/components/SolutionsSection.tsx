@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -132,7 +133,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         <h2 className="section-title">{renderTitle()}</h2>
         
         {isMobile ? (
-          // Carousel for mobile view
+          // Carousel for mobile view with consistent card heights and autoplay
           <div className="mt-4">
             <Carousel 
               opts={{
@@ -140,18 +141,20 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
                 loop: true,
               }}
               className="w-full"
+              autoplay={true}
+              interval={5000}
             >
               <CarouselContent>
                 {displaySolutions.map((solution) => (
                   <CarouselItem key={solution.id} className="md:basis-1/2 lg:basis-1/3">
-                    <div className="glass relative overflow-hidden rounded-2xl h-auto">
+                    <div className="glass relative overflow-hidden rounded-2xl h-full">
                       <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", solution.color)}></div>
-                      <div className="relative z-10 p-4">
+                      <div className="relative z-10 p-4 flex flex-col h-full">
                         <div className="bg-white/10 p-2 rounded-full w-fit mb-3">
                           {solution.icon}
                         </div>
                         <h3 className="text-xl font-bold mb-3 text-left">{solution.title}</h3>
-                        <div className="mb-3 text-left">
+                        <div className="mb-3 text-left flex-grow">
                           {solution.description}
                         </div>
                       </div>
