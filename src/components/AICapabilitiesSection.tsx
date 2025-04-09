@@ -1,8 +1,10 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Brain, BrainCircuit, Microscope, Settings, Zap, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import AIProductCard from './AIProductCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export interface AICapability {
   id: string;
@@ -42,6 +44,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
 }) => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [activeTab, setActiveTab] = useState('development');
+  const isMobile = useIsMobile();
 
   const categories = [
     { id: 'development', name: 'AI Development' },
@@ -155,18 +158,45 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
                           {getIconByName(capability.icon)}
                         </div>
                         <h3 className="text-lg font-bold mb-2">{capability.title}</h3>
-                        <p className="text-white/80 mb-3 text-sm">{capability.description}</p>
+                        
+                        {/* Conditionally render description based on device */}
+                        {isMobile ? (
+                          <p className="text-white/80 mb-3 text-sm line-clamp-2">
+                            {capability.description}
+                          </p>
+                        ) : (
+                          <p className="text-white/80 mb-3 text-sm">{capability.description}</p>
+                        )}
+                        
+                        {/* Tools section - condensed for mobile */}
                         <div>
-                          <h4 className="text-xs uppercase tracking-wider text-white/60 mb-1">Technologies</h4>
+                          <h4 className="text-xs uppercase tracking-wider text-white/60 mb-1">
+                            {isMobile ? "Tech" : "Technologies"}
+                          </h4>
                           <div className="flex flex-wrap gap-1">
-                            {capability.tools.map((tool) => (
-                              <span 
-                                key={`${capability.id}-${tool}`}
-                                className="bg-white/10 text-white/90 text-xs px-2 py-0.5 rounded-full hover:bg-white/20 transition-colors"
-                              >
-                                {tool}
+                            {isMobile 
+                              ? capability.tools.slice(0, 3).map((tool) => (
+                                  <span 
+                                    key={`${capability.id}-${tool}`}
+                                    className="bg-white/10 text-white/90 text-xs px-2 py-0.5 rounded-full hover:bg-white/20 transition-colors"
+                                  >
+                                    {tool}
+                                  </span>
+                                ))
+                              : capability.tools.map((tool) => (
+                                  <span 
+                                    key={`${capability.id}-${tool}`}
+                                    className="bg-white/10 text-white/90 text-xs px-2 py-0.5 rounded-full hover:bg-white/20 transition-colors"
+                                  >
+                                    {tool}
+                                  </span>
+                                ))
+                            }
+                            {isMobile && capability.tools.length > 3 && (
+                              <span className="bg-white/10 text-white/90 text-xs px-2 py-0.5 rounded-full">
+                                +{capability.tools.length - 3}
                               </span>
-                            ))}
+                            )}
                           </div>
                         </div>
                       </div>
@@ -184,7 +214,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
             </h2>
             <h3 className="text-lg md:text-xl text-center mb-8 sm:mb-10 text-white/80">{productsSection.subtitle}</h3>
             
-            <div className="grid grid-cols-2 gap-4 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-6xl mx-auto">
               {products.map((product) => {
                 return (
                   <AIProductCard
