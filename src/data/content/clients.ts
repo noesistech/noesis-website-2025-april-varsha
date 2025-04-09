@@ -12,11 +12,99 @@ export const clientsSectionData: ClientsSection = {
 };
 
 export const clientLogosData: ClientLogo[] = [
-  // Empty for now
+  {
+    id: 'client-1',
+    name: 'Asian Paints',
+    image_url: '/placeholder.svg',
+    url: '#',
+    sort_order: 1,
+    created_at: '',
+    updated_at: '',
+  },
+  {
+    id: 'client-2',
+    name: 'Sharekhan',
+    image_url: '/placeholder.svg',
+    url: '#',
+    sort_order: 2,
+    created_at: '',
+    updated_at: '',
+  },
+  {
+    id: 'client-3',
+    name: 'The Cube Club',
+    image_url: '/placeholder.svg',
+    url: '#',
+    sort_order: 3,
+    created_at: '',
+    updated_at: '',
+  },
+  {
+    id: 'client-4',
+    name: 'MamaEarth',
+    image_url: '/placeholder.svg',
+    url: '#',
+    sort_order: 4,
+    created_at: '',
+    updated_at: '',
+  },
+  {
+    id: 'client-5',
+    name: 'Nykaa',
+    image_url: '/placeholder.svg',
+    url: '#',
+    sort_order: 5,
+    created_at: '',
+    updated_at: '',
+  },
 ];
 
 export const partnerLogosData: PartnerLogo[] = [
-  // Empty for now
+  {
+    id: 'partner-1',
+    name: 'Microsoft Partner',
+    image_url: '/placeholder.svg',
+    url: '#',
+    sort_order: 1,
+    created_at: '',
+    updated_at: '',
+  },
+  {
+    id: 'partner-2',
+    name: 'Google Cloud Partner',
+    image_url: '/placeholder.svg',
+    url: '#',
+    sort_order: 2,
+    created_at: '',
+    updated_at: '',
+  },
+  {
+    id: 'partner-3',
+    name: 'AWS Partner',
+    image_url: '/placeholder.svg',
+    url: '#',
+    sort_order: 3,
+    created_at: '',
+    updated_at: '',
+  },
+  {
+    id: 'partner-4',
+    name: 'OpenAI Partner',
+    image_url: '/placeholder.svg',
+    url: '#',
+    sort_order: 4,
+    created_at: '',
+    updated_at: '',
+  },
+  {
+    id: 'partner-5',
+    name: 'Shopify Partner',
+    image_url: '/placeholder.svg',
+    url: '#',
+    sort_order: 5,
+    created_at: '',
+    updated_at: '',
+  },
 ];
 
 export const testimonialsData: Testimonial[] = [
