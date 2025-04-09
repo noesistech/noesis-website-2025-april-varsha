@@ -1,4 +1,3 @@
-
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
@@ -56,6 +55,9 @@ const config = {
         "noesis-darkpurple": "#8257e6",
         "noesis-blue": "#4ea7ff",
         "noesis-teal": "#2fcbcf",
+        "noesis-yellow": "#f6e05e",
+        "noesis-pink": "#f472b6",
+        "noesis-green": "#4ade80",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -106,9 +108,13 @@ const config = {
         },
         "border-rainbow": {
           "0%": { backgroundPosition: "0% 50%", borderColor: "#a074ff" },
-          "25%": { borderColor: "#8257e6" },
-          "50%": { backgroundPosition: "100% 50%", borderColor: "#4ea7ff" },
-          "75%": { borderColor: "#2fcbcf" },
+          "12.5%": { borderColor: "#8257e6" },
+          "25%": { borderColor: "#4ea7ff" },
+          "37.5%": { borderColor: "#2fcbcf" },
+          "50%": { borderColor: "#4ade80" },
+          "62.5%": { borderColor: "#f6e05e" },
+          "75%": { borderColor: "#f472b6" },
+          "87.5%": { borderColor: "#d946ef" },
           "100%": { backgroundPosition: "0% 50%", borderColor: "#a074ff" }
         },
       },
@@ -120,10 +126,10 @@ const config = {
         "slide-in": "slide-in 0.8s ease-out forwards",
         "mobile-menu-slide-down": "mobile-menu-slide-down 0.3s ease-out forwards",
         "shine": "shine 1.5s ease-in-out infinite",
-        "border-rainbow": "border-rainbow 5s ease infinite",
+        "border-rainbow": "border-rainbow 10s ease infinite",
       },
       backgroundImage: {
-        'rainbow-gradient': 'linear-gradient(60deg, #a074ff, #8257e6, #4ea7ff, #2fcbcf, #a074ff)',
+        'rainbow-gradient': 'linear-gradient(60deg, #a074ff, #8257e6, #4ea7ff, #2fcbcf, #4ade80, #f6e05e, #f472b6, #d946ef, #a074ff)',
       },
     },
   },
