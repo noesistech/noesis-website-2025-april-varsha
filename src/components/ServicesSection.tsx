@@ -101,7 +101,7 @@ const ServicesSection: React.FC<ServicesProps> = ({
           <Accordion type="single" collapsible className="w-full">
             {displayServices.map(service => (
               <AccordionItem key={service.id} value={service.id} className="glass-card mb-4 border-none">
-                <AccordionTrigger className="p-3 flex items-center text-left">
+                <AccordionTrigger className="p-2 flex items-center text-left no-underline">
                   <div className="flex items-center">
                     <div className="mr-3 transform group-hover:scale-110 transition-transform duration-300">
                       {service.icon}
@@ -109,8 +109,8 @@ const ServicesSection: React.FC<ServicesProps> = ({
                     <h3 className="font-bold gradient-text text-lg">{service.title}</h3>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="p-3 pt-0">
-                  <div className="text-white/80 text-base">
+                <AccordionContent className="p-2 pt-0">
+                  <div className="text-white/80 text-sm">
                     {service.description}
                   </div>
                 </AccordionContent>
