@@ -1,3 +1,4 @@
+
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
@@ -107,15 +108,34 @@ const config = {
           "100%": { transform: "translateX(100%)" }
         },
         "border-rainbow": {
-          "0%": { backgroundPosition: "0% 50%", borderColor: "#a074ff" },
-          "12.5%": { borderColor: "#8257e6" },
-          "25%": { borderColor: "#4ea7ff" },
-          "37.5%": { borderColor: "#2fcbcf" },
-          "50%": { borderColor: "#4ade80" },
-          "62.5%": { borderColor: "#f6e05e" },
-          "75%": { borderColor: "#f472b6" },
-          "87.5%": { borderColor: "#d946ef" },
-          "100%": { backgroundPosition: "0% 50%", borderColor: "#a074ff" }
+          "0%, 100%": { 
+            backgroundPosition: "0% 0%", 
+            borderImage: "linear-gradient(to right, #a074ff, #8257e6) 1"
+          },
+          "12.5%": { 
+            borderImage: "linear-gradient(to bottom, #8257e6, #4ea7ff) 1" 
+          },
+          "25%": { 
+            backgroundPosition: "100% 0%", 
+            borderImage: "linear-gradient(to left, #4ea7ff, #2fcbcf) 1" 
+          },
+          "37.5%": { 
+            borderImage: "linear-gradient(to top, #2fcbcf, #4ade80) 1" 
+          },
+          "50%": { 
+            backgroundPosition: "100% 100%", 
+            borderImage: "linear-gradient(to right, #4ade80, #f6e05e) 1" 
+          },
+          "62.5%": { 
+            borderImage: "linear-gradient(to bottom, #f6e05e, #f472b6) 1" 
+          },
+          "75%": { 
+            backgroundPosition: "0% 100%", 
+            borderImage: "linear-gradient(to left, #f472b6, #d946ef) 1" 
+          },
+          "87.5%": { 
+            borderImage: "linear-gradient(to top, #d946ef, #a074ff) 1" 
+          }
         },
       },
       animation: {
