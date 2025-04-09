@@ -1,16 +1,25 @@
-
 import React, { useRef, useEffect } from 'react';
 import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SolutionItem } from '@/types/supabase';
+import { useIsMobile } from '@/hooks/use-mobile';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
 interface SolutionsSectionProps {
   title: string;
   solutions: SolutionItem[];
 }
+
 const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   title,
   solutions
 }) => {
+  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const displaySolutions = solutions && solutions.length > 0 ? solutions.map(solution => ({
@@ -75,7 +84,10 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       </ul>,
     color: 'from-yellow-500/20 to-yellow-600/20'
   }];
+
   useEffect(() => {
+    if (isMobile) return; // Skip animation setup on mobile since we'll use accordion
+    
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -95,7 +107,8 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         if (card) observer.unobserve(card);
       });
     };
-  }, []);
+  }, [isMobile]);
+
   const renderTitle = () => {
     if (!title) return "Our Solutions";
     const words = title.split(' ');
@@ -104,31 +117,59 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         {words.slice(0, lastWordIndex).join(' ')} <span className="gradient-text">{words[lastWordIndex]}</span>
       </>;
   };
+
+  // Only create rows for desktop view
   const solutionRows = [];
   for (let i = 0; i < displaySolutions.length; i += 3) {
     solutionRows.push(displaySolutions.slice(i, i + 3));
   }
+
   return <section id="solutions" ref={sectionRef} className="py-10 sm:py-16 md:py-[40px]">
       <div className="container mx-auto px-3 sm:px-6">
         <h2 className="section-title">{renderTitle()}</h2>
         
-        {solutionRows.map((row, rowIndex) => <div key={`row-${rowIndex}`} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 last:mb-0">
-            {row.map((solution, index) => <div key={solution.id} ref={el => cardsRef.current[rowIndex * 3 + index] = el} className="glass relative overflow-hidden rounded-2xl opacity-0 transition-all duration-500 hover:shadow-lg h-full">
-                <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", solution.color)}></div>
-                <div className="relative z-10 p-4 sm:p-6">
-                  <div className="bg-white/10 p-2 sm:p-3 rounded-full w-fit mb-3 sm:mb-4">
-                    {solution.icon}
+        {isMobile ? (
+          // Accordion for mobile view
+          <Accordion type="single" collapsible className="w-full">
+            {displaySolutions.map(solution => (
+              <AccordionItem key={solution.id} value={solution.id} className="glass-card mb-4 border-none">
+                <AccordionTrigger className="p-2 flex items-center text-left no-underline">
+                  <div className="flex items-center">
+                    <div className={cn("bg-white/10 p-2 rounded-full w-fit mr-3")}>
+                      {solution.icon}
+                    </div>
+                    <h3 className="font-bold text-lg">{solution.title}</h3>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-left">{solution.title}</h3>
-                  <div className="mb-3 sm:mb-6 text-left">
+                </AccordionTrigger>
+                <AccordionContent className="p-2 pt-0">
+                  <div className="text-white/80 text-sm">
                     {solution.description}
                   </div>
-                </div>
-              </div>)}
-          </div>)}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        ) : (
+          // Original row layout for desktop
+          solutionRows.map((row, rowIndex) => <div key={`row-${rowIndex}`} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 last:mb-0">
+              {row.map((solution, index) => <div key={solution.id} ref={el => cardsRef.current[rowIndex * 3 + index] = el} className="glass relative overflow-hidden rounded-2xl opacity-0 transition-all duration-500 hover:shadow-lg h-full">
+                  <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", solution.color)}></div>
+                  <div className="relative z-10 p-4 sm:p-6">
+                    <div className="bg-white/10 p-2 sm:p-3 rounded-full w-fit mb-3 sm:mb-4">
+                      {solution.icon}
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-left">{solution.title}</h3>
+                    <div className="mb-3 sm:mb-6 text-left">
+                      {solution.description}
+                    </div>
+                  </div>
+                </div>)}
+            </div>)
+        )}
       </div>
     </section>;
 };
+
 const getIconByName = (iconName: string) => {
   const normalizedIconName = iconName.toLowerCase();
   switch (normalizedIconName) {
@@ -151,4 +192,5 @@ const getIconByName = (iconName: string) => {
       return <Cpu className="h-10 w-10" />;
   }
 };
+
 export default SolutionsSection;
