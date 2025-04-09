@@ -4,11 +4,12 @@ import { cn } from '@/lib/utils';
 import { SolutionItem } from '@/types/supabase';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface SolutionsSectionProps {
   title: string;
@@ -28,65 +29,67 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
     title: solution.title,
     description: solution.description,
     color: solution.color || 'from-purple-500/20 to-purple-600/20'
-  })) : [{
-    id: 'lms',
-    icon: <GraduationCap className="h-10 w-10" />,
-    title: 'AI-Powered Learning Management',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>Human-centered interface enhanced by AI for intuitive course creation and management</li>
-        <li>Smart assessment tools that combine AI grading with human educational expertise</li>
-        <li>AI-driven analytics with human-interpreted reporting for actionable insights</li>
-        <li>Customizable branding and integrations overseen by human design specialists</li>
-      </ul>,
-    color: 'from-blue-500/20 to-blue-600/20'
-  }, {
-    id: 'brainstormer',
-    icon: <Cpu className="h-10 w-10" />,
-    title: 'Brainstormer',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>Our proprietary AI platform developed by human AI experts</li>
-        <li>Brainstormer Pro: Human-designed customized ChatGPT solutions for business needs</li>
-        <li>Brainstormer Studio: Low-code environment where human creativity directs AI capabilities</li>
-        <li>AI agents orchestrated by human strategists to automate workflows in finance, HR, and strategy</li>
-      </ul>,
-    color: 'from-purple-500/20 to-purple-600/20'
-  }, {
-    id: 'ecommerce',
-    icon: <ShoppingBag className="h-10 w-10" />,
-    title: 'AI-Enhanced eCommerce',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>Expert human designers directing AI tools for optimized website design and platform development</li>
-        <li>Specialized teams combining AI efficiency with human creativity for Shopify and Magento solutions</li>
-        <li>Our human experts with AI support have contributed to brands like MamaEarth, HyugaLife, Nykaa, and more</li>
-        <li>Exceptional 8-9% ROAS achieved through AI-human optimization strategies</li>
-      </ul>,
-    color: 'from-pink-500/20 to-pink-600/20'
-  }, {
-    id: 'chatbots',
-    icon: <MessageSquare className="h-10 w-10" />,
-    title: 'Human-Directed AI Chatbots',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>Bespoke AI solutions crafted by human experts for your specific business needs</li>
-        <li>Team collaboration features designed by humans to enhance AI workflow integration</li>
-        <li>Knowledge base management combining AI document processing with human curation</li>
-        <li>Human-supervised AI translation services enabling support in 14+ Indic languages</li>
-      </ul>,
-    color: 'from-green-500/20 to-green-600/20'
-  }, {
-    id: 'creative',
-    icon: <Wand2 className="h-10 w-10" />,
-    title: 'AI-Augmented Creative Technology',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
-        <li>Chatbots that blend AI capabilities with human warmth for social media and website integration</li>
-        <li>Interactive marketing solutions where human creativity guides AI tools for quizzes and social filters</li>
-        <li>AR/VR experiences crafted through human-AI collaboration</li>
-        <li>Educational apps that combine human teaching expertise with AI engagement mechanics</li>
-      </ul>,
-    color: 'from-yellow-500/20 to-yellow-600/20'
-  }];
+  })) : [
+    {
+      id: 'lms',
+      icon: <GraduationCap className="h-10 w-10" />,
+      title: 'AI-Powered Learning Management',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Human-centered interface enhanced by AI for intuitive course creation and management</li>
+          <li>Smart assessment tools that combine AI grading with human educational expertise</li>
+          <li>AI-driven analytics with human-interpreted reporting for actionable insights</li>
+          <li>Customizable branding and integrations overseen by human design specialists</li>
+        </ul>,
+      color: 'from-blue-500/20 to-blue-600/20'
+    }, {
+      id: 'brainstormer',
+      icon: <Cpu className="h-10 w-10" />,
+      title: 'Brainstormer',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Our proprietary AI platform developed by human AI experts</li>
+          <li>Brainstormer Pro: Human-designed customized ChatGPT solutions for business needs</li>
+          <li>Brainstormer Studio: Low-code environment where human creativity directs AI capabilities</li>
+          <li>AI agents orchestrated by human strategists to automate workflows in finance, HR, and strategy</li>
+        </ul>,
+      color: 'from-purple-500/20 to-purple-600/20'
+    }, {
+      id: 'ecommerce',
+      icon: <ShoppingBag className="h-10 w-10" />,
+      title: 'AI-Enhanced eCommerce',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Expert human designers directing AI tools for optimized website design and platform development</li>
+          <li>Specialized teams combining AI efficiency with human creativity for Shopify and Magento solutions</li>
+          <li>Our human experts with AI support have contributed to brands like MamaEarth, HyugaLife, Nykaa, and more</li>
+          <li>Exceptional 8-9% ROAS achieved through AI-human optimization strategies</li>
+        </ul>,
+      color: 'from-pink-500/20 to-pink-600/20'
+    }, {
+      id: 'chatbots',
+      icon: <MessageSquare className="h-10 w-10" />,
+      title: 'Human-Directed AI Chatbots',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Bespoke AI solutions crafted by human experts for your specific business needs</li>
+          <li>Team collaboration features designed by humans to enhance AI workflow integration</li>
+          <li>Knowledge base management combining AI document processing with human curation</li>
+          <li>Human-supervised AI translation services enabling support in 14+ Indic languages</li>
+        </ul>,
+      color: 'from-green-500/20 to-green-600/20'
+    }, {
+      id: 'creative',
+      icon: <Wand2 className="h-10 w-10" />,
+      title: 'AI-Augmented Creative Technology',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Chatbots that blend AI capabilities with human warmth for social media and website integration</li>
+          <li>Interactive marketing solutions where human creativity guides AI tools for quizzes and social filters</li>
+          <li>AR/VR experiences crafted through human-AI collaboration</li>
+          <li>Educational apps that combine human teaching expertise with AI engagement mechanics</li>
+        </ul>,
+      color: 'from-yellow-500/20 to-yellow-600/20'
+    }
+  ];
 
   useEffect(() => {
-    if (isMobile) return; // Skip animation setup on mobile since we'll use accordion
+    if (isMobile) return; // Skip animation setup on mobile since we'll use carousel
     
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -129,26 +132,39 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         <h2 className="section-title">{renderTitle()}</h2>
         
         {isMobile ? (
-          // Accordion for mobile view
-          <Accordion type="single" collapsible className="w-full">
-            {displaySolutions.map(solution => (
-              <AccordionItem key={solution.id} value={solution.id} className="glass-card mb-4 border-none">
-                <AccordionTrigger className="p-2 flex items-center text-left no-underline">
-                  <div className="flex items-center">
-                    <div className={cn("bg-white/10 p-2 rounded-full w-fit mr-3")}>
-                      {solution.icon}
+          // Carousel for mobile view
+          <div className="mt-4">
+            <Carousel 
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent>
+                {displaySolutions.map((solution) => (
+                  <CarouselItem key={solution.id} className="md:basis-1/2 lg:basis-1/3">
+                    <div className="glass relative overflow-hidden rounded-2xl h-auto">
+                      <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", solution.color)}></div>
+                      <div className="relative z-10 p-4">
+                        <div className="bg-white/10 p-2 rounded-full w-fit mb-3">
+                          {solution.icon}
+                        </div>
+                        <h3 className="text-xl font-bold mb-3 text-left">{solution.title}</h3>
+                        <div className="mb-3 text-left">
+                          {solution.description}
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="font-bold text-lg">{solution.title}</h3>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="p-2 pt-0">
-                  <div className="text-white/80 text-sm">
-                    {solution.description}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex justify-center gap-2 mt-4">
+                <CarouselPrevious className="static translate-y-0 mr-2" />
+                <CarouselNext className="static translate-y-0 ml-2" />
+              </div>
+            </Carousel>
+          </div>
         ) : (
           // Original row layout for desktop
           solutionRows.map((row, rowIndex) => <div key={`row-${rowIndex}`} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 last:mb-0">
