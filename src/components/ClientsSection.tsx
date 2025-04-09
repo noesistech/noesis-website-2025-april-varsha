@@ -13,42 +13,18 @@ import {
 const ClientsSection = () => {
   const {
     clientsSection,
-    clientLogos,
-    partnerLogos,
     testimonials
   } = useContent();
   const isMobile = useIsMobile();
 
   return <section id="clients" className="bg-gradient-to-b from-noesis-darkest to-noesis-dark py-[50px]">
       <div className="container mx-auto px-4">
-        {clientsSection && <div className="text-center">
-            <h2 className="section-title">Our <span className="gradient-text">Clients & Partners</span></h2>
-          </div>}
-        
-        {/* Clients Logos */}
-        {clientLogos && clientLogos.length > 0 && <div className="mb-20">
-            <h3 className="text-2xl font-semibold mb-8 text-center">{clientsSection?.clients_subtitle}</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center justify-items-center">
-              {clientLogos.map(logo => <div key={logo.id} className="p-4 grayscale hover:grayscale-0 transition-all">
-                  <img src={logo.image_url} alt={logo.name} className="max-h-16 mx-auto" />
-                </div>)}
-            </div>
-          </div>}
-        
-        {/* Partners Logos */}
-        {partnerLogos && partnerLogos.length > 0 && <div className="mb-20">
-            <h3 className="text-2xl font-semibold mb-8 text-center">{clientsSection?.partners_subtitle}</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center justify-items-center">
-              {partnerLogos.map(logo => <div key={logo.id} className="p-4 grayscale hover:grayscale-0 transition-all">
-                  <img src={logo.image_url} alt={logo.name} className="max-h-16 mx-auto" />
-                </div>)}
-            </div>
+        {clientsSection && <div className="text-center mb-12">
+            <h2 className="section-title">Testimonials</h2>
           </div>}
         
         {/* Testimonials - Carousel for mobile, grid for desktop */}
         {testimonials && testimonials.length > 0 && <div>
-            <h3 className="text-2xl font-semibold mb-12 text-center">{clientsSection?.testimonials_subtitle}</h3>
-            
             {isMobile ? (
               <Carousel
                 opts={{
