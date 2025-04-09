@@ -182,7 +182,7 @@
     border-radius: 0.625rem;
     background: linear-gradient(to right, #a074ff, #8257e6, #4ea7ff, #2fcbcf, #4ade80, #f6e05e, #f472b6, #d946ef, #a074ff);
     background-size: 200% 100%;
-    animation: border-flow 8s linear infinite;
+    animation: border-flow 8s ease-in-out infinite;
   }
   
   .border-animation::after {
