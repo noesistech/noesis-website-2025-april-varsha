@@ -1,4 +1,3 @@
-
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
@@ -51,7 +50,7 @@ const config = {
         },
         "noesis-dark": "#1A1F2C",
         "noesis-darker": "#141821",
-        "noesis-darkest": "#0F111A", /* Added darker background color */
+        "noesis-darkest": "#0F111A",
         "noesis-purple": "#a074ff",
         "noesis-darkpurple": "#8257e6",
         "noesis-blue": "#4ea7ff",
@@ -100,7 +99,10 @@ const config = {
         "mobile-menu-slide-down": {
           "0%": { transform: "scaleY(0)", opacity: "0", transformOrigin: "top" },
           "100%": { transform: "scaleY(1)", opacity: "1", transformOrigin: "top" }
-        }
+        },
+        "shine": {
+          "100%": { transform: "translateX(100%)" }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -108,7 +110,8 @@ const config = {
         "float": "float 6s ease-in-out infinite",
         "fade-in": "fade-in 0.9s ease-out forwards",
         "slide-in": "slide-in 0.8s ease-out forwards",
-        "mobile-menu-slide-down": "mobile-menu-slide-down 0.3s ease-out forwards"
+        "mobile-menu-slide-down": "mobile-menu-slide-down 0.3s ease-out forwards",
+        "shine": "shine 1.5s ease-in-out infinite",
       },
     },
   },

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useContent } from '@/contexts/ContentContext';
 import { 
@@ -127,8 +127,9 @@ const Header = () => {
             </a>
           ))}
           <a href="#contact">
-            <Button className="text-white" variant="noesis">
+            <Button className="group" variant="animated">
               Get in Touch
+              <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
             </Button>
           </a>
         </nav>
@@ -162,12 +163,13 @@ const Header = () => {
                   <div className="mt-4 w-full">
                     <a href="#contact" className="block w-full">
                       <Button 
-                        className="w-full text-white animate-in fade-in duration-300"
+                        className="w-full text-white animate-in fade-in duration-300 group"
                         style={{ animationDelay: `${navLinks.length * 50}ms` }}
-                        variant="noesis"
+                        variant="animated"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         Get in Touch
+                        <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
                       </Button>
                     </a>
                   </div>
