@@ -127,7 +127,7 @@ const Header = () => {
             </a>
           ))}
           <a href="#contact">
-            <Button className="group" variant="animated">
+            <Button className="group" variant="rainbow">
               Get in Touch
               <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
             </Button>
@@ -165,7 +165,7 @@ const Header = () => {
                       <Button 
                         className="w-full text-white animate-in fade-in duration-300 group"
                         style={{ animationDelay: `${navLinks.length * 50}ms` }}
-                        variant="animated"
+                        variant="rainbow"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         Get in Touch
