@@ -28,6 +28,12 @@ export {
   aiProductsSectionData 
 } from './content/aiCapabilities';
 
+// Team section
+export {
+  teamSectionData,
+  teamMembersData
+} from './content/team';
+
 // Clients section
 export { 
   clientsSectionData, 

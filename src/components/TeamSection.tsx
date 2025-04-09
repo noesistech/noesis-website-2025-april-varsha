@@ -1,15 +1,14 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Card, CardContent } from "@/components/ui/card";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { 
   Briefcase, 
   ChevronDown, 
   ChevronUp, 
   User
 } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export interface TeamMember {
   id: string;
@@ -31,6 +30,7 @@ interface TeamSectionProps {
 const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers }) => {
   const isMobile = useIsMobile();
   const [expandedMember, setExpandedMember] = React.useState<string | null>(null);
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
 
   const toggleBio = (id: string) => {
     if (expandedMember === id) {
@@ -38,6 +38,14 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
     } else {
       setExpandedMember(id);
     }
+  };
+
+  const handleImageError = (memberId: string) => {
+    setImageErrors(prev => ({
+      ...prev,
+      [memberId]: true
+    }));
+    console.error(`Failed to load image for team member: ${memberId}`);
   };
 
   return (
@@ -57,11 +65,18 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
               <div className="relative overflow-hidden">
                 <AspectRatio ratio={1}>
                   <div className="w-full h-full bg-gradient-to-b from-noesis-darker to-noesis-purple/20 absolute inset-0 z-10 opacity-50"></div>
-                  <img
-                    src={member.image_url}
-                    alt={member.name}
-                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                  />
+                  {imageErrors[member.id] ? (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-gray-800 to-gray-900">
+                      <User size={60} className="text-gray-500" />
+                    </div>
+                  ) : (
+                    <img
+                      src={member.image_url}
+                      alt={member.name}
+                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                      onError={() => handleImageError(member.id)}
+                    />
+                  )}
                 </AspectRatio>
               </div>
               
