@@ -127,7 +127,7 @@ const config = {
         "slide-in": "slide-in 0.8s ease-out forwards",
         "mobile-menu-slide-down": "mobile-menu-slide-down 0.3s ease-out forwards",
         "shine": "shine 1.5s ease-in-out infinite",
-        "border-rainbow": "border-rainbow 10s ease-in-out infinite",
+        "border-rainbow": "border-rainbow 6s ease-in-out infinite", // Changed from 10s to 6s
       },
       backgroundImage: {
         'rainbow-gradient': 'linear-gradient(60deg, #a074ff, #8257e6, #4ea7ff, #2fcbcf, #4ade80, #f6e05e, #f472b6, #d946ef, #a074ff)',
