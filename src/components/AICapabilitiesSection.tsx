@@ -142,7 +142,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
           
           {categories.map((category) => (
             <TabsContent key={category.id} value={category.id} className="animate-fade-in">
-              <div className="grid grid-cols-2 gap-4">
+              <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-2'} gap-4`}>
                 {capabilities
                   .filter(cap => cap.category === category.id)
                   .map((capability, index) => (
@@ -158,45 +158,18 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
                           {getIconByName(capability.icon)}
                         </div>
                         <h3 className="text-lg font-bold mb-2">{capability.title}</h3>
-                        
-                        {/* Conditionally render description based on device */}
-                        {isMobile ? (
-                          <p className="text-white/80 mb-3 text-sm line-clamp-2">
-                            {capability.description}
-                          </p>
-                        ) : (
-                          <p className="text-white/80 mb-3 text-sm">{capability.description}</p>
-                        )}
-                        
-                        {/* Tools section - condensed for mobile */}
+                        <p className="text-white/80 mb-3 text-sm">{capability.description}</p>
                         <div>
-                          <h4 className="text-xs uppercase tracking-wider text-white/60 mb-1">
-                            {isMobile ? "Tech" : "Technologies"}
-                          </h4>
+                          <h4 className="text-xs uppercase tracking-wider text-white/60 mb-1">Technologies</h4>
                           <div className="flex flex-wrap gap-1">
-                            {isMobile 
-                              ? capability.tools.slice(0, 3).map((tool) => (
-                                  <span 
-                                    key={`${capability.id}-${tool}`}
-                                    className="bg-white/10 text-white/90 text-xs px-2 py-0.5 rounded-full hover:bg-white/20 transition-colors"
-                                  >
-                                    {tool}
-                                  </span>
-                                ))
-                              : capability.tools.map((tool) => (
-                                  <span 
-                                    key={`${capability.id}-${tool}`}
-                                    className="bg-white/10 text-white/90 text-xs px-2 py-0.5 rounded-full hover:bg-white/20 transition-colors"
-                                  >
-                                    {tool}
-                                  </span>
-                                ))
-                            }
-                            {isMobile && capability.tools.length > 3 && (
-                              <span className="bg-white/10 text-white/90 text-xs px-2 py-0.5 rounded-full">
-                                +{capability.tools.length - 3}
+                            {capability.tools.map((tool) => (
+                              <span 
+                                key={`${capability.id}-${tool}`}
+                                className="bg-white/10 text-white/90 text-xs px-2 py-0.5 rounded-full hover:bg-white/20 transition-colors"
+                              >
+                                {tool}
                               </span>
-                            )}
+                            ))}
                           </div>
                         </div>
                       </div>
