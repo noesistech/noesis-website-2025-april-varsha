@@ -109,14 +109,20 @@ const config = {
         },
         "border-rainbow": {
           "0%": { backgroundPosition: "0% 50%", borderColor: "#a074ff" },
-          "12.5%": { borderColor: "#8257e6" },
-          "25%": { borderColor: "#4ea7ff" },
-          "37.5%": { borderColor: "#2fcbcf" },
-          "50%": { borderColor: "#4ade80" },
-          "62.5%": { borderColor: "#f6e05e" },
-          "75%": { borderColor: "#f472b6" },
-          "87.5%": { borderColor: "#d946ef" },
-          "100%": { backgroundPosition: "0% 50%", borderColor: "#a074ff" }
+          "12%": { borderColor: "#a074ff" }, // Start color with delay
+          "15%": { borderColor: "#8257e6" }, // Transition to next color
+          "27%": { borderColor: "#8257e6" }, // Hold color
+          "30%": { borderColor: "#4ea7ff" }, // Transition to next color
+          "42%": { borderColor: "#4ea7ff" }, // Hold color
+          "45%": { borderColor: "#2fcbcf" }, // Transition to next color
+          "57%": { borderColor: "#2fcbcf" }, // Hold color
+          "60%": { borderColor: "#4ade80" }, // Transition to next color
+          "72%": { borderColor: "#4ade80" }, // Hold color
+          "75%": { borderColor: "#f6e05e" }, // Transition to next color
+          "87%": { borderColor: "#f6e05e" }, // Hold color
+          "90%": { borderColor: "#f472b6" }, // Transition to next color
+          "96%": { borderColor: "#d946ef" }, // Quick transition through last two colors
+          "100%": { backgroundPosition: "0% 50%", borderColor: "#a074ff" } // Back to start
         },
       },
       animation: {
@@ -127,7 +133,7 @@ const config = {
         "slide-in": "slide-in 0.8s ease-out forwards",
         "mobile-menu-slide-down": "mobile-menu-slide-down 0.3s ease-out forwards",
         "shine": "shine 1.5s ease-in-out infinite",
-        "border-rainbow": "border-rainbow 15s ease-in-out infinite", // Changed from 9.6s to 15s
+        "border-rainbow": "border-rainbow 15s ease-in-out infinite", // Keeping the 15s duration
       },
       backgroundImage: {
         'rainbow-gradient': 'linear-gradient(60deg, #a074ff, #8257e6, #4ea7ff, #2fcbcf, #4ade80, #f6e05e, #f472b6, #d946ef, #a074ff)',
