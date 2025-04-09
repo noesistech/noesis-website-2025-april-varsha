@@ -1,4 +1,3 @@
-
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
@@ -108,7 +107,7 @@ const config = {
           "100%": { transform: "translateX(100%)" }
         },
         "border-rainbow": {
-          "0%": { backgroundPosition: "0% 50%", borderColor: "#a074ff" },
+          "0%": { borderColor: "#a074ff" },
           "12.5%": { borderColor: "#8257e6" },
           "25%": { borderColor: "#4ea7ff" },
           "37.5%": { borderColor: "#2fcbcf" },
@@ -116,7 +115,7 @@ const config = {
           "62.5%": { borderColor: "#f6e05e" },
           "75%": { borderColor: "#f472b6" },
           "87.5%": { borderColor: "#d946ef" },
-          "100%": { backgroundPosition: "0% 50%", borderColor: "#a074ff" }
+          "100%": { borderColor: "#a074ff" }
         },
       },
       animation: {
