@@ -42,7 +42,7 @@ const MissionSection = () => {
           Our <span className="gradient-text">Mission & Vision</span>
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 max-w-6xl mx-auto">
+        <div className={`grid grid-cols-1 ${isMobile ? 'gap-3' : 'gap-6 md:gap-16'} md:grid-cols-2 max-w-6xl mx-auto`}>
           <MissionCard title={missionSectionData.mission_title} description={missionSectionData.mission_description} />
           
           <VisionCard title={missionSectionData.vision_title} description={missionSectionData.vision_description} />

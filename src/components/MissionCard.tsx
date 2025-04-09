@@ -1,25 +1,23 @@
 
 import React from 'react';
-import { Gem } from 'lucide-react';
+import { Flag } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-interface VisionCardProps {
+interface MissionCardProps {
   title: string;
   description: string;
 }
 
-const VisionCard = ({
+const MissionCard = ({
   title,
   description
-}: VisionCardProps) => {
+}: MissionCardProps) => {
   const isMobile = useIsMobile();
 
   return (
-    <div id="vision-card" className={`glass-card animate-fade-in relative transition-transform duration-500 ease-out transform ${isMobile ? 'p-3' : 'p-4 sm:p-8 md:p-10'} ${isMobile ? 'mt-6' : 'mt-10 sm:mt-20'}`} style={{
-      animationDelay: '0.2s'
-    }}>
-      <div className={`absolute ${isMobile ? "-top-8" : "-top-10 sm:-top-20"} left-0 md:-left-6 ${isMobile ? 'p-2' : 'p-4 sm:p-6'} rounded-full bg-noesis-blue/15 text-noesis-blue`}>
-        <Gem className={`${isMobile ? "h-6 w-6" : "h-8 w-8 md:h-12 md:w-12"}`} />
+    <div id="mission-card" className={`glass-card animate-fade-in relative transition-transform duration-500 ease-out transform ${isMobile ? 'p-3' : 'p-4 sm:p-8 md:p-10'} ${isMobile ? 'mt-6' : 'mt-10 sm:mt-20'}`}>
+      <div className={`absolute ${isMobile ? "-top-8" : "-top-10 sm:-top-20"} left-0 md:-left-6 ${isMobile ? 'p-2' : 'p-4 sm:p-6'} rounded-full bg-noesis-purple/15 text-noesis-purple`}>
+        <Flag className={`${isMobile ? "h-6 w-6" : "h-8 w-8 md:h-12 md:w-12"}`} />
       </div>
       <h3 className={`${isMobile ? 'text-xl' : 'text-2xl sm:text-3xl md:text-4xl'} font-bold gradient-text mb-2 sm:mb-4 md:mb-8 pt-4 sm:pt-6 relative`}>
         {title}
@@ -32,4 +30,4 @@ const VisionCard = ({
   );
 };
 
-export default VisionCard;
+export default MissionCard;
