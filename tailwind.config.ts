@@ -1,3 +1,4 @@
+
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
@@ -108,18 +109,20 @@ const config = {
         },
         "border-rainbow": {
           "0%": { backgroundPosition: "0% 50%", borderColor: "#a074ff" },
-          "14.2%": { borderColor: "#a074ff" },      // Hold color 1 for 15 seconds
-          "16.6%": { borderColor: "#8257e6" },      // Transition to color 2
-          "30.8%": { borderColor: "#8257e6" },      // Hold color 2 for 15 seconds
-          "33.2%": { borderColor: "#4ea7ff" },      // Transition to color 3
-          "47.4%": { borderColor: "#4ea7ff" },      // Hold color 3 for 15 seconds
-          "49.8%": { borderColor: "#2fcbcf" },      // Transition to color 4
-          "64%": { borderColor: "#2fcbcf" },        // Hold color 4 for 15 seconds
-          "66.4%": { borderColor: "#4ade80" },      // Transition to color 5
-          "80.6%": { borderColor: "#4ade80" },      // Hold color 5 for 15 seconds
-          "83%": { borderColor: "#f6e05e" },        // Transition to color 6
-          "97.2%": { borderColor: "#f6e05e" },      // Hold color 6 for 15 seconds
-          "99.6%": { borderColor: "#a074ff" },      // Transition back to first color
+          "12%": { borderColor: "#a074ff" },      // Hold color 1 for ~30-36 seconds
+          "14%": { borderColor: "#8257e6" },      // Transition to color 2
+          "26%": { borderColor: "#8257e6" },      // Hold color 2 for ~30-36 seconds
+          "28%": { borderColor: "#4ea7ff" },      // Transition to color 3
+          "40%": { borderColor: "#4ea7ff" },      // Hold color 3 for ~30-36 seconds
+          "42%": { borderColor: "#2fcbcf" },      // Transition to color 4
+          "54%": { borderColor: "#2fcbcf" },      // Hold color 4 for ~30-36 seconds
+          "56%": { borderColor: "#4ade80" },      // Transition to color 5
+          "68%": { borderColor: "#4ade80" },      // Hold color 5 for ~30-36 seconds
+          "70%": { borderColor: "#f6e05e" },      // Transition to color 6
+          "82%": { borderColor: "#f6e05e" },      // Hold color 6 for ~30-36 seconds
+          "84%": { borderColor: "#f472b6" },      // Transition to color 7
+          "96%": { borderColor: "#f472b6" },      // Hold color 7 for ~30-36 seconds
+          "98%": { borderColor: "#a074ff" },      // Transition back to first color
           "100%": { backgroundPosition: "0% 50%", borderColor: "#a074ff" } // Back to start
         },
       },
@@ -131,7 +134,7 @@ const config = {
         "slide-in": "slide-in 0.8s ease-out forwards",
         "mobile-menu-slide-down": "mobile-menu-slide-down 0.3s ease-out forwards",
         "shine": "shine 1.5s ease-in-out infinite",
-        "border-rainbow": "border-rainbow 105s ease-in-out infinite", // Changed to 105s for ~15s per color
+        "border-rainbow": "border-rainbow 300s ease-in-out infinite", // Changed to 300s for ~36s per color
       },
       backgroundImage: {
         'rainbow-gradient': 'linear-gradient(60deg, #a074ff, #8257e6, #4ea7ff, #2fcbcf, #4ade80, #f6e05e, #f472b6, #d946ef, #a074ff)',
