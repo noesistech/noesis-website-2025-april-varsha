@@ -9,6 +9,7 @@ import MissionSection from '@/components/MissionSection';
 import ServicesSection from '@/components/ServicesSection';
 import SolutionsSection from '@/components/SolutionsSection';
 import TechStackSection from '@/components/TechStackSection';
+import TeamSection from '@/components/TeamSection';
 import ClientsSection from '@/components/ClientsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
@@ -23,7 +24,9 @@ const ContentPage: React.FC = () => {
     solutionsSection,
     solutionItems,
     techStackSection,
-    techCategories
+    techCategories,
+    teamSection,
+    teamMembers
   } = useContent();
 
   useEffect(() => {
@@ -63,6 +66,11 @@ const ContentPage: React.FC = () => {
         <TechStackSection 
           title={techStackSection.title}
           categories={techCategories}
+        />
+        <TeamSection 
+          title={teamSection.title}
+          subtitle={teamSection.subtitle}
+          teamMembers={teamMembers}
         />
         <ClientsSection />
         <ContactSection />

@@ -19,6 +19,7 @@ import {
   Testimonial
 } from '@/types/contentTypes';
 import { AICapability, AIProduct } from '@/components/AICapabilitiesSection';
+import { TeamMember } from '@/components/TeamSection';
 
 // Import data from the new modular files
 import { heroSectionData, serviceCardsData } from '@/data/content/hero';
@@ -39,6 +40,7 @@ import {
   partnerLogosData, 
   testimonialsData 
 } from '@/data/content/clients';
+import { teamSectionData, teamMembersData } from '@/data/content/team';
 
 interface ContentContextType {
   heroSection: HeroSection;
@@ -67,6 +69,14 @@ interface ContentContextType {
     created_at: string;
     updated_at: string;
   };
+  teamSection: {
+    id: string;
+    title: string;
+    subtitle?: string;
+    created_at: string;
+    updated_at: string;
+  };
+  teamMembers: TeamMember[];
   clientsSection: ClientsSection;
   clientLogos: ClientLogo[];
   partnerLogos: PartnerLogo[];
@@ -98,6 +108,8 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   const [aiCapabilities] = useState<AICapability[]>(aiCapabilitiesData);
   const [aiProducts] = useState<AIProduct[]>(aiProductsData);
   const [aiProductsSection] = useState(aiProductsSectionData);
+  const [teamSection] = useState(teamSectionData);
+  const [teamMembers] = useState<TeamMember[]>(teamMembersData);
   const [clientsSection] = useState<ClientsSection>(clientsSectionData);
   const [clientLogos] = useState<ClientLogo[]>(clientLogosData);
   const [partnerLogos] = useState<PartnerLogo[]>(partnerLogosData);
@@ -130,6 +142,8 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
         aiCapabilities,
         aiProducts,
         aiProductsSection,
+        teamSection,
+        teamMembers,
         clientsSection,
         clientLogos,
         partnerLogos,

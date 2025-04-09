@@ -11,6 +11,7 @@ import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 import AboutStatsSection from '../components/AboutStatsSection';
 import MissionSection from '../components/MissionSection';
+import TeamSection from '../components/TeamSection';
 import { useContent } from '@/contexts/ContentContext';
 
 const Index = () => {
@@ -24,7 +25,9 @@ const Index = () => {
     aiCapabilitiesSection,
     aiCapabilities,
     aiProducts,
-    aiProductsSection
+    aiProductsSection,
+    teamSection,
+    teamMembers
   } = useContent();
 
   return (
@@ -41,6 +44,11 @@ const Index = () => {
         capabilities={aiCapabilities} 
         products={aiProducts}
         productsSection={aiProductsSection}
+      />
+      <TeamSection 
+        title={teamSection.title} 
+        subtitle={teamSection.subtitle} 
+        teamMembers={teamMembers} 
       />
       <ClientsSection />
       <ContactSection />
