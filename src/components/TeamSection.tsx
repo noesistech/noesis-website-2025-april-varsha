@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export interface TeamMember {
   id: string;
@@ -67,7 +68,11 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
                   <div className="w-full h-full bg-gradient-to-b from-noesis-darker to-noesis-purple/20 absolute inset-0 z-10 opacity-50"></div>
                   {imageErrors[member.id] ? (
                     <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-gray-800 to-gray-900">
-                      <User size={60} className="text-gray-500" />
+                      <Avatar className="h-32 w-32">
+                        <AvatarFallback className="text-4xl bg-gray-800 text-gray-400">
+                          <User size={60} />
+                        </AvatarFallback>
+                      </Avatar>
                     </div>
                   ) : (
                     <img
@@ -75,6 +80,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
                       alt={member.name}
                       className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                       onError={() => handleImageError(member.id)}
+                      loading="lazy"
                     />
                   )}
                 </AspectRatio>
