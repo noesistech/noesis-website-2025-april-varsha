@@ -46,7 +46,10 @@ function App() {
           title={aiCapabilitiesSection?.title || ''} 
           capabilities={aiCapabilities || []} 
           products={aiProducts || []} 
-          productsSection={aiProductsSection || { id: '', title: '', subtitle: '', created_at: '', updated_at: '' }}
+          productsSection={{
+            title: aiProductsSection?.title || '',
+            subtitle: aiProductsSection?.subtitle || ''
+          }}
         />
         <SolutionsSection title={solutionsSection?.title || ''} solutions={solutionItems || []} />
         <FilterableTeamSection />

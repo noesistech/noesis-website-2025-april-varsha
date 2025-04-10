@@ -11,13 +11,13 @@ export interface TechStackSectionProps {
 
 const TechStackSection: React.FC<TechStackSectionProps> = ({
   title,
-  categories
+  categories = [] // Provide a default empty array
 }) => {
   const [activeTab, setActiveTab] = useState('tech');
 
-  // Filter categories into tech stack and cloud stack
-  const techStack = categories.filter(category => !category.is_cloud_stack);
-  const cloudStack = categories.filter(category => category.is_cloud_stack);
+  // Add null check before filtering
+  const techStack = categories?.filter(category => !category.is_cloud_stack) || [];
+  const cloudStack = categories?.filter(category => category.is_cloud_stack) || [];
   
   return (
     <section id="tech-stack" className="py-12 sm:py-16 md:py-24 relative overflow-hidden">

@@ -38,9 +38,9 @@ interface AICapabilitiesSectionProps {
 
 const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   title,
-  capabilities,
-  products,
-  productsSection
+  capabilities = [], // Provide a default empty array
+  products = [], // Provide a default empty array
+  productsSection = { title: '', subtitle: '' } // Provide default empty object
 }) => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [activeTab, setActiveTab] = useState('development');
@@ -51,7 +51,8 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
     { id: 'deployment', name: 'AI Deployment' }
   ];
 
-  const filteredCapabilities = capabilities.filter(cap => cap.category === activeTab);
+  // Add null check before filtering
+  const filteredCapabilities = capabilities?.filter(cap => cap.category === activeTab) || [];
   
   useEffect(() => {
     cardsRef.current = cardsRef.current.slice(0, filteredCapabilities.length);
@@ -143,8 +144,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
           {categories.map((category) => (
             <TabsContent key={category.id} value={category.id} className="animate-fade-in">
               <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-2'} gap-4`}>
-                {capabilities
-                  .filter(cap => cap.category === category.id)
+                {capabilities?.filter(cap => cap.category === category.id)
                   .map((capability, index) => (
                     <div
                       key={capability.id}
