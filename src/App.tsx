@@ -1,6 +1,8 @@
 
+import React from 'react';
 import ScrollToTop from './components/ScrollToTop';
 import { Toaster } from './components/ui/toaster';
+import { useContent } from './contexts/ContentContext';
 
 // Import all sections
 import AboutSection from './components/AboutSection';
@@ -18,6 +20,19 @@ import SolutionsSection from './components/SolutionsSection';
 import TechStackSection from './components/TechStackSection';
 
 function App() {
+  const {
+    servicesSection,
+    serviceItems,
+    aiCapabilitiesSection,
+    aiCapabilities,
+    aiProducts,
+    aiProductsSection,
+    solutionsSection,
+    solutionItems,
+    techStackSection,
+    techCategories
+  } = useContent();
+
   return (
     <>
       <Header />
@@ -26,11 +41,16 @@ function App() {
         <AboutSection />
         <AboutStatsSection />
         <MissionSection />
-        <ServicesSection />
-        <AICapabilitiesSection />
-        <SolutionsSection />
+        <ServicesSection title={servicesSection?.title || ''} services={serviceItems || []} />
+        <AICapabilitiesSection 
+          title={aiCapabilitiesSection?.title || ''} 
+          capabilities={aiCapabilities || []} 
+          products={aiProducts || []} 
+          productsSection={aiProductsSection || { id: '', title: '', subtitle: '', created_at: '', updated_at: '' }}
+        />
+        <SolutionsSection title={solutionsSection?.title || ''} solutions={solutionItems || []} />
         <FilterableTeamSection />
-        <TechStackSection />
+        <TechStackSection title={techStackSection?.title || ''} categories={techCategories || []} />
         <ClientsSection />
         <ContactSection />
       </main>
