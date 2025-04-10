@@ -4,32 +4,32 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Filter, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
-import { useContentContext } from '../contexts/ContentContext';
+import { useContent } from '../contexts/ContentContext';
 
 const FilterableTeamSection = () => {
-  const { teamContent } = useContentContext();
+  const { teamSection, teamMembers } = useContent();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [allCategories, setAllCategories] = useState<string[]>([]);
 
   // Extract all unique departments/categories from team data
   useEffect(() => {
-    if (teamContent?.members) {
-      const categories = ['All', ...new Set(teamContent.members.map(member => member.department))];
-      setAllCategories(categories);
+    if (teamMembers) {
+      const categories = ['All', ...new Set(teamMembers.map(member => member.department || member.position))];
+      setAllCategories(categories as string[]);
     }
-  }, [teamContent]);
+  }, [teamMembers]);
 
-  const filteredTeamMembers = teamContent?.members?.filter(member => 
-    selectedCategory === 'All' || member.department === selectedCategory
+  const filteredTeamMembers = teamMembers?.filter(member => 
+    selectedCategory === 'All' || member.department === selectedCategory || member.position === selectedCategory
   ) || [];
 
   return (
     <section id="team" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="container px-4 mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">{teamContent?.title}</h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">{teamContent?.description}</p>
+          <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">{teamSection?.title || 'Our Team'}</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">{teamSection?.subtitle || 'Meet the talented people behind our success'}</p>
         </div>
 
         {/* Category Filter - Mobile */}
@@ -99,7 +99,7 @@ const FilterableTeamSection = () => {
           >
             {filteredTeamMembers.map((member, index) => (
               <motion.div 
-                key={member.name}
+                key={member.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -107,16 +107,16 @@ const FilterableTeamSection = () => {
               >
                 <div className="h-72 overflow-hidden">
                   <img 
-                    src={member.imageUrl} 
+                    src={member.image_url} 
                     alt={member.name}
                     className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
                   />
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-800 dark:text-white">{member.name}</h3>
-                  <p className="text-orange-500 font-medium mb-2">{member.title}</p>
+                  <p className="text-orange-500 font-medium mb-2">{member.title || member.position}</p>
                   <Badge variant="outline" className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
-                    {member.department}
+                    {member.department || member.position}
                   </Badge>
                   <p className="mt-4 text-gray-600 dark:text-gray-400">{member.bio}</p>
                   
