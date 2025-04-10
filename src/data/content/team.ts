@@ -95,7 +95,7 @@ export const teamMembersData: TeamMember[] = [
     name: 'Shailya Gohil',
     position: 'Project Coordinator',
     bio: 'A 22-year-old BCA graduate with a strong passion for technology and innovation. Currently working in project coordination, Shailya is gaining hands-on experience in management, communication, and team leadership. She\'s also deeply interested in artificial intelligence, especially prompt engineering, where she enjoys crafting creative and efficient interactions with AI systems. With a mix of technical knowledge, real-world project experience, and a drive to keep learning, she\'s building a career that blends strategic thinking with cutting-edge tech. Her organizational skills and attention to detail have been instrumental in streamlining project workflows.',
-    image_url: '/lovable-uploads/e30b48fd-6be5-4156-b67e-7beb68875b68.png',
+    image_url: '/lovable-uploads/fca4e2b7-e9b5-44be-9887-86c433590709.png',
     sort_order: 9,
     created_at: '',
     updated_at: '',
