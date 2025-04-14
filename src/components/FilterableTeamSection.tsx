@@ -100,7 +100,7 @@ const FilterableTeamSection = () => {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="flex justify-center px-4">
+            <div className="flex justify-center">
               <TeamSection 
                 title=""
                 subtitle=""
