@@ -30,7 +30,16 @@ interface TeamSectionProps {
 
 const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers }) => {
   const isMobile = useIsMobile();
+  const [expandedMember, setExpandedMember] = React.useState<string | null>(null);
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
+
+  const toggleBio = (id: string) => {
+    if (expandedMember === id) {
+      setExpandedMember(null);
+    } else {
+      setExpandedMember(id);
+    }
+  };
 
   const handleImageError = (memberId: string) => {
     setImageErrors(prev => ({
@@ -77,9 +86,34 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
             </div>
             
             <div className="relative">
-              <div className="text-sm text-white/70">
+              <div className={`text-sm text-white/70 transition-all duration-300 overflow-hidden ${
+                expandedMember === member.id ? 'max-h-[500px]' : 'max-h-[80px]'
+              }`}>
                 {member.bio}
               </div>
+              
+              {member.bio.length > 150 && (
+                <button 
+                  onClick={() => toggleBio(member.id)}
+                  className="flex items-center text-xs text-noesis-purple mt-2 hover:text-noesis-teal transition-colors"
+                >
+                  {expandedMember === member.id ? (
+                    <>
+                      <span>Read Less</span>
+                      <ChevronUp size={14} className="ml-1" />
+                    </>
+                  ) : (
+                    <>
+                      <span>Read More</span>
+                      <ChevronDown size={14} className="ml-1" />
+                    </>
+                  )}
+                </button>
+              )}
+              
+              {expandedMember !== member.id && member.bio.length > 150 && (
+                <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-gray-900/90 to-transparent"></div>
+              )}
             </div>
           </CardContent>
         </Card>
