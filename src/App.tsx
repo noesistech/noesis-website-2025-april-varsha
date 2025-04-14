@@ -6,7 +6,6 @@ import { useContent } from './contexts/ContentContext';
 
 // Import all sections
 import AboutSection from './components/AboutSection';
-import AboutStatsSection from './components/AboutStatsSection';
 import AICapabilitiesSection from './components/AICapabilitiesSection';
 import ClientsSection from './components/ClientsSection';
 import ContactSection from './components/ContactSection';
@@ -39,7 +38,6 @@ function App() {
       <main>
         <HeroSection />
         <AboutSection />
-        <AboutStatsSection />
         <MissionSection />
         <ServicesSection title={servicesSection?.title || ''} services={serviceItems || []} />
         <AICapabilitiesSection 

@@ -32,11 +32,12 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
 
   // Stock images to use as fallbacks
   const stockImages = [
-    "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=500&q=80",
-    "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=500&q=80",
-    "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=500&q=80",
-    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=500&q=80",
-    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=500&q=80"
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80",
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80",
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80",
+    "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=500&q=80",
+    "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=500&q=80",
+    "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=500&q=80"
   ];
 
   const handleImageError = (memberId: string) => {
@@ -55,14 +56,14 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mx-auto text-center">
       {teamMembers.map((member) => (
         <Card 
           key={member.id} 
-          className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 backdrop-blur-sm border border-gray-700/50 overflow-hidden hover:border-noesis-purple/50 transition-all duration-300 group"
+          className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 backdrop-blur-sm border border-gray-700/50 overflow-hidden hover:border-noesis-purple/50 transition-all duration-300 group flex flex-col h-full"
         >
           <div className="relative overflow-hidden">
-            <AspectRatio ratio={1}>
+            <AspectRatio ratio={1/1}>
               <div className="w-full h-full bg-gradient-to-b from-noesis-darker to-noesis-purple/20 absolute inset-0 z-10 opacity-50"></div>
               {imageErrors[member.id] ? (
                 <img
@@ -83,15 +84,17 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
             </AspectRatio>
           </div>
           
-          <CardContent className="p-5">
-            <h3 className="text-lg font-semibold gradient-text">{member.name}</h3>
-            <div className="flex items-center gap-1 mb-3">
-              <Briefcase size={14} className="text-noesis-purple" />
-              <p className="text-sm text-white/80">{member.position}</p>
+          <CardContent className="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 className="text-base font-semibold gradient-text">{member.name}</h3>
+              <div className="flex items-center justify-center gap-1 mb-2">
+                <Briefcase size={12} className="text-noesis-purple" />
+                <p className="text-xs text-white/80">{member.position}</p>
+              </div>
             </div>
             
-            <div className="relative">
-              <div className="text-sm text-white/70">
+            <div className="relative mt-2">
+              <div className="text-xs text-white/70 max-h-20 overflow-y-auto">
                 {member.bio}
               </div>
             </div>

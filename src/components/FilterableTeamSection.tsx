@@ -100,11 +100,13 @@ const FilterableTeamSection = () => {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
           >
-            <TeamSection 
-              title=""
-              subtitle=""
-              teamMembers={filteredTeamMembers} 
-            />
+            <div className="flex justify-center px-4">
+              <TeamSection 
+                title=""
+                subtitle=""
+                teamMembers={filteredTeamMembers}
+              />
+            </div>
           </motion.div>
         </AnimatePresence>
       </div>
