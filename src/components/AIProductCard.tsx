@@ -52,14 +52,15 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
       <CardContent className="p-0">
         <div className="p-5 flex flex-col h-full">
           <div className="mb-4">
-            <div className="relative h-15">
+            <div className="relative h-20">
               {!imageLoaded && !imageError && <div className="absolute inset-0 flex items-center justify-start">
                   <div className="animate-pulse bg-gray-700 h-8 w-32 rounded"></div>
                 </div>}
               
               {imageError ? <h3 className="text-lg font-bold text-white">{title}</h3> : <img src={logoUrl} alt={`${title} logo`} style={{
-              maxWidth: '150px'
-            }} onLoad={() => setImageLoaded(true)} onError={() => setImageError(true)} className="object-fill h-15" />}
+              maxWidth: '200px',
+              maxHeight: '120px'
+            }} onLoad={() => setImageLoaded(true)} onError={() => setImageError(true)} className="object-contain w-full h-full" />}
             </div>
           </div>
           
