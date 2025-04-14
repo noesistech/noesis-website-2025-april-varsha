@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Brain, BrainCircuit, Microscope, Settings, Zap, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -38,9 +37,9 @@ interface AICapabilitiesSectionProps {
 
 const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   title,
-  capabilities = [], // Provide a default empty array
-  products = [], // Provide a default empty array
-  productsSection = { title: '', subtitle: '' } // Provide default empty object
+  capabilities = [],
+  products = [],
+  productsSection = { title: '', subtitle: '' }
 }) => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [activeTab, setActiveTab] = useState('development');
@@ -51,9 +50,8 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
     { id: 'deployment', name: 'AI Deployment' }
   ];
 
-  // Add null check before filtering
   const filteredCapabilities = capabilities?.filter(cap => cap.category === activeTab) || [];
-  
+
   useEffect(() => {
     cardsRef.current = cardsRef.current.slice(0, filteredCapabilities.length);
     
@@ -158,7 +156,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
                           {getIconByName(capability.icon)}
                         </div>
                         <h3 className="text-lg font-bold mb-2">{capability.title}</h3>
-                        <p className="text-white/80 mb-3 text-sm">{capability.description}</p>
+                        <p className="text-white/80 mb-3 text-base">{capability.description}</p>
                         <div>
                           <h4 className="text-xs uppercase tracking-wider text-white/60 mb-1">Technologies</h4>
                           <div className="flex flex-wrap gap-1">
@@ -185,7 +183,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
             <h2 className="section-title">
               <span className="gradient-text">{productsSection.title}</span>
             </h2>
-            <h3 className="text-lg md:text-xl text-center mb-8 sm:mb-10 text-white/80">{productsSection.subtitle}</h3>
+            <h3 className="text-base md:text-base text-center mb-8 sm:mb-10 text-white/80">{productsSection.subtitle}</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-6xl mx-auto">
               {products.map((product) => {

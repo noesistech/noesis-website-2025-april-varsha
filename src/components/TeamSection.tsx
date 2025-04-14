@@ -95,7 +95,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
               </div>
               
               <div className="mt-2">
-                <p className="text-xs text-white/70 line-clamp-none">{member.bio}</p>
+                <p className="text-sm text-white/70 line-clamp-3">{member.bio}</p>
               </div>
             </CardContent>
           </Card>
@@ -106,3 +106,4 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
 };
 
 export default TeamSection;
+
