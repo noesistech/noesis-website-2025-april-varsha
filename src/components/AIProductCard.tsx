@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -51,14 +52,14 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
       <CardContent className="p-0">
         <div className="p-5 flex flex-col h-full">
           <div className="mb-4">
-            <div className="relative h-12">
+            <div className="relative h-15">
               {!imageLoaded && !imageError && <div className="absolute inset-0 flex items-center justify-start">
                   <div className="animate-pulse bg-gray-700 h-8 w-32 rounded"></div>
                 </div>}
               
               {imageError ? <h3 className="text-lg font-bold text-white">{title}</h3> : <img src={logoUrl} alt={`${title} logo`} style={{
               maxWidth: '150px'
-            }} onLoad={() => setImageLoaded(true)} onError={() => setImageError(true)} className="object-fill h-11" />}
+            }} onLoad={() => setImageLoaded(true)} onError={() => setImageError(true)} className="object-fill h-15" />}
             </div>
           </div>
           
