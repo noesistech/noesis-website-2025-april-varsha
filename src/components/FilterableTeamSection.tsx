@@ -7,11 +7,14 @@ import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { ToggleGroup, ToggleGroupItem } from './ui/toggle-group';
 import TeamSection from './TeamSection';
+import { ScrollArea } from './ui/scroll-area';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const FilterableTeamSection = () => {
   const { teamSection, teamMembers } = useContent();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [departmentGroups, setDepartmentGroups] = useState<string[]>([]);
+  const isMobile = useIsMobile();
 
   // Extract unique department groups from team member positions
   useEffect(() => {
@@ -74,21 +77,30 @@ const FilterableTeamSection = () => {
           </p>
         </div>
 
-        {/* Department Filter */}
+        {/* Department Filter - Scrollable on mobile */}
         <div className="flex justify-center mb-12">
-          <Card className="bg-gradient-to-br from-gray-800/40 to-gray-900/40 backdrop-blur-sm border border-gray-700/50 p-1 overflow-hidden">
-            <ToggleGroup type="single" value={selectedCategory} onValueChange={(value) => value && setSelectedCategory(value)}>
-              {departmentGroups.map((group) => (
-                <ToggleGroupItem 
-                  key={group} 
-                  value={group}
-                  aria-label={`Filter by ${group}`}
-                  className="px-4 py-2 text-white/80 data-[state=on]:bg-noesis-purple data-[state=on]:text-white transition-colors"
+          <Card className="bg-gradient-to-br from-gray-800/40 to-gray-900/40 backdrop-blur-sm border border-gray-700/50 p-1 overflow-hidden w-full max-w-3xl">
+            <ScrollArea className="w-full">
+              <div className={`flex ${isMobile ? 'px-4 py-2' : ''}`}>
+                <ToggleGroup 
+                  type="single" 
+                  value={selectedCategory} 
+                  onValueChange={(value) => value && setSelectedCategory(value)}
+                  className="flex-nowrap"
                 >
-                  {group}
-                </ToggleGroupItem>
-              ))}
-            </ToggleGroup>
+                  {departmentGroups.map((group) => (
+                    <ToggleGroupItem 
+                      key={group} 
+                      value={group}
+                      aria-label={`Filter by ${group}`}
+                      className="px-4 py-2 text-white/80 data-[state=on]:bg-noesis-purple data-[state=on]:text-white transition-colors whitespace-nowrap"
+                    >
+                      {group}
+                    </ToggleGroupItem>
+                  ))}
+                </ToggleGroup>
+              </div>
+            </ScrollArea>
           </Card>
         </div>
 
@@ -100,13 +112,11 @@ const FilterableTeamSection = () => {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="flex justify-center">
-              <TeamSection 
-                title=""
-                subtitle=""
-                teamMembers={filteredTeamMembers}
-              />
-            </div>
+            <TeamSection 
+              title=""
+              subtitle=""
+              teamMembers={filteredTeamMembers}
+            />
           </motion.div>
         </AnimatePresence>
       </div>

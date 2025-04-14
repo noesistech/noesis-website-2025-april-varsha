@@ -55,58 +55,52 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
     return stockImages[index];
   };
 
-  // Function to truncate bio text to fit in cards
-  const truncateBio = (bio: string, maxLength: number = 100) => {
-    if (bio.length <= maxLength) return bio;
-    return bio.substring(0, maxLength) + '...';
-  };
-
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mx-auto">
-      {teamMembers.map((member) => (
-        <Card 
-          key={member.id} 
-          className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 backdrop-blur-sm border border-gray-700/50 overflow-hidden hover:border-noesis-purple/50 transition-all duration-300 group flex flex-col h-full mx-auto"
-        >
-          <div className="relative overflow-hidden">
-            <AspectRatio ratio={1/1}>
-              <div className="w-full h-full bg-gradient-to-b from-noesis-darker to-noesis-purple/20 absolute inset-0 z-10 opacity-50"></div>
-              {imageErrors[member.id] ? (
-                <img
-                  src={getStockImage(member.id)}
-                  alt={member.name}
-                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-              ) : (
-                <img
-                  src={member.image_url || getStockImage(member.id)}
-                  alt={member.name}
-                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                  onError={() => handleImageError(member.id)}
-                  loading="lazy"
-                />
-              )}
-            </AspectRatio>
-          </div>
-          
-          <CardContent className="p-4 flex-1 flex flex-col justify-between text-center">
-            <div>
-              <h3 className="text-base font-semibold gradient-text">{member.name}</h3>
-              <div className="flex items-center justify-center gap-1 mb-2">
-                <Briefcase size={12} className="text-noesis-purple" />
-                <p className="text-xs text-white/80">{member.position}</p>
-              </div>
+    <div className="flex justify-center w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 max-w-[1400px]">
+        {teamMembers.map((member) => (
+          <Card 
+            key={member.id} 
+            className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 backdrop-blur-sm border border-gray-700/50 overflow-hidden hover:border-noesis-purple/50 transition-all duration-300 group h-full"
+          >
+            <div className="relative overflow-hidden h-48 sm:h-40">
+              <AspectRatio ratio={1/1}>
+                <div className="w-full h-full bg-gradient-to-b from-noesis-darker to-noesis-purple/20 absolute inset-0 z-10 opacity-50"></div>
+                {imageErrors[member.id] ? (
+                  <img
+                    src={getStockImage(member.id)}
+                    alt={member.name}
+                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                ) : (
+                  <img
+                    src={member.image_url || getStockImage(member.id)}
+                    alt={member.name}
+                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                    onError={() => handleImageError(member.id)}
+                    loading="lazy"
+                  />
+                )}
+              </AspectRatio>
             </div>
             
-            <div className="relative mt-2">
-              <div className="text-xs text-white/70">
-                {truncateBio(member.bio, 100)}
+            <CardContent className="p-4 flex-1 flex flex-col justify-between text-center">
+              <div>
+                <h3 className="text-base font-semibold gradient-text">{member.name}</h3>
+                <div className="flex items-center justify-center gap-1 mb-2">
+                  <Briefcase size={12} className="text-noesis-purple" />
+                  <p className="text-xs text-white/80">{member.position}</p>
+                </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+              
+              <div className="mt-2">
+                <p className="text-xs text-white/70">{member.bio}</p>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 };

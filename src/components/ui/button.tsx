@@ -20,8 +20,8 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         noesis: "bg-noesis-purple/30 border border-noesis-purple hover:bg-noesis-purple/40 text-white hover:scale-105 shadow-[0_0_10px_rgba(160,116,255,0.3)]",
-        animated: "bg-noesis-purple/30 border border-noesis-purple text-white shadow-[0_0_10px_rgba(160,116,255,0.3)] relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(160,116,255,0.5)] hover:bg-noesis-purple/40 hover:scale-105 after:absolute after:inset-0 after:content-[''] after:bg-gradient-to-r after:from-transparent after:via-white/20 after:to-transparent after:translate-x-[-100%] after:hover:animate-shine",
-        rainbow: "bg-noesis-purple/30 text-white relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(160,116,255,0.5)] hover:bg-noesis-purple/40 hover:scale-105 after:absolute after:inset-0 after:content-[''] after:bg-gradient-to-r after:from-transparent after:via-white/20 after:to-transparent after:translate-x-[-100%] after:hover:animate-shine border border-transparent shadow-[0_0_10px_rgba(160,116,255,0.3)]",
+        animated: "bg-noesis-purple/30 text-white shadow-[0_0_10px_rgba(160,116,255,0.3)] relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(160,116,255,0.5)] hover:bg-noesis-purple/40 hover:scale-105",
+        rainbow: "bg-noesis-purple/30 text-white relative transition-all duration-300 hover:shadow-[0_0_15px_rgba(160,116,255,0.5)] hover:bg-noesis-purple/40 hover:scale-105 border-transparent shadow-[0_0_10px_rgba(160,116,255,0.3)]",
       },
       size: {
         default: "h-10 px-4 py-2",

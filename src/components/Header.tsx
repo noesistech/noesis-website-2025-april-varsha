@@ -54,6 +54,23 @@ const Header = () => {
 
   // Fixed header height to prevent shrinking
   const HEADER_HEIGHT = '60px';
+  
+  // Use hamburger menu for tablets as well as mobile
+  const useHamburgerMenu = () => {
+    return window.innerWidth < 1024; // breakpoint for lg in Tailwind
+  };
+  
+  const [isTabletOrMobile, setIsTabletOrMobile] = useState(false);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setIsTabletOrMobile(useHamburgerMenu());
+    };
+    
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <header className={cn(
@@ -116,7 +133,7 @@ const Header = () => {
           </svg>
         </a>
         
-        <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+        <nav className="hidden lg:flex items-center gap-6 lg:gap-8">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
@@ -127,15 +144,15 @@ const Header = () => {
             </a>
           ))}
           <a href="#contact">
-            <Button className="group" variant="rainbow">
+            <Button className="group" variant="noesis">
               Get in Touch
               <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
             </Button>
           </a>
         </nav>
         
-        {/* Mobile menu button - using Sheet component */}
-        <div className="md:hidden">
+        {/* Mobile and tablet menu button - using Sheet component */}
+        <div className="lg:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <button className="text-white z-[60]">
@@ -165,7 +182,7 @@ const Header = () => {
                       <Button 
                         className="w-full text-white animate-in fade-in duration-300 group"
                         style={{ animationDelay: `${navLinks.length * 50}ms` }}
-                        variant="rainbow"
+                        variant="noesis"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         Get in Touch
