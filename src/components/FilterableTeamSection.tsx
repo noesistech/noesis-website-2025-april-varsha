@@ -18,8 +18,8 @@ const FilterableTeamSection = () => {
     if (teamMembers && teamMembers.length > 0) {
       // Group similar positions together
       const positionGroups: Record<string, string> = {
-        'Manager': 'Management',
         'Sr. Project Manager': 'Management',
+        'Manager': 'Management',
         'Project Coordinator': 'Management',
         'UI/UX Manager': 'Design',
         'Sr. DevOps Engineer': 'Engineering',
@@ -48,6 +48,7 @@ const FilterableTeamSection = () => {
     // Map positions to department groups
     const positionGroups: Record<string, string> = {
       'Sr. Project Manager': 'Management',
+      'Manager': 'Management',
       'Project Coordinator': 'Management',
       'UI/UX Manager': 'Design',
       'Sr. DevOps Engineer': 'Engineering',
