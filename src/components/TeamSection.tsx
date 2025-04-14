@@ -85,17 +85,17 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
               </AspectRatio>
             </div>
             
-            <CardContent className="p-4 flex-1 flex flex-col justify-between text-center">
+            <CardContent className="p-4 flex-1 flex flex-col justify-between text-left">
               <div>
                 <h3 className="text-base font-semibold gradient-text">{member.name}</h3>
-                <div className="flex items-center justify-center gap-1 mb-2">
+                <div className="flex items-center gap-1 mb-2">
                   <Briefcase size={12} className="text-noesis-purple" />
                   <p className="text-xs text-white/80">{member.position}</p>
                 </div>
               </div>
               
               <div className="mt-2">
-                <p className="text-xs text-white/70">{member.bio}</p>
+                <p className="text-xs text-white/70 line-clamp-none">{member.bio}</p>
               </div>
             </CardContent>
           </Card>

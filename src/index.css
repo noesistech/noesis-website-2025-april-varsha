@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -107,6 +106,11 @@
   h6 {
     @apply text-base md:text-lg;
   }
+  
+  /* Standardized paragraph text sizes */
+  p {
+    @apply text-base;  /* 16px by default */
+  }
 }
 
 @layer components {
@@ -180,6 +184,19 @@
       padding-top: var(--section-padding-y);
       padding-bottom: var(--section-padding-y);
     }
+  }
+  
+  /* Standardized text styles */
+  .text-standard {
+    @apply text-base leading-relaxed text-white/80;
+  }
+  
+  .text-small {
+    @apply text-sm leading-relaxed text-white/70;
+  }
+  
+  .text-large {
+    @apply text-lg leading-relaxed text-white/80;
   }
 }
 

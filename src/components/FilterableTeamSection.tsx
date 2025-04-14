@@ -72,7 +72,7 @@ const FilterableTeamSection = () => {
           <h2 className="text-4xl font-bold text-white mb-4">
             <span className="gradient-text">{teamSection?.title || 'Our Team'}</span>
           </h2>
-          <p className="text-lg text-white/70 max-w-3xl mx-auto">
+          <p className="text-standard max-w-3xl mx-auto">
             {teamSection?.subtitle || 'Meet the talented people behind our success'}
           </p>
         </div>

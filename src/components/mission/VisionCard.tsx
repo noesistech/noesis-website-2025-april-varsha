@@ -22,7 +22,7 @@ const VisionCard = ({
         {title}
         <span className="absolute left-0 bottom-[-15px] w-16 h-1 bg-gradient-to-r from-noesis-purple to-noesis-blue rounded-full"></span>
       </h3>
-      <p className="text-white/80 text-lg md:text-xl leading-relaxed mt-4 md:mt-8">
+      <p className="text-standard mt-4 md:mt-8">
         {description}
       </p>
     </div>
