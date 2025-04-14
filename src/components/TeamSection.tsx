@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { 
   Briefcase, 
-  ChevronDown, 
-  ChevronUp, 
   User
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -30,22 +28,30 @@ interface TeamSectionProps {
 
 const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers }) => {
   const isMobile = useIsMobile();
-  const [expandedMember, setExpandedMember] = React.useState<string | null>(null);
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
 
-  const toggleBio = (id: string) => {
-    if (expandedMember === id) {
-      setExpandedMember(null);
-    } else {
-      setExpandedMember(id);
-    }
-  };
+  // Stock images to use as fallbacks
+  const stockImages = [
+    "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=500&q=80",
+    "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=500&q=80",
+    "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=500&q=80",
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=500&q=80",
+    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=500&q=80"
+  ];
 
   const handleImageError = (memberId: string) => {
     setImageErrors(prev => ({
       ...prev,
       [memberId]: true
     }));
+  };
+
+  // Function to get a stock image based on team member ID
+  const getStockImage = (id: string) => {
+    // Use the last character of the ID as a numeric hash
+    const lastChar = id.slice(-1);
+    const index = parseInt(lastChar, 36) % stockImages.length;
+    return stockImages[index];
   };
 
   return (
@@ -59,16 +65,15 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
             <AspectRatio ratio={1}>
               <div className="w-full h-full bg-gradient-to-b from-noesis-darker to-noesis-purple/20 absolute inset-0 z-10 opacity-50"></div>
               {imageErrors[member.id] ? (
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-gray-800 to-gray-900">
-                  <Avatar className="h-32 w-32">
-                    <AvatarFallback className="text-4xl bg-gray-800 text-gray-400">
-                      <User size={60} />
-                    </AvatarFallback>
-                  </Avatar>
-                </div>
+                <img
+                  src={getStockImage(member.id)}
+                  alt={member.name}
+                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
               ) : (
                 <img
-                  src={member.image_url || "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"}
+                  src={member.image_url || getStockImage(member.id)}
                   alt={member.name}
                   className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   onError={() => handleImageError(member.id)}
@@ -86,34 +91,9 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
             </div>
             
             <div className="relative">
-              <div className={`text-sm text-white/70 transition-all duration-300 overflow-hidden ${
-                expandedMember === member.id ? 'max-h-[500px]' : 'max-h-[80px]'
-              }`}>
+              <div className="text-sm text-white/70">
                 {member.bio}
               </div>
-              
-              {member.bio.length > 150 && (
-                <button 
-                  onClick={() => toggleBio(member.id)}
-                  className="flex items-center text-xs text-noesis-purple mt-2 hover:text-noesis-teal transition-colors"
-                >
-                  {expandedMember === member.id ? (
-                    <>
-                      <span>Read Less</span>
-                      <ChevronUp size={14} className="ml-1" />
-                    </>
-                  ) : (
-                    <>
-                      <span>Read More</span>
-                      <ChevronDown size={14} className="ml-1" />
-                    </>
-                  )}
-                </button>
-              )}
-              
-              {expandedMember !== member.id && member.bio.length > 150 && (
-                <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-gray-900/90 to-transparent"></div>
-              )}
             </div>
           </CardContent>
         </Card>
