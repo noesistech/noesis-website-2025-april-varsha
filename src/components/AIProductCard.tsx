@@ -1,9 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-
 interface AIProductCardProps {
   title: string;
   description: string;
@@ -11,7 +9,6 @@ interface AIProductCardProps {
   ctaText: string;
   ctaUrl: string;
 }
-
 const AIProductCard: React.FC<AIProductCardProps> = ({
   title,
   description,
@@ -21,7 +18,6 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
-
   useEffect(() => {
     setImageLoaded(false);
     setImageError(false);
@@ -50,58 +46,37 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
       setImageError(true);
     }
   }, [logoUrl, title]);
-
-  return (
-    <Card className="bg-[#1E2335] border-[#2A304B] overflow-hidden h-full glass-card">
+  return <Card className="bg-[#1E2335] border-[#2A304B] overflow-hidden h-full glass-card">
       <CardContent className="p-0">
         <div className="p-5 flex flex-col h-full">
           {/* Product Logo */}
           <div className="mb-4">
             <div className="relative h-12">
-              {!imageLoaded && !imageError && 
-                <div className="absolute inset-0 flex items-center justify-start">
+              {!imageLoaded && !imageError && <div className="absolute inset-0 flex items-center justify-start">
                   <div className="animate-pulse bg-gray-700 h-8 w-32 rounded"></div>
-                </div>
-              }
+                </div>}
               
-              {imageError ? 
-                <h3 className="text-lg font-bold text-white">{title}</h3> : 
-                <img 
-                  src={logoUrl} 
-                  alt={`${title} logo`} 
-                  style={{ maxWidth: '150px' }}
-                  onLoad={() => setImageLoaded(true)} 
-                  onError={() => setImageError(true)} 
-                  className="object-fill h-10" 
-                />
-              }
+              {imageError ? <h3 className="text-lg font-bold text-white">{title}</h3> : <img src={logoUrl} alt={`${title} logo`} style={{
+              maxWidth: '150px'
+            }} onLoad={() => setImageLoaded(true)} onError={() => setImageError(true)} className="object-fill h-10" />}
             </div>
           </div>
           
           {/* Product Description */}
-          <p className="text-white/80 mb-4 flex-grow text-sm leading-relaxed">
+          <p className="text-white/80 mb-4 flex-grow leading-relaxed text-base">
             {description}
           </p>
           
           {/* CTA Button */}
-          {ctaUrl && ctaText && 
-            <div className="mt-auto">
-              <Button 
-                variant="noesis" 
-                size="sm" 
-                asChild 
-                className="group bg-gradient-to-r from-noesis-purple/80 to-noesis-blue/80 hover:from-noesis-purple hover:to-noesis-blue text-sm font-medium"
-              >
+          {ctaUrl && ctaText && <div className="mt-auto">
+              <Button variant="noesis" size="sm" asChild className="group bg-gradient-to-r from-noesis-purple/80 to-noesis-blue/80 hover:from-noesis-purple hover:to-noesis-blue text-sm font-medium">
                 <a href={ctaUrl}>
                   {ctaText} <ArrowRight className="ml-1 w-3 h-3 transition-transform group-hover:translate-x-1" />
                 </a>
               </Button>
-            </div>
-          }
+            </div>}
         </div>
       </CardContent>
-    </Card>
-  );
+    </Card>;
 };
-
 export default AIProductCard;
