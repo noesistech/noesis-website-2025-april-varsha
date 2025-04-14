@@ -1,8 +1,9 @@
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Users, Award, Clock, Percent } from 'lucide-react';
 import P5Animation from './P5Animation';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useContent } from '@/contexts/ContentContext';
 
 const AboutSection = () => {
   const { aboutSection, stats } = useContent();
