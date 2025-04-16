@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Filter, Users, ChevronDown } from 'lucide-react';
@@ -80,7 +81,7 @@ const FilterableTeamSection = () => {
             <span className="gradient-text">{teamSection?.title || 'Our Team'}</span>
           </h2>
           <p className="text-standard max-w-3xl mx-auto">
-            {teamSection?.subtitle || 'Meet our talented team of professionals'}
+            {teamSection?.subtitle || 'Meet the talented professionals behind our success'}
           </p>
         </div>
 
@@ -150,7 +151,9 @@ const FilterableTeamSection = () => {
                 <TeamSection 
                   title=""
                   subtitle=""
-                  teamMembers={filteredTeamMembers}
+                  teamMembers={selectedCategory === 'All' 
+                    ? teamMembers || [] 
+                    : groupedTeamMembers[selectedCategory] || []}
                 />
               </motion.div>
             </AnimatePresence>
