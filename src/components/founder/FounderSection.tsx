@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Building, GraduationCap, Briefcase } from 'lucide-react';
 import { Card } from '@/components/ui/card';
@@ -6,12 +5,11 @@ import { Card } from '@/components/ui/card';
 const FounderSection = () => {
   return (
     <div className="container mx-auto px-4 mb-20">
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-12 gradient-text">
-        Meet Our Founder
-      </h2>
-      
       <div className="flex flex-col lg:flex-row gap-8 items-center">
         <div className="lg:w-1/3">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 gradient-text text-left">
+            Meet Our Founder
+          </h2>
           <div className="relative mb-4">
             <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/20 to-transparent rounded-2xl"></div>
             <img 
