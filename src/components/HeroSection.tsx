@@ -51,7 +51,11 @@ const HeroSection = () => {
   return (
     <div 
       ref={heroRef}
-      className={`min-h-[75vh] md:min-h-[85vh] flex flex-col justify-center relative overflow-hidden ${isMobile ? 'pt-4 pb-1' : 'pt-8 sm:pt-10 pb-1'} font-inter`}
+      className={`min-h-[75vh] md:min-h-[85vh] flex flex-col justify-center relative overflow-hidden 
+        pt-4 pb-1 
+        md:pt-6 md:pb-2 
+        lg:pt-8 lg:pb-1 
+        font-inter`}
       style={{
         background: 'linear-gradient(135deg, rgba(26,31,44,1) 0%, rgba(50,30,80,1) 100%)'
       }}
