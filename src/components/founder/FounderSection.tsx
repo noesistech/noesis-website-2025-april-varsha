@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Building, GraduationCap, Briefcase } from 'lucide-react';
 import { Card } from '@/components/ui/card';
@@ -10,13 +11,26 @@ const FounderSection = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 gradient-text text-left">
             Meet Our Founder
           </h2>
-          <div className="relative mb-4">
-            <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/20 to-transparent rounded-2xl"></div>
-            <img 
-              src="/lovable-uploads/83d6e966-1792-4d06-8a94-2e4840a6f17a.png"
-              alt="Sidd - Founder of Noesis.tech"
-              className="rounded-2xl w-full object-cover shadow-xl"
-            />
+          <div className="relative mb-4 group">
+            {/* Cyberpunk overlay effects */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/40 via-noesis-blue/30 to-transparent rounded-2xl z-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-noesis-darkpurple/20 via-transparent to-noesis-teal/20 rounded-2xl"></div>
+            
+            {/* Glowing border effect */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-noesis-purple via-noesis-blue to-noesis-teal rounded-2xl blur-sm group-hover:blur opacity-75 transition duration-1000 group-hover:opacity-100"></div>
+            
+            {/* Main image container */}
+            <div className="relative rounded-2xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/20 to-transparent mix-blend-overlay"></div>
+              <img 
+                src="/lovable-uploads/83d6e966-1792-4d06-8a94-2e4840a6f17a.png"
+                alt="Sidd - Founder of Noesis.tech"
+                className="rounded-2xl w-full object-cover shadow-xl relative z-[1] transition-transform duration-700 group-hover:scale-105"
+              />
+              
+              {/* Scanline effect */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-noesis-purple/5 to-transparent bg-[length:100%_8px] animate-pulse opacity-30"></div>
+            </div>
           </div>
           <div className="text-center lg:text-left">
             <h4 className="text-xl font-semibold text-white mb-1">Siddharth Bhansali</h4>
