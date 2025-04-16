@@ -66,17 +66,19 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={cn(
-      'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-      scrolled ? 'glass shadow-lg' : 'bg-transparent'
-    )}
-    style={{ height: HEADER_HEIGHT }}>
+    <header 
+      className={cn(
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        scrolled ? 'glass shadow-lg' : 'bg-transparent'
+      )}
+      style={{ height: HEADER_HEIGHT }}
+    >
       <div className="container mx-auto flex justify-between items-center h-full">
         <a href="/" className="flex items-center gap-2 z-[60]">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 300.48 54.12" 
-            className="h-6 sm:h-7 md:h-8 w-auto"
+            className="h-5 sm:h-6 md:h-7 w-auto"
             fill="currentColor"
           >
             <path 
@@ -132,15 +134,15 @@ const Header = () => {
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-[14px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap"
+              className="text-[12px] sm:text-[14px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap"
             >
               {link.name}
             </a>
           ))}
           <a href="#contact">
-            <Button className="group text-[14px]" variant="noesis" size="sm">
+            <Button className="group text-[12px] sm:text-[14px]" variant="noesis" size="sm">
               Get in Touch
-              <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300 h-4 w-4 ml-1" />
+              <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300 h-3 w-3 ml-1" />
             </Button>
           </a>
         </nav>
