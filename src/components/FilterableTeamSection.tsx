@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Filter, Users, ChevronDown } from 'lucide-react';
@@ -66,6 +67,11 @@ const FilterableTeamSection = () => {
     }) || [];
     return acc;
   }, {} as Record<string, typeof teamMembers>);
+
+  // Add the missing filteredTeamMembers variable
+  const filteredTeamMembers = selectedCategory === 'All' 
+    ? teamMembers || [] 
+    : groupedTeamMembers[selectedCategory] || [];
 
   return (
     <section id="team" className="py-20 bg-gradient-to-b from-noesis-dark to-noesis-darker">
@@ -143,11 +149,7 @@ const FilterableTeamSection = () => {
                 <TeamSection 
                   title=""
                   subtitle=""
-                  teamMembers={
-                    selectedCategory === 'All' 
-                      ? teamMembers || []
-                      : filteredTeamMembers
-                  }
+                  teamMembers={filteredTeamMembers}
                 />
               </motion.div>
             </AnimatePresence>
