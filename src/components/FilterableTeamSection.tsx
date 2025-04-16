@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Filter, Users, ChevronDown } from 'lucide-react';
@@ -7,6 +6,7 @@ import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { ToggleGroup, ToggleGroupItem } from './ui/toggle-group';
 import TeamSection from './TeamSection';
+import FounderSection from './founder/FounderSection';
 import { ScrollArea } from './ui/scroll-area';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
@@ -68,7 +68,6 @@ const FilterableTeamSection = () => {
     return acc;
   }, {} as Record<string, typeof teamMembers>);
 
-  // Add the missing filteredTeamMembers variable
   const filteredTeamMembers = selectedCategory === 'All' 
     ? teamMembers || [] 
     : groupedTeamMembers[selectedCategory] || [];
@@ -84,6 +83,8 @@ const FilterableTeamSection = () => {
             {teamSection?.subtitle || 'Meet our talented team of professionals'}
           </p>
         </div>
+
+        <FounderSection />
 
         {isMobile ? (
           <Accordion type="single" collapsible className="w-full mb-8">
