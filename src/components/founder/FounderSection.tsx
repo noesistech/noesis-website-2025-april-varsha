@@ -8,7 +8,8 @@ const FounderSection = () => {
     <div className="container mx-auto px-4 mb-20">
       <div className="flex flex-col lg:flex-row gap-8 items-center">
         <div className="lg:w-1/3">
-          <div className="relative">
+          <h3 className="text-2xl md:text-3xl font-bold mb-6 gradient-text text-center lg:text-left">Meet Our Founder</h3>
+          <div className="relative mb-4">
             <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/20 to-transparent rounded-2xl"></div>
             <img 
               src="/lovable-uploads/83d6e966-1792-4d06-8a94-2e4840a6f17a.png"
@@ -16,11 +17,13 @@ const FounderSection = () => {
               className="rounded-2xl w-full object-cover shadow-xl"
             />
           </div>
+          <div className="text-center lg:text-left">
+            <h4 className="text-xl font-semibold text-white mb-1">Siddharth Bhansali</h4>
+            <p className="text-noesis-purple">Founder & CEO</p>
+          </div>
         </div>
 
         <div className="lg:w-2/3">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4 gradient-text">Meet Our Founder</h3>
-          
           <Card className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 backdrop-blur-sm border border-gray-700/50 p-6">
             <div className="space-y-6">
               <div className="flex items-start gap-4">
