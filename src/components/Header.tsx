@@ -135,15 +135,15 @@ const Header = () => {
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-[10px] sm:text-[10px] md:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap"
+              className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap"
             >
               {link.name}
             </a>
           ))}
           <a href="#contact">
-            <Button className="group text-[10px] sm:text-[10px] md:text-[16px]" variant="noesis" size="sm">
+            <Button className="group text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px]" variant="noesis" size="sm">
               Get in Touch
-              <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300 h-2 w-2 md:h-4 md:w-4 ml-1" />
+              <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300 h-2 w-2 md:h-4 md:w-4 lg:h-4 lg:w-4 ml-1" />
             </Button>
           </a>
         </nav>
