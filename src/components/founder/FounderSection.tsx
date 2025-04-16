@@ -12,24 +12,32 @@ const FounderSection = () => {
             Meet Our Founder
           </h2>
           <div className="relative mb-4 group">
-            {/* Cyberpunk overlay effects */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/40 via-noesis-blue/30 to-transparent rounded-2xl z-10"></div>
-            <div className="absolute inset-0 bg-gradient-to-br from-noesis-darkpurple/20 via-transparent to-noesis-teal/20 rounded-2xl"></div>
+            {/* Enhanced cyberpunk background */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple via-noesis-blue to-noesis-teal opacity-20 rounded-2xl blur-md"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-noesis-darkpurple via-transparent to-noesis-teal/30 rounded-2xl"></div>
+            
+            {/* Animated grid pattern */}
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20 rounded-2xl"></div>
             
             {/* Glowing border effect */}
             <div className="absolute -inset-0.5 bg-gradient-to-r from-noesis-purple via-noesis-blue to-noesis-teal rounded-2xl blur-sm group-hover:blur opacity-75 transition duration-1000 group-hover:opacity-100"></div>
             
             {/* Main image container */}
-            <div className="relative rounded-2xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/20 to-transparent mix-blend-overlay"></div>
+            <div className="relative rounded-2xl overflow-hidden backdrop-blur-sm">
+              {/* Holographic overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/30 via-noesis-blue/20 to-transparent mix-blend-overlay"></div>
+              
               <img 
                 src="/lovable-uploads/83d6e966-1792-4d06-8a94-2e4840a6f17a.png"
                 alt="Sidd - Founder of Noesis.tech"
                 className="rounded-2xl w-full object-cover shadow-xl relative z-[1] transition-transform duration-700 group-hover:scale-105"
               />
               
-              {/* Scanline effect */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-noesis-purple/5 to-transparent bg-[length:100%_8px] animate-pulse opacity-30"></div>
+              {/* Enhanced scanline effect */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-noesis-purple/5 to-transparent bg-[length:100%_4px] animate-pulse opacity-30"></div>
+              
+              {/* Cyberpunk noise texture */}
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIG51bU9jdGF2ZXM9IjMiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')] opacity-20 mix-blend-overlay"></div>
             </div>
           </div>
           <div className="text-center lg:text-left">
