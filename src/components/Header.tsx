@@ -156,20 +156,20 @@ const Header = () => {
               className="bg-[#1A1F2C] border-b border-white/10 h-screen p-0 rounded-none"
               style={{ marginTop: HEADER_HEIGHT }}
             >
-              <div className="flex flex-col items-center justify-center px-4 py-8 h-full mt-[-60px]">
-                <div className="flex flex-col items-center justify-center w-full h-full max-w-md mx-auto">
+              <div className="flex flex-col items-center justify-center px-4 py-4 md:py-2 h-full mt-[-60px]">
+                <div className="flex flex-col items-center justify-center w-full h-full max-w-md mx-auto space-y-4 md:space-y-2">
                   {navLinks.map((link, index) => (
                     <a 
                       key={link.name} 
                       href={link.href} 
-                      className="text-white py-4 text-lg text-center w-full transition-colors animate-in fade-in duration-300"
+                      className="text-white py-3 md:py-2 text-lg text-center w-full transition-colors animate-in fade-in duration-300"
                       style={{ animationDelay: `${index * 50}ms` }}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {link.name}
                     </a>
                   ))}
-                  <div className="mt-4 w-full flex justify-center">
+                  <div className="mt-4 md:mt-2 w-full flex justify-center">
                     <a 
                       href="#contact" 
                       className="inline-block"
