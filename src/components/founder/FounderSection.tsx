@@ -13,25 +13,22 @@ const FounderSection = () => {
           </h2>
           <div className="relative mb-4 group">
             {/* Cyberpunk background effects */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple via-noesis-blue to-noesis-teal opacity-30 rounded-2xl blur-lg"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple via-noesis-blue to-noesis-teal opacity-20 rounded-2xl blur-lg"></div>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-noesis-darkpurple via-transparent to-noesis-teal/30 rounded-2xl"></div>
             
             {/* Hexagonal grid pattern */}
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImhleGFnb24iIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcGF0dGVyblRyYW5zZm9ybT0icm90YXRlKDMwKSI+PHBhdGggZD0iTTAgMzBMMTUgMGwxNSAzMEwxNSA2MEwwIDMweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMSkiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjaGV4YWdvbikiLz48L3N2Zz4=')] opacity-40 rounded-2xl animate-pulse"></div>
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImhleGFnb24iIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcGF0dGVyblRyYW5zZm9ybT0icm90YXRlKDMwKSI+PHBhdGggZD0iTTAgMzBMMTUgMGwxNSAzMEwxNSA2MEwwIDMweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMSkiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjaGV4YWdvbikiLz48L3N2Zz4=')] opacity-30 rounded-2xl animate-pulse"></div>
             
             {/* Glowing border effect */}
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-noesis-purple via-noesis-blue to-noesis-teal rounded-2xl blur-sm group-hover:blur opacity-90 transition duration-1000 group-hover:opacity-100"></div>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-noesis-purple via-noesis-blue to-noesis-teal rounded-2xl blur-sm group-hover:blur opacity-75 transition duration-1000 group-hover:opacity-100"></div>
             
             {/* Main image container with enhanced effects */}
-            <div className="relative rounded-2xl overflow-hidden backdrop-blur-sm bg-gradient-to-b from-noesis-darkpurple/40 to-noesis-blue/40">
-              {/* Holographic overlay - more vibrant */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/40 via-noesis-blue/20 to-transparent mix-blend-overlay"></div>
+            <div className="relative rounded-2xl overflow-hidden backdrop-blur-sm bg-gradient-to-b from-noesis-darkpurple/30 to-noesis-blue/30">
+              {/* Holographic overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/30 via-noesis-blue/20 to-transparent mix-blend-overlay"></div>
               
               {/* Circuit board pattern */}
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cGF0aCBkPSJNMTAgMTBIMjBWMjBIMTB6IE0zMCAzMEg0MFY0MEgzMHogTTUwIDUwSDYwVjYwSDUweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDc4LCA4NywgMjMwLCAwLjIpIi8+PC9zdmc+')] opacity-30"></div>
-              
-              {/* Enhanced tint/overlay layer */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/60 via-noesis-blue/40 to-noesis-teal/30 mix-blend-overlay"></div>
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cGF0aCBkPSJNMTAgMTBIMjBWMjBIMTB6IE0zMCAzMEg0MFY0MEgzMHogTTUwIDUwSDYwVjYwSDUweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDc4LCA4NywgMjMwLCAwLjEpIi8+PC9zdmc+')] opacity-20"></div>
               
               <img 
                 src="/lovable-uploads/af4dc9fd-e708-4fc8-b6e5-d4dee4f5961d.png"
@@ -40,10 +37,10 @@ const FounderSection = () => {
               />
               
               {/* Enhanced scanline effect */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-noesis-purple/10 to-transparent bg-[length:100%_4px] animate-pulse opacity-40"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-noesis-purple/5 to-transparent bg-[length:100%_4px] animate-pulse opacity-30"></div>
               
-              {/* Enhanced digital noise effect */}
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIG51bU9jdGF2ZXM9IjMiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+')] opacity-30 mix-blend-overlay"></div>
+              {/* Digital noise effect */}
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIG51bU9jdGF2ZXM9IjMiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')] opacity-20 mix-blend-overlay"></div>
             </div>
           </div>
           <div className="text-center lg:text-left">

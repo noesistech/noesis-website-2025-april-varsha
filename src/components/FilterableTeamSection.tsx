@@ -16,7 +16,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { toast } from 'sonner';
 
 const FilterableTeamSection = () => {
   const { teamSection, teamMembers } = useContent();
@@ -25,9 +24,6 @@ const FilterableTeamSection = () => {
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    // Log to diagnose rendering
-    console.info("FilterableTeamSection rendered");
-    
     if (teamMembers && teamMembers.length > 0) {
       const positionGroups: Record<string, string> = {
         'Sr. Project Manager': 'Management',
@@ -52,11 +48,6 @@ const FilterableTeamSection = () => {
       setDepartmentGroups(Array.from(uniqueGroups));
     }
   }, [teamMembers]);
-
-  // Show a toast to verify component is rendered and updated
-  useEffect(() => {
-    toast.success('Team section updated!');
-  }, []);
 
   const groupedTeamMembers = departmentGroups.reduce((acc, group) => {
     if (group === 'All') return acc;
@@ -94,10 +85,7 @@ const FilterableTeamSection = () => {
           </p>
         </div>
 
-        {/* Updated styling for the founder section border */}
-        <div className="p-0.5 rounded-2xl bg-gradient-to-r from-noesis-purple via-noesis-blue to-noesis-teal mb-12">
-          <FounderSection />
-        </div>
+        <FounderSection />
 
         {isMobile ? (
           <Accordion type="single" collapsible className="w-full mb-8">
