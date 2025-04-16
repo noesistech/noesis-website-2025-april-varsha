@@ -69,7 +69,7 @@ const FilterableTeamSection = () => {
     <section id="team" className="py-20 bg-gradient-to-b from-noesis-dark to-noesis-darker">
       <div className="container px-4 mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="section-title">
             <span className="gradient-text">{teamSection?.title || 'Our Team'}</span>
           </h2>
           <p className="text-standard max-w-3xl mx-auto">
