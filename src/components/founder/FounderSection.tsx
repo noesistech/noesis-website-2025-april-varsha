@@ -30,6 +30,9 @@ const FounderSection = () => {
               {/* Circuit board pattern */}
               <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cGF0aCBkPSJNMTAgMTBIMjBWMjBIMTB6IE0zMCAzMEg0MFY0MEgzMHogTTUwIDUwSDYwVjYwSDUweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDc4LCA4NywgMjMwLCAwLjEpIi8+PC9zdmc+')] opacity-20"></div>
               
+              {/* New tint/overlay layer */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/40 via-noesis-blue/30 to-noesis-teal/20 mix-blend-overlay"></div>
+              
               <img 
                 src="/lovable-uploads/af4dc9fd-e708-4fc8-b6e5-d4dee4f5961d.png"
                 alt="Sidd - Founder of Noesis.tech"
