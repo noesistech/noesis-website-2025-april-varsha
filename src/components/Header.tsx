@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight } from 'lucide-react';
@@ -129,7 +130,7 @@ const Header = () => {
         </a>
         
         {/* Desktop and Tablet Navigation */}
-        <nav className="hidden sm:flex items-center gap-2 md:gap-4">
+        <nav className="hidden sm:flex items-center gap-2 md:gap-4 lg:gap-6">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
