@@ -1,8 +1,9 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import ScrollToTop from './components/ScrollToTop';
 import { Toaster } from './components/ui/toaster';
 import { useContent } from './contexts/ContentContext';
+import { toast } from 'sonner';
 
 // Import all sections
 import AboutStatsSection from './components/AboutStatsSection';
@@ -31,6 +32,11 @@ function App() {
     techStackSection,
     techCategories
   } = useContent();
+
+  useEffect(() => {
+    // Log to verify App component is rendering
+    console.info("App component rendered");
+  }, []);
 
   return (
     <>
