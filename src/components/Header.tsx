@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight } from 'lucide-react';
@@ -78,7 +79,7 @@ const Header = () => {
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 300.48 54.12" 
-            className="h-5 sm:h-6 md:h-7 w-auto"
+            className="h-5 sm:h-6 md:h-8 w-auto"
             fill="currentColor"
           >
             <path 
@@ -134,15 +135,15 @@ const Header = () => {
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-[12px] sm:text-[14px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap"
+              className="text-[12px] sm:text-[12px] md:text-[14px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap"
             >
               {link.name}
             </a>
           ))}
           <a href="#contact">
-            <Button className="group text-[12px] sm:text-[14px]" variant="noesis" size="sm">
+            <Button className="group text-[12px] sm:text-[12px] md:text-[14px]" variant="noesis" size="sm">
               Get in Touch
-              <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300 h-3 w-3 ml-1" />
+              <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300 h-3 w-3 md:h-4 md:w-4 ml-1" />
             </Button>
           </a>
         </nav>
