@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight } from 'lucide-react';
@@ -50,17 +51,17 @@ const Header = () => {
   const HEADER_HEIGHT = '60px';
   
   const useHamburgerMenu = () => {
-    return window.innerWidth < 1024; // breakpoint for lg in Tailwind
+    return window.innerWidth < 640; // Changed from 1024 to 640 for mobile-only hamburger
   };
   
-  const [isTabletOrMobile, setIsTabletOrMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   
   useEffect(() => {
     const handleResize = () => {
-      setIsTabletOrMobile(useHamburgerMenu());
+      setIsMobile(useHamburgerMenu());
     };
     
-    handleResize(); // Initial check
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -126,25 +127,27 @@ const Header = () => {
           </svg>
         </a>
         
-        <nav className="hidden lg:flex items-center gap-6 lg:gap-8">
+        {/* Desktop and Tablet Navigation */}
+        <nav className="hidden sm:flex items-center gap-4 md:gap-6">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-base text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all"
+              className="text-sm md:text-base text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all"
             >
               {link.name}
             </a>
           ))}
           <a href="#contact">
-            <Button className="group" variant="noesis">
+            <Button className="group" variant="noesis" size="sm">
               Get in Touch
-              <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
+              <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300 h-4 w-4" />
             </Button>
           </a>
         </nav>
         
-        <div className="lg:hidden">
+        {/* Mobile Navigation */}
+        <div className="sm:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <button className="text-white z-[60]">
