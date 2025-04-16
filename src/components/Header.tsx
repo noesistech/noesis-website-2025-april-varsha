@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight } from 'lucide-react';
@@ -15,7 +14,6 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { clientsSection, clientLogos, partnerLogos, testimonials } = useContent();
   
-  // Check if we have clients data to display
   const hasClientsData = Boolean(
     clientsSection && 
     (clientLogos?.length > 0 || partnerLogos?.length > 0 || testimonials?.length > 0)
@@ -35,7 +33,6 @@ const Header = () => {
     };
   }, [scrolled]);
 
-  // Define nav links with conditional inclusion of Clients link
   const navLinks = [
     { name: 'About', href: '#about' },
     { name: 'Mission', href: '#mission' },
@@ -44,18 +41,14 @@ const Header = () => {
     { name: 'Tech Stack', href: '#tech-stack' },
   ];
   
-  // Conditionally add Clients link if data exists
   if (hasClientsData) {
     navLinks.push({ name: 'Clients', href: '#clients' });
   }
   
-  // Always add Contact link at the end
   navLinks.push({ name: 'Contact', href: '#contact' });
 
-  // Fixed header height to prevent shrinking
   const HEADER_HEIGHT = '60px';
   
-  // Use hamburger menu for tablets as well as mobile
   const useHamburgerMenu = () => {
     return window.innerWidth < 1024; // breakpoint for lg in Tailwind
   };
@@ -151,7 +144,6 @@ const Header = () => {
           </a>
         </nav>
         
-        {/* Mobile and tablet menu button - using Sheet component */}
         <div className="lg:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
@@ -161,11 +153,11 @@ const Header = () => {
             </SheetTrigger>
             <SheetContent 
               side="top" 
-              className="bg-[#1A1F2C] border-b border-white/10 h-[calc(100vh-60px)] p-0 rounded-none"
+              className="bg-[#1A1F2C] border-b border-white/10 h-screen p-0 rounded-none"
               style={{ marginTop: HEADER_HEIGHT }}
             >
-              <div className="flex flex-col items-center justify-center px-4 py-0 h-full mt-[-60px]">
-                <div className="flex flex-col items-center justify-center w-full h-full">
+              <div className="flex flex-col items-center justify-center px-4 py-8 h-full mt-[-60px]">
+                <div className="flex flex-col items-center justify-center w-full h-full max-w-md mx-auto">
                   {navLinks.map((link, index) => (
                     <a 
                       key={link.name} 
@@ -177,13 +169,16 @@ const Header = () => {
                       {link.name}
                     </a>
                   ))}
-                  <div className="mt-4 w-full">
-                    <a href="#contact" className="block w-full">
+                  <div className="mt-4 w-full flex justify-center">
+                    <a 
+                      href="#contact" 
+                      className="inline-block"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
                       <Button 
-                        className="w-full text-white animate-in fade-in duration-300 group"
+                        className="animate-in fade-in duration-300 group"
                         style={{ animationDelay: `${navLinks.length * 50}ms` }}
                         variant="noesis"
-                        onClick={() => setMobileMenuOpen(false)}
                       >
                         Get in Touch
                         <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
