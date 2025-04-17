@@ -81,7 +81,7 @@ export const teamMembersData: TeamMember[] = [
     name: 'Bhumika Narendra Pinara',
     position: 'Jr. Finance Executive',
     bio: 'Bhumika supports financial management through accurate reporting, compliance with standards, and process optimization.',
-    image_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80',
+    image_url: '/lovable-uploads/ac3cc09c-d3ed-4ef9-b26c-aa7b23050f16.png',
     sort_order: 7,
     created_at: '',
     updated_at: '',
