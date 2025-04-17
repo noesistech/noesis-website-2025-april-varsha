@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { 
@@ -76,11 +77,11 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
                 
                 {/* Use conditional rendering for team-1 (Rahul) with special handling */}
                 {member.id === 'team-1' ? (
-                  <div className="relative w-full h-full flex justify-center items-center overflow-hidden">
+                  <div className="relative w-full h-full flex justify-center items-start overflow-hidden">
                     <img
                       src={member.image_url}
                       alt={member.name}
-                      className="max-w-full max-h-full object-contain object-center transition-transform duration-500 group-hover:scale-105 relative z-[1]"
+                      className="max-w-full max-h-full object-contain object-top transition-transform duration-500 group-hover:scale-105 relative z-[1]"
                       onError={(e) => {
                         console.log("Image failed to load for Rahul, using direct path");
                         // Try with direct path as fallback
