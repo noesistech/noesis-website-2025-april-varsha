@@ -19,6 +19,7 @@ export const teamMembersData: TeamMember[] = [
     sort_order: 1,
     created_at: '',
     updated_at: '',
+    grayscale: false
   },
   {
     id: 'team-2',
@@ -29,6 +30,7 @@ export const teamMembersData: TeamMember[] = [
     sort_order: 2,
     created_at: '',
     updated_at: '',
+    grayscale: true
   },
   {
     id: 'team-3',
@@ -39,6 +41,7 @@ export const teamMembersData: TeamMember[] = [
     sort_order: 3,
     created_at: '',
     updated_at: '',
+    grayscale: false
   },
   {
     id: 'team-4',
@@ -49,6 +52,7 @@ export const teamMembersData: TeamMember[] = [
     sort_order: 4,
     created_at: '',
     updated_at: '',
+    grayscale: false
   },
   {
     id: 'team-5',
@@ -59,6 +63,7 @@ export const teamMembersData: TeamMember[] = [
     sort_order: 5,
     created_at: '',
     updated_at: '',
+    grayscale: false
   },
   {
     id: 'team-6',
@@ -69,6 +74,7 @@ export const teamMembersData: TeamMember[] = [
     sort_order: 6,
     created_at: '',
     updated_at: '',
+    grayscale: false
   },
   {
     id: 'team-7',
@@ -79,6 +85,7 @@ export const teamMembersData: TeamMember[] = [
     sort_order: 7,
     created_at: '',
     updated_at: '',
+    grayscale: false
   },
   {
     id: 'team-8',
@@ -89,6 +96,7 @@ export const teamMembersData: TeamMember[] = [
     sort_order: 8,
     created_at: '',
     updated_at: '',
+    grayscale: false
   },
   {
     id: 'team-9',
@@ -99,5 +107,6 @@ export const teamMembersData: TeamMember[] = [
     sort_order: 9,
     created_at: '',
     updated_at: '',
+    grayscale: false
   },
 ];

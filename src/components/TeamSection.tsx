@@ -18,6 +18,7 @@ export interface TeamMember {
   sort_order: number;
   created_at: string;
   updated_at: string;
+  grayscale?: boolean;
 }
 
 interface TeamSectionProps {
@@ -75,67 +76,35 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
                 {/* Enhanced cyberpunk background styling */}
                 <div className="w-full h-full bg-gradient-to-b from-noesis-darker to-noesis-purple/30 absolute inset-0 z-10 opacity-60"></div>
                 
-                {/* Use conditional rendering for special team members with enhanced styling */}
-                {member.id === 'team-1' || member.id === 'team-2' ? (
-                  <div className="relative w-full h-full flex justify-center items-start overflow-hidden">
-                    <img
-                      src={member.id === 'team-1' 
-                        ? member.image_url 
-                        : member.id === 'team-2' 
-                          ? '/lovable-uploads/9974d449-5315-4593-aa82-cae4ebd2c8cb.png' 
-                          : member.image_url
+                {/* Apply consistent styling for all team members */}
+                <div className="relative w-full h-full flex justify-center items-start overflow-hidden">
+                  <img
+                    src={member.image_url}
+                    alt={member.name}
+                    className={`max-w-full max-h-full object-contain object-top transition-transform duration-500 group-hover:scale-105 relative z-[1] ${
+                      member.grayscale ? 'grayscale' : ''
+                    }`}
+                    onError={(e) => {
+                      console.log(`Image failed to load for ${member.name}, using fallback`);
+                      if (member.id === 'team-1') {
+                        (e.target as HTMLImageElement).src = "/lovable-uploads/b2d0275a-2da4-4059-aec3-c772f2449a67.png";
+                      } else if (member.id === 'team-2') {
+                        (e.target as HTMLImageElement).src = "/lovable-uploads/9974d449-5315-4593-aa82-cae4ebd2c8cb.png";
+                      } else {
+                        handleImageError(member.id);
                       }
-                      alt={member.name}
-                      className={`max-w-full max-h-full object-contain object-top transition-transform duration-500 group-hover:scale-105 relative z-[1] ${
-                        member.id === 'team-2' ? 'grayscale' : ''
-                      }`}
-                      onError={(e) => {
-                        console.log(`Image failed to load for ${member.name}, using direct path`);
-                        // Try with direct path as fallback for specific team members
-                        if (member.id === 'team-1') {
-                          (e.target as HTMLImageElement).src = "/lovable-uploads/b2d0275a-2da4-4059-aec3-c772f2449a67.png";
-                        } else if (member.id === 'team-2') {
-                          (e.target as HTMLImageElement).src = "/lovable-uploads/9974d449-5315-4593-aa82-cae4ebd2c8cb.png";
-                        }
-                      }}
-                      loading="lazy"
-                    />
-                    
-                    {/* Enhanced cyberpunk effects for special team members */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-noesis-darkpurple/50 via-noesis-blue/30 to-noesis-teal/40 mix-blend-overlay z-[2]"></div>
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent bg-[length:100%_2px] animate-pulse opacity-40 z-[3]"></div>
-                    <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/30 to-transparent opacity-80 z-[2] mix-blend-screen"></div>
-                    
-                    {/* Subtle digital noise texture */}
-                    <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMjAwdjIwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')] opacity-25 z-[3]"></div>
-                  </div>
-                ) : (
-                  <div className="relative w-full h-full">
-                    {imageErrors[member.id] ? (
-                      <img
-                        src={getStockImage(member.id)}
-                        alt={member.name}
-                        className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <>
-                        <img
-                          src={member.image_url}
-                          alt={member.name}
-                          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 relative z-[1]"
-                          onError={() => handleImageError(member.id)}
-                          loading="lazy"
-                        />
-                        
-                        {/* Standard effects for other team members */}
-                        <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/40 via-noesis-blue/30 to-noesis-teal/40 mix-blend-overlay z-[2]"></div>
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent bg-[length:100%_2px] animate-pulse opacity-30 z-[3]"></div>
-                        <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/10 to-transparent opacity-70 z-[2] mix-blend-screen"></div>
-                      </>
-                    )}
-                  </div>
-                )}
+                    }}
+                    loading="lazy"
+                  />
+                  
+                  {/* Enhanced cyberpunk effects for all team members */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-noesis-darkpurple/50 via-noesis-blue/30 to-noesis-teal/40 mix-blend-overlay z-[2]"></div>
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent bg-[length:100%_2px] animate-pulse opacity-40 z-[3]"></div>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/30 to-transparent opacity-80 z-[2] mix-blend-screen"></div>
+                  
+                  {/* Subtle digital noise texture */}
+                  <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMjAwdjIwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')] opacity-25 z-[3]"></div>
+                </div>
               </AspectRatio>
             </div>
             
@@ -160,4 +129,3 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
 };
 
 export default TeamSection;
-
