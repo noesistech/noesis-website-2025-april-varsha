@@ -71,7 +71,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
             className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 backdrop-blur-sm border border-gray-700/50 overflow-hidden hover:border-noesis-purple/50 transition-all duration-300 group h-full"
           >
             <div className="relative overflow-hidden h-48 sm:h-40">
-              <AspectRatio ratio={1/1} className="bg-gradient-to-b from-noesis-darker to-noesis-darkpurple/40">
+              <AspectRatio ratio={1/1} className="bg-gradient-to-b from-noesis-darker to-noesis-purple/30">
                 {/* Enhanced cyberpunk background styling */}
                 <div className="w-full h-full bg-gradient-to-b from-noesis-darker to-noesis-purple/30 absolute inset-0 z-10 opacity-60"></div>
                 
@@ -86,7 +86,9 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
                           : member.image_url
                       }
                       alt={member.name}
-                      className="max-w-full max-h-full object-contain object-top transition-transform duration-500 group-hover:scale-105 relative z-[1]"
+                      className={`max-w-full max-h-full object-contain object-top transition-transform duration-500 group-hover:scale-105 relative z-[1] ${
+                        member.id === 'team-2' ? 'grayscale' : ''
+                      }`}
                       onError={(e) => {
                         console.log(`Image failed to load for ${member.name}, using direct path`);
                         // Try with direct path as fallback for specific team members
@@ -158,3 +160,4 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
 };
 
 export default TeamSection;
+
