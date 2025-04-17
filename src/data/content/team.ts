@@ -15,7 +15,7 @@ export const teamMembersData: TeamMember[] = [
     name: 'Rahul Sharma',
     position: 'Sr. Project Manager',
     bio: 'With 8+ years managing complex App and Website projects, Rahul brings exceptional leadership and strategic planning to every project.',
-    image_url: '/lovable-uploads/1c24be48-3404-422d-8078-2c2a0696f12c.png',
+    image_url: '/lovable-uploads/409eb7f4-c837-43ce-9471-e3ff7d9a6686.png',
     sort_order: 1,
     created_at: '',
     updated_at: '',

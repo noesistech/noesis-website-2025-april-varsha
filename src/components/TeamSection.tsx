@@ -65,7 +65,9 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
           >
             <div className="relative overflow-hidden h-48 sm:h-40">
               <AspectRatio ratio={1/1}>
+                {/* Background styling consistent with founder section */}
                 <div className="w-full h-full bg-gradient-to-b from-noesis-darker to-noesis-purple/20 absolute inset-0 z-10 opacity-50"></div>
+                
                 {imageErrors[member.id] ? (
                   <img
                     src={getStockImage(member.id)}
@@ -74,13 +76,21 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
                     loading="lazy"
                   />
                 ) : (
-                  <img
-                    src={member.image_url || getStockImage(member.id)}
-                    alt={member.name}
-                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                    onError={() => handleImageError(member.id)}
-                    loading="lazy"
-                  />
+                  <div className="relative w-full h-full">
+                    <img
+                      src={member.image_url || getStockImage(member.id)}
+                      alt={member.name}
+                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 relative z-[1]"
+                      onError={() => handleImageError(member.id)}
+                      loading="lazy"
+                    />
+                    
+                    {/* Color overlay with blend mode similar to founder section */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/40 via-noesis-blue/30 to-noesis-teal/40 mix-blend-overlay z-[2]"></div>
+                    
+                    {/* Cyberpunk scan lines */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent bg-[length:100%_2px] animate-pulse opacity-30 z-[3]"></div>
+                  </div>
                 )}
               </AspectRatio>
             </div>
