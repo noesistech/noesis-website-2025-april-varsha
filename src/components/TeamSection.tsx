@@ -8,6 +8,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface TeamMember {
   id: string;
@@ -30,6 +31,7 @@ interface TeamSectionProps {
 const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers }) => {
   const isMobile = useIsMobile();
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
+  const [imageLoading, setImageLoading] = useState<Record<string, boolean>>({});
 
   const handleImageError = (memberId: string) => {
     console.log(`Image error for member ${memberId}`);
@@ -37,11 +39,28 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
       ...prev,
       [memberId]: true
     }));
+    setImageLoading(prev => ({
+      ...prev,
+      [memberId]: false
+    }));
+  };
+
+  const handleImageLoad = (memberId: string) => {
+    console.log(`Image loaded for member ${memberId}`);
+    setImageLoading(prev => ({
+      ...prev,
+      [memberId]: false
+    }));
   };
   
   useEffect(() => {
     console.log("TeamSection rendering with members:", teamMembers);
-    // Reset image errors when team members change
+    // Reset image states when team members change
+    const initialLoadingState: Record<string, boolean> = {};
+    teamMembers.forEach(member => {
+      initialLoadingState[member.id] = true;
+    });
+    setImageLoading(initialLoadingState);
     setImageErrors({});
   }, [teamMembers]);
 
@@ -61,15 +80,23 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
                 {/* Apply consistent styling for all team members */}
                 <div className="relative w-full h-full flex justify-center items-center overflow-hidden">
                   {!imageErrors[member.id] && (
-                    <img
-                      src={member.image_url}
-                      alt={member.name}
-                      className={`max-w-full max-h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 relative z-[1] ${
-                        member.grayscale ? 'grayscale' : ''
-                      }`}
-                      onError={() => handleImageError(member.id)}
-                      loading="lazy"
-                    />
+                    <>
+                      {imageLoading[member.id] && (
+                        <div className="absolute inset-0 z-20 flex items-center justify-center">
+                          <Skeleton className="h-full w-full bg-noesis-purple/20" />
+                        </div>
+                      )}
+                      <img
+                        src={member.image_url}
+                        alt={member.name}
+                        className={`w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 relative z-[1] ${
+                          member.grayscale ? 'grayscale' : ''
+                        }`}
+                        onError={() => handleImageError(member.id)}
+                        onLoad={() => handleImageLoad(member.id)}
+                        loading="lazy"
+                      />
+                    </>
                   )}
                   
                   {imageErrors[member.id] && (
