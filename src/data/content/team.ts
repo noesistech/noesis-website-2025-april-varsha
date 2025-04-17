@@ -37,7 +37,7 @@ export const teamMembersData: TeamMember[] = [
     name: 'Sachin Bodke',
     position: 'Sr. DevOps Engineer',
     bio: 'Expert in cloud tech, CI/CD pipelines, and containerization with innovative approaches to DevOps practices.',
-    image_url: '/lovable-uploads/1c24be48-3404-422d-8078-2c2a0696f12c.png',
+    image_url: '/lovable-uploads/5d2ab8d9-526c-4e6c-926c-30a351b8e909.png',
     sort_order: 3,
     created_at: '',
     updated_at: '',
