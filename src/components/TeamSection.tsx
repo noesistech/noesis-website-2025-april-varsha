@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { 
   Briefcase, 
@@ -41,6 +41,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
   ];
 
   const handleImageError = (memberId: string) => {
+    console.log(`Image error for member ${memberId}`);
     setImageErrors(prev => ({
       ...prev,
       [memberId]: true
@@ -54,6 +55,12 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
     const index = parseInt(lastChar, 36) % stockImages.length;
     return stockImages[index];
   };
+  
+  useEffect(() => {
+    console.log("TeamSection rendering with members:", teamMembers);
+    // Reset image errors when team members change
+    setImageErrors({});
+  }, [teamMembers]);
 
   return (
     <div className="flex justify-center w-full">
@@ -65,7 +72,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
           >
             <div className="relative overflow-hidden h-48 sm:h-40">
               <AspectRatio ratio={1/1}>
-                {/* Background styling consistent with founder section */}
+                {/* Background styling consistent with cyberpunk theme */}
                 <div className="w-full h-full bg-gradient-to-b from-noesis-darker to-noesis-purple/20 absolute inset-0 z-10 opacity-50"></div>
                 
                 {imageErrors[member.id] ? (
@@ -78,18 +85,21 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
                 ) : (
                   <div className="relative w-full h-full">
                     <img
-                      src={member.image_url || getStockImage(member.id)}
+                      src={member.image_url}
                       alt={member.name}
                       className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 relative z-[1]"
                       onError={() => handleImageError(member.id)}
                       loading="lazy"
                     />
                     
-                    {/* Color overlay with blend mode similar to founder section */}
+                    {/* Color overlay with blend mode for cyberpunk effect */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/40 via-noesis-blue/30 to-noesis-teal/40 mix-blend-overlay z-[2]"></div>
                     
                     {/* Cyberpunk scan lines */}
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent bg-[length:100%_2px] animate-pulse opacity-30 z-[3]"></div>
+                    
+                    {/* Subtle glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/10 to-transparent opacity-70 z-[2] mix-blend-screen"></div>
                   </div>
                 )}
               </AspectRatio>
