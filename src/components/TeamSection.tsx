@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { 
@@ -81,7 +80,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
                     <img
                       src={member.image_url}
                       alt={member.name}
-                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 relative z-[1]"
+                      className="max-w-full max-h-full object-contain object-center transition-transform duration-500 group-hover:scale-105 relative z-[1]"
                       onError={(e) => {
                         console.log("Image failed to load for Rahul, using direct path");
                         // Try with direct path as fallback
