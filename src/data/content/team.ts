@@ -1,4 +1,3 @@
-
 import { TeamMember } from '@/components/TeamSection';
 
 export const teamSectionData = {
@@ -48,7 +47,7 @@ export const teamMembersData: TeamMember[] = [
     name: 'Vijaya Balkrishna Pawar',
     position: 'Senior QA Engineer',
     bio: 'A meticulous QA Engineer with expertise in creating comprehensive test strategies for web and mobile platforms.',
-    image_url: '/lovable-uploads/1c24be48-3404-422d-8078-2c2a0696f12c.png',
+    image_url: '/lovable-uploads/283f3919-3f58-4126-8243-64809a18e8a6.png',
     sort_order: 4,
     created_at: '',
     updated_at: '',
