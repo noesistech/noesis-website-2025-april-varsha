@@ -71,17 +71,17 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
             className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 backdrop-blur-sm border border-gray-700/50 overflow-hidden hover:border-noesis-purple/50 transition-all duration-300 group h-full"
           >
             <div className="relative overflow-hidden h-48 sm:h-40">
-              <AspectRatio ratio={1/1}>
+              <AspectRatio ratio={1/1} className="bg-gradient-to-b from-noesis-darker to-noesis-darkpurple/40">
                 {/* Enhanced cyberpunk background styling */}
                 <div className="w-full h-full bg-gradient-to-b from-noesis-darker to-noesis-purple/30 absolute inset-0 z-10 opacity-60"></div>
                 
                 {/* Use conditional rendering for team-1 (Rahul) with special handling */}
                 {member.id === 'team-1' ? (
-                  <div className="relative w-full h-full">
+                  <div className="relative w-full h-full flex justify-center items-center overflow-hidden">
                     <img
                       src={member.image_url}
                       alt={member.name}
-                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 relative z-[1]"
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 relative z-[1]"
                       onError={(e) => {
                         console.log("Image failed to load for Rahul, using direct path");
                         // Try with direct path as fallback
