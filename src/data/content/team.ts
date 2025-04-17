@@ -70,7 +70,7 @@ export const teamMembersData: TeamMember[] = [
     name: 'Sandesh Suresh Jadhav',
     position: 'SR. IT Executive',
     bio: 'With 6 years at our company, Sandesh maintains our IT infrastructure with expertise in network admin and cybersecurity.',
-    image_url: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=500&q=80',
+    image_url: '/lovable-uploads/f9efde52-33ff-4301-aa76-9f1ce92c1b7b.png',
     sort_order: 6,
     created_at: '',
     updated_at: '',
