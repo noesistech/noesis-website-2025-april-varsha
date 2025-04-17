@@ -72,7 +72,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
           >
             <div className="relative overflow-hidden h-48 sm:h-40">
               <AspectRatio ratio={1/1}>
-                {/* Background styling consistent with cyberpunk theme */}
+                {/* Enhanced cyberpunk background styling */}
                 <div className="w-full h-full bg-gradient-to-b from-noesis-darker to-noesis-purple/20 absolute inset-0 z-10 opacity-50"></div>
                 
                 {imageErrors[member.id] ? (
@@ -84,22 +84,41 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
                   />
                 ) : (
                   <div className="relative w-full h-full">
-                    <img
-                      src={member.image_url}
-                      alt={member.name}
-                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 relative z-[1]"
-                      onError={() => handleImageError(member.id)}
-                      loading="lazy"
-                    />
-                    
-                    {/* Color overlay with blend mode for cyberpunk effect */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/40 via-noesis-blue/30 to-noesis-teal/40 mix-blend-overlay z-[2]"></div>
-                    
-                    {/* Cyberpunk scan lines */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent bg-[length:100%_2px] animate-pulse opacity-30 z-[3]"></div>
-                    
-                    {/* Subtle glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/10 to-transparent opacity-70 z-[2] mix-blend-screen"></div>
+                    {/* Special styling for Rahul's image */}
+                    {member.id === 'team-1' ? (
+                      <>
+                        <img
+                          src={member.image_url}
+                          alt={member.name}
+                          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 relative z-[1]"
+                          onError={() => handleImageError(member.id)}
+                          loading="lazy"
+                        />
+                        
+                        {/* Enhanced cyberpunk effects for Rahul's image */}
+                        <div className="absolute inset-0 bg-gradient-to-tr from-noesis-darkpurple/60 via-noesis-blue/40 to-noesis-teal/50 mix-blend-overlay z-[2]"></div>
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent bg-[length:100%_2px] animate-pulse opacity-40 z-[3]"></div>
+                        <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/20 to-transparent opacity-80 z-[2] mix-blend-screen"></div>
+                        
+                        {/* Subtle digital noise texture */}
+                        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMjAwdjIwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')] opacity-20 z-[3]"></div>
+                      </>
+                    ) : (
+                      <>
+                        <img
+                          src={member.image_url}
+                          alt={member.name}
+                          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 relative z-[1]"
+                          onError={() => handleImageError(member.id)}
+                          loading="lazy"
+                        />
+                        
+                        {/* Standard effects for other team members */}
+                        <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/40 via-noesis-blue/30 to-noesis-teal/40 mix-blend-overlay z-[2]"></div>
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent bg-[length:100%_2px] animate-pulse opacity-30 z-[3]"></div>
+                        <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/10 to-transparent opacity-70 z-[2] mix-blend-screen"></div>
+                      </>
+                    )}
                   </div>
                 )}
               </AspectRatio>

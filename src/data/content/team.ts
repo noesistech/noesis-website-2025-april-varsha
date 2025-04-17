@@ -1,3 +1,4 @@
+
 import { TeamMember } from '@/components/TeamSection';
 
 export const teamSectionData = {
@@ -14,7 +15,7 @@ export const teamMembersData: TeamMember[] = [
     name: 'Rahul Sharma',
     position: 'Sr. Project Manager',
     bio: 'With 8+ years managing complex App and Website projects, Rahul brings exceptional leadership and strategic planning to every project.',
-    image_url: '/lovable-uploads/0c7101b4-a31c-45bb-94b0-48bab5e9d21f.png',
+    image_url: '/lovable-uploads/681fb3ef-1ced-48b4-a148-34d4d6d7c228.png',
     sort_order: 1,
     created_at: '',
     updated_at: '',
