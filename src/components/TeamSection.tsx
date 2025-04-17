@@ -84,18 +84,19 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
                     className={`max-w-full max-h-full object-contain object-top transition-transform duration-500 group-hover:scale-105 relative z-[1] ${
                       member.grayscale ? 'grayscale' : ''
                     }`}
-                    onError={(e) => {
-                      console.log(`Image failed to load for ${member.name}, using fallback`);
-                      if (member.id === 'team-1') {
-                        (e.target as HTMLImageElement).src = "/lovable-uploads/b2d0275a-2da4-4059-aec3-c772f2449a67.png";
-                      } else if (member.id === 'team-2') {
-                        (e.target as HTMLImageElement).src = "/lovable-uploads/9974d449-5315-4593-aa82-cae4ebd2c8cb.png";
-                      } else {
-                        handleImageError(member.id);
-                      }
-                    }}
+                    onError={() => handleImageError(member.id)}
                     loading="lazy"
                   />
+                  
+                  {imageErrors[member.id] && (
+                    <div className="absolute inset-0 flex items-center justify-center z-[2]">
+                      <Avatar className="h-24 w-24 bg-noesis-purple/20 border border-noesis-purple/40">
+                        <AvatarFallback className="bg-noesis-purple/20 text-white">
+                          {member.name.split(' ').map(n => n[0]).join('')}
+                        </AvatarFallback>
+                      </Avatar>
+                    </div>
+                  )}
                   
                   {/* Enhanced cyberpunk effects for all team members */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-noesis-darkpurple/50 via-noesis-blue/30 to-noesis-teal/40 mix-blend-overlay z-[2]"></div>

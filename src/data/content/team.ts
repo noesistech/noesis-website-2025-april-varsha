@@ -1,3 +1,4 @@
+
 import { TeamMember } from '@/components/TeamSection';
 
 export const teamSectionData = {
@@ -36,7 +37,7 @@ export const teamMembersData: TeamMember[] = [
     name: 'Sachin Bodke',
     position: 'Sr. DevOps Engineer',
     bio: 'Expert in cloud tech, CI/CD pipelines, and containerization with innovative approaches to DevOps practices.',
-    image_url: '/lovable-uploads/5d2ab8d9-526c-4e6c-926c-30a351b8e909.png',
+    image_url: '/lovable-uploads/8cedcd42-6b53-4ec6-9be3-20790c499226.png',
     sort_order: 3,
     created_at: '',
     updated_at: '',
@@ -47,7 +48,7 @@ export const teamMembersData: TeamMember[] = [
     name: 'Vijaya Balkrishna Pawar',
     position: 'Senior QA Engineer',
     bio: 'A meticulous QA Engineer with expertise in creating comprehensive test strategies for web and mobile platforms.',
-    image_url: '/lovable-uploads/283f3919-3f58-4126-8243-64809a18e8a6.png',
+    image_url: '/lovable-uploads/8cedcd42-6b53-4ec6-9be3-20790c499226.png',
     sort_order: 4,
     created_at: '',
     updated_at: '',
