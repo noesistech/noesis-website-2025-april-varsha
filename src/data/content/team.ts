@@ -25,7 +25,7 @@ export const teamMembersData: TeamMember[] = [
     name: 'Varsha Ravi',
     position: 'UI/UX Manager',
     bio: 'A UI/UX Manager with 6+ years experience creating thoughtful, user-first digital experiences across multiple platforms.',
-    image_url: '/lovable-uploads/1c24be48-3404-422d-8078-2c2a0696f12c.png',
+    image_url: '/lovable-uploads/9974d449-5315-4593-aa82-cae4ebd2c8cb.png',
     sort_order: 2,
     created_at: '',
     updated_at: '',

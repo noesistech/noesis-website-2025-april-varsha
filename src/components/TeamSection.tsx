@@ -75,22 +75,31 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
                 {/* Enhanced cyberpunk background styling */}
                 <div className="w-full h-full bg-gradient-to-b from-noesis-darker to-noesis-purple/30 absolute inset-0 z-10 opacity-60"></div>
                 
-                {/* Use conditional rendering for team-1 (Rahul) with special handling */}
-                {member.id === 'team-1' ? (
+                {/* Use conditional rendering for special team members with enhanced styling */}
+                {member.id === 'team-1' || member.id === 'team-2' ? (
                   <div className="relative w-full h-full flex justify-center items-start overflow-hidden">
                     <img
-                      src={member.image_url}
+                      src={member.id === 'team-1' 
+                        ? member.image_url 
+                        : member.id === 'team-2' 
+                          ? '/lovable-uploads/9974d449-5315-4593-aa82-cae4ebd2c8cb.png' 
+                          : member.image_url
+                      }
                       alt={member.name}
                       className="max-w-full max-h-full object-contain object-top transition-transform duration-500 group-hover:scale-105 relative z-[1]"
                       onError={(e) => {
-                        console.log("Image failed to load for Rahul, using direct path");
-                        // Try with direct path as fallback
-                        (e.target as HTMLImageElement).src = "/lovable-uploads/b2d0275a-2da4-4059-aec3-c772f2449a67.png";
+                        console.log(`Image failed to load for ${member.name}, using direct path`);
+                        // Try with direct path as fallback for specific team members
+                        if (member.id === 'team-1') {
+                          (e.target as HTMLImageElement).src = "/lovable-uploads/b2d0275a-2da4-4059-aec3-c772f2449a67.png";
+                        } else if (member.id === 'team-2') {
+                          (e.target as HTMLImageElement).src = "/lovable-uploads/9974d449-5315-4593-aa82-cae4ebd2c8cb.png";
+                        }
                       }}
                       loading="lazy"
                     />
                     
-                    {/* Enhanced cyberpunk effects specifically for Rahul's image */}
+                    {/* Enhanced cyberpunk effects for special team members */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-noesis-darkpurple/50 via-noesis-blue/30 to-noesis-teal/40 mix-blend-overlay z-[2]"></div>
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent bg-[length:100%_2px] animate-pulse opacity-40 z-[3]"></div>
                     <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/30 to-transparent opacity-80 z-[2] mix-blend-screen"></div>
