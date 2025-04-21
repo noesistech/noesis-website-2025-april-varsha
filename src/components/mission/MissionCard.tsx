@@ -13,8 +13,8 @@ const MissionCard = ({
 }: MissionCardProps) => {
   return (
     <div className="relative flex flex-col items-center">
-      {/* Icon above card and overlapping */}
-      <div className="z-20 absolute -top-10 left-1/2 -translate-x-1/2 bg-noesis-purple/15 text-noesis-purple rounded-full p-4 md:p-6 shadow-lg">
+      {/* Icon above card and overlapping on the left */}
+      <div className="z-20 absolute -top-10 left-0 -translate-x-1/2 bg-noesis-purple/15 text-noesis-purple rounded-full p-4 md:p-6 shadow-lg">
         <Flag className="h-8 w-8 md:h-12 md:w-12" />
       </div>
       {/* Card content */}
@@ -32,4 +32,3 @@ const MissionCard = ({
 };
 
 export default MissionCard;
-
