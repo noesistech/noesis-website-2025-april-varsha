@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useContent } from '../contexts/ContentContext';
@@ -89,7 +88,7 @@ const FilterableTeamSection = () => {
       : groupedTeamMembers[selectedCategory] || [];
 
   return (
-    <section id="team" className="py-20 bg-gradient-to-b from-noesis-dark to-noesis-darker">
+    <section id="team" className="bg-gradient-to-b from-noesis-dark to-noesis-darker">
       <div className="container px-4 mx-auto">
         <div className="text-center mb-12">
           <h2 className="section-title">
@@ -179,4 +178,3 @@ const FilterableTeamSection = () => {
 };
 
 export default FilterableTeamSection;
-
