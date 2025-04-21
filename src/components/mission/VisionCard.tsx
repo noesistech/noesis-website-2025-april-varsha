@@ -12,7 +12,7 @@ const VisionCard = ({
     animationDelay: '0.2s'
   }}>
       {/* Icon above card and overlapping on the left */}
-      <div className="z-20 absolute -top-10 left-0 -translate-x-1/2 bg-noesis-blue/15 text-noesis-blue rounded-full p-4 md:p-6 shadow-lg py-[20px] px-[20px] mx-[50px] my-[35px]">
+      <div className="z-20 absolute -top-10 left-0 -translate-x-1/2 bg-noesis-blue/15 text-noesis-blue rounded-full p-4 md:p-6 shadow-lg py-[20px] px-[20px] my-[35px] mx-[70px]">
         <Gem className="h-8 w-8 md:h-12 md:w-12" />
       </div>
       {/* Card content */}
