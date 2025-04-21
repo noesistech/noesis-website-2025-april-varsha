@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useContent } from '../contexts/ContentContext';
@@ -21,9 +22,9 @@ const positionGroups: Record<string, string> = {
   'Project Coordinator': 'Management',
   'UI/UX Manager': 'Design',
   'Sr. DevOps Engineer': 'IT & Operations',
-  'Full Stack Developer': 'Developers',
-  'Frontend Developer': 'Developers',
-  'Senior Frontend Developer': 'Developers',
+  'Full Stack Developer': 'Development',
+  'Frontend Developer': 'Development',
+  'Senior Frontend Developer': 'Development',
   'Senior QA Engineer': 'Quality Assurance',
   'Senior Quality Assurance Tester': 'Quality Assurance',
   'Jr. QA Tester': 'Quality Assurance',
@@ -63,7 +64,7 @@ const FilterableTeamSection = () => {
         'All',
         'Management',
         'Design',
-        'Developers',
+        'Development',
         'Quality Assurance',
         'IT & Operations',
         'Finance',
@@ -178,3 +179,4 @@ const FilterableTeamSection = () => {
 };
 
 export default FilterableTeamSection;
+
