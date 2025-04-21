@@ -73,27 +73,26 @@ const PromisePanel = ({
   };
 
   return (
-    <section className="page-section flex flex-col items-center w-full pt-0"> 
-      {/* Removed top padding by pt-0 */}
+    <div className="page-section flex flex-col items-center w-full">
       <div style={{ animationDelay: '0.4s' }} className="text-center max-w-4xl mx-auto animate-fade-in">
         <h3 className="text-4xl md:text-5xl font-bold mb-12">
           <span>Our </span><span className="gradient-text">Promise</span>
         </h3>
-        <div 
-          ref={promiseContainerRef} 
+        <div
+          ref={promiseContainerRef}
           className="promise-glass-panel relative overflow-hidden transition-transform duration-300 ease-out mx-auto p-8 md:px-[130px] md:py-[40px]"
         >
           <div className="refraction-layer"></div>
           <div className="glass-highlight"></div>
-          <p 
-            ref={promiseTextRef} 
+          <p
+            ref={promiseTextRef}
             className="text-2xl md:text-4xl relative promise-text font-light tracking-wide z-10"
           >
             {renderPromiseText()}
           </p>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
