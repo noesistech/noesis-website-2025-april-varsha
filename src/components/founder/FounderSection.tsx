@@ -1,13 +1,10 @@
-
 import React from 'react';
 import { Building, GraduationCap, Briefcase } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-
 const FounderSection = () => {
   console.log("Founder section rendering with updated overlay"); // Debug log
-  
-  return (
-    <div className="container mx-auto px-4 mb-20">
+
+  return <div className="container mx-auto px-4 mb-20">
       <div className="flex flex-col lg:flex-row gap-8 items-center">
         <div className="lg:w-1/3">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 gradient-text text-left">
@@ -15,11 +12,7 @@ const FounderSection = () => {
           </h2>
           <div className="relative mb-4 overflow-hidden rounded-2xl">
             {/* Base image */}
-            <img 
-              src="/lovable-uploads/af4dc9fd-e708-4fc8-b6e5-d4dee4f5961d.png"
-              alt="Sidd - Founder of Noesis.tech"
-              className="w-full h-auto relative z-[1]"
-            />
+            <img src="/lovable-uploads/af4dc9fd-e708-4fc8-b6e5-d4dee4f5961d.png" alt="Sidd - Founder of Noesis.tech" className="w-full h-auto relative z-[1]" />
             
             {/* Color overlay with blend mode */}
             <div className="absolute inset-0 bg-gradient-to-tr from-noesis-purple/60 via-noesis-blue/40 to-noesis-teal/50 mix-blend-overlay z-[2]"></div>
@@ -37,7 +30,7 @@ const FounderSection = () => {
         </div>
 
         <div className="lg:w-2/3">
-          <Card className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 backdrop-blur-sm border border-gray-700/50 p-6">
+          <Card className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 backdrop-blur-sm border border-gray-700/50 p-6 py-[11px] px-[15px]">
             <div className="space-y-6">
               <div className="flex items-start gap-4">
                 <Building className="w-6 h-6 text-noesis-purple flex-shrink-0 mt-1" />
@@ -72,8 +65,6 @@ const FounderSection = () => {
           </Card>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default FounderSection;
