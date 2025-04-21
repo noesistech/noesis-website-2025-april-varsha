@@ -78,7 +78,8 @@ const FilterableTeamSection = () => {
       <div className="container px-4 mx-auto">
         <div className="text-center mb-12">
           <h2 className="section-title">
-            <span className="gradient-text">{teamSection?.title || 'Our Team'}</span>
+            <span className="text-white">Our&nbsp;</span>
+            <span className="gradient-text">{teamSection?.title?.replace(/^Our\s*/, '') || 'Team'}</span>
           </h2>
           <p className="text-standard max-w-3xl mx-auto">
             {teamSection?.subtitle || 'Meet the talented professionals behind our success'}
@@ -165,3 +166,4 @@ const FilterableTeamSection = () => {
 };
 
 export default FilterableTeamSection;
+
