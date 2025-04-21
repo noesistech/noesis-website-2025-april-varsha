@@ -109,4 +109,61 @@ export const teamMembersData: TeamMember[] = [
     updated_at: '',
     grayscale: false
   },
+  // --- NEW MEMBERS START ---
+  {
+    id: 'team-10',
+    name: 'Renu Vishwakarma',
+    position: 'Finance Manager',
+    bio: '8 years as Finance Manager at Noesis, handling accounting, tax, reporting, and compliance.',
+    image_url: '/placeholder.svg', // Use a placeholder, update with real image if available
+    sort_order: 10,
+    created_at: '',
+    updated_at: '',
+    grayscale: false
+  },
+  {
+    id: 'team-11',
+    name: 'Nitish Khunteta',
+    position: 'Full Stack Developer',
+    bio: 'Full Stack Developer passionate about clean code, performance and building elegant solutions.',
+    image_url: '/placeholder.svg',
+    sort_order: 11,
+    created_at: '',
+    updated_at: '',
+    grayscale: false
+  },
+  {
+    id: 'team-12',
+    name: 'Karan Sharma',
+    position: 'Frontend Developer',
+    bio: 'Frontend Developer from Noida, building user-friendly web and app interfaces at Noesis.',
+    image_url: '/placeholder.svg',
+    sort_order: 12,
+    created_at: '',
+    updated_at: '',
+    grayscale: false
+  },
+  {
+    id: 'team-13',
+    name: 'Sushant Kulkarni',
+    position: 'Senior Frontend Developer',
+    bio: '3.5+ years building responsive, accessible, high-performing web experiences.',
+    image_url: '/placeholder.svg',
+    sort_order: 13,
+    created_at: '',
+    updated_at: '',
+    grayscale: false
+  },
+  {
+    id: 'team-14',
+    name: 'Urvashi Khatri',
+    position: 'Project Manager',
+    bio: 'Project Manager with an IT background, leading the team to deliver value and innovation at Noesis.',
+    image_url: '/placeholder.svg',
+    sort_order: 14,
+    created_at: '',
+    updated_at: '',
+    grayscale: false
+  }
+  // --- NEW MEMBERS END ---
 ];
