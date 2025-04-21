@@ -73,7 +73,8 @@ const PromisePanel = ({
   };
 
   return (
-    <div className="page-section flex flex-col items-center w-full">
+    <section className="page-section flex flex-col items-center w-full pt-0"> 
+      {/* Removed top padding by pt-0 */}
       <div style={{ animationDelay: '0.4s' }} className="text-center max-w-4xl mx-auto animate-fade-in">
         <h3 className="text-4xl md:text-5xl font-bold mb-12">
           <span>Our </span><span className="gradient-text">Promise</span>
@@ -92,7 +93,7 @@ const PromisePanel = ({
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
