@@ -6,9 +6,11 @@ import PromisePanel from './mission/PromisePanel';
 import BackgroundPattern from './mission/BackgroundPattern';
 import MissionStyles from './mission/MissionStyles';
 import { useIsMobile } from '@/hooks/use-mobile';
+
 const MissionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
+
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
@@ -26,27 +28,25 @@ const MissionSection = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMobile]);
 
-  // Configuration for the grid pattern
   const gridRows = 16;
   const gridCols = 24;
-  return <section id="mission" ref={sectionRef} className="py-10 sm:py-16 md:py-[40px] relative overflow-hidden bg-noesis-dark my-0">
+
+  return (
+    <section id="mission" ref={sectionRef} className="page-section relative overflow-hidden bg-noesis-dark">
       <BackgroundPattern gridRows={gridRows} gridCols={gridCols} />
-      
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="section-title my-[40px] py-0">
+        <h2 className="section-title">
           Our <span className="gradient-text">Mission & Vision</span>
         </h2>
-        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 max-w-6xl mx-auto">
           <MissionCard title={missionSectionData.mission_title} description={missionSectionData.mission_description} />
-          
           <VisionCard title={missionSectionData.vision_title} description={missionSectionData.vision_description} />
         </div>
-        
         <PromisePanel title={missionSectionData.promise_title} text={missionSectionData.promise_text} />
       </div>
-      
       <MissionStyles gridRows={gridRows} gridCols={gridCols} />
-    </section>;
+    </section>
+  );
 };
+
 export default MissionSection;

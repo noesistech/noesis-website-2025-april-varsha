@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TechCategory } from '@/types/supabase';
@@ -20,7 +19,7 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
   const cloudStack = categories?.filter(category => category.is_cloud_stack) || [];
   
   return (
-    <section id="tech-stack" className="py-12 sm:py-16 md:py-24 relative overflow-hidden">
+    <section id="tech-stack" className="page-section relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">

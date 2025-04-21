@@ -5,10 +5,12 @@ import { cn } from '@/lib/utils';
 import { ServiceItem } from '@/types/supabase';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useIsMobile } from '@/hooks/use-mobile';
+
 interface ServicesProps {
   title: string;
   services: ServiceItem[];
 }
+
 const ServicesSection: React.FC<ServicesProps> = ({
   title,
   services
@@ -79,48 +81,49 @@ const ServicesSection: React.FC<ServicesProps> = ({
           <li>Targeted advertising campaigns that leverage AI for personalization</li>
         </ul>
   }];
-  return <section id="services" className="py-10 sm:py-16 relative md:py-[40px] my-0">
+
+  return (
+    <section id="services" className="page-section relative">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
-      
       <div className="container mx-auto px-3 sm:px-6 relative z-10">
         <h2 className="section-title">
           Our <span className="gradient-text">Services</span>
         </h2>
-        
         {isMobile ? <Accordion type="single" collapsible className="w-full">
-            {displayServices.map(service => <AccordionItem key={service.id} value={service.id} className="glass-card mb-4 border-none">
-                <AccordionTrigger className="p-2 flex items-center text-left no-underline">
-                  <div className="flex items-center">
-                    <div className="mr-3 transform group-hover:scale-110 transition-transform duration-300">
-                      {service.icon}
-                    </div>
-                    <h3 className="font-bold gradient-text text-lg">{service.title}</h3>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="p-2 pt-0">
-                  <div className="text-white/80 text-sm">
-                    {service.description}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>)}
-          </Accordion> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {displayServices.map(service => <Card key={service.id} className="glass-card group transition-all duration-300 hover:bg-white/10 h-full">
-                <div className="p-3 sm:p-4 flex flex-col items-start text-left h-full">
-                  <div className="mb-2 transform group-hover:scale-110 transition-transform duration-300">
+          {displayServices.map(service => <AccordionItem key={service.id} value={service.id} className="glass-card mb-4 border-none">
+              <AccordionTrigger className="p-2 flex items-center text-left no-underline">
+                <div className="flex items-center">
+                  <div className="mr-3 transform group-hover:scale-110 transition-transform duration-300">
                     {service.icon}
                   </div>
-                  <h3 className="font-bold mb-1 sm:mb-2 gradient-text text-lg sm:text-xl">{service.title}</h3>
-                  <div className="text-white/80 flex-grow text-base">
-                    {service.description}
-                  </div>
+                  <h3 className="font-bold gradient-text text-lg">{service.title}</h3>
                 </div>
-              </Card>)}
-          </div>}
+              </AccordionTrigger>
+              <AccordionContent className="p-2 pt-0">
+                <div className="text-white/80 text-sm">
+                  {service.description}
+                </div>
+              </AccordionContent>
+            </AccordionItem>)}
+        </Accordion> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {displayServices.map(service => <Card key={service.id} className="glass-card group transition-all duration-300 hover:bg-white/10 h-full">
+              <div className="p-3 sm:p-4 flex flex-col items-start text-left h-full">
+                <div className="mb-2 transform group-hover:scale-110 transition-transform duration-300">
+                  {service.icon}
+                </div>
+                <h3 className="font-bold mb-1 sm:mb-2 gradient-text text-lg sm:text-xl">{service.title}</h3>
+                <div className="text-white/80 flex-grow text-base">
+                  {service.description}
+                </div>
+              </div>
+            </Card>)}
+        </div>}
       </div>
-    </section>;
+    </section>
+  );
 };
+
 const getIconByName = (iconName: string) => {
-  // Convert to lowercase to handle case inconsistencies in the database
   const normalizedIconName = iconName.toLowerCase();
   switch (normalizedIconName) {
     case 'palette':
@@ -155,4 +158,5 @@ const getIconByName = (iconName: string) => {
       return <Palette className="h-10 w-10 text-noesis-purple" />;
   }
 };
+
 export default ServicesSection;
