@@ -200,7 +200,8 @@ const ContactSection = () => {
                   <div>
                     <p className="font-semibold text-white">Address</p>
                     <p className="text-white/70">
-                      C, Wing, 209, Floral Deck Plaza, 23rd Rd, M.I.D.C, Santacruz Electronic Export Processing Zone, Andheri East, Mumbai, Maharashtra 400093
+                      C, Wing, 209, Floral Deck Plaza, 23rd Rd, M.I.D.C, Santacruz Electronic Export Processing Zone, <br />
+                      Andheri East, Mumbai, Maharashtra 400093
                     </p>
                   </div>
                 </div>
