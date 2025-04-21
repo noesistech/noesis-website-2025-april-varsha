@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { missionSectionData } from '@/data/content/mission';
 import MissionCard from './mission/MissionCard';
@@ -7,11 +6,9 @@ import PromisePanel from './mission/PromisePanel';
 import BackgroundPattern from './mission/BackgroundPattern';
 import MissionStyles from './mission/MissionStyles';
 import { useIsMobile } from '@/hooks/use-mobile';
-
 const MissionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
-  
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
@@ -32,13 +29,11 @@ const MissionSection = () => {
   // Configuration for the grid pattern
   const gridRows = 16;
   const gridCols = 24;
-  
-  return (
-    <section id="mission" className="py-10 sm:py-16 md:py-[40px] relative overflow-hidden bg-noesis-dark" ref={sectionRef}>
+  return <section id="mission" ref={sectionRef} className="py-10 sm:py-16 md:py-[40px] relative overflow-hidden bg-noesis-dark my-0">
       <BackgroundPattern gridRows={gridRows} gridCols={gridCols} />
       
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="section-title">
+        <h2 className="section-title my-[40px] py-0">
           Our <span className="gradient-text">Mission & Vision</span>
         </h2>
         
@@ -52,8 +47,6 @@ const MissionSection = () => {
       </div>
       
       <MissionStyles gridRows={gridRows} gridCols={gridCols} />
-    </section>
-  );
+    </section>;
 };
-
 export default MissionSection;

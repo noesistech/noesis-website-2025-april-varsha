@@ -86,7 +86,7 @@ const PromisePanel = ({
   };
   return <div style={{
     animationDelay: '0.4s'
-  }} className="mt-32 max-w-4xl mx-auto text-center animate-fade-in my-[100px]">
+  }} className="mt-32 max-w-4xl text-center animate-fade-in py-0 mx-0 my-[50px]">
       <h3 className="text-4xl md:text-5xl font-bold mb-12">
         <span>Our </span><span className="gradient-text">Promise</span>
       </h3>

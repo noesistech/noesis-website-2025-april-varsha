@@ -1,28 +1,19 @@
-
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Palette, Globe, Laptop, Cloud, BrainCircuit, Users, Code, PenTool, Database, TrendingUp, Image, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ServiceItem } from '@/types/supabase';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useIsMobile } from '@/hooks/use-mobile';
-
 interface ServicesProps {
   title: string;
   services: ServiceItem[];
 }
-
 const ServicesSection: React.FC<ServicesProps> = ({
   title,
   services
 }) => {
   const isMobile = useIsMobile();
-  
   const displayServices = services && services.length > 0 ? services.map(service => ({
     id: service.id,
     icon: getIconByName(service.icon_name),
@@ -88,8 +79,7 @@ const ServicesSection: React.FC<ServicesProps> = ({
           <li>Targeted advertising campaigns that leverage AI for personalization</li>
         </ul>
   }];
-  
-  return <section id="services" className="py-10 sm:py-16 relative md:py-[40px]">
+  return <section id="services" className="py-10 sm:py-16 relative md:py-[40px] my-0">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-3 sm:px-6 relative z-10">
@@ -97,10 +87,8 @@ const ServicesSection: React.FC<ServicesProps> = ({
           Our <span className="gradient-text">Services</span>
         </h2>
         
-        {isMobile ? (
-          <Accordion type="single" collapsible className="w-full">
-            {displayServices.map(service => (
-              <AccordionItem key={service.id} value={service.id} className="glass-card mb-4 border-none">
+        {isMobile ? <Accordion type="single" collapsible className="w-full">
+            {displayServices.map(service => <AccordionItem key={service.id} value={service.id} className="glass-card mb-4 border-none">
                 <AccordionTrigger className="p-2 flex items-center text-left no-underline">
                   <div className="flex items-center">
                     <div className="mr-3 transform group-hover:scale-110 transition-transform duration-300">
@@ -114,11 +102,8 @@ const ServicesSection: React.FC<ServicesProps> = ({
                     {service.description}
                   </div>
                 </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              </AccordionItem>)}
+          </Accordion> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {displayServices.map(service => <Card key={service.id} className="glass-card group transition-all duration-300 hover:bg-white/10 h-full">
                 <div className="p-3 sm:p-4 flex flex-col items-start text-left h-full">
                   <div className="mb-2 transform group-hover:scale-110 transition-transform duration-300">
@@ -130,12 +115,10 @@ const ServicesSection: React.FC<ServicesProps> = ({
                   </div>
                 </div>
               </Card>)}
-          </div>
-        )}
+          </div>}
       </div>
     </section>;
 };
-
 const getIconByName = (iconName: string) => {
   // Convert to lowercase to handle case inconsistencies in the database
   const normalizedIconName = iconName.toLowerCase();
@@ -172,5 +155,4 @@ const getIconByName = (iconName: string) => {
       return <Palette className="h-10 w-10 text-noesis-purple" />;
   }
 };
-
 export default ServicesSection;
