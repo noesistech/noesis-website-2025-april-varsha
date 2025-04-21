@@ -96,26 +96,27 @@ const PromisePanel = ({
 
   return (
     <div 
-      style={{ animationDelay: '0.4s' }} 
-      className="mt-32 max-w-4xl text-center animate-fade-in py-0 my-[170px] mx-[30px]"
+      className="flex flex-col items-center w-full mt-32 py-0 my-[170px]"
     >
-      <h3 className="text-4xl md:text-5xl font-bold mb-12">
-        <span>Our </span><span className="gradient-text">Promise</span>
-      </h3>
-      
-      <div 
-        ref={promiseContainerRef} 
-        className="promise-glass-panel relative overflow-hidden p-10 transition-transform duration-300 ease-out"
-      >
-        <div className="refraction-layer"></div>
-        <div className="glass-highlight"></div>
+      <div className="text-center max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
+        <h3 className="text-4xl md:text-5xl font-bold mb-12">
+          <span>Our </span><span className="gradient-text">Promise</span>
+        </h3>
         
-        <p 
-          ref={promiseTextRef} 
-          className="text-3xl md:text-4xl relative promise-text font-light tracking-wide z-10"
+        <div 
+          ref={promiseContainerRef} 
+          className="promise-glass-panel relative overflow-hidden p-10 transition-transform duration-300 ease-out mx-auto"
         >
-          {renderPromiseText()}
-        </p>
+          <div className="refraction-layer"></div>
+          <div className="glass-highlight"></div>
+          
+          <p 
+            ref={promiseTextRef} 
+            className="text-3xl md:text-4xl relative promise-text font-light tracking-wide z-10"
+          >
+            {renderPromiseText()}
+          </p>
+        </div>
       </div>
     </div>
   );
