@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -61,17 +62,14 @@ const PromisePanel = ({
   }, [isMobile]);
 
   const renderPromiseText = () => {
-    if (isMobile) {
-      return <>
-          <span>Human </span><span className="gradient-word">creativity</span><span>,</span>
-          <br />
-          <span>AI </span><span className="gradient-word">precision</span>
-        </>;
-    }
-    return <>
-        <span>Human </span><span className="gradient-word">creativity</span><span>, </span>
+    // Make sure the text is displayed for both mobile and desktop
+    return (
+      <>
+        <span>Human </span><span className="gradient-word">creativity</span>
+        {isMobile ? <br /> : <span>, </span>}
         <span>AI </span><span className="gradient-word">precision</span>
-      </>;
+      </>
+    );
   };
 
   return (
@@ -80,10 +78,16 @@ const PromisePanel = ({
         <h3 className="text-4xl md:text-5xl font-bold mb-12">
           <span>Our </span><span className="gradient-text">Promise</span>
         </h3>
-        <div ref={promiseContainerRef} className="promise-glass-panel relative overflow-hidden p-10 transition-transform duration-300 ease-out mx-auto px-[130px] py-[40px]">
+        <div 
+          ref={promiseContainerRef} 
+          className="promise-glass-panel relative overflow-hidden transition-transform duration-300 ease-out mx-auto p-8 md:px-[130px] md:py-[40px]"
+        >
           <div className="refraction-layer"></div>
           <div className="glass-highlight"></div>
-          <p ref={promiseTextRef} className="text-3xl md:text-4xl relative promise-text font-light tracking-wide z-10">
+          <p 
+            ref={promiseTextRef} 
+            className="text-2xl md:text-4xl relative promise-text font-light tracking-wide z-10"
+          >
             {renderPromiseText()}
           </p>
         </div>
