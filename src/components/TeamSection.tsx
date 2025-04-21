@@ -91,6 +91,8 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
                         alt={member.name}
                         className={`w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 relative z-[1] ${
                           member.grayscale ? 'grayscale' : ''
+                        } ${
+                          member.id === 'team-3' ? '-mt-4' : ''
                         }`}
                         onError={() => handleImageError(member.id)}
                         onLoad={() => handleImageLoad(member.id)}
@@ -139,3 +141,4 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
 };
 
 export default TeamSection;
+
