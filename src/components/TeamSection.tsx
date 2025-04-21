@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { 
@@ -64,7 +65,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
   }, [teamMembers]);
 
   return (
-    <section className="page-section flex justify-center w-full">
+    <section className="page-section flex justify-center w-full pt-0">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 max-w-[1400px]">
         {teamMembers.map((member) => (
           <Card 
@@ -140,3 +141,4 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
 };
 
 export default TeamSection;
+
