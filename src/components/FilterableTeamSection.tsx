@@ -28,14 +28,19 @@ const FilterableTeamSection = () => {
       const positionGroups: Record<string, string> = {
         'Sr. Project Manager': 'Management',
         'Manager': 'Management',
+        'Project Manager': 'Management',
         'Project Coordinator': 'Management',
         'UI/UX Manager': 'Design',
         'Sr. DevOps Engineer': 'Engineering',
+        'Full Stack Developer': 'Engineering',
+        'Frontend Developer': 'Engineering',
+        'Senior Frontend Developer': 'Engineering',
         'Senior QA Engineer': 'Quality Assurance',
         'Senior Quality Assurance Tester': 'Quality Assurance',
         'Jr. QA Tester': 'Quality Assurance',
         'SR. IT Executive': 'IT & Operations',
-        'Jr. Finance Executive': 'Finance'
+        'Jr. Finance Executive': 'Finance',
+        'Finance Manager': 'Finance'
       };
 
       const uniqueGroups = new Set(['All']);
@@ -166,4 +171,3 @@ const FilterableTeamSection = () => {
 };
 
 export default FilterableTeamSection;
-
