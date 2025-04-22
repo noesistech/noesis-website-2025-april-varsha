@@ -1,4 +1,3 @@
-
 import { SolutionsSection, SolutionItem } from '@/types/contentTypes';
 
 export const solutionsSectionData: SolutionsSection = {
@@ -56,6 +55,16 @@ export const solutionItemsData: SolutionItem[] = [
     description: 'Chatbots that blend AI capabilities with human warmth for social media and website integration',
     color: 'from-yellow-500/20 to-yellow-600/20',
     sort_order: 5,
+    created_at: '',
+    updated_at: '',
+  },
+  {
+    id: 'solution-item-6',
+    icon_name: 'Code',
+    title: 'App & Web Development',
+    description: 'Full-stack development combining human expertise with AI-enhanced tools for web applications, mobile apps, and enterprise solutions',
+    color: 'from-indigo-500/20 to-indigo-600/20',
+    sort_order: 6,
     created_at: '',
     updated_at: '',
   },

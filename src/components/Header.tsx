@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight } from 'lucide-react';
@@ -154,9 +153,12 @@ const Header = () => {
         
         {/* Mobile Navigation */}
         <div className="sm:hidden">
-          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+          <Sheet>
             <SheetTrigger asChild>
-              <button className="text-white z-[60]">
+              <button 
+                className="text-white z-[60]"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
                 {mobileMenuOpen ? <X /> : <Menu />}
               </button>
             </SheetTrigger>
@@ -164,6 +166,7 @@ const Header = () => {
               side="top" 
               className="bg-[#1A1F2C] border-b border-white/10 h-screen p-0 rounded-none"
               style={{ marginTop: HEADER_HEIGHT }}
+              onCloseAutoFocus={() => setMobileMenuOpen(false)}
             >
               <div className="flex flex-col items-center justify-center px-4 py-4 md:py-2 h-full mt-[-60px]">
                 <div className="flex flex-col items-center justify-center w-full h-full max-w-md mx-auto space-y-4 md:space-y-2">
