@@ -12,7 +12,7 @@ export const aiCapabilitiesData = [
     icon: 'brain',
     description: 'Advanced NLP models for understanding and generating human language with high accuracy and context awareness.',
     tools: ['GPT-4', 'BERT', 'Transformers', 'NER', 'Sentiment Analysis'],
-    color: 'from-purple-600 to-indigo-600',
+    color: 'from-noesis-purple to-noesis-blue',
     category: 'development'
   },
   {
@@ -21,7 +21,7 @@ export const aiCapabilitiesData = [
     icon: 'microscope',
     description: 'State-of-the-art visual recognition systems for object detection, image segmentation, and scene understanding.',
     tools: ['CNN', 'YOLO', 'ResNet', 'OpenCV', 'TensorFlow Vision'],
-    color: 'from-pink-600 to-rose-600',
+    color: 'from-noesis-purple to-noesis-blue',
     category: 'development'
   },
   {
@@ -30,7 +30,7 @@ export const aiCapabilitiesData = [
     icon: 'brain-circuit',
     description: 'Sophisticated RL frameworks for training agents that learn optimal decision-making strategies through interaction.',
     tools: ['Q-Learning', 'PPO', 'A3C', 'TensorFlow RL', 'Gym Environments'],
-    color: 'from-blue-600 to-cyan-600',
+    color: 'from-noesis-purple to-noesis-blue',
     category: 'development'
   },
   {
@@ -39,7 +39,7 @@ export const aiCapabilitiesData = [
     icon: 'settings',
     description: 'Seamless AI model deployment pipelines with monitoring, versioning, and continuous integration capabilities.',
     tools: ['Docker', 'Kubernetes', 'TensorFlow Serving', 'MLflow', 'Prometheus'],
-    color: 'from-yellow-600 to-amber-600',
+    color: 'from-noesis-purple to-noesis-blue',
     category: 'deployment'
   },
   {
@@ -48,7 +48,7 @@ export const aiCapabilitiesData = [
     icon: 'zap',
     description: 'Optimized AI solutions for edge devices, enabling low-latency inference on embedded systems and IoT devices.',
     tools: ['TensorFlow Lite', 'EdgeML', 'ONNX Runtime', 'ARM NN', 'Edge TPU'],
-    color: 'from-green-600 to-emerald-600',
+    color: 'from-noesis-purple to-noesis-blue',
     category: 'deployment'
   },
   {
@@ -57,7 +57,7 @@ export const aiCapabilitiesData = [
     icon: 'bot',
     description: 'End-to-end conversational agents and chatbot frameworks with natural dialogue capabilities and domain adaptation.',
     tools: ['RASA', 'DialoGPT', 'BERT', 'Intent Recognition', 'Dialog Management'],
-    color: 'from-orange-600 to-red-600',
+    color: 'from-noesis-purple to-noesis-blue',
     category: 'deployment'
   }
 ];
@@ -85,7 +85,7 @@ export const aiProductsData = [
 
 export const aiProductsSectionData = {
   id: 'ai-products-section-1',
-  title: 'Brainstormer <span>Suite</span>',
+  title: 'Brainstormer <span class="gradient-text">Suite</span>',
   subtitle: 'Our AI Products',
   created_at: '',
   updated_at: '',
