@@ -1,10 +1,16 @@
 
 import React from 'react';
-import { Palette, Globe, Image, Cloud, BrainCircuit, Users } from 'lucide-react';
+import { Palette, Globe, Image, Cloud, BrainCircuit, Users, ChevronDown } from 'lucide-react';
 import { ServiceItem } from '@/types/supabase';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ServicesSection as ServicesSectionType } from '@/types/contentTypes';
 import { servicesSectionData } from '@/data/content/services';
+import { 
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
+} from "@/components/ui/accordion";
 
 interface ServicesSectionProps {
   title: string;
@@ -67,22 +73,43 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
             {servicesSectionData.subtitle}
           </p>
         )}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayServices.map(service => (
-            <div 
-              key={service.id} 
-              className="glass-card relative overflow-hidden rounded-2xl transition-all duration-300 h-full hover:border-white/30"
-            >
-              <div className="p-6">
-                <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
-                  {service.icon}
+        
+        {isMobile ? (
+          <Accordion type="single" collapsible className="w-full">
+            {displayServices.map(service => (
+              <AccordionItem key={service.id} value={service.id} className="mb-4 rounded-2xl overflow-hidden bg-[#222732] border-none">
+                <AccordionTrigger className="px-4 py-3 flex items-center hover:no-underline">
+                  <div className="flex items-center">
+                    <div className="bg-[#1A1F2C]/80 p-3 rounded-full mr-4">
+                      {service.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-white">{service.title}</h3>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-4 pb-4 text-gray-300">
+                  {service.description}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {displayServices.map(service => (
+              <div 
+                key={service.id} 
+                className="glass-card relative overflow-hidden rounded-2xl transition-all duration-300 h-full hover:border-white/30"
+              >
+                <div className="p-6">
+                  <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-left text-white">{service.title}</h3>
+                  <p className="text-gray-300 text-left">{service.description}</p>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-left text-white">{service.title}</h3>
-                <p className="text-gray-300 text-left">{service.description}</p>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
