@@ -64,10 +64,11 @@ export const solutionItemsData: SolutionItem[] = [
     id: 'solution-item-6',
     icon_name: 'Code2',
     title: 'App & Web Development',
-    description: 'Full-stack development with AI assistance, custom web apps using modern frameworks, and seamless cross-platform experiences with integrated AI features.',
+    description: 'We build custom full-stack web apps with a mobile-first, responsive design approach. Powered by modern frameworks and AI-driven features like chatbots, personalization, and smart recommendations.',
     color: 'from-orange-500/20 to-orange-600/20',
     sort_order: 6,
     created_at: '',
     updated_at: '',
   }
 ];
+
