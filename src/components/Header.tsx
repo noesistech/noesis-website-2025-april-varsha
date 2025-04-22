@@ -152,23 +152,23 @@ const Header = () => {
         </a>
         
         <nav className="hidden sm:flex items-center gap-2 md:gap-4 lg:gap-6">
-          <NavigationMenu>
-            <NavigationMenuList>
+          <NavigationMenu className="relative">
+            <NavigationMenuList className="flex items-center gap-2 md:gap-4 lg:gap-6">
               {navStructure.map((item) => (
-                <NavigationMenuItem key={item.name}>
+                <NavigationMenuItem key={item.name} className="relative">
                   {item.subMenu ? (
                     <>
                       <NavigationMenuTrigger className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white bg-transparent data-[state=open]:bg-white/10">
                         {item.name}
                       </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <ul className="grid gap-3 p-4 w-[200px] bg-[#1A1F2C]/80 backdrop-blur-md border border-white/10 rounded-lg shadow-lg">
+                      <NavigationMenuContent className="absolute left-0 top-full">
+                        <ul className="grid gap-3 p-4 min-w-[200px] bg-[#1A1F2C]/80 backdrop-blur-md border border-white/10 rounded-lg shadow-lg">
                           {item.subMenu.map((subItem) => (
                             <li key={subItem.name}>
                               <NavigationMenuLink asChild>
                                 <a
                                   href={subItem.href}
-                                  className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/10 focus:bg-accent focus:text-accent-foreground text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white"
+                                  className="block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/10 focus:bg-accent focus:text-accent-foreground text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white"
                                 >
                                   {subItem.name}
                                 </a>
