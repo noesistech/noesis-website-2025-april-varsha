@@ -8,6 +8,8 @@ interface AIProductCardProps {
   title: string;
   description: string;
   logoUrl: string;
+  logoWidth?: number;
+  logoHeight?: number;
   ctaText: string;
   ctaUrl: string;
 }
@@ -16,6 +18,8 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
   title,
   description,
   logoUrl,
+  logoWidth = 200,
+  logoHeight = 120,
   ctaText,
   ctaUrl
 }) => {
@@ -58,8 +62,8 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
                 </div>}
               
               {imageError ? <h3 className="text-lg font-bold text-white">{title}</h3> : <img src={logoUrl} alt={`${title} logo`} style={{
-              maxWidth: '200px',
-              maxHeight: '120px'
+              maxWidth: `${logoWidth}px`,
+              maxHeight: `${logoHeight}px`
             }} onLoad={() => setImageLoaded(true)} onError={() => setImageError(true)} className="object-contain w-full h-full" />}
             </div>
           </div>

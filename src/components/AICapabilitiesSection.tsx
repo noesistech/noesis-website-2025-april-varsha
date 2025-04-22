@@ -23,6 +23,8 @@ export interface AIProduct {
   description: string;
   icon: string;
   logoUrl: string;
+  logoWidth?: number;
+  logoHeight?: number;
   ctaUrl: string;
   ctaText: string;
 }
@@ -174,7 +176,16 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-6xl mx-auto">
                 {products.map(product => {
-            return <AIProductCard key={product.id} title={product.title} description={product.description} logoUrl={product.logoUrl || '/placeholder.svg'} ctaText={product.ctaText} ctaUrl={product.ctaUrl} />;
+            return <AIProductCard 
+              key={product.id} 
+              title={product.title} 
+              description={product.description} 
+              logoUrl={product.logoUrl || '/placeholder.svg'}
+              logoWidth={product.logoWidth}
+              logoHeight={product.logoHeight}
+              ctaText={product.ctaText} 
+              ctaUrl={product.ctaUrl} 
+            />;
           })}
             </div>
         </div>}
