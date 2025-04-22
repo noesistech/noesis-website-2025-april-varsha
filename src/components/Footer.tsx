@@ -12,7 +12,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Company Logo, Description, and Social Links */}
-          <div className="md:col-span-8 lg:col-span-3 order-1">
+          <div className="md:col-span-12 lg:col-span-3 order-1">
             <div className="flex flex-col md:flex-row lg:flex-col gap-6">
               <div className="flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300.48 54.12" className="h-8 w-auto" fill="currentColor">
@@ -45,8 +45,8 @@ const Footer = () => {
             </div>
           </div>
           
-          {/* Quick Links */}
-          <div className="md:col-span-4 lg:col-span-3 order-2 lg:order-2">
+          {/* Quick Links - now moved below logo section for iPad sizes */}
+          <div className="md:col-span-12 lg:col-span-3 order-2">
             <h3 className="text-white text-xl font-bold mb-4">Quick Links</h3>
             <div className="grid grid-cols-2 gap-x-4 gap-y-2">
               <div>
