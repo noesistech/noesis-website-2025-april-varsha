@@ -338,6 +338,13 @@
   footer .gap-6 {
     gap: 1.25rem;
   }
+  
+  /* Fix for header/hero overlap at specific screen sizes */
+  @media (min-width: 700px) and (max-width: 900px) {
+    .min-h-\[75vh\].md\:min-h-\[85vh\] {
+      padding-top: 90px !important; /* Force more padding at problematic screen sizes */
+    }
+  }
 }
 
 /* iPad landscape specific */
