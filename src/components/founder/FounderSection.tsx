@@ -1,9 +1,9 @@
+
 import React from 'react';
 import { Building, GraduationCap, Briefcase } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-const FounderSection = () => {
-  console.log("Founder section rendering with updated overlay"); // Debug log
 
+const FounderSection = () => {
   return <div className="container mx-auto px-4 mb-20">
       <div className="flex flex-col lg:flex-row gap-8 items-center">
         <div className="lg:w-1/3">
@@ -36,7 +36,7 @@ const FounderSection = () => {
                 <Building className="w-6 h-6 text-noesis-purple flex-shrink-0 mt-1" />
                 <div>
                   <h4 className="text-lg font-semibold mb-2 text-white">Founder & CEO</h4>
-                  <p className="text-white/80 leading-relaxed">
+                  <p className="text-white/80 leading-relaxed mb-0 sm:mb-6">
                     Sidd is a dynamic technology entrepreneur and seasoned consultant, combining deep expertise in AI, digital transformation, and software engineering. As the founder of Noesis.tech, he leads a team focused on building impactful tech solutions that drive growth for startups and mid-sized enterprises.
                   </p>
                 </div>
@@ -46,7 +46,7 @@ const FounderSection = () => {
                 <GraduationCap className="w-6 h-6 text-noesis-purple flex-shrink-0 mt-1" />
                 <div>
                   <h4 className="text-lg font-semibold mb-2 text-white">Education & Expertise</h4>
-                  <p className="text-white/80 leading-relaxed">
+                  <p className="text-white/80 leading-relaxed mb-0 sm:mb-6">
                     Holding a Bachelor of Science from USC's Marshall School of Business and an advanced software engineering certification from IIT Madras, Sidd specializes in Cloud, Blockchain, and IoT technologies. His expertise has been instrumental in developing innovative AI solutions like Brainstormer Studio and Brainstormer Teams.
                   </p>
                 </div>
@@ -56,7 +56,7 @@ const FounderSection = () => {
                 <Briefcase className="w-6 h-6 text-noesis-purple flex-shrink-0 mt-1" />
                 <div>
                   <h4 className="text-lg font-semibold mb-2 text-white">Vision & Innovation</h4>
-                  <p className="text-white/80 leading-relaxed">
+                  <p className="text-white/80 leading-relaxed mb-0 sm:mb-6">
                     Through Noesis.tech, Sidd has pioneered solutions like Brainstormer Studio, a low-code platform for creating AI agents, and Brainstormer Teams, a groundbreaking solution for internal AI deployment. His experience with Core Jewellery demonstrates his ability to merge technology with tradition, making him uniquely qualified to guide companies in leveraging AI for innovation and growth.
                   </p>
                 </div>
@@ -68,3 +68,4 @@ const FounderSection = () => {
     </div>;
 };
 export default FounderSection;
+
