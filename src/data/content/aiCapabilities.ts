@@ -1,3 +1,4 @@
+
 import { AICapability, AIProduct } from '@/components/AICapabilitiesSection';
 
 export const aiCapabilitiesSectionData = {
@@ -80,6 +81,8 @@ export const aiProductsData: AIProduct[] = [
     description: 'Our advanced AI engine for content, marketing, and business process automation tailored for enterprise needs. Leverage Brainstormer Pro to enhance workflow and drive productivity within a secure, collaborative environment.',
     icon: 'brain',
     logoUrl: '/images/brainstormer-pro-logo.svg',
+    logoWidth: 300, // Increased from default
+    logoHeight: 80, // Increased from default
     ctaUrl: '/brainstormer-pro',
     ctaText: 'Explore Pro'
   },
@@ -89,6 +92,8 @@ export const aiProductsData: AIProduct[] = [
     description: 'Brainstormer Studio empowers you to create AI agents effortlessly. Our intuitive low-code/no-code platform is ideal for creative and enterprise environments, simplifying AI development and deployment.',
     icon: 'sparkles',
     logoUrl: '/images/brainstormer-studio-logo.svg',
+    logoWidth: 300, // Increased from default
+    logoHeight: 80, // Increased from default
     ctaText: 'Try Studio',
     ctaUrl: '/brainstormer-studio'
   }
