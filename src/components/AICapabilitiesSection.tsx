@@ -115,7 +115,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
           Our <span className="gradient-text">AI</span> <span className="gradient-text">Capabilities</span>
         </h2>
         
-        <Tabs defaultValue="development" className="max-w-6xl mx-auto">
+        <Tabs defaultValue="development" className="max-w-6xl mx-auto my-0 py-0">
           <div className="flex justify-center mb-8 sm:mb-10 md:mb-12">
             <TabsList className="glass p-1">
               {categories.map(category => <TabsTrigger key={category.id} value={category.id} className="px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 data-[state=active]:bg-noesis-purple data-[state=active]:text-white text-base sm:text-lg" onClick={() => setActiveTab(category.id)}>
@@ -150,7 +150,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
             </TabsContent>)}
         </Tabs>
         
-        {products && products.length > 0 && <div className="mt-6 sm:mt-8 my-[70px]">
+        {products && products.length > 0 && <div className="mt-6 sm:mt-8 my-[69px]">
             <h2 dangerouslySetInnerHTML={{
           __html: productsSection.title
         }} className="section-title mb-4 my-[14px] py-[2px]"></h2>

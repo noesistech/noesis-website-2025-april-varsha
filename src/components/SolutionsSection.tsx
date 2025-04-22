@@ -1,16 +1,13 @@
-
 import React, { useRef, useEffect } from 'react';
 import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SolutionItem } from '@/types/supabase';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-
 interface SolutionsSectionProps {
   title: string;
   solutions: SolutionItem[];
 }
-
 const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   title,
   solutions
@@ -18,7 +15,6 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-
   const displaySolutions = solutions && solutions.length > 0 ? solutions.map(solution => ({
     id: solution.id,
     icon: getIconByName(solution.icon_name),
@@ -81,7 +77,6 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         </ul>,
     color: 'from-yellow-500/20 to-yellow-600/20'
   }];
-
   useEffect(() => {
     if (isMobile) return; // Skip animation setup on mobile since we'll use carousel
 
@@ -105,7 +100,6 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       });
     };
   }, [isMobile]);
-
   const renderTitle = () => {
     if (!title) return "Our Solutions";
     const words = title.split(' ');
@@ -114,22 +108,18 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         {words.slice(0, lastWordIndex).join(' ')} <span className="gradient-text">{words[lastWordIndex]}</span>
       </>;
   };
-
   const solutionRows = [];
   for (let i = 0; i < displaySolutions.length; i += 3) {
     solutionRows.push(displaySolutions.slice(i, i + 3));
   }
-
-  return (
-    <section id="solutions" ref={sectionRef} className="page-section">
-      <div className="container mx-auto px-3 sm:px-6">
+  return <section id="solutions" ref={sectionRef} className="page-section py-0">
+      <div className="container mx-auto px-3 sm:px-6 py-0 my-0">
         <h2 className="section-title">{renderTitle()}</h2>
-        {isMobile ?
-          <div className="mt-4">
+        {isMobile ? <div className="mt-4">
             <Carousel opts={{
-              align: "start",
-              loop: true
-            }} className="w-full" autoplay={true} interval={5000}>
+          align: "start",
+          loop: true
+        }} className="w-full" autoplay={true} interval={5000}>
               <CarouselContent>
                 {displaySolutions.map(solution => <CarouselItem key={solution.id} className="md:basis-1/2 lg:basis-1/3">
                     <div className="glass relative overflow-hidden rounded-2xl h-full">
@@ -151,8 +141,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
                 <CarouselNext className="static translate-y-0 ml-2" />
               </div>
             </Carousel>
-          </div> :
-          solutionRows.map((row, rowIndex) => <div key={`row-${rowIndex}`} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 last:mb-0">
+          </div> : solutionRows.map((row, rowIndex) => <div key={`row-${rowIndex}`} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 last:mb-0">
               {row.map((solution, index) => <div key={solution.id} ref={el => cardsRef.current[rowIndex * 3 + index] = el} className="glass relative overflow-hidden rounded-2xl opacity-0 transition-all duration-500 hover:shadow-lg h-full">
                   <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", solution.color)}></div>
                   <div className="relative z-10 p-4 sm:p-6">
@@ -167,10 +156,8 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
                 </div>)}
             </div>)}
       </div>
-    </section>
-  );
+    </section>;
 };
-
 const getIconByName = (iconName: string) => {
   const normalizedIconName = iconName.toLowerCase();
   switch (normalizedIconName) {
@@ -193,5 +180,4 @@ const getIconByName = (iconName: string) => {
       return <Cpu className="h-10 w-10" />;
   }
 };
-
 export default SolutionsSection;
