@@ -59,7 +59,7 @@ const FilterableTeamSection = () => {
     return acc;
   }, {} as Record<string, typeof teamMembers>);
   const filteredTeamMembers = selectedCategory === 'All' ? teamMembers || [] : groupedTeamMembers[selectedCategory] || [];
-  return <section id="team" className="bg-gradient-to-b from-noesis-dark to-noesis-darker pt-16">
+  return <section id="team" className="bg-gradient-to-b from-noesis-dark to-noesis-darker pt-16 py-0">
       <div className="container px-4 mx-auto my-0">
         <div className="text-center mb-12">
           <h2 className="section-title">
