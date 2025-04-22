@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -84,6 +83,21 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
     color: 'from-yellow-500/20 to-yellow-600/20'
   }];
 
+  const enhancedDisplaySolutions = displaySolutions.map(solution => {
+    if (solution.id === 'solution-item-6') {
+      return {
+        ...solution,
+        description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Full-stack development combining human expertise with AI-powered code assistance</li>
+          <li>Custom web applications built with modern frameworks and AI optimization</li>
+          <li>Mobile-first responsive design approach for seamless cross-platform experiences</li>
+          <li>Integration of AI features like chatbots, recommendation systems, and personalization</li>
+        </ul>
+      };
+    }
+    return solution;
+  });
+
   useEffect(() => {
     if (isMobile) return; // Skip animation setup on mobile since we'll use carousel
 
@@ -120,8 +134,8 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   };
 
   const solutionRows = [];
-  for (let i = 0; i < displaySolutions.length; i += 3) {
-    solutionRows.push(displaySolutions.slice(i, i + 3));
+  for (let i = 0; i < enhancedDisplaySolutions.length; i += 3) {
+    solutionRows.push(enhancedDisplaySolutions.slice(i, i + 3));
   }
 
   return <section id="solutions" ref={sectionRef} className="page-section py-0">
@@ -138,7 +152,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
           loop: true
         }} className="w-full" autoplay={true} interval={5000}>
               <CarouselContent>
-                {displaySolutions.map(solution => <CarouselItem key={solution.id} className="md:basis-1/2 lg:basis-1/3">
+                {enhancedDisplaySolutions.map(solution => <CarouselItem key={solution.id} className="md:basis-1/2 lg:basis-1/3">
                     <div className="glass relative overflow-hidden rounded-2xl h-full">
                       <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", solution.color)}></div>
                       <div className="relative z-10 p-4 flex flex-col h-full">
