@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Mail, Phone, MapPin, Instagram, Linkedin } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
@@ -13,8 +12,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Company Logo, Description, and Social Links */}
           <div className="md:col-span-12 lg:col-span-3 order-1">
-            <div className="flex flex-col md:flex-row lg:flex-col gap-6">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col md:flex-row lg:flex-col gap-6 md:items-start">
+              <div className="flex items-center gap-2 md:mr-6">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300.48 54.12" className="h-8 w-auto" fill="currentColor">
                   <path d="M172.28,18.21a5.4,5.4,0,0,1,5.33,5.33,5.34,5.34,0,0,1-5.33,5.26A5.29,5.29,0,0,1,167,23.54,5.35,5.35,0,0,1,172.28,18.21Z" className="text-noesis-purple" />
                   <path d="M189.4,33h-2.35a1.31,1.31,0,0,1-1.25-1.32V27a1.26,1.26,0,0,1,1.25-1.32h2.35V18a1.37,1.37,0,0,1,1.32-1.32l5.68-.07A1.3,1.3,0,0,1,197.65,18v7.76h6.1A1.27,1.27,0,0,1,205.06,27v4.64A1.32,1.32,0,0,1,203.75,33h-6.1V44.08c0,1.94,1,2.21,2.15,2.21a11,11,0,0,0,3.39-.76,1.08,1.08,0,0,1,1.53.76l1.38,4.37a1.25,1.25,0,0,1-.76,1.66,26,26,0,0,1-8.24,1.8c-5.34,0-7.7-3.32-7.7-8.94Z" className="text-white" />
@@ -45,7 +44,7 @@ const Footer = () => {
             </div>
           </div>
           
-          {/* Quick Links - now moved below logo section for iPad sizes */}
+          {/* Quick Links */}
           <div className="md:col-span-12 lg:col-span-3 order-2">
             <h3 className="text-white text-xl font-bold mb-4">Quick Links</h3>
             <div className="grid grid-cols-2 gap-x-4 gap-y-2">
