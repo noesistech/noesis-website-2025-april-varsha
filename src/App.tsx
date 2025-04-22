@@ -49,7 +49,11 @@ function App() {
             subtitle: aiProductsSection?.subtitle || ''
           }}
         />
-        <SolutionsSection title={solutionsSection?.title || ''} solutions={solutionItems || []} />
+        <SolutionsSection 
+          title={solutionsSection?.title || ''} 
+          subtitle={solutionsSection?.subtitle || ''}
+          solutions={solutionItems || []} 
+        />
         <FilterableTeamSection />
         <TechStackSection title={techStackSection?.title || ''} categories={techCategories || []} />
         <ClientsSection />

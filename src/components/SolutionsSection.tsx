@@ -1,20 +1,26 @@
+
 import React, { useRef, useEffect } from 'react';
 import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SolutionItem } from '@/types/supabase';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+
 interface SolutionsSectionProps {
   title: string;
+  subtitle?: string;
   solutions: SolutionItem[];
 }
+
 const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   title,
+  subtitle,
   solutions
 }) => {
   const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
   const displaySolutions = solutions && solutions.length > 0 ? solutions.map(solution => ({
     id: solution.id,
     icon: getIconByName(solution.icon_name),
@@ -77,6 +83,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         </ul>,
     color: 'from-yellow-500/20 to-yellow-600/20'
   }];
+
   useEffect(() => {
     if (isMobile) return; // Skip animation setup on mobile since we'll use carousel
 
@@ -91,15 +98,18 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       root: null,
       threshold: 0.1
     });
+
     cardsRef.current.forEach(card => {
       if (card) observer.observe(card);
     });
+
     return () => {
       cardsRef.current.forEach(card => {
         if (card) observer.unobserve(card);
       });
     };
   }, [isMobile]);
+
   const renderTitle = () => {
     if (!title) return "Our Solutions";
     const words = title.split(' ');
@@ -108,16 +118,18 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         {words.slice(0, lastWordIndex).join(' ')} <span className="gradient-text">{words[lastWordIndex]}</span>
       </>;
   };
+
   const solutionRows = [];
   for (let i = 0; i < displaySolutions.length; i += 3) {
     solutionRows.push(displaySolutions.slice(i, i + 3));
   }
+
   return <section id="solutions" ref={sectionRef} className="page-section py-0">
       <div className="container mx-auto px-3 sm:px-6 py-0 my-0">
         <h2 className="section-title my-0 py-[14px]">{renderTitle()}</h2>
-        {solutionsSection?.subtitle && (
+        {subtitle && (
           <p className="text-standard max-w-3xl mx-auto text-lg mb-8">
-            {solutionsSection.subtitle}
+            {subtitle}
           </p>
         )}
         {isMobile ? <div className="mt-4">
@@ -163,6 +175,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       </div>
     </section>;
 };
+
 const getIconByName = (iconName: string) => {
   const normalizedIconName = iconName.toLowerCase();
   switch (normalizedIconName) {
@@ -185,4 +198,5 @@ const getIconByName = (iconName: string) => {
       return <Cpu className="h-10 w-10" />;
   }
 };
+
 export default SolutionsSection;
