@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Palette, Globe, Laptop, Cloud, BrainCircuit, Users, Code, PenTool, Database, TrendingUp, Image, ChevronDown } from 'lucide-react';
@@ -6,12 +5,10 @@ import { cn } from '@/lib/utils';
 import { ServiceItem } from '@/types/supabase';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useIsMobile } from '@/hooks/use-mobile';
-
 interface ServicesProps {
   title: string;
   services: ServiceItem[];
 }
-
 const ServicesSection: React.FC<ServicesProps> = ({
   title,
   services
@@ -82,9 +79,7 @@ const ServicesSection: React.FC<ServicesProps> = ({
           <li>Targeted advertising campaigns that leverage AI for personalization</li>
         </ul>
   }];
-
-  return (
-    <section id="services" className="page-section relative py-8 sm:py-8 md:py-8">
+  return <section id="services" className="page-section relative sm:py-8 md:py-8 py-0">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
       <div className="container mx-auto px-3 sm:px-6 relative z-10">
         <h2 className="section-title">
@@ -120,10 +115,8 @@ const ServicesSection: React.FC<ServicesProps> = ({
             </Card>)}
         </div>}
       </div>
-    </section>
-  );
+    </section>;
 };
-
 const getIconByName = (iconName: string) => {
   const normalizedIconName = iconName.toLowerCase();
   switch (normalizedIconName) {
@@ -159,5 +152,4 @@ const getIconByName = (iconName: string) => {
       return <Palette className="h-10 w-10 text-noesis-purple" />;
   }
 };
-
 export default ServicesSection;
