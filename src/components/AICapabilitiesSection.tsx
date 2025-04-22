@@ -157,18 +157,18 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
             </TabsContent>)}
         </Tabs>
         
-        {products && products.length > 0 && <div className="mt-8 sm:mt-10">
+        {products && products.length > 0 && <div className="mt-6 sm:mt-8">
             <h2 className="section-title mb-4" dangerouslySetInnerHTML={{
-          __html: productsSection.title
-        }}></h2>
-            <h3 className="text-base text-center mb-6 sm:mb-8 text-white/80 md:text-lg">{productsSection.subtitle}</h3>
+                __html: productsSection.title
+            }}></h2>
+            <h3 className="text-base text-center mb-4 sm:mb-6 text-white/80 md:text-lg">{productsSection.subtitle}</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-6xl mx-auto">
-              {products.map(product => {
-            return <AIProductCard key={product.id} title={product.title} description={product.description} logoUrl={product.logoUrl || '/placeholder.svg'} ctaText={product.ctaText} ctaUrl={product.ctaUrl} />;
-          })}
+                {products.map(product => {
+                    return <AIProductCard key={product.id} title={product.title} description={product.description} logoUrl={product.logoUrl || '/placeholder.svg'} ctaText={product.ctaText} ctaUrl={product.ctaUrl} />;
+                })}
             </div>
-          </div>}
+        </div>}
       </div>
     </section>;
 };

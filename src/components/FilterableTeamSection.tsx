@@ -68,12 +68,12 @@ const FilterableTeamSection = () => {
 
   return <section id="team" className="bg-gradient-to-b from-noesis-dark to-noesis-darker pt-16 py-0">
       <div className="container px-4 mx-auto my-0">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="section-title">
             <span className="text-white">Our&nbsp;</span>
             <span className="gradient-text">{teamSection?.title?.replace(/^Our\s*/, '') || 'Team'}</span>
           </h2>
-          <p className="text-standard max-w-3xl mx-auto text-lg -mt-4">
+          <p className="text-standard max-w-3xl mx-auto text-lg -mt-2">
             {teamSection?.subtitle || 'Meet the talented professionals behind our success'}
           </p>
         </div>
