@@ -52,9 +52,9 @@ const config = {
         "noesis-dark": "#1A1F2C",
         "noesis-darker": "#141821",
         "noesis-darkest": "#0F111A",
-        "noesis-purple": "#a074ff",
+        "noesis-purple": "#997aff",
         "noesis-darkpurple": "#8257e6",
-        "noesis-blue": "#4ea7ff",
+        "noesis-blue": "#987aff",
         "noesis-teal": "#2fcbcf",
         "noesis-yellow": "#f6e05e",
         "noesis-pink": "#f472b6",
@@ -137,7 +137,7 @@ const config = {
         "border-rainbow": "border-rainbow 300s ease-in-out infinite", // Changed to 300s for ~36s per color
       },
       backgroundImage: {
-        'rainbow-gradient': 'linear-gradient(60deg, #a074ff, #8257e6, #4ea7ff, #2fcbcf, #4ade80, #f6e05e, #f472b6, #d946ef, #a074ff)',
+        'rainbow-gradient': 'linear-gradient(60deg, #997aff, #8257e6, #987aff, #2fcbcf, #4ade80, #f6e05e, #f472b6, #d946ef, #997aff)',
       },
     },
   },
