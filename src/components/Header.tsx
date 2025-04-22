@@ -29,6 +29,10 @@ const Header = () => {
     };
 
     document.addEventListener('scroll', handleScroll);
+    
+    // Add scroll padding to the document for anchor links
+    document.documentElement.style.scrollPadding = '80px 0 0 0';
+    
     return () => {
       document.removeEventListener('scroll', handleScroll);
     };
