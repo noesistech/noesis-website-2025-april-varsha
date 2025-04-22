@@ -84,7 +84,7 @@ const ServicesSection: React.FC<ServicesProps> = ({
   }];
 
   return (
-    <section id="services" className="page-section relative">
+    <section id="services" className="page-section relative py-8 sm:py-8 md:py-8">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
       <div className="container mx-auto px-3 sm:px-6 relative z-10">
         <h2 className="section-title">
