@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import AIProductCard from './AIProductCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useIsMobile } from '@/hooks/use-mobile';
+
 export interface AICapability {
   id: string;
   title: string;
@@ -13,6 +14,7 @@ export interface AICapability {
   color: string;
   category?: string;
 }
+
 export interface AIProduct {
   id: string;
   title: string;
@@ -22,6 +24,7 @@ export interface AIProduct {
   ctaUrl: string;
   ctaText: string;
 }
+
 interface AICapabilitiesSectionProps {
   title: string;
   capabilities: AICapability[];
@@ -31,6 +34,7 @@ interface AICapabilitiesSectionProps {
     subtitle: string;
   };
 }
+
 const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   title,
   capabilities = [],
@@ -51,6 +55,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
     name: 'AI Deployment'
   }];
   const filteredCapabilities = capabilities?.filter(cap => cap.category === activeTab) || [];
+
   useEffect(() => {
     cardsRef.current = cardsRef.current.slice(0, filteredCapabilities.length);
     const observer = new IntersectionObserver(entries => {
@@ -87,6 +92,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       });
     };
   }, [filteredCapabilities, activeTab]);
+
   const getIconByName = (iconName: string) => {
     const normalizedIconName = iconName.toLowerCase();
     switch (normalizedIconName) {
@@ -107,6 +113,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         return <Brain className="h-8 w-8" />;
     }
   };
+
   return <section id="ai-capabilities" className="page-section relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
@@ -150,11 +157,11 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
             </TabsContent>)}
         </Tabs>
         
-        {products && products.length > 0 && <div className="mt-16 sm:mt-20">
-            <h2 className="section-title" dangerouslySetInnerHTML={{
+        {products && products.length > 0 && <div className="mt-8 sm:mt-10">
+            <h2 className="section-title mb-4" dangerouslySetInnerHTML={{
           __html: productsSection.title
         }}></h2>
-            <h3 className="text-base text-center mb-8 sm:mb-10 text-white/80 md:text-lg">{productsSection.subtitle}</h3>
+            <h3 className="text-base text-center mb-6 sm:mb-8 text-white/80 md:text-lg">{productsSection.subtitle}</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-6xl mx-auto">
               {products.map(product => {
@@ -165,4 +172,5 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       </div>
     </section>;
 };
+
 export default AICapabilitiesSection;
