@@ -141,4 +141,3 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, subtitle, teamMembers 
 };
 
 export default TeamSection;
-
