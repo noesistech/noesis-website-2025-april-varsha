@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2 } from 'lucide-react';
+import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2, Code2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SolutionItem } from '@/types/supabase';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -207,6 +207,8 @@ const getIconByName = (iconName: string) => {
     case 'wand':
     case 'wand2':
       return <Wand2 className="h-10 w-10 text-yellow-400" />;
+    case 'code2':
+      return <Code2 className="h-10 w-10 text-orange-400" />;
     default:
       console.warn(`Icon name not recognized: ${iconName}`);
       return <Cpu className="h-10 w-10" />;

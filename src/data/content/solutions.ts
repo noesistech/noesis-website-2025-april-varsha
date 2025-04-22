@@ -64,7 +64,7 @@ export const solutionItemsData: SolutionItem[] = [
     id: 'solution-item-6',
     icon_name: 'Code2',
     title: 'App & Web Development',
-    description: 'Full-stack development combining human expertise with AI-powered code assistance. Custom web applications built with modern frameworks. Mobile-first responsive design for cross-platform experiences.',
+    description: 'Full-stack development combining human expertise with AI-powered code assistance, custom web applications built with modern frameworks, and mobile-first responsive design for seamless cross-platform experiences.',
     color: 'from-orange-500/20 to-orange-600/20',
     sort_order: 6,
     created_at: '',
