@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Users, Award, Clock, Percent } from 'lucide-react';
 import P5Animation from './P5Animation';
@@ -54,8 +55,8 @@ const AboutStatsSection = () => {
                 <div className="bg-purple-900/30 p-3 rounded-full mb-4">
                   <Users className="w-6 h-6 text-purple-400" />
                 </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-purple-300">40</h3>
-                <p className="text-sm text-gray-400 text-center">Human + AI Experts</p>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-purple-300">40</h3>
+                <p className="text-xs sm:text-sm text-gray-400 text-center">Human + AI Experts</p>
               </div>
               
               {/* Stat 2 */}
@@ -65,8 +66,8 @@ const AboutStatsSection = () => {
                 <div className="bg-purple-900/30 p-3 rounded-full mb-4">
                   <Award className="w-6 h-6 text-purple-400" />
                 </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-purple-300">15+</h3>
-                <p className="text-sm text-gray-400 text-center">Innovation Awards</p>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-purple-300">15+</h3>
+                <p className="text-xs sm:text-sm text-gray-400 text-center">Innovation Awards</p>
               </div>
               
               {/* Stat 3 */}
@@ -76,8 +77,8 @@ const AboutStatsSection = () => {
                 <div className="bg-purple-900/30 p-3 rounded-full mb-4">
                   <Clock className="w-6 h-6 text-purple-400" />
                 </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-purple-300 text-center">&gt; 4 Years</h3>
-                <p className="text-sm text-gray-400 text-center">Avg. Client Relationship</p>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-purple-300 text-center">&gt; 4 Years</h3>
+                <p className="text-xs sm:text-sm text-gray-400 text-center">Avg. Client Relationship</p>
               </div>
               
               {/* Stat 4 */}
@@ -87,8 +88,8 @@ const AboutStatsSection = () => {
                 <div className="bg-purple-900/30 p-3 rounded-full mb-4">
                   <Percent className="w-6 h-6 text-purple-400" />
                 </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-purple-300">95%</h3>
-                <p className="text-sm text-gray-400 text-center">Client Retention Rate</p>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-purple-300">95%</h3>
+                <p className="text-xs sm:text-sm text-gray-400 text-center">Client Retention Rate</p>
               </div>
             </div>
           </div>
@@ -99,3 +100,4 @@ const AboutStatsSection = () => {
 };
 
 export default AboutStatsSection;
+
