@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { missionSectionData } from '@/data/content/mission';
 import MissionCard from './mission/MissionCard';
@@ -35,7 +36,7 @@ const MissionSection = () => {
     <section id="mission" ref={sectionRef} className="page-section relative overflow-hidden bg-noesis-dark">
       <BackgroundPattern gridRows={gridRows} gridCols={gridCols} />
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="section-title">
+        <h2 className="section-title mt-0">
           Our <span className="gradient-text">Mission & Vision</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 max-w-6xl mx-auto">
@@ -50,3 +51,4 @@ const MissionSection = () => {
 };
 
 export default MissionSection;
+
