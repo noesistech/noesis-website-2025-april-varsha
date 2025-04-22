@@ -1,4 +1,3 @@
-
 export interface HeroSection {
   id: string;
   title: string;
@@ -56,6 +55,7 @@ export interface MissionSection {
 export interface ServicesSection {
   id: string;
   title: string;
+  subtitle?: string;
   created_at: string;
   updated_at: string;
 }
@@ -73,6 +73,7 @@ export interface ServiceItem {
 export interface SolutionsSection {
   id: string;
   title: string;
+  subtitle?: string;
   created_at: string;
   updated_at: string;
 }
@@ -91,6 +92,7 @@ export interface SolutionItem {
 export interface TechStackSection {
   id: string;
   title: string;
+  subtitle?: string;
   created_at: string;
   updated_at: string;
 }

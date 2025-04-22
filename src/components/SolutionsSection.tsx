@@ -115,6 +115,11 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   return <section id="solutions" ref={sectionRef} className="page-section py-0">
       <div className="container mx-auto px-3 sm:px-6 py-0 my-0">
         <h2 className="section-title my-0 py-[14px]">{renderTitle()}</h2>
+        {solutionsSection?.subtitle && (
+          <p className="text-standard max-w-3xl mx-auto text-lg mb-8">
+            {solutionsSection.subtitle}
+          </p>
+        )}
         {isMobile ? <div className="mt-4">
             <Carousel opts={{
           align: "start",

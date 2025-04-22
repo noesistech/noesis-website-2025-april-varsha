@@ -4,6 +4,7 @@ import { TechStackSection, TechCategory } from '@/types/contentTypes';
 export const techStackSectionData: TechStackSection = {
   id: 'tech-stack-section-1',
   title: 'Our Technology Stack',
+  subtitle: 'Advanced technologies that power our innovative solutions',
   created_at: '',
   updated_at: '',
 };
