@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight } from 'lucide-react';
@@ -9,6 +8,14 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -38,20 +45,31 @@ const Header = () => {
     };
   }, [scrolled]);
 
-  const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Mission', href: '#mission' },
+  const navStructure = [
+    { 
+      name: 'About',
+      subMenu: [
+        { name: 'About Us', href: '#about' },
+        { name: 'Mission & Vision', href: '#mission' },
+        { name: 'Our Team', href: '#team' }
+      ]
+    },
     { name: 'Services', href: '#services' },
     { name: 'Solutions', href: '#solutions' },
-    { name: 'Tech Stack', href: '#tech-stack' },
+    { 
+      name: 'AI Power',
+      subMenu: [
+        { name: 'AI Capabilities', href: '#ai-capabilities' },
+        { name: 'Brainstormer Suite', href: '#brainstormer' }
+      ]
+    },
+    { name: 'Tech Stack', href: '#tech-stack' }
   ];
   
   if (hasClientsData) {
-    navLinks.push({ name: 'Clients', href: '#clients' });
+    navStructure.push({ name: 'Clients', href: '#clients' });
   }
   
-  navLinks.push({ name: 'Contact', href: '#contact' });
-
   const HEADER_HEIGHT = '60px';
   
   const useHamburgerMenu = () => {
@@ -133,17 +151,48 @@ const Header = () => {
           </svg>
         </a>
         
-        {/* Desktop and Tablet Navigation */}
         <nav className="hidden sm:flex items-center gap-2 md:gap-4 lg:gap-6">
-          {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
-              className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap"
-            >
-              {link.name}
-            </a>
-          ))}
+          <NavigationMenu>
+            <NavigationMenuList>
+              {navStructure.map((item) => (
+                <NavigationMenuItem key={item.name}>
+                  {item.subMenu ? (
+                    <>
+                      <NavigationMenuTrigger className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white">
+                        {item.name}
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        <ul className="grid gap-3 p-4 w-[200px]">
+                          {item.subMenu.map((subItem) => (
+                            <li key={subItem.name}>
+                              <NavigationMenuLink asChild>
+                                <a
+                                  href={subItem.href}
+                                  className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white"
+                                >
+                                  {subItem.name}
+                                </a>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
+                    </>
+                  ) : (
+                    <NavigationMenuLink asChild>
+                      <a
+                        href={item.href}
+                        className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center px-4 py-2"
+                      >
+                        {item.name}
+                      </a>
+                    </NavigationMenuLink>
+                  )}
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
+          
           <a href="#contact">
             <Button className="group text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px]" variant="noesis" size="sm">
               Get in Touch
@@ -152,7 +201,6 @@ const Header = () => {
           </a>
         </nav>
         
-        {/* Mobile Navigation */}
         <div className="sm:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
@@ -167,16 +215,37 @@ const Header = () => {
             >
               <div className="flex flex-col items-center justify-center px-4 py-4 md:py-2 h-full mt-[-60px]">
                 <div className="flex flex-col items-center justify-center w-full h-full max-w-md mx-auto space-y-4 md:space-y-2">
-                  {navLinks.map((link, index) => (
-                    <a 
-                      key={link.name} 
-                      href={link.href} 
-                      className="text-white py-3 md:py-2 text-lg text-center w-full transition-colors animate-in fade-in duration-300"
-                      style={{ animationDelay: `${index * 50}ms` }}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {link.name}
-                    </a>
+                  {navStructure.map((item, index) => (
+                    <div key={item.name} className="w-full">
+                      {item.subMenu ? (
+                        <>
+                          <div className="text-white py-3 md:py-2 text-lg text-center w-full transition-colors">
+                            {item.name}
+                          </div>
+                          <div className="ml-4 space-y-2">
+                            {item.subMenu.map((subItem) => (
+                              <a
+                                key={subItem.name}
+                                href={subItem.href}
+                                className="text-white/80 py-2 text-base text-center w-full transition-colors block hover:text-white"
+                                onClick={() => setMobileMenuOpen(false)}
+                              >
+                                {subItem.name}
+                              </a>
+                            ))}
+                          </div>
+                        </>
+                      ) : (
+                        <a 
+                          href={item.href} 
+                          className="text-white py-3 md:py-2 text-lg text-center w-full transition-colors animate-in fade-in duration-300 block"
+                          style={{ animationDelay: `${index * 50}ms` }}
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.name}
+                        </a>
+                      )}
+                    </div>
                   ))}
                   <div className="mt-4 md:mt-2 w-full flex justify-center">
                     <a 
@@ -186,7 +255,7 @@ const Header = () => {
                     >
                       <Button 
                         className="animate-in fade-in duration-300 group"
-                        style={{ animationDelay: `${navLinks.length * 50}ms` }}
+                        style={{ animationDelay: `${navStructure.length * 50}ms` }}
                         variant="noesis"
                       >
                         Get in Touch
