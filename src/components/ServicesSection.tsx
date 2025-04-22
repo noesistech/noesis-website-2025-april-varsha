@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Palette, Globe, Image, Cloud, BrainCircuit, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -61,9 +60,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
     <section id="services" className="page-section bg-white text-black">
       <div className="container mx-auto px-4 sm:px-6">
         <h2 className="section-title text-black">
-          <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">
-            {title}
-          </span>
+          Our <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">Services</span>
         </h2>
         {servicesSectionData.subtitle && (
           <p className="text-center text-gray-700 max-w-3xl mx-auto text-lg mb-12">
@@ -114,4 +111,3 @@ const getIconByName = (iconName: string) => {
 };
 
 export default ServicesSection;
-
