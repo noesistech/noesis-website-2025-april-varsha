@@ -83,10 +83,10 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
                     <div className="bg-[#1A1F2C]/80 p-3 rounded-full mr-4">
                       {service.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-white">{service.title}</h3>
+                    <h3 className="text-xl font-bold text-white text-left">{service.title}</h3>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="px-4 pb-4 text-gray-300">
+                <AccordionContent className="px-4 pb-4 text-gray-300 text-left">
                   {service.description}
                 </AccordionContent>
               </AccordionItem>
