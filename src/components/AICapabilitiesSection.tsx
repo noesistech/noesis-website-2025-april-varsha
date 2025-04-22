@@ -4,7 +4,6 @@ import { cn } from '@/lib/utils';
 import AIProductCard from './AIProductCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useIsMobile } from '@/hooks/use-mobile';
-
 export interface AICapability {
   id: string;
   title: string;
@@ -14,7 +13,6 @@ export interface AICapability {
   color: string;
   category?: string;
 }
-
 export interface AIProduct {
   id: string;
   title: string;
@@ -24,7 +22,6 @@ export interface AIProduct {
   ctaUrl: string;
   ctaText: string;
 }
-
 interface AICapabilitiesSectionProps {
   title: string;
   capabilities: AICapability[];
@@ -34,27 +31,28 @@ interface AICapabilitiesSectionProps {
     subtitle: string;
   };
 }
-
 const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   title,
   capabilities = [],
   products = [],
-  productsSection = { title: '', subtitle: '' }
+  productsSection = {
+    title: '',
+    subtitle: ''
+  }
 }) => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [activeTab, setActiveTab] = useState('development');
   const isMobile = useIsMobile();
-
-  const categories = [
-    { id: 'development', name: 'AI Development' },
-    { id: 'deployment', name: 'AI Deployment' }
-  ];
-
+  const categories = [{
+    id: 'development',
+    name: 'AI Development'
+  }, {
+    id: 'deployment',
+    name: 'AI Deployment'
+  }];
   const filteredCapabilities = capabilities?.filter(cap => cap.category === activeTab) || [];
-
   useEffect(() => {
     cardsRef.current = cardsRef.current.slice(0, filteredCapabilities.length);
-    
     const observer = new IntersectionObserver(entries => {
       entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
@@ -68,7 +66,6 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       root: null,
       threshold: 0.1
     });
-    
     setTimeout(() => {
       cardsRef.current.forEach(card => {
         if (card) {
@@ -76,7 +73,6 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
           observer.observe(card);
         }
       });
-      
       setTimeout(() => {
         cardsRef.current.forEach(card => {
           if (card) {
@@ -85,14 +81,12 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         });
       }, 100);
     }, 100);
-    
     return () => {
       cardsRef.current.forEach(card => {
         if (card) observer.unobserve(card);
       });
     };
   }, [filteredCapabilities, activeTab]);
-
   const getIconByName = (iconName: string) => {
     const normalizedIconName = iconName.toLowerCase();
     switch (normalizedIconName) {
@@ -113,9 +107,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         return <Brain className="h-8 w-8" />;
     }
   };
-
-  return (
-    <section id="ai-capabilities" className="py-12 sm:py-16 md:py-24 relative overflow-hidden">
+  return <section id="ai-capabilities" className="py-12 sm:py-16 relative overflow-hidden md:py-[30px]">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
@@ -126,30 +118,17 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         <Tabs defaultValue="development" className="max-w-6xl mx-auto">
           <div className="flex justify-center mb-8 sm:mb-10 md:mb-12">
             <TabsList className="glass p-1">
-              {categories.map(category => (
-                <TabsTrigger 
-                  key={category.id}
-                  value={category.id} 
-                  className="px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 data-[state=active]:bg-noesis-purple data-[state=active]:text-white text-base sm:text-lg" 
-                  onClick={() => setActiveTab(category.id)}
-                >
+              {categories.map(category => <TabsTrigger key={category.id} value={category.id} className="px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 data-[state=active]:bg-noesis-purple data-[state=active]:text-white text-base sm:text-lg" onClick={() => setActiveTab(category.id)}>
                   {category.name}
-                </TabsTrigger>
-              ))}
+                </TabsTrigger>)}
             </TabsList>
           </div>
           
-          {categories.map((category) => (
-            <TabsContent key={category.id} value={category.id} className="animate-fade-in">
+          {categories.map(category => <TabsContent key={category.id} value={category.id} className="animate-fade-in">
               <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-2'} gap-4`}>
-                {capabilities?.filter(cap => cap.category === category.id)
-                  .map((capability, index) => (
-                    <div
-                      key={capability.id}
-                      ref={el => cardsRef.current[index] = el}
-                      className="glass-card opacity-0 relative overflow-hidden min-h-[200px]"
-                      style={{ animationDelay: `${index * 100}ms` }}
-                    >
+                {capabilities?.filter(cap => cap.category === category.id).map((capability, index) => <div key={capability.id} ref={el => cardsRef.current[index] = el} className="glass-card opacity-0 relative overflow-hidden min-h-[200px]" style={{
+              animationDelay: `${index * 100}ms`
+            }}>
                       <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", capability.color)}></div>
                       <div className="relative z-10 p-4">
                         <div className="bg-white/10 p-2 rounded-lg w-fit mb-3">
@@ -160,48 +139,30 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
                         <div>
                           <h4 className="text-xs uppercase tracking-wider text-white/60 mb-1">Technologies</h4>
                           <div className="flex flex-wrap gap-1">
-                            {capability.tools.map((tool) => (
-                              <span 
-                                key={`${capability.id}-${tool}`}
-                                className="bg-white/10 text-white/90 text-xs px-2 py-0.5 rounded-full hover:bg-white/20 transition-colors"
-                              >
+                            {capability.tools.map(tool => <span key={`${capability.id}-${tool}`} className="bg-white/10 text-white/90 text-xs px-2 py-0.5 rounded-full hover:bg-white/20 transition-colors">
                                 {tool}
-                              </span>
-                            ))}
+                              </span>)}
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
               </div>
-            </TabsContent>
-          ))}
+            </TabsContent>)}
         </Tabs>
         
-        {products && products.length > 0 && (
-          <div className="mt-16 sm:mt-20">
-            <h2 className="section-title" dangerouslySetInnerHTML={{ __html: productsSection.title }}></h2>
+        {products && products.length > 0 && <div className="mt-16 sm:mt-20">
+            <h2 className="section-title" dangerouslySetInnerHTML={{
+          __html: productsSection.title
+        }}></h2>
             <h3 className="text-base md:text-base text-center mb-8 sm:mb-10 text-white/80">{productsSection.subtitle}</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-6xl mx-auto">
-              {products.map((product) => {
-                return (
-                  <AIProductCard
-                    key={product.id}
-                    title={product.title}
-                    description={product.description}
-                    logoUrl={product.logoUrl || '/placeholder.svg'}
-                    ctaText={product.ctaText}
-                    ctaUrl={product.ctaUrl}
-                  />
-                );
-              })}
+              {products.map(product => {
+            return <AIProductCard key={product.id} title={product.title} description={product.description} logoUrl={product.logoUrl || '/placeholder.svg'} ctaText={product.ctaText} ctaUrl={product.ctaUrl} />;
+          })}
             </div>
-          </div>
-        )}
+          </div>}
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default AICapabilitiesSection;
