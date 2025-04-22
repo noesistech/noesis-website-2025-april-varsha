@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Brain, BrainCircuit, Microscope, Settings, Zap, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -158,7 +159,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
             </TabsContent>)}
         </Tabs>
         
-        {products && products.length > 0 && <div className="mt-12">
+        {products && products.length > 0 && <div className="mt-12 sm:mt-16">
             <h2 dangerouslySetInnerHTML={{
               __html: productsSection.title
             }} className="section-title mb-4"></h2>
@@ -175,3 +176,4 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
 };
 
 export default AICapabilitiesSection;
+
