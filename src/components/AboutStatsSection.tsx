@@ -1,8 +1,9 @@
+
 import React from 'react';
 import { useContent } from '@/contexts/ContentContext';
 
 const AboutStatsSection = () => {
-  const { statsData } = useContent();
+  const { stats } = useContent();
   return (
     <section id="about" className="page-section py-12 sm:py-16">
       <div className="container mx-auto px-4">
@@ -14,7 +15,7 @@ const AboutStatsSection = () => {
         </p>
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          {statsData.map((stat, index) => (
+          {stats && stats.map((stat, index) => (
             <div key={stat.id || index} className="glass-card text-center">
               <div className="text-2xl md:text-3xl lg:text-4xl font-bold gradient-text mb-2">
                 {stat.value}

@@ -1,3 +1,4 @@
+
 import { SolutionsSection, SolutionItem } from '@/types/contentTypes';
 
 export const solutionsSectionData: SolutionsSection = {
@@ -60,7 +61,7 @@ export const solutionItemsData: SolutionItem[] = [
   },
   {
     id: 'solution-item-6',
-    icon_name: 'Code',
+    icon_name: 'CodeXSquare',
     title: 'App & Web Development',
     description: 'Full-stack development combining human expertise with AI-enhanced tools for web applications, mobile apps, and enterprise solutions',
     color: 'from-indigo-500/20 to-indigo-600/20',
