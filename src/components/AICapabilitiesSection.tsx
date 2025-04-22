@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import AIProductCard from './AIProductCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { aiCapabilitiesSectionData } from '@/data/content/aiCapabilities';
 
 export interface AICapability {
   id: string;
@@ -120,9 +121,15 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <h2 className="section-title mb-8">
+        <h2 className="section-title mb-3">
           Our <span className="gradient-text">AI</span> <span className="gradient-text">Capabilities</span>
         </h2>
+        
+        {aiCapabilitiesSectionData.subtitle && (
+          <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mb-8">
+            {aiCapabilitiesSectionData.subtitle}
+          </p>
+        )}
         
         <Tabs defaultValue="development" className="max-w-6xl mx-auto my-0 py-0">
           <div className="flex justify-center mb-8 sm:mb-10 md:mb-12">
@@ -162,8 +169,8 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         {products && products.length > 0 && <div className="mt-12 sm:mt-16">
             <h2 dangerouslySetInnerHTML={{
               __html: productsSection.title
-            }} className="section-title mb-4"></h2>
-            <h3 className="text-base text-center mb-8 text-white/80 md:text-lg">{productsSection.subtitle}</h3>
+            }} className="section-title mb-3"></h2>
+            <h3 className="text-center text-gray-300 mx-auto text-lg mb-8 md:text-lg">{productsSection.subtitle}</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-6xl mx-auto">
                 {products.map(product => {
@@ -176,4 +183,3 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
 };
 
 export default AICapabilitiesSection;
-

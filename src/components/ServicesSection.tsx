@@ -1,9 +1,11 @@
+
 import React from 'react';
 import { Palette, Globe, Image, Cloud, BrainCircuit, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ServiceItem } from '@/types/supabase';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ServicesSection as ServicesSectionType } from '@/types/contentTypes';
+import { servicesSectionData } from '@/data/content/services';
 
 interface ServicesSectionProps {
   title: string;
@@ -61,9 +63,9 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
         <h2 className="section-title">
           {title}
         </h2>
-        {servicesSection?.subtitle && (
-          <p className="text-standard max-w-3xl mx-auto text-lg mb-12">
-            {servicesSection.subtitle}
+        {servicesSectionData.subtitle && (
+          <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mb-12">
+            {servicesSectionData.subtitle}
           </p>
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

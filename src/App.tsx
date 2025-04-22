@@ -39,7 +39,11 @@ function App() {
         <HeroSection />
         <AboutStatsSection />
         <MissionSection />
-        <ServicesSection title={servicesSection?.title || ''} services={serviceItems || []} />
+        <ServicesSection 
+          title={servicesSection?.title || ''} 
+          services={serviceItems || []} 
+          servicesSection={servicesSection} 
+        />
         <AICapabilitiesSection 
           title={aiCapabilitiesSection?.title || ''} 
           capabilities={aiCapabilities || []} 
@@ -55,7 +59,11 @@ function App() {
           solutions={solutionItems || []} 
         />
         <FilterableTeamSection />
-        <TechStackSection title={techStackSection?.title || ''} categories={techCategories || []} />
+        <TechStackSection 
+          title={techStackSection?.title || ''} 
+          subtitle={techStackSection?.subtitle || ''}
+          categories={techCategories || []} 
+        />
         <ClientsSection />
         <ContactSection />
       </main>

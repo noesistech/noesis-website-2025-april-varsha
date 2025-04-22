@@ -159,3 +159,11 @@ export interface Testimonial {
   created_at: string;
   updated_at: string;
 }
+
+export interface ContactSection {
+  id: string;
+  title: string;
+  subtitle: string;
+  created_at: string;
+  updated_at: string;
+}

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TechCategory } from '@/types/supabase';
@@ -25,11 +26,11 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <h2 className="section-title mb-4">
+        <h2 className="section-title mb-3">
           Our <span className="gradient-text">Technology Stack</span>
         </h2>
         {subtitle && (
-          <p className="text-standard max-w-3xl mx-auto text-lg mb-8">
+          <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mb-8">
             {subtitle}
           </p>
         )}

@@ -1,11 +1,14 @@
+
 import React, { useRef, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 interface PromisePanelProps {
   title: string;
+  subtitle?: string;
   text: string;
 }
 const PromisePanel = ({
   title,
+  subtitle,
   text
 }: PromisePanelProps) => {
   const promiseTextRef = useRef<HTMLParagraphElement>(null);
@@ -65,9 +68,14 @@ const PromisePanel = ({
       <div style={{
       animationDelay: '0.4s'
     }} className="text-center max-w-4xl mx-auto animate-fade-in">
-        <h3 className="text-4xl md:text-5xl font-bold mb-12">
+        <h3 className="text-4xl md:text-5xl font-bold mb-3">
           <span>Our </span><span className="gradient-text">Promise</span>
         </h3>
+        {subtitle && (
+          <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mb-8">
+            {subtitle}
+          </p>
+        )}
         <div ref={promiseContainerRef} className="promise-glass-panel relative overflow-hidden transition-transform duration-300 ease-out mx-auto p-8 md:px-[130px] md:py-[40px]">
           <div className="refraction-layer"></div>
           <div className="glass-highlight"></div>

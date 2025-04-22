@@ -4,7 +4,7 @@ import { SolutionsSection, SolutionItem } from '@/types/contentTypes';
 export const solutionsSectionData: SolutionsSection = {
   id: 'solutions-section-1',
   title: 'Our Solutions',
-  subtitle: 'Innovative AI-powered solutions tailored for your business needs',
+  subtitle: 'Tailored AI solutions for your industry challenges',
   created_at: '',
   updated_at: '',
 };

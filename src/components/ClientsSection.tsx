@@ -19,8 +19,13 @@ const ClientsSection = () => {
 
   return <section id="clients" className="bg-gradient-to-b from-noesis-darkest to-noesis-dark py-[50px]">
       <div className="container mx-auto px-4">
-        {clientsSection && <div className="text-center mb-12">
+        {clientsSection && <div className="text-center mb-8">
             <h2 className="section-title">Testimonials</h2>
+            {clientsSection.subtitle && (
+              <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mt-3 mb-8">
+                {clientsSection.subtitle}
+              </p>
+            )}
           </div>}
         
         {/* Testimonials - Carousel for mobile, grid for desktop */}

@@ -128,7 +128,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       <div className="container mx-auto px-3 sm:px-6 py-0 my-0">
         <h2 className="section-title my-0 py-[14px]">{renderTitle()}</h2>
         {subtitle && (
-          <p className="text-standard max-w-3xl mx-auto text-lg mb-8">
+          <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mb-8">
             {subtitle}
           </p>
         )}
