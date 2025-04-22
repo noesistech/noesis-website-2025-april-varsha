@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { ArrowDown } from 'lucide-react';
 import HeroBackground from './hero/HeroBackground';
@@ -53,7 +52,8 @@ const HeroSection = () => {
       ref={heroRef}
       className={`min-h-[75vh] md:min-h-[85vh] flex flex-col justify-center relative overflow-hidden 
         pt-4 pb-1 
-        md:pt-2 md:pb-1 
+        sm:pt-4 sm:pb-1
+        md:pt-24 md:pb-1 
         lg:pt-8 lg:pb-1 
         font-inter`}
       style={{
