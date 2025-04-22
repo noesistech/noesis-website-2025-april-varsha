@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Palette, Globe, Image, Cloud, BrainCircuit, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -5,6 +6,7 @@ import { ServiceItem } from '@/types/supabase';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ServicesSection as ServicesSectionType } from '@/types/contentTypes';
 import { servicesSectionData } from '@/data/content/services';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface ServicesSectionProps {
   title: string;
@@ -57,13 +59,13 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
   }];
 
   return (
-    <section id="services" className="page-section bg-white text-black">
+    <section id="services" className="page-section bg-[#1A1F2C] text-white">
       <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="section-title text-black">
+        <h2 className="section-title mb-3">
           Our <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">Services</span>
         </h2>
         {servicesSectionData.subtitle && (
-          <p className="text-center text-gray-700 max-w-3xl mx-auto text-lg mb-12">
+          <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mb-12">
             {servicesSectionData.subtitle}
           </p>
         )}
@@ -71,14 +73,14 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
           {displayServices.map(service => (
             <div 
               key={service.id} 
-              className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 h-full bg-gray-50 border border-gray-200"
+              className="glass-card relative overflow-hidden rounded-2xl transition-all duration-300 h-full hover:border-white/30"
             >
               <div className="p-6">
-                <div className="bg-white/10 p-3 rounded-full w-fit mb-4">
+                <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
                   {service.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-left text-black">{service.title}</h3>
-                <p className="text-gray-700 text-left">{service.description}</p>
+                <h3 className="text-xl font-bold mb-3 text-left text-white">{service.title}</h3>
+                <p className="text-gray-300 text-left">{service.description}</p>
               </div>
             </div>
           ))}
