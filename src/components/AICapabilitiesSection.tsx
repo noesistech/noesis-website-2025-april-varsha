@@ -161,9 +161,12 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         </Tabs>
         
         {products && products.length > 0 && <div className="mt-16 sm:mt-20">
-            <h2 className="section-title" dangerouslySetInnerHTML={{
-          __html: productsSection.title
-        }}></h2>
+            <h2 
+              className="section-title" 
+              dangerouslySetInnerHTML={{
+                __html: productsSection.title
+              }}
+            ></h2>
             <h3 className="text-base md:text-base text-center mb-8 sm:mb-10 text-white/80">{productsSection.subtitle}</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-6xl mx-auto">
