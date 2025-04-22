@@ -20,68 +20,89 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const displaySolutions = solutions && solutions.length > 0 ? solutions.map(solution => ({
-    id: solution.id,
-    icon: getIconByName(solution.icon_name),
-    title: solution.title,
-    description: solution.description,
-    color: solution.color || 'from-purple-500/20 to-purple-600/20'
-  })) : [{
-    id: 'lms',
-    icon: <GraduationCap className="h-10 w-10" />,
-    title: 'AI-Powered Learning Management',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+  const displaySolutions = solutions && solutions.length > 0 ? solutions.map(solution => {
+    if (solution.id === 'solution-item-6') {
+      return {
+        id: solution.id,
+        icon: getIconByName(solution.icon_name),
+        title: solution.title,
+        description: (
+          <ul className="list-disc pl-5 space-y-1 text-white/80">
+            <li>Full-stack development combining human expertise with AI-powered code assistance</li>
+            <li>Custom web applications built with modern frameworks and AI optimization</li>
+            <li>Mobile-first responsive design approach for seamless cross-platform experiences</li>
+            <li>Integration of AI features like chatbots, recommendation systems, and personalization</li>
+          </ul>
+        ),
+        color: solution.color || 'from-orange-500/20 to-orange-600/20'
+      };
+    }
+    
+    return {
+      id: solution.id,
+      icon: getIconByName(solution.icon_name),
+      title: solution.title,
+      description: solution.description,
+      color: solution.color || 'from-purple-500/20 to-purple-600/20'
+    };
+  }) : [
+    {
+      id: 'lms',
+      icon: <GraduationCap className="h-10 w-10" />,
+      title: 'AI-Powered Learning Management',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
           <li>Human-centered interface enhanced by AI for intuitive course creation and management</li>
           <li>Smart assessment tools that combine AI grading with human educational expertise</li>
           <li>AI-driven analytics with human-interpreted reporting for actionable insights</li>
           <li>Customizable branding and integrations overseen by human design specialists</li>
         </ul>,
-    color: 'from-blue-500/20 to-blue-600/20'
-  }, {
-    id: 'brainstormer',
-    icon: <Cpu className="h-10 w-10" />,
-    title: 'Brainstormer',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+      color: 'from-blue-500/20 to-blue-600/20'
+    }, {
+      id: 'brainstormer',
+      icon: <Cpu className="h-10 w-10" />,
+      title: 'Brainstormer',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
           <li>Our proprietary AI platform developed by human AI experts</li>
           <li>Brainstormer Pro: Human-designed customized ChatGPT solutions for business needs</li>
           <li>Brainstormer Studio: Low-code environment where human creativity directs AI capabilities</li>
           <li>AI agents orchestrated by human strategists to automate workflows in finance, HR, and strategy</li>
         </ul>,
-    color: 'from-purple-500/20 to-purple-600/20'
-  }, {
-    id: 'ecommerce',
-    icon: <ShoppingBag className="h-10 w-10" />,
-    title: 'AI-Enhanced eCommerce',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+      color: 'from-purple-500/20 to-purple-600/20'
+    }, {
+      id: 'ecommerce',
+      icon: <ShoppingBag className="h-10 w-10" />,
+      title: 'AI-Enhanced eCommerce',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
           <li>Expert human designers directing AI tools for optimized website design and platform development</li>
           <li>Specialized teams combining AI efficiency with human creativity for Shopify and Magento solutions</li>
           <li>Our human experts with AI support have contributed to brands like MamaEarth, HyugaLife, Nykaa, and more</li>
           <li>Exceptional 8-9% ROAS achieved through AI-human optimization strategies</li>
         </ul>,
-    color: 'from-pink-500/20 to-pink-600/20'
-  }, {
-    id: 'chatbots',
-    icon: <MessageSquare className="h-10 w-10" />,
-    title: 'Human-Directed AI Chatbots',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+      color: 'from-pink-500/20 to-pink-600/20'
+    }, {
+      id: 'chatbots',
+      icon: <MessageSquare className="h-10 w-10" />,
+      title: 'Human-Directed AI Chatbots',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
           <li>Bespoke AI solutions crafted by human experts for your specific business needs</li>
           <li>Team collaboration features designed by humans to enhance AI workflow integration</li>
           <li>Knowledge base management combining AI document processing with human curation</li>
           <li>Human-supervised AI translation services enabling support in 14+ Indic languages</li>
         </ul>,
-    color: 'from-green-500/20 to-green-600/20'
-  }, {
-    id: 'creative',
-    icon: <Wand2 className="h-10 w-10" />,
-    title: 'AI-Augmented Creative Technology',
-    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+      color: 'from-green-500/20 to-green-600/20'
+    }, {
+      id: 'creative',
+      icon: <Wand2 className="h-10 w-10" />,
+      title: 'AI-Augmented Creative Technology',
+      description: <ul className="list-disc pl-5 space-y-1 text-white/80">
           <li>Chatbots that blend AI capabilities with human warmth for social media and website integration</li>
           <li>Interactive marketing solutions where human creativity guides AI tools for quizzes and social filters</li>
           <li>AR/VR experiences crafted through human-AI collaboration</li>
           <li>Educational apps that combine human teaching expertise with AI engagement mechanics</li>
         </ul>,
-    color: 'from-yellow-500/20 to-yellow-600/20'
-  }];
+      color: 'from-yellow-500/20 to-yellow-600/20'
+    }
+  ];
 
   const enhancedDisplaySolutions = displaySolutions.map(solution => {
     if (solution.id === 'solution-item-6') {
