@@ -58,26 +58,30 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
   }];
 
   return (
-    <section id="services" className="page-section">
+    <section id="services" className="page-section bg-white text-black">
       <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="section-title">
-          {title}
+        <h2 className="section-title text-black">
+          <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">
+            {title}
+          </span>
         </h2>
         {servicesSectionData.subtitle && (
-          <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mb-12">
+          <p className="text-center text-gray-700 max-w-3xl mx-auto text-lg mb-12">
             {servicesSectionData.subtitle}
           </p>
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayServices.map(service => (
-            <div key={service.id} className="glass relative overflow-hidden rounded-2xl hover:shadow-lg transition-all duration-300 h-full">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/10 opacity-30"></div>
-              <div className="relative z-10 p-6">
+            <div 
+              key={service.id} 
+              className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 h-full bg-gray-50 border border-gray-200"
+            >
+              <div className="p-6">
                 <div className="bg-white/10 p-3 rounded-full w-fit mb-4">
                   {service.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-left">{service.title}</h3>
-                <p className="text-white/80 text-left">{service.description}</p>
+                <h3 className="text-xl font-bold mb-3 text-left text-black">{service.title}</h3>
+                <p className="text-gray-700 text-left">{service.description}</p>
               </div>
             </div>
           ))}
@@ -110,3 +114,4 @@ const getIconByName = (iconName: string) => {
 };
 
 export default ServicesSection;
+
