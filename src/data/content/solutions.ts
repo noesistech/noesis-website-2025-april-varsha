@@ -1,4 +1,3 @@
-
 import { SolutionsSection, SolutionItem } from '@/types/contentTypes';
 
 export const solutionsSectionData: SolutionsSection = {
@@ -71,4 +70,3 @@ export const solutionItemsData: SolutionItem[] = [
     updated_at: '',
   }
 ];
-
