@@ -66,14 +66,14 @@ const FilterableTeamSection = () => {
 
   const filteredTeamMembers = selectedCategory === 'All' ? teamMembers || [] : groupedTeamMembers[selectedCategory] || [];
 
-  return <section id="team" className="bg-gradient-to-b from-noesis-dark to-noesis-darker pt-16 py-0">
-      <div className="container px-4 mx-auto my-0">
+  return <section id="team" className="bg-gradient-to-b from-noesis-dark to-noesis-darker py-12 sm:py-16">
+      <div className="container px-4 mx-auto">
         <div className="text-center mb-8">
-          <h2 className="section-title">
+          <h2 className="section-title mb-2">
             <span className="text-white">Our&nbsp;</span>
             <span className="gradient-text">{teamSection?.title?.replace(/^Our\s*/, '') || 'Team'}</span>
           </h2>
-          <p className="text-standard max-w-3xl mx-auto text-lg -mt-2">
+          <p className="text-standard max-w-3xl mx-auto text-lg">
             {teamSection?.subtitle || 'Meet the talented professionals behind our success'}
           </p>
         </div>

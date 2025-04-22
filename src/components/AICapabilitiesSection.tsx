@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import AIProductCard from './AIProductCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useIsMobile } from '@/hooks/use-mobile';
+
 export interface AICapability {
   id: string;
   title: string;
@@ -13,6 +14,7 @@ export interface AICapability {
   color: string;
   category?: string;
 }
+
 export interface AIProduct {
   id: string;
   title: string;
@@ -22,6 +24,7 @@ export interface AIProduct {
   ctaUrl: string;
   ctaText: string;
 }
+
 interface AICapabilitiesSectionProps {
   title: string;
   capabilities: AICapability[];
@@ -31,6 +34,7 @@ interface AICapabilitiesSectionProps {
     subtitle: string;
   };
 }
+
 const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   title,
   capabilities = [],
@@ -50,7 +54,9 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
     id: 'deployment',
     name: 'AI Deployment'
   }];
+
   const filteredCapabilities = capabilities?.filter(cap => cap.category === activeTab) || [];
+
   useEffect(() => {
     cardsRef.current = cardsRef.current.slice(0, filteredCapabilities.length);
     const observer = new IntersectionObserver(entries => {
@@ -87,6 +93,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       });
     };
   }, [filteredCapabilities, activeTab]);
+
   const getIconByName = (iconName: string) => {
     const normalizedIconName = iconName.toLowerCase();
     switch (normalizedIconName) {
@@ -107,11 +114,12 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         return <Brain className="h-8 w-8" />;
     }
   };
-  return <section id="ai-capabilities" className="page-section relative overflow-hidden">
+
+  return <section id="ai-capabilities" className="page-section relative overflow-hidden py-12 sm:py-16">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <h2 className="section-title">
+        <h2 className="section-title mb-8">
           Our <span className="gradient-text">AI</span> <span className="gradient-text">Capabilities</span>
         </h2>
         
@@ -150,11 +158,11 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
             </TabsContent>)}
         </Tabs>
         
-        {products && products.length > 0 && <div className="mt-6 sm:mt-8 my-[69px]">
+        {products && products.length > 0 && <div className="mt-12">
             <h2 dangerouslySetInnerHTML={{
-          __html: productsSection.title
-        }} className="section-title mb-4 my-[14px] py-[2px]"></h2>
-            <h3 className="text-base text-center mb-4 sm:mb-6 text-white/80 md:text-lg">{productsSection.subtitle}</h3>
+              __html: productsSection.title
+            }} className="section-title mb-4"></h2>
+            <h3 className="text-base text-center mb-8 text-white/80 md:text-lg">{productsSection.subtitle}</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-6xl mx-auto">
                 {products.map(product => {
@@ -165,4 +173,5 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       </div>
     </section>;
 };
+
 export default AICapabilitiesSection;

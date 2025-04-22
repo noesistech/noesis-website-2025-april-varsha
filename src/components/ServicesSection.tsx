@@ -5,10 +5,12 @@ import { cn } from '@/lib/utils';
 import { ServiceItem } from '@/types/supabase';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useIsMobile } from '@/hooks/use-mobile';
+
 interface ServicesProps {
   title: string;
   services: ServiceItem[];
 }
+
 const ServicesSection: React.FC<ServicesProps> = ({
   title,
   services
@@ -79,10 +81,11 @@ const ServicesSection: React.FC<ServicesProps> = ({
           <li>Targeted advertising campaigns that leverage AI for personalization</li>
         </ul>
   }];
-  return <section id="services" className="page-section relative sm:py-6 md:py-6 py-0">
+
+  return <section id="services" className="page-section relative py-12 sm:py-16">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
       <div className="container mx-auto px-3 sm:px-6 relative z-10">
-        <h2 className="section-title mb-6 py-[16px]">
+        <h2 className="section-title mb-8">
           Our <span className="gradient-text">Services</span>
         </h2>
         {isMobile ? <Accordion type="single" collapsible className="w-full">
@@ -117,6 +120,7 @@ const ServicesSection: React.FC<ServicesProps> = ({
       </div>
     </section>;
 };
+
 const getIconByName = (iconName: string) => {
   const normalizedIconName = iconName.toLowerCase();
   switch (normalizedIconName) {
@@ -152,4 +156,5 @@ const getIconByName = (iconName: string) => {
       return <Palette className="h-10 w-10 text-noesis-purple" />;
   }
 };
+
 export default ServicesSection;

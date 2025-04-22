@@ -11,7 +11,7 @@ export interface TechStackSectionProps {
 
 const TechStackSection: React.FC<TechStackSectionProps> = ({
   title,
-  categories = [] // Provide a default empty array
+  categories = []
 }) => {
   const [activeTab, setActiveTab] = useState('tech');
 
@@ -20,11 +20,11 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
   const cloudStack = categories?.filter(category => category.is_cloud_stack) || [];
   
   return (
-    <section id="tech-stack" className="page-section relative overflow-hidden">
+    <section id="tech-stack" className="page-section relative overflow-hidden py-12 sm:py-16">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <h2 className="section-title">
+        <h2 className="section-title mb-8">
           Our <span className="gradient-text">Technology Stack</span>
         </h2>
         

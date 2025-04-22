@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -30,7 +29,7 @@
 
 @layer components {
   .section-title {
-    @apply text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-10 sm:mb-12 md:mb-16 mt-6 sm:mt-8;
+    @apply text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold;
   }
   
   .gradient-text {
@@ -46,19 +45,8 @@
   }
   
   .page-section {
-    @apply py-12 sm:py-16 md:py-24;
-    scroll-margin-top: 80px; /* This ensures section titles aren't hidden behind the fixed header */
-  }
-  
-  /* Animation utilities */
-  .animate-fade-in {
-    animation: fadeIn 0.8s ease-in-out forwards;
-    opacity: 0;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    @apply py-12 sm:py-16;
+    scroll-margin-top: 80px;
   }
 }
 
