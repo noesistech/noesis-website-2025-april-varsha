@@ -4,6 +4,7 @@ import { useContent } from '@/contexts/ContentContext';
 
 const AboutStatsSection = () => {
   const { stats } = useContent();
+  
   return (
     <section id="about" className="page-section py-12 sm:py-16">
       <div className="container mx-auto px-4">
