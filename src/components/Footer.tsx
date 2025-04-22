@@ -1,6 +1,6 @@
+
 import React from 'react';
 import { Mail, Phone, MapPin, Instagram, Linkedin } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -11,10 +11,10 @@ const Footer = () => {
     <footer className="bg-noesis-dark py-12 mt-20">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 lg:gap-12">
-          {/* Company Logo and Social Links */}
-          <div className="md:col-span-6 lg:col-span-3 order-1">
-            <div className="flex md:flex-row flex-col md:gap-8 lg:block">
-              <div className="flex items-center gap-2 mb-4">
+          {/* Company Logo, Description, and Social Links */}
+          <div className="md:col-span-8 lg:col-span-3 order-1">
+            <div className="flex flex-col md:flex-row lg:flex-col gap-6">
+              <div className="flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300.48 54.12" className="h-8 w-auto" fill="currentColor">
                   <path d="M172.28,18.21a5.4,5.4,0,0,1,5.33,5.33,5.34,5.34,0,0,1-5.33,5.26A5.29,5.29,0,0,1,167,23.54,5.35,5.35,0,0,1,172.28,18.21Z" className="text-noesis-purple" />
                   <path d="M189.4,33h-2.35a1.31,1.31,0,0,1-1.25-1.32V27a1.26,1.26,0,0,1,1.25-1.32h2.35V18a1.37,1.37,0,0,1,1.32-1.32l5.68-.07A1.3,1.3,0,0,1,197.65,18v7.76h6.1A1.27,1.27,0,0,1,205.06,27v4.64A1.32,1.32,0,0,1,203.75,33h-6.1V44.08c0,1.94,1,2.21,2.15,2.21a11,11,0,0,0,3.39-.76,1.08,1.08,0,0,1,1.53.76l1.38,4.37a1.25,1.25,0,0,1-.76,1.66,26,26,0,0,1-8.24,1.8c-5.34,0-7.7-3.32-7.7-8.94Z" className="text-white" />
@@ -29,8 +29,8 @@ const Footer = () => {
                   <path d="M138.24,25.09l1.88-3.74a1,1,0,0,1,1.59-.49A15.48,15.48,0,0,0,148,22.52c1.38,0,2.35-.55,2.35-1.73s-1-2-4.64-3.46c-5.34-2.08-7.83-4.93-7.83-9.15S141,0,148.08,0a16,16,0,0,1,8.53,2.15A1.47,1.47,0,0,1,157.23,4L155.5,7.55a1.32,1.32,0,0,1-1.66.49,16.4,16.4,0,0,0-5.76-1.46c-1.66,0-2.36.7-2.36,1.6,0,1.25,1.25,1.66,3.81,2.7,5.34,2.08,9.36,4.37,9.36,9.77,0,4.58-4,8.46-11,8.46a15.68,15.68,0,0,1-9.22-2.57A1.19,1.19,0,0,1,138.24,25.09Z" className="text-white" />
                 </svg>
               </div>
-              <div className="md:flex-1">
-                <p className="text-white/70 mb-6 max-w-[280px] line-clamp-3">
+              <div className="flex-1">
+                <p className="text-white/70 mb-6 max-w-none md:max-w-[400px] lg:max-w-[280px]">
                   Creatively combining content, media, data and technology to build digital solutions that deliver business results.
                 </p>
                 <div className="flex gap-4 mb-6 md:mb-0">
@@ -46,7 +46,7 @@ const Footer = () => {
           </div>
           
           {/* Quick Links */}
-          <div className="md:col-span-6 lg:col-span-3 order-2">
+          <div className="md:col-span-4 lg:col-span-3 order-2 lg:order-2">
             <h3 className="text-white text-xl font-bold mb-4">Quick Links</h3>
             <div className="grid grid-cols-2 gap-x-4 gap-y-2">
               <div>
