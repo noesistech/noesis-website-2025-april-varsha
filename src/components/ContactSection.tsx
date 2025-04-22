@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,7 +11,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { supabase } from "@/integrations/supabase/client";
-
 const contactFormSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters"
@@ -27,9 +25,7 @@ const contactFormSchema = z.object({
     message: "Message must be at least 10 characters"
   })
 });
-
 type ContactFormValues = z.infer<typeof contactFormSchema>;
-
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
@@ -42,11 +38,9 @@ const ContactSection = () => {
       message: ""
     }
   });
-
   const onSubmit = async (data: ContactFormValues) => {
     try {
       setIsSubmitting(true);
-
       const brevoResult = await supabase.functions.invoke('submit-contact-form', {
         body: {
           name: data.name,
@@ -58,7 +52,6 @@ const ContactSection = () => {
         throw new Error(`Error saving to Brevo: ${brevoResult.error.message}`);
       }
       console.log("Successfully saved to Brevo:", brevoResult);
-
       const emailResult = await supabase.functions.invoke('send-contact-email', {
         body: {
           name: data.name,
@@ -88,22 +81,20 @@ const ContactSection = () => {
       setIsSubmitting(false);
     }
   };
-
-  return (
-    <section id="contact" className="py-10 relative">
+  return <section id="contact" className="py-10 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-blue/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-3 sm:px-6 relative z-10">
         <div className="text-center animate-fade-in">
-          <h2 className="section-title">
+          <h2 className="section-title py-[39px]">
             Experience the <span className="gradient-text">AI-Human Partnership</span>
           </h2>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 max-w-6xl mx-auto">
           <Card className="glass-card animate-fade-in" style={{
-            animationDelay: '0.2s'
-          }}>
+          animationDelay: '0.2s'
+        }}>
             <div className="p-4 sm:p-6 md:p-8">
               <h3 className="text-xl sm:text-2xl font-bold gradient-text mb-4 sm:mb-6">Start The Conversation</h3>
               
@@ -111,8 +102,8 @@ const ContactSection = () => {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <FormField control={form.control} name="name" render={({
-                      field
-                    }) => <FormItem>
+                    field
+                  }) => <FormItem>
                             <FormLabel className="text-sm font-medium text-white/70">Your Name</FormLabel>
                             <FormControl>
                               <Input {...field} className="bg-white/5 border-white/10 focus:border-noesis-purple text-white" placeholder="John Doe" disabled={isSubmitting} />
@@ -121,8 +112,8 @@ const ContactSection = () => {
                           </FormItem>} />
                     
                     <FormField control={form.control} name="email" render={({
-                      field
-                    }) => <FormItem>
+                    field
+                  }) => <FormItem>
                             <FormLabel className="text-sm font-medium text-white/70">Email Address</FormLabel>
                             <FormControl>
                               <Input {...field} className="bg-white/5 border-white/10 focus:border-noesis-purple text-white" placeholder="john@example.com" type="email" disabled={isSubmitting} />
@@ -132,8 +123,8 @@ const ContactSection = () => {
                   </div>
                   
                   <FormField control={form.control} name="subject" render={({
-                    field
-                  }) => <FormItem>
+                  field
+                }) => <FormItem>
                           <FormLabel className="text-sm font-medium text-white/70">Subject</FormLabel>
                           <FormControl>
                             <Input {...field} className="bg-white/5 border-white/10 focus:border-noesis-purple text-white" placeholder="Project Inquiry" disabled={isSubmitting} />
@@ -142,8 +133,8 @@ const ContactSection = () => {
                         </FormItem>} />
                   
                   <FormField control={form.control} name="message" render={({
-                    field
-                  }) => <FormItem>
+                  field
+                }) => <FormItem>
                           <FormLabel className="text-sm font-medium text-white/70">Project Requirements</FormLabel>
                           <FormControl>
                             <Textarea {...field} className="bg-white/5 border-white/10 focus:border-noesis-purple text-white h-24 sm:h-32" placeholder="Briefly describe your project requirements..." disabled={isSubmitting} />
@@ -166,8 +157,8 @@ const ContactSection = () => {
           </Card>
           
           <Card className="glass-card animate-fade-in" style={{
-            animationDelay: '0.4s'
-          }}>
+          animationDelay: '0.4s'
+        }}>
             <div className="p-4 sm:p-6 md:p-8">
               <h3 className="text-xl sm:text-2xl font-bold gradient-text mb-4 sm:mb-6">Reach Our AI-Human Team</h3>
               
@@ -230,8 +221,6 @@ const ContactSection = () => {
           </div>
         </AlertDialogContent>
       </AlertDialog>
-    </section>
-  );
+    </section>;
 };
-
 export default ContactSection;
