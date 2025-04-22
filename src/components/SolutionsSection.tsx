@@ -4,12 +4,10 @@ import { cn } from '@/lib/utils';
 import { SolutionItem } from '@/types/supabase';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-
 interface SolutionsSectionProps {
   title: string;
   solutions: SolutionItem[];
 }
-
 const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   title,
   solutions
@@ -17,7 +15,6 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-
   const displaySolutions = solutions && solutions.length > 0 ? solutions.map(solution => ({
     id: solution.id,
     icon: getIconByName(solution.icon_name),
@@ -80,9 +77,8 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         </ul>,
     color: 'from-yellow-500/20 to-yellow-600/20'
   }];
-
   useEffect(() => {
-    if (isMobile) return;
+    if (isMobile) return; // Skip animation setup on mobile since we'll use carousel
 
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -104,26 +100,21 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       });
     };
   }, [isMobile]);
-
   const renderTitle = () => {
+    if (!title) return "Our Solutions";
+    const words = title.split(' ');
+    const lastWordIndex = words.length - 1;
     return <>
-      <h2 className="section-title mb-2">
-        <span className="text-white">Our</span> <span className="gradient-text">Solutions</span>
-      </h2>
-      <p className="text-white/80 text-lg mb-8 max-w-3xl mx-auto">
-        Innovative technology solutions tailored to your business needs
-      </p>
-    </>;
+        {words.slice(0, lastWordIndex).join(' ')} <span className="gradient-text">{words[lastWordIndex]}</span>
+      </>;
   };
-
   const solutionRows = [];
   for (let i = 0; i < displaySolutions.length; i += 3) {
     solutionRows.push(displaySolutions.slice(i, i + 3));
   }
-
-  return <section id="solutions" ref={sectionRef} className="page-section py-12 sm:py-16">
-      <div className="container mx-auto px-4">
-        {renderTitle()}
+  return <section id="solutions" ref={sectionRef} className="page-section py-0">
+      <div className="container mx-auto px-3 sm:px-6 py-0 my-0">
+        <h2 className="section-title my-0 py-[14px]">{renderTitle()}</h2>
         {isMobile ? <div className="mt-4">
             <Carousel opts={{
           align: "start",
@@ -131,8 +122,8 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         }} className="w-full" autoplay={true} interval={5000}>
               <CarouselContent>
                 {displaySolutions.map(solution => <CarouselItem key={solution.id} className="md:basis-1/2 lg:basis-1/3">
-                    <div className="glass relative overflow-hidden rounded-2xl h-full border-2 border-white/10 shadow-lg">
-                      <div className={cn("absolute inset-0 bg-gradient-to-br opacity-40", solution.color)}></div>
+                    <div className="glass relative overflow-hidden rounded-2xl h-full">
+                      <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", solution.color)}></div>
                       <div className="relative z-10 p-4 flex flex-col h-full">
                         <div className="bg-white/10 p-2 rounded-full w-fit mb-3">
                           {solution.icon}
@@ -167,7 +158,6 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       </div>
     </section>;
 };
-
 const getIconByName = (iconName: string) => {
   const normalizedIconName = iconName.toLowerCase();
   switch (normalizedIconName) {
@@ -190,5 +180,4 @@ const getIconByName = (iconName: string) => {
       return <Cpu className="h-10 w-10" />;
   }
 };
-
 export default SolutionsSection;

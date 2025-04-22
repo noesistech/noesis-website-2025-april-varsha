@@ -162,23 +162,13 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         {products && products.length > 0 && <div className="mt-12 sm:mt-16">
             <h2 dangerouslySetInnerHTML={{
               __html: productsSection.title
-            }} className="section-title mb-2"></h2>
-            <p className="text-white/80 text-lg mb-8">
-              {productsSection.subtitle}
-            </p>
+            }} className="section-title mb-4"></h2>
+            <h3 className="text-base text-center mb-8 text-white/80 md:text-lg">{productsSection.subtitle}</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-6xl mx-auto">
                 {products.map(product => {
-                  return <AIProductCard 
-                    key={product.id} 
-                    title={product.title} 
-                    description={product.description} 
-                    logoUrl={product.logoUrl || '/placeholder.svg'} 
-                    ctaText={product.ctaText} 
-                    ctaUrl={product.ctaUrl}
-                    className="h-full"
-                  />;
-                })}
+            return <AIProductCard key={product.id} title={product.title} description={product.description} logoUrl={product.logoUrl || '/placeholder.svg'} ctaText={product.ctaText} ctaUrl={product.ctaUrl} />;
+          })}
             </div>
         </div>}
       </div>
@@ -186,3 +176,4 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
 };
 
 export default AICapabilitiesSection;
+

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
 interface AIProductCardProps {
   title: string;
@@ -11,7 +10,6 @@ interface AIProductCardProps {
   logoUrl: string;
   ctaText: string;
   ctaUrl: string;
-  className?: string;
 }
 
 const AIProductCard: React.FC<AIProductCardProps> = ({
@@ -19,8 +17,7 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
   description,
   logoUrl,
   ctaText,
-  ctaUrl,
-  className
+  ctaUrl
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -51,7 +48,7 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
     }
   }, [logoUrl, title]);
 
-  return <Card className={cn("bg-[#1E2335] border-[#2A304B] overflow-hidden h-full glass-card", className)}>
+  return <Card className="bg-[#1E2335] border-[#2A304B] overflow-hidden h-full glass-card">
       <CardContent className="p-0">
         <div className="p-5 flex flex-col h-full">
           <div className="mb-4">

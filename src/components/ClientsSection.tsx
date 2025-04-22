@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useContent } from '@/contexts/ContentContext';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -16,15 +17,10 @@ const ClientsSection = () => {
   } = useContent();
   const isMobile = useIsMobile();
 
-  return <section id="clients" className="bg-gradient-to-b from-noesis-darkest to-noesis-dark py-12 sm:py-16">
+  return <section id="clients" className="bg-gradient-to-b from-noesis-darkest to-noesis-dark py-[50px]">
       <div className="container mx-auto px-4">
         {clientsSection && <div className="text-center mb-12">
-            <h2 className="section-title mb-2">
-              <span className="text-white">Client</span> <span className="gradient-text">Testimonials</span>
-            </h2>
-            <p className="text-white/80 text-lg mb-8">
-              What our clients say about working with us
-            </p>
+            <h2 className="section-title">Testimonials</h2>
           </div>}
         
         {/* Testimonials - Carousel for mobile, grid for desktop */}

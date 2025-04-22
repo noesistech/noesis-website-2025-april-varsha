@@ -59,14 +59,4 @@ export const solutionItemsData: SolutionItem[] = [
     created_at: '',
     updated_at: '',
   },
-  {
-    id: 'solution-item-6',
-    icon_name: 'CodeXSquare',
-    title: 'App & Web Development',
-    description: 'Full-stack development combining human expertise with AI-enhanced tools for web applications, mobile apps, and enterprise solutions',
-    color: 'from-indigo-500/20 to-indigo-600/20',
-    sort_order: 6,
-    created_at: '',
-    updated_at: '',
-  },
 ];
