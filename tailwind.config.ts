@@ -138,6 +138,7 @@ const config = {
       },
       backgroundImage: {
         'rainbow-gradient': 'linear-gradient(60deg, #a074ff, #8257e6, #4ea7ff, #2fcbcf, #4ade80, #f6e05e, #f472b6, #d946ef, #a074ff)',
+        'highlight-gradient': 'linear-gradient(to right, #997aff, #987aff)',
       },
     },
   },

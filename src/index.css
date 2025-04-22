@@ -34,7 +34,7 @@
   }
   
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#997aff] to-[#987aff];
   }
   
   .glass {
