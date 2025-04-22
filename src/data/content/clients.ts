@@ -4,9 +4,10 @@ import { ClientsSection, Testimonial } from '@/types/contentTypes';
 export const clientsSectionData: ClientsSection = {
   id: 'clients-section-1',
   title: 'Testimonials',
-  clients_subtitle: '',
-  partners_subtitle: '',
-  testimonials_subtitle: 'Testimonials',
+  subtitle: 'What our clients say about us',
+  clients_subtitle: 'Trusted by industry leaders',
+  partners_subtitle: 'Our trusted partners',
+  testimonials_subtitle: 'Client success stories',
   created_at: '',
   updated_at: '',
 };

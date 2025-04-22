@@ -3,6 +3,7 @@ import { AICapability, AIProduct } from '@/components/AICapabilitiesSection';
 export const aiCapabilitiesSectionData = {
   id: 'ai-capabilities-section-1',
   title: 'Our AI Capabilities',
+  subtitle: 'Harnessing AI power for innovative solutions',
   created_at: '',
   updated_at: '',
 };

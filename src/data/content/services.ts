@@ -4,7 +4,7 @@ import { ServicesSection, ServiceItem } from '@/types/contentTypes';
 export const servicesSectionData: ServicesSection = {
   id: 'services-section-1',
   title: 'Our Services',
-  subtitle: 'Comprehensive digital solutions powered by AI and human expertise',
+  subtitle: 'Empowering businesses with AI-enhanced solutions',
   created_at: '',
   updated_at: '',
 };

@@ -43,10 +43,13 @@ export interface Stat {
 export interface MissionSection {
   id: string;
   mission_title: string;
+  mission_subtitle: string;
   mission_description: string;
   vision_title: string;
+  vision_subtitle: string;
   vision_description: string;
   promise_title: string;
+  promise_subtitle: string;
   promise_text: string;
   created_at: string;
   updated_at: string;
@@ -120,6 +123,7 @@ export interface TechCategory {
 export interface ClientsSection {
   id: string;
   title: string;
+  subtitle: string;
   clients_subtitle: string;
   partners_subtitle: string;
   testimonials_subtitle: string;
