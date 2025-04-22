@@ -1,12 +1,10 @@
 
 import React from 'react';
 import { Palette, Globe, Image, Cloud, BrainCircuit, Users } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { ServiceItem } from '@/types/supabase';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ServicesSection as ServicesSectionType } from '@/types/contentTypes';
 import { servicesSectionData } from '@/data/content/services';
-import { Card, CardContent } from '@/components/ui/card';
 
 interface ServicesSectionProps {
   title: string;
@@ -69,7 +67,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
             {servicesSectionData.subtitle}
           </p>
         )}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayServices.map(service => (
             <div 
               key={service.id} 
