@@ -66,7 +66,7 @@ export const aiCapabilitiesData: AICapability[] = [
 
 export const aiProductsSectionData = {
   id: 'ai-products-section-1',
-  title: 'Brainstormer <span class="text-white">Brainstormer</span> <span class="gradient-text">Suite</span>',
+  title: 'Brainstormer <span class="gradient-text">Suite</span>',
   subtitle: 'Our AI Products',
   created_at: '',
   updated_at: '',
