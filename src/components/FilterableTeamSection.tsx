@@ -8,7 +8,6 @@ import FounderSection from './founder/FounderSection';
 import { ScrollArea } from './ui/scroll-area';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-
 const positionGroups: Record<string, string> = {
   'Sr. Project Manager': 'Management',
   'Manager': 'Management',
@@ -29,14 +28,12 @@ const positionGroups: Record<string, string> = {
   'Renu Vishwakarma': 'Finance',
   'Sachin Bodke': 'IT & Operations'
 };
-
 const getGroupForMember = (member: any): string => {
   if (member.name === 'Urvashi Khatri') return 'Management';
   if (member.name === 'Renu Vishwakarma') return 'Finance';
   if (member.position === 'Sr. DevOps Engineer' && member.name === 'Sachin Bodke') return 'IT & Operations';
   return positionGroups[member.position] || 'Other';
 };
-
 const FilterableTeamSection = () => {
   const {
     teamSection,
@@ -45,7 +42,6 @@ const FilterableTeamSection = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [departmentGroups, setDepartmentGroups] = useState<string[]>([]);
   const isMobile = useIsMobile();
-
   useEffect(() => {
     if (teamMembers && teamMembers.length > 0) {
       const uniqueGroups = new Set<string>(['All']);
@@ -57,15 +53,12 @@ const FilterableTeamSection = () => {
       setDepartmentGroups(groupOrder.filter(g => uniqueGroups.has(g)));
     }
   }, [teamMembers]);
-
   const groupedTeamMembers = departmentGroups.reduce((acc, group) => {
     if (group === 'All') return acc;
     acc[group] = teamMembers?.filter(member => getGroupForMember(member) === group) || [];
     return acc;
   }, {} as Record<string, typeof teamMembers>);
-
   const filteredTeamMembers = selectedCategory === 'All' ? teamMembers || [] : groupedTeamMembers[selectedCategory] || [];
-
   return <section id="team" className="bg-gradient-to-b from-noesis-dark to-noesis-darker pt-16">
       <div className="container px-4 mx-auto my-0">
         <div className="text-center mb-12">
@@ -73,7 +66,7 @@ const FilterableTeamSection = () => {
             <span className="text-white">Our&nbsp;</span>
             <span className="gradient-text">{teamSection?.title?.replace(/^Our\s*/, '') || 'Team'}</span>
           </h2>
-          <p className="text-standard max-w-3xl mx-auto">
+          <p className="text-standard max-w-3xl mx-auto text-lg">
             {teamSection?.subtitle || 'Meet the talented professionals behind our success'}
           </p>
         </div>
@@ -124,5 +117,4 @@ const FilterableTeamSection = () => {
       </div>
     </section>;
 };
-
 export default FilterableTeamSection;
