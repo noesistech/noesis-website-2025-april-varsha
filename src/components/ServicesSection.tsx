@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Palette, Globe, Laptop, Cloud, BrainCircuit, Users, Code, PenTool, Database, TrendingUp, Image, ChevronDown } from 'lucide-react';
