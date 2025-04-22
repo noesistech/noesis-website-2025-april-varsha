@@ -1,4 +1,3 @@
-
 import { SolutionsSection, SolutionItem } from '@/types/contentTypes';
 
 export const solutionsSectionData: SolutionsSection = {
@@ -60,4 +59,19 @@ export const solutionItemsData: SolutionItem[] = [
     created_at: '',
     updated_at: '',
   },
+  {
+    id: 'solution-item-6',
+    icon_name: 'Code2',
+    title: 'App & Web Development',
+    description: <ul className="list-disc pl-5 space-y-1 text-white/80">
+          <li>Full-stack development combining human expertise with AI-powered code assistance</li>
+          <li>Custom web applications built with modern frameworks and AI optimization</li>
+          <li>Mobile-first responsive design approach for seamless cross-platform experiences</li>
+          <li>Integration of AI features like chatbots, recommendation systems, and personalization</li>
+        </ul>,
+    color: 'from-orange-500/20 to-orange-600/20',
+    sort_order: 6,
+    created_at: '',
+    updated_at: '',
+  }
 ];
