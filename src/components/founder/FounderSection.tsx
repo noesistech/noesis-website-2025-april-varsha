@@ -67,5 +67,5 @@ const FounderSection = () => {
       </div>
     </div>;
 };
-export default FounderSection;
 
+export default FounderSection;
