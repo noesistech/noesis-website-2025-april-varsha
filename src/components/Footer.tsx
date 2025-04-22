@@ -59,12 +59,12 @@ const Footer = () => {
             </div>
           </div>
           
-          {/* Contact Us - Combined section with Email, Phone and Location */}
+          {/* Contact Us - Improved for iPad responsiveness */}
           <div className="lg:col-span-6 order-3">
             <h3 className="text-white text-xl font-bold mb-4">Contact Us</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Email and Phone */}
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-4">
                 <a href="mailto:sales@noesis.tech" className="flex items-center gap-3 group transition-colors">
                   <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors">
                     <Mail className="h-5 w-5 text-noesis-purple" />
@@ -86,7 +86,7 @@ const Footer = () => {
                 </a>
               </div>
               
-              {/* Location - Adjusted spacing */}
+              {/* Location - Fixed formatting for iPad */}
               <div className="flex">
                 <a href="https://maps.app.goo.gl/CkqvvqT73buV1keWA" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group transition-colors">
                   <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors flex-shrink-0 mt-0.5">
@@ -94,7 +94,7 @@ const Footer = () => {
                   </div>
                   <div>
                     <p className="text-white font-medium">Visit Us</p>
-                    <p className="text-white/70 group-hover:text-white transition-colors">Unit 209, 2nd Floor, C Wing, Floral Deck Plaza, MIDC Road, Andheri (East), Mumbai 400093</p>
+                    <p className="text-white/70 group-hover:text-white transition-colors md:pr-2">Unit 209, 2nd Floor, C Wing, Floral Deck Plaza, MIDC Road, Andheri (East), Mumbai 400093</p>
                   </div>
                 </a>
               </div>

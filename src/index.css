@@ -306,7 +306,7 @@
   }
 }
 
-/* iPad specific adjustments - consistent padding */
+/* iPad specific adjustments - improved for better layout */
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .container {
     padding-left: 1.5rem;
@@ -329,6 +329,15 @@
     padding-top: var(--section-padding-y-tablet);
     padding-bottom: var(--section-padding-y-tablet);
   }
+  
+  /* Footer specific adjustments for iPad */
+  footer .grid-cols-2 {
+    column-gap: 2rem;
+  }
+  
+  footer .gap-6 {
+    gap: 1.25rem;
+  }
 }
 
 /* iPad landscape specific */
@@ -346,5 +355,38 @@
   section {
     padding-top: var(--section-padding-y);
     padding-bottom: var(--section-padding-y);
+  }
+  
+  /* Footer contact section on iPad landscape */
+  footer .lg\:col-span-6 .grid-cols-2 {
+    gap: 1.5rem;
+  }
+  
+  footer .lg\:col-span-6 .md\:grid-cols-2 > div:last-child {
+    padding-left: 0.5rem;
+  }
+}
+
+/* iPad Air and similar tablets specific fixes */
+@media only screen 
+  and (min-width: 768px) 
+  and (max-width: 920px) {
+  
+  /* Footer specific fixes for iPad Air */
+  footer .md\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  footer .lg\:col-span-6 .md\:grid-cols-2 {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  
+  footer .lg\:col-span-6 .flex-col {
+    margin-bottom: 0;
+  }
+  
+  footer .md\:pr-2 {
+    padding-right: 0;
   }
 }
