@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Brain, BrainCircuit, Microscope, Settings, Zap, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -100,26 +99,26 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
     const normalizedIconName = iconName.toLowerCase();
     switch (normalizedIconName) {
       case 'brain':
-        return <Brain className="h-8 w-8 text-[#997aff]" />;
+        return <Brain className="h-8 w-8 text-purple-400" />;
       case 'brain-circuit':
-        return <BrainCircuit className="h-8 w-8 text-[#997aff]" />;
+        return <BrainCircuit className="h-8 w-8 text-blue-400" />;
       case 'microscope':
-        return <Microscope className="h-8 w-8 text-[#997aff]" />;
+        return <Microscope className="h-8 w-8 text-pink-400" />;
       case 'settings':
-        return <Settings className="h-8 w-8 text-[#997aff]" />;
+        return <Settings className="h-8 w-8 text-yellow-400" />;
       case 'zap':
-        return <Zap className="h-8 w-8 text-[#997aff]" />;
+        return <Zap className="h-8 w-8 text-green-400" />;
       case 'bot':
-        return <Bot className="h-8 w-8 text-[#997aff]" />;
+        return <Bot className="h-8 w-8 text-orange-400" />;
       default:
         console.warn(`Icon name not recognized: ${iconName}`);
-        return <Brain className="h-8 w-8 text-[#997aff]" />;
+        return <Brain className="h-8 w-8" />;
     }
   };
   
   return (
     <section id="ai-capabilities" className="page-section relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-[#997aff]/5 to-noesis-dark/0 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <h2 className="section-title">
@@ -129,7 +128,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         <Tabs defaultValue="development" className="max-w-6xl mx-auto">
           <div className="flex justify-center mb-8 sm:mb-10 md:mb-12">
             <TabsList className="glass p-1">
-              {categories.map(category => <TabsTrigger key={category.id} value={category.id} className="px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 data-[state=active]:bg-[#997aff] data-[state=active]:text-white text-base sm:text-lg" onClick={() => setActiveTab(category.id)}>
+              {categories.map(category => <TabsTrigger key={category.id} value={category.id} className="px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 data-[state=active]:bg-noesis-purple data-[state=active]:text-white text-base sm:text-lg" onClick={() => setActiveTab(category.id)}>
                   {category.name}
                 </TabsTrigger>)}
             </TabsList>
@@ -140,7 +139,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
                 {capabilities?.filter(cap => cap.category === category.id).map((capability, index) => <div key={capability.id} ref={el => cardsRef.current[index] = el} className="glass-card opacity-0 relative overflow-hidden min-h-[200px]" style={{
               animationDelay: `${index * 100}ms`
             }}>
-                      <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", "from-[#997aff] to-[#987aff]")}></div>
+                      <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", capability.color)}></div>
                       <div className="relative z-10 p-4">
                         <div className="bg-white/10 p-2 rounded-lg w-fit mb-3">
                           {getIconByName(capability.icon)}
@@ -162,12 +161,9 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         </Tabs>
         
         {products && products.length > 0 && <div className="mt-16 sm:mt-20">
-            <h2 
-              className="section-title" 
-              dangerouslySetInnerHTML={{
-                __html: productsSection.title
-              }}
-            ></h2>
+            <h2 className="section-title" dangerouslySetInnerHTML={{
+          __html: productsSection.title
+        }}></h2>
             <h3 className="text-base md:text-base text-center mb-8 sm:mb-10 text-white/80">{productsSection.subtitle}</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-6xl mx-auto">

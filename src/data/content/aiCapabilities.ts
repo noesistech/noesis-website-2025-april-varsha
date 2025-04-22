@@ -1,3 +1,4 @@
+import { AICapability, AIProduct } from '@/components/AICapabilitiesSection';
 
 export const aiCapabilitiesSectionData = {
   id: 'ai-capabilities-section-1',
@@ -6,82 +7,61 @@ export const aiCapabilitiesSectionData = {
   updated_at: '',
 };
 
-export const aiCapabilitiesData = [
+export const aiCapabilitiesData: AICapability[] = [
   {
-    id: 'ai-cap-1',
+    id: 'nlp',
     title: 'Natural Language Processing',
     icon: 'brain',
-    description: 'Advanced NLP models for understanding and generating human language with high accuracy and context awareness.',
-    tools: ['GPT-4', 'BERT', 'Transformers', 'NER', 'Sentiment Analysis'],
-    color: 'from-[#997aff] to-[#987aff]',
+    description: 'We develop sophisticated NLP solutions that understand, interpret, and generate human language, enabling intelligent interactions between humans and machines.',
+    tools: ['GPT-4o', 'LLaMA', 'BERT', 'Transformer Models', 'Langchain', 'Semantic Search', 'RAG'],
+    color: 'from-purple-500/20 to-purple-600/20',
     category: 'development'
   },
   {
-    id: 'ai-cap-2',
+    id: 'ml',
+    title: 'Machine Learning & Deep Learning',
+    icon: 'brain-circuit',
+    description: 'Our team creates custom machine learning models that learn from data patterns to make predictions, decisions, and solve complex problems across industries.',
+    tools: ['TensorFlow', 'PyTorch', 'Scikit-Learn', 'Neural Networks', 'CNN', 'RNN', 'GANs', 'Reinforcement Learning'],
+    color: 'from-blue-500/20 to-blue-600/20',
+    category: 'development'
+  },
+  {
+    id: 'cv',
     title: 'Computer Vision',
     icon: 'microscope',
-    description: 'State-of-the-art visual recognition systems for object detection, image segmentation, and scene understanding.',
-    tools: ['CNN', 'YOLO', 'ResNet', 'OpenCV', 'TensorFlow Vision'],
-    color: 'from-[#997aff] to-[#987aff]',
+    description: 'We build systems that can interpret and understand visual information from the world, enabling applications from facial recognition to autonomous vehicles.',
+    tools: ['OpenCV', 'YOLO', 'Object Detection', 'Image Segmentation', 'Face Recognition', 'Visual SLAM'],
+    color: 'from-pink-500/20 to-pink-600/20',
     category: 'development'
   },
   {
-    id: 'ai-cap-3',
-    title: 'Reinforcement Learning',
-    icon: 'brain-circuit',
-    description: 'Sophisticated RL frameworks for training agents that learn optimal decision-making strategies through interaction.',
-    tools: ['Q-Learning', 'PPO', 'A3C', 'TensorFlow RL', 'Gym Environments'],
-    color: 'from-[#997aff] to-[#987aff]',
-    category: 'development'
-  },
-  {
-    id: 'ai-cap-4',
-    title: 'MLOps & Deployment',
+    id: 'aiops',
+    title: 'AI Operations & Engineering',
     icon: 'settings',
-    description: 'Seamless AI model deployment pipelines with monitoring, versioning, and continuous integration capabilities.',
-    tools: ['Docker', 'Kubernetes', 'TensorFlow Serving', 'MLflow', 'Prometheus'],
-    color: 'from-[#997aff] to-[#987aff]',
-    category: 'deployment'
+    description: 'Our expertise in AI operations ensures efficient development, deployment, and management of AI systems at scale with industry best practices.',
+    tools: ['MLOps', 'Model Optimization', 'Feature Engineering', 'Data Preprocessing', 'Model Evaluation'],
+    color: 'from-yellow-500/20 to-yellow-600/20',
+    category: 'development'
   },
   {
-    id: 'ai-cap-5',
-    title: 'AI Edge Computing',
+    id: 'deploy-cloud',
+    title: 'AI Cloud Deployment',
     icon: 'zap',
-    description: 'Optimized AI solutions for edge devices, enabling low-latency inference on embedded systems and IoT devices.',
-    tools: ['TensorFlow Lite', 'EdgeML', 'ONNX Runtime', 'ARM NN', 'Edge TPU'],
-    color: 'from-[#997aff] to-[#987aff]',
+    description: 'We deploy AI systems on major cloud platforms, ensuring scalability, reliability, and efficient resource utilization for production environments.',
+    tools: ['AWS SageMaker', 'Google Vertex AI', 'Azure Machine Learning', 'Docker', 'Kubernetes', 'CI/CD for ML'],
+    color: 'from-green-500/20 to-green-600/20',
     category: 'deployment'
   },
   {
-    id: 'ai-cap-6',
-    title: 'Conversational AI',
-    icon: 'bot',
-    description: 'End-to-end conversational agents and chatbot frameworks with natural dialogue capabilities and domain adaptation.',
-    tools: ['RASA', 'DialoGPT', 'BERT', 'Intent Recognition', 'Dialog Management'],
-    color: 'from-[#997aff] to-[#987aff]',
+    id: 'deploy-edge',
+    title: 'Edge AI & Embedded Systems',
+    icon: 'bot', 
+    description: 'We implement AI capabilities directly on edge devices, enabling real-time processing without cloud connectivity for IoT, mobile, and embedded systems.',
+    tools: ['TensorFlow Lite', 'ONNX', 'Edge TPU', 'Model Compression', 'Quantization', 'IoT Integration'],
+    color: 'from-orange-500/20 to-orange-600/20',
     category: 'deployment'
-  }
-];
-
-export const aiProductsData = [
-  {
-    id: 'ai-product-1',
-    title: 'Brainstormer Pro',
-    description: 'Powerful AI-driven brainstorming assistant that helps you generate and refine ideas for any creative or business project.',
-    icon: 'brain',
-    logoUrl: '/images/brainstormer-pro-logo.svg',
-    ctaUrl: '/products/brainstormer-pro',
-    ctaText: 'Learn More'
   },
-  {
-    id: 'ai-product-2',
-    title: 'Brainstormer Studio',
-    description: 'Complete AI content creation studio with advanced tools for generating, editing, and optimizing all types of digital content.',
-    icon: 'brain-circuit',
-    logoUrl: '/images/brainstormer-studio-logo.svg',
-    ctaUrl: '/products/brainstormer-studio',
-    ctaText: 'Explore Features'
-  }
 ];
 
 export const aiProductsSectionData = {
@@ -91,3 +71,24 @@ export const aiProductsSectionData = {
   created_at: '',
   updated_at: '',
 };
+
+export const aiProductsData: AIProduct[] = [
+  {
+    id: 'brainstormer-pro',
+    title: 'Brainstormer Pro',
+    description: 'Our advanced AI engine for content, marketing, and business process automation tailored for enterprise needs. Leverage Brainstormer Pro to enhance workflow and drive productivity within a secure, collaborative environment.',
+    icon: 'brain',
+    logoUrl: '/images/brainstormer-pro-logo.svg',
+    ctaUrl: '/brainstormer-pro',
+    ctaText: 'Explore Pro'
+  },
+  {
+    id: 'brainstormer-studio',
+    title: 'Brainstormer Studio',
+    description: 'Brainstormer Studio empowers you to create AI agents effortlessly. Our intuitive low-code/no-code platform is ideal for creative and enterprise environments, simplifying AI development and deployment.',
+    icon: 'sparkles',
+    logoUrl: '/images/brainstormer-studio-logo.svg',
+    ctaText: 'Try Studio',
+    ctaUrl: '/brainstormer-studio'
+  }
+];
