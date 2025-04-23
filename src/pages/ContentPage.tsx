@@ -14,6 +14,7 @@ import ClientsSection from '@/components/ClientsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import ChatBotSection from "@/components/ChatBotSection";
 
 const ContentPage: React.FC = () => {
   const { 
@@ -73,6 +74,7 @@ const ContentPage: React.FC = () => {
           teamMembers={teamMembers}
         />
         <ClientsSection />
+        <ChatBotSection />
         <ContactSection />
       </main>
       <Footer />
