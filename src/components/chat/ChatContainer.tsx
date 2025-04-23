@@ -1,0 +1,53 @@
+
+import React from 'react';
+import { useMessageContext } from '@/contexts/MessageContext';
+import Messages from './Messages';
+import MessageInput from './MessageInput';
+import EmptyMessageList from './EmptyMessageList';
+import ChatHeader from './ChatHeader';
+
+interface ChatContainerProps {
+  handlePromptClick: (text: string) => void;
+  handleMessageSend: (text: string) => void;
+  handleDrop: (files: File[]) => void;
+  onClose?: () => void;
+  embedded?: boolean;
+}
+
+const ChatContainer = ({ 
+  handlePromptClick, 
+  handleMessageSend, 
+  handleDrop,
+  onClose,
+  embedded = false
+}: ChatContainerProps) => {
+  const { messages } = useMessageContext();
+
+  return (
+    <div className={`bg-gradient-to-b from-noesis-dark to-noesis-darker border border-noesis-purple/30 rounded-lg shadow-lg ${embedded ? 'w-full' : 'w-full max-w-4xl h-[600px]'} flex flex-col overflow-hidden ${!embedded ? 'animate-fade-in' : ''}`}>
+      <ChatHeader 
+        title="Noesis AI Assistant" 
+        onClose={onClose}
+        showCloseButton={!embedded}
+      />
+      
+      <div className="flex-1 overflow-hidden flex flex-col">
+        <div className={`${embedded ? 'h-[500px]' : 'flex-1'} overflow-hidden`} onClick={(e) => e.stopPropagation()}>
+          {messages.length > 0 ? (
+            <Messages handlePromptClick={handlePromptClick} />
+          ) : (
+            <EmptyMessageList handleSuggestionClick={handlePromptClick} />
+          )}
+        </div>
+        <div className="p-3 bg-noesis-darker/50" onClick={(e) => e.stopPropagation()}>
+          <MessageInput 
+            sendMessage={handleMessageSend} 
+            handlePromptClick={handlePromptClick} 
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ChatContainer;

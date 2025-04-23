@@ -13,6 +13,7 @@ import AboutStatsSection from '../components/AboutStatsSection';
 import MissionSection from '../components/MissionSection';
 import TeamSection from '../components/TeamSection';
 import { useContent } from '@/contexts/ContentContext';
+import ChatBotSection from "@/components/ChatBotSection";
 
 const Index = () => {
   const { 
@@ -51,6 +52,7 @@ const Index = () => {
         teamMembers={teamMembers} 
       />
       <ClientsSection />
+      <ChatBotSection />
       <ContactSection />
       <Footer />
     </div>

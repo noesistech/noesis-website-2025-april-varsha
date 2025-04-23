@@ -17,6 +17,7 @@ import MissionSection from './components/MissionSection';
 import ServicesSection from './components/ServicesSection';
 import SolutionsSection from './components/SolutionsSection';
 import TechStackSection from './components/TechStackSection';
+import ChatBotSection from "@/components/ChatBotSection";
 
 function App() {
   const {
@@ -65,6 +66,7 @@ function App() {
           categories={techCategories || []} 
         />
         <ClientsSection />
+        <ChatBotSection />
         <ContactSection />
       </main>
       <Footer />

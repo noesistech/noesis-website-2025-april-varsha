@@ -79,3 +79,147 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px; /* Adjust to match the height of your fixed header */
 }
+
+@media(min-width:800px){
+  /* Custom thin scrollbar */
+  .thin-scrollbar::-webkit-scrollbar {
+    width: 10px;  /* Width of vertical scrollbar */
+    height: 10px; /* Height of horizontal scrollbar */
+  }
+
+  .thin-scrollbar::-webkit-scrollbar-thumb {
+    background: #3f3f3f; /* Color of the scrollbar thumb */
+    border-radius: 0px; /* Roundness of the scrollbar thumb */
+  }
+
+  .thin-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Darker shade on hover */
+  }
+
+  .thin-scrollbar::-webkit-scrollbar-track {
+    background: rgba(83, 83, 83, 0.2); /* Background of the scrollbar track */
+  }
+}
+/* Custom Thin Vertical Scrollbar */
+.thin-y-scrollbar {
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: thin; /* Firefox support */
+  scrollbar-color: #3f3f3f rgba(83, 83, 83, 0.2); /* Thumb and track color */
+}
+
+/* WebKit-based browsers (Chrome, Safari) */
+.thin-y-scrollbar::-webkit-scrollbar {
+  width: 10px; /* Vertical scrollbar width */
+}
+
+.thin-y-scrollbar::-webkit-scrollbar-thumb {
+  background: #3f3f3f; /* Scrollbar thumb color */
+  border-radius: 0; /* No roundness */
+}
+
+.thin-y-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker shade on hover */
+}
+
+.thin-y-scrollbar::-webkit-scrollbar-track {
+  background: rgba(83, 83, 83, 0.2); /* Track background */
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bar {
+  width: 0;
+  height: 5px;
+  background: linear-gradient(to right, #a074ff4d, #63489c4d);
+  border-radius: 5px;
+  animation: loadAnimation 0.8s infinite alternate ease-in-out;
+}
+
+.bar:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.bar:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.bar:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loadAnimation {
+  from {
+      width: 50px;
+      opacity: 0.6;
+  }
+  to {
+      width: 200px;
+      opacity: 1;
+  }
+}
+
+.markdown-text ol{
+  list-style-type: upper-greek;
+  list-style-position: inside;
+}
+
+.markdown-text ul{
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+.markdown-text code {
+  background-color: rgba(110,118,129,0.4);
+  color: inherit;
+  padding: 0.2em 0.4em;
+  white-space: break-spaces;
+  border-radius: 6px;
+}
+
+.markdown-text h1,h2,h3,h4,h5,h6{
+  margin-top: 0.5rem
+}
+.markdown-text h1 {
+  font-size: 1.8rem !important;
+}
+.markdown-text h2 {
+  font-size: 1.5rem !important;
+}
+.markdown-text h3, .markdown-text h4, .markdown-text h5   {
+  font-size: 1.2rem !important;
+  font-weight: 500 !important;
+}
+
+.markdown-text > *:first-child{
+  margin-top: 0;
+}
+
+.markdown-text > * {
+  margin-bottom: 0;
+}
+
+.markdown-text > *:last-child{
+  margin-bottom: 0;
+}
+
+.markdown-text > table:first-child{
+  margin-bottom: 0;
+}
+.markdown-text ol, .markdown-text ul {
+  margin-bottom: 15px;
+}
+.markdown-text ol li::marker, .markdown-text ul li::marker {
+  display: inline-block;
+}
+.markdown-text ol li p, .markdown-text ul li p {
+  display: initial;
+  color: #e0e0e0f2;
+  font-weight: 300;
+}
+.markdown-text ol li p strong, .markdown-text ul li p strong {
+  font-weight: 700;
+}
