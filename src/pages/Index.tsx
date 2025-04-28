@@ -9,9 +9,6 @@ import TechStackSection from '../components/TechStackSection';
 import AICapabilitiesSection from '../components/AICapabilitiesSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
-import AboutStatsSection from '../components/AboutStatsSection';
-import MissionSection from '../components/MissionSection';
-import TeamSection from '../components/TeamSection';
 import { useContent } from '@/contexts/ContentContext';
 import ChatBotSection from "@/components/ChatBotSection";
 
@@ -26,17 +23,13 @@ const Index = () => {
     aiCapabilitiesSection,
     aiCapabilities,
     aiProducts,
-    aiProductsSection,
-    teamSection,
-    teamMembers
+    aiProductsSection
   } = useContent();
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
       <HeroSection />
-      <AboutStatsSection />
-      <MissionSection />
       <ServicesSection title={servicesSection.title} services={serviceItems} />
       <SolutionsSection title={solutionsSection.title} solutions={solutionItems} />
       <TechStackSection title={techStackSection.title} categories={techCategories} />
@@ -45,11 +38,6 @@ const Index = () => {
         capabilities={aiCapabilities} 
         products={aiProducts}
         productsSection={aiProductsSection}
-      />
-      <TeamSection 
-        title={teamSection.title} 
-        subtitle={teamSection.subtitle} 
-        teamMembers={teamMembers} 
       />
       <ClientsSection />
       <ChatBotSection />

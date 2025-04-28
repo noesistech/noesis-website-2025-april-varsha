@@ -48,11 +48,7 @@ const Header = () => {
   const navStructure = [
     { 
       name: 'About',
-      subMenu: [
-        { name: 'About Us', href: '#about' },
-        { name: 'Mission & Vision', href: '#mission' },
-        { name: 'Our Team', href: '#team' }
-      ]
+      href: '/about'
     },
     { name: 'Services', href: '#services' },
     { name: 'Solutions', href: '#solutions' },
