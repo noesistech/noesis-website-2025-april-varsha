@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '../ui/button';
-import { MessageSquare, Bot } from 'lucide-react';
+import { Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface FloatingChatButtonProps {
