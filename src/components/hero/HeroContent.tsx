@@ -16,7 +16,7 @@ const HeroContent = () => {
     return () => clearTimeout(timer);
   }, []);
   
-  return <div className={`${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'} transition-all duration-700 ease-out py-0 sm:py-0`}>
+  return <div className={`${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'} transition-all duration-700 ease-out pt-16 sm:pt-20 md:py-0`}>
       <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
         {isMobile ? (
           <>

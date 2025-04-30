@@ -24,32 +24,34 @@ const Index = () => {
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-gradient-to-b from-noesis-darkest via-noesis-dark to-noesis-darker">
       <Header />
-      <HeroSection />
-      
-      {/* ChatBot Section - needed for the #chatbot anchor */}
-      <div id="chatbot">
-        <ChatBotSection />
-      </div>
-      
-      {/* About Section */}
-      <AboutSection />
-      
-      {/* Promise Section - removed extra wrapper div */}
-      <PromiseSection />
-      
-      {/* Services Preview */}
-      <section id="services-preview">
-        <ServicesPreviewSection />
-      </section>
-      
-      {/* AI Capabilities - removed separate gradient div */}
-      <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
-      
-      {/* Brainstormer Section */}
-      <BrainstormerSection products={aiProducts} />
-      
-      {/* Clients Section */}
-      <ClientsSection />
+      <main className="pt-16 sm:pt-20 md:pt-16">
+        <HeroSection />
+        
+        {/* ChatBot Section - needed for the #chatbot anchor */}
+        <div id="chatbot">
+          <ChatBotSection />
+        </div>
+        
+        {/* About Section */}
+        <AboutSection />
+        
+        {/* Promise Section - removed extra wrapper div */}
+        <PromiseSection />
+        
+        {/* Services Preview */}
+        <section id="services-preview">
+          <ServicesPreviewSection />
+        </section>
+        
+        {/* AI Capabilities - removed separate gradient div */}
+        <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
+        
+        {/* Brainstormer Section */}
+        <BrainstormerSection products={aiProducts} />
+        
+        {/* Clients Section */}
+        <ClientsSection />
+      </main>
       
       <Footer />
       <ScrollToTop />

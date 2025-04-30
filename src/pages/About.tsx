@@ -14,7 +14,7 @@ const About = () => {
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
-      <main>
+      <main className="pt-16 sm:pt-20 md:pt-16">
         <AboutStatsSection />
         <MissionSection showPromisePanel={false} />
         <TeamSection 
