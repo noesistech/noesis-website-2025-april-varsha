@@ -13,6 +13,7 @@ import Footer from '../components/Footer';
 import { useContent } from '@/contexts/ContentContext';
 import ChatBotSection from "@/components/ChatBotSection";
 import PromiseSection from "@/components/PromiseSection";
+import ServicesPreviewSection from "@/components/ServicesPreviewSection";
 
 const Index = () => {
   const { 
@@ -34,7 +35,7 @@ const Index = () => {
       <HeroSection />
       <AboutSection />
       <PromiseSection />
-      <ServicesSection title={servicesSection.title} services={serviceItems} />
+      <ServicesPreviewSection />
       <SolutionsSection title={solutionsSection.title} solutions={solutionItems} />
       <TechStackSection title={techStackSection.title} categories={techCategories} />
       <AICapabilitiesSection 
