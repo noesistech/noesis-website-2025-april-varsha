@@ -1,7 +1,9 @@
+
 import React from 'react';
 import { useContent } from '@/contexts/ContentContext';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+
 const ClientsSection = () => {
   const {
     clientsSection,
@@ -12,7 +14,9 @@ const ClientsSection = () => {
 
   // Double the logos array to create the continuous scrolling effect
   const repeatedLogos = [...clientLogos, ...clientLogos];
-  return <section id="clients" className="page-section py-16 sm:py-24 overflow-hidden relative">
+
+  return (
+    <section id="clients" className="page-section py-16 sm:py-24 overflow-hidden relative">
       {/* Background gradients similar to BrainstormerSection */}
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       <div className="absolute top-1/3 left-0 w-72 h-72 bg-noesis-purple/20 rounded-full filter blur-[120px] opacity-20"></div>
@@ -35,7 +39,7 @@ const ClientsSection = () => {
         </div>
         
         {/* Testimonials Section */}
-        {clientsSection && <div className="text-center mb-10">
+        {clientsSection && <div className="text-center mb-10 pt-6 md:pt-8">
             <h2 className="section-title py-0 my-0">
               <span className="text-white">Client</span> <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#997aff] to-[#987aff]">Testimonials</span>
             </h2>
@@ -80,6 +84,8 @@ const ClientsSection = () => {
               </div>}
           </div>}
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default ClientsSection;
