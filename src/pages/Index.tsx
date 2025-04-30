@@ -3,7 +3,6 @@ import React from 'react';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
-import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 import { useContent } from '@/contexts/ContentContext';
 import ChatBotSection from "@/components/ChatBotSection";
@@ -36,7 +35,6 @@ const Index = () => {
       <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
       <BrainstormerSection products={aiProducts} />
       <ClientsSection />
-      <ContactSection />
       <Footer />
     </div>
   );
