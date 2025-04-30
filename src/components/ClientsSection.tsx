@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useContent } from '@/contexts/ContentContext';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useDeviceType } from '@/hooks/use-mobile';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const ClientsSection = () => {
@@ -10,7 +10,10 @@ const ClientsSection = () => {
     testimonials,
     clientLogos
   } = useContent();
-  const isMobile = useIsMobile();
+  const deviceType = useDeviceType();
+  const isMobile = deviceType === 'mobile';
+  const isTablet = deviceType === 'tablet';
+  const showCarousel = isMobile || isTablet;
 
   // Double the logos array to create the continuous scrolling effect
   const repeatedLogos = [...clientLogos, ...clientLogos];
@@ -27,7 +30,7 @@ const ClientsSection = () => {
         <div className="relative overflow-hidden w-full mb-16">
           <div className="overflow-hidden">
             <div className="flex animate-[scroll_40s_linear_infinite] items-center">
-              {repeatedLogos.map((logo, index) => <div key={`${logo.id}-${index}`} className="flex-shrink-0 mx-8 w-[120px] md:w-[140px] h-[60px] flex items-center justify-center my-0">
+              {repeatedLogos.map((logo, index) => <div key={`${logo.id}-${index}`} className="flex-shrink-0 mx-4 sm:mx-6 md:mx-8 w-[100px] sm:w-[120px] md:w-[140px] h-[50px] sm:h-[60px] flex items-center justify-center my-0">
                   <img src={logo.image_url} alt={logo.name} className="max-h-full max-w-full opacity-70 hover:opacity-100 transition-opacity duration-300" />
                 </div>)}
             </div>
@@ -48,9 +51,9 @@ const ClientsSection = () => {
               </p>}
           </div>}
         
-        {/* Testimonials - Carousel for mobile, grid for desktop */}
+        {/* Testimonials - Carousel for mobile/tablet, grid for desktop */}
         {testimonials && testimonials.length > 0 && <div>
-            {isMobile ? <Carousel opts={{
+            {showCarousel ? <Carousel opts={{
           align: "center",
           loop: true
         }} className="w-full" autoplay={true} interval={6000}>

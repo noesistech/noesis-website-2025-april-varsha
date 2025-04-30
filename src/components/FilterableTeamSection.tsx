@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useContent } from '../contexts/ContentContext';
@@ -6,7 +7,7 @@ import { ToggleGroup, ToggleGroupItem } from './ui/toggle-group';
 import TeamSection from './TeamSection';
 import FounderSection from './founder/FounderSection';
 import { ScrollArea } from './ui/scroll-area';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useIsMobile, useIsTablet } from '@/hooks/use-mobile';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const positionGroups: Record<string, string> = {
@@ -45,6 +46,8 @@ const FilterableTeamSection = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [departmentGroups, setDepartmentGroups] = useState<string[]>([]);
   const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
+  const needsAccordion = isMobile || isTablet;
 
   useEffect(() => {
     if (teamMembers && teamMembers.length > 0) {
@@ -80,7 +83,7 @@ const FilterableTeamSection = () => {
 
         <FounderSection />
 
-        {isMobile ? <Accordion type="single" collapsible className="w-full mb-8">
+        {needsAccordion ? <Accordion type="single" collapsible className="w-full mb-8">
             {departmentGroups.map(group => <AccordionItem key={group} value={group}>
                 <AccordionTrigger className="text-white hover:no-underline">
                   {group}
@@ -93,7 +96,7 @@ const FilterableTeamSection = () => {
             <div className="flex justify-center mb-12">
               <Card className="bg-gradient-to-br from-gray-800/40 to-gray-900/40 backdrop-blur-sm border border-gray-700/50 p-1 overflow-hidden w-full max-w-3xl">
                 <ScrollArea className="w-full">
-                  <div className={`flex ${isMobile ? 'px-4 py-2' : ''}`}>
+                  <div className="flex px-2">
                     <ToggleGroup type="single" value={selectedCategory} onValueChange={value => value && setSelectedCategory(value)} className="flex-nowrap">
                       {departmentGroups.map(group => <ToggleGroupItem key={group} value={group} aria-label={`Filter by ${group}`} className="px-4 py-2 text-white/80 data-[state=on]:bg-noesis-purple data-[state=on]:text-white transition-colors whitespace-nowrap">
                           {group}

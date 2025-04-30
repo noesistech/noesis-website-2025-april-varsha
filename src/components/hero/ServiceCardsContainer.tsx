@@ -49,7 +49,7 @@ const serviceCards = [
     icon: <Users size={32} className={serviceIconColors['Users']} />,
     title: "Staff Augmentation",
     description: "AI-enhanced talent solutions"
-  }
+  },
 ];
 
 // Create enough copies to ensure seamless infinite scrolling
@@ -67,7 +67,7 @@ const ServiceCardsContainer = () => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
     
-    const cardHeight = isMobile ? 160 + 20 : 180 + 20; // Adjusted card height with spacing
+    const cardHeight = isMobile ? 140 + 16 : 180 + 20; // Adjusted card height with spacing for mobile
     const totalHeight = extendedServiceCards.length * cardHeight;
     const singleSetHeight = serviceCards.length * cardHeight;
     
@@ -129,12 +129,12 @@ const ServiceCardsContainer = () => {
   }, [isMobile, isVisible]);
   
   return (
-    <div className="relative h-[400px] md:h-[450px] lg:h-[500px] overflow-hidden animate-fade-in">
+    <div className="relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-[500px] overflow-hidden animate-fade-in">
       {/* We'll create a wrapper for the scroll container for better scroll management */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
           ref={scrollContainerRef} 
-          className="grid grid-cols-2 gap-x-3 sm:gap-x-4 md:gap-x-5 lg:gap-x-6 gap-y-4 sm:gap-y-5" 
+          className="grid grid-cols-2 gap-x-2 sm:gap-x-3 md:gap-x-4 lg:gap-x-6 gap-y-3 sm:gap-y-4 md:gap-y-5" 
           style={{ 
             padding: '1rem 0', 
             transform: 'translateZ(0)', // Force hardware acceleration

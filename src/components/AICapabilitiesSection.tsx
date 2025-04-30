@@ -1,9 +1,10 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Brain, BrainCircuit, Microscope, Settings, Zap, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import AIProductCard from './AIProductCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useDeviceType } from '@/hooks/use-mobile';
 import { aiCapabilitiesSectionData } from '@/data/content/aiCapabilities';
 
 export interface AICapability {
@@ -49,7 +50,10 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
 }) => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [activeTab, setActiveTab] = useState('development');
-  const isMobile = useIsMobile();
+  const deviceType = useDeviceType();
+  const isMobile = deviceType === 'mobile';
+  const isTablet = deviceType === 'tablet';
+  
   const categories = [{
     id: 'development',
     name: 'AI Development'
@@ -118,6 +122,9 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
     }
   };
 
+  // Define grid columns based on device type
+  const gridColumns = isMobile ? 'grid-cols-1' : isTablet ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-2';
+
   return <section id="ai-capabilities" className="page-section relative overflow-hidden py-12 sm:py-16">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
@@ -135,14 +142,14 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         <Tabs defaultValue="development" className="max-w-6xl mx-auto my-0 py-0">
           <div className="flex justify-center mb-8 sm:mb-10 md:mb-12">
             <TabsList className="glass p-1">
-              {categories.map(category => <TabsTrigger key={category.id} value={category.id} className="px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 data-[state=active]:bg-noesis-purple data-[state=active]:text-white text-base sm:text-lg" onClick={() => setActiveTab(category.id)}>
+              {categories.map(category => <TabsTrigger key={category.id} value={category.id} className="px-2 py-1 sm:px-4 sm:py-2 md:px-8 md:py-3 data-[state=active]:bg-noesis-purple data-[state=active]:text-white text-sm sm:text-base md:text-lg" onClick={() => setActiveTab(category.id)}>
                   {category.name}
                 </TabsTrigger>)}
             </TabsList>
           </div>
           
           {categories.map(category => <TabsContent key={category.id} value={category.id} className="animate-fade-in">
-              <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-2'} gap-4`}>
+              <div className={`grid ${gridColumns} gap-4`}>
                 {capabilities?.filter(cap => cap.category === category.id).map((capability, index) => <div key={capability.id} ref={el => cardsRef.current[index] = el} className="glass-card opacity-0 relative overflow-hidden min-h-[200px]" style={{
               animationDelay: `${index * 100}ms`
             }}>
@@ -173,7 +180,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
             }} className="section-title mb-3"></h2>
             <h3 className="text-center text-gray-300 mx-auto text-lg mb-8 md:text-lg">{productsSection.subtitle}</h3>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl mx-auto">
                 {products.map(product => {
             return <AIProductCard 
               key={product.id} 

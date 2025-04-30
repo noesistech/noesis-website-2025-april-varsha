@@ -93,6 +93,28 @@ html {
   scroll-padding-top: 80px; /* Adjust to match the height of your fixed header */
 }
 
+/* Improved responsiveness for mobile devices */
+@media (max-width: 640px) {
+  .section-title {
+    @apply text-xl sm:text-2xl;
+  }
+  
+  .section-subtitle {
+    @apply text-base;
+  }
+  
+  .page-section {
+    @apply py-8 sm:py-12;
+  }
+}
+
+/* Improved responsiveness for tablets */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .section-title {
+    @apply text-2xl sm:text-3xl;
+  }
+}
+
 @media(min-width:800px){
   /* Custom thin scrollbar */
   .thin-scrollbar::-webkit-scrollbar {
@@ -172,6 +194,20 @@ html {
   to {
       width: 200px;
       opacity: 1;
+  }
+}
+
+/* Responsive adjustments for the loader */
+@media (max-width: 640px) {
+  @keyframes loadAnimation {
+    from {
+        width: 30px;
+        opacity: 0.6;
+    }
+    to {
+        width: 120px;
+        opacity: 1;
+    }
   }
 }
 

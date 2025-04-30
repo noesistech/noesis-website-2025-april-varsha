@@ -61,7 +61,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-3 sm:px-6 md:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-5 lg:gap-10 items-center">
           <HeroContent />
-          <div className="hidden sm:block">
+          <div className="block sm:block">
             <ServiceCardsContainer />
           </div>
         </div>
