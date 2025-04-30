@@ -75,11 +75,6 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
   const handleDrop = (files: File[]) => {
     toast.info(`File functionality has been disabled.`);
   };
-  
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-    setHasInteracted(true);
-  };
 
   // Log WebSocket status changes for debugging
   useEffect(() => {
@@ -103,26 +98,10 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
     );
   }
   
-  // Floating chat UI
+  // Floating chat UI - now just showing the button that navigates to homepage chatbot section
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      {isOpen ? (
-        <Dropzone onDrop={handleDrop}>
-          <ChatContainer
-            handlePromptClick={handlePromptClick}
-            handleMessageSend={handleMessageSend}
-            handleDrop={handleDrop}
-            onClose={toggleChat}
-            embedded={false}
-            minimized={false}
-          />
-        </Dropzone>
-      ) : (
-        <FloatingChatButton 
-          onClick={toggleChat} 
-          pulseAnimation={!hasInteracted}
-        />
-      )}
+      <FloatingChatButton pulseAnimation={!hasInteracted} />
     </div>
   );
 };
