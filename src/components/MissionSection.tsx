@@ -8,7 +8,11 @@ import BackgroundPattern from './mission/BackgroundPattern';
 import MissionStyles from './mission/MissionStyles';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-const MissionSection = () => {
+interface MissionSectionProps {
+  showPromisePanel?: boolean;
+}
+
+const MissionSection = ({ showPromisePanel = true }: MissionSectionProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
 
@@ -47,11 +51,13 @@ const MissionSection = () => {
           <MissionCard title={missionSectionData.mission_title} description={missionSectionData.mission_description} />
           <VisionCard title={missionSectionData.vision_title} description={missionSectionData.vision_description} />
         </div>
-        <PromisePanel 
-          title={missionSectionData.promise_title} 
-          subtitle={missionSectionData.promise_subtitle}
-          text={missionSectionData.promise_text} 
-        />
+        {showPromisePanel && (
+          <PromisePanel 
+            title={missionSectionData.promise_title} 
+            subtitle={missionSectionData.promise_subtitle}
+            text={missionSectionData.promise_text} 
+          />
+        )}
       </div>
       <MissionStyles gridRows={gridRows} gridCols={gridCols} />
     </section>;

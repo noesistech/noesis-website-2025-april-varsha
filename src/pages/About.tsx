@@ -15,7 +15,7 @@ const About = () => {
       <Header />
       <main>
         <AboutSection />
-        <MissionSection />
+        <MissionSection showPromisePanel={false} />
         <TeamSection 
           title={teamSection.title} 
           subtitle={teamSection.subtitle} 
