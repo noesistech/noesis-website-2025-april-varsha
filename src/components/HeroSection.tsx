@@ -51,14 +51,9 @@ const HeroSection = () => {
   return (
     <div 
       ref={heroRef}
-      className={`min-h-[75vh] md:min-h-[85vh] flex flex-col justify-center relative overflow-hidden 
-        pt-4 pb-1 
-        sm:pt-4 sm:pb-1
-        md:pt-24 md:pb-1 
-        lg:pt-8 lg:pb-1 
-        font-inter`}
+      className="min-h-[85vh] md:min-h-[90vh] flex flex-col justify-center relative overflow-hidden"
       style={{
-        background: 'linear-gradient(135deg, rgba(26,31,44,1) 0%, rgba(50,30,80,1) 100%)'
+        background: 'linear-gradient(135deg, rgba(15,17,26,1) 0%, rgba(40,24,64,1) 100%)'
       }}
     >
       <HeroBackground />
@@ -72,12 +67,18 @@ const HeroSection = () => {
         </div>
       </div>
       
-      {/* Scroll arrow - adjusted position to be more visible */}
-      <div className="absolute bottom-2 sm:bottom-3 left-0 right-0 flex justify-center animate-bounce z-20">
-        <a href="#about" className="text-white/70 hover:text-white transition-colors bg-noesis-dark/40 p-2 rounded-full backdrop-blur-sm">
+      {/* Scroll arrow with enhanced styling */}
+      <div className="absolute bottom-4 left-0 right-0 flex justify-center animate-bounce z-20">
+        <a 
+          href="#about" 
+          className="text-white/70 hover:text-white transition-colors bg-noesis-dark/40 p-2 rounded-full backdrop-blur-sm shadow-lg border border-white/10 hover:border-white/20"
+        >
           <ArrowDown className="h-5 w-5 sm:h-6 sm:w-6" />
         </a>
       </div>
+      
+      {/* Gradient transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-noesis-darker to-transparent"></div>
     </div>
   );
 };

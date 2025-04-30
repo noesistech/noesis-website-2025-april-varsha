@@ -1,6 +1,5 @@
 
 import React, { useRef, useEffect } from 'react';
-import { missionSectionData } from '@/data/content/mission';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const PromiseSection = () => {
@@ -41,16 +40,22 @@ const PromiseSection = () => {
   }, [isMobile]);
 
   return (
-    <section className="page-section relative overflow-hidden bg-noesis-dark py-16 sm:py-24">
+    <section className="relative overflow-hidden py-16 sm:py-24">
+      {/* Background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-1/4 w-72 h-72 bg-noesis-purple/10 rounded-full filter blur-[80px]"></div>
+        <div className="absolute bottom-0 left-1/4 w-60 h-60 bg-noesis-blue/10 rounded-full filter blur-[60px]"></div>
+      </div>
+      
       <div className="container mx-auto px-6 relative z-10 text-center">
         <h2 className="mb-10 text-4xl md:text-5xl font-bold">
-          <span>Our </span><span className="text-noesis-purple">Promise</span>
+          <span className="text-white">Our </span><span className="text-noesis-purple">Promise</span>
         </h2>
         
         <div className="max-w-3xl mx-auto">
           <div 
             ref={promiseCardRef}
-            className="bg-[#2A2F3C]/70 backdrop-blur-sm rounded-xl p-8 md:p-10 transition-transform duration-300 ease-out"
+            className="bg-[#2A2F3C]/70 backdrop-blur-sm rounded-xl p-8 md:p-10 transition-transform duration-300 ease-out shadow-xl border border-white/5 hover:border-white/10"
           >
             <p className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide text-white">
               <span>Human </span>
