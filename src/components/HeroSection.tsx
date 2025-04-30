@@ -67,10 +67,10 @@ const HeroSection = () => {
         </div>
       </div>
       
-      {/* Scroll arrow with enhanced styling */}
+      {/* Scroll arrow with enhanced styling - Updated href to point to chatbot section */}
       <div className="absolute bottom-4 left-0 right-0 flex justify-center animate-bounce z-20">
         <a 
-          href="#about" 
+          href="#chatbot" 
           className="text-white/70 hover:text-white transition-colors bg-noesis-dark/40 p-2 rounded-full backdrop-blur-sm shadow-lg border border-white/10 hover:border-white/20"
         >
           <ArrowDown className="h-5 w-5 sm:h-6 sm:w-6" />
