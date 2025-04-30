@@ -25,13 +25,13 @@ const Index = () => {
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
       <HeroSection />
+      <ChatBotSection />
       <AboutSection />
       <PromiseSection />
       <ServicesPreviewSection />
       <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
       <BrainstormerSection products={aiProducts} />
       <ClientsSection />
-      <ChatBotSection />
       <ContactSection />
       <Footer />
     </div>

@@ -8,9 +8,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 interface MessageInputProps {
   sendMessage: (text: string) => void;
   handlePromptClick: (text: string) => void;
+  customPrompts?: string[];
 }
 
-const MessageInput = ({ sendMessage, handlePromptClick }: MessageInputProps) => {
+const MessageInput = ({ sendMessage, handlePromptClick, customPrompts = [] }: MessageInputProps) => {
   const [message, setMessage] = useState('');
   const { 
     isTyping, 
@@ -78,31 +79,34 @@ const MessageInput = ({ sendMessage, handlePromptClick }: MessageInputProps) => 
     ? 'bg-noesis-purple text-white'
     : 'bg-gray-800/50 text-gray-500';
 
-  const displayPrompts = prompts && prompts.length > 0 
-    ? prompts.slice(0, 4) 
-    : [
-      "What AI services do you offer?",
-      "How can AI improve my business processes?",
-      "Tell me about your tech stack",
-      "What makes Noesis different from other agencies?"
-    ];
+  // Determine which prompts to display
+  const displayPrompts = customPrompts.length > 0 
+    ? customPrompts 
+    : prompts && prompts.length > 0 
+      ? prompts.slice(0, 4) 
+      : [
+          "What AI services do you offer?",
+          "How can AI improve my business processes?",
+          "Tell me about your tech stack",
+          "What makes Noesis different from other agencies?"
+        ];
 
   return (
     <div className="relative">
-     
-      {(!message || message.length < 2) && (displayPrompts.length > 0 && displayPrompts.some(p => (p && p["Question"])))  && (
-        
-        <div className="thin-scrollbar absolute -top-12 left-0 right-0 flex overflow-auto gap-2 px-2 py-2 z-10 bg-noesis-darker/95 backdrop-blur-md rounded border-noesis-purple/30 shadow-lg mb-4">
-         {displayPrompts.map((prompt, index) => 
-            <button
-              key={index}
-              onClick={() => handlePromptClick(typeof prompt === "object" && prompt ? prompt["Question"] : prompt)}
-              className="px-3 pt-[4px] py-[6px] bg-white/10 hover:bg-white/20 rounded-full text-sm sm:text-md text-white/90 transition-colors whitespace-nowrap"
-              disabled={isDisabled}
-            >
-              {typeof prompt === "object" && prompt ? prompt["Question"] : prompt}
-            </button>
-          )}
+      {(!message || message.length < 2) && displayPrompts.length > 0 && (
+        <div className="thin-scrollbar overflow-x-auto gap-2 px-2 py-2 mb-4">
+          <div className="flex flex-wrap gap-2 mb-3">
+            {displayPrompts.map((prompt, index) => (
+              <button
+                key={index}
+                onClick={() => handlePromptClick(typeof prompt === "object" && prompt ? prompt["Question"] : prompt)}
+                className="px-3 pt-[4px] py-[6px] bg-white/10 hover:bg-white/20 rounded-full text-sm sm:text-md text-white/90 transition-colors whitespace-nowrap"
+                disabled={isDisabled}
+              >
+                {typeof prompt === "object" && prompt ? prompt["Question"] : prompt}
+              </button>
+            ))}
+          </div>
         </div>
       )}
       

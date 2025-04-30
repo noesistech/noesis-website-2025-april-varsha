@@ -10,13 +10,16 @@ const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
   const { prompts, connectWebsocket } = useMessageContext();
 
   const defaultPrompts = [
-    "What AI services do you offer?",
-    "How can AI improve my business processes?",
-    "Tell me about your tech stack",
-    "What makes Noesis different from other agencies?"
+    "What services does Noesis offer?",
+    "How can I join the Noesis team?",
+    "I'm interested in partnering with Noesis",
+    "Tell me about your AI & Cloud solutions",
+    "How can I contact the team?",
+    "What makes Noesis different?",
+    "Show me recent success stories"
   ];
 
-  const displayPrompts = prompts && prompts.length > 0 ? prompts.slice(0, 4) : defaultPrompts;
+  const displayPrompts = prompts && prompts.length > 0 ? prompts.slice(0, 7) : defaultPrompts;
 
   return (
     <div className="flex flex-col h-full justify-center items-center px-4">

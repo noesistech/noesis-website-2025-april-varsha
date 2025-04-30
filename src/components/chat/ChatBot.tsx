@@ -10,9 +10,10 @@ import useChatWebSocket from '@/hooks/useChatWebSocket';
 
 interface ChatBotProps {
   embedded?: boolean;
+  minimized?: boolean;
 }
 
-const ChatBot = ({ embedded = false }: ChatBotProps) => {
+const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
   const { 
     messages, 
     setMessages, 
@@ -25,6 +26,7 @@ const ChatBot = ({ embedded = false }: ChatBotProps) => {
   } = useMessageContext();
   
   const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(!minimized);
   
   // Initialize chat setup (bot info, chat history, etc.)
   useChatSetup();
@@ -36,6 +38,11 @@ const ChatBot = ({ embedded = false }: ChatBotProps) => {
     if (isTyping || messageStreaming || !text.trim()) {
       console.log("Message not sent due to conditions:", { isTyping, messageStreaming, emptyText: !text.trim() });
       return;
+    }
+    
+    // Expand the chat interface if it's minimized
+    if (!isExpanded) {
+      setIsExpanded(true);
     }
     
     // Add user message to the chat
@@ -85,6 +92,7 @@ const ChatBot = ({ embedded = false }: ChatBotProps) => {
             handleMessageSend={handleMessageSend}
             handleDrop={handleDrop}
             embedded={true}
+            minimized={!isExpanded}
           />
         </Dropzone>
       </div>
@@ -102,6 +110,7 @@ const ChatBot = ({ embedded = false }: ChatBotProps) => {
             handleDrop={handleDrop}
             onClose={toggleChat}
             embedded={false}
+            minimized={false}
           />
         </Dropzone>
       ) : (
