@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import Sketch from 'react-p5';
 import p5Types from 'p5';
@@ -11,15 +10,15 @@ interface P5AnimationProps {
 const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
   // Track the container size for responsive canvas
   const containerRef = useRef<HTMLDivElement>(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const [dimensions, setDimensions] = useState({ width: 300, height: 500 });
   const isMobile = useIsMobile();
   
   // Update dimensions when container size changes
   useEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
-        const containerWidth = containerRef.current.offsetWidth;
-        let containerHeight = containerRef.current.offsetHeight;
+        const containerWidth = containerRef.current.offsetWidth || 300;
+        let containerHeight = containerRef.current.offsetHeight || 500;
         
         // On mobile, limit the height to 50vh maximum
         if (isMobile && containerHeight > window.innerHeight * 0.5) {
@@ -39,9 +38,23 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
     // Add resize listener
     window.addEventListener('resize', updateDimensions);
     
+    // Use MutationObserver to watch for size changes in parent container
+    const observer = new MutationObserver(updateDimensions);
+    if (containerRef.current?.parentElement) {
+      observer.observe(containerRef.current.parentElement, { 
+        attributes: true, 
+        attributeFilter: ['style']
+      });
+    }
+    
+    // Use a setTimeout to ensure the component has time to render properly
+    const initialSizeTimeout = setTimeout(updateDimensions, 100);
+    
     // Cleanup
     return () => {
       window.removeEventListener('resize', updateDimensions);
+      observer.disconnect();
+      clearTimeout(initialSizeTimeout);
     };
   }, [isMobile]);
   
@@ -59,7 +72,7 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
 
   const setup = (p5: p5Types, canvasParentRef: Element) => {
     // Create responsive canvas that fills its container
-    const canvas = p5.createCanvas(dimensions.width || 800, dimensions.height || 500).parent(canvasParentRef);
+    const canvas = p5.createCanvas(dimensions.width, dimensions.height).parent(canvasParentRef);
     canvas.class(className || '');
     
     // Initialize particles
@@ -190,4 +203,3 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
 };
 
 export default P5Animation;
-

@@ -15,29 +15,43 @@ const AboutSection = () => {
       if (rightContainerRef.current && leftContainerRef.current) {
         const rightHeight = rightContainerRef.current.offsetHeight;
         leftContainerRef.current.style.height = `${rightHeight}px`;
+        console.log("Adjusted height to:", rightHeight);
       }
     };
 
-    // Initial adjustment
-    adjustHeight();
+    // Initial adjustment with a slight delay to ensure content is rendered
+    const initialTimer = setTimeout(adjustHeight, 100);
     
     // Listen for window resize to readjust
     window.addEventListener('resize', adjustHeight);
     
+    // Setup a mutation observer to track content changes in the right container
+    const observer = new MutationObserver(adjustHeight);
+    if (rightContainerRef.current) {
+      observer.observe(rightContainerRef.current, { 
+        childList: true, 
+        subtree: true,
+        characterData: true
+      });
+    }
+    
     // Cleanup listener on unmount
     return () => {
       window.removeEventListener('resize', adjustHeight);
+      clearTimeout(initialTimer);
+      observer.disconnect();
     };
   }, []);
 
   return (
     <section id="about" className="relative py-20 bg-noesis-dark overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           {/* Left side - P5 Animation */}
           <div 
             ref={leftContainerRef}
             className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden animate-fade-in"
+            style={{ minHeight: '500px' }}
           >
             <P5Animation className="w-full h-full absolute inset-0" />
             <div className="absolute inset-0 grid-pattern opacity-20"></div>
