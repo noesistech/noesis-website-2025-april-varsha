@@ -77,8 +77,8 @@ const HeroSection = () => {
         </a>
       </div>
       
-      {/* Gradient transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-noesis-darker to-transparent"></div>
+      {/* Enhanced gradient transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-noesis-darker to-transparent"></div>
     </div>
   );
 };

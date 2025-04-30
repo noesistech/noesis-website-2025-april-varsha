@@ -25,33 +25,23 @@ const Index = () => {
       <Header />
       <HeroSection />
       
-      {/* ChatBot Section with smoother transition */}
-      <div className="bg-gradient-to-b from-noesis-darker to-noesis-dark py-12">
-        <div className="container mx-auto px-4 xl:px-8 2xl:px-16">
-          <ChatBotSection />
-        </div>
-      </div>
+      {/* ChatBot Section - removed separate gradient div to make transition seamless */}
+      <ChatBotSection />
       
       {/* About Section */}
       <AboutSection />
       
-      {/* Promise Section */}
-      <div className="bg-gradient-to-b from-noesis-dark to-noesis-darker">
-        <PromiseSection />
-      </div>
+      {/* Promise Section - removed extra wrapper div */}
+      <PromiseSection />
       
       {/* Services Preview */}
       <ServicesPreviewSection />
       
-      {/* AI Capabilities with improved transition */}
-      <div className="bg-gradient-to-b from-noesis-darker to-noesis-dark">
-        <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
-      </div>
+      {/* AI Capabilities - removed separate gradient div */}
+      <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
       
       {/* Brainstormer Section */}
-      <div className="bg-gradient-to-b from-noesis-dark to-noesis-darkest">
-        <BrainstormerSection products={aiProducts} />
-      </div>
+      <BrainstormerSection products={aiProducts} />
       
       {/* Clients Section */}
       <ClientsSection />

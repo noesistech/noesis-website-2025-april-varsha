@@ -5,8 +5,8 @@ import { MessageProvider } from '@/contexts/MessageContext';
 
 const ChatBotSection = () => {
   return (
-    <section id="chatbot" className="py-10 bg-gradient-to-b from-noesis-darkest to-noesis-dark">
-      <div className="container mx-auto px-4">
+    <section id="chatbot" className="bg-gradient-to-b from-noesis-darker to-noesis-dark py-10">
+      <div className="container mx-auto px-4 xl:px-8 2xl:px-16">
         <div className="mb-8 text-center">
           <h2 className="section-title">Experience <span className="gradient-text">Noesis AI Assistant</span></h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mt-4">

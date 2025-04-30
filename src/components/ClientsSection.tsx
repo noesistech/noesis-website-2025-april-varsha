@@ -108,8 +108,7 @@ const ClientsSection = () => {
         )}
       </div>
       
-      {/* Bottom gradient for smooth transition to footer */}
-      <div className="h-16 bg-gradient-to-b from-transparent to-noesis-darkest mt-10"></div>
+      {/* Removed the bottom extra space */}
     </section>
   );
 };
