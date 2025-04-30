@@ -5,22 +5,19 @@ import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import ServicesSection from '../components/ServicesSection';
 import ClientsSection from '../components/ClientsSection';
-import AICapabilitiesSection from '../components/AICapabilitiesSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 import { useContent } from '@/contexts/ContentContext';
 import ChatBotSection from "@/components/ChatBotSection";
 import PromiseSection from "@/components/PromiseSection";
 import ServicesPreviewSection from "@/components/ServicesPreviewSection";
+import AICapabilitiesPreviewSection from "@/components/AICapabilitiesPreviewSection";
 
 const Index = () => {
   const { 
     servicesSection, 
-    serviceItems, 
-    aiCapabilitiesSection,
-    aiCapabilities,
-    aiProducts,
-    aiProductsSection
+    serviceItems,
+    aiCapabilities
   } = useContent();
 
   return (
@@ -30,12 +27,7 @@ const Index = () => {
       <AboutSection />
       <PromiseSection />
       <ServicesPreviewSection />
-      <AICapabilitiesSection 
-        title={aiCapabilitiesSection.title} 
-        capabilities={aiCapabilities} 
-        products={aiProducts}
-        productsSection={aiProductsSection}
-      />
+      <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
       <ClientsSection />
       <ChatBotSection />
       <ContactSection />

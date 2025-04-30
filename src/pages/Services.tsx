@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Button } from '@/components/ui/button';
@@ -8,9 +8,33 @@ import { useContent } from '@/contexts/ContentContext';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { getIconByName } from '@/components/hero/ServiceCard';
 import TechStackSection from '@/components/TechStackSection';
+import AICapabilitiesSection from '@/components/AICapabilitiesSection';
+import { useLocation } from 'react-router-dom';
 
 const Services = () => {
-  const { serviceItems, servicesSection, techStackSection, techCategories } = useContent();
+  const { 
+    serviceItems, 
+    servicesSection, 
+    techStackSection, 
+    techCategories,
+    aiCapabilitiesSection,
+    aiCapabilities,
+    aiProducts,
+    aiProductsSection
+  } = useContent();
+  
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check if there's a hash in the URL and scroll to that element
+    if (location.hash) {
+      const id = location.hash.substring(1); // remove the # character
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
@@ -57,6 +81,14 @@ const Services = () => {
             </div>
           </div>
         </section>
+        
+        {/* AI Capabilities Section */}
+        <AICapabilitiesSection 
+          title={aiCapabilitiesSection.title} 
+          capabilities={aiCapabilities} 
+          products={aiProducts}
+          productsSection={aiProductsSection}
+        />
         
         {/* Technology Stack Section */}
         <TechStackSection 
