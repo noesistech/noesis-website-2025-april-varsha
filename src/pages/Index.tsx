@@ -5,12 +5,12 @@ import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import Footer from '../components/Footer';
 import { useContent } from '@/contexts/ContentContext';
-import ChatBotSection from "@/components/ChatBotSection";
 import PromiseSection from "@/components/PromiseSection";
 import ServicesPreviewSection from "@/components/ServicesPreviewSection";
 import AICapabilitiesPreviewSection from "@/components/AICapabilitiesPreviewSection";
 import BrainstormerSection from "@/components/BrainstormerSection";
 import ClientsSection from "../components/ClientsSection";
+import ChatBotSection from "@/components/ChatBotSection";
 
 const Index = () => {
   const { 
@@ -25,8 +25,10 @@ const Index = () => {
       <Header />
       <HeroSection />
       
-      {/* ChatBot Section - removed separate gradient div to make transition seamless */}
-      <ChatBotSection />
+      {/* ChatBot Section - needed for the #chatbot anchor */}
+      <div id="chatbot">
+        <ChatBotSection />
+      </div>
       
       {/* About Section */}
       <AboutSection />

@@ -27,6 +27,7 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
   
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(!minimized);
+  const [hasInteracted, setHasInteracted] = useState(false);
   
   // Initialize chat setup (bot info, chat history, etc.)
   useChatSetup();
@@ -44,6 +45,8 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
     if (!isExpanded) {
       setIsExpanded(true);
     }
+    
+    setHasInteracted(true);
     
     // Add user message to the chat
     setMessages(prev => [...prev, { role: 'user', content: text }]);
@@ -75,6 +78,7 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
   
   const toggleChat = () => {
     setIsOpen(!isOpen);
+    setHasInteracted(true);
   };
 
   // Log WebSocket status changes for debugging
@@ -114,7 +118,10 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
           />
         </Dropzone>
       ) : (
-        <FloatingChatButton onClick={toggleChat} />
+        <FloatingChatButton 
+          onClick={toggleChat} 
+          pulseAnimation={!hasInteracted}
+        />
       )}
     </div>
   );
