@@ -66,10 +66,10 @@ const AICapabilitiesPreviewSection: React.FC<AICapabilitiesPreviewSectionProps> 
         
         <div className="text-center">
           <Button 
-            variant="animated" 
+            variant="noesis" 
             size="lg" 
             asChild
-            className="bg-gradient-to-r from-noesis-purple/80 to-noesis-blue/80 hover:from-noesis-purple hover:to-noesis-blue text-base font-medium"
+            className="shadow-lg hover:shadow-noesis-purple/50"
           >
             <Link to="/services#ai-capabilities" className="inline-flex items-center gap-2">
               Explore Our AI Capabilities <ArrowRight className="h-4 w-4" />
