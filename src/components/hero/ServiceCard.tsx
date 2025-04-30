@@ -20,27 +20,41 @@ interface ServiceCardProps {
   isVisible: boolean;
 }
 
-// Helper function to map icon names to actual icon components
+// Define service icon colors for consistent usage
+export const serviceIconColors = {
+  'Palette': 'text-noesis-blue',
+  'Globe': 'text-noesis-green',
+  'Image': 'text-noesis-yellow',
+  'Cloud': 'text-pink-400',
+  'Server': 'text-pink-400',
+  'BrainCircuit': 'text-noesis-purple',
+  'Code': 'text-noesis-blue',
+  'Users': 'text-orange-400',
+};
+
+// Helper function to map icon names to actual icon components with appropriate colors
 export const getIconByName = (iconName: string): React.ReactNode => {
+  const colorClass = serviceIconColors[iconName as keyof typeof serviceIconColors] || 'text-noesis-purple';
+  
   switch (iconName) {
     case 'BrainCircuit':
-      return <BrainCircuit size={24} className="text-white" />;
+      return <BrainCircuit size={24} className={colorClass} />;
     case 'Code':
-      return <Code size={24} className="text-white" />;
+      return <Code size={24} className={colorClass} />;
     case 'PaletteIcon':
     case 'Palette':
-      return <Palette size={24} className="text-white" />;
+      return <Palette size={24} className={colorClass} />;
     case 'Server':
     case 'Cloud':
-      return <Server size={24} className="text-white" />;
+      return <Server size={24} className={colorClass} />;
     case 'Globe':
-      return <Globe size={24} className="text-white" />;
+      return <Globe size={24} className={colorClass} />;
     case 'Users':
-      return <Users size={24} className="text-white" />;
+      return <Users size={24} className={colorClass} />;
     case 'Image':
-      return <Image size={24} className="text-white" />;
+      return <Image size={24} className={colorClass} />;
     default:
-      return <BrainCircuit size={24} className="text-white" />;
+      return <BrainCircuit size={24} className={colorClass} />;
   }
 };
 

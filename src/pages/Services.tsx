@@ -6,20 +6,10 @@ import { Button } from '@/components/ui/button';
 import { ChevronRight, Package, ArrowRight } from 'lucide-react';
 import { useContent } from '@/contexts/ContentContext';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { getIconByName } from '@/components/hero/ServiceCard';
+import { getIconByName, serviceIconColors } from '@/components/hero/ServiceCard';
 import TechStackSection from '@/components/TechStackSection';
 import AICapabilitiesSection from '@/components/AICapabilitiesSection';
 import { useLocation } from 'react-router-dom';
-
-// Define service card colors - matching the ones in ServicesPreviewSection
-const serviceColors = {
-  'Palette': 'text-noesis-blue',
-  'Globe': 'text-noesis-green',
-  'Image': 'text-noesis-yellow',
-  'Cloud': 'text-pink-400',
-  'BrainCircuit': 'text-noesis-purple',
-  'Users': 'text-orange-400',
-};
 
 const Services = () => {
   const { 
@@ -76,7 +66,7 @@ const Services = () => {
                 <Card key={service.id} className="bg-[#222732] border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
                   <CardContent className="pt-6">
                     <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
-                      <div className={`${serviceColors[service.icon_name as keyof typeof serviceColors] || 'text-noesis-purple'}`}>
+                      <div className={`${serviceIconColors[service.icon_name as keyof typeof serviceIconColors] || 'text-noesis-purple'}`}>
                         {getIconByName(service.icon_name)}
                       </div>
                     </div>

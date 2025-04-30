@@ -1,6 +1,6 @@
 
 import React, { useRef, useEffect, useState } from 'react';
-import ServiceCard from './ServiceCard';
+import ServiceCard, { serviceIconColors } from './ServiceCard';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { 
   BrainCircuit, 
@@ -16,12 +16,12 @@ import {
 // Define our service cards data with more explicit icon rendering
 const serviceCards = [
   {
-    icon: <BrainCircuit size={32} className="text-noesis-purple" />,
+    icon: <BrainCircuit size={32} className={serviceIconColors['BrainCircuit']} />,
     title: "AI Solutions",
     description: "Next-gen intelligent experiences"
   },
   {
-    icon: <Code size={32} className="text-noesis-blue" />,
+    icon: <Code size={32} className={serviceIconColors['Code']} />,
     title: "Web Development",
     description: "AI-powered digital experiences"
   },
@@ -31,22 +31,22 @@ const serviceCards = [
     description: "Human-centered, AI-enhanced"
   },
   {
-    icon: <Server size={32} className="text-pink-400" />,
+    icon: <Server size={32} className={serviceIconColors['Server']} />,
     title: "Cloud Services",
     description: "AI-optimized infrastructure"
   },
   {
-    icon: <Palette size={32} className="text-noesis-green" />,
+    icon: <Palette size={32} className={serviceIconColors['Palette']} />,
     title: "Creative Design",
     description: "Human creativity, AI precision"
   },
   {
-    icon: <Image size={32} className="text-noesis-yellow" />,
+    icon: <Image size={32} className={serviceIconColors['Image']} />,
     title: "Digital Marketing",
     description: "Data-driven, AI-powered growth"
   },
   {
-    icon: <Users size={32} className="text-orange-400" />,
+    icon: <Users size={32} className={serviceIconColors['Users']} />,
     title: "Staff Augmentation",
     description: "AI-enhanced talent solutions"
   }
