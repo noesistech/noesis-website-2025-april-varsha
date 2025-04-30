@@ -2,28 +2,32 @@
 import React, { useRef, useEffect } from 'react';
 import { Users, Award, Clock, Percent } from 'lucide-react';
 import P5Animation from './P5Animation';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { useContent } from '@/contexts/ContentContext';
 
 const AboutSection = () => {
   const { aboutSection, stats } = useContent();
 
   return (
-    <section id="about" className="py-20 relative bg-noesis-dark overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-noesis-dark/90 to-noesis-dark/0 pointer-events-none"></div>
-      
-      <div className="container mx-auto">
-        <h2 className="section-title">About <span className="gradient-text">Noesis</span></h2>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-16">
+    <section id="about" className="relative py-20 bg-noesis-dark overflow-hidden">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          {/* Left side - P5 Animation */}
           <div className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden animate-fade-in" style={{ minHeight: '500px' }}>
             <P5Animation className="w-full h-full absolute inset-0" />
+            <div className="absolute inset-0 grid-pattern opacity-20"></div>
           </div>
           
-          <div>
-            <h3 className="text-2xl md:text-3xl font-bold mb-6 animate-fade-in">
-              Evolving Since <span className="gradient-text">2009</span>, Leading in AI Today
-            </h3>
+          {/* Right side - Content */}
+          <div className="space-y-8">
+            {/* Heading */}
+            <div className="space-y-2">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight animate-fade-in">
+                Evolving Since <span className="text-purple-400">2009</span>, Leading in AI Today
+              </h2>
+              <div className="h-1 w-24 bg-purple-500 rounded-full animate-fade-in"></div>
+            </div>
+            
+            {/* Description paragraphs */}
             <div className="space-y-4">
               <p className="text-white/80 animate-fade-in" style={{ animationDelay: '0.2s' }}>
                 Our 40+ member team combines talented human experts with cutting-edge AI tools to deliver solutions that blend the best of human creativity and artificial intelligence.
@@ -35,34 +39,51 @@ const AboutSection = () => {
                 Our 95% client retention rate and 4+ year average relationships demonstrate how our unique AI-human partnership approach consistently delivers breakthrough solutions that exceed expectations.
               </p>
             </div>
+            
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 gap-4">
+              {stats.map((stat, index) => (
+                <StatCard 
+                  key={stat.id}
+                  icon={getIconComponent(stat.icon_name)}
+                  value={stat.value}
+                  label={stat.label}
+                  delay={`${0.3 + (index * 0.1)}s`}
+                />
+              ))}
+            </div>
           </div>
         </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {stats.map((stat, index) => (
-            <StatCard 
-              key={stat.id}
-              icon={
-                stat.icon_name === 'Users' ? <Users className="h-6 w-6 text-noesis-purple" /> :
-                stat.icon_name === 'Trophy' ? <Award className="h-6 w-6 text-noesis-blue" /> :
-                stat.icon_name === 'Calendar' ? <Clock className="h-6 w-6 text-purple-400" /> :
-                <Percent className="h-6 w-6 text-pink-400" />
-              }
-              value={stat.id === 'stat-3' ? "> 4 Years" : stat.value}
-              label={stat.label}
-              delay={`${0.2 * (index + 1)}s`}
-            />
-          ))}
-        </div>
       </div>
-      
-      {/* Bottom gradient for smooth transition to next section */}
-      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-b from-noesis-dark/0 to-noesis-dark pointer-events-none"></div>
     </section>
   );
 };
 
-const StatCard = ({ icon, value, label, delay }: { icon: React.ReactNode, value: string, label: string, delay: string }) => {
+const getIconComponent = (iconName: string) => {
+  switch (iconName) {
+    case 'Users':
+      return <Users className="h-6 w-6 text-purple-400" />;
+    case 'Trophy':
+      return <Award className="h-6 w-6 text-purple-400" />;
+    case 'Calendar':
+      return <Clock className="h-6 w-6 text-purple-400" />;
+    case 'Percent':
+    default:
+      return <Percent className="h-6 w-6 text-purple-400" />;
+  }
+};
+
+const StatCard = ({ 
+  icon, 
+  value, 
+  label, 
+  delay 
+}: { 
+  icon: React.ReactNode, 
+  value: string, 
+  label: string, 
+  delay: string 
+}) => {
   const counterRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -71,47 +92,30 @@ const StatCard = ({ icon, value, label, delay }: { icon: React.ReactNode, value:
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const target = entry.target as HTMLElement;
+            const displayValue = target.getAttribute('data-value') || '0';
             
-            // Special case handling for values with ">"
-            if (value.includes('>')) {
-              // Extract only numeric part for the counter
-              const numericPart = value.replace(/[^0-9]/g, '');
-              const countTo = parseInt(numericPart, 10);
-              let count = 0;
-              const increment = Math.ceil(countTo / 50);
-              
-              const updateCount = () => {
-                count += increment;
-                if (count < countTo) {
-                  target.textContent = "> " + count.toString() + (value.includes('Year') ? ' Years' : '');
-                  requestAnimationFrame(updateCount);
-                } else {
-                  target.textContent = value;
-                }
-              };
-              
-              requestAnimationFrame(updateCount);
-            } else {
-              // Original logic for normal numbers
-              const numericValue = target.getAttribute('data-numeric-value') || '0';
-              const countTo = parseInt(numericValue, 10);
-              const suffix = target.getAttribute('data-suffix') || '';
-              let count = 0;
-              const increment = Math.ceil(countTo / 50);
-              
-              const updateCount = () => {
-                count += increment;
-                if (count < countTo) {
-                  target.textContent = count.toString() + suffix;
-                  requestAnimationFrame(updateCount);
-                } else {
-                  target.textContent = numericValue + suffix;
-                }
-              };
-              
-              requestAnimationFrame(updateCount);
+            if (displayValue.includes('>')) {
+              target.textContent = displayValue;
+              observer.unobserve(target);
+              return;
             }
             
+            const countTo = parseInt(displayValue.replace(/\D/g, ''), 10);
+            let count = 0;
+            const increment = Math.ceil(countTo / 30);
+            const suffix = displayValue.includes('+') ? '+' : '';
+            
+            const updateCount = () => {
+              count += increment;
+              if (count < countTo) {
+                target.textContent = count + suffix;
+                requestAnimationFrame(updateCount);
+              } else {
+                target.textContent = displayValue;
+              }
+            };
+            
+            requestAnimationFrame(updateCount);
             observer.unobserve(target);
           }
         });
@@ -130,27 +134,22 @@ const StatCard = ({ icon, value, label, delay }: { icon: React.ReactNode, value:
     };
   }, [value]);
   
-  // Extract numeric and non-numeric parts for data attributes
-  const numericValue = value.replace(/[^0-9]/g, '');
-  const suffix = value.replace(/[0-9]/g, '');
-  
   return (
-    <div className={`glass-card animate-fade-in w-full`} style={{ animationDelay: delay }}>
-      <div className="flex flex-col items-center">
-        <div className="p-4 rounded-full bg-noesis-purple/20 mb-4">
-          {icon}
-        </div>
-        <div 
-          ref={counterRef}
-          className="text-4xl font-bold mb-2 gradient-text"
-          data-value={value}
-          data-numeric-value={numericValue}
-          data-suffix={suffix}
-        >
-          {value.includes('>') ? '> 0' : '0'}
-        </div>
-        <p className="text-white/70">{label}</p>
+    <div 
+      className="bg-noesis-darker rounded-xl p-6 flex flex-col items-center animate-fade-in"
+      style={{ animationDelay: delay }}
+    >
+      <div className="bg-purple-900/30 p-3 rounded-full mb-4">
+        {icon}
       </div>
+      <div 
+        ref={counterRef}
+        className="text-3xl md:text-4xl font-bold text-center text-purple-300"
+        data-value={value}
+      >
+        {value.startsWith('>') ? '> 0' : '0'}
+      </div>
+      <p className="text-sm text-center text-gray-400 mt-1">{label}</p>
     </div>
   );
 };
