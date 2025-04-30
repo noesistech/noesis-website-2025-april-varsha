@@ -1,22 +1,25 @@
 
 import React from 'react';
-import PromisePanel from './mission/PromisePanel';
 import { missionSectionData } from '@/data/content/mission';
-import BackgroundPattern from './mission/BackgroundPattern';
 
 const PromiseSection = () => {
-  const gridRows = 16;
-  const gridCols = 24;
-
   return (
-    <section className="page-section relative overflow-hidden bg-noesis-dark py-12 sm:py-16">
-      <BackgroundPattern gridRows={gridRows} gridCols={gridCols} />
-      <div className="container mx-auto px-6 relative z-10">
-        <PromisePanel 
-          title={missionSectionData.promise_title} 
-          subtitle={missionSectionData.promise_subtitle}
-          text={missionSectionData.promise_text} 
-        />
+    <section className="page-section relative overflow-hidden bg-noesis-dark py-16 sm:py-24">
+      <div className="container mx-auto px-6 relative z-10 text-center">
+        <h2 className="mb-10 text-4xl md:text-5xl font-bold">
+          <span>Our </span><span className="text-noesis-purple">Promise</span>
+        </h2>
+        
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-[#2A2F3C]/70 backdrop-blur-sm rounded-xl p-8 md:p-10">
+            <p className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide text-white">
+              <span>Human </span>
+              <span className="gradient-text underline decoration-noesis-purple decoration-2 underline-offset-8">creativity</span>
+              <span>, AI </span>
+              <span className="gradient-text underline decoration-noesis-purple decoration-2 underline-offset-8">precision</span>
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
