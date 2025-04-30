@@ -40,13 +40,7 @@ const PromiseSection = () => {
   }, [isMobile]);
 
   return (
-    <section className="relative overflow-hidden py-16 sm:py-24">
-      {/* Background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-1/4 w-72 h-72 bg-noesis-purple/10 rounded-full filter blur-[80px]"></div>
-        <div className="absolute bottom-0 left-1/4 w-60 h-60 bg-noesis-blue/10 rounded-full filter blur-[60px]"></div>
-      </div>
-      
+    <section className="py-16 sm:py-24">
       <div className="container mx-auto px-6 relative z-10 text-center">
         <h2 className="mb-10 text-4xl md:text-5xl font-bold">
           <span className="text-white">Our </span><span className="text-noesis-purple">Promise</span>
