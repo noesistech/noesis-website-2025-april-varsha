@@ -35,7 +35,7 @@ const ServicesPreviewSection = () => {
               </div>
               <h3 className="text-lg font-semibold mb-1 text-white group-hover:text-noesis-purple transition-colors duration-300">{service.title}</h3>
               <p className="text-sm text-gray-300 group-hover:text-gray-200">
-                {service.short_description || "Innovative solutions for your business"}
+                {service.description.substring(0, 60) + (service.description.length > 60 ? '...' : '')}
               </p>
             </Link>
           ))}
