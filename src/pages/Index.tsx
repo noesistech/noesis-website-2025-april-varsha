@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import ServicesSection from '../components/ServicesSection';
-import SolutionsSection from '../components/SolutionsSection';
 import ClientsSection from '../components/ClientsSection';
 import TechStackSection from '../components/TechStackSection';
 import AICapabilitiesSection from '../components/AICapabilitiesSection';
@@ -19,8 +18,6 @@ const Index = () => {
   const { 
     servicesSection, 
     serviceItems, 
-    solutionsSection, 
-    solutionItems, 
     techStackSection, 
     techCategories,
     aiCapabilitiesSection,
@@ -36,7 +33,6 @@ const Index = () => {
       <AboutSection />
       <PromiseSection />
       <ServicesPreviewSection />
-      <SolutionsSection title={solutionsSection.title} solutions={solutionItems} />
       <TechStackSection title={techStackSection.title} categories={techCategories} />
       <AICapabilitiesSection 
         title={aiCapabilitiesSection.title} 
