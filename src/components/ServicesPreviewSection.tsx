@@ -51,7 +51,7 @@ const ServicesPreviewSection = () => {
           <Button 
             variant="noesis" 
             size="lg" 
-            className="group shadow-lg hover:shadow-noesis-purple/50" 
+            className="shadow-lg hover:shadow-noesis-purple/50" 
             asChild
           >
             <Link to="/services" className="inline-flex items-center gap-2">

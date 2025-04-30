@@ -81,8 +81,8 @@ const BrainstormerSection: React.FC<BrainstormerSectionProps> = ({
                 {/* CTA button */}
                 <div className="mt-auto">
                   <Button 
-                    variant="outline" 
-                    className="border-noesis-purple/50 text-white hover:bg-noesis-purple/20 hover:text-white"
+                    variant="noesis" 
+                    className="shadow-lg hover:shadow-noesis-purple/50"
                     asChild
                   >
                     <Link to={product.ctaUrl} className="inline-flex items-center gap-2">

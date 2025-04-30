@@ -106,8 +106,15 @@ const Services = () => {
                 Get in touch with us today to discuss how our services can help you achieve your goals.
               </p>
               <div className="flex justify-center">
-                <Button variant="noesis" size="lg" className="inline-flex items-center gap-2">
-                  Contact Us <ArrowRight className="h-4 w-4" />
+                <Button 
+                  variant="noesis" 
+                  size="lg" 
+                  className="shadow-lg hover:shadow-noesis-purple/50" 
+                  asChild
+                >
+                  <a href="/contact" className="inline-flex items-center gap-2">
+                    Contact Us <ArrowRight className="h-4 w-4" />
+                  </a>
                 </Button>
               </div>
             </div>

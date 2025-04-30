@@ -12,8 +12,8 @@ const GradientCta = ({ children, height = "auto", id, onClick }: GradientCtaProp
   return (
     <button
       id={id}
-      className="gradient-button px-4 py-2 rounded-md text-white font-medium flex items-center justify-center"
-      style={{ height, background: "linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%)" }}
+      className="bg-noesis-purple/30 border border-noesis-purple hover:bg-noesis-purple/40 text-white hover:scale-105 shadow-[0_0_10px_rgba(160,116,255,0.3)] px-4 py-2 rounded-md text-white font-medium flex items-center justify-center transition-all duration-300"
+      style={{ height }}
       onClick={onClick}
     >
       {children}

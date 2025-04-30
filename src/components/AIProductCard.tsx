@@ -73,8 +73,13 @@ const AIProductCard: React.FC<AIProductCardProps> = ({
           </p>
           
           {ctaUrl && ctaText && <div className="mt-auto">
-              <Button variant="noesis" size="sm" asChild className="group bg-gradient-to-r from-noesis-purple/80 to-noesis-blue/80 hover:from-noesis-purple hover:to-noesis-blue text-sm font-medium">
-                <a href={ctaUrl}>
+              <Button 
+                variant="noesis" 
+                size="sm" 
+                asChild 
+                className="shadow-lg hover:shadow-noesis-purple/50"
+              >
+                <a href={ctaUrl} className="inline-flex items-center gap-2">
                   {ctaText} <ArrowRight className="ml-1 w-3 h-3 transition-transform group-hover:translate-x-1" />
                 </a>
               </Button>

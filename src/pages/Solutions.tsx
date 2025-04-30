@@ -48,7 +48,12 @@ const Solutions = () => {
                 Let us help you implement the right solution for your unique needs.
               </p>
               <div className="flex justify-center">
-                <Button variant="noesis" size="lg" className="shadow-lg hover:shadow-noesis-purple/50" asChild>
+                <Button 
+                  variant="noesis" 
+                  size="lg" 
+                  className="shadow-lg hover:shadow-noesis-purple/50" 
+                  asChild
+                >
                   <Link to="/contact" className="inline-flex items-center gap-2">
                     Get in Touch <ArrowRight className="h-4 w-4" />
                   </Link>
