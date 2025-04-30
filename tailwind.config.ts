@@ -125,6 +125,10 @@ const config = {
           "98%": { borderColor: "#a074ff" },      // Transition back to first color
           "100%": { backgroundPosition: "0% 50%", borderColor: "#a074ff" } // Back to start
         },
+        "scroll": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

@@ -11,6 +11,7 @@ import ServicesPreviewSection from "@/components/ServicesPreviewSection";
 import AICapabilitiesPreviewSection from "@/components/AICapabilitiesPreviewSection";
 import BrainstormerSection from "@/components/BrainstormerSection";
 import ClientsSection from "../components/ClientsSection";
+import ClientLogosSection from "../components/ClientLogosSection";
 
 const Index = () => {
   const { 
@@ -34,6 +35,7 @@ const Index = () => {
       <ServicesPreviewSection />
       <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
       <BrainstormerSection products={aiProducts} />
+      <ClientLogosSection />
       <ClientsSection />
       <Footer />
     </div>
