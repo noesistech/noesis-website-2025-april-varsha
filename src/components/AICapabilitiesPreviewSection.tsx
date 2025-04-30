@@ -26,7 +26,7 @@ const AICapabilitiesPreviewSection: React.FC<AICapabilitiesPreviewSectionProps> 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="section-title mb-3">
-            Cutting-Edge <span className="gradient-text">AI</span> Capabilities
+            Cutting-Edge <span className="gradient-text">AI Capabilities</span>
           </h2>
           <p className="section-subtitle">
             Harness the power of artificial intelligence to transform your business
