@@ -25,7 +25,11 @@ const Index = () => {
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
       <HeroSection />
-      <ChatBotSection />
+      <div className="bg-gradient-to-b from-noesis-darkest to-noesis-dark py-6">
+        <div className="container mx-auto px-4 xl:px-8 2xl:px-16">
+          <ChatBotSection />
+        </div>
+      </div>
       <AboutSection />
       <PromiseSection />
       <ServicesPreviewSection />
