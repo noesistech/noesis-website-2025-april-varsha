@@ -1,8 +1,45 @@
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { missionSectionData } from '@/data/content/mission';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const PromiseSection = () => {
+  const promiseCardRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    if (!promiseCardRef.current || isMobile) return;
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      const card = promiseCardRef.current;
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = (y - centerY) / 30;
+      const rotateY = (centerX - x) / 30;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    };
+
+    const handleMouseLeave = () => {
+      if (!promiseCardRef.current) return;
+      promiseCardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    };
+
+    const element = promiseCardRef.current;
+    element.addEventListener('mousemove', handleMouseMove);
+    element.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      if (element) {
+        element.removeEventListener('mousemove', handleMouseMove);
+        element.removeEventListener('mouseleave', handleMouseLeave);
+      }
+    };
+  }, [isMobile]);
+
   return (
     <section className="page-section relative overflow-hidden bg-noesis-dark py-16 sm:py-24">
       <div className="container mx-auto px-6 relative z-10 text-center">
@@ -11,7 +48,10 @@ const PromiseSection = () => {
         </h2>
         
         <div className="max-w-3xl mx-auto">
-          <div className="bg-[#2A2F3C]/70 backdrop-blur-sm rounded-xl p-8 md:p-10">
+          <div 
+            ref={promiseCardRef}
+            className="bg-[#2A2F3C]/70 backdrop-blur-sm rounded-xl p-8 md:p-10 transition-transform duration-300 ease-out"
+          >
             <p className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide text-white">
               <span>Human </span>
               <span className="gradient-text underline decoration-noesis-purple decoration-2 underline-offset-8">creativity</span>
