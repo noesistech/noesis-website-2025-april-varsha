@@ -1,8 +1,10 @@
 
 import React, { useRef, useEffect } from 'react';
 import { Users, Award, Clock, Percent } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import P5Animation from './P5Animation';
 import { useContent } from '@/contexts/ContentContext';
+import { Button } from '@/components/ui/button';
 
 const AboutSection = () => {
   const { aboutSection, stats } = useContent();
@@ -57,7 +59,7 @@ const AboutSection = () => {
             <div className="absolute inset-0 grid-pattern opacity-20"></div>
           </div>
           
-          {/* Right side - Content */}
+          {/* Right side - Content - SHORTENED */}
           <div ref={rightContainerRef} className="space-y-8">
             {/* Heading */}
             <div className="space-y-2">
@@ -67,16 +69,10 @@ const AboutSection = () => {
               <div className="h-1 w-24 bg-purple-500 rounded-full animate-fade-in"></div>
             </div>
             
-            {/* Description paragraphs */}
+            {/* Description paragraphs - SHORTENED */}
             <div className="space-y-4">
               <p className="text-white/80 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                Our 40+ member team combines talented human experts with cutting-edge AI tools to deliver solutions that blend the best of human creativity and artificial intelligence.
-              </p>
-              <p className="text-white/80 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-                With over a decade of experience in digital innovation, we've grown alongside emerging technologies to establish ourselves as leaders in AI-enhanced digital services.
-              </p>
-              <p className="text-white/80 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                Our 95% client retention rate and 4+ year average relationships demonstrate how our unique AI-human partnership approach consistently delivers breakthrough solutions that exceed expectations.
+                Our 40+ member team combines talented human experts with cutting-edge AI tools, delivering breakthrough solutions with a 95% client retention rate.
               </p>
             </div>
             
@@ -91,6 +87,15 @@ const AboutSection = () => {
                   delay={`${0.3 + (index * 0.1)}s`}
                 />
               ))}
+            </div>
+
+            {/* New CTA Button to About Page */}
+            <div className="flex justify-start mt-6 animate-fade-in" style={{ animationDelay: '0.7s' }}>
+              <Link to="/about">
+                <Button variant="noesis" className="px-6 py-2 text-base">
+                  Learn More About Noesis
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

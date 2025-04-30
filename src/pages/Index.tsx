@@ -11,6 +11,7 @@ import AICapabilitiesPreviewSection from "@/components/AICapabilitiesPreviewSect
 import BrainstormerSection from "@/components/BrainstormerSection";
 import ClientsSection from "../components/ClientsSection";
 import ChatBotSection from "@/components/ChatBotSection";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const Index = () => {
   const { 
@@ -51,6 +52,7 @@ const Index = () => {
       <ClientsSection />
       
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };
