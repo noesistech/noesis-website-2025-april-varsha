@@ -61,6 +61,12 @@ const Services = () => {
         {/* Services Grid */}
         <section className="bg-[#1A1F2C] py-16">
           <div className="container mx-auto px-4 sm:px-6">
+            <h2 className="section-title mb-6">
+              Our <span className="gradient-text">Services</span>
+            </h2>
+            <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mb-12">
+              Explore our comprehensive range of services designed to transform your business
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {serviceItems.map((service) => (
                 <Card key={service.id} className="bg-[#222732] border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">

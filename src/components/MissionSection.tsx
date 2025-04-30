@@ -39,11 +39,11 @@ const MissionSection = ({ showPromisePanel = true }: MissionSectionProps) => {
   return <section id="mission" ref={sectionRef} className="page-section relative overflow-hidden bg-noesis-dark py-12 sm:py-16">
       <BackgroundPattern gridRows={gridRows} gridCols={gridCols} />
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="section-title mt-0 mb-3">
+        <h2 className="section-title mb-6">
           Our <span className="gradient-text">Mission & Vision</span>
         </h2>
         {missionSectionData.mission_subtitle && (
-          <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mb-8">
+          <p className="section-subtitle">
             {missionSectionData.mission_subtitle}
           </p>
         )}
