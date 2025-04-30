@@ -12,6 +12,7 @@ import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 import { useContent } from '@/contexts/ContentContext';
 import ChatBotSection from "@/components/ChatBotSection";
+import MissionSection from "@/components/MissionSection";
 
 const Index = () => {
   const { 
@@ -34,6 +35,7 @@ const Index = () => {
       <Header />
       <HeroSection />
       <AboutSection />
+      <MissionSection />
       <ServicesSection title={servicesSection.title} services={serviceItems} />
       <SolutionsSection title={solutionsSection.title} solutions={solutionItems} />
       <TechStackSection title={techStackSection.title} categories={techCategories} />
