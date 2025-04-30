@@ -75,7 +75,7 @@ const ClientsSection = () => {
                   <CarouselNext className="static translate-y-0 ml-2" />
                 </div>
               </Carousel> : <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {testimonials.map(testimonial => <div key={testimonial.id} className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 p-6 rounded-xl backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-noesis-purple/20 hover:border-white/20 transition-all duration-300">
+                {testimonials.map(testimonial => <div key={testimonial.id} className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 p-6 rounded-xl backdrop-blur-sm border border-gray-700/50 shadow-xl">
                     <blockquote className="text-lg mb-4 text-white/90">{testimonial.quote}</blockquote>
                     <div className="flex items-center">
                       <div>
