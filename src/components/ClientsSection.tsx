@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { useContent } from '@/contexts/ContentContext';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-
 const ClientsSection = () => {
   const {
     clientsSection,
@@ -14,9 +12,7 @@ const ClientsSection = () => {
 
   // Double the logos array to create the continuous scrolling effect
   const repeatedLogos = [...clientLogos, ...clientLogos];
-  
-  return (
-    <section id="clients" className="page-section py-16 sm:py-24 overflow-hidden relative">
+  return <section id="clients" className="page-section py-16 sm:py-24 overflow-hidden relative">
       {/* Background gradients similar to BrainstormerSection */}
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       <div className="absolute top-1/3 left-0 w-72 h-72 bg-noesis-purple/20 rounded-full filter blur-[120px] opacity-20"></div>
@@ -27,18 +23,9 @@ const ClientsSection = () => {
         <div className="relative overflow-hidden w-full mb-16">
           <div className="overflow-hidden">
             <div className="flex animate-[scroll_40s_linear_infinite] items-center">
-              {repeatedLogos.map((logo, index) => (
-                <div 
-                  key={`${logo.id}-${index}`} 
-                  className="flex-shrink-0 mx-8 my-2 w-[120px] md:w-[140px] h-[60px] flex items-center justify-center"
-                >
-                  <img 
-                    src={logo.image_url} 
-                    alt={logo.name} 
-                    className="max-h-full max-w-full opacity-70 hover:opacity-100 transition-opacity duration-300" 
-                  />
-                </div>
-              ))}
+              {repeatedLogos.map((logo, index) => <div key={`${logo.id}-${index}`} className="flex-shrink-0 mx-8 w-[120px] md:w-[140px] h-[60px] flex items-center justify-center my-0">
+                  <img src={logo.image_url} alt={logo.name} className="max-h-full max-w-full opacity-70 hover:opacity-100 transition-opacity duration-300" />
+                </div>)}
             </div>
           </div>
           
@@ -48,35 +35,23 @@ const ClientsSection = () => {
         </div>
         
         {/* Testimonials Section */}
-        {clientsSection && (
-          <div className="text-center mb-10">
-            <h2 className="section-title">
+        {clientsSection && <div className="text-center mb-10">
+            <h2 className="section-title py-0 my-0">
               <span className="text-white">Client</span> <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#997aff] to-[#987aff]">Testimonials</span>
             </h2>
-            {clientsSection.subtitle && (
-              <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mt-3 mb-8">
+            {clientsSection.subtitle && <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mt-3 mb-8">
                 {clientsSection.subtitle}
-              </p>
-            )}
-          </div>
-        )}
+              </p>}
+          </div>}
         
         {/* Testimonials - Carousel for mobile, grid for desktop */}
-        {testimonials && testimonials.length > 0 && (
-          <div>
-            {isMobile ? (
-              <Carousel 
-                opts={{
-                  align: "center",
-                  loop: true
-                }} 
-                className="w-full" 
-                autoplay={true} 
-                interval={6000}
-              >
+        {testimonials && testimonials.length > 0 && <div>
+            {isMobile ? <Carousel opts={{
+          align: "center",
+          loop: true
+        }} className="w-full" autoplay={true} interval={6000}>
                 <CarouselContent>
-                  {testimonials.map(testimonial => (
-                    <CarouselItem key={testimonial.id}>
+                  {testimonials.map(testimonial => <CarouselItem key={testimonial.id}>
                       <div className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 p-6 rounded-xl backdrop-blur-sm border border-gray-700/50 h-full shadow-xl">
                         <blockquote className="text-lg mb-4 text-white/90">{testimonial.quote}</blockquote>
                         <div className="flex items-center">
@@ -86,18 +61,14 @@ const ClientsSection = () => {
                           </div>
                         </div>
                       </div>
-                    </CarouselItem>
-                  ))}
+                    </CarouselItem>)}
                 </CarouselContent>
                 <div className="flex justify-center gap-2 mt-4">
                   <CarouselPrevious className="static translate-y-0 mr-2" />
                   <CarouselNext className="static translate-y-0 ml-2" />
                 </div>
-              </Carousel>
-            ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {testimonials.map(testimonial => (
-                  <div key={testimonial.id} className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 p-6 rounded-xl backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-noesis-purple/20 hover:border-white/20 transition-all duration-300">
+              </Carousel> : <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {testimonials.map(testimonial => <div key={testimonial.id} className="bg-gradient-to-b from-gray-800/40 to-gray-900/40 p-6 rounded-xl backdrop-blur-sm border border-gray-700/50 shadow-xl hover:shadow-noesis-purple/20 hover:border-white/20 transition-all duration-300">
                     <blockquote className="text-lg mb-4 text-white/90">{testimonial.quote}</blockquote>
                     <div className="flex items-center">
                       <div>
@@ -105,15 +76,10 @@ const ClientsSection = () => {
                         <div className="text-sm text-white/70">{testimonial.position}, {testimonial.company}</div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+                  </div>)}
+              </div>}
+          </div>}
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ClientsSection;
