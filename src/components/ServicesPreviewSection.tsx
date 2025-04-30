@@ -26,17 +26,16 @@ const ServicesPreviewSection = () => {
             <Link
               to="/services"
               key={service.id}
-              className="bg-gradient-to-b from-[#222732]/90 to-[#1D212B]/80 backdrop-blur-sm rounded-xl p-5 border border-white/10 shadow-xl hover:shadow-noesis-purple/30 transition-all duration-300 flex flex-col items-center text-center hover:border-noesis-purple/30 group"
+              className="bg-gradient-to-b from-[#222732]/90 to-[#1D212B]/80 backdrop-blur-sm rounded-xl p-5 border border-white/10 shadow-xl hover:shadow-noesis-purple/30 transition-all duration-300 flex flex-col items-center text-center hover:border-noesis-purple/30 hover:scale-105 group"
             >
               <div className={`bg-[#1A1F2C]/90 p-3 rounded-full w-fit mb-3 group-hover:bg-noesis-purple/20 transition-colors duration-300 border border-white/5 group-hover:border-noesis-purple/30`}>
                 <div className="text-noesis-purple group-hover:text-white transition-colors duration-300">
                   {getIconByName(service.icon_name)}
                 </div>
               </div>
-              <h3 className="text-lg font-semibold mb-1 text-white group-hover:text-noesis-purple transition-colors duration-300">{service.title}</h3>
-              <p className="text-sm text-gray-300 group-hover:text-gray-200">
-                {service.description.substring(0, 60) + (service.description.length > 60 ? '...' : '')}
-              </p>
+              <h3 className="text-lg font-semibold text-white group-hover:text-noesis-purple transition-colors duration-300">
+                {service.title}
+              </h3>
             </Link>
           ))}
         </div>
