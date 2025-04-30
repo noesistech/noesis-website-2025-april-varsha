@@ -69,10 +69,10 @@ const AboutSection = () => {
               <div className="h-1 w-24 bg-purple-500 rounded-full animate-fade-in"></div>
             </div>
             
-            {/* Description paragraphs - SHORTENED */}
+            {/* Description paragraphs - UPDATED TEXT */}
             <div className="space-y-4">
               <p className="text-white/80 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                Our 40+ member team combines talented human experts with cutting-edge AI tools, delivering breakthrough solutions with a 95% client retention rate.
+                With over a decade of experience in digital innovation, we've grown alongside emerging technologies to establish ourselves as leaders in AI-enhanced digital services.
               </p>
             </div>
             
