@@ -6,19 +6,45 @@ import { useContent } from '@/contexts/ContentContext';
 
 const AboutSection = () => {
   const { aboutSection, stats } = useContent();
+  const rightContainerRef = useRef<HTMLDivElement>(null);
+  const leftContainerRef = useRef<HTMLDivElement>(null);
+
+  // Effect to match the left container height to the right container
+  useEffect(() => {
+    const adjustHeight = () => {
+      if (rightContainerRef.current && leftContainerRef.current) {
+        const rightHeight = rightContainerRef.current.offsetHeight;
+        leftContainerRef.current.style.height = `${rightHeight}px`;
+      }
+    };
+
+    // Initial adjustment
+    adjustHeight();
+    
+    // Listen for window resize to readjust
+    window.addEventListener('resize', adjustHeight);
+    
+    // Cleanup listener on unmount
+    return () => {
+      window.removeEventListener('resize', adjustHeight);
+    };
+  }, []);
 
   return (
     <section id="about" className="relative py-20 bg-noesis-dark overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left side - P5 Animation */}
-          <div className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden animate-fade-in" style={{ minHeight: '500px' }}>
+          <div 
+            ref={leftContainerRef}
+            className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden animate-fade-in"
+          >
             <P5Animation className="w-full h-full absolute inset-0" />
             <div className="absolute inset-0 grid-pattern opacity-20"></div>
           </div>
           
           {/* Right side - Content */}
-          <div className="space-y-8">
+          <div ref={rightContainerRef} className="space-y-8">
             {/* Heading */}
             <div className="space-y-2">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight animate-fade-in">
