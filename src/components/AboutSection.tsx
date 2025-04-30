@@ -76,6 +76,15 @@ const AboutSection = () => {
               </p>
             </div>
             
+            {/* CTA Button to About Page - MOVED ABOVE STATS */}
+            <div className="flex justify-start mt-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <Link to="/about">
+                <Button variant="noesis" className="px-6 py-2 text-base">
+                  Learn More About Noesis
+                </Button>
+              </Link>
+            </div>
+            
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-4">
               {stats.map((stat, index) => (
@@ -84,18 +93,9 @@ const AboutSection = () => {
                   icon={getIconComponent(stat.icon_name)}
                   value={stat.value}
                   label={stat.label}
-                  delay={`${0.3 + (index * 0.1)}s`}
+                  delay={`${0.4 + (index * 0.1)}s`}
                 />
               ))}
-            </div>
-
-            {/* New CTA Button to About Page */}
-            <div className="flex justify-start mt-6 animate-fade-in" style={{ animationDelay: '0.7s' }}>
-              <Link to="/about">
-                <Button variant="noesis" className="px-6 py-2 text-base">
-                  Learn More About Noesis
-                </Button>
-              </Link>
             </div>
           </div>
         </div>
