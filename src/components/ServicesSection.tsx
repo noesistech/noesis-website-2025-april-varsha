@@ -1,10 +1,10 @@
-
 import React from 'react';
 import { Palette, Globe, Image, Cloud, BrainCircuit, Users, ChevronDown } from 'lucide-react';
 import { ServiceItem } from '@/types/supabase';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ServicesSection as ServicesSectionType } from '@/types/contentTypes';
 import { servicesSectionData } from '@/data/content/services';
+import { getIconByName, serviceIconColors } from '@/components/hero/ServiceCard';
 import { 
   Accordion,
   AccordionContent,
@@ -32,32 +32,32 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
     description: service.description
   })) : [{
     id: 'uiux',
-    icon: <Palette className="h-8 w-8 text-blue-400" />,
+    icon: <Palette className={`h-8 w-8 ${serviceIconColors['Palette']}`} />,
     title: 'UI/UX',
     description: 'Create exceptional user experiences through the perfect blend of human-centered design principles and AI-powered insights.'
   }, {
     id: 'webdev',
-    icon: <Globe className="h-8 w-8 text-green-400" />,
+    icon: <Globe className={`h-8 w-8 ${serviceIconColors['Globe']}`} />,
     title: 'Web and Application Development',
     description: 'Build cutting-edge digital solutions with our AI-enhanced development process that combines human creativity with machine efficiency.'
   }, {
     id: 'graphics',
-    icon: <Image className="h-8 w-8 text-yellow-400" />,
+    icon: <Image className={`h-8 w-8 ${serviceIconColors['Image']}`} />,
     title: 'Graphics and Content Creation',
     description: 'AI-assisted content creation balanced with human editorial expertise for compelling website copy and articles. Human creativity enhanced by AI tools to design captivating visuals and infographics that resonate with audiences.'
   }, {
     id: 'cloud',
-    icon: <Cloud className="h-8 w-8 text-pink-400" />,
+    icon: <Cloud className={`h-8 w-8 ${serviceIconColors['Cloud'] || 'text-pink-400'}`} />,
     title: 'Cloud Services & DevOps',
     description: 'AI-optimized hosting solutions managed by experienced human engineers. Intelligent performance tuning that leverages machine learning for predictive scaling while maintaining human oversight.'
   }, {
     id: 'ai',
-    icon: <BrainCircuit className="h-8 w-8 text-purple-400" />,
+    icon: <BrainCircuit className={`h-8 w-8 ${serviceIconColors['BrainCircuit']}`} />,
     title: 'AI Customized Solutions',
     description: 'Human-guided AI systems that extract meaningful insights from complex data. Content generation that combines AI efficiency with human creativity for brand-perfect messaging.'
   }, {
     id: 'staff',
-    icon: <Users className="h-8 w-8 text-orange-400" />,
+    icon: <Users className={`h-8 w-8 ${serviceIconColors['Users']}`} />,
     title: 'AI-Enhanced Staff Solutions',
     description: 'Access to 500+ high-quality professionals trained in AI-human collaboration methodologies. Teams skilled in AI integration across Frontend, Backend, Fullstack, ML, DevOps and cloud technologies.'
   }];
@@ -113,28 +113,6 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
       </div>
     </section>
   );
-};
-
-const getIconByName = (iconName: string) => {
-  const normalizedIconName = iconName.toLowerCase();
-
-  switch (normalizedIconName) {
-    case 'palette':
-      return <Palette className="h-8 w-8 text-blue-400" />;
-    case 'globe':
-      return <Globe className="h-8 w-8 text-green-400" />;
-    case 'image':
-      return <Image className="h-8 w-8 text-yellow-400" />;
-    case 'cloud':
-      return <Cloud className="h-8 w-8 text-pink-400" />;
-    case 'braincircuit':
-      return <BrainCircuit className="h-8 w-8 text-purple-400" />;
-    case 'users':
-      return <Users className="h-8 w-8 text-orange-400" />;
-    default:
-      console.warn(`Icon name not recognized: ${iconName}`);
-      return <Globe className="h-8 w-8" />;
-  }
 };
 
 export default ServicesSection;

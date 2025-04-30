@@ -66,7 +66,7 @@ const Services = () => {
                 <Card key={service.id} className="bg-[#222732] border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
                   <CardContent className="pt-6">
                     <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
-                      <div className={`${serviceIconColors[service.icon_name as keyof typeof serviceIconColors] || 'text-noesis-purple'}`}>
+                      <div className={serviceIconColors[service.icon_name as keyof typeof serviceIconColors] || 'text-noesis-purple'}>
                         {getIconByName(service.icon_name)}
                       </div>
                     </div>
