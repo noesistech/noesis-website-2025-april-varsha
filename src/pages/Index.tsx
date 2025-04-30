@@ -3,8 +3,6 @@ import React from 'react';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
-import ServicesSection from '../components/ServicesSection';
-import ClientsSection from '../components/ClientsSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 import { useContent } from '@/contexts/ContentContext';
@@ -12,12 +10,15 @@ import ChatBotSection from "@/components/ChatBotSection";
 import PromiseSection from "@/components/PromiseSection";
 import ServicesPreviewSection from "@/components/ServicesPreviewSection";
 import AICapabilitiesPreviewSection from "@/components/AICapabilitiesPreviewSection";
+import BrainstormerSection from "@/components/BrainstormerSection";
+import ClientsSection from "../components/ClientsSection";
 
 const Index = () => {
   const { 
     servicesSection, 
     serviceItems,
-    aiCapabilities
+    aiCapabilities,
+    aiProducts
   } = useContent();
 
   return (
@@ -28,6 +29,7 @@ const Index = () => {
       <PromiseSection />
       <ServicesPreviewSection />
       <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
+      <BrainstormerSection products={aiProducts} />
       <ClientsSection />
       <ChatBotSection />
       <ContactSection />
