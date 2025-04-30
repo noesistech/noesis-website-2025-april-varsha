@@ -16,7 +16,12 @@ const ClientsSection = () => {
   const repeatedLogos = [...clientLogos, ...clientLogos];
   
   return (
-    <section id="clients" className="bg-gradient-to-b from-noesis-darker to-noesis-darkest py-[60px]">
+    <section id="clients" className="page-section py-16 sm:py-24 overflow-hidden relative">
+      {/* Background gradients similar to BrainstormerSection */}
+      <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
+      <div className="absolute top-1/3 left-0 w-72 h-72 bg-noesis-purple/20 rounded-full filter blur-[120px] opacity-20"></div>
+      <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-noesis-blue/20 rounded-full filter blur-[100px] opacity-30"></div>
+      
       <div className="container mx-auto px-4">
         {/* Client Logos Scrolling Section */}
         <div className="relative overflow-hidden w-full mb-16">
@@ -107,8 +112,6 @@ const ClientsSection = () => {
           </div>
         )}
       </div>
-      
-      {/* Removed the bottom extra space */}
     </section>
   );
 };
