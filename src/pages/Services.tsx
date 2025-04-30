@@ -7,9 +7,10 @@ import { ChevronRight, Package, ArrowRight } from 'lucide-react';
 import { useContent } from '@/contexts/ContentContext';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { getIconByName } from '@/components/hero/ServiceCard';
+import TechStackSection from '@/components/TechStackSection';
 
 const Services = () => {
-  const { serviceItems, servicesSection } = useContent();
+  const { serviceItems, servicesSection, techStackSection, techCategories } = useContent();
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
@@ -54,14 +55,25 @@ const Services = () => {
                 </Card>
               ))}
             </div>
+          </div>
+        </section>
+        
+        {/* Technology Stack Section */}
+        <TechStackSection 
+          title={techStackSection.title} 
+          categories={techCategories}
+          subtitle={techStackSection.subtitle}
+        />
 
-            {/* CTA Section */}
-            <div className="mt-20 text-center">
-              <div className="bg-[#2A2F3C]/70 backdrop-blur-sm rounded-xl p-8 md:p-10 max-w-3xl mx-auto">
-                <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Ready to Transform Your Business?</h2>
-                <p className="text-gray-300 mb-8">
-                  Get in touch with us today to discuss how our services can help you achieve your goals.
-                </p>
+        {/* CTA Section */}
+        <section className="mt-20 py-16 bg-[#1A1F2C]">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="bg-[#2A2F3C]/70 backdrop-blur-sm rounded-xl p-8 md:p-10 max-w-3xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white text-center">Ready to Transform Your Business?</h2>
+              <p className="text-gray-300 mb-8 text-center">
+                Get in touch with us today to discuss how our services can help you achieve your goals.
+              </p>
+              <div className="flex justify-center">
                 <Button variant="noesis" size="lg" className="inline-flex items-center gap-2">
                   Contact Us <ArrowRight className="h-4 w-4" />
                 </Button>
