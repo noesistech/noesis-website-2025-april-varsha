@@ -21,26 +21,24 @@ const ServicesPreviewSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
           {serviceItems.map((service) => (
             <div 
               key={service.id} 
-              className="bg-[#222732]/80 backdrop-blur-sm rounded-xl p-6 border border-white/10 shadow-xl hover:shadow-noesis-purple/20 transition-all duration-300 flex flex-col"
+              className="bg-[#222732]/80 backdrop-blur-sm rounded-xl p-4 border border-white/10 shadow-xl hover:shadow-noesis-purple/20 transition-all duration-300 flex flex-col items-center text-center"
             >
-              <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
+              <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-3">
                 {getIconByName(service.icon_name)}
               </div>
-              <h3 className="text-xl font-bold mb-3 text-white">{service.title}</h3>
-              <p className="text-gray-300 mb-4 line-clamp-3 flex-grow">
-                {service.description}
-              </p>
+              <h3 className="text-lg font-semibold mb-3 text-white">{service.title}</h3>
               <Button 
                 variant="ghost" 
                 className="text-noesis-purple hover:text-white hover:bg-noesis-purple/20 p-0 w-fit"
                 asChild
+                size="sm"
               >
-                <Link to="/services" className="flex items-center gap-2">
-                  Learn more <ChevronRight className="h-4 w-4" />
+                <Link to="/services" className="flex items-center gap-1">
+                  Learn more <ChevronRight className="h-3 w-3" />
                 </Link>
               </Button>
             </div>
