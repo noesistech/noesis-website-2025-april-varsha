@@ -33,7 +33,7 @@ export const ScrollToTop = () => {
     <Button
       variant="noesis"
       className={cn(
-        'fixed bottom-4 right-4 z-40 rounded-full p-2 shadow-lg transition-all duration-300',
+        'fixed bottom-24 right-4 z-40 rounded-full p-2 shadow-lg transition-all duration-300',
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
       )}
       onClick={scrollToTop}
