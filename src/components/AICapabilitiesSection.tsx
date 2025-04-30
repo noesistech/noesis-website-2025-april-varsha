@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Brain, BrainCircuit, Microscope, Settings, Zap, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -128,7 +127,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         </h2>
         
         {aiCapabilitiesSectionData.subtitle && (
-          <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mb-8">
+          <p className="section-subtitle">
             {aiCapabilitiesSectionData.subtitle}
           </p>
         )}
