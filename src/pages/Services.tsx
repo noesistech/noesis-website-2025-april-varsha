@@ -11,6 +11,16 @@ import TechStackSection from '@/components/TechStackSection';
 import AICapabilitiesSection from '@/components/AICapabilitiesSection';
 import { useLocation } from 'react-router-dom';
 
+// Define service card colors - matching the ones in ServicesPreviewSection
+const serviceColors = {
+  'Palette': 'text-noesis-blue',
+  'Globe': 'text-noesis-green',
+  'Image': 'text-noesis-yellow',
+  'Cloud': 'text-pink-400',
+  'BrainCircuit': 'text-noesis-purple',
+  'Users': 'text-orange-400',
+};
+
 const Services = () => {
   const { 
     serviceItems, 
@@ -66,7 +76,9 @@ const Services = () => {
                 <Card key={service.id} className="bg-[#222732] border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
                   <CardContent className="pt-6">
                     <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
-                      {getIconByName(service.icon_name)}
+                      <div className={`${serviceColors[service.icon_name as keyof typeof serviceColors] || 'text-noesis-purple'}`}>
+                        {getIconByName(service.icon_name)}
+                      </div>
                     </div>
                     <h3 className="text-xl font-bold mb-3 text-white">{service.title}</h3>
                     <p className="text-gray-300">{service.description}</p>

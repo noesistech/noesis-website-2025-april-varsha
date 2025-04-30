@@ -7,7 +7,8 @@ import {
   Server, 
   Palette, 
   Globe, 
-  Users 
+  Users,
+  Image
 } from 'lucide-react';
 
 interface ServiceCardProps {
@@ -27,15 +28,17 @@ export const getIconByName = (iconName: string): React.ReactNode => {
     case 'Code':
       return <Code size={24} className="text-white" />;
     case 'PaletteIcon':
-      return <PaletteIcon size={24} className="text-white" />;
-    case 'Server':
-      return <Server size={24} className="text-white" />;
     case 'Palette':
       return <Palette size={24} className="text-white" />;
+    case 'Server':
+    case 'Cloud':
+      return <Server size={24} className="text-white" />;
     case 'Globe':
       return <Globe size={24} className="text-white" />;
     case 'Users':
       return <Users size={24} className="text-white" />;
+    case 'Image':
+      return <Image size={24} className="text-white" />;
     default:
       return <BrainCircuit size={24} className="text-white" />;
   }

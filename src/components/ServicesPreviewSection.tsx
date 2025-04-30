@@ -6,6 +6,16 @@ import { Button } from '@/components/ui/button';
 import { useContent } from '@/contexts/ContentContext';
 import { getIconByName } from '@/components/hero/ServiceCard';
 
+// Define service card colors
+const serviceColors = {
+  'Palette': 'text-noesis-blue',
+  'Globe': 'text-noesis-green',
+  'Image': 'text-noesis-yellow',
+  'Cloud': 'text-pink-400',
+  'BrainCircuit': 'text-noesis-purple',
+  'Users': 'text-orange-400',
+};
+
 const ServicesPreviewSection = () => {
   const { serviceItems } = useContent();
 
@@ -29,7 +39,7 @@ const ServicesPreviewSection = () => {
               className="bg-gradient-to-b from-[#222732]/90 to-[#1D212B]/80 backdrop-blur-sm rounded-xl p-5 border border-white/10 shadow-xl hover:shadow-noesis-purple/30 transition-all duration-300 flex flex-col items-center text-center hover:border-noesis-purple/30 hover:scale-105 group"
             >
               <div className={`bg-[#1A1F2C]/90 p-3 rounded-full w-fit mb-3 group-hover:bg-noesis-purple/20 transition-colors duration-300 border border-white/5 group-hover:border-noesis-purple/30`}>
-                <div className="text-noesis-purple group-hover:text-white transition-colors duration-300">
+                <div className={`${serviceColors[service.icon_name as keyof typeof serviceColors] || 'text-noesis-purple'} group-hover:text-white transition-colors duration-300`}>
                   {getIconByName(service.icon_name)}
                 </div>
               </div>

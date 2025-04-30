@@ -9,7 +9,8 @@ import {
   Palette, 
   Globe, 
   Users,
-  LayoutGrid
+  LayoutGrid,
+  Image
 } from 'lucide-react';
 
 // Define our service cards data with more explicit icon rendering
@@ -35,17 +36,17 @@ const serviceCards = [
     description: "AI-optimized infrastructure"
   },
   {
-    icon: <Palette size={32} className="text-green-400" />,
+    icon: <Palette size={32} className="text-noesis-green" />,
     title: "Creative Design",
     description: "Human creativity, AI precision"
   },
   {
-    icon: <Globe size={32} className="text-yellow-400" />,
+    icon: <Image size={32} className="text-noesis-yellow" />,
     title: "Digital Marketing",
     description: "Data-driven, AI-powered growth"
   },
   {
-    icon: <Users size={32} className="text-blue-400" />,
+    icon: <Users size={32} className="text-orange-400" />,
     title: "Staff Augmentation",
     description: "AI-enhanced talent solutions"
   }
