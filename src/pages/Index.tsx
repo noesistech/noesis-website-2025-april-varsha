@@ -35,7 +35,9 @@ const Index = () => {
       <PromiseSection />
       
       {/* Services Preview */}
-      <ServicesPreviewSection />
+      <section id="services-preview">
+        <ServicesPreviewSection />
+      </section>
       
       {/* AI Capabilities - removed separate gradient div */}
       <AICapabilitiesPreviewSection capabilities={aiCapabilities} />

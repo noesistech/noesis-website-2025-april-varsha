@@ -31,7 +31,7 @@ const HeroContent = () => {
             <BrainCircuit className="mr-1" /> Try AI Assistant
           </Button>
         </a>
-        <a href="#services" className="inline-block">
+        <a href="#services-preview" className="inline-block">
           <Button variant="outline" className="bg-transparent border-white/20 text-white hover:bg-white/10 text-md sm:text-lg py-2 sm:py-3 md:py-4 px-5 sm:px-6 md:px-8 w-full">
             <Code className="mr-1" /> Our Services
           </Button>
