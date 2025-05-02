@@ -48,8 +48,8 @@ const PromiseSection = () => {
           <h2 className="section-title">
             Our <span className="gradient-text">Promise</span>
           </h2>
-          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
-          <p className="text-gray-300 text-lg">{missionSection.promise_subtitle}</p>
+          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4"></div>
+          <p className="text-gray-300 text-lg mt-8">{missionSection.promise_subtitle}</p>
         </div>
         
         <div className="max-w-3xl mx-auto">
