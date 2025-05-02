@@ -1,15 +1,12 @@
-
 import React, { useRef, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useContent } from '@/contexts/ContentContext';
-
 const PromiseSection = () => {
   const promiseCardRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const {
     missionSection
   } = useContent();
-
   useEffect(() => {
     if (!promiseCardRef.current || isMobile) return;
     const handleMouseMove = (e: MouseEvent) => {
@@ -24,12 +21,10 @@ const PromiseSection = () => {
       const rotateY = (centerX - x) / 30;
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     };
-
     const handleMouseLeave = () => {
       if (!promiseCardRef.current) return;
       promiseCardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
     };
-
     const element = promiseCardRef.current;
     element.addEventListener('mousemove', handleMouseMove);
     element.addEventListener('mouseleave', handleMouseLeave);
@@ -40,7 +35,6 @@ const PromiseSection = () => {
       }
     };
   }, [isMobile]);
-
   return <section className="py-16 sm:py-24">
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto">
@@ -49,7 +43,7 @@ const PromiseSection = () => {
           </h2>
           
           {/* Purple divider line */}
-          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
+          
           
           {/* Subtitle with proper spacing */}
           <p className="text-gray-300 text-lg">{missionSection.promise_subtitle}</p>
@@ -68,5 +62,4 @@ const PromiseSection = () => {
       </div>
     </section>;
 };
-
 export default PromiseSection;
