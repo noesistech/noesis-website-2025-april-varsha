@@ -99,7 +99,7 @@ html {
   }
   
   .section-subtitle {
-    @apply text-base;
+    font-size: 1rem; /* Using direct CSS instead of @apply text-base */
   }
   
   h2.text-3xl {
@@ -107,11 +107,12 @@ html {
   }
   
   h3.text-base {
-    @apply text-base font-medium;
+    font-size: 1rem; /* Using direct CSS instead of @apply text-base */
+    font-weight: 500;
   }
   
   p.text-xl, .text-xl {
-    @apply text-base;
+    font-size: 1rem; /* Using direct CSS instead of @apply text-base */
   }
   
   .page-section {
