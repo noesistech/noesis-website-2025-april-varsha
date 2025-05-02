@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -15,7 +14,7 @@ const ServicesPreviewSection = () => {
           <h2 className="section-title">
             Our <span className="text-noesis-purple">Services</span>
           </h2>
-          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
+          
           <p className="text-gray-300 max-w-2xl mx-auto text-xl">We combine human creativity with AI precision to deliver 
 exceptional solutions tailored to your needs.
         </p>
