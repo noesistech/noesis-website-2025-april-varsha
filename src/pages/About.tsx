@@ -22,9 +22,9 @@ const About = () => {
           backgroundEffect="purple"
         />
         
-        <MissionSection showPromisePanel={false} />
-        
         <CompanyHistory />
+        
+        <MissionSection showPromisePanel={false} />
         
         <CultureSection />
         
