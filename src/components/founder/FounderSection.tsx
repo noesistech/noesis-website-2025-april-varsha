@@ -2,8 +2,14 @@
 import React from 'react';
 import { Building, GraduationCap, Briefcase } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
-const FounderSection = () => {
+interface FounderSectionProps {
+  showCta?: boolean;
+}
+
+const FounderSection = ({ showCta = false }: FounderSectionProps) => {
   return (
     <div className="container mx-auto px-4 mb-20">
       <div className="flex flex-col lg:flex-row gap-8 items-center">
@@ -28,6 +34,16 @@ const FounderSection = () => {
             <h4 className="text-xl font-semibold text-white mb-1">Siddharth Bhansali</h4>
             <p className="text-noesis-purple">Founder & CEO</p>
           </div>
+
+          {showCta && (
+            <div className="mt-8 flex justify-center lg:justify-start">
+              <Link to="/about">
+                <Button variant="rainbow" className="px-6 py-2 text-base">
+                  Meet Our Full Team
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
 
         <div className="lg:w-2/3">

@@ -17,7 +17,6 @@ const AboutStatsSection = () => {
         <div className="absolute inset-0 overflow-hidden">
           <P5Animation
             className="stats-animation"
-            scale={isMobile ? 0.5 : isTablet ? 0.75 : 1}
           />
         </div>
         
