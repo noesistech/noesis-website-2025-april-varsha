@@ -31,21 +31,23 @@ const Index = () => {
       <Header />
       <main className="flex-grow">
         <HeroSection />
+        <ChatBotSection />
         <AboutSection />
         <ServicesPreviewSection />
         <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
+        <BrainstormerSection products={aiProducts} />
         
-        {/* Founder Section with simplified content and CTA */}
-        <section className="bg-[#1A1F2C] py-16 md:py-24">
-          <div className="container mx-auto px-4 md:px-6">
+        {/* Founder Section with styling matching other sections */}
+        <section className="page-section py-16 sm:py-24 overflow-hidden relative">
+          <div className="container mx-auto px-4 sm:px-6 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white">
-                Meet Our <span className="text-noesis-purple">Founder</span>
+              <h2 className="section-title">
+                Meet Our <span className="gradient-text">Founder</span>
               </h2>
               <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
             </div>
             
-            <div className="flex flex-col lg:flex-row items-center gap-8 max-w-4xl mx-auto">
+            <div className="flex flex-col lg:flex-row items-center gap-8 max-w-5xl mx-auto">
               <div className="lg:w-1/3">
                 <div className="relative mb-4 overflow-hidden rounded-2xl">
                   {/* Base image */}
@@ -83,12 +85,10 @@ const Index = () => {
           </div>
         </section>
         
-        <BrainstormerSection products={aiProducts} />
         <TechStackSection title={techStackSection.title} categories={techCategories} />
         <SolutionsSection title={solutionsSection.title} solutions={solutionItems} />
         <ClientsSection />
         <ContactSection />
-        <ChatBotSection />
       </main>
       <Footer />
     </div>
