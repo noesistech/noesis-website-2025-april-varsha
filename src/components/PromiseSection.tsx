@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useContent } from '@/contexts/ContentContext';
@@ -43,10 +44,10 @@ const PromiseSection = () => {
           </h2>
           
           {/* Purple divider line */}
+          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
           
-          
-          {/* Subtitle with proper spacing */}
-          <p className="text-gray-300 text-lg">{missionSection.promise_subtitle}</p>
+          {/* Subtitle with proper spacing and 20px font size */}
+          <p className="text-gray-300 text-xl">{missionSection.promise_subtitle}</p>
         </div>
         
         <div className="max-w-3xl mx-auto mt-16">

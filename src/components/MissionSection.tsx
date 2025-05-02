@@ -44,6 +44,7 @@ const MissionSection = ({ showPromisePanel = true }: MissionSectionProps) => {
             Our <span className="text-noesis-purple">Mission & Vision</span>
           </h2>
           <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
+          <p className="text-gray-300 text-xl mb-8">Our commitment to excellence in AI and human collaboration</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 max-w-6xl mx-auto mb-12">
           <MissionCard title={missionSectionData.mission_title} description={missionSectionData.mission_description} />
