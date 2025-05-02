@@ -129,49 +129,47 @@ const CultureSection = () => {
           </Carousel>
         </div>
 
-        {/* Redesigned Team Values Section */}
-        <div className="bg-gradient-to-br from-purple-900/30 to-purple-800/10 rounded-xl p-8 border border-white/10">
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="flex items-center justify-center md:w-1/3">
-              <div className="relative">
-                <div className="absolute -inset-1 rounded-full bg-purple-500/30 blur-md"></div>
-                <div className="relative bg-[#1A1F2C] p-6 rounded-full border border-purple-500/40">
-                  <Users className="h-16 w-16 text-purple-400" />
+        {/* New Team Values Section that better blends with the background */}
+        <div className="backdrop-blur-sm bg-[#1A1F2C]/40 rounded-xl border border-purple-500/10 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 to-transparent pointer-events-none opacity-60"></div>
+          
+          <div className="relative p-8">
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              {/* Left side - Icon with glow effect */}
+              <div className="md:w-1/3 flex justify-center">
+                <div className="relative inline-flex">
+                  <div className="absolute -inset-2 bg-purple-500/10 blur-xl rounded-full"></div>
+                  <div className="relative z-10 bg-[#1A1F2C] p-5 rounded-full border border-purple-500/20 shadow-lg shadow-purple-500/10">
+                    <Users className="h-12 w-12 text-purple-400" />
+                  </div>
                 </div>
               </div>
-            </div>
-            
-            <div className="md:w-2/3">
-              <h3 className="text-2xl font-bold mb-4 flex items-center">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-200">
-                  Our Team Values
-                </span>
-              </h3>
               
-              <div className="space-y-4">
-                <p className="text-gray-300">
+              {/* Right side - Content */}
+              <div className="md:w-2/3">
+                <h3 className="text-2xl font-bold mb-4 inline-flex items-center border-b border-purple-500/30 pb-2">
+                  <span>Our Team Values</span>
+                  <div className="h-1 w-12 bg-purple-500/40 ml-3 rounded-full"></div>
+                </h3>
+                
+                <p className="text-gray-300 mb-6">
                   At Noesis, our team is our greatest asset. We foster a supportive environment 
                   where creativity thrives and innovation is celebrated. We believe that diverse 
-                  perspectives lead to better solutions, and we're committed to creating an inclusive 
-                  workplace where everyone can contribute their unique talents.
+                  perspectives lead to better solutions.
                 </p>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                  <div className="flex items-center gap-3 bg-[#1A1F2C]/80 p-3 rounded-lg border border-white/5">
-                    <div className="h-2 w-2 rounded-full bg-purple-500"></div>
-                    <p className="text-gray-200 font-medium">Collaboration</p>
+                <div className="flex flex-wrap gap-3">
+                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-4 py-2 rounded-full border border-purple-500/20">
+                    <p className="text-purple-300 font-medium text-sm">Collaboration</p>
                   </div>
-                  <div className="flex items-center gap-3 bg-[#1A1F2C]/80 p-3 rounded-lg border border-white/5">
-                    <div className="h-2 w-2 rounded-full bg-purple-500"></div>
-                    <p className="text-gray-200 font-medium">Innovation</p>
+                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-4 py-2 rounded-full border border-purple-500/20">
+                    <p className="text-purple-300 font-medium text-sm">Innovation</p>
                   </div>
-                  <div className="flex items-center gap-3 bg-[#1A1F2C]/80 p-3 rounded-lg border border-white/5">
-                    <div className="h-2 w-2 rounded-full bg-purple-500"></div>
-                    <p className="text-gray-200 font-medium">Respect</p>
+                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-4 py-2 rounded-full border border-purple-500/20">
+                    <p className="text-purple-300 font-medium text-sm">Respect</p>
                   </div>
-                  <div className="flex items-center gap-3 bg-[#1A1F2C]/80 p-3 rounded-lg border border-white/5">
-                    <div className="h-2 w-2 rounded-full bg-purple-500"></div>
-                    <p className="text-gray-200 font-medium">Growth Mindset</p>
+                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-4 py-2 rounded-full border border-purple-500/20">
+                    <p className="text-purple-300 font-medium text-sm">Growth Mindset</p>
                   </div>
                 </div>
               </div>
