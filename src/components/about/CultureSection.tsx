@@ -159,52 +159,64 @@ const CultureSection = () => {
           </p>
         </div>
 
-        {/* Culture highlights cards */}
+        {/* Culture highlights cards - REDESIGNED */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="glass-card">
-            <div className="flex flex-col items-center text-center">
-              <div className="bg-purple-900/30 p-3 rounded-full mb-4">
-                <Award className="h-6 w-6 text-purple-400" />
+          {/* Culture Highlights Card */}
+          <div className="relative overflow-hidden rounded-xl transition-all duration-300 hover:translate-y-[-10px] group">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-900/50 to-indigo-900/50 opacity-70 z-0"></div>
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517048676732-d65bc937f952')] bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+            <div className="relative z-10 p-6 h-full flex flex-col">
+              <div className="bg-white/10 backdrop-blur-sm p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 border border-purple-400/20 shadow-lg shadow-purple-500/20">
+                <Award className="h-7 w-7 text-purple-300" />
               </div>
-              <h3 className="text-xl font-bold mb-2">Culture Highlights</h3>
-              <p className="text-gray-300">
+              <h3 className="text-xl font-bold mb-3 text-white group-hover:text-purple-300 transition-colors">Culture Highlights</h3>
+              <p className="text-gray-300 flex-grow">
                 Our culture is built on innovation, trust, and continuous learning. 
                 We celebrate diverse perspectives and encourage everyone to bring their 
                 authentic selves to work.
               </p>
+              <div className="mt-4 h-1 w-12 bg-purple-500/50 group-hover:w-20 transition-all duration-300"></div>
             </div>
           </div>
 
-          <div className="glass-card">
-            <div className="flex flex-col items-center text-center">
-              <div className="bg-purple-900/30 p-3 rounded-full mb-4">
-                <Building className="h-6 w-6 text-purple-400" />
+          {/* Work Culture Card */}
+          <div className="relative overflow-hidden rounded-xl transition-all duration-300 hover:translate-y-[-10px] group">
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/50 to-purple-800/50 opacity-70 z-0"></div>
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522071820081-009f0129c71c')] bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+            <div className="relative z-10 p-6 h-full flex flex-col">
+              <div className="bg-white/10 backdrop-blur-sm p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 border border-indigo-400/20 shadow-lg shadow-indigo-500/20">
+                <Building className="h-7 w-7 text-indigo-300" />
               </div>
-              <h3 className="text-xl font-bold mb-2">Work Culture</h3>
-              <p className="text-gray-300">
+              <h3 className="text-xl font-bold mb-3 text-white group-hover:text-indigo-300 transition-colors">Work Culture</h3>
+              <p className="text-gray-300 flex-grow">
                 We value work-life balance and provide flexible schedules. 
                 Our collaborative environment supports both individual excellence 
                 and team success.
               </p>
+              <div className="mt-4 h-1 w-12 bg-indigo-500/50 group-hover:w-20 transition-all duration-300"></div>
             </div>
           </div>
 
-          <div className="glass-card">
-            <div className="flex flex-col items-center text-center">
-              <div className="bg-purple-900/30 p-3 rounded-full mb-4">
-                <Laptop className="h-6 w-6 text-purple-400" />
+          {/* Remote/Hybrid Work Card */}
+          <div className="relative overflow-hidden rounded-xl transition-all duration-300 hover:translate-y-[-10px] group">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/50 to-indigo-900/50 opacity-70 z-0"></div>
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1593642634367-d91a135587b5')] bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+            <div className="relative z-10 p-6 h-full flex flex-col">
+              <div className="bg-white/10 backdrop-blur-sm p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 border border-blue-400/20 shadow-lg shadow-blue-500/20">
+                <Laptop className="h-7 w-7 text-blue-300" />
               </div>
-              <h3 className="text-xl font-bold mb-2">Remote/Hybrid Work</h3>
-              <p className="text-gray-300">
+              <h3 className="text-xl font-bold mb-3 text-white group-hover:text-blue-300 transition-colors">Remote/Hybrid Work</h3>
+              <p className="text-gray-300 flex-grow">
                 We embrace a flexible approach to work, supporting both in-office 
                 and remote team members. Our digital infrastructure ensures 
                 everyone stays connected and productive.
               </p>
+              <div className="mt-4 h-1 w-12 bg-blue-500/50 group-hover:w-20 transition-all duration-300"></div>
             </div>
           </div>
         </div>
 
-        {/* Team Values Section with animated canvas background - MOVED ABOVE TEAM GALLERY */}
+        {/* Team Values Section - remains above Team Gallery as previously moved */}
         <div className="backdrop-blur-sm bg-[#1A1F2C]/40 rounded-xl border border-purple-500/10 overflow-hidden mb-12">
           <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 to-transparent pointer-events-none opacity-60"></div>
           
