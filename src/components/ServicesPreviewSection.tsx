@@ -33,9 +33,6 @@ deliver exceptional solutions tailored to your needs.
               <h3 className="text-base font-semibold text-white group-hover:text-noesis-purple transition-colors duration-300">
                 {service.title}
               </h3>
-              <p className="text-xs text-gray-300 mt-1 line-clamp-3">
-                {service.description}
-              </p>
             </Link>)}
         </div>
 
