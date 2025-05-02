@@ -145,52 +145,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
     solutionRows.push(enhancedDisplaySolutions.slice(i, i + 3));
   }
   return <section id="solutions" ref={sectionRef} className="page-section py-0">
-      <div className="container mx-auto px-3 sm:px-6 py-0 my-0">
-        <h2 className="section-title my-0 py-[14px]">{renderTitle()}</h2>
-        {subtitle && <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mb-8">
-            {subtitle}
-          </p>}
-        {isMobile ? <div className="mt-4">
-            <Carousel opts={{
-          align: "start",
-          loop: true
-        }} className="w-full" autoplay={true} interval={5000}>
-              <CarouselContent>
-                {enhancedDisplaySolutions.map(solution => <CarouselItem key={solution.id} className="md:basis-1/2 lg:basis-1/3">
-                    <div className="glass relative overflow-hidden rounded-2xl h-full">
-                      <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", solution.color)}></div>
-                      <div className="relative z-10 p-4 flex flex-col h-full">
-                        <div className="bg-white/10 p-2 rounded-full w-fit mb-3">
-                          {solution.icon}
-                        </div>
-                        <h3 className="text-xl font-bold mb-3 text-left">{solution.title}</h3>
-                        <div className="mb-3 text-left flex-grow">
-                          {solution.description}
-                        </div>
-                      </div>
-                    </div>
-                  </CarouselItem>)}
-              </CarouselContent>
-              <div className="flex justify-center gap-2 mt-4">
-                <CarouselPrevious className="static translate-y-0 mr-2" />
-                <CarouselNext className="static translate-y-0 ml-2" />
-              </div>
-            </Carousel>
-          </div> : solutionRows.map((row, rowIndex) => <div key={`row-${rowIndex}`} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 last:mb-0">
-              {row.map((solution, index) => <div key={solution.id} ref={el => cardsRef.current[rowIndex * 3 + index] = el} className="glass relative overflow-hidden rounded-2xl opacity-0 transition-all duration-500 hover:shadow-lg h-full">
-                  <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", solution.color)}></div>
-                  <div className="relative z-10 p-4 sm:p-6">
-                    <div className="bg-white/10 p-2 sm:p-3 rounded-full w-fit mb-3 sm:mb-4">
-                      {solution.icon}
-                    </div>
-                    <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-left">{solution.title}</h3>
-                    <div className="mb-3 sm:mb-6 text-left">
-                      {solution.description}
-                    </div>
-                  </div>
-                </div>)}
-            </div>)}
-      </div>
+      
     </section>;
 };
 const getIconByName = (iconName: string) => {
