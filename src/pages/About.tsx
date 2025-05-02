@@ -8,6 +8,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 import SubpageHero from '@/components/SubpageHero';
 import CompanyHistory from '@/components/about/CompanyHistory';
 import FounderSection from '@/components/founder/FounderSection';
+import CultureSection from '@/components/about/CultureSection';
 
 const About = () => {
   return (
@@ -22,6 +23,8 @@ const About = () => {
         />
         
         <CompanyHistory />
+        
+        <CultureSection />
         
         <MissionSection showPromisePanel={false} />
 
