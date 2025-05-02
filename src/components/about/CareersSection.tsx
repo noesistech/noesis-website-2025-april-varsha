@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Briefcase, FileText, User, Mail } from 'lucide-react';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -9,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "@/components/ui/use-toast";
-
 const applicationFormSchema = z.object({
   fullName: z.string().min(2, {
     message: "Full name must be at least 2 characters."
@@ -27,9 +25,7 @@ const applicationFormSchema = z.object({
   }),
   resume: z.string().optional()
 });
-
 type ApplicationFormValues = z.infer<typeof applicationFormSchema>;
-
 const CareersSection = () => {
   // Define default values for the form
   const defaultValues: Partial<ApplicationFormValues> = {
@@ -62,29 +58,23 @@ const CareersSection = () => {
   };
 
   // Career opportunities
-  const opportunities = [
-    {
-      title: "AI Research Engineer",
-      department: "Research & Development",
-      type: "Full-time",
-      description: "Join our R&D team to develop cutting-edge AI models and solutions for our clients."
-    },
-    {
-      title: "Frontend Developer",
-      department: "Engineering",
-      type: "Full-time",
-      description: "Build beautiful, responsive interfaces for our AI-powered applications."
-    },
-    {
-      title: "AI Product Manager",
-      department: "Product",
-      type: "Full-time",
-      description: "Bridge the gap between business needs and technical implementation of AI solutions."
-    }
-  ];
-
-  return (
-    <section className="bg-[#1A1F2C] py-16">
+  const opportunities = [{
+    title: "AI Research Engineer",
+    department: "Research & Development",
+    type: "Full-time",
+    description: "Join our R&D team to develop cutting-edge AI models and solutions for our clients."
+  }, {
+    title: "Frontend Developer",
+    department: "Engineering",
+    type: "Full-time",
+    description: "Build beautiful, responsive interfaces for our AI-powered applications."
+  }, {
+    title: "AI Product Manager",
+    department: "Product",
+    type: "Full-time",
+    description: "Bridge the gap between business needs and technical implementation of AI solutions."
+  }];
+  return <section className="bg-[#1A1F2C] py-16">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
@@ -98,36 +88,14 @@ const CareersSection = () => {
 
         {/* Current Opportunities */}
         <div className="mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {opportunities.map((job, index) => (
-              <div key={index} className="bg-gradient-to-br from-purple-900/10 to-indigo-900/10 border border-purple-500/20 rounded-lg p-6 hover:shadow-purple-500/10 hover:shadow-lg transition-all">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="p-2 bg-purple-900/30 rounded-full">
-                    <Briefcase className="h-5 w-5 text-purple-400" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-white">{job.title}</h3>
-                </div>
-                <div className="space-y-2 mb-4">
-                  <p className="text-sm text-gray-400">{job.department} • {job.type}</p>
-                  <p className="text-gray-300">{job.description}</p>
-                </div>
-                <Button variant="outline" className="w-full border-purple-500/30 text-purple-300 hover:bg-purple-900/30">
-                  Apply Now
-                </Button>
-              </div>
-            ))}
-          </div>
+          
         </div>
 
         {/* General Application Form */}
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-semibold text-white">
-              General Application
-            </h3>
-            <p className="text-gray-400 mt-2">
-              Don't see a position that fits your skills? Send us your resume anyway!
-            </p>
+            
+            
           </div>
           
           <div className="bg-gradient-to-br from-purple-900/10 to-indigo-900/10 border border-purple-500/20 rounded-xl p-6 md:p-8">
@@ -218,8 +186,6 @@ const CareersSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CareersSection;
