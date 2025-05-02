@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useContent } from '@/contexts/ContentContext';
@@ -46,7 +47,7 @@ const PromiseSection = () => {
           <p className="text-gray-300 text-xl">{missionSection.promise_subtitle}</p>
         </div>
         
-        <div className="max-w-3xl mx-auto mt-16">
+        <div className="max-w-3xl mx-auto mt-8">
           <div ref={promiseCardRef} className="bg-[#1d2130]/80 backdrop-blur-sm rounded-xl p-8 md:p-10 transition-transform duration-300 ease-out shadow-xl border border-white/5 hover:border-white/10 py-[35px]">
             <p className="text-3xl lg:text-3xl font-light tracking-wide text-white text-center md:text-xl">
               <span>Human </span>
