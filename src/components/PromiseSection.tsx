@@ -55,9 +55,6 @@ const PromiseSection = () => {
             Our <span className="text-noesis-purple">Promise</span>
           </h2>
           
-          {/* Purple divider line */}
-          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mb-8"></div>
-          
           {/* Subtitle with proper 20px font size */}
           <p className="text-gray-300 text-xl">{missionSection.promise_subtitle}</p>
         </div>

@@ -46,7 +46,6 @@ const Index = () => {
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
                 Meet Our <span className="gradient-text">Founder</span>
               </h2>
-              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mb-8"></div>
               
               {/* Updated subtitle to 20px (text-xl) */}
               <p className="text-gray-300 text-xl">Learn about the visionary behind Noesis.tech</p>
