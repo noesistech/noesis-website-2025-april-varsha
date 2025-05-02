@@ -77,12 +77,13 @@ const Index = () => {
                   <p className="text-white/80 leading-relaxed text-xl">
                     Sidd is a dynamic technology entrepreneur and seasoned consultant, combining deep expertise in AI, digital transformation, and software engineering. As the founder of Noesis.tech, he leads a team focused on building impactful tech solutions that drive growth for startups and mid-sized enterprises.
                   </p>
-                  
-                  <div className="mt-6 flex justify-center">
-                    <a href="/about" className="bg-noesis-purple/30 border border-noesis-purple hover:bg-noesis-purple/40 text-white hover:scale-105 shadow-[0_0_10px_rgba(160,116,255,0.3)] px-6 py-2 rounded-md text-sm font-medium transition-all">
-                      Meet Our Team
-                    </a>
-                  </div>
+                </div>
+                
+                {/* Moved CTA button outside of the gradient card */}
+                <div className="mt-6 flex justify-center">
+                  <a href="/about" className="bg-noesis-purple/30 border border-noesis-purple hover:bg-noesis-purple/40 text-white hover:scale-105 shadow-[0_0_10px_rgba(160,116,255,0.3)] px-6 py-2 rounded-md text-sm font-medium transition-all">
+                    Meet Our Team
+                  </a>
                 </div>
               </div>
             </div>
