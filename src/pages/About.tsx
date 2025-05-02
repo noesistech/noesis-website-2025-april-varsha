@@ -7,6 +7,7 @@ import TeamSection from '../components/TeamSection';
 import Footer from '../components/Footer';
 import { useContent } from '@/contexts/ContentContext';
 import ScrollToTop from '@/components/ScrollToTop';
+import SubpageHero from '@/components/SubpageHero';
 
 const About = () => {
   const { teamSection, teamMembers } = useContent();
@@ -15,6 +16,12 @@ const About = () => {
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
       <main className="pt-16 sm:pt-20 md:pt-16">
+        <SubpageHero 
+          title="About Our Company"
+          subtitle="Learn about our mission, vision, and the team behind our success"
+          gradientText="Company"
+          backgroundEffect="purple"
+        />
         <AboutStatsSection />
         <MissionSection showPromisePanel={false} />
         <TeamSection 

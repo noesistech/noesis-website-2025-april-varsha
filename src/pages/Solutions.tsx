@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -7,6 +6,7 @@ import { useContent } from '@/contexts/ContentContext';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SubpageHero from '@/components/SubpageHero';
 
 const Solutions = () => {
   const { solutionsSection, solutionItems } = useContent();
@@ -16,21 +16,12 @@ const Solutions = () => {
       <Header />
       <main>
         {/* Hero section */}
-        <section className="relative bg-[#1A1F2C] py-16 md:py-24 overflow-hidden">
-          <div className="container mx-auto px-4 sm:px-6 relative z-10">
-            <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
-                Our <span className="text-noesis-purple">Solutions</span>
-              </h1>
-              <p className="text-lg md:text-xl text-gray-300">
-                Tailored AI solutions designed to solve your most complex business challenges.
-              </p>
-            </div>
-          </div>
-
-          {/* Background gradient */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-noesis-purple/20 rounded-full filter blur-[120px] opacity-50" />
-        </section>
+        <SubpageHero
+          title="Our Solutions"
+          subtitle="Tailored AI solutions designed to solve your most complex business challenges."
+          gradientText="Solutions"
+          backgroundEffect="green"
+        />
 
         {/* Solutions Section */}
         <SolutionsSection 

@@ -3,15 +3,27 @@ import React from 'react';
 import Header from '../components/Header';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
+import SubpageHero from '@/components/SubpageHero';
+import { useContent } from '@/contexts/ContentContext';
+import ScrollToTop from '@/components/ScrollToTop';
 
 const Contact = () => {
+  const { contactSection } = useContent();
+
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
-      <div className="flex-1 pt-24">
+      <main className="pt-16 sm:pt-20 md:pt-16">
+        <SubpageHero
+          title="Get in Touch"
+          subtitle="Ready to transform your business with AI-powered solutions?"
+          gradientText="Touch"
+          backgroundEffect="orange"
+        />
         <ContactSection />
-      </div>
+      </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };
