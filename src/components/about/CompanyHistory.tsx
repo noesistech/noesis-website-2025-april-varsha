@@ -104,9 +104,9 @@ const TimelineItem = ({ year, leftContent, rightContent, dotColor, index }: Time
         {year}
       </motion.h3>
       
-      {/* Timeline dot - Fixed properly to exactly align with the center of the line */}
+      {/* Timeline dot - Adjusted position to align with the center line */}
       <motion.div 
-        className="absolute left-1/2 transform -translate-x-1/2 top-0 z-10"
+        className="absolute left-1/2 transform -translate-x-[5px] top-0 z-10"
         initial={{ scale: 0 }}
         animate={isInView ? { scale: 1 } : { scale: 0 }}
         transition={{ duration: 0.4, delay: 0.2 }}
