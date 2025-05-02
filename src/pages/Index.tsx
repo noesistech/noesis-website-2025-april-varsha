@@ -9,11 +9,10 @@ import Footer from '../components/Footer';
 import SolutionsSection from '../components/SolutionsSection';
 import AICapabilitiesPreviewSection from '../components/AICapabilitiesPreviewSection';
 import BrainstormerSection from '../components/BrainstormerSection';
-import TechStackSection from '../components/TechStackSection';
 import ClientsSection from '../components/ClientsSection';
 import ContactSection from '../components/ContactSection';
 import FounderSection from '@/components/founder/FounderSection';
-import PromisePanel from '@/components/mission/PromisePanel';
+import PromiseSection from '@/components/PromiseSection';
 import { useContent } from '@/contexts/ContentContext';
 
 const Index = () => {
@@ -21,11 +20,8 @@ const Index = () => {
   const { 
     aiCapabilities,
     aiProducts,
-    techStackSection,
-    techCategories,
     solutionsSection,
     solutionItems,
-    missionSection
   } = useContent();
 
   return (
@@ -35,20 +31,13 @@ const Index = () => {
         <HeroSection />
         <ChatBotSection />
         <AboutSection />
+        
+        {/* Promise Section - moved directly after AboutSection */}
+        <PromiseSection />
+        
         <ServicesPreviewSection />
         <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
         <BrainstormerSection products={aiProducts} />
-        
-        {/* Promise Section */}
-        <section className="page-section py-16 sm:py-24 overflow-hidden relative">
-          <div className="container mx-auto px-4 sm:px-6 relative z-10">
-            <PromisePanel 
-              title={missionSection.promise_title} 
-              subtitle={missionSection.promise_subtitle} 
-              text={missionSection.promise_text} 
-            />
-          </div>
-        </section>
         
         {/* Founder Section with styling matching other sections */}
         <section className="page-section py-16 sm:py-24 overflow-hidden relative">
@@ -98,7 +87,6 @@ const Index = () => {
           </div>
         </section>
         
-        <TechStackSection title={techStackSection.title} categories={techCategories} />
         <SolutionsSection title={solutionsSection.title} solutions={solutionItems} />
         <ClientsSection />
         <ContactSection />

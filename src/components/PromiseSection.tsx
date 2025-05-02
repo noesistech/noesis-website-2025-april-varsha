@@ -1,10 +1,12 @@
 
 import React, { useRef, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useContent } from '@/contexts/ContentContext';
 
 const PromiseSection = () => {
   const promiseCardRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  const { missionSection } = useContent();
 
   useEffect(() => {
     if (!promiseCardRef.current || isMobile) return;
@@ -42,9 +44,10 @@ const PromiseSection = () => {
   return (
     <section className="py-16 sm:py-24">
       <div className="container mx-auto px-6 relative z-10 text-center">
-        <h2 className="mb-10 text-4xl md:text-5xl font-bold">
-          <span className="text-white">Our </span><span className="text-noesis-purple">Promise</span>
+        <h2 className="mb-4 text-4xl md:text-5xl font-bold">
+          <span className="text-white">Our </span><span className="text-purple-400">Promise</span>
         </h2>
+        <p className="text-gray-300 text-lg mb-10">{missionSection.promise_subtitle}</p>
         
         <div className="max-w-3xl mx-auto">
           <div 
@@ -53,9 +56,9 @@ const PromiseSection = () => {
           >
             <p className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide text-white">
               <span>Human </span>
-              <span className="gradient-text underline decoration-noesis-purple decoration-2 underline-offset-8">creativity</span>
+              <span className="text-purple-400 underline decoration-purple-500 decoration-2 underline-offset-8">creativity</span>
               <span>, AI </span>
-              <span className="gradient-text underline decoration-noesis-purple decoration-2 underline-offset-8">precision</span>
+              <span className="text-purple-400 underline decoration-purple-500 decoration-2 underline-offset-8">precision</span>
             </p>
           </div>
         </div>
