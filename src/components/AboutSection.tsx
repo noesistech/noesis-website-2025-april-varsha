@@ -1,9 +1,11 @@
+
 import React, { useRef, useEffect } from 'react';
 import { Users, Award, Clock, Percent } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import P5Animation from './P5Animation';
 import { useContent } from '@/contexts/ContentContext';
 import { Button } from '@/components/ui/button';
+
 const AboutSection = () => {
   const {
     aboutSection,
@@ -45,6 +47,7 @@ const AboutSection = () => {
       observer.disconnect();
     };
   }, []);
+
   return <section id="about" className="relative py-20 bg-noesis-dark overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
@@ -56,26 +59,25 @@ const AboutSection = () => {
             <div className="absolute inset-0 grid-pattern opacity-20"></div>
           </div>
           
-          {/* Right side - Content - SHORTENED */}
+          {/* Right side - Content */}
           <div ref={rightContainerRef} className="space-y-8">
             {/* Heading */}
             <div className="space-y-2">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight animate-fade-in">
                 Evolving Since <span className="text-purple-400">2009</span>, Leading in AI Today
               </h2>
-              
             </div>
             
-            {/* Description paragraphs - UPDATED TEXT */}
+            {/* Description paragraph - Updated to ensure text-xl (20px) */}
             <div className="space-y-4">
-              <p className="text-white/80 animate-fade-in" style={{
+              <p className="text-white/80 text-xl animate-fade-in" style={{
               animationDelay: '0.2s'
             }}>
                 With over a decade of experience in digital innovation, we've grown alongside emerging technologies to establish ourselves as leaders in AI-enhanced digital services.
               </p>
             </div>
             
-            {/* CTA Button to About Page - MOVED ABOVE STATS */}
+            {/* CTA Button to About Page */}
             <div className="flex justify-start mt-6 animate-fade-in" style={{
             animationDelay: '0.3s'
           }}>
@@ -95,6 +97,7 @@ const AboutSection = () => {
       </div>
     </section>;
 };
+
 const getIconComponent = (iconName: string) => {
   switch (iconName) {
     case 'Users':
@@ -108,6 +111,7 @@ const getIconComponent = (iconName: string) => {
       return <Percent className="h-6 w-6 text-purple-400" />;
   }
 };
+
 const StatCard = ({
   icon,
   value,
@@ -120,6 +124,7 @@ const StatCard = ({
   delay: string;
 }) => {
   const counterRef = useRef<HTMLDivElement>(null);
+  
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -151,15 +156,18 @@ const StatCard = ({
     }, {
       threshold: 0.5
     });
+    
     if (counterRef.current) {
       observer.observe(counterRef.current);
     }
+    
     return () => {
       if (counterRef.current) {
         observer.unobserve(counterRef.current);
       }
     };
   }, [value]);
+  
   return <div className="bg-noesis-darker rounded-xl p-6 flex flex-col items-center animate-fade-in" style={{
     animationDelay: delay
   }}>
@@ -172,4 +180,5 @@ const StatCard = ({
       <p className="text-sm text-center text-gray-400 mt-1">{label}</p>
     </div>;
 };
+
 export default AboutSection;

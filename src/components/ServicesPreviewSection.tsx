@@ -1,23 +1,27 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useContent } from '@/contexts/ContentContext';
 import { getIconByName, serviceIconColors } from '@/components/hero/ServiceCard';
+
 const ServicesPreviewSection = () => {
   const {
     serviceItems
   } = useContent();
+  
   return <section className="bg-[#1A1F2C] relative py-20 overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="section-title">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
             Our <span className="text-noesis-purple">Services</span>
           </h2>
           
-          <p className="text-gray-300 max-w-2xl mx-auto text-xl">We combine human creativity with AI precision to deliver 
-exceptional solutions tailored to your needs.
-        </p>
+          <p className="text-gray-300 max-w-2xl mx-auto text-xl">
+            We combine human creativity with AI precision to deliver 
+            exceptional solutions tailored to your needs.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -49,4 +53,5 @@ exceptional solutions tailored to your needs.
       <div className="absolute bottom-20 left-10 w-[250px] h-[250px] bg-noesis-teal/10 rounded-full filter blur-[70px] opacity-20" />
     </section>;
 };
+
 export default ServicesPreviewSection;
