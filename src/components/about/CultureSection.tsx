@@ -204,43 +204,8 @@ const CultureSection = () => {
           </div>
         </div>
 
-        {/* Team Gallery */}
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-6">
-            <GalleryVertical className="h-6 w-6 text-purple-400" />
-            <h3 className="text-2xl font-bold">Team Gallery</h3>
-          </div>
-          
-          <Carousel className="w-full" autoplay={true} interval={5000}>
-            <CarouselContent>
-              {galleryImages.map((image, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <Card className="border-0 bg-transparent">
-                    <CardContent className="p-1">
-                      <div className="overflow-hidden rounded-xl">
-                        <img 
-                          src={image.src} 
-                          alt={image.caption} 
-                          className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300" 
-                        />
-                        <div className="bg-[#1A1F2C]/80 p-3 text-center">
-                          <p className="text-gray-300">{image.caption}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <div className="flex justify-center gap-2 mt-4">
-              <CarouselPrevious className="relative inset-auto translate-y-0" />
-              <CarouselNext className="relative inset-auto translate-y-0" />
-            </div>
-          </Carousel>
-        </div>
-
-        {/* New Team Values Section with animated canvas background */}
-        <div className="backdrop-blur-sm bg-[#1A1F2C]/40 rounded-xl border border-purple-500/10 overflow-hidden">
+        {/* Team Values Section with animated canvas background - MOVED ABOVE TEAM GALLERY */}
+        <div className="backdrop-blur-sm bg-[#1A1F2C]/40 rounded-xl border border-purple-500/10 overflow-hidden mb-12">
           <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 to-transparent pointer-events-none opacity-60"></div>
           
           <div className="relative p-8">
@@ -288,6 +253,41 @@ const CultureSection = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Team Gallery */}
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <GalleryVertical className="h-6 w-6 text-purple-400" />
+            <h3 className="text-2xl font-bold">Team Gallery</h3>
+          </div>
+          
+          <Carousel className="w-full" autoplay={true} interval={5000}>
+            <CarouselContent>
+              {galleryImages.map((image, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                  <Card className="border-0 bg-transparent">
+                    <CardContent className="p-1">
+                      <div className="overflow-hidden rounded-xl">
+                        <img 
+                          src={image.src} 
+                          alt={image.caption} 
+                          className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300" 
+                        />
+                        <div className="bg-[#1A1F2C]/80 p-3 text-center">
+                          <p className="text-gray-300">{image.caption}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center gap-2 mt-4">
+              <CarouselPrevious className="relative inset-auto translate-y-0" />
+              <CarouselNext className="relative inset-auto translate-y-0" />
+            </div>
+          </Carousel>
         </div>
       </div>
     </section>
