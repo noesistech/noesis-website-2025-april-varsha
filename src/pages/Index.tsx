@@ -13,6 +13,7 @@ import TechStackSection from '../components/TechStackSection';
 import ClientsSection from '../components/ClientsSection';
 import ContactSection from '../components/ContactSection';
 import FounderSection from '@/components/founder/FounderSection';
+import PromisePanel from '@/components/mission/PromisePanel';
 import { useContent } from '@/contexts/ContentContext';
 
 const Index = () => {
@@ -23,7 +24,8 @@ const Index = () => {
     techStackSection,
     techCategories,
     solutionsSection,
-    solutionItems
+    solutionItems,
+    missionSection
   } = useContent();
 
   return (
@@ -36,6 +38,17 @@ const Index = () => {
         <ServicesPreviewSection />
         <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
         <BrainstormerSection products={aiProducts} />
+        
+        {/* Promise Section */}
+        <section className="page-section py-16 sm:py-24 overflow-hidden relative">
+          <div className="container mx-auto px-4 sm:px-6 relative z-10">
+            <PromisePanel 
+              title={missionSection.promise_title} 
+              subtitle={missionSection.promise_subtitle} 
+              text={missionSection.promise_text} 
+            />
+          </div>
+        </section>
         
         {/* Founder Section with styling matching other sections */}
         <section className="page-section py-16 sm:py-24 overflow-hidden relative">
