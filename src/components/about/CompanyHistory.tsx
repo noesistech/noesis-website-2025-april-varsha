@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { useContent } from '@/contexts/ContentContext';
 import { motion } from 'framer-motion';
@@ -51,6 +52,7 @@ interface TimelineItemProps {
   dotColor: string;
   index: number;
 }
+
 const TimelineItem = ({
   year,
   leftContent,
@@ -61,56 +63,73 @@ const TimelineItem = ({
   const ref = useRef(null);
   const isInView = useInView(ref, {
     once: true,
-    amount: 0.3
+    amount: 0.3,
+    margin: "-100px 0px -100px 0px"
   });
+
   return <div ref={ref} className="relative">
       {/* Central year label - visible on mobile only */}
-      <motion.h3 className="text-xl font-semibold text-noesis-purple absolute left-1/2 transform -translate-x-1/2 -top-10 md:hidden z-10 bg-[#1e2330] px-3 py-1 rounded-full" initial={{
-      y: -20,
-      opacity: 0
-    }} animate={isInView ? {
-      y: 0,
-      opacity: 1
-    } : {
-      y: -20,
-      opacity: 0
-    }} transition={{
-      duration: 0.4,
-      delay: 0.1
-    }}>
+      <motion.h3 
+        className="text-xl font-semibold text-noesis-purple absolute left-1/2 transform -translate-x-1/2 -top-10 md:hidden z-10 bg-[#1e2330] px-3 py-1 rounded-full" 
+        initial={{
+          y: -20,
+          opacity: 0
+        }} 
+        animate={isInView ? {
+          y: 0,
+          opacity: 1
+        } : {
+          y: -20,
+          opacity: 0
+        }} 
+        transition={{
+          duration: 0.4,
+          delay: 0.1 + index * 0.3
+        }}
+      >
         {year}
       </motion.h3>
       
       {/* Timeline dot - Adjusted position to align with the center line */}
-      <motion.div className="absolute left-1/2 transform -translate-x-[5px] top-0 z-10" initial={{
-      scale: 0
-    }} animate={isInView ? {
-      scale: 1
-    } : {
-      scale: 0
-    }} transition={{
-      duration: 0.4,
-      delay: 0.2
-    }}>
+      <motion.div 
+        className="absolute left-1/2 transform -translate-x-[5px] top-0 z-10" 
+        initial={{
+          scale: 0
+        }} 
+        animate={isInView ? {
+          scale: 1
+        } : {
+          scale: 0
+        }} 
+        transition={{
+          duration: 0.4,
+          delay: 0.2 + index * 0.3
+        }}
+      >
         <div className={`w-6 h-6 ${dotColor} rounded-full border-2 border-white shadow-lg shadow-${dotColor}/30`}></div>
       </motion.div>
       
       {/* Content grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-8">
         {/* Left content */}
-        <motion.div className="text-right pr-4 md:pr-12 hidden md:block" initial={{
-        x: -50,
-        opacity: 0
-      }} animate={isInView ? {
-        x: 0,
-        opacity: 1
-      } : {
-        x: -50,
-        opacity: 0
-      }} transition={{
-        duration: 0.5,
-        delay: 0.3 + index * 0.1
-      }}>
+        <motion.div 
+          className="text-right pr-4 md:pr-12 hidden md:block" 
+          initial={{
+            x: -50,
+            opacity: 0
+          }} 
+          animate={isInView ? {
+            x: 0,
+            opacity: 1
+          } : {
+            x: -50,
+            opacity: 0
+          }} 
+          transition={{
+            duration: 0.5,
+            delay: 0.3 + index * 0.3
+          }}
+        >
           <h3 className="text-xl font-semibold text-noesis-purple mb-3">{year}</h3>
           <p className="text-gray-300">{leftContent}</p>
         </motion.div>
@@ -119,40 +138,51 @@ const TimelineItem = ({
         <div className="md:hidden h-8"></div>
         
         {/* Right content */}
-        <motion.div className="pl-4 md:pl-12 mt-6 md:mt-0" initial={{
-        x: 50,
-        opacity: 0
-      }} animate={isInView ? {
-        x: 0,
-        opacity: 1
-      } : {
-        x: 50,
-        opacity: 0
-      }} transition={{
-        duration: 0.5,
-        delay: 0.4 + index * 0.1
-      }}>
+        <motion.div 
+          className="pl-4 md:pl-12 mt-6 md:mt-0" 
+          initial={{
+            x: 50,
+            opacity: 0
+          }} 
+          animate={isInView ? {
+            x: 0,
+            opacity: 1
+          } : {
+            x: 50,
+            opacity: 0
+          }} 
+          transition={{
+            duration: 0.5,
+            delay: 0.4 + index * 0.3
+          }}
+        >
           <h3 className="text-xl font-semibold text-noesis-purple mb-3 md:hidden">{year}</h3>
           <p className="text-gray-300 text-left">{rightContent}</p>
         </motion.div>
         
         {/* Mobile view - left content appears below right content */}
-        <motion.div className="pl-4 pr-4 mt-4 md:hidden" initial={{
-        y: 20,
-        opacity: 0
-      }} animate={isInView ? {
-        y: 0,
-        opacity: 1
-      } : {
-        y: 20,
-        opacity: 0
-      }} transition={{
-        duration: 0.5,
-        delay: 0.5 + index * 0.1
-      }}>
+        <motion.div 
+          className="pl-4 pr-4 mt-4 md:hidden" 
+          initial={{
+            y: 20,
+            opacity: 0
+          }} 
+          animate={isInView ? {
+            y: 0,
+            opacity: 1
+          } : {
+            y: 20,
+            opacity: 0
+          }} 
+          transition={{
+            duration: 0.5,
+            delay: 0.5 + index * 0.3
+          }}
+        >
           <p className="text-gray-300">{leftContent}</p>
         </motion.div>
       </div>
     </div>;
 };
+
 export default CompanyHistory;
