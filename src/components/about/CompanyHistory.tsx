@@ -19,24 +19,28 @@ const CompanyHistory = () => {
           
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="text-gray-300 text-lg leading-relaxed">
-              Since our founding in 2009, Noesis has evolved from a small tech consultancy into a leading innovator at the intersection of human expertise and artificial intelligence.
+              From our humble beginnings in 2009, Noesis has transformed into a pioneering force at the intersection 
+              of human intelligence and artificial intelligence technologies.
             </p>
             
             <p className="text-gray-300 text-lg leading-relaxed mt-6">
-              Our journey has been marked by continuous adaptation to emerging technologies, strategic growth, and an unwavering commitment to delivering exceptional value to our clients across industries.
+              We've consistently embraced emerging technologies while maintaining our core values of innovation, 
+              excellence, and client-focused solutions that deliver measurable results.
             </p>
             
             <p className="text-gray-300 text-lg leading-relaxed mt-6">
-              Today, we pride ourselves on our unique approach that combines the creativity and intuition of our talented team with the power and efficiency of cutting-edge AI systems—creating solutions that are truly greater than the sum of their parts.
+              Today, our team of experts combines deep industry knowledge with cutting-edge AI capabilities to create 
+              solutions that are revolutionizing how businesses operate in the digital age.
             </p>
           </div>
           
           {/* Interactive Timeline */}
           <div className="mt-16 relative pt-8">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-noesis-purple/80 to-noesis-blue/40"></div>
+            {/* Vertical timeline line */}
+            <div className="absolute left-1/2 transform -translate-x-[1px] h-full w-[2px] bg-gradient-to-b from-noesis-purple/80 to-noesis-blue/40"></div>
             
-            <div className="space-y-32 relative">
-              {/* Timeline item 1 */}
+            <div className="space-y-32 md:space-y-40 relative">
+              {/* Timeline items */}
               <TimelineItem 
                 year="2009"
                 leftContent="Founded with a vision to bring cutting-edge technology solutions to businesses"
@@ -45,7 +49,6 @@ const CompanyHistory = () => {
                 index={0}
               />
               
-              {/* Timeline item 2 */}
               <TimelineItem 
                 year="2015"
                 leftContent="Expanded our services to include mobile development and cloud solutions"
@@ -54,7 +57,6 @@ const CompanyHistory = () => {
                 index={1}
               />
               
-              {/* Timeline item 3 */}
               <TimelineItem 
                 year="2020"
                 leftContent="Began integrating AI technologies into our development process"
@@ -63,7 +65,6 @@ const CompanyHistory = () => {
                 index={2}
               />
               
-              {/* Timeline item 4 */}
               <TimelineItem 
                 year="Today"
                 leftContent="Leading the industry with our 40+ member team combining human expertise with advanced AI capabilities"
@@ -93,48 +94,61 @@ const TimelineItem = ({ year, leftContent, rightContent, dotColor, index }: Time
   
   return (
     <div ref={ref} className="relative">
+      {/* Central year label - visible on mobile only */}
+      <motion.h3 
+        className="text-xl font-semibold text-noesis-purple absolute left-1/2 transform -translate-x-1/2 -top-10 md:hidden z-10 bg-[#1e2330] px-3 py-1 rounded-full"
+        initial={{ y: -20, opacity: 0 }}
+        animate={isInView ? { y: 0, opacity: 1 } : { y: -20, opacity: 0 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+      >
+        {year}
+      </motion.h3>
+      
       {/* Timeline dot */}
       <motion.div 
-        className={`absolute left-1/2 transform -translate-x-1/2 -top-3 z-10`}
+        className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
         initial={{ scale: 0 }}
         animate={isInView ? { scale: 1 } : { scale: 0 }}
         transition={{ duration: 0.4, delay: 0.2 }}
       >
-        <div className={`w-6 h-6 ${dotColor} rounded-full border-2 border-white`}></div>
+        <div className={`w-6 h-6 ${dotColor} rounded-full border-2 border-white shadow-lg shadow-${dotColor}/30`}></div>
       </motion.div>
       
-      {/* Grid for left and right content */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      {/* Content grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-8">
         {/* Left content */}
         <motion.div 
-          className="text-right pr-4 md:pr-8 hidden md:block"
+          className="text-right pr-4 md:pr-12 hidden md:block"
           initial={{ x: -50, opacity: 0 }}
           animate={isInView ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
           transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
         >
-          <h3 className="text-xl font-semibold text-noesis-purple">{year}</h3>
-          <p className="text-gray-300 mt-2">{leftContent}</p>
+          <h3 className="text-xl font-semibold text-noesis-purple mb-3">{year}</h3>
+          <p className="text-gray-300">{leftContent}</p>
         </motion.div>
+        
+        {/* Empty div for spacing on mobile */}
+        <div className="md:hidden h-8"></div>
         
         {/* Right content */}
         <motion.div 
-          className="md:pl-4 md:pl-8"
+          className="pl-4 md:pl-12"
           initial={{ x: 50, opacity: 0 }}
           animate={isInView ? { x: 0, opacity: 1 } : { x: 50, opacity: 0 }}
           transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
         >
-          <h3 className="text-xl font-semibold text-noesis-purple md:hidden">{year}</h3>
-          <p className="text-gray-300 mt-2 md:mt-0">{rightContent}</p>
+          <h3 className="text-xl font-semibold text-noesis-purple mb-3 md:hidden">{year}</h3>
+          <p className="text-gray-300">{rightContent}</p>
         </motion.div>
         
-        {/* Mobile view - left content appears below the year for better flow */}
+        {/* Mobile view - left content appears below right content */}
         <motion.div 
-          className="md:hidden"
+          className="pl-4 pr-4 mt-4 md:hidden"
           initial={{ y: 20, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
           transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
         >
-          <p className="text-gray-300 mt-2">{leftContent}</p>
+          <p className="text-gray-300">{leftContent}</p>
         </motion.div>
       </div>
     </div>
