@@ -1,63 +1,43 @@
 import React, { useEffect, useRef } from 'react';
-import { 
-  Award, 
-  Users, 
-  Building, 
-  Laptop,
-  GalleryVertical 
-} from 'lucide-react';
-import { 
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
-} from "@/components/ui/carousel";
+import { Award, Users, Building, Laptop, GalleryVertical } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-
 const CultureSection = () => {
   // Gallery images with captions
-  const galleryImages = [
-    {
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c',
-      caption: 'Team collaboration session'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81',
-      caption: 'Our annual team meetup'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952',
-      caption: 'Office brainstorming'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04',
-      caption: 'Remote work setup'
-    }
-  ];
+  const galleryImages = [{
+    src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c',
+    caption: 'Team collaboration session'
+  }, {
+    src: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81',
+    caption: 'Our annual team meetup'
+  }, {
+    src: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952',
+    caption: 'Office brainstorming'
+  }, {
+    src: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04',
+    caption: 'Remote work setup'
+  }];
 
   // Reference for the canvas element
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  
+
   // Animation effect for team values section
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-    
+
     // Set canvas dimensions
     const setCanvasDimensions = () => {
       if (!canvas) return;
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
     };
-    
+
     // Particles configuration
     const particlesArray: Particle[] = [];
     const numberOfParticles = 50;
-    
     class Particle {
       x: number;
       y: number;
@@ -65,28 +45,25 @@ const CultureSection = () => {
       speedX: number;
       speedY: number;
       color: string;
-      
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
         this.size = Math.random() * 5 + 1;
         this.speedX = (Math.random() - 0.5) * 0.5;
         this.speedY = (Math.random() - 0.5) * 0.5;
-        
+
         // Use purple theme colors with transparency
         const colors = ['rgba(155, 135, 245, 0.6)', 'rgba(130, 87, 230, 0.5)', 'rgba(214, 188, 250, 0.3)'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }
-      
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        
+
         // Boundary check
         if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
         if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
       }
-      
       draw() {
         if (!ctx) return;
         ctx.beginPath();
@@ -95,32 +72,30 @@ const CultureSection = () => {
         ctx.fill();
       }
     }
-    
+
     // Initialize particles
     const init = () => {
       for (let i = 0; i < numberOfParticles; i++) {
         particlesArray.push(new Particle());
       }
     };
-    
+
     // Animate particles
     const animate = () => {
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+
       // Draw connecting lines
       for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();
         particlesArray[i].draw();
-        
         for (let j = i; j < particlesArray.length; j++) {
           const dx = particlesArray[i].x - particlesArray[j].x;
           const dy = particlesArray[i].y - particlesArray[j].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
-          
           if (distance < 100) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(155, 135, 245, ${0.2 - distance/500})`;
+            ctx.strokeStyle = `rgba(155, 135, 245, ${0.2 - distance / 500})`;
             ctx.lineWidth = 1;
             ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
             ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
@@ -128,26 +103,23 @@ const CultureSection = () => {
           }
         }
       }
-      
       requestAnimationFrame(animate);
     };
-    
+
     // Handle resize
     window.addEventListener('resize', setCanvasDimensions);
-    
+
     // Initialize
     setCanvasDimensions();
     init();
     animate();
-    
+
     // Cleanup
     return () => {
       window.removeEventListener('resize', setCanvasDimensions);
     };
   }, []);
-
-  return (
-    <section className="bg-[#1A1F2C] py-12 md:py-16">
+  return <section className="bg-[#1A1F2C] py-12 md:py-0">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -215,10 +187,7 @@ const CultureSection = () => {
               {/* Left side - Animated canvas replacing static icon */}
               <div className="md:w-1/3 flex justify-center">
                 <div className="relative w-full aspect-square max-w-[240px] rounded-2xl overflow-hidden border border-purple-500/20">
-                  <canvas 
-                    ref={canvasRef} 
-                    className="absolute inset-0 w-full h-full"
-                  ></canvas>
+                  <canvas ref={canvasRef} className="absolute inset-0 w-full h-full"></canvas>
                   <div className="absolute inset-0 flex items-center justify-center">
                     <Users className="h-12 w-12 text-purple-400/70" />
                   </div>
@@ -266,24 +235,18 @@ const CultureSection = () => {
           
           <Carousel className="w-full" autoplay={true} interval={5000}>
             <CarouselContent>
-              {galleryImages.map((image, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+              {galleryImages.map((image, index) => <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                   <Card className="border-0 bg-transparent">
                     <CardContent className="p-1">
                       <div className="overflow-hidden rounded-xl">
-                        <img 
-                          src={image.src} 
-                          alt={image.caption} 
-                          className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300" 
-                        />
+                        <img src={image.src} alt={image.caption} className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300" />
                         <div className="bg-[#1A1F2C]/80 p-3 text-center">
                           <p className="text-gray-300">{image.caption}</p>
                         </div>
                       </div>
                     </CardContent>
                   </Card>
-                </CarouselItem>
-              ))}
+                </CarouselItem>)}
             </CarouselContent>
             <div className="flex justify-center gap-2 mt-4">
               <CarouselPrevious className="relative inset-auto translate-y-0" />
@@ -292,8 +255,6 @@ const CultureSection = () => {
           </Carousel>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CultureSection;
