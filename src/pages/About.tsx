@@ -10,6 +10,8 @@ import CompanyHistory from '@/components/about/CompanyHistory';
 import FounderSection from '@/components/founder/FounderSection';
 import CultureSection from '@/components/about/CultureSection';
 import CareersSection from '@/components/about/CareersSection';
+import ChatBotSection from '@/components/ChatBotSection';
+import ContactBanner from '@/components/ContactBanner';
 
 const About = () => {
   return (
@@ -43,6 +45,12 @@ const About = () => {
         </section>
         
         <CareersSection />
+        
+        {/* AI Assistant Section */}
+        <ChatBotSection />
+        
+        {/* Contact Banner */}
+        <ContactBanner />
       </main>
       <Footer />
       <ScrollToTop />
