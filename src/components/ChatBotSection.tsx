@@ -7,7 +7,7 @@ const ChatBotSection = () => {
       <div className="container mx-auto px-4 xl:px-8 2xl:px-16">
         <div className="mb-8 text-center">
           <h2 className="section-title">Experience <span className="gradient-text">Noesis AI Assistant</span></h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mt-4 whitespace-nowrap overflow-x-auto">Interact with our AI assistant to learn more about our services and how we can help your business.</p>
+          <p className="text-xl text-gray-300 max-w-5xl mx-auto mt-4">Interact with our AI assistant to learn more about our services and how we can help your business.</p>
         </div>
         
         <div className="w-full max-w-4xl mx-auto">
