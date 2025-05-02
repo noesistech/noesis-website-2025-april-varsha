@@ -19,7 +19,7 @@ const About = () => {
       <main className="pt-16 sm:pt-20 md:pt-16 flex flex-col gap-16 md:gap-24">
         <SubpageHero 
           title="About Our Company"
-          subtitle="Learn about our mission, vision, and the team behind our success"
+          subtitle="Learn about our mission, vision, and how we blend human expertise with AI innovation"
           gradientText="Company"
           backgroundEffect="purple"
         />

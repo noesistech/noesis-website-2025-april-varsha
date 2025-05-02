@@ -36,17 +36,15 @@ const MissionSection = ({ showPromisePanel = true }: MissionSectionProps) => {
   const gridRows = 16;
   const gridCols = 24;
 
-  return <section id="mission" ref={sectionRef} className="page-section relative overflow-hidden bg-noesis-dark py-12 sm:py-16">
+  return <section id="mission" ref={sectionRef} className="page-section relative overflow-hidden bg-[#1A1F2C] py-12 sm:py-16">
       <BackgroundPattern gridRows={gridRows} gridCols={gridCols} />
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="section-title mb-6">
-          Our <span className="gradient-text">Mission & Vision</span>
-        </h2>
-        {missionSectionData.mission_subtitle && (
-          <p className="section-subtitle">
-            {missionSectionData.mission_subtitle}
-          </p>
-        )}
+        <div className="text-center max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            Our <span className="text-noesis-purple">Mission & Vision</span>
+          </h2>
+          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 max-w-6xl mx-auto mb-12">
           <MissionCard title={missionSectionData.mission_title} description={missionSectionData.mission_description} />
           <VisionCard title={missionSectionData.vision_title} description={missionSectionData.vision_description} />

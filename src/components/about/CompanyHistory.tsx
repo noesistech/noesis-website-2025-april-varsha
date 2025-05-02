@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { useContent } from '@/contexts/ContentContext';
 import { motion } from 'framer-motion';
@@ -6,7 +7,7 @@ const CompanyHistory = () => {
   const {
     aboutSection
   } = useContent();
-  return <section className="w-full bg-gradient-to-b from-[#1A1F2C] to-[#232736] py-12 md:py-0">
+  return <section className="w-full bg-[#1A1F2C] py-12 md:py-0">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
@@ -63,7 +64,7 @@ const TimelineItem = ({
   });
   return <div ref={ref} className="relative">
       {/* Central year label - visible on mobile only */}
-      <motion.h3 className="text-xl font-semibold text-noesis-purple absolute left-1/2 transform -translate-x-1/2 -top-10 md:hidden z-10 bg-[#1e2330] px-3 py-1 rounded-full" initial={{
+      <motion.h3 className="text-xl font-semibold text-noesis-purple absolute left-1/2 transform -translate-x-1/2 -top-10 md:hidden z-10 bg-[#1A1F2C] px-3 py-1 rounded-full" initial={{
       y: -20,
       opacity: 0
     }} animate={isInView ? {
