@@ -1,16 +1,14 @@
-
 import React, { useRef, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useContent } from '@/contexts/ContentContext';
-
 const PromiseSection = () => {
   const promiseCardRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
-  const { missionSection } = useContent();
-
+  const {
+    missionSection
+  } = useContent();
   useEffect(() => {
     if (!promiseCardRef.current || isMobile) return;
-    
     const handleMouseMove = (e: MouseEvent) => {
       const card = promiseCardRef.current;
       if (!card) return;
@@ -23,16 +21,13 @@ const PromiseSection = () => {
       const rotateY = (centerX - x) / 30;
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     };
-
     const handleMouseLeave = () => {
       if (!promiseCardRef.current) return;
       promiseCardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
     };
-
     const element = promiseCardRef.current;
     element.addEventListener('mousemove', handleMouseMove);
     element.addEventListener('mouseleave', handleMouseLeave);
-
     return () => {
       if (element) {
         element.removeEventListener('mousemove', handleMouseMove);
@@ -40,9 +35,7 @@ const PromiseSection = () => {
       }
     };
   }, [isMobile]);
-
-  return (
-    <section className="py-16 sm:py-24">
+  return <section className="py-16 sm:py-24">
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
@@ -50,17 +43,14 @@ const PromiseSection = () => {
           </h2>
           
           {/* Purple divider line */}
-          <div className="h-1 w-24 bg-noesis-purple mx-auto rounded-full"></div>
+          
           
           {/* Subtitle with proper spacing */}
           <p className="text-gray-300 text-lg mt-6">{missionSection.promise_subtitle}</p>
         </div>
         
         <div className="max-w-3xl mx-auto mt-16">
-          <div 
-            ref={promiseCardRef}
-            className="bg-[#1d2130]/80 backdrop-blur-sm rounded-xl p-8 md:p-10 transition-transform duration-300 ease-out shadow-xl border border-white/5 hover:border-white/10"
-          >
+          <div ref={promiseCardRef} className="bg-[#1d2130]/80 backdrop-blur-sm rounded-xl p-8 md:p-10 transition-transform duration-300 ease-out shadow-xl border border-white/5 hover:border-white/10">
             <p className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wide text-white text-center">
               <span>Human </span>
               <span className="text-noesis-blue">creativity</span>
@@ -70,8 +60,6 @@ const PromiseSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default PromiseSection;
