@@ -51,8 +51,8 @@ const AboutSection = () => {
   return <section id="about" className="relative py-20 bg-noesis-dark overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-          {/* Left side - P5 Animation */}
-          <div ref={leftContainerRef} className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden animate-fade-in" style={{
+          {/* Left side - P5 Animation with square aspect ratio on mobile */}
+          <div ref={leftContainerRef} className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden animate-fade-in aspect-square md:aspect-auto" style={{
           minHeight: '500px'
         }}>
             <P5Animation className="w-full h-full absolute inset-0" />
