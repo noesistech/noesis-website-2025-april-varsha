@@ -43,7 +43,7 @@ const PromiseSection = () => {
 
   return (
     <section className="py-16 sm:py-24">
-      <div className="container mx-auto px-6 relative z-10 text-center">
+      <div className="container mx-auto px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="section-title">
             Our <span className="gradient-text">Promise</span>
