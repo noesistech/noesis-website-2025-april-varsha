@@ -9,6 +9,7 @@ import SubpageHero from '@/components/SubpageHero';
 import CompanyHistory from '@/components/about/CompanyHistory';
 import FounderSection from '@/components/founder/FounderSection';
 import CultureSection from '@/components/about/CultureSection';
+import CareersSection from '@/components/about/CareersSection';
 
 const About = () => {
   return (
@@ -40,6 +41,8 @@ const About = () => {
             <FounderSection />
           </div>
         </section>
+        
+        <CareersSection />
       </main>
       <Footer />
       <ScrollToTop />
