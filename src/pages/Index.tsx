@@ -13,8 +13,19 @@ import TechStackSection from '../components/TechStackSection';
 import ClientsSection from '../components/ClientsSection';
 import ContactSection from '../components/ContactSection';
 import FounderSection from '@/components/founder/FounderSection';
+import { useContent } from '@/contexts/ContentContext';
 
 const Index = () => {
+  // Access data from ContentContext
+  const { 
+    aiCapabilities,
+    aiProducts,
+    techStackSection,
+    techCategories,
+    solutionsSection,
+    solutionItems
+  } = useContent();
+
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
@@ -22,7 +33,7 @@ const Index = () => {
         <HeroSection />
         <AboutSection />
         <ServicesPreviewSection />
-        <AICapabilitiesPreviewSection />
+        <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
         
         {/* Add the Founder Section with CTA */}
         <section className="bg-[#1A1F2C] py-16 md:py-24">
@@ -41,9 +52,9 @@ const Index = () => {
           </div>
         </section>
         
-        <BrainstormerSection />
-        <TechStackSection />
-        <SolutionsSection />
+        <BrainstormerSection products={aiProducts} />
+        <TechStackSection title={techStackSection.title} categories={techCategories} />
+        <SolutionsSection title={solutionsSection.title} solutions={solutionItems} />
         <ClientsSection />
         <ContactSection />
         <ChatBotSection />
