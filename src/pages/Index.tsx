@@ -92,8 +92,10 @@ const Index = () => {
         
         <SolutionsSection title={solutionsSection.title} solutions={solutionItems} />
         <ClientsSection />
-        <ContactBanner />
       </main>
+      
+      {/* ContactBanner positioned directly above Footer with no margin/padding between them */}
+      <ContactBanner />
       <Footer />
     </div>
   );
