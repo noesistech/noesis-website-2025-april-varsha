@@ -4,7 +4,7 @@ import {
   Award, 
   Users, 
   Building, 
-  RemoteControl,
+  Laptop,
   GalleryVertical 
 } from 'lucide-react';
 import { 
@@ -82,7 +82,7 @@ const CultureSection = () => {
           <div className="glass-card">
             <div className="flex flex-col items-center text-center">
               <div className="bg-purple-900/30 p-3 rounded-full mb-4">
-                <RemoteControl className="h-6 w-6 text-purple-400" />
+                <Laptop className="h-6 w-6 text-purple-400" />
               </div>
               <h3 className="text-xl font-bold mb-2">Remote/Hybrid Work</h3>
               <p className="text-gray-300">
