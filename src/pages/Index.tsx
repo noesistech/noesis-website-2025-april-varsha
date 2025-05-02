@@ -10,7 +10,7 @@ import SolutionsSection from '../components/SolutionsSection';
 import AICapabilitiesPreviewSection from '../components/AICapabilitiesPreviewSection';
 import BrainstormerSection from '../components/BrainstormerSection';
 import ClientsSection from '../components/ClientsSection';
-import ContactSection from '../components/ContactSection';
+import ContactBanner from '../components/ContactBanner';
 import FounderSection from '@/components/founder/FounderSection';
 import PromiseSection from '@/components/PromiseSection';
 import { useContent } from '@/contexts/ContentContext';
@@ -89,7 +89,7 @@ const Index = () => {
         
         <SolutionsSection title={solutionsSection.title} solutions={solutionItems} />
         <ClientsSection />
-        <ContactSection />
+        <ContactBanner />
       </main>
       <Footer />
     </div>
