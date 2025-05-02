@@ -44,24 +44,28 @@ const PromiseSection = () => {
   return (
     <section className="py-16 sm:py-24">
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="section-title">
-            Our <span className="gradient-text">Promise</span>
+        <div className="text-center max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
+            Our <span className="text-noesis-purple">Promise</span>
           </h2>
-          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4"></div>
-          <p className="text-gray-300 text-lg mt-8">{missionSection.promise_subtitle}</p>
+          
+          {/* Purple divider line */}
+          <div className="h-1 w-24 bg-noesis-purple mx-auto rounded-full"></div>
+          
+          {/* Subtitle with proper spacing */}
+          <p className="text-gray-300 text-lg mt-6">{missionSection.promise_subtitle}</p>
         </div>
         
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto mt-16">
           <div 
             ref={promiseCardRef}
-            className="bg-[#2A2F3C]/70 backdrop-blur-sm rounded-xl p-8 md:p-10 transition-transform duration-300 ease-out shadow-xl border border-white/5 hover:border-white/10"
+            className="bg-[#1d2130]/80 backdrop-blur-sm rounded-xl p-8 md:p-10 transition-transform duration-300 ease-out shadow-xl border border-white/5 hover:border-white/10"
           >
-            <p className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide text-white">
+            <p className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wide text-white text-center">
               <span>Human </span>
-              <span className="bg-gradient-to-r from-noesis-purple to-noesis-blue bg-clip-text text-transparent underline decoration-gradient-to-r from-noesis-purple to-noesis-blue decoration-2 underline-offset-8">creativity</span>
+              <span className="text-noesis-blue">creativity</span>
               <span>, AI </span>
-              <span className="bg-gradient-to-r from-noesis-purple to-noesis-blue bg-clip-text text-transparent underline decoration-gradient-to-r from-noesis-purple to-noesis-blue decoration-2 underline-offset-8">precision</span>
+              <span className="text-noesis-purple">precision</span>
             </p>
           </div>
         </div>

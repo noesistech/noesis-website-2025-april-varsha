@@ -32,7 +32,7 @@ const Index = () => {
         <ChatBotSection />
         <AboutSection />
         
-        {/* Promise Section - moved directly after AboutSection */}
+        {/* Promise Section - positioned directly after AboutSection */}
         <PromiseSection />
         
         <ServicesPreviewSection />
