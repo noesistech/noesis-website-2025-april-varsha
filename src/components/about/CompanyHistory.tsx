@@ -104,9 +104,9 @@ const TimelineItem = ({ year, leftContent, rightContent, dotColor, index }: Time
         {year}
       </motion.h3>
       
-      {/* Timeline dot */}
+      {/* Timeline dot - Fixed position to align with line */}
       <motion.div 
-        className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+        className="absolute left-1/2 transform -translate-x-1/2 top-0 z-10"
         initial={{ scale: 0 }}
         animate={isInView ? { scale: 1 } : { scale: 0 }}
         transition={{ duration: 0.4, delay: 0.2 }}
@@ -132,7 +132,7 @@ const TimelineItem = ({ year, leftContent, rightContent, dotColor, index }: Time
         
         {/* Right content */}
         <motion.div 
-          className="pl-4 md:pl-12"
+          className="pl-4 md:pl-12 mt-6 md:mt-0"
           initial={{ x: 50, opacity: 0 }}
           animate={isInView ? { x: 0, opacity: 1 } : { x: 50, opacity: 0 }}
           transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
