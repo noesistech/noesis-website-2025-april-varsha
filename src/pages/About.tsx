@@ -17,7 +17,7 @@ const About = () => {
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
-      <main className="pt-16 sm:pt-20 md:pt-16 flex flex-col gap-16 md:gap-24">
+      <main className="pt-16 sm:pt-20 md:pt-16">
         <SubpageHero 
           title="About Our Company"
           subtitle="Learn about our mission, vision, and how we blend human expertise with AI innovation"
@@ -31,7 +31,7 @@ const About = () => {
         
         <CultureSection />
         
-        <section className="bg-[#1A1F2C] py-8 md:py-16">
+        <section className="py-16">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-white">
@@ -49,7 +49,7 @@ const About = () => {
         {/* AI Assistant Section */}
         <ChatBotSection />
         
-        {/* Contact Banner */}
+        {/* Contact Banner - No bottom margin needed as it connects to footer */}
         <ContactBanner />
       </main>
       <Footer />
