@@ -35,7 +35,7 @@ const PromiseSection = () => {
       }
     };
   }, [isMobile]);
-  return <section className="py-16 sm:py-24">
+  return <section className="py-16 sm:py-0">
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
