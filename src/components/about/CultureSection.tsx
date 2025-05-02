@@ -129,23 +129,53 @@ const CultureSection = () => {
           </Carousel>
         </div>
 
-        {/* Team values statement */}
-        <div className="flex flex-col md:flex-row items-center gap-8 glass-card">
-          <div className="md:w-1/3 flex justify-center">
-            <Users className="h-24 w-24 text-purple-400" />
-          </div>
-          <div className="md:w-2/3">
-            <h3 className="text-2xl font-bold mb-4">Our Team Values</h3>
-            <p className="text-gray-300 mb-4">
-              At Noesis, our team is our greatest asset. We foster a supportive environment 
-              where creativity thrives and innovation is celebrated. We believe that diverse 
-              perspectives lead to better solutions, and we're committed to creating an inclusive 
-              workplace where everyone can contribute their unique talents.
-            </p>
-            <p className="text-gray-300">
-              Whether working remotely or in our offices, we maintain strong connections through 
-              regular team events, collaborative projects, and a shared commitment to excellence.
-            </p>
+        {/* Redesigned Team Values Section */}
+        <div className="bg-gradient-to-br from-purple-900/30 to-purple-800/10 rounded-xl p-8 border border-white/10">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="flex items-center justify-center md:w-1/3">
+              <div className="relative">
+                <div className="absolute -inset-1 rounded-full bg-purple-500/30 blur-md"></div>
+                <div className="relative bg-[#1A1F2C] p-6 rounded-full border border-purple-500/40">
+                  <Users className="h-16 w-16 text-purple-400" />
+                </div>
+              </div>
+            </div>
+            
+            <div className="md:w-2/3">
+              <h3 className="text-2xl font-bold mb-4 flex items-center">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-200">
+                  Our Team Values
+                </span>
+              </h3>
+              
+              <div className="space-y-4">
+                <p className="text-gray-300">
+                  At Noesis, our team is our greatest asset. We foster a supportive environment 
+                  where creativity thrives and innovation is celebrated. We believe that diverse 
+                  perspectives lead to better solutions, and we're committed to creating an inclusive 
+                  workplace where everyone can contribute their unique talents.
+                </p>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                  <div className="flex items-center gap-3 bg-[#1A1F2C]/80 p-3 rounded-lg border border-white/5">
+                    <div className="h-2 w-2 rounded-full bg-purple-500"></div>
+                    <p className="text-gray-200 font-medium">Collaboration</p>
+                  </div>
+                  <div className="flex items-center gap-3 bg-[#1A1F2C]/80 p-3 rounded-lg border border-white/5">
+                    <div className="h-2 w-2 rounded-full bg-purple-500"></div>
+                    <p className="text-gray-200 font-medium">Innovation</p>
+                  </div>
+                  <div className="flex items-center gap-3 bg-[#1A1F2C]/80 p-3 rounded-lg border border-white/5">
+                    <div className="h-2 w-2 rounded-full bg-purple-500"></div>
+                    <p className="text-gray-200 font-medium">Respect</p>
+                  </div>
+                  <div className="flex items-center gap-3 bg-[#1A1F2C]/80 p-3 rounded-lg border border-white/5">
+                    <div className="h-2 w-2 rounded-full bg-purple-500"></div>
+                    <p className="text-gray-200 font-medium">Growth Mindset</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
