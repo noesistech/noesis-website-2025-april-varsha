@@ -2,10 +2,12 @@ import React, { useEffect, useRef } from 'react';
 import { useContent } from '@/contexts/ContentContext';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
+
 const CompanyHistory = () => {
   const {
     aboutSection
   } = useContent();
+  
   return <section className="w-full bg-gradient-to-b from-[#1A1F2C] to-[#232736] py-12 md:py-16">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto text-center space-y-8">
@@ -17,18 +19,7 @@ const CompanyHistory = () => {
           
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="text-gray-300 text-lg leading-relaxed">
-              From our humble beginnings in 2009, Noesis has transformed into a pioneering force at the intersection 
-              of human intelligence and artificial intelligence technologies.
-            </p>
-            
-            <p className="text-gray-300 text-lg leading-relaxed mt-6">
-              We've consistently embraced emerging technologies while maintaining our core values of innovation, 
-              excellence, and client-focused solutions that deliver measurable results.
-            </p>
-            
-            <p className="text-gray-300 text-lg leading-relaxed mt-6">
-              Today, our team of experts combines deep industry knowledge with cutting-edge AI capabilities to create 
-              solutions that are revolutionizing how businesses operate in the digital age.
+              Since our founding in 2009, Noesis has evolved into a pioneering force in digital technology, powered by our 40+ member team of skilled creative technologists, engineers, project managers, and business analysts with a combined 175+ years of experience. Our excellence is reflected in our 95% client retention rate and average relationships exceeding 4 years, as we continue to serve as an innovation partner to leading agencies and consultancies across the globe, blending human expertise with cutting-edge AI capabilities to deliver transformative solutions.
             </p>
           </div>
           
@@ -52,6 +43,7 @@ const CompanyHistory = () => {
       </div>
     </section>;
 };
+
 interface TimelineItemProps {
   year: string;
   leftContent: string;
