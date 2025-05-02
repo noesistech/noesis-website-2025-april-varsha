@@ -94,8 +94,8 @@ const Index = () => {
         <ClientsSection />
       </main>
       
-      {/* ContactBanner directly above Footer with no margin/padding between */}
-      <div className="contact-footer-container">
+      {/* Remove margin from container and update comment */}
+      <div className="contact-footer-container" style={{ marginBottom: 0, paddingBottom: 0 }}>
         <ContactBanner />
         <Footer />
       </div>

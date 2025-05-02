@@ -8,7 +8,7 @@ const Footer = () => {
   const isMobile = useIsMobile();
 
   return (
-    <footer className="bg-[#111319] py-12 mt-20">  {/* Changed background color */}
+    <footer className="bg-[#111319] py-12 mt-0">  {/* Changed margin-top to 0 */}
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Company Logo, Description, and Social Links */}
