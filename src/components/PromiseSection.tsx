@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useContent } from '@/contexts/ContentContext';
@@ -48,7 +49,7 @@ const PromiseSection = () => {
         
         <div className="max-w-3xl mx-auto mt-16">
           <div ref={promiseCardRef} className="bg-[#1d2130]/80 backdrop-blur-sm rounded-xl p-8 md:p-10 transition-transform duration-300 ease-out shadow-xl border border-white/5 hover:border-white/10 py-[35px]">
-            <p className="text-3xl lg:text-5xl font-light tracking-wide text-white text-center md:text-2xl">
+            <p className="text-2xl md:text-3xl lg:text-5xl font-light tracking-wide text-white text-center">
               <span>Human </span>
               <span className="text-noesis-blue">creativity</span>
               <span>, AI </span>
