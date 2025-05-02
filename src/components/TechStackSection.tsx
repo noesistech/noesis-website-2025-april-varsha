@@ -51,9 +51,9 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
               {techStack.map((category) => (
                 <Card key={category.id} className="bg-gray-800/50 border border-gray-700/50 hover:border-noesis-purple/50 transition-all">
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold text-white mb-3">{category.name}</h3>
+                    <h3 className="text-xl font-semibold text-white mb-3">{category.title}</h3>
                     <ul className="space-y-2">
-                      {category.items?.map((item) => (
+                      {category.technologies?.map((item) => (
                         <li key={item.id} className="text-gray-300/80">
                           {item.name}
                         </li>
@@ -70,9 +70,9 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
               {cloudStack.map((category) => (
                 <Card key={category.id} className="bg-gray-800/50 border border-gray-700/50 hover:border-noesis-purple/50 transition-all">
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold text-white mb-3">{category.name}</h3>
+                    <h3 className="text-xl font-semibold text-white mb-3">{category.title}</h3>
                     <ul className="space-y-2">
-                      {category.items?.map((item) => (
+                      {category.technologies?.map((item) => (
                         <li key={item.id} className="text-gray-300/80">
                           {item.name}
                         </li>
