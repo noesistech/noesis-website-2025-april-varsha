@@ -81,9 +81,7 @@ const CareersSection = () => {
             Join Our <span className="text-noesis-purple">Team</span>
           </h2>
           <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
-          <p className="text-gray-300">
-            Explore opportunities to work with us and be part of our mission to transform businesses through AI innovation
-          </p>
+          
         </div>
 
         {/* Current Opportunities */}

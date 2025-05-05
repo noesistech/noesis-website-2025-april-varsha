@@ -134,9 +134,7 @@ const CultureSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Our <span className="text-noesis-purple">Culture</span>
           </h2>
-          <p className="text-gray-300 max-w-2xl mx-auto">
-            Discover what makes Noesis a unique place to work and grow professionally
-          </p>
+          
         </div>
 
         {/* Culture highlights cards */}
