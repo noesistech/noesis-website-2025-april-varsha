@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { useContent } from '@/contexts/ContentContext';
 import { motion } from 'framer-motion';
@@ -9,7 +8,7 @@ const CompanyHistory = () => {
   } = useContent();
   return <section className="w-full bg-[#1A1F2C] py-12 md:py-0">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+        <div className="max-w-4xl mx-auto text-center space-y-8 py-[2px]">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             Our <span className="text-noesis-purple">Journey</span> Since 2009
           </h2>

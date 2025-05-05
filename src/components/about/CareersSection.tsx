@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Briefcase, FileText, User, Mail } from 'lucide-react';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -9,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "@/components/ui/use-toast";
-
 const applicationFormSchema = z.object({
   fullName: z.string().min(2, {
     message: "Full name must be at least 2 characters."
@@ -27,9 +25,7 @@ const applicationFormSchema = z.object({
   }),
   resume: z.string().optional()
 });
-
 type ApplicationFormValues = z.infer<typeof applicationFormSchema>;
-
 const CareersSection = () => {
   // Define default values for the form
   const defaultValues: Partial<ApplicationFormValues> = {
@@ -78,7 +74,6 @@ const CareersSection = () => {
     type: "Full-time",
     description: "Bridge the gap between business needs and technical implementation of AI solutions."
   }];
-
   return <section className="py-16 bg-[#1A1F2C]">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-12">
@@ -93,27 +88,14 @@ const CareersSection = () => {
 
         {/* Current Opportunities */}
         <div className="mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {opportunities.map((job, index) => (
-              <div key={index} className="bg-gradient-to-br from-purple-900/10 to-indigo-900/10 border border-purple-500/20 rounded-xl p-6 hover:border-purple-500/40 transition-all duration-300">
-                <h3 className="text-xl font-semibold text-white mb-2">{job.title}</h3>
-                <div className="flex items-center mb-3 text-sm">
-                  <span className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full mr-2">{job.department}</span>
-                  <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full">{job.type}</span>
-                </div>
-                <p className="text-gray-300">{job.description}</p>
-              </div>
-            ))}
-          </div>
+          
         </div>
 
         {/* General Application Form */}
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-semibold text-white mb-2">Submit Your Application</h3>
-            <p className="text-gray-300">
-              Don't see a position that matches your skills? We're always looking for talented individuals to join our team.
-            </p>
+            
+            
           </div>
           
           <div className="bg-gradient-to-br from-purple-900/10 to-indigo-900/10 border border-purple-500/20 rounded-xl p-6 md:p-8">
@@ -204,5 +186,4 @@ const CareersSection = () => {
       </div>
     </section>;
 };
-
 export default CareersSection;

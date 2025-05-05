@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { missionSectionData } from '@/data/content/mission';
 import MissionCard from './mission/MissionCard';
@@ -7,15 +6,14 @@ import PromisePanel from './mission/PromisePanel';
 import BackgroundPattern from './mission/BackgroundPattern';
 import MissionStyles from './mission/MissionStyles';
 import { useIsMobile } from '@/hooks/use-mobile';
-
 interface MissionSectionProps {
   showPromisePanel?: boolean;
 }
-
-const MissionSection = ({ showPromisePanel = true }: MissionSectionProps) => {
+const MissionSection = ({
+  showPromisePanel = true
+}: MissionSectionProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
-
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
@@ -32,13 +30,11 @@ const MissionSection = ({ showPromisePanel = true }: MissionSectionProps) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMobile]);
-
   const gridRows = 16;
   const gridCols = 24;
-
-  return <section id="mission" ref={sectionRef} className="page-section relative overflow-hidden bg-[#1A1F2C] py-12 sm:py-16">
+  return <section id="mission" ref={sectionRef} className="page-section relative overflow-hidden bg-[#1A1F2C] sm:py-16 py-[60px]">
       <BackgroundPattern gridRows={gridRows} gridCols={gridCols} />
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10 py-[10px]">
         <div className="text-center max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             Our <span className="text-noesis-purple">Mission & Vision</span>
@@ -50,16 +46,9 @@ const MissionSection = ({ showPromisePanel = true }: MissionSectionProps) => {
           <MissionCard title={missionSectionData.mission_title} description={missionSectionData.mission_description} />
           <VisionCard title={missionSectionData.vision_title} description={missionSectionData.vision_description} />
         </div>
-        {showPromisePanel && (
-          <PromisePanel 
-            title={missionSectionData.promise_title} 
-            subtitle={missionSectionData.promise_subtitle}
-            text={missionSectionData.promise_text} 
-          />
-        )}
+        {showPromisePanel && <PromisePanel title={missionSectionData.promise_title} subtitle={missionSectionData.promise_subtitle} text={missionSectionData.promise_text} />}
       </div>
       <MissionStyles gridRows={gridRows} gridCols={gridCols} />
     </section>;
 };
-
 export default MissionSection;
