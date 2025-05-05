@@ -123,12 +123,14 @@ const CultureSection = () => {
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    // Initialize with a slight delay to ensure container is ready
+    // Ensure the container is properly sized and visible
     setTimeout(() => {
       setCanvasDimensions();
       init();
+      // Start the animation
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
       animationRef.current = requestAnimationFrame(animate);
-    }, 100);
+    }, 300); // Longer delay to ensure DOM is ready
 
     // Handle resize
     const handleResize = () => {
@@ -205,13 +207,13 @@ const CultureSection = () => {
         </div>
 
         {/* Team Values Section */}
-        <div className="backdrop-blur-sm bg-[#1A1F2C]/40 rounded-xl border border-purple-500/10 overflow-hidden mb-12">
+        <div className="backdrop-blur-sm bg-[#1A1F2C]/40 rounded-xl border border-purple-500/10 overflow-hidden mb-12 relative">
           <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 to-transparent pointer-events-none opacity-60"></div>
           
           <div className="relative p-8">
             <div className="flex flex-col md:flex-row items-center gap-8">
               {/* Left side - Animated canvas replacing static icon */}
-              <div ref={canvasContainerRef} className="md:w-1/3 flex justify-center relative">
+              <div ref={canvasContainerRef} className="md:w-1/3 flex justify-center relative w-full aspect-square md:aspect-auto">
                 <div className="w-full aspect-square max-w-[240px] rounded-2xl overflow-hidden border border-purple-500/20 relative">
                   <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-10"></canvas>
                   <div className="absolute inset-0 flex items-center justify-center z-20">
