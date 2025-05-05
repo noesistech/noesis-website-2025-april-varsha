@@ -16,7 +16,7 @@ const CompanyHistory = () => {
           <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full"></div>
           
           <div className="prose prose-lg prose-invert max-w-none">
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-gray-300 leading-relaxed text-base">
               Since our founding in 2009, Noesis has evolved into a pioneering force in digital technology, powered by our 40+ member team of skilled creative technologists, engineers, project managers, and business analysts with a combined 175+ years of experience. Our excellence is reflected in our 95% client retention rate and average relationships exceeding 4 years, as we continue to serve as an innovation partner to leading agencies and consultancies across the globe, blending human expertise with cutting-edge AI capabilities to deliver transformative solutions.
             </p>
           </div>
