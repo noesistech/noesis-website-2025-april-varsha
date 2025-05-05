@@ -180,7 +180,7 @@ const TimelineItem = ({
           delay: 0.4 + index * 0.3
         }}>
             <h3 className="text-xl font-semibold text-noesis-purple mb-3">{year}</h3>
-            <p className="text-gray-300">{rightContent}</p>
+            <p className="text-gray-300 text-left">{rightContent}</p>
           </motion.div>
         </div>
       </div>
