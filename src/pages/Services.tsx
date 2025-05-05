@@ -55,7 +55,7 @@ const Services = () => {
         <section className="bg-[#1A1F2C] py-16">
           <div className="container mx-auto px-4 sm:px-6">
             <h2 className="section-title mb-6">
-              Our <span className="gradient-text">Services</span>
+              What <span className="gradient-text">We Offer</span>
             </h2>
             <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mb-12">
               Explore our comprehensive range of services designed to transform your business
@@ -72,11 +72,6 @@ const Services = () => {
                     <h3 className="text-xl font-bold mb-3 text-white">{service.title}</h3>
                     <p className="text-gray-300">{service.description}</p>
                   </CardContent>
-                  <CardFooter>
-                    <Button variant="ghost" className="text-noesis-purple hover:text-white hover:bg-noesis-purple/20 p-0 flex items-center gap-2">
-                      Learn more <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </CardFooter>
                 </Card>
               ))}
             </div>
