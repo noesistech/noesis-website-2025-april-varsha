@@ -112,7 +112,7 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
         </section>
         
         {/* AI Products Section - MOVED AFTER TECH STACK */}
-        {aiProducts && aiProducts.length > 0 && <section className="py-16">
+        {aiProducts && aiProducts.length > 0 && <section className="py-0">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto mb-2">
               <h2 className="text-3xl md:text-4xl font-bold text-white">
