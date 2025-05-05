@@ -25,7 +25,7 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
     <section className="page-section overflow-hidden relative">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <Tabs defaultValue="tech" value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center">
             <TabsList className="glass p-1">
               <TabsTrigger 
                 value="tech" 

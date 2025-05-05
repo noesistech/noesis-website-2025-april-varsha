@@ -98,11 +98,11 @@ exceptional solutions tailored to your needs."
         {/* AI Capabilities Section */}
         <section className="py-16">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="text-center max-w-3xl mx-auto mb-6">
+            <div className="text-center max-w-3xl mx-auto mb-2">
               <h2 className="text-3xl md:text-4xl font-bold text-white">
                 Our <span className="text-noesis-purple">AI Capabilities</span>
               </h2>
-              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-6"></div>
+              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-2"></div>
             </div>
             <AICapabilitiesSection 
               title={aiCapabilitiesSection.title} 
@@ -116,11 +116,11 @@ exceptional solutions tailored to your needs."
         {/* Technology Stack Section */}
         <section className="py-16">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="text-center max-w-3xl mx-auto mb-6">
+            <div className="text-center max-w-3xl mx-auto mb-2">
               <h2 className="text-3xl md:text-4xl font-bold text-white">
                 Our <span className="text-noesis-purple">Tech Stack</span>
               </h2>
-              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-6"></div>
+              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-2"></div>
             </div>
             <TechStackSection 
               title={techStackSection.title} 
