@@ -3,7 +3,7 @@ import React from 'react';
 import ChatBot from './chat/ChatBot';
 import { MessageProvider } from '@/contexts/MessageContext';
 
-const ChatBotSection = () => {
+const ChatBotSection: React.FC = () => {
   return (
     <section id="chatbot" className="bg-[#171C28] py-16">
       <div className="container mx-auto px-4">

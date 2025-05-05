@@ -144,9 +144,9 @@ const FilterableTeamSection = () => {
               >
                 <Card className="overflow-hidden bg-gray-800/50 backdrop-blur-sm border-gray-700 hover:border-noesis-purple transition-all duration-300 hover:shadow-lg hover:shadow-noesis-purple/20">
                   <div className="aspect-square overflow-hidden">
-                    {member.image ? (
+                    {member.image_url ? (
                       <img 
-                        src={member.image} 
+                        src={member.image_url} 
                         alt={member.name} 
                         className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-300"
                       />
