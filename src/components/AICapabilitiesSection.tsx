@@ -161,7 +161,6 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
                 Our <span className="text-noesis-purple">AI Products</span>
               </h2>
               <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
-              {productsSection.subtitle}
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl mx-auto">
