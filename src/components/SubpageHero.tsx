@@ -26,7 +26,7 @@ const SubpageHero = ({
         return 'bg-noesis-purple/20';
     }
   };
-  return <section className="relative bg-[#1A1F2C] py-16 overflow-hidden md:py-[96px]">
+  return <section className="relative bg-[#1A1F2C] py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
