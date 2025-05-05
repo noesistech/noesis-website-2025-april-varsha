@@ -106,9 +106,9 @@ const HowWeWorkSection: React.FC = () => {
             <div className="grid grid-cols-6 gap-4">
               {workSteps.map((step, index) => (
                 <div key={step.id} className="relative">
-                  {/* Step indicator */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[#222732] border-2 border-noesis-purple flex items-center justify-center z-10 shadow-lg shadow-noesis-purple/20">
-                    <span className="text-lg font-bold text-noesis-purple">{step.step}</span>
+                  {/* Step indicator - made smaller */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#222732] border-2 border-noesis-purple flex items-center justify-center z-10 shadow-lg shadow-noesis-purple/20">
+                    <span className="text-xs font-bold text-noesis-purple">{step.step}</span>
                   </div>
                   
                   {/* Content card - positioned below the step indicator */}
@@ -144,20 +144,20 @@ const HowWeWorkSection: React.FC = () => {
               {/* Progress line */}
               <div className="absolute top-10 left-0 w-full h-1 bg-gradient-to-r from-noesis-purple/30 via-noesis-purple to-noesis-purple/30 rounded-full"></div>
               
-              {/* Step indicators */}
+              {/* Step indicators - made smaller */}
               <div className="flex justify-between mb-16">
                 {workSteps.map((step, index) => (
                   <div 
                     key={`indicator-${step.id}`}
                     className={cn(
-                      "w-8 h-8 rounded-full flex items-center justify-center z-10 shadow-lg shadow-noesis-purple/20 transition-all duration-300",
+                      "w-6 h-6 rounded-full flex items-center justify-center z-10 shadow-lg shadow-noesis-purple/20 transition-all duration-300",
                       currentStep === index 
-                        ? "bg-noesis-purple border-2 border-white transform scale-125" 
+                        ? "bg-noesis-purple border-2 border-white transform scale-115" 
                         : "bg-[#222732] border-2 border-noesis-purple"
                     )}
                   >
                     <span className={cn(
-                      "text-sm font-bold",
+                      "text-xs font-bold",
                       currentStep === index ? "text-white" : "text-noesis-purple"
                     )}>
                       {step.step}
