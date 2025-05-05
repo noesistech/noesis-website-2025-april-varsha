@@ -115,7 +115,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
 
   // Define grid columns based on device type
   const gridColumns = isMobile ? 'grid-cols-1' : isTablet ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-2';
-  return <section id="ai-capabilities" className="page-section relative overflow-hidden sm:py-16 py-[30px]">
+  return <section id="ai-capabilities" className="page-section relative overflow-hidden sm:py-16 py-[10px]">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
