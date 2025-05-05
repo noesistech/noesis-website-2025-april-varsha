@@ -1,7 +1,9 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Award, Users, Building, Laptop, GalleryVertical } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
+
 const CultureSection = () => {
   // Gallery images with captions - Using direct paths to the uploaded images
   const galleryImages = [{
@@ -84,6 +86,7 @@ const CultureSection = () => {
 
     // Initialize particles
     const init = () => {
+      particlesArray.length = 0; // Clear existing particles
       for (let i = 0; i < numberOfParticles; i++) {
         particlesArray.push(new Particle());
       }
@@ -91,7 +94,7 @@ const CultureSection = () => {
 
     // Animate particles
     const animate = () => {
-      if (!ctx) return;
+      if (!ctx || !canvas) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Draw connecting lines
@@ -112,22 +115,27 @@ const CultureSection = () => {
           }
         }
       }
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     };
 
     // Handle resize
-    window.addEventListener('resize', setCanvasDimensions);
+    window.addEventListener('resize', () => {
+      setCanvasDimensions();
+      init();
+    });
 
     // Initialize
     setCanvasDimensions();
     init();
-    animate();
+    let animationId = requestAnimationFrame(animate);
 
     // Cleanup
     return () => {
       window.removeEventListener('resize', setCanvasDimensions);
+      cancelAnimationFrame(animationId);
     };
   }, []);
+
   return <section className="bg-[#1A1F2C] py-0">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
@@ -267,4 +275,5 @@ const CultureSection = () => {
       </div>
     </section>;
 };
+
 export default CultureSection;
