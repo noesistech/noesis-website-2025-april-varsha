@@ -34,7 +34,7 @@ const MissionSection = ({
   const gridCols = 24;
   return <section id="mission" ref={sectionRef} className="page-section relative overflow-hidden bg-[#1A1F2C] sm:py-16 py-[60px]">
       <BackgroundPattern gridRows={gridRows} gridCols={gridCols} />
-      <div className="container mx-auto px-6 relative z-10 py-[10px]">
+      <div className="container mx-auto px-6 relative z-10 py-[30px]">
         <div className="text-center max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             Our <span className="text-noesis-purple">Mission & Vision</span>

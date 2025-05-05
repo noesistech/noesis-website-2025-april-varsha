@@ -128,7 +128,7 @@ const CultureSection = () => {
       window.removeEventListener('resize', setCanvasDimensions);
     };
   }, []);
-  return <section className="bg-[#1A1F2C] py-[5px]">
+  return <section className="bg-[#1A1F2C] py-0">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
