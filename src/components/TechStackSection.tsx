@@ -37,20 +37,22 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
         </div>
 
         <Tabs defaultValue="tech" value={activeTab} onValueChange={setActiveTab} className="max-w-5xl mx-auto">
-          <TabsList className="mx-auto mb-8 bg-transparent">
-            <TabsTrigger 
-              value="tech" 
-              className="rounded-md text-base sm:text-lg py-3 px-10 data-[state=active]:bg-noesis-purple data-[state=active]:text-white"
-            >
-              Tech Stack
-            </TabsTrigger>
-            <TabsTrigger 
-              value="cloud" 
-              className="rounded-md text-base sm:text-lg py-3 px-10 data-[state=active]:bg-gray-800 data-[state=active]:text-white"
-            >
-              Cloud Stack
-            </TabsTrigger>
-          </TabsList>
+          <div className="flex justify-center">
+            <TabsList className="mb-8 bg-transparent">
+              <TabsTrigger 
+                value="tech" 
+                className="rounded-md text-base sm:text-lg py-3 px-10 data-[state=active]:bg-noesis-purple data-[state=active]:text-white"
+              >
+                Tech Stack
+              </TabsTrigger>
+              <TabsTrigger 
+                value="cloud" 
+                className="rounded-md text-base sm:text-lg py-3 px-10 data-[state=active]:bg-noesis-blue data-[state=active]:text-white"
+              >
+                Cloud Stack
+              </TabsTrigger>
+            </TabsList>
+          </div>
           
           <TabsContent value="tech" className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
