@@ -156,10 +156,13 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         </Tabs>
         
         {products && products.length > 0 && <div className="mt-12 sm:mt-16">
-            <h2 dangerouslySetInnerHTML={{
-          __html: productsSection.title
-        }} className="section-title mb-3"></h2>
-            <h3 className="text-center text-gray-300 mx-auto text-lg mb-8 md:text-lg">{productsSection.subtitle}</h3>
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                Our <span className="text-noesis-purple">AI Products</span>
+              </h2>
+              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
+              {productsSection.subtitle && <p className="text-gray-300">{productsSection.subtitle}</p>}
+            </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl mx-auto">
                 {products.map(product => {
