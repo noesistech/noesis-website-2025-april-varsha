@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Brain, BrainCircuit, Microscope, Settings, Zap, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -122,7 +121,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         
         <Tabs defaultValue="development" className="max-w-6xl mx-auto">
-          <div className="flex justify-center">
+          <div className="flex justify-center py-[9px]">
             <TabsList className="glass p-1">
               {categories.map(category => <TabsTrigger key={category.id} value={category.id} className="px-2 py-1 sm:px-4 sm:py-2 md:px-8 md:py-3 data-[state=active]:bg-noesis-purple data-[state=active]:text-white text-sm sm:text-base md:text-lg" onClick={() => setActiveTab(category.id)}>
                   {category.name}
