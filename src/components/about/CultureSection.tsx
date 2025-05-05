@@ -4,34 +4,34 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Card, CardContent } from "@/components/ui/card";
 
 const CultureSection = () => {
-  // Gallery images with captions - Updated with full absolute URLs
+  // Gallery images with captions - Using direct paths to the uploaded images
   const galleryImages = [
     {
-      src: 'https://lovable.ai/lovable-uploads/fb11624f-dd5b-4012-a7bf-3f7cfd690bf3.png',
+      src: '/lovable-uploads/fb11624f-dd5b-4012-a7bf-3f7cfd690bf3.png',
       caption: 'Team Boat Party'
     }, 
     {
-      src: 'https://lovable.ai/lovable-uploads/f8be8f20-b244-46c0-b4ea-dbfa5624f5de.png',
+      src: '/lovable-uploads/f8be8f20-b244-46c0-b4ea-dbfa5624f5de.png',
       caption: 'Office Meet & Greet'
     }, 
     {
-      src: 'https://lovable.ai/lovable-uploads/1b3cc2c7-b074-4ead-8782-54d708a6e771.png',
+      src: '/lovable-uploads/1b3cc2c7-b074-4ead-8782-54d708a6e771.png',
       caption: 'Team Party Night'
     }, 
     {
-      src: 'https://lovable.ai/lovable-uploads/1cd22acd-3f83-4fd2-861c-4ea47a2355a4.png',
+      src: '/lovable-uploads/1cd22acd-3f83-4fd2-861c-4ea47a2355a4.png',
       caption: 'Diwali Celebration'
     },
     {
-      src: 'https://lovable.ai/lovable-uploads/5a5b134d-3282-4d40-95fc-26e71a95800c.png',
+      src: '/lovable-uploads/5a5b134d-3282-4d40-95fc-26e71a95800c.png',
       caption: 'Festive Team Gathering'
     },
     {
-      src: 'https://lovable.ai/lovable-uploads/09fdbbec-b316-401c-956a-03b7302519ee.png',
+      src: '/lovable-uploads/09fdbbec-b316-401c-956a-03b7302519ee.png',
       caption: 'Restaurant Team Dinner'
     },
     {
-      src: 'https://lovable.ai/lovable-uploads/ada4c856-1764-4d20-8f88-1fced15eb227.png',
+      src: '/lovable-uploads/ada4c856-1764-4d20-8f88-1fced15eb227.png',
       caption: 'Beach Retreat'
     }
   ];
@@ -149,7 +149,7 @@ const CultureSection = () => {
           </p>
         </div>
 
-        {/* Culture highlights cards - IMPROVED READABILITY */}
+        {/* Culture highlights cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {/* Culture Highlights Card */}
           <div className="bg-gradient-to-br from-purple-900/30 to-indigo-900/30 border border-purple-500/20 rounded-xl p-6 hover:border-purple-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10">
@@ -197,7 +197,7 @@ const CultureSection = () => {
           </div>
         </div>
 
-        {/* Team Values Section - remains above Team Gallery as previously moved */}
+        {/* Team Values Section */}
         <div className="backdrop-blur-sm bg-[#1A1F2C]/40 rounded-xl border border-purple-500/10 overflow-hidden mb-12">
           <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 to-transparent pointer-events-none opacity-60"></div>
           
@@ -266,7 +266,6 @@ const CultureSection = () => {
                           loading="lazy"
                           onError={(e) => {
                             console.error('Image failed to load:', image.src);
-                            // Fall back to placeholder if image fails to load
                             (e.target as HTMLImageElement).src = '/placeholder.svg';
                           }}
                         />
