@@ -1,11 +1,13 @@
 
 import React from 'react';
+
 type SubpageHeroProps = {
   title: string;
   subtitle?: string;
   gradientText?: string;
   backgroundEffect?: 'purple' | 'blue' | 'green' | 'orange';
 };
+
 const SubpageHero = ({
   title,
   subtitle,
@@ -26,7 +28,8 @@ const SubpageHero = ({
         return 'bg-noesis-purple/20';
     }
   };
-  return <section className="relative bg-[#1A1F2C] py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden">
+
+  return <section className="relative bg-[#1A1F2C] py-24 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
@@ -44,4 +47,5 @@ const SubpageHero = ({
       <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] ${getBackgroundColor()} rounded-full filter blur-[120px] opacity-50`} />
     </section>;
 };
+
 export default SubpageHero;
