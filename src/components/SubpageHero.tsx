@@ -42,7 +42,11 @@ const SubpageHero = ({
               </>
             ) : title}
           </h1>
-          {subtitle && <p className="text-lg md:text-xl text-gray-300">{subtitle}</p>}
+          {subtitle && (
+            <p className="text-lg md:text-xl text-gray-300 whitespace-pre-line">
+              {subtitle}
+            </p>
+          )}
         </div>
       </div>
 
