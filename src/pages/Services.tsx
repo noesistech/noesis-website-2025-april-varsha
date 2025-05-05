@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -14,7 +13,6 @@ import SubpageHero from '@/components/SubpageHero';
 import HowWeWorkSection from '@/components/HowWeWorkSection';
 import WhyChooseSection from '@/components/WhyChooseSection';
 import ServiceGrid from '@/components/ServiceGrid';
-
 const Services = () => {
   const {
     serviceItems,
@@ -26,9 +24,7 @@ const Services = () => {
     aiProducts,
     aiProductsSection
   } = useContent();
-  
   const location = useLocation();
-  
   useEffect(() => {
     // Check if there's a hash in the URL and scroll to that element
     if (location.hash) {
@@ -41,19 +37,12 @@ const Services = () => {
       }
     }
   }, [location]);
-  
-  return (
-    <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
+  return <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
       <main>
         {/* Hero section with updated subtitle */}
-        <SubpageHero 
-          title="Our Services" 
-          subtitle="We combine human creativity with AI precision to deliver
-exceptional solutions tailored to your needs." 
-          gradientText="Services" 
-          backgroundEffect="blue" 
-        />
+        <SubpageHero title="Our Services" subtitle="We combine human creativity with AI precision to deliver
+exceptional solutions tailored to your needs." gradientText="Services" backgroundEffect="blue" />
 
         {/* Services Grid - New Component */}
         <section className="py-16 bg-[#1A1F2C]" id="services">
@@ -104,17 +93,12 @@ exceptional solutions tailored to your needs."
               </h2>
               <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-2"></div>
             </div>
-            <AICapabilitiesSection 
-              title={aiCapabilitiesSection.title} 
-              capabilities={aiCapabilities} 
-              products={aiProducts} 
-              productsSection={aiProductsSection} 
-            />
+            <AICapabilitiesSection title={aiCapabilitiesSection.title} capabilities={aiCapabilities} products={aiProducts} productsSection={aiProductsSection} />
           </div>
         </section>
         
         {/* Technology Stack Section */}
-        <section className="py-16">
+        <section className="py-0">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto mb-2">
               <h2 className="text-3xl md:text-4xl font-bold text-white">
@@ -122,11 +106,7 @@ exceptional solutions tailored to your needs."
               </h2>
               <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-2"></div>
             </div>
-            <TechStackSection 
-              title={techStackSection.title} 
-              categories={techCategories} 
-              subtitle={techStackSection.subtitle} 
-            />
+            <TechStackSection title={techStackSection.title} categories={techCategories} subtitle={techStackSection.subtitle} />
           </div>
         </section>
 
@@ -150,8 +130,6 @@ exceptional solutions tailored to your needs."
         </section>
       </main>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Services;
