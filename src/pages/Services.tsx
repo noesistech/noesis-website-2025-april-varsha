@@ -12,6 +12,7 @@ import AICapabilitiesSection from '@/components/AICapabilitiesSection';
 import { useLocation } from 'react-router-dom';
 import SubpageHero from '@/components/SubpageHero';
 import HowWeWorkSection from '@/components/HowWeWorkSection';
+import WhyChooseSection from '@/components/WhyChooseSection';
 
 const Services = () => {
   const { 
@@ -81,6 +82,9 @@ const Services = () => {
             </div>
           </div>
         </section>
+        
+        {/* Why Choose Noesis Section */}
+        <WhyChooseSection />
         
         {/* How We Work Section */}
         <HowWeWorkSection />
