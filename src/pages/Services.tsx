@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -14,6 +15,9 @@ import HowWeWorkSection from '@/components/HowWeWorkSection';
 import WhyChooseSection from '@/components/WhyChooseSection';
 import ServiceGrid from '@/components/ServiceGrid';
 import AIProductCard from '@/components/AIProductCard';
+import ChatBotSection from '@/components/ChatBotSection';
+import ContactBanner from '@/components/ContactBanner';
+
 const Services = () => {
   const {
     serviceItems,
@@ -26,6 +30,7 @@ const Services = () => {
     aiProductsSection
   } = useContent();
   const location = useLocation();
+  
   useEffect(() => {
     // Check if there's a hash in the URL and scroll to that element
     if (location.hash) {
@@ -38,6 +43,7 @@ const Services = () => {
       }
     }
   }, [location]);
+  
   return <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
       <main>
@@ -145,8 +151,15 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
             </div>
           </div>
         </section>
+
+        {/* AI Assistant Section */}
+        <ChatBotSection />
+        
+        {/* Contact Banner Section */}
+        <ContactBanner />
       </main>
       <Footer />
     </div>;
 };
+
 export default Services;
