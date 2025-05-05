@@ -118,7 +118,13 @@ const HowWeWorkSection: React.FC = () => {
               loop: true,
             }}
             className="w-full"
-            onSelect={(index) => setCurrentStep(index)}
+            onSelect={(api) => {
+              // Fix: Get the current index from the API instead of using the event directly
+              const slideIndex = api?.selectedScrollSnap();
+              if (slideIndex !== undefined) {
+                setCurrentStep(slideIndex);
+              }
+            }}
             autoplay={true}
             interval={5000}
           >
