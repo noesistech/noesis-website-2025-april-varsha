@@ -29,15 +29,18 @@ const SubpageHero = ({
     }
   };
 
-  return <section className="relative bg-[#1A1F2C] py-24 overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+  return (
+    <section className="relative bg-[#1A1F2C] py-20 overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10 py-12">
+        <div className="text-center max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
-            {gradientText ? <>
+            {gradientText ? (
+              <>
                 {title.split(gradientText)[0]}
                 <span className="text-noesis-purple">{gradientText}</span>
                 {title.split(gradientText)[1]}
-              </> : title}
+              </>
+            ) : title}
           </h1>
           {subtitle && <p className="text-lg md:text-xl text-gray-300">{subtitle}</p>}
         </div>
@@ -45,7 +48,8 @@ const SubpageHero = ({
 
       {/* Background gradient */}
       <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] ${getBackgroundColor()} rounded-full filter blur-[120px] opacity-50`} />
-    </section>;
+    </section>
+  );
 };
 
 export default SubpageHero;
