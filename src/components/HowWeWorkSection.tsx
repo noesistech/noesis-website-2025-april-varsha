@@ -1,8 +1,15 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Check, CircleUser, CodeXml, Lightbulb, MessageSquare, RefreshCw } from 'lucide-react';
-import { Separator } from './ui/separator';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from './ui/carousel';
+import { useIsMobile, useIsTablet } from '@/hooks/use-mobile';
+import { cn } from '@/lib/utils';
 
 interface WorkStep {
   id: string;
@@ -13,6 +20,10 @@ interface WorkStep {
 }
 
 const HowWeWorkSection: React.FC = () => {
+  const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
+  const [currentStep, setCurrentStep] = useState(0);
+  
   const workSteps: WorkStep[] = [
     {
       id: 'step-1',
@@ -68,12 +79,13 @@ const HowWeWorkSection: React.FC = () => {
           A systematic approach that combines human creativity with AI precision
         </p>
 
-        {/* Desktop Step Flow */}
-        <div className="hidden lg:block">
-          <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-noesis-purple/30 via-noesis-purple to-noesis-purple/30 rounded-full"></div>
+        {/* Desktop & Tablet Process Steps */}
+        <div className="hidden md:block">
+          <div className="relative mb-16">
+            {/* Progress line */}
+            <div className="absolute top-10 left-0 w-full h-1 bg-gradient-to-r from-noesis-purple/30 via-noesis-purple to-noesis-purple/30 rounded-full"></div>
             
-            <div className="space-y-24">
+            <div className="grid grid-cols-6 gap-4">
               {workSteps.map((step, index) => (
                 <div key={step.id} className="relative">
                   {/* Step indicator */}
@@ -81,19 +93,16 @@ const HowWeWorkSection: React.FC = () => {
                     <span className="text-lg font-bold text-noesis-purple">{step.step}</span>
                   </div>
                   
-                  {/* Content card */}
-                  <div className={`flex ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
-                    <div className={`bg-[#222732] rounded-xl p-6 shadow-lg shadow-noesis-purple/10 border border-[#2A2F3C] max-w-xl w-full 
-                                  transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-noesis-purple/20
-                                  ${index % 2 === 0 ? 'mr-auto' : 'ml-auto'}`}>
-                      <div className="flex gap-4 items-center mb-4">
-                        <div className="bg-[#1A1F2C] p-4 rounded-full flex-shrink-0">
-                          {step.icon}
-                        </div>
-                        <h3 className="text-xl font-bold text-white">{step.title}</h3>
+                  {/* Content card - positioned below the step indicator */}
+                  <div className="bg-[#222732] rounded-xl p-6 shadow-lg shadow-noesis-purple/10 border border-[#2A2F3C] mt-16
+                                transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-noesis-purple/20 h-full">
+                    <div className="flex flex-col items-center mb-4">
+                      <div className="bg-[#1A1F2C] p-4 rounded-full mb-3">
+                        {step.icon}
                       </div>
-                      <p className="text-gray-300">{step.description}</p>
+                      <h3 className="text-xl font-bold text-white text-center">{step.title}</h3>
                     </div>
+                    <p className="text-gray-300 text-center">{step.description}</p>
                   </div>
                 </div>
               ))}
@@ -101,30 +110,66 @@ const HowWeWorkSection: React.FC = () => {
           </div>
         </div>
         
-        {/* Mobile/Tablet Steps */}
-        <div className="lg:hidden">
-          <div className="relative pl-8 border-l-2 border-noesis-purple">
-            {workSteps.map((step) => (
-              <div key={step.id} className="mb-8 relative">
-                {/* Step indicator */}
-                <div className="absolute -left-[25px] w-12 h-12 rounded-full bg-[#222732] border-2 border-noesis-purple flex items-center justify-center shadow-lg shadow-noesis-purple/20">
-                  <span className="text-lg font-bold text-noesis-purple">{step.step}</span>
-                </div>
-                
-                {/* Step card */}
-                <div className="bg-[#222732] rounded-xl p-6 shadow-lg shadow-noesis-purple/10 border border-[#2A2F3C]
-                              transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-noesis-purple/20 ml-4">
-                  <div className="flex gap-4 items-center mb-4">
-                    <div className="bg-[#1A1F2C] p-4 rounded-full">
-                      {step.icon}
-                    </div>
-                    <h3 className="text-xl font-bold text-white">{step.title}</h3>
+        {/* Mobile Steps Carousel */}
+        <div className="md:hidden">
+          <Carousel
+            opts={{
+              align: 'start',
+              loop: true,
+            }}
+            className="w-full"
+            onSelect={(index) => setCurrentStep(index)}
+            autoplay={true}
+            interval={5000}
+          >
+            <div className="relative mb-8">
+              {/* Progress line */}
+              <div className="absolute top-10 left-0 w-full h-1 bg-gradient-to-r from-noesis-purple/30 via-noesis-purple to-noesis-purple/30 rounded-full"></div>
+              
+              {/* Step indicators */}
+              <div className="flex justify-between mb-16">
+                {workSteps.map((step, index) => (
+                  <div 
+                    key={`indicator-${step.id}`}
+                    className={cn(
+                      "w-8 h-8 rounded-full flex items-center justify-center z-10 shadow-lg shadow-noesis-purple/20 transition-all duration-300",
+                      currentStep === index 
+                        ? "bg-noesis-purple border-2 border-white transform scale-125" 
+                        : "bg-[#222732] border-2 border-noesis-purple"
+                    )}
+                  >
+                    <span className={cn(
+                      "text-sm font-bold",
+                      currentStep === index ? "text-white" : "text-noesis-purple"
+                    )}>
+                      {step.step}
+                    </span>
                   </div>
-                  <p className="text-gray-300">{step.description}</p>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+
+            <CarouselContent>
+              {workSteps.map((step) => (
+                <CarouselItem key={step.id}>
+                  <div className="bg-[#222732] rounded-xl p-6 shadow-lg shadow-noesis-purple/10 border border-[#2A2F3C]
+                              transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-noesis-purple/20">
+                    <div className="flex flex-col items-center mb-4">
+                      <div className="bg-[#1A1F2C] p-4 rounded-full mb-3">
+                        {step.icon}
+                      </div>
+                      <h3 className="text-xl font-bold text-white text-center">{step.title}</h3>
+                    </div>
+                    <p className="text-gray-300 text-center">{step.description}</p>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center gap-4 mt-6">
+              <CarouselPrevious className="relative static" />
+              <CarouselNext className="relative static" />
+            </div>
+          </Carousel>
         </div>
       </div>
     </section>
