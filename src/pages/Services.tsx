@@ -16,6 +16,7 @@ import ServiceGrid from '@/components/ServiceGrid';
 import AIProductCard from '@/components/AIProductCard';
 import ChatBotSection from '@/components/ChatBotSection';
 import ContactBanner from '@/components/ContactBanner';
+
 const Services = () => {
   const {
     serviceItems,
@@ -61,14 +62,14 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
           </div>
         </section>
         
-        {/* Why Choose Noesis Section */}
-        <section className="bg-[#1A1F2C] py-16 sm:py-0">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="text-center max-w-3xl mx-auto mb-12">
+        {/* Why Choose Noesis Section - Updated for mobile */}
+        <section className="py-10 sm:py-16">
+          <div className="container mx-auto px-3 sm:px-6">
+            <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-white">
                 Why <span className="text-noesis-purple">Choose Noesis?</span>
               </h2>
-              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
+              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-6 sm:mb-8"></div>
             </div>
             <WhyChooseSection />
           </div>
@@ -100,7 +101,7 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
           </div>
         </section>
         
-        {/* Technology Stack Section - MOVED BEFORE AI PRODUCTS */}
+        {/* Technology Stack Section */}
         <section className="py-0">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto mb-2">
@@ -113,7 +114,7 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
           </div>
         </section>
         
-        {/* AI Products Section - MOVED AFTER TECH STACK */}
+        {/* AI Products Section */}
         {aiProducts && aiProducts.length > 0 && <section className="py-0">
           <div className="container mx-auto px-4 md:px-6 py-[70px]">
             <div className="text-center max-w-3xl mx-auto mb-2">
@@ -128,9 +129,6 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
             </div>
           </div>
         </section>}
-
-        {/* CTA Section */}
-        
 
         {/* AI Assistant Section */}
         <ChatBotSection />

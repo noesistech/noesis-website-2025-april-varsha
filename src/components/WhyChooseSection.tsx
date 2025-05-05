@@ -21,7 +21,7 @@ const ReasonCard: React.FC<ReasonCardProps> = ({ icon, title, description, class
           {icon}
         </div>
         <h3 className="text-xl font-bold mb-3 text-white text-center">{title}</h3>
-        <p className="text-gray-300 text-center">{description}</p>
+        <p className="text-gray-300 text-center text-sm">{description}</p>
       </div>
     </div>
   );
@@ -68,7 +68,7 @@ const WhyChooseSection: React.FC = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
       {reasons.map((reason) => (
         <ReasonCard
           key={reason.id}
