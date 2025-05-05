@@ -1,15 +1,12 @@
-
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TechCategory } from '@/types/supabase';
 import { Card } from '@/components/ui/card';
-
 export interface TechStackSectionProps {
   title: string;
   categories: TechCategory[];
   subtitle?: string;
 }
-
 const TechStackSection: React.FC<TechStackSectionProps> = ({
   title,
   categories = [],
@@ -20,25 +17,16 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
   // Add null check before filtering
   const techStack = categories?.filter(category => !category.is_cloud_stack) || [];
   const cloudStack = categories?.filter(category => category.is_cloud_stack) || [];
-
-  return <section className="page-section sm:py-24 overflow-hidden relative py-0">
+  return <section className="page-section sm:py-24 overflow-hidden relative py-[10px]">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         
         <Tabs defaultValue="tech" value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">
           <div className="flex justify-center mb-8 sm:mb-10 md:mb-12">
             <TabsList className="glass p-1">
-              <TabsTrigger 
-                value="tech" 
-                className="px-2 py-1 sm:px-4 sm:py-2 md:px-8 md:py-3 data-[state=active]:bg-noesis-purple data-[state=active]:text-white text-sm sm:text-base md:text-lg"
-                onClick={() => setActiveTab('tech')}
-              >
+              <TabsTrigger value="tech" className="px-2 py-1 sm:px-4 sm:py-2 md:px-8 md:py-3 data-[state=active]:bg-noesis-purple data-[state=active]:text-white text-sm sm:text-base md:text-lg" onClick={() => setActiveTab('tech')}>
                 Tech Stack
               </TabsTrigger>
-              <TabsTrigger 
-                value="cloud" 
-                className="px-2 py-1 sm:px-4 sm:py-2 md:px-8 md:py-3 data-[state=active]:bg-noesis-purple data-[state=active]:text-white text-sm sm:text-base md:text-lg"
-                onClick={() => setActiveTab('cloud')}
-              >
+              <TabsTrigger value="cloud" className="px-2 py-1 sm:px-4 sm:py-2 md:px-8 md:py-3 data-[state=active]:bg-noesis-purple data-[state=active]:text-white text-sm sm:text-base md:text-lg" onClick={() => setActiveTab('cloud')}>
                 Cloud Stack
               </TabsTrigger>
             </TabsList>
@@ -73,5 +61,4 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
       </div>
     </section>;
 };
-
 export default TechStackSection;
