@@ -95,7 +95,7 @@ const TimelineItem = ({
           duration: 0.5,
           delay: 0.3 + index * 0.3
         }}>
-            <p className="text-gray-300">{rightContent}</p>
+            <p className="text-gray-300 text-left">{rightContent}</p>
           </motion.div>
           
           <motion.div className="pt-2 border-t border-gray-700/30" initial={{
@@ -111,7 +111,7 @@ const TimelineItem = ({
           duration: 0.5,
           delay: 0.5 + index * 0.3
         }}>
-            <p className="text-gray-300">{leftContent}</p>
+            <p className="text-gray-300 text-left">{leftContent}</p>
           </motion.div>
         </div>
       </div>
