@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -17,7 +16,6 @@ import ServiceGrid from '@/components/ServiceGrid';
 import AIProductCard from '@/components/AIProductCard';
 import ChatBotSection from '@/components/ChatBotSection';
 import ContactBanner from '@/components/ContactBanner';
-
 const Services = () => {
   const {
     serviceItems,
@@ -30,7 +28,6 @@ const Services = () => {
     aiProductsSection
   } = useContent();
   const location = useLocation();
-  
   useEffect(() => {
     // Check if there's a hash in the URL and scroll to that element
     if (location.hash) {
@@ -43,7 +40,6 @@ const Services = () => {
       }
     }
   }, [location]);
-  
   return <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
       <main>
@@ -119,7 +115,7 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
         
         {/* AI Products Section - MOVED AFTER TECH STACK */}
         {aiProducts && aiProducts.length > 0 && <section className="py-0">
-          <div className="container mx-auto px-4 md:px-6">
+          <div className="container mx-auto px-4 md:px-6 py-[70px]">
             <div className="text-center max-w-3xl mx-auto mb-2">
               <h2 className="text-3xl md:text-4xl font-bold text-white">
                 Our <span className="text-noesis-purple">AI Products</span>
@@ -134,23 +130,7 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
         </section>}
 
         {/* CTA Section */}
-        <section className="mt-20 py-16 bg-[#1A1F2C]">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="bg-[#2A2F3C]/70 backdrop-blur-sm rounded-xl p-8 md:p-10 max-w-3xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white text-center">Ready to Transform Your Business?</h2>
-              <p className="text-gray-300 mb-8 text-center">
-                Get in touch with us today to discuss how our services can help you achieve your goals.
-              </p>
-              <div className="flex justify-center">
-                <Button variant="noesis" size="lg" className="shadow-lg hover:shadow-noesis-purple/50" asChild>
-                  <a href="/contact" className="inline-flex items-center gap-2">
-                    Contact Us <ArrowRight className="h-4 w-4" />
-                  </a>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
+        
 
         {/* AI Assistant Section */}
         <ChatBotSection />
@@ -161,5 +141,4 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
       <Footer />
     </div>;
 };
-
 export default Services;
