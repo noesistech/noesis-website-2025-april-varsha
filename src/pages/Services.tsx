@@ -44,7 +44,7 @@ const Services = () => {
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
       <main>
-        {/* Hero section */}
+        {/* Hero section with updated subtitle */}
         <SubpageHero
           title="Our Services"
           subtitle="We combine human creativity with AI precision to deliver exceptional solutions tailored to your needs."
