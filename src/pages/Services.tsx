@@ -88,7 +88,7 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
         {/* AI Capabilities Section */}
         <section className="py-16 sm:py-20">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="text-center max-w-3xl mx-auto mb-8">
               <h2 className="text-3xl md:text-4xl font-bold text-white">
                 Our <span className="text-noesis-purple">AI Capabilities</span>
               </h2>
@@ -101,7 +101,7 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
         {/* Technology Stack Section */}
         <section className="py-16 sm:py-0">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="text-center max-w-3xl mx-auto mb-8">
               <h2 className="text-3xl md:text-4xl font-bold text-white">
                 Our <span className="text-noesis-purple">Tech Stack</span>
               </h2>
