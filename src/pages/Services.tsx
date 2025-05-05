@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -13,6 +14,7 @@ import SubpageHero from '@/components/SubpageHero';
 import HowWeWorkSection from '@/components/HowWeWorkSection';
 import WhyChooseSection from '@/components/WhyChooseSection';
 import ServiceGrid from '@/components/ServiceGrid';
+import AIProductCard from '@/components/AIProductCard';
 const Services = () => {
   const {
     serviceItems,
@@ -97,8 +99,8 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
           </div>
         </section>
         
-        {/* Technology Stack Section */}
-        <section className="py-0">
+        {/* Technology Stack Section - MOVED BEFORE AI PRODUCTS */}
+        <section className="py-16">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto mb-2">
               <h2 className="text-3xl md:text-4xl font-bold text-white">
@@ -109,6 +111,35 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
             <TechStackSection title={techStackSection.title} categories={techCategories} subtitle={techStackSection.subtitle} />
           </div>
         </section>
+        
+        {/* AI Products Section - MOVED AFTER TECH STACK */}
+        {aiProducts && aiProducts.length > 0 && (
+        <section className="py-16">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center max-w-3xl mx-auto mb-2">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                Our <span className="text-noesis-purple">AI Products</span>
+              </h2>
+              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-6"></div>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl mx-auto">
+              {aiProducts.map(product => (
+                <AIProductCard 
+                  key={product.id} 
+                  title={product.title} 
+                  description={product.description} 
+                  logoUrl={product.logoUrl || '/placeholder.svg'} 
+                  logoWidth={product.logoWidth} 
+                  logoHeight={product.logoHeight} 
+                  ctaText={product.ctaText} 
+                  ctaUrl={product.ctaUrl} 
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+        )}
 
         {/* CTA Section */}
         <section className="mt-20 py-16 bg-[#1A1F2C]">

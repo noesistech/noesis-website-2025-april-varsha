@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Brain, BrainCircuit, Microscope, Settings, Zap, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -154,21 +155,6 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
               </div>
             </TabsContent>)}
         </Tabs>
-        
-        {products && products.length > 0 && <div className="mt-12 sm:mt-16">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white">
-                Our <span className="text-noesis-purple">AI Products</span>
-              </h2>
-              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl mx-auto">
-                {products.map(product => {
-            return <AIProductCard key={product.id} title={product.title} description={product.description} logoUrl={product.logoUrl || '/placeholder.svg'} logoWidth={product.logoWidth} logoHeight={product.logoHeight} ctaText={product.ctaText} ctaUrl={product.ctaUrl} />;
-          })}
-            </div>
-        </div>}
       </div>
     </section>;
 };
