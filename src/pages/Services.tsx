@@ -13,6 +13,7 @@ import { useLocation } from 'react-router-dom';
 import SubpageHero from '@/components/SubpageHero';
 import HowWeWorkSection from '@/components/HowWeWorkSection';
 import WhyChooseSection from '@/components/WhyChooseSection';
+import ServiceGrid from '@/components/ServiceGrid';
 
 const Services = () => {
   const { 
@@ -51,32 +52,12 @@ const Services = () => {
           backgroundEffect="blue"
         />
 
-        {/* Services Grid */}
-        <section className="bg-[#1A1F2C] py-16">
-          <div className="container mx-auto px-4 sm:px-6">
-            <h2 className="section-title mb-6">
-              What <span className="gradient-text">We Offer</span>
-            </h2>
-            <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mb-12">
-              Explore our comprehensive range of services designed to transform your business
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {serviceItems.map((service) => (
-                <Card key={service.id} className="bg-[#222732] border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
-                  <CardContent className="pt-6">
-                    <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
-                      <div className={serviceIconColors[service.icon_name as keyof typeof serviceIconColors] || 'text-noesis-purple'}>
-                        {getIconByName(service.icon_name)}
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-bold mb-3 text-white">{service.title}</h3>
-                    <p className="text-gray-300">{service.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Services Grid - New Component */}
+        <ServiceGrid 
+          title="What We Offer"
+          subtitle="Explore our comprehensive range of services designed to transform your business"
+          services={serviceItems}
+        />
         
         {/* Why Choose Noesis Section */}
         <WhyChooseSection />
