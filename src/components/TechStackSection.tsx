@@ -19,11 +19,7 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
   const cloudStack = categories?.filter(category => category.is_cloud_stack) || [];
   return <section className="page-section sm:py-24 overflow-hidden relative py-0">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          
-          {subtitle}
-          
-        </div>
+        
 
         <Tabs defaultValue="tech" value={activeTab} onValueChange={setActiveTab} className="max-w-5xl mx-auto">
           <div className="flex justify-center">
