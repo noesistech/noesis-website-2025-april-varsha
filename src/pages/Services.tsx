@@ -68,6 +68,7 @@ exceptional solutions tailored to your needs."
             
             <ServiceGrid 
               services={serviceItems}
+              title="What We Offer"
             />
           </div>
         </section>
