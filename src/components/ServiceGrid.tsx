@@ -4,6 +4,7 @@ import { ServiceItem } from '@/types/supabase';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { getIconByName, serviceIconColors } from '@/components/hero/ServiceCard';
 import { motion } from 'framer-motion';
+import { ChevronRight } from 'lucide-react';
 
 interface ServiceGridProps {
   title: string;
