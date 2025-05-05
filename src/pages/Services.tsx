@@ -47,7 +47,8 @@ const Services = () => {
         {/* Hero section with updated subtitle */}
         <SubpageHero
           title="Our Services"
-          subtitle="We combine human creativity with AI precision to deliver exceptional solutions tailored to your needs."
+          subtitle="We combine human creativity with AI precision to deliver
+exceptional solutions tailored to your needs."
           gradientText="Services"
           backgroundEffect="blue"
         />
