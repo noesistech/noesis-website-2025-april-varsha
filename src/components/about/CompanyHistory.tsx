@@ -69,93 +69,91 @@ const TimelineItem = ({
   
   return <div ref={ref} className="relative">
       {/* Central year label - visible on mobile only */}
-      <motion.h3 className="text-xl font-semibold text-noesis-purple absolute left-1/2 transform -translate-x-1/2 -top-10 md:hidden z-10 bg-[#1A1F2C] px-3 py-1 rounded-full" initial={{
-      y: -20,
-      opacity: 0
-    }} animate={isInView ? {
-      y: 0,
-      opacity: 1
-    } : {
-      y: -20,
-      opacity: 0
-    }} transition={{
-      duration: 0.4,
-      delay: 0.1 + index * 0.3
-    }}>
-        {year}
-      </motion.h3>
+      <motion.div className="md:hidden text-center mb-8" initial={{
+        opacity: 0
+      }} animate={isInView ? {
+        opacity: 1
+      } : {
+        opacity: 0
+      }} transition={{
+        duration: 0.4,
+        delay: 0.1 + index * 0.3
+      }}>
+        <h3 className="text-xl font-semibold text-noesis-purple inline-block bg-[#1A1F2C] px-3 z-10 relative">
+          {year}
+        </h3>
+      </motion.div>
       
-      {/* Timeline dot - Fixed positioning for mobile and desktop */}
-      <motion.div className="absolute left-1/2 transform -translate-x-1/2 top-0 z-10" initial={{
-      scale: 0
-    }} animate={isInView ? {
-      scale: 1
-    } : {
-      scale: 0
-    }} transition={{
-      duration: 0.4,
-      delay: 0.2 + index * 0.3
-    }}>
+      {/* Timeline dot */}
+      <motion.div className="absolute left-1/2 transform -translate-x-1/2 z-10" initial={{
+        scale: 0
+      }} animate={isInView ? {
+        scale: 1
+      } : {
+        scale: 0
+      }} transition={{
+        duration: 0.4,
+        delay: 0.2 + index * 0.3
+      }}>
         <div className={`w-6 h-6 ${dotColor} rounded-full border-2 border-white shadow-lg shadow-${dotColor}/30`}></div>
       </motion.div>
       
       {/* Content grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {/* Left content - Hidden on mobile, visible on desktop */}
         <motion.div className="text-right pr-4 md:pr-12 hidden md:block" initial={{
-        x: -50,
-        opacity: 0
-      }} animate={isInView ? {
-        x: 0,
-        opacity: 1
-      } : {
-        x: -50,
-        opacity: 0
-      }} transition={{
-        duration: 0.5,
-        delay: 0.3 + index * 0.3
-      }}>
+          x: -50,
+          opacity: 0
+        }} animate={isInView ? {
+          x: 0,
+          opacity: 1
+        } : {
+          x: -50,
+          opacity: 0
+        }} transition={{
+          duration: 0.5,
+          delay: 0.3 + index * 0.3
+        }}>
           <h3 className="text-xl font-semibold text-noesis-purple mb-3">{year}</h3>
           <p className="text-gray-300">{leftContent}</p>
         </motion.div>
         
-        {/* Spacer for mobile view */}
-        <div className="md:hidden h-8"></div>
-        
-        {/* Right content */}
-        <motion.div className="pl-4 md:pl-12 mt-6 md:mt-0" initial={{
-        x: 50,
-        opacity: 0
-      }} animate={isInView ? {
-        x: 0,
-        opacity: 1
-      } : {
-        x: 50,
-        opacity: 0
-      }} transition={{
-        duration: 0.5,
-        delay: 0.4 + index * 0.3
-      }}>
-          {/* Year label shown on mobile but hidden on desktop */}
-          <h3 className="text-xl font-semibold text-noesis-purple mb-3 md:hidden">{year}</h3>
+        {/* Right content - For both mobile and desktop */}
+        <motion.div className="pl-6 md:pl-12 pb-8 md:pb-0 pt-4" initial={{
+          x: 50,
+          opacity: 0
+        }} animate={isInView ? {
+          x: 0,
+          opacity: 1
+        } : {
+          x: 50,
+          opacity: 0
+        }} transition={{
+          duration: 0.5,
+          delay: 0.4 + index * 0.3
+        }}>
+          {/* Year label shown on desktop but hidden on mobile */}
+          <h3 className="text-xl font-semibold text-noesis-purple mb-3 hidden md:block">{year}</h3>
           <p className="text-gray-300 text-left">{rightContent}</p>
         </motion.div>
         
-        {/* Mobile view - left content appears below right content with proper padding */}
-        <motion.div className="pl-4 pr-4 mt-4 pt-2 pb-4 md:hidden" initial={{
-        y: 20,
-        opacity: 0
-      }} animate={isInView ? {
-        y: 0,
-        opacity: 1
-      } : {
-        y: 20,
-        opacity: 0
-      }} transition={{
-        duration: 0.5,
-        delay: 0.5 + index * 0.3
-      }}>
-          <p className="text-gray-300">{leftContent}</p>
+        {/* Mobile view - left content appears below right content with proper spacing */}
+        <motion.div className="pl-6 pr-4 md:hidden mt-2 mb-8" initial={{
+          y: 20,
+          opacity: 0
+        }} animate={isInView ? {
+          y: 0,
+          opacity: 1
+        } : {
+          y: 20,
+          opacity: 0
+        }} transition={{
+          duration: 0.5,
+          delay: 0.5 + index * 0.3
+        }}>
+          <div className="pt-2 border-t border-gray-700/30">
+            <p className="text-gray-300">{leftContent}</p>
+          </div>
         </motion.div>
       </div>
     </div>;
