@@ -4,34 +4,34 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Card, CardContent } from "@/components/ui/card";
 
 const CultureSection = () => {
-  // Gallery images with captions
+  // Gallery images with captions - Updated with full absolute URLs
   const galleryImages = [
     {
-      src: '/lovable-uploads/fb11624f-dd5b-4012-a7bf-3f7cfd690bf3.png',
+      src: 'https://lovable.ai/lovable-uploads/fb11624f-dd5b-4012-a7bf-3f7cfd690bf3.png',
       caption: 'Team Boat Party'
     }, 
     {
-      src: '/lovable-uploads/f8be8f20-b244-46c0-b4ea-dbfa5624f5de.png',
+      src: 'https://lovable.ai/lovable-uploads/f8be8f20-b244-46c0-b4ea-dbfa5624f5de.png',
       caption: 'Office Meet & Greet'
     }, 
     {
-      src: '/lovable-uploads/1b3cc2c7-b074-4ead-8782-54d708a6e771.png',
+      src: 'https://lovable.ai/lovable-uploads/1b3cc2c7-b074-4ead-8782-54d708a6e771.png',
       caption: 'Team Party Night'
     }, 
     {
-      src: '/lovable-uploads/1cd22acd-3f83-4fd2-861c-4ea47a2355a4.png',
+      src: 'https://lovable.ai/lovable-uploads/1cd22acd-3f83-4fd2-861c-4ea47a2355a4.png',
       caption: 'Diwali Celebration'
     },
     {
-      src: '/lovable-uploads/5a5b134d-3282-4d40-95fc-26e71a95800c.png',
+      src: 'https://lovable.ai/lovable-uploads/5a5b134d-3282-4d40-95fc-26e71a95800c.png',
       caption: 'Festive Team Gathering'
     },
     {
-      src: '/lovable-uploads/09fdbbec-b316-401c-956a-03b7302519ee.png',
+      src: 'https://lovable.ai/lovable-uploads/09fdbbec-b316-401c-956a-03b7302519ee.png',
       caption: 'Restaurant Team Dinner'
     },
     {
-      src: '/lovable-uploads/ada4c856-1764-4d20-8f88-1fced15eb227.png',
+      src: 'https://lovable.ai/lovable-uploads/ada4c856-1764-4d20-8f88-1fced15eb227.png',
       caption: 'Beach Retreat'
     }
   ];
@@ -261,9 +261,14 @@ const CultureSection = () => {
                       <div className="overflow-hidden rounded-xl">
                         <img 
                           src={image.src} 
-                          alt={image.caption} 
+                          alt={image.caption}
                           className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300" 
                           loading="lazy"
+                          onError={(e) => {
+                            console.error('Image failed to load:', image.src);
+                            // Fall back to placeholder if image fails to load
+                            (e.target as HTMLImageElement).src = '/placeholder.svg';
+                          }}
                         />
                         <div className="bg-[#1A1F2C]/80 p-3 text-center">
                           <p className="text-gray-300">{image.caption}</p>
