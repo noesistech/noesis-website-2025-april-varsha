@@ -1,12 +1,15 @@
+
 import React, { useEffect, useRef } from 'react';
 import { useContent } from '@/contexts/ContentContext';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
+
 const CompanyHistory = () => {
   const {
     aboutSection
   } = useContent();
-  return <section className="w-full bg-[#1A1F2C] py-12 md:py-0">
+  
+  return <section className="w-full bg-[#1A1F2C] py-12 md:py-20">
       <div className="container mx-auto px-4 md:px-6 py-0">
         <div className="max-w-4xl mx-auto text-center space-y-8 py-[40px]">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
@@ -24,9 +27,9 @@ const CompanyHistory = () => {
           {/* Interactive Timeline */}
           <div className="mt-16 relative pt-8">
             {/* Vertical timeline line */}
-            <div className="absolute left-1/2 transform -translate-x-[1px] h-full w-[2px] bg-gradient-to-b from-noesis-purple/80 to-noesis-blue/40 py-0 px-0 mx-[10px]"></div>
+            <div className="absolute left-1/2 transform -translate-x-[1px] h-full w-[2px] bg-gradient-to-b from-noesis-purple/80 to-noesis-blue/40"></div>
             
-            <div className="space-y-32 md:space-y-40 relative">
+            <div className="space-y-24 md:space-y-40 relative">
               {/* Timeline items */}
               <TimelineItem year="2009" leftContent="Founded with a vision to bring cutting-edge technology solutions to businesses" rightContent="Established our core team and began delivering custom software solutions to our first clients" dotColor="bg-noesis-purple" index={0} />
               
@@ -41,6 +44,7 @@ const CompanyHistory = () => {
       </div>
     </section>;
 };
+
 interface TimelineItemProps {
   year: string;
   leftContent: string;
@@ -48,6 +52,7 @@ interface TimelineItemProps {
   dotColor: string;
   index: number;
 }
+
 const TimelineItem = ({
   year,
   leftContent,
@@ -61,6 +66,7 @@ const TimelineItem = ({
     amount: 0.3,
     margin: "-100px 0px -100px 0px"
   });
+  
   return <div ref={ref} className="relative">
       {/* Central year label - visible on mobile only */}
       <motion.h3 className="text-xl font-semibold text-noesis-purple absolute left-1/2 transform -translate-x-1/2 -top-10 md:hidden z-10 bg-[#1A1F2C] px-3 py-1 rounded-full" initial={{
@@ -79,8 +85,8 @@ const TimelineItem = ({
         {year}
       </motion.h3>
       
-      {/* Timeline dot - Adjusted position to align with the center line */}
-      <motion.div className="absolute left-1/2 transform -translate-x-[5px] top-0 z-10" initial={{
+      {/* Timeline dot - Fixed positioning for mobile and desktop */}
+      <motion.div className="absolute left-1/2 transform -translate-x-1/2 top-0 z-10" initial={{
       scale: 0
     }} animate={isInView ? {
       scale: 1
@@ -94,8 +100,8 @@ const TimelineItem = ({
       </motion.div>
       
       {/* Content grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-8">
-        {/* Left content */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+        {/* Left content - Hidden on mobile, visible on desktop */}
         <motion.div className="text-right pr-4 md:pr-12 hidden md:block" initial={{
         x: -50,
         opacity: 0
@@ -113,7 +119,7 @@ const TimelineItem = ({
           <p className="text-gray-300">{leftContent}</p>
         </motion.div>
         
-        {/* Empty div for spacing on mobile */}
+        {/* Spacer for mobile view */}
         <div className="md:hidden h-8"></div>
         
         {/* Right content */}
@@ -130,12 +136,13 @@ const TimelineItem = ({
         duration: 0.5,
         delay: 0.4 + index * 0.3
       }}>
+          {/* Year label shown on mobile but hidden on desktop */}
           <h3 className="text-xl font-semibold text-noesis-purple mb-3 md:hidden">{year}</h3>
           <p className="text-gray-300 text-left">{rightContent}</p>
         </motion.div>
         
-        {/* Mobile view - left content appears below right content */}
-        <motion.div className="pl-4 pr-4 mt-4 md:hidden" initial={{
+        {/* Mobile view - left content appears below right content with proper padding */}
+        <motion.div className="pl-4 pr-4 mt-4 pt-2 pb-4 md:hidden" initial={{
         y: 20,
         opacity: 0
       }} animate={isInView ? {
@@ -153,4 +160,5 @@ const TimelineItem = ({
       </div>
     </div>;
 };
+
 export default CompanyHistory;
