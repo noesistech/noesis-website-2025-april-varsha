@@ -7,6 +7,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi
 } from './ui/carousel';
 import { useIsMobile, useIsTablet } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
@@ -23,6 +24,23 @@ const HowWeWorkSection: React.FC = () => {
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
   const [currentStep, setCurrentStep] = useState(0);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  
+  // Update current step when carousel changes
+  React.useEffect(() => {
+    if (!carouselApi) return;
+    
+    const onSelect = () => {
+      setCurrentStep(carouselApi.selectedScrollSnap());
+    };
+    
+    carouselApi.on("select", onSelect);
+    
+    // Cleanup
+    return () => {
+      carouselApi.off("select", onSelect);
+    };
+  }, [carouselApi]);
   
   const workSteps: WorkStep[] = [
     {
@@ -118,13 +136,7 @@ const HowWeWorkSection: React.FC = () => {
               loop: true,
             }}
             className="w-full"
-            onSelect={(api) => {
-              // Fix: Get the current index from the API instead of using the event directly
-              const slideIndex = api?.selectedScrollSnap();
-              if (slideIndex !== undefined) {
-                setCurrentStep(slideIndex);
-              }
-            }}
+            setApi={setCarouselApi}
             autoplay={true}
             interval={5000}
           >
