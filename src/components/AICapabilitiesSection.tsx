@@ -120,9 +120,6 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         
-        
-        {aiCapabilitiesSectionData.subtitle}
-        
         <Tabs defaultValue="development" className="max-w-6xl mx-auto my-0 py-0">
           <div className="flex justify-center mb-8 sm:mb-10 md:mb-12">
             <TabsList className="glass p-1">
