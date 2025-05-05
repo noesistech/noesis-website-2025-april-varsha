@@ -68,27 +68,16 @@ const WhyChooseSection: React.FC = () => {
   ];
 
   return (
-    <section className="bg-[#1A1F2C] py-16 sm:py-20">
-      <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="section-title mb-4">
-          Why <span className="gradient-text">Choose Noesis?</span>
-        </h2>
-        <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mb-12">
-          Discover the advantages of our unique human-AI hybrid approach
-        </p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reasons.map((reason) => (
-            <ReasonCard
-              key={reason.id}
-              icon={reason.icon}
-              title={reason.title}
-              description={reason.description}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {reasons.map((reason) => (
+        <ReasonCard
+          key={reason.id}
+          icon={reason.icon}
+          title={reason.title}
+          description={reason.description}
+        />
+      ))}
+    </div>
   );
 };
 

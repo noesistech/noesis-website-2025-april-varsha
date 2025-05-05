@@ -61,25 +61,65 @@ exceptional solutions tailored to your needs."
         />
         
         {/* Why Choose Noesis Section */}
-        <WhyChooseSection />
+        <section className="bg-[#1A1F2C] py-16 sm:py-20">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                Why <span className="text-noesis-purple">Choose Noesis?</span>
+              </h2>
+              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
+            </div>
+            <WhyChooseSection />
+          </div>
+        </section>
         
         {/* How We Work Section */}
-        <HowWeWorkSection />
+        <section className="py-16 sm:py-20">
+          <div className="container mx-auto px-4 md:px-6 py-[15px]">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                Our <span className="text-noesis-purple">Process</span>
+              </h2>
+              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
+            </div>
+            <HowWeWorkSection />
+          </div>
+        </section>
         
         {/* AI Capabilities Section */}
-        <AICapabilitiesSection 
-          title={aiCapabilitiesSection.title} 
-          capabilities={aiCapabilities} 
-          products={aiProducts}
-          productsSection={aiProductsSection}
-        />
+        <section className="py-16 sm:py-20">
+          <div className="container mx-auto px-4 md:px-6 py-[15px]">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                Our <span className="text-noesis-purple">AI Capabilities</span>
+              </h2>
+              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
+            </div>
+            <AICapabilitiesSection 
+              title={aiCapabilitiesSection.title} 
+              capabilities={aiCapabilities} 
+              products={aiProducts}
+              productsSection={aiProductsSection}
+            />
+          </div>
+        </section>
         
         {/* Technology Stack Section */}
-        <TechStackSection 
-          title={techStackSection.title} 
-          categories={techCategories}
-          subtitle={techStackSection.subtitle}
-        />
+        <section className="py-16 sm:py-20">
+          <div className="container mx-auto px-4 md:px-6 py-[15px]">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                Our <span className="text-noesis-purple">Tech Stack</span>
+              </h2>
+              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
+            </div>
+            <TechStackSection 
+              title={techStackSection.title} 
+              categories={techCategories}
+              subtitle={techStackSection.subtitle}
+            />
+          </div>
+        </section>
 
         {/* CTA Section */}
         <section className="mt-20 py-16 bg-[#1A1F2C]">
