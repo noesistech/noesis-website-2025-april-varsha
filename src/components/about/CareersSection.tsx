@@ -75,7 +75,7 @@ const CareersSection = () => {
     description: "Bridge the gap between business needs and technical implementation of AI solutions."
   }];
   return <section className="bg-[#1A1F2C] py-0">
-      <div className="container mx-auto px-4 my-0 py-[60px]">
+      <div className="container mx-auto px-4 my-0 py-0">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             Join Our <span className="text-noesis-purple">Team</span>
@@ -96,7 +96,7 @@ const CareersSection = () => {
             
           </div>
           
-          <div className="bg-gradient-to-br from-purple-900/10 to-indigo-900/10 border border-purple-500/20 rounded-xl p-6 md:p-8 my-0">
+          <div className="bg-gradient-to-br from-purple-900/10 to-indigo-900/10 border border-purple-500/20 rounded-xl p-6 md:p-8 py-[30px] my-[70px]">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
