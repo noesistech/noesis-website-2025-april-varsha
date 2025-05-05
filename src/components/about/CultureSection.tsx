@@ -31,19 +31,24 @@ const CultureSection = () => {
 
   // Reference for the canvas element
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number>();
+  const canvasContainerRef = useRef<HTMLDivElement>(null);
 
   // Animation effect for team values section
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     // Set canvas dimensions
     const setCanvasDimensions = () => {
-      if (!canvas) return;
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      if (!canvas || !canvasContainerRef.current) return;
+      const container = canvasContainerRef.current;
+      canvas.width = container.offsetWidth;
+      canvas.height = container.offsetHeight;
+      console.log('Canvas dimensions set:', canvas.width, canvas.height);
     };
 
     // Particles configuration
@@ -115,24 +120,30 @@ const CultureSection = () => {
           }
         }
       }
-      animationId = requestAnimationFrame(animate);
+      animationRef.current = requestAnimationFrame(animate);
     };
 
-    // Handle resize
-    window.addEventListener('resize', () => {
+    // Initialize with a slight delay to ensure container is ready
+    setTimeout(() => {
       setCanvasDimensions();
       init();
-    });
+      animationRef.current = requestAnimationFrame(animate);
+    }, 100);
 
-    // Initialize
-    setCanvasDimensions();
-    init();
-    let animationId = requestAnimationFrame(animate);
+    // Handle resize
+    const handleResize = () => {
+      setCanvasDimensions();
+      init();
+    };
+    
+    window.addEventListener('resize', handleResize);
 
     // Cleanup
     return () => {
-      window.removeEventListener('resize', setCanvasDimensions);
-      cancelAnimationFrame(animationId);
+      window.removeEventListener('resize', handleResize);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
     };
   }, []);
 
@@ -200,10 +211,10 @@ const CultureSection = () => {
           <div className="relative p-8">
             <div className="flex flex-col md:flex-row items-center gap-8">
               {/* Left side - Animated canvas replacing static icon */}
-              <div className="md:w-1/3 flex justify-center">
-                <div className="relative w-full aspect-square max-w-[240px] rounded-2xl overflow-hidden border border-purple-500/20">
-                  <canvas ref={canvasRef} className="absolute inset-0 w-full h-full"></canvas>
-                  <div className="absolute inset-0 flex items-center justify-center">
+              <div ref={canvasContainerRef} className="md:w-1/3 flex justify-center relative">
+                <div className="w-full aspect-square max-w-[240px] rounded-2xl overflow-hidden border border-purple-500/20 relative">
+                  <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-10"></canvas>
+                  <div className="absolute inset-0 flex items-center justify-center z-20">
                     <Users className="h-12 w-12 text-purple-400/70" />
                   </div>
                 </div>
