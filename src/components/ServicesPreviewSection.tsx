@@ -11,7 +11,7 @@ const ServicesPreviewSection = () => {
     serviceItems
   } = useContent();
 
-  return <section className="bg-[#1A1F2C] relative py-20 overflow-hidden">
+  return <section id="services-preview" className="bg-[#1A1F2C] relative py-20 overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
@@ -24,7 +24,7 @@ deliver exceptional solutions tailored to your needs.
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
-          {serviceItems.map((service, index) => <Link to="/services" key={service.id} className="bg-gradient-to-b from-[#222732]/90 to-[#1D212B]/80 backdrop-blur-sm rounded-xl p-5 border border-white/10 shadow-xl hover:shadow-noesis-purple/30 transition-all duration-300 flex flex-col items-center text-center hover:border-noesis-purple/30 hover:scale-105 group">
+          {serviceItems.map((service, index) => <Link to="/services#services" key={service.id} className="bg-gradient-to-b from-[#222732]/90 to-[#1D212B]/80 backdrop-blur-sm rounded-xl p-5 border border-white/10 shadow-xl hover:shadow-noesis-purple/30 transition-all duration-300 flex flex-col items-center text-center hover:border-noesis-purple/30 hover:scale-105 group">
               <div className={`bg-[#1A1F2C]/90 p-3 rounded-full w-fit mb-3 group-hover:bg-noesis-purple/20 transition-colors duration-300 border border-white/5 group-hover:border-noesis-purple/30`}>
                 <div className={`${serviceIconColors[service.icon_name as keyof typeof serviceIconColors] || 'text-noesis-purple'} group-hover:text-white transition-colors duration-300`}>
                   {getIconByName(service.icon_name)}
@@ -38,7 +38,7 @@ deliver exceptional solutions tailored to your needs.
 
         <div className="text-center">
           <Button variant="noesis" size="lg" className="shadow-lg hover:shadow-noesis-purple/50" asChild>
-            <Link to="/services" className="inline-flex items-center gap-2">
+            <Link to="/services#services" className="inline-flex items-center gap-2">
               View All Services 
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Link>
