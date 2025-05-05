@@ -74,8 +74,8 @@ const CareersSection = () => {
     type: "Full-time",
     description: "Bridge the gap between business needs and technical implementation of AI solutions."
   }];
-  return <section className="py-16 bg-[#1A1F2C]">
-      <div className="container mx-auto px-4">
+  return <section className="bg-[#1A1F2C] py-0">
+      <div className="container mx-auto px-4 my-0 py-[50px]">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             Join Our <span className="text-noesis-purple">Team</span>

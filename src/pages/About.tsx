@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import MissionSection from '../components/MissionSection';
@@ -13,18 +12,11 @@ import CareersSection from '@/components/about/CareersSection';
 import ChatBotSection from '@/components/ChatBotSection';
 import ContactBanner from '@/components/ContactBanner';
 import FilterableTeamSection from '@/components/FilterableTeamSection';
-
 const About = () => {
-  return (
-    <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
+  return <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
       <main className="pt-16 sm:pt-20 md:pt-16">
-        <SubpageHero 
-          title="About Our Company" 
-          subtitle="Learn about our mission, vision, and how we blend human expertise with AI innovation" 
-          gradientText="Company" 
-          backgroundEffect="purple" 
-        />
+        <SubpageHero title="About Our Company" subtitle="Learn about our mission, vision, and how we blend human expertise with AI innovation" gradientText="Company" backgroundEffect="purple" />
         
         <CompanyHistory />
         
@@ -34,7 +26,7 @@ const About = () => {
         
         <FilterableTeamSection />
         
-        <section className="py-16">
+        <section className="py-[30px]">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-white">
@@ -57,8 +49,6 @@ const About = () => {
       </main>
       <Footer />
       <ScrollToTop />
-    </div>
-  );
+    </div>;
 };
-
 export default About;
