@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Brain, BrainCircuit, Microscope, Settings, Zap, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -6,7 +5,6 @@ import AIProductCard from './AIProductCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useDeviceType } from '@/hooks/use-mobile';
 import { aiCapabilitiesSectionData } from '@/data/content/aiCapabilities';
-
 export interface AICapability {
   id: string;
   title: string;
@@ -16,7 +14,6 @@ export interface AICapability {
   color: string;
   category?: string;
 }
-
 export interface AIProduct {
   id: string;
   title: string;
@@ -28,7 +25,6 @@ export interface AIProduct {
   ctaUrl: string;
   ctaText: string;
 }
-
 interface AICapabilitiesSectionProps {
   title: string;
   capabilities: AICapability[];
@@ -38,7 +34,6 @@ interface AICapabilitiesSectionProps {
     subtitle: string;
   };
 }
-
 const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   title,
   capabilities = [],
@@ -53,7 +48,6 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
   const deviceType = useDeviceType();
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
-  
   const categories = [{
     id: 'development',
     name: 'AI Development'
@@ -61,9 +55,7 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
     id: 'deployment',
     name: 'AI Deployment'
   }];
-
   const filteredCapabilities = capabilities?.filter(cap => cap.category === activeTab) || [];
-
   useEffect(() => {
     cardsRef.current = cardsRef.current.slice(0, filteredCapabilities.length);
     const observer = new IntersectionObserver(entries => {
@@ -100,7 +92,6 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
       });
     };
   }, [filteredCapabilities, activeTab]);
-
   const getIconByName = (iconName: string) => {
     const normalizedIconName = iconName.toLowerCase();
     switch (normalizedIconName) {
@@ -124,20 +115,13 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
 
   // Define grid columns based on device type
   const gridColumns = isMobile ? 'grid-cols-1' : isTablet ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-2';
-
-  return <section id="ai-capabilities" className="page-section relative overflow-hidden py-12 sm:py-16">
+  return <section id="ai-capabilities" className="page-section relative overflow-hidden sm:py-16 py-[30px]">
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <h2 className="section-title mb-3">
-          Our <span className="gradient-text">AI</span> <span className="gradient-text">Capabilities</span>
-        </h2>
         
-        {aiCapabilitiesSectionData.subtitle && (
-          <p className="section-subtitle">
-            {aiCapabilitiesSectionData.subtitle}
-          </p>
-        )}
+        
+        {aiCapabilitiesSectionData.subtitle}
         
         <Tabs defaultValue="development" className="max-w-6xl mx-auto my-0 py-0">
           <div className="flex justify-center mb-8 sm:mb-10 md:mb-12">
@@ -176,27 +160,17 @@ const AICapabilitiesSection: React.FC<AICapabilitiesSectionProps> = ({
         
         {products && products.length > 0 && <div className="mt-12 sm:mt-16">
             <h2 dangerouslySetInnerHTML={{
-              __html: productsSection.title
-            }} className="section-title mb-3"></h2>
+          __html: productsSection.title
+        }} className="section-title mb-3"></h2>
             <h3 className="text-center text-gray-300 mx-auto text-lg mb-8 md:text-lg">{productsSection.subtitle}</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl mx-auto">
                 {products.map(product => {
-            return <AIProductCard 
-              key={product.id} 
-              title={product.title} 
-              description={product.description} 
-              logoUrl={product.logoUrl || '/placeholder.svg'}
-              logoWidth={product.logoWidth}
-              logoHeight={product.logoHeight}
-              ctaText={product.ctaText} 
-              ctaUrl={product.ctaUrl} 
-            />;
+            return <AIProductCard key={product.id} title={product.title} description={product.description} logoUrl={product.logoUrl || '/placeholder.svg'} logoWidth={product.logoWidth} logoHeight={product.logoHeight} ctaText={product.ctaText} ctaUrl={product.ctaUrl} />;
           })}
             </div>
         </div>}
       </div>
     </section>;
 };
-
 export default AICapabilitiesSection;

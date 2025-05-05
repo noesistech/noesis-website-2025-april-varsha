@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -14,44 +13,36 @@ import SubpageHero from '@/components/SubpageHero';
 import HowWeWorkSection from '@/components/HowWeWorkSection';
 import WhyChooseSection from '@/components/WhyChooseSection';
 import ServiceGrid from '@/components/ServiceGrid';
-
 const Services = () => {
-  const { 
-    serviceItems, 
-    servicesSection, 
-    techStackSection, 
+  const {
+    serviceItems,
+    servicesSection,
+    techStackSection,
     techCategories,
     aiCapabilitiesSection,
     aiCapabilities,
     aiProducts,
     aiProductsSection
   } = useContent();
-  
   const location = useLocation();
-
   useEffect(() => {
     // Check if there's a hash in the URL and scroll to that element
     if (location.hash) {
       const id = location.hash.substring(1); // remove the # character
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({
+          behavior: 'smooth'
+        });
       }
     }
   }, [location]);
-
-  return (
-    <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
+  return <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
       <main>
         {/* Hero section with updated subtitle */}
-        <SubpageHero
-          title="Our Services"
-          subtitle="We combine human creativity with AI precision to deliver
-exceptional solutions tailored to your needs."
-          gradientText="Services"
-          backgroundEffect="blue"
-        />
+        <SubpageHero title="Our Services" subtitle="We combine human creativity with AI precision to deliver
+exceptional solutions tailored to your needs." gradientText="Services" backgroundEffect="blue" />
 
         {/* Services Grid - New Component */}
         <section className="py-16 bg-[#1A1F2C]" id="services">
@@ -61,15 +52,10 @@ exceptional solutions tailored to your needs."
                 What We <span className="text-noesis-purple">Offer</span>
               </h2>
               <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
-              <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg">
-                Explore our comprehensive range of services designed to transform your business
-              </p>
+              
             </div>
             
-            <ServiceGrid 
-              services={serviceItems}
-              title="What We Offer"
-            />
+            <ServiceGrid services={serviceItems} title="What We Offer" />
           </div>
         </section>
         
@@ -108,12 +94,7 @@ exceptional solutions tailored to your needs."
               </h2>
               <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
             </div>
-            <AICapabilitiesSection 
-              title={aiCapabilitiesSection.title} 
-              capabilities={aiCapabilities} 
-              products={aiProducts}
-              productsSection={aiProductsSection}
-            />
+            <AICapabilitiesSection title={aiCapabilitiesSection.title} capabilities={aiCapabilities} products={aiProducts} productsSection={aiProductsSection} />
           </div>
         </section>
         
@@ -126,11 +107,7 @@ exceptional solutions tailored to your needs."
               </h2>
               <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
             </div>
-            <TechStackSection 
-              title={techStackSection.title} 
-              categories={techCategories}
-              subtitle={techStackSection.subtitle}
-            />
+            <TechStackSection title={techStackSection.title} categories={techCategories} subtitle={techStackSection.subtitle} />
           </div>
         </section>
 
@@ -143,12 +120,7 @@ exceptional solutions tailored to your needs."
                 Get in touch with us today to discuss how our services can help you achieve your goals.
               </p>
               <div className="flex justify-center">
-                <Button 
-                  variant="noesis" 
-                  size="lg" 
-                  className="shadow-lg hover:shadow-noesis-purple/50" 
-                  asChild
-                >
+                <Button variant="noesis" size="lg" className="shadow-lg hover:shadow-noesis-purple/50" asChild>
                   <a href="/contact" className="inline-flex items-center gap-2">
                     Contact Us <ArrowRight className="h-4 w-4" />
                   </a>
@@ -159,8 +131,6 @@ exceptional solutions tailored to your needs."
         </section>
       </main>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Services;
