@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -10,6 +11,7 @@ import TechStackSection from '@/components/TechStackSection';
 import AICapabilitiesSection from '@/components/AICapabilitiesSection';
 import { useLocation } from 'react-router-dom';
 import SubpageHero from '@/components/SubpageHero';
+import HowWeWorkSection from '@/components/HowWeWorkSection';
 
 const Services = () => {
   const { 
@@ -79,6 +81,9 @@ const Services = () => {
             </div>
           </div>
         </section>
+        
+        {/* How We Work Section */}
+        <HowWeWorkSection />
         
         {/* AI Capabilities Section */}
         <AICapabilitiesSection 
