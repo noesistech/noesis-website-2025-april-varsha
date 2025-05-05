@@ -37,28 +37,35 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
         </div>
 
         <Tabs defaultValue="tech" value={activeTab} onValueChange={setActiveTab} className="max-w-5xl mx-auto">
-          <TabsList className="mx-auto mb-8 bg-gray-800/50 border border-gray-700/50">
-            <TabsTrigger value="tech" className="text-sm sm:text-base data-[state=active]:bg-noesis-purple/30 data-[state=active]:text-white">
-              Technologies
+          <TabsList className="mx-auto mb-8 bg-transparent">
+            <TabsTrigger 
+              value="tech" 
+              className="rounded-md text-base sm:text-lg py-3 px-10 data-[state=active]:bg-noesis-purple data-[state=active]:text-white"
+            >
+              Tech Stack
             </TabsTrigger>
-            <TabsTrigger value="cloud" className="text-sm sm:text-base data-[state=active]:bg-noesis-purple/30 data-[state=active]:text-white">
-              Cloud Infrastructure
+            <TabsTrigger 
+              value="cloud" 
+              className="rounded-md text-base sm:text-lg py-3 px-10 data-[state=active]:bg-gray-800 data-[state=active]:text-white"
+            >
+              Cloud Stack
             </TabsTrigger>
           </TabsList>
           
           <TabsContent value="tech" className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {techStack.map((category) => (
-                <Card key={category.id} className="bg-gray-800/50 border border-gray-700/50 hover:border-noesis-purple/50 transition-all">
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-white mb-3">{category.title}</h3>
-                    <ul className="space-y-2">
-                      {category.technologies?.map((item) => (
-                        <li key={item.id} className="text-gray-300/80">
-                          {item.name}
-                        </li>
-                      ))}
-                    </ul>
+                <Card key={category.id} className="bg-[#1e1e24]/90 border-0 overflow-hidden rounded-lg p-6">
+                  <h3 className="text-xl font-semibold text-noesis-purple mb-6">{category.title}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {category.technologies?.map((item) => (
+                      <span 
+                        key={item.id} 
+                        className="bg-gray-800/80 text-white/90 px-4 py-2 text-sm rounded-full"
+                      >
+                        {item.name}
+                      </span>
+                    ))}
                   </div>
                 </Card>
               ))}
@@ -66,18 +73,19 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
           </TabsContent>
           
           <TabsContent value="cloud" className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {cloudStack.map((category) => (
-                <Card key={category.id} className="bg-gray-800/50 border border-gray-700/50 hover:border-noesis-purple/50 transition-all">
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-white mb-3">{category.title}</h3>
-                    <ul className="space-y-2">
-                      {category.technologies?.map((item) => (
-                        <li key={item.id} className="text-gray-300/80">
-                          {item.name}
-                        </li>
-                      ))}
-                    </ul>
+                <Card key={category.id} className="bg-[#1e1e24]/90 border-0 overflow-hidden rounded-lg p-6">
+                  <h3 className="text-xl font-semibold text-noesis-purple mb-6">{category.title}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {category.technologies?.map((item) => (
+                      <span 
+                        key={item.id} 
+                        className="bg-gray-800/80 text-white/90 px-4 py-2 text-sm rounded-full"
+                      >
+                        {item.name}
+                      </span>
+                    ))}
                   </div>
                 </Card>
               ))}
