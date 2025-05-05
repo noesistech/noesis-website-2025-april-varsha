@@ -13,7 +13,7 @@ interface BrainstormerSectionProps {
 
 const BrainstormerSection: React.FC<BrainstormerSectionProps> = ({
   products,
-  title = 'Brainstormer <span class="gradient-text">Suite</span>',
+  title = 'Brainstormer Suite',
   subtitle = 'Our AI Products'
 }) => {
   // Get the icon component based on the icon name
@@ -36,8 +36,11 @@ const BrainstormerSection: React.FC<BrainstormerSectionProps> = ({
       <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-noesis-blue/20 rounded-full filter blur-[100px] opacity-30"></div>
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="section-title mb-3" dangerouslySetInnerHTML={{ __html: title }} />
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            Brainstormer <span className="text-noesis-purple">Suite</span>
+          </h2>
+          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
           <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg">
             {subtitle}
           </p>
