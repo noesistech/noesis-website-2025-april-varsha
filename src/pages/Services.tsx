@@ -22,7 +22,8 @@ import {
   Cloud,
   BrainCircuit,
   Users,
-  ImageIcon
+  ImageIcon,
+  MousePointerClick
 } from 'lucide-react';
 import { useContent } from '@/contexts/ContentContext';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
@@ -81,6 +82,16 @@ const Services = () => {
   const aiService = getServiceById('ai') || serviceItemsData[4];
   const staffService = getServiceById('staff') || serviceItemsData[5];
 
+  // Handle smooth scrolling to service sections
+  const scrollToService = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
       <main>
@@ -88,7 +99,7 @@ const Services = () => {
         <SubpageHero title="Our Services" subtitle="We combine human creativity with AI precision to deliver
 exceptional solutions tailored to your needs." gradientText="Services" backgroundEffect="blue" />
 
-        {/* Services Overview Grid */}
+        {/* Services Overview Grid - Updated with clickable service cards */}
         <section className="py-16 bg-[#1A1F2C]" id="services">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="text-center max-w-3xl mx-auto mb-12">
@@ -96,9 +107,32 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
                 What We <span className="text-noesis-purple">Offer</span>
               </h2>
               <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
+              <p className="text-gray-300 mb-8">Click on any service to learn more about our offerings</p>
             </div>
             
-            <ServiceGrid services={serviceItems} title="What We Offer" />
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
+              {serviceItems.map((service, index) => (
+                <div 
+                  key={service.id}
+                  onClick={() => scrollToService(service.id.replace('service-item-', '') || `service-${index + 1}`)}
+                  className="bg-gradient-to-b from-[#222732]/95 to-[#1D212B]/85 backdrop-blur-sm rounded-xl p-5 sm:p-6 border border-white/10 shadow-xl hover:shadow-noesis-purple/30 transition-all duration-300 flex flex-col items-center text-center hover:border-noesis-purple/30 hover:scale-105 group cursor-pointer"
+                >
+                  <div className={`bg-[#1A1F2C]/90 p-4 rounded-full w-fit mb-4 group-hover:bg-noesis-purple/20 transition-colors duration-300 border border-white/5 group-hover:border-noesis-purple/30`}>
+                    <div className={`${serviceIconColors[service.icon_name as keyof typeof serviceIconColors] || 'text-noesis-purple'} group-hover:text-white transition-colors duration-300`}>
+                      {getIconByName(service.icon_name)}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-semibold text-white group-hover:text-noesis-purple transition-colors duration-300 mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-300 text-sm mb-4 line-clamp-2">{service.description.split('.')[0]}.</p>
+                  <div className="mt-auto flex items-center text-noesis-purple opacity-70 group-hover:opacity-100">
+                    <span className="text-sm">Learn more</span>
+                    <MousePointerClick className="h-4 w-4 ml-1" />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
         
