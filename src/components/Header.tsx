@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight } from 'lucide-react';
@@ -17,6 +18,12 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -40,27 +47,41 @@ const Header = () => {
     };
   }, [scrolled]);
 
-  // Updated navigation structure as requested
+  // About submenu items
+  const aboutSubmenu = [
+    { name: "Our Story", href: "/about#our-story" },
+    { name: "Mission & Vision", href: "/about#mission-vision" },
+    { name: "Team", href: "/about#team" },
+    { name: "Careers", href: "/about#careers" }
+  ];
+
+  // Updated navigation structure with About dropdown
   const navStructure = [
     { 
       name: 'About',
-      href: '/about'
+      href: '/about',
+      hasSubmenu: true,
+      submenu: aboutSubmenu
     },
     { 
       name: 'Services',
-      href: '/services'
+      href: '/services',
+      hasSubmenu: false
     },
     { 
       name: 'Solutions',
-      href: '/solutions'
+      href: '/solutions',
+      hasSubmenu: false
     },
     { 
       name: 'Noesis AI Assistant',
-      href: '#chatbot'
+      href: '#chatbot',
+      hasSubmenu: false
     },
     { 
       name: 'Contact',
-      href: '/contact'
+      href: '/contact',
+      hasSubmenu: false
     }
   ];
   
@@ -150,7 +171,11 @@ const Header = () => {
             <NavigationMenuList>
               {navStructure.map((item) => (
                 <NavigationMenuItem key={item.name}>
-                  {item.href.startsWith('/') ? (
+                  {item.hasSubmenu ? (
+                    <NavigationMenuTrigger className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white bg-transparent">
+                      {item.name}
+                    </NavigationMenuTrigger>
+                  ) : item.href.startsWith('/') ? (
                     <NavigationMenuLink asChild>
                       <Link
                         to={item.href}
@@ -168,6 +193,24 @@ const Header = () => {
                         {item.name}
                       </a>
                     </NavigationMenuLink>
+                  )}
+                  
+                  {/* Dropdown content for items with submenus */}
+                  {item.hasSubmenu && (
+                    <NavigationMenuContent>
+                      <ul className="grid w-[200px] gap-1 p-2 bg-[#1A1F2C] border border-white/10 rounded-md">
+                        {item.submenu?.map((subItem) => (
+                          <li key={subItem.name}>
+                            <Link 
+                              to={subItem.href}
+                              className="block select-none space-y-1 rounded-md p-2 text-white/80 hover:bg-white/10 hover:text-white transition-colors text-[10px] sm:text-[10px] md:text-[10px] lg:text-[14px]"
+                            >
+                              {subItem.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
                   )}
                 </NavigationMenuItem>
               ))}
@@ -198,7 +241,25 @@ const Header = () => {
                 <div className="flex flex-col items-center justify-center w-full h-full max-w-md mx-auto space-y-4 md:space-y-2">
                   {navStructure.map((item, index) => (
                     <div key={item.name} className="w-full">
-                      {item.href.startsWith('/') ? (
+                      {item.hasSubmenu ? (
+                        <div className="w-full">
+                          <div className="text-white py-3 md:py-2 text-lg text-center w-full transition-colors animate-in fade-in duration-300 font-semibold">
+                            {item.name}
+                          </div>
+                          <div className="pl-4 space-y-2 mb-2">
+                            {item.submenu?.map((subItem) => (
+                              <Link
+                                key={subItem.name}
+                                to={subItem.href}
+                                className="text-white/80 py-2 text-base text-center w-full transition-colors animate-in fade-in duration-300 block hover:text-white"
+                                onClick={() => setMobileMenuOpen(false)}
+                              >
+                                {subItem.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      ) : item.href.startsWith('/') ? (
                         <Link 
                           to={item.href} 
                           className="text-white py-3 md:py-2 text-lg text-center w-full transition-colors animate-in fade-in duration-300 block"
