@@ -97,20 +97,21 @@ const ContactSection = () => {
   };
   
   return (
-    <section id="contact" className="page-section py-16 sm:py-24 bg-gray-900/30 overflow-hidden relative">
+    <section id="contact" className="py-16 sm:py-24 bg-gray-900/30 overflow-hidden relative">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="section-title">
-            Contact <span className="gradient-text">Us</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            Contact <span className="text-noesis-purple">Us</span>
           </h2>
           <p className="mt-4 text-lg text-gray-300/80">
-            Ready to transform your business with AI-powered solutions?
+            We'd love to hear from you. Here's how you can reach us.
           </p>
           <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
         </div>
         
-        <div className="flex flex-col lg:flex-row max-w-6xl mx-auto gap-8">
-          <div className="lg:w-1/3 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* Contact Information Cards */}
+          <div className="space-y-6">
             <Card className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 overflow-hidden">
               <div className="p-6">
                 <div className="flex items-center">
@@ -158,8 +159,9 @@ const ContactSection = () => {
             </Card>
           </div>
           
-          <div className="lg:w-2/3">
-            <Card className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 overflow-hidden">
+          {/* Contact Form - Takes up 2 columns */}
+          <div className="lg:col-span-2">
+            <Card className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 overflow-hidden h-full">
               <div className="p-8">
                 <h3 className="text-xl font-semibold text-white mb-6">Send us a message</h3>
                 <Form {...form}>

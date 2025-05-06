@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import SubpageHero from '@/components/SubpageHero';
 import { useContent } from '@/contexts/ContentContext';
 import ScrollToTop from '@/components/ScrollToTop';
+import ChatBotSection from '@/components/ChatBotSection';
 
 const Contact = () => {
   const { contactSection } = useContent();
@@ -20,7 +21,12 @@ const Contact = () => {
           gradientText="Touch"
           backgroundEffect="orange"
         />
+        
+        {/* New layout structure with columns for contact details and form */}
         <ContactSection />
+        
+        {/* AI Assistant Section */}
+        <ChatBotSection />
       </main>
       <Footer />
       <ScrollToTop />
