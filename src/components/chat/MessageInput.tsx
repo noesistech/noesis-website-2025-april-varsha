@@ -39,7 +39,6 @@ const MessageInput = ({ sendMessage, handlePromptClick, customPrompts = [] }: Me
         return;
       }
       
-      console.log("Sending message:", message);
       sendMessage(message.trim());
       setMessage('');
       if (textareaRef.current) {
@@ -53,10 +52,11 @@ const MessageInput = ({ sendMessage, handlePromptClick, customPrompts = [] }: Me
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
     
-    // Auto-resize textarea
+    // Auto-resize textarea but limit height
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+      const newHeight = Math.min(textareaRef.current.scrollHeight, 100);
+      textareaRef.current.style.height = `${newHeight}px`;
     }
   };
 
@@ -94,13 +94,13 @@ const MessageInput = ({ sendMessage, handlePromptClick, customPrompts = [] }: Me
   return (
     <div className="relative">
       {(!message || message.length < 2) && displayPrompts.length > 0 && (
-        <div className="thin-scrollbar overflow-x-auto gap-2 px-2 py-2 mb-4">
-          <div className="flex flex-wrap gap-2 mb-3">
+        <div className="thin-scrollbar flex overflow-x-auto gap-2 px-1 py-2 mb-2">
+          <div className="flex gap-2">
             {displayPrompts.map((prompt, index) => (
               <button
                 key={index}
                 onClick={() => handlePromptClick(typeof prompt === "object" && prompt ? prompt["Question"] : prompt)}
-                className="px-3 pt-[4px] py-[6px] bg-white/10 hover:bg-white/20 rounded-full text-sm sm:text-md text-white/90 transition-colors whitespace-nowrap"
+                className="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full text-xs whitespace-nowrap text-white/90 transition-colors"
                 disabled={isDisabled}
               >
                 {typeof prompt === "object" && prompt ? prompt["Question"] : prompt}
@@ -110,7 +110,7 @@ const MessageInput = ({ sendMessage, handlePromptClick, customPrompts = [] }: Me
         </div>
       )}
       
-      <div className="border-t border-gray-700/50 px-0 py-3 sm:p-3">
+      <div className="border-t border-gray-700/50 px-0 py-2">
         <div className="relative flex items-end rounded-lg bg-white/10 p-2">
           <textarea
             ref={textareaRef}

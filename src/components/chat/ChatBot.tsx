@@ -25,9 +25,8 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
     connectWebsocket,
   } = useMessageContext();
   
-  const [isOpen, setIsOpen] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(!minimized);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(!minimized);
   
   // Initialize chat setup (bot info, chat history, etc.)
   useChatSetup();
@@ -37,7 +36,6 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
   
   const handleMessageSend = (text: string) => {
     if (isTyping || messageStreaming || !text.trim()) {
-      console.log("Message not sent due to conditions:", { isTyping, messageStreaming, emptyText: !text.trim() });
       return;
     }
     
@@ -56,7 +54,6 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
     setMessageStreaming(true);
     
     // Send message via WebSocket
-    console.log("Attempting to send message:", text, "WebSocket ready state:", readyState);
     const success = sendMessage(text);
     
     if (!success) {
@@ -68,7 +65,6 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
   };
   
   const handlePromptClick = (text: string) => {
-    console.log("Prompt clicked:", text, "WebSocket connected:", wsConnected);
     handleMessageSend(text);
   };
   
@@ -76,15 +72,10 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
     toast.info(`File functionality has been disabled.`);
   };
 
-  // Log WebSocket status changes for debugging
-  useEffect(() => {
-    console.log("WebSocket ready state changed:", readyState, "Connected:", wsConnected, "ChatId:", chatId);
-  }, [readyState, wsConnected, chatId]);
-
   // Embedded chat UI
   if (embedded) {
     return (
-      <div className="w-full">
+      <div className="w-full h-full">
         <Dropzone onDrop={handleDrop}>
           <ChatContainer
             handlePromptClick={handlePromptClick}
@@ -98,7 +89,7 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
     );
   }
   
-  // Floating chat UI - now just showing the button that navigates to homepage chatbot section
+  // Floating chat UI - just showing the button that navigates to homepage chatbot section
   return (
     <div className="fixed bottom-6 right-6 z-50">
       <FloatingChatButton pulseAnimation={!hasInteracted} />

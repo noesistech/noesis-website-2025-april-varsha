@@ -22,10 +22,10 @@ const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
   const displayPrompts = prompts && prompts.length > 0 ? prompts.slice(0, 7) : defaultPrompts;
 
   return (
-    <div className="flex flex-col h-full justify-center items-center px-4">
-      <div className="text-center mb-6">
-        <h4 className="text-xl font-semibold mb-2">Get Started</h4>
-        <p className="text-white/70">Ask me anything about Noesis.tech's services or AI solutions</p>
+    <div className="flex flex-col h-full justify-center items-center px-4 py-6">
+      <div className="text-center mb-4">
+        <h4 className="text-lg font-semibold mb-2">Get Started</h4>
+        <p className="text-white/70 text-sm">Ask me anything about Noesis.tech's services or AI solutions</p>
       </div>
       
       <div className="w-full max-w-md grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -33,7 +33,7 @@ const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
           <button
             key={index}
             onClick={() => handleSuggestionClick(prompt)}
-            className="p-3 bg-white/10 hover:bg-white/20 rounded-lg text-left text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-2 bg-white/10 hover:bg-white/20 rounded-lg text-left text-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={!connectWebsocket}
           >
             {prompt}
