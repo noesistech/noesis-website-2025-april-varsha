@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useContent } from '@/contexts/ContentContext';
+import { Link } from 'react-router-dom';
 import { 
   Sheet,
   SheetContent,
@@ -20,13 +21,7 @@ import {
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { clientsSection, clientLogos, partnerLogos, testimonials } = useContent();
   
-  const hasClientsData = Boolean(
-    clientsSection && 
-    (clientLogos?.length > 0 || partnerLogos?.length > 0 || testimonials?.length > 0)
-  );
-
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
@@ -45,26 +40,29 @@ const Header = () => {
     };
   }, [scrolled]);
 
+  // Updated navigation structure as requested
   const navStructure = [
     { 
       name: 'About',
       href: '/about'
     },
-    { name: 'Services', href: '#services' },
-    { name: 'Solutions', href: '#solutions' },
     { 
-      name: 'AI Power',
-      subMenu: [
-        { name: 'AI Capabilities', href: '#ai-capabilities' },
-        { name: 'Brainstormer Suite', href: '#brainstormer' }
-      ]
+      name: 'Services',
+      href: '/services'
     },
-    { name: 'Tech Stack', href: '#tech-stack' }
+    { 
+      name: 'Solutions',
+      href: '/solutions'
+    },
+    { 
+      name: 'Noesis AI Assistant',
+      href: '#chatbot'
+    },
+    { 
+      name: 'Contact',
+      href: '/contact'
+    }
   ];
-  
-  if (hasClientsData) {
-    navStructure.push({ name: 'Clients', href: '#clients' });
-  }
   
   const HEADER_HEIGHT = '60px';
   
@@ -93,7 +91,7 @@ const Header = () => {
       style={{ height: HEADER_HEIGHT }}
     >
       <div className="container mx-auto flex justify-between items-center h-full">
-        <a href="/" className="flex items-center gap-2 z-[60]">
+        <Link to="/" className="flex items-center gap-2 z-[60]">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 300.48 54.12" 
@@ -145,35 +143,22 @@ const Header = () => {
               className="text-white"
             />
           </svg>
-        </a>
+        </Link>
         
         <nav className="hidden sm:flex items-center gap-2 md:gap-4 lg:gap-6">
           <NavigationMenu>
             <NavigationMenuList>
               {navStructure.map((item) => (
                 <NavigationMenuItem key={item.name}>
-                  {item.subMenu ? (
-                    <>
-                      <NavigationMenuTrigger className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white bg-transparent data-[state=open]:bg-white/10">
+                  {item.href.startsWith('/') ? (
+                    <NavigationMenuLink asChild>
+                      <Link
+                        to={item.href}
+                        className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center px-4 py-2"
+                      >
                         {item.name}
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <ul className="grid gap-3 p-4 w-[200px] bg-[#1A1F2C]/80 backdrop-blur-md border border-white/10 rounded-lg shadow-lg">
-                          {item.subMenu.map((subItem) => (
-                            <li key={subItem.name}>
-                              <NavigationMenuLink asChild>
-                                <a
-                                  href={subItem.href}
-                                  className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/10 focus:bg-accent focus:text-accent-foreground text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white"
-                                >
-                                  {subItem.name}
-                                </a>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </>
+                      </Link>
+                    </NavigationMenuLink>
                   ) : (
                     <NavigationMenuLink asChild>
                       <a
@@ -189,12 +174,12 @@ const Header = () => {
             </NavigationMenuList>
           </NavigationMenu>
           
-          <a href="#contact">
+          <Link to="/contact">
             <Button className="group text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px]" variant="noesis" size="sm">
               Get in Touch
               <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300 h-2 w-2 md:h-4 md:w-4 lg:h-4 lg:w-4 ml-1" />
             </Button>
-          </a>
+          </Link>
         </nav>
         
         <div className="sm:hidden">
@@ -213,24 +198,15 @@ const Header = () => {
                 <div className="flex flex-col items-center justify-center w-full h-full max-w-md mx-auto space-y-4 md:space-y-2">
                   {navStructure.map((item, index) => (
                     <div key={item.name} className="w-full">
-                      {item.subMenu ? (
-                        <>
-                          <div className="text-white py-3 md:py-2 text-lg text-center w-full transition-colors">
-                            {item.name}
-                          </div>
-                          <div className="ml-4 space-y-2">
-                            {item.subMenu.map((subItem) => (
-                              <a
-                                key={subItem.name}
-                                href={subItem.href}
-                                className="text-white/80 py-2 text-base text-center w-full transition-colors block hover:text-white"
-                                onClick={() => setMobileMenuOpen(false)}
-                              >
-                                {subItem.name}
-                              </a>
-                            ))}
-                          </div>
-                        </>
+                      {item.href.startsWith('/') ? (
+                        <Link 
+                          to={item.href} 
+                          className="text-white py-3 md:py-2 text-lg text-center w-full transition-colors animate-in fade-in duration-300 block"
+                          style={{ animationDelay: `${index * 50}ms` }}
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.name}
+                        </Link>
                       ) : (
                         <a 
                           href={item.href} 
@@ -244,8 +220,8 @@ const Header = () => {
                     </div>
                   ))}
                   <div className="mt-4 md:mt-2 w-full flex justify-center">
-                    <a 
-                      href="#contact" 
+                    <Link 
+                      to="/contact" 
                       className="inline-block"
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -257,7 +233,7 @@ const Header = () => {
                         Get in Touch
                         <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
                       </Button>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
