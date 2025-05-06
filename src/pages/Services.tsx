@@ -1,9 +1,8 @@
-
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Button } from '@/components/ui/button';
-import { ChevronRight, Package, ArrowRight } from 'lucide-react';
+import { ChevronRight, Package, ArrowRight, ExternalLink, Eye, UserRound, Accessibility, Palette, FileText, GitBranch, BarChart2, Languages, Boxes, PlusSquare, RotateCcw } from 'lucide-react';
 import { useContent } from '@/contexts/ContentContext';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { getIconByName, serviceIconColors } from '@/components/hero/ServiceCard';
@@ -17,6 +16,7 @@ import ServiceGrid from '@/components/ServiceGrid';
 import AIProductCard from '@/components/AIProductCard';
 import ContactBanner from '@/components/ContactBanner';
 import ChatBotSection from '@/components/ChatBotSection';
+import ServiceDetailSection from '@/components/ServiceDetailSection';
 
 const Services = () => {
   const {
@@ -84,200 +84,165 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
         {/* Individual Service Sections */}
         {/* UI/UX Section */}
         <section id="uiux" className="py-16 bg-[#1A1F2C]/90">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="flex flex-col lg:flex-row items-center gap-8">
-              <div className="lg:w-1/2">
-                <div className="bg-[#222732] p-6 rounded-2xl border border-white/10 shadow-lg">
-                  <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
-                    {getIconByName(uiuxService.icon_name)}
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{uiuxService.title}</h3>
-                  <p className="text-gray-300">{uiuxService.description}</p>
-                </div>
-              </div>
-              <div className="lg:w-1/2">
-                <div className="space-y-4">
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">User Research</h4>
-                    <p className="text-gray-300">Deep user research to understand your target audience's needs, behaviors, and pain points.</p>
-                  </div>
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">Intuitive Design</h4>
-                    <p className="text-gray-300">Creating interfaces that feel natural and intuitive while maintaining visual consistency.</p>
-                  </div>
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">Accessibility</h4>
-                    <p className="text-gray-300">Ensuring your digital products are accessible to all users, including those with disabilities.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ServiceDetailSection 
+            service={uiuxService} 
+            features={[
+              {
+                icon: <UserRound className="h-6 w-6 text-noesis-blue" />,
+                title: "User Research",
+                description: "Deep user research to understand your target audience's needs, behaviors, and pain points."
+              },
+              {
+                icon: <Eye className="h-6 w-6 text-noesis-green" />,
+                title: "Intuitive Design",
+                description: "Creating interfaces that feel natural and intuitive while maintaining visual consistency."
+              },
+              {
+                icon: <Accessibility className="h-6 w-6 text-noesis-yellow" />,
+                title: "Accessibility",
+                description: "Ensuring your digital products are accessible to all users, including those with disabilities."
+              }
+            ]} 
+            isAlternate={false}
+            bgColor="from-[#1c212e] to-[#151a25]" 
+            accentColor="border-noesis-blue/30"
+            imageUrl="public/lovable-uploads/b1889f4a-cdf6-40f8-907c-386a883fbeb6.png"
+          />
         </section>
         
         {/* Web Development Section */}
         <section id="webdev" className="py-16 bg-[#1A1F2C]">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="flex flex-col lg:flex-row-reverse items-center gap-8">
-              <div className="lg:w-1/2">
-                <div className="bg-[#222732] p-6 rounded-2xl border border-white/10 shadow-lg">
-                  <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
-                    {getIconByName(webdevService.icon_name)}
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{webdevService.title}</h3>
-                  <p className="text-gray-300">{webdevService.description}</p>
-                </div>
-              </div>
-              <div className="lg:w-1/2">
-                <div className="space-y-4">
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">Frontend Development</h4>
-                    <p className="text-gray-300">Creating responsive, interactive user interfaces using modern frameworks like React, Vue, and Angular.</p>
-                  </div>
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">Backend Development</h4>
-                    <p className="text-gray-300">Building robust server-side systems that power your applications with security and performance.</p>
-                  </div>
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">Mobile App Development</h4>
-                    <p className="text-gray-300">Creating cross-platform mobile applications with React Native or native development for iOS and Android.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ServiceDetailSection 
+            service={webdevService} 
+            features={[
+              {
+                icon: <ChevronRight className="h-6 w-6 text-noesis-green" />,
+                title: "Frontend Development",
+                description: "Creating responsive, interactive user interfaces using modern frameworks like React, Vue, and Angular."
+              },
+              {
+                icon: <Package className="h-6 w-6 text-noesis-blue" />,
+                title: "Backend Development",
+                description: "Building robust server-side systems that power your applications with security and performance."
+              },
+              {
+                icon: <ExternalLink className="h-6 w-6 text-noesis-yellow" />,
+                title: "Mobile App Development",
+                description: "Creating cross-platform mobile applications with React Native or native development for iOS and Android."
+              }
+            ]} 
+            isAlternate={true}
+            bgColor="from-[#1e2330] to-[#171c27]" 
+            accentColor="border-noesis-green/30"
+          />
         </section>
         
         {/* Graphics and Content Section */}
         <section id="graphics" className="py-16 bg-[#1A1F2C]/90">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="flex flex-col lg:flex-row items-center gap-8">
-              <div className="lg:w-1/2">
-                <div className="bg-[#222732] p-6 rounded-2xl border border-white/10 shadow-lg">
-                  <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
-                    {getIconByName(graphicsService.icon_name)}
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{graphicsService.title}</h3>
-                  <p className="text-gray-300">{graphicsService.description}</p>
-                </div>
-              </div>
-              <div className="lg:w-1/2">
-                <div className="space-y-4">
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">Brand Identity</h4>
-                    <p className="text-gray-300">Developing cohesive visual identities that communicate your brand's values and personality.</p>
-                  </div>
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">Content Creation</h4>
-                    <p className="text-gray-300">Producing engaging, SEO-optimized content that connects with your target audience.</p>
-                  </div>
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">Digital Marketing Materials</h4>
-                    <p className="text-gray-300">Creating visuals for social media, email campaigns, and digital advertising platforms.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ServiceDetailSection 
+            service={graphicsService} 
+            features={[
+              {
+                icon: <Palette className="h-6 w-6 text-noesis-purple" />,
+                title: "Brand Identity",
+                description: "Developing cohesive visual identities that communicate your brand's values and personality."
+              },
+              {
+                icon: <FileText className="h-6 w-6 text-noesis-blue" />,
+                title: "Content Creation",
+                description: "Producing engaging, SEO-optimized content that connects with your target audience."
+              },
+              {
+                icon: <Image className="h-6 w-6 text-noesis-yellow" />,
+                title: "Digital Marketing Materials",
+                description: "Creating visuals for social media, email campaigns, and digital advertising platforms."
+              }
+            ]} 
+            isAlternate={false}
+            bgColor="from-[#1c212e] to-[#151a25]" 
+            accentColor="border-noesis-yellow/30"
+          />
         </section>
         
         {/* Cloud Services Section */}
         <section id="cloud" className="py-16 bg-[#1A1F2C]">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="flex flex-col lg:flex-row-reverse items-center gap-8">
-              <div className="lg:w-1/2">
-                <div className="bg-[#222732] p-6 rounded-2xl border border-white/10 shadow-lg">
-                  <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
-                    {getIconByName(cloudService.icon_name)}
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{cloudService.title}</h3>
-                  <p className="text-gray-300">{cloudService.description}</p>
-                </div>
-              </div>
-              <div className="lg:w-1/2">
-                <div className="space-y-4">
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">Cloud Infrastructure</h4>
-                    <p className="text-gray-300">Designing and implementing scalable cloud architecture on AWS, Azure, or Google Cloud.</p>
-                  </div>
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">CI/CD Pipelines</h4>
-                    <p className="text-gray-300">Setting up automated development workflows that ensure reliable, frequent deployment.</p>
-                  </div>
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">Performance Optimization</h4>
-                    <p className="text-gray-300">Monitoring and optimizing infrastructure for cost-effectiveness and optimal performance.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ServiceDetailSection 
+            service={cloudService} 
+            features={[
+              {
+                icon: <Cloud className="h-6 w-6 text-pink-400" />,
+                title: "Cloud Infrastructure",
+                description: "Designing and implementing scalable cloud architecture on AWS, Azure, or Google Cloud."
+              },
+              {
+                icon: <GitBranch className="h-6 w-6 text-noesis-blue" />,
+                title: "CI/CD Pipelines",
+                description: "Setting up automated development workflows that ensure reliable, frequent deployment."
+              },
+              {
+                icon: <BarChart2 className="h-6 w-6 text-noesis-green" />,
+                title: "Performance Optimization",
+                description: "Monitoring and optimizing infrastructure for cost-effectiveness and optimal performance."
+              }
+            ]} 
+            isAlternate={true}
+            bgColor="from-[#1e2330] to-[#171c27]" 
+            accentColor="border-pink-400/30"
+          />
         </section>
         
         {/* AI Customized Solutions Section */}
         <section id="ai" className="py-16 bg-[#1A1F2C]/90">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="flex flex-col lg:flex-row items-center gap-8">
-              <div className="lg:w-1/2">
-                <div className="bg-[#222732] p-6 rounded-2xl border border-white/10 shadow-lg">
-                  <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
-                    {getIconByName(aiService.icon_name)}
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{aiService.title}</h3>
-                  <p className="text-gray-300">{aiService.description}</p>
-                </div>
-              </div>
-              <div className="lg:w-1/2">
-                <div className="space-y-4">
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">Custom AI Models</h4>
-                    <p className="text-gray-300">Developing and training machine learning models specific to your business needs.</p>
-                  </div>
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">NLP & Computer Vision</h4>
-                    <p className="text-gray-300">Implementing language processing and image recognition systems for advanced data analysis.</p>
-                  </div>
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">AI Integration</h4>
-                    <p className="text-gray-300">Seamlessly incorporating AI capabilities into your existing systems and workflows.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ServiceDetailSection 
+            service={aiService} 
+            features={[
+              {
+                icon: <BrainCircuit className="h-6 w-6 text-noesis-purple" />,
+                title: "Custom AI Models",
+                description: "Developing and training machine learning models specific to your business needs."
+              },
+              {
+                icon: <Languages className="h-6 w-6 text-noesis-blue" />,
+                title: "NLP & Computer Vision",
+                description: "Implementing language processing and image recognition systems for advanced data analysis."
+              },
+              {
+                icon: <Boxes className="h-6 w-6 text-noesis-green" />,
+                title: "AI Integration",
+                description: "Seamlessly incorporating AI capabilities into your existing systems and workflows."
+              }
+            ]} 
+            isAlternate={false}
+            bgColor="from-[#1c212e] to-[#151a25]" 
+            accentColor="border-noesis-purple/30"
+          />
         </section>
         
         {/* AI-Enhanced Staff Solutions Section */}
         <section id="staff" className="py-16 bg-[#1A1F2C]">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="flex flex-col lg:flex-row-reverse items-center gap-8">
-              <div className="lg:w-1/2">
-                <div className="bg-[#222732] p-6 rounded-2xl border border-white/10 shadow-lg">
-                  <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
-                    {getIconByName(staffService.icon_name)}
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{staffService.title}</h3>
-                  <p className="text-gray-300">{staffService.description}</p>
-                </div>
-              </div>
-              <div className="lg:w-1/2">
-                <div className="space-y-4">
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">Talent Matching</h4>
-                    <p className="text-gray-300">Connecting you with professionals who have the exact skills your project needs.</p>
-                  </div>
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">Flexible Engagement Models</h4>
-                    <p className="text-gray-300">Options ranging from short-term contractors to dedicated full-time team members.</p>
-                  </div>
-                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
-                    <h4 className="text-xl font-semibold text-white mb-2">Team Augmentation</h4>
-                    <p className="text-gray-300">Seamlessly integrating expert professionals into your existing team structure.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ServiceDetailSection 
+            service={staffService} 
+            features={[
+              {
+                icon: <Users className="h-6 w-6 text-orange-400" />,
+                title: "Talent Matching",
+                description: "Connecting you with professionals who have the exact skills your project needs."
+              },
+              {
+                icon: <RotateCcw className="h-6 w-6 text-noesis-blue" />,
+                title: "Flexible Engagement Models",
+                description: "Options ranging from short-term contractors to dedicated full-time team members."
+              },
+              {
+                icon: <PlusSquare className="h-6 w-6 text-noesis-green" />,
+                title: "Team Augmentation",
+                description: "Seamlessly integrating expert professionals into your existing team structure."
+              }
+            ]} 
+            isAlternate={true}
+            bgColor="from-[#1e2330] to-[#171c27]" 
+            accentColor="border-orange-400/30"
+          />
         </section>
         
         {/* Why Choose Noesis Section */}
