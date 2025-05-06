@@ -1,8 +1,29 @@
+
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Button } from '@/components/ui/button';
-import { ChevronRight, Package, ArrowRight, ExternalLink, Eye, UserRound, Accessibility, Palette, FileText, GitBranch, BarChart2, Languages, Boxes, PlusSquare, RotateCcw } from 'lucide-react';
+import { 
+  ChevronRight, 
+  Package, 
+  ArrowRight, 
+  ExternalLink, 
+  Eye, 
+  UserRound, 
+  Accessibility, 
+  Palette, 
+  FileText, 
+  GitBranch, 
+  BarChart2, 
+  Languages, 
+  Boxes, 
+  PlusSquare, 
+  RotateCcw,
+  Cloud,
+  BrainCircuit,
+  Users,
+  ImageIcon
+} from 'lucide-react';
 import { useContent } from '@/contexts/ContentContext';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { getIconByName, serviceIconColors } from '@/components/hero/ServiceCard';
@@ -153,7 +174,7 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
                 description: "Producing engaging, SEO-optimized content that connects with your target audience."
               },
               {
-                icon: <Image className="h-6 w-6 text-noesis-yellow" />,
+                icon: <ImageIcon className="h-6 w-6 text-noesis-yellow" />,
                 title: "Digital Marketing Materials",
                 description: "Creating visuals for social media, email campaigns, and digital advertising platforms."
               }
