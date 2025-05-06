@@ -144,10 +144,10 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
                 else if (service.id === 'service-item-4' || service.id === '4' || service.title.toLowerCase().includes('cloud')) {
                   targetSectionId = 'cloud';
                 } 
-                else if (service.id === 'service-item-5' || service.id === '5' || service.title.toLowerCase().includes('ai')) {
+                else if (service.id === 'service-item-5' || service.id === '5' || service.title.toLowerCase().includes('ai') && !service.title.toLowerCase().includes('staff')) {
                   targetSectionId = 'ai';
                 } 
-                else if (service.id === 'service-item-6' || service.id === '6' || service.title.toLowerCase().includes('staff')) {
+                else if (service.id === 'service-item-6' || service.id === '6' || service.title.toLowerCase().includes('staff') || service.title.toLowerCase().includes('enhanced')) {
                   targetSectionId = 'staff';
                 } 
                 else {
