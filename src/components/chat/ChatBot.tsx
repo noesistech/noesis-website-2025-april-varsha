@@ -91,7 +91,7 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
             handleMessageSend={handleMessageSend}
             handleDrop={handleDrop}
             embedded={true}
-            minimized={!isExpanded}
+            minimized={minimized}
           />
         </Dropzone>
       </div>

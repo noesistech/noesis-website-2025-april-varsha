@@ -19,7 +19,7 @@ const ChatBotSection: React.FC = () => {
         
         <div className="max-w-2xl mx-auto">
           <MessageProvider>
-            <ChatBot minimized={true} />
+            <ChatBot embedded={true} minimized={false} />
           </MessageProvider>
         </div>
       </div>
