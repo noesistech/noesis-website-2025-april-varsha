@@ -1,17 +1,14 @@
-
 import React from 'react';
 import { ServiceItem } from '@/types/supabase';
 import { getIconByName } from '@/components/hero/ServiceCard';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
 interface ServiceFeature {
   icon: React.ReactNode;
   title: string;
   description: string;
 }
-
 interface ServiceDetailSectionProps {
   service: ServiceItem;
   features: ServiceFeature[];
@@ -20,7 +17,6 @@ interface ServiceDetailSectionProps {
   accentColor?: string;
   imageUrl?: string;
 }
-
 const ServiceDetailSection: React.FC<ServiceDetailSectionProps> = ({
   service,
   features,
@@ -29,19 +25,11 @@ const ServiceDetailSection: React.FC<ServiceDetailSectionProps> = ({
   accentColor = "border-noesis-purple/30",
   imageUrl
 }) => {
-  return (
-    <div className="container mx-auto px-4 sm:px-6">
-      <div className={cn(
-        "flex flex-col gap-8",
-        isAlternate ? "lg:flex-row-reverse" : "lg:flex-row"
-      )}>
+  return <div className="container mx-auto px-4 sm:px-6">
+      <div className={cn("flex flex-col gap-8", isAlternate ? "lg:flex-row-reverse" : "lg:flex-row")}>
         {/* Service Info Card */}
         <div className="lg:w-1/2">
-          <div className={cn(
-            "rounded-2xl bg-gradient-to-b", 
-            bgColor,
-            "border border-white/10 shadow-xl p-8 h-full"
-          )}>
+          <div className={cn("rounded-2xl bg-gradient-to-b", bgColor, "border border-white/10 shadow-xl p-8 h-full")}>
             <div className="flex items-center mb-6">
               <div className="bg-[#1A1F2C]/80 p-4 rounded-full mr-4 shadow-lg border border-white/5">
                 {getIconByName(service.icon_name)}
@@ -55,10 +43,7 @@ const ServiceDetailSection: React.FC<ServiceDetailSectionProps> = ({
               {service.description}
             </p>
             
-            <Button 
-              variant="outline" 
-              className="group border-white/20 hover:border-white/40 bg-transparent text-white hover:text-white hover:bg-white/5"
-            >
+            <Button variant="outline" className="group border-white/20 hover:border-white/40 bg-transparent text-white hover:text-white hover:bg-white/5">
               Learn more
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
@@ -67,26 +52,12 @@ const ServiceDetailSection: React.FC<ServiceDetailSectionProps> = ({
         
         {/* Features */}
         <div className="lg:w-1/2">
-          {imageUrl && (
-            <div className="mb-6 rounded-2xl overflow-hidden">
-              <img 
-                src={imageUrl} 
-                alt="Service illustration" 
-                className="w-full object-cover h-44 md:h-56"
-              />
-            </div>
-          )}
+          {imageUrl && <div className="mb-6 rounded-2xl overflow-hidden">
+              
+            </div>}
           
           <div className="grid gap-4">
-            {features.map((feature, index) => (
-              <div 
-                key={index} 
-                className={cn(
-                  "bg-[#1A1F2C]/50 backdrop-blur-sm rounded-xl p-6 border transition-all duration-300",
-                  accentColor,
-                  "hover:shadow-lg hover:border-white/20 transform hover:-translate-y-1"
-                )}
-              >
+            {features.map((feature, index) => <div key={index} className={cn("bg-[#1A1F2C]/50 backdrop-blur-sm rounded-xl p-6 border transition-all duration-300", accentColor, "hover:shadow-lg hover:border-white/20 transform hover:-translate-y-1")}>
                 <div className="flex items-start">
                   <div className="bg-[#222732] p-3 rounded-lg shadow-inner mr-4 border border-white/5">
                     {feature.icon}
@@ -96,13 +67,10 @@ const ServiceDetailSection: React.FC<ServiceDetailSectionProps> = ({
                     <p className="text-gray-300">{feature.description}</p>
                   </div>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default ServiceDetailSection;
