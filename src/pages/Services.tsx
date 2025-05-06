@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -82,14 +81,23 @@ const Services = () => {
   const aiService = getServiceById('ai') || serviceItemsData[4];
   const staffService = getServiceById('staff') || serviceItemsData[5];
 
-  // Handle smooth scrolling to service sections
+  // Handle smooth scrolling to service sections - Updated with more robust implementation
   const scrollToService = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
+    console.log("Scrolling to:", sectionId);
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const yOffset = -80; // Adjust this value based on your header height
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({
+          top: y,
+          behavior: 'smooth'
+        });
+        console.log("Element found, scrolling to position:", y);
+      } else {
+        console.log("Element not found:", sectionId);
+      }
+    }, 100); // Small delay to ensure DOM is ready
   };
 
   return <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
@@ -117,10 +125,20 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
                   ? service.id.replace('service-item-', '') 
                   : service.id;
                 
+                // Map service item IDs to section IDs
+                let sectionId;
+                if (serviceId === '1') sectionId = 'uiux';
+                else if (serviceId === '2') sectionId = 'webdev';
+                else if (serviceId === '3') sectionId = 'graphics';
+                else if (serviceId === '4') sectionId = 'cloud';
+                else if (serviceId === '5') sectionId = 'ai';
+                else if (serviceId === '6') sectionId = 'staff';
+                else sectionId = serviceId;
+                
                 return (
                   <div 
                     key={service.id}
-                    onClick={() => scrollToService(serviceId)}
+                    onClick={() => scrollToService(sectionId)}
                     className="bg-gradient-to-b from-[#222732]/95 to-[#1D212B]/85 backdrop-blur-sm rounded-xl p-5 sm:p-6 border border-white/10 shadow-xl hover:shadow-noesis-purple/30 transition-all duration-300 flex flex-col items-center text-center hover:border-noesis-purple/30 hover:scale-105 group cursor-pointer"
                   >
                     <div className={`bg-[#1A1F2C]/90 p-4 rounded-full w-fit mb-4 group-hover:bg-noesis-purple/20 transition-colors duration-300 border border-white/5 group-hover:border-noesis-purple/30`}>
