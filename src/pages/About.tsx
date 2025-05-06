@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Header from '../components/Header';
 import MissionSection from '../components/MissionSection';
@@ -9,9 +10,8 @@ import CompanyHistory from '@/components/about/CompanyHistory';
 import FounderSection from '@/components/founder/FounderSection';
 import CultureSection from '@/components/about/CultureSection';
 import CareersSection from '@/components/about/CareersSection';
-import ChatBotSection from '@/components/ChatBotSection';
 import ContactBanner from '@/components/ContactBanner';
-import FilterableTeamSection from '@/components/FilterableTeamSection';
+
 const About = () => {
   return <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
@@ -23,8 +23,6 @@ const About = () => {
         <MissionSection showPromisePanel={false} />
         
         <CultureSection />
-        
-        <FilterableTeamSection />
         
         <section className="py-[10px]">
           <div className="container mx-auto px-4 md:px-6 py-[15px]">
@@ -40,9 +38,6 @@ const About = () => {
         </section>
         
         <CareersSection />
-        
-        {/* AI Assistant Section */}
-        <ChatBotSection />
         
         {/* Contact Banner - No bottom margin needed as it connects to footer */}
         <ContactBanner />
