@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -81,23 +82,30 @@ const Services = () => {
   const aiService = getServiceById('ai') || serviceItemsData[4];
   const staffService = getServiceById('staff') || serviceItemsData[5];
 
-  // Handle smooth scrolling to service sections - Updated with more robust implementation
+  // Enhanced scrolling function with better detection
   const scrollToService = (sectionId: string) => {
-    console.log("Scrolling to:", sectionId);
-    setTimeout(() => {
+    console.log("Attempting to scroll to section:", sectionId);
+    
+    // Ensure DOM is fully loaded
+    requestAnimationFrame(() => {
       const element = document.getElementById(sectionId);
+      
       if (element) {
-        const yOffset = -80; // Adjust this value based on your header height
-        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        // Add offset to account for fixed header
+        const yOffset = -80; 
+        const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+        
+        // Use window.scrollTo for more reliable scrolling
         window.scrollTo({
           top: y,
           behavior: 'smooth'
         });
-        console.log("Element found, scrolling to position:", y);
+        
+        console.log("Found element, scrolling to position:", y);
       } else {
-        console.log("Element not found:", sectionId);
+        console.error("Target section not found:", sectionId);
       }
-    }, 100); // Small delay to ensure DOM is ready
+    });
   };
 
   return <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
@@ -120,25 +128,40 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
             
             <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
               {serviceItems.map((service) => {
-                // Extract the service ID for scrolling
-                const serviceId = service.id.includes('service-item-') 
-                  ? service.id.replace('service-item-', '') 
-                  : service.id;
+                // Determine which section to scroll to
+                let targetSectionId;
                 
-                // Map service item IDs to section IDs
-                let sectionId;
-                if (serviceId === '1') sectionId = 'uiux';
-                else if (serviceId === '2') sectionId = 'webdev';
-                else if (serviceId === '3') sectionId = 'graphics';
-                else if (serviceId === '4') sectionId = 'cloud';
-                else if (serviceId === '5') sectionId = 'ai';
-                else if (serviceId === '6') sectionId = 'staff';
-                else sectionId = serviceId;
+                // Map service IDs to section IDs directly
+                if (service.id === 'service-item-1' || service.id === '1' || service.title.toLowerCase().includes('ui/ux')) {
+                  targetSectionId = 'uiux';
+                } 
+                else if (service.id === 'service-item-2' || service.id === '2' || service.title.toLowerCase().includes('web')) {
+                  targetSectionId = 'webdev';
+                } 
+                else if (service.id === 'service-item-3' || service.id === '3' || service.title.toLowerCase().includes('graphic')) {
+                  targetSectionId = 'graphics';
+                } 
+                else if (service.id === 'service-item-4' || service.id === '4' || service.title.toLowerCase().includes('cloud')) {
+                  targetSectionId = 'cloud';
+                } 
+                else if (service.id === 'service-item-5' || service.id === '5' || service.title.toLowerCase().includes('ai')) {
+                  targetSectionId = 'ai';
+                } 
+                else if (service.id === 'service-item-6' || service.id === '6' || service.title.toLowerCase().includes('staff')) {
+                  targetSectionId = 'staff';
+                } 
+                else {
+                  // Default to the service id as fallback
+                  targetSectionId = service.id;
+                }
                 
                 return (
                   <div 
                     key={service.id}
-                    onClick={() => scrollToService(sectionId)}
+                    onClick={() => {
+                      console.log(`Card clicked, target section: ${targetSectionId}`);
+                      scrollToService(targetSectionId);
+                    }}
                     className="bg-gradient-to-b from-[#222732]/95 to-[#1D212B]/85 backdrop-blur-sm rounded-xl p-5 sm:p-6 border border-white/10 shadow-xl hover:shadow-noesis-purple/30 transition-all duration-300 flex flex-col items-center text-center hover:border-noesis-purple/30 hover:scale-105 group cursor-pointer"
                   >
                     <div className={`bg-[#1A1F2C]/90 p-4 rounded-full w-fit mb-4 group-hover:bg-noesis-purple/20 transition-colors duration-300 border border-white/5 group-hover:border-noesis-purple/30`}>
