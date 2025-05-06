@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -15,6 +16,8 @@ import WhyChooseSection from '@/components/WhyChooseSection';
 import ServiceGrid from '@/components/ServiceGrid';
 import AIProductCard from '@/components/AIProductCard';
 import ContactBanner from '@/components/ContactBanner';
+import ChatBotSection from '@/components/ChatBotSection';
+
 const Services = () => {
   const {
     serviceItems,
@@ -27,18 +30,36 @@ const Services = () => {
     aiProductsSection
   } = useContent();
   const location = useLocation();
+  
   useEffect(() => {
     // Check if there's a hash in the URL and scroll to that element
     if (location.hash) {
       const id = location.hash.substring(1); // remove the # character
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth'
-        });
+        setTimeout(() => {
+          element.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }, 100); // Small delay to ensure DOM is ready
       }
+    } else {
+      window.scrollTo(0, 0);
     }
   }, [location]);
+
+  // Filter service items by ID to create individual service sections
+  const getServiceById = (id: string) => {
+    return serviceItems.find(service => service.id === id || service.id.includes(id));
+  };
+
+  const uiuxService = getServiceById('uiux') || serviceItemsData[0];
+  const webdevService = getServiceById('webdev') || serviceItemsData[1];
+  const graphicsService = getServiceById('graphics') || serviceItemsData[2];
+  const cloudService = getServiceById('cloud') || serviceItemsData[3];
+  const aiService = getServiceById('ai') || serviceItemsData[4];
+  const staffService = getServiceById('staff') || serviceItemsData[5];
+
   return <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
       <main>
@@ -46,7 +67,7 @@ const Services = () => {
         <SubpageHero title="Our Services" subtitle="We combine human creativity with AI precision to deliver
 exceptional solutions tailored to your needs." gradientText="Services" backgroundEffect="blue" />
 
-        {/* Services Grid - New Component */}
+        {/* Services Overview Grid */}
         <section className="py-16 bg-[#1A1F2C]" id="services">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="text-center max-w-3xl mx-auto mb-12">
@@ -60,7 +81,206 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
           </div>
         </section>
         
-        {/* Why Choose Noesis Section - Updated for mobile */}
+        {/* Individual Service Sections */}
+        {/* UI/UX Section */}
+        <section id="uiux" className="py-16 bg-[#1A1F2C]/90">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="flex flex-col lg:flex-row items-center gap-8">
+              <div className="lg:w-1/2">
+                <div className="bg-[#222732] p-6 rounded-2xl border border-white/10 shadow-lg">
+                  <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
+                    {getIconByName(uiuxService.icon_name)}
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{uiuxService.title}</h3>
+                  <p className="text-gray-300">{uiuxService.description}</p>
+                </div>
+              </div>
+              <div className="lg:w-1/2">
+                <div className="space-y-4">
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">User Research</h4>
+                    <p className="text-gray-300">Deep user research to understand your target audience's needs, behaviors, and pain points.</p>
+                  </div>
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">Intuitive Design</h4>
+                    <p className="text-gray-300">Creating interfaces that feel natural and intuitive while maintaining visual consistency.</p>
+                  </div>
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">Accessibility</h4>
+                    <p className="text-gray-300">Ensuring your digital products are accessible to all users, including those with disabilities.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Web Development Section */}
+        <section id="webdev" className="py-16 bg-[#1A1F2C]">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="flex flex-col lg:flex-row-reverse items-center gap-8">
+              <div className="lg:w-1/2">
+                <div className="bg-[#222732] p-6 rounded-2xl border border-white/10 shadow-lg">
+                  <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
+                    {getIconByName(webdevService.icon_name)}
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{webdevService.title}</h3>
+                  <p className="text-gray-300">{webdevService.description}</p>
+                </div>
+              </div>
+              <div className="lg:w-1/2">
+                <div className="space-y-4">
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">Frontend Development</h4>
+                    <p className="text-gray-300">Creating responsive, interactive user interfaces using modern frameworks like React, Vue, and Angular.</p>
+                  </div>
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">Backend Development</h4>
+                    <p className="text-gray-300">Building robust server-side systems that power your applications with security and performance.</p>
+                  </div>
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">Mobile App Development</h4>
+                    <p className="text-gray-300">Creating cross-platform mobile applications with React Native or native development for iOS and Android.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Graphics and Content Section */}
+        <section id="graphics" className="py-16 bg-[#1A1F2C]/90">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="flex flex-col lg:flex-row items-center gap-8">
+              <div className="lg:w-1/2">
+                <div className="bg-[#222732] p-6 rounded-2xl border border-white/10 shadow-lg">
+                  <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
+                    {getIconByName(graphicsService.icon_name)}
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{graphicsService.title}</h3>
+                  <p className="text-gray-300">{graphicsService.description}</p>
+                </div>
+              </div>
+              <div className="lg:w-1/2">
+                <div className="space-y-4">
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">Brand Identity</h4>
+                    <p className="text-gray-300">Developing cohesive visual identities that communicate your brand's values and personality.</p>
+                  </div>
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">Content Creation</h4>
+                    <p className="text-gray-300">Producing engaging, SEO-optimized content that connects with your target audience.</p>
+                  </div>
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">Digital Marketing Materials</h4>
+                    <p className="text-gray-300">Creating visuals for social media, email campaigns, and digital advertising platforms.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Cloud Services Section */}
+        <section id="cloud" className="py-16 bg-[#1A1F2C]">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="flex flex-col lg:flex-row-reverse items-center gap-8">
+              <div className="lg:w-1/2">
+                <div className="bg-[#222732] p-6 rounded-2xl border border-white/10 shadow-lg">
+                  <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
+                    {getIconByName(cloudService.icon_name)}
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{cloudService.title}</h3>
+                  <p className="text-gray-300">{cloudService.description}</p>
+                </div>
+              </div>
+              <div className="lg:w-1/2">
+                <div className="space-y-4">
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">Cloud Infrastructure</h4>
+                    <p className="text-gray-300">Designing and implementing scalable cloud architecture on AWS, Azure, or Google Cloud.</p>
+                  </div>
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">CI/CD Pipelines</h4>
+                    <p className="text-gray-300">Setting up automated development workflows that ensure reliable, frequent deployment.</p>
+                  </div>
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">Performance Optimization</h4>
+                    <p className="text-gray-300">Monitoring and optimizing infrastructure for cost-effectiveness and optimal performance.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* AI Customized Solutions Section */}
+        <section id="ai" className="py-16 bg-[#1A1F2C]/90">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="flex flex-col lg:flex-row items-center gap-8">
+              <div className="lg:w-1/2">
+                <div className="bg-[#222732] p-6 rounded-2xl border border-white/10 shadow-lg">
+                  <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
+                    {getIconByName(aiService.icon_name)}
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{aiService.title}</h3>
+                  <p className="text-gray-300">{aiService.description}</p>
+                </div>
+              </div>
+              <div className="lg:w-1/2">
+                <div className="space-y-4">
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">Custom AI Models</h4>
+                    <p className="text-gray-300">Developing and training machine learning models specific to your business needs.</p>
+                  </div>
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">NLP & Computer Vision</h4>
+                    <p className="text-gray-300">Implementing language processing and image recognition systems for advanced data analysis.</p>
+                  </div>
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">AI Integration</h4>
+                    <p className="text-gray-300">Seamlessly incorporating AI capabilities into your existing systems and workflows.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* AI-Enhanced Staff Solutions Section */}
+        <section id="staff" className="py-16 bg-[#1A1F2C]">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="flex flex-col lg:flex-row-reverse items-center gap-8">
+              <div className="lg:w-1/2">
+                <div className="bg-[#222732] p-6 rounded-2xl border border-white/10 shadow-lg">
+                  <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
+                    {getIconByName(staffService.icon_name)}
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{staffService.title}</h3>
+                  <p className="text-gray-300">{staffService.description}</p>
+                </div>
+              </div>
+              <div className="lg:w-1/2">
+                <div className="space-y-4">
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">Talent Matching</h4>
+                    <p className="text-gray-300">Connecting you with professionals who have the exact skills your project needs.</p>
+                  </div>
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">Flexible Engagement Models</h4>
+                    <p className="text-gray-300">Options ranging from short-term contractors to dedicated full-time team members.</p>
+                  </div>
+                  <div className="bg-[#222732]/70 p-5 rounded-xl border border-white/5">
+                    <h4 className="text-xl font-semibold text-white mb-2">Team Augmentation</h4>
+                    <p className="text-gray-300">Seamlessly integrating expert professionals into your existing team structure.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Why Choose Noesis Section */}
         <section className="py-10 sm:py-16">
           <div className="container mx-auto px-3 sm:px-6">
             <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
@@ -128,10 +348,17 @@ exceptional solutions tailored to your needs." gradientText="Services" backgroun
           </div>
         </section>}
         
+        {/* Chatbot Section */}
+        <ChatBotSection />
+        
         {/* Contact Banner Section */}
         <ContactBanner />
       </main>
       <Footer />
     </div>;
 };
+
+// Import needed for the fallback service data
+import { serviceItemsData } from '@/data/content/services';
+
 export default Services;

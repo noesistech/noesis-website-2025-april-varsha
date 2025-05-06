@@ -55,6 +55,16 @@ const Header = () => {
     { name: "Careers", href: "/about#careers" }
   ];
 
+  // Services submenu items
+  const servicesSubmenu = [
+    { name: "UI/UX", href: "/services#uiux" },
+    { name: "Web and Application Development", href: "/services#webdev" },
+    { name: "Graphics and Content Creation", href: "/services#graphics" },
+    { name: "Cloud Services & DevOps", href: "/services#cloud" },
+    { name: "AI Customized Solutions", href: "/services#ai" },
+    { name: "AI-Enhanced Staff Solutions", href: "/services#staff" }
+  ];
+
   // Updated navigation structure with About dropdown
   const navStructure = [
     { 
@@ -66,7 +76,8 @@ const Header = () => {
     { 
       name: 'Services',
       href: '/services',
-      hasSubmenu: false
+      hasSubmenu: true,
+      submenu: servicesSubmenu
     },
     { 
       name: 'Solutions',
