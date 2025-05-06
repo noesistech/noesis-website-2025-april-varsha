@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import SubpageHero from '@/components/SubpageHero';
 import { useContent } from '@/contexts/ContentContext';
 import ScrollToTop from '@/components/ScrollToTop';
-import ChatBotSection from '@/components/ChatBotSection';
+import AIAssistantBanner from '@/components/AIAssistantBanner';
 
 const Contact = () => {
   const { contactSection } = useContent();
@@ -22,11 +22,11 @@ const Contact = () => {
           backgroundEffect="orange"
         />
         
-        {/* New layout structure with columns for contact details and form */}
+        {/* Contact form and info section */}
         <ContactSection />
         
-        {/* AI Assistant Section */}
-        <ChatBotSection />
+        {/* AI Assistant Banner */}
+        <AIAssistantBanner />
       </main>
       <Footer />
       <ScrollToTop />

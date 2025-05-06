@@ -15,6 +15,11 @@ const FloatingChatButton = ({ onClick, pulseAnimation = true }: FloatingChatButt
   const location = useLocation();
   
   const handleClick = () => {
+    if (onClick) {
+      onClick();
+      return;
+    }
+    
     if (location.pathname === '/') {
       // If already on homepage, scroll to the chatbot section
       const chatbotElement = document.getElementById('chatbot');
@@ -40,7 +45,7 @@ const FloatingChatButton = ({ onClick, pulseAnimation = true }: FloatingChatButt
           "relative transition-transform duration-200 hover:scale-105",
           "border-2 border-white/20"
         )}
-        aria-label="View AI Assistant"
+        aria-label="Chat with AI Assistant"
       >
         <Bot size={24} />
       </Button>

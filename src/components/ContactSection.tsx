@@ -99,71 +99,14 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-16 sm:py-24 bg-gray-900/30 overflow-hidden relative">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Contact <span className="text-noesis-purple">Us</span>
-          </h2>
-          <p className="mt-4 text-lg text-gray-300/80">
-            We'd love to hear from you. Here's how you can reach us.
-          </p>
-          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
-        </div>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Contact Information Cards */}
-          <div className="space-y-6">
-            <Card className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 overflow-hidden">
-              <div className="p-6">
-                <div className="flex items-center">
-                  <div className="rounded-full bg-noesis-purple/20 p-3 mr-4">
-                    <Mail className="h-6 w-6 text-noesis-purple" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-white">Email</h3>
-                    <a href="mailto:info@noesis.tech" className="text-noesis-purple hover:text-noesis-purple/90 transition-colors">
-                      info@noesis.tech
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </Card>
-            
-            <Card className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 overflow-hidden">
-              <div className="p-6">
-                <div className="flex items-center">
-                  <div className="rounded-full bg-noesis-purple/20 p-3 mr-4">
-                    <Phone className="h-6 w-6 text-noesis-purple" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-white">Phone</h3>
-                    <a href="tel:+91-8080135738" className="text-noesis-purple hover:text-noesis-purple/90 transition-colors">
-                      +91-8080135738
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </Card>
-            
-            <Card className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 overflow-hidden">
-              <div className="p-6">
-                <div className="flex items-center">
-                  <div className="rounded-full bg-noesis-purple/20 p-3 mr-4">
-                    <MapPin className="h-6 w-6 text-noesis-purple" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-white">Location</h3>
-                    <p className="text-gray-300/80">Mumbai, India</p>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
-          
-          {/* Contact Form - Takes up 2 columns */}
-          <div className="lg:col-span-2">
-            <Card className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 overflow-hidden h-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {/* Contact Form */}
+          <div>
+            <Card className="bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 overflow-hidden h-full">
               <div className="p-8">
-                <h3 className="text-xl font-semibold text-white mb-6">Send us a message</h3>
+                <h2 className="text-2xl md:text-3xl font-bold text-noesis-purple mb-8">
+                  Start The Conversation
+                </h2>
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -172,12 +115,12 @@ const ContactSection = () => {
                         name="name"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white">Name</FormLabel>
+                            <FormLabel className="text-white/80">Your Name</FormLabel>
                             <FormControl>
                               <Input 
-                                placeholder="Your name" 
+                                placeholder="John Doe" 
                                 {...field}
-                                className="bg-gray-900/50 border-gray-700" 
+                                className="bg-gray-900/70 border-gray-700 text-white" 
                               />
                             </FormControl>
                             <FormMessage />
@@ -190,12 +133,12 @@ const ContactSection = () => {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white">Email</FormLabel>
+                            <FormLabel className="text-white/80">Email Address</FormLabel>
                             <FormControl>
                               <Input 
-                                placeholder="your.email@example.com" 
+                                placeholder="john@example.com" 
                                 {...field}
-                                className="bg-gray-900/50 border-gray-700" 
+                                className="bg-gray-900/70 border-gray-700 text-white" 
                               />
                             </FormControl>
                             <FormMessage />
@@ -209,12 +152,12 @@ const ContactSection = () => {
                       name="subject"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">Subject</FormLabel>
+                          <FormLabel className="text-white/80">Subject</FormLabel>
                           <FormControl>
                             <Input 
-                              placeholder="What is this about?" 
+                              placeholder="Project Inquiry" 
                               {...field}
-                              className="bg-gray-900/50 border-gray-700" 
+                              className="bg-gray-900/70 border-gray-700 text-white" 
                             />
                           </FormControl>
                           <FormMessage />
@@ -227,12 +170,12 @@ const ContactSection = () => {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">Message</FormLabel>
+                          <FormLabel className="text-white/80">Project Requirements</FormLabel>
                           <FormControl>
                             <Textarea 
-                              placeholder="Your message..." 
+                              placeholder="Briefly describe your project requirements..." 
                               {...field}
-                              className="bg-gray-900/50 border-gray-700 min-h-32" 
+                              className="bg-gray-900/70 border-gray-700 text-white min-h-32" 
                             />
                           </FormControl>
                           <FormMessage />
@@ -243,7 +186,7 @@ const ContactSection = () => {
                     <Button 
                       type="submit" 
                       disabled={isSubmitting}
-                      className="bg-noesis-purple hover:bg-noesis-purple/90 text-white w-full sm:w-auto"
+                      className="bg-noesis-purple hover:bg-noesis-purple/90 text-white"
                     >
                       {isSubmitting ? (
                         <div className="flex items-center">
@@ -252,12 +195,66 @@ const ContactSection = () => {
                         </div>
                       ) : (
                         <div className="flex items-center">
-                          <Send className="mr-2 h-4 w-4" /> Send Message
+                          <Send className="mr-2 h-4 w-4" /> Connect With Our Team
                         </div>
                       )}
                     </Button>
                   </form>
                 </Form>
+              </div>
+            </Card>
+          </div>
+          
+          {/* Contact Information */}
+          <div>
+            <Card className="bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 overflow-hidden h-full">
+              <div className="p-8">
+                <h2 className="text-2xl md:text-3xl font-bold text-noesis-purple mb-8">
+                  Reach Our AI-Human Team
+                </h2>
+                
+                <div className="space-y-8">
+                  <div className="flex items-start">
+                    <div className="rounded-full bg-noesis-purple/20 p-3 mr-4">
+                      <Mail className="h-6 w-6 text-noesis-purple" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-1">Email</h3>
+                      <a href="mailto:yukti@noesis.tech" className="text-white/80 hover:text-noesis-purple transition-colors block">
+                        yukti@noesis.tech
+                      </a>
+                      <a href="mailto:sales@noesis.tech" className="text-white/80 hover:text-noesis-purple transition-colors block">
+                        sales@noesis.tech
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="rounded-full bg-noesis-purple/20 p-3 mr-4">
+                      <Phone className="h-6 w-6 text-noesis-purple" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-1">Phone</h3>
+                      <a href="tel:+916378652266" className="text-white/80 hover:text-noesis-purple transition-colors">
+                        +91 6378652266
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="rounded-full bg-noesis-purple/20 p-3 mr-4">
+                      <MapPin className="h-6 w-6 text-noesis-purple" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-1">Address</h3>
+                      <p className="text-white/80">
+                        C, Wing, 209, Floral Deck Plaza, 23rd Rd, M.I.D.C.,<br />
+                        Santacruz Electronic Export Processing Zone,<br />
+                        Andheri East, Mumbai, Maharashtra 400093
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </Card>
           </div>
