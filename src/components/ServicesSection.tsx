@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Palette, Globe, Image, Cloud, BrainCircuit, Users, ChevronDown } from 'lucide-react';
 import { ServiceItem } from '@/types/supabase';
@@ -11,6 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger
 } from "@/components/ui/accordion";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface ServicesSectionProps {
   title: string;
@@ -77,36 +79,47 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
         {isMobile ? (
           <Accordion type="single" collapsible className="w-full">
             {displayServices.map(service => (
-              <AccordionItem key={service.id} value={service.id} className="mb-4 rounded-2xl overflow-hidden bg-[#222732] border-none">
-                <AccordionTrigger className="px-4 py-3 flex items-center hover:no-underline">
-                  <div className="flex items-center">
-                    <div className="bg-[#1A1F2C]/80 p-3 rounded-full mr-4">
-                      {service.icon}
+              <AccordionItem 
+                key={service.id} 
+                value={service.id} 
+                className="mb-4 rounded-2xl overflow-hidden border-none"
+              >
+                <Card className="overflow-hidden bg-gradient-to-br from-[#222732] to-[#1e232d] border border-white/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.01]">
+                  <AccordionTrigger className="px-6 py-4 flex items-center hover:no-underline">
+                    <div className="flex items-center">
+                      <div className="bg-[#1A1F2C]/80 p-3 rounded-full mr-4 shadow-inner">
+                        {service.icon}
+                      </div>
+                      <h3 className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">{service.title}</h3>
                     </div>
-                    <h3 className="text-xl font-bold text-white text-left">{service.title}</h3>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="px-4 pb-4 text-gray-300 text-left">
-                  {service.description}
-                </AccordionContent>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-0">
+                    <CardContent className="p-4 pt-0 pb-6 bg-[#222732]/50 text-gray-300 backdrop-blur-sm">
+                      {service.description}
+                    </CardContent>
+                  </AccordionContent>
+                </Card>
               </AccordionItem>
             ))}
           </Accordion>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {displayServices.map(service => (
-              <div 
+              <Card 
                 key={service.id} 
-                className="glass-card relative overflow-hidden rounded-2xl transition-all duration-300 h-full hover:border-white/30"
+                className="bg-gradient-to-br from-[#222732] to-[#1e232d] border border-white/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] overflow-hidden rounded-2xl relative group"
               >
-                <div className="p-6">
-                  <div className="bg-[#1A1F2C]/80 p-3 rounded-full w-fit mb-4">
-                    {service.icon}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#8257e6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <CardContent className="p-6 relative">
+                  <div className="bg-[#1A1F2C]/90 p-4 rounded-full w-fit mb-4 shadow-md border border-white/5 group-hover:border-white/10 transition-all">
+                    <div className="transform group-hover:scale-110 transition-transform duration-300">
+                      {service.icon}
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-left text-white">{service.title}</h3>
+                  <h3 className="text-xl font-bold mb-3 text-left bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">{service.title}</h3>
                   <p className="text-gray-300 text-left">{service.description}</p>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         )}
