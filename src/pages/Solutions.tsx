@@ -39,7 +39,9 @@ const Solutions = () => {
         />
 
         {/* Brainstormer Platform Overview Section */}
-        <BrainstormerOverviewSection />
+        <section id="brainstormer">
+          <BrainstormerOverviewSection />
+        </section>
         
         {/* Contact Banner */}
         <ContactBanner />

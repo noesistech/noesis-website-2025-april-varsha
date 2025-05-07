@@ -67,7 +67,7 @@ const Header = () => {
 
   // Solutions submenu items
   const solutionsSubmenu = [
-    { name: "Brainstormer Suite", href: "/#brainstormer" }
+    { name: "Brainstormer Suite", href: "/solutions#brainstormer" }
   ];
 
   // Updated navigation structure with Solutions dropdown
@@ -193,7 +193,11 @@ const Header = () => {
                       <Link 
                         to={item.href}
                         className="hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center"
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e) => {
+                          // Only prevent the default action for dropdown triggers
+                          e.preventDefault();
+                          window.location.href = item.href;
+                        }}
                       >
                         {item.name}
                       </Link>
@@ -227,6 +231,10 @@ const Header = () => {
                             <Link 
                               to={subItem.href}
                               className="block select-none space-y-1 rounded-md p-2 text-white/80 hover:bg-white/10 hover:text-white transition-colors text-[10px] sm:text-[10px] md:text-[10px] lg:text-[14px]"
+                              onClick={() => {
+                                // Close any open navigation menus
+                                document.body.click();
+                              }}
                             >
                               {subItem.name}
                             </Link>
