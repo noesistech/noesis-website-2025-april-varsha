@@ -35,15 +35,15 @@ const Solutions = () => {
           highlightLastWord={true}
         />
 
-        {/* Brainstormer Platform Overview Section */}
-        <BrainstormerOverviewSection />
-
-        {/* Industry-Specific Solutions Section */}
+        {/* Industry-Specific Solutions Section - MOVED UP */}
         <IndustrySection 
           title={industrySpecificSolutionsData.title}
           subtitle={industrySpecificSolutionsData.subtitle}
           industries={industrySpecificSolutionsData.industries}
         />
+
+        {/* Brainstormer Platform Overview Section - MOVED DOWN */}
+        <BrainstormerOverviewSection />
 
         {/* CTA Section */}
         <section className="py-16 md:py-20 bg-[#1A1F2C]">
