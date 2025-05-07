@@ -1,12 +1,15 @@
+
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SolutionsSection from '@/components/SolutionsSection';
+import IndustrySection from '@/components/IndustrySection';
 import { useContent } from '@/contexts/ContentContext';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SubpageHero from '@/components/SubpageHero';
+import { industrySpecificSolutionsData } from '@/data/content/solutions';
 
 const Solutions = () => {
   const { solutionsSection, solutionItems } = useContent();
@@ -28,6 +31,13 @@ const Solutions = () => {
           title={solutionsSection.title} 
           subtitle={solutionsSection.subtitle} 
           solutions={solutionItems} 
+        />
+
+        {/* Industry-Specific Solutions Section */}
+        <IndustrySection 
+          title={industrySpecificSolutionsData.title}
+          subtitle={industrySpecificSolutionsData.subtitle}
+          industries={industrySpecificSolutionsData.industries}
         />
 
         {/* CTA Section */}

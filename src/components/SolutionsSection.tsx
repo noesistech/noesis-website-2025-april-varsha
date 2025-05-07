@@ -1,14 +1,17 @@
+
 import React, { useRef, useEffect } from 'react';
-import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2, Code2 } from 'lucide-react';
+import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2, Code2, Heart, Briefcase, ShoppingCart, Factory, Building } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SolutionItem } from '@/types/supabase';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+
 interface SolutionsSectionProps {
   title: string;
   subtitle?: string;
   solutions: SolutionItem[];
 }
+
 const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   title,
   subtitle,
@@ -17,6 +20,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
   const displaySolutions = solutions && solutions.length > 0 ? solutions.map(solution => {
     if (solution.id === 'solution-item-6') {
       return {
@@ -95,20 +99,19 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         </ul>,
     color: 'from-yellow-500/20 to-yellow-600/20'
   }];
+
   const enhancedDisplaySolutions = displaySolutions.map(solution => {
     if (solution.id === 'solution-item-6') {
       return {
         ...solution,
         description: <ul className="">
-          
-          
-          
           <li>We build custom full-stack web apps with a mobile-first, responsive design approach. Powered by modern frameworks and AI-driven features like chatbots, personalization, and smart recommendations.</li>
         </ul>
       };
     }
     return solution;
   });
+
   useEffect(() => {
     if (isMobile) return; // Skip animation setup on mobile since we'll use carousel
 
@@ -123,15 +126,18 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       root: null,
       threshold: 0.1
     });
+
     cardsRef.current.forEach(card => {
       if (card) observer.observe(card);
     });
+
     return () => {
       cardsRef.current.forEach(card => {
         if (card) observer.unobserve(card);
       });
     };
   }, [isMobile]);
+
   const renderTitle = () => {
     if (!title) return "Our Solutions";
     const words = title.split(' ');
@@ -140,14 +146,73 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         {words.slice(0, lastWordIndex).join(' ')} <span className="gradient-text">{words[lastWordIndex]}</span>
       </>;
   };
+
   const solutionRows = [];
   for (let i = 0; i < enhancedDisplaySolutions.length; i += 3) {
     solutionRows.push(enhancedDisplaySolutions.slice(i, i + 3));
   }
-  return <section id="solutions" ref={sectionRef} className="page-section py-0">
-      
-    </section>;
+
+  return (
+    <section id="solutions" ref={sectionRef} className="page-section py-16">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            {renderTitle()}
+          </h2>
+          {subtitle && <p className="text-gray-300 mt-4">{subtitle}</p>}
+        </div>
+
+        {isMobile ? (
+          <Carousel className="mx-auto max-w-md">
+            <CarouselContent>
+              {enhancedDisplaySolutions.map((solution, index) => (
+                <CarouselItem key={solution.id || index}>
+                  <div className={`bg-gradient-radial ${solution.color} to-transparent p-1 rounded-2xl h-full`}>
+                    <div className="bg-[#222732] rounded-2xl p-6 h-full flex flex-col">
+                      <div className="mb-4">{solution.icon}</div>
+                      <h3 className="text-xl font-bold text-white mb-3">{solution.title}</h3>
+                      <div className="mt-2 text-gray-300 text-sm">
+                        {solution.description}
+                      </div>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center gap-2 mt-4">
+              <CarouselPrevious className="relative inset-auto translate-y-0" />
+              <CarouselNext className="relative inset-auto translate-y-0" />
+            </div>
+          </Carousel>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {enhancedDisplaySolutions.map((solution, index) => (
+              <div
+                key={solution.id || index}
+                ref={el => {
+                  cardsRef.current[index] = el;
+                }}
+                className={cn(
+                  "bg-gradient-radial p-1 rounded-2xl opacity-0 transform translate-y-4 transition-all duration-700",
+                  solution.color
+                )}
+              >
+                <div className="bg-[#222732] rounded-2xl p-6 h-full flex flex-col">
+                  <div className="mb-4">{solution.icon}</div>
+                  <h3 className="text-xl font-bold text-white mb-3">{solution.title}</h3>
+                  <div className="mt-2 text-gray-300 text-sm">
+                    {solution.description}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
 };
+
 const getIconByName = (iconName: string) => {
   const normalizedIconName = iconName.toLowerCase();
   switch (normalizedIconName) {
@@ -167,9 +232,20 @@ const getIconByName = (iconName: string) => {
       return <Wand2 className="h-10 w-10 text-yellow-400" />;
     case 'code2':
       return <Code2 className="h-10 w-10 text-orange-400" />;
+    case 'heart':
+      return <Heart className="h-10 w-10 text-red-400" />;
+    case 'briefcase':
+      return <Briefcase className="h-10 w-10 text-blue-400" />;
+    case 'shoppingcart':
+      return <ShoppingCart className="h-10 w-10 text-purple-400" />;
+    case 'factory':
+      return <Factory className="h-10 w-10 text-green-400" />;
+    case 'building':
+      return <Building className="h-10 w-10 text-orange-400" />;
     default:
       console.warn(`Icon name not recognized: ${iconName}`);
       return <Cpu className="h-10 w-10" />;
   }
 };
+
 export default SolutionsSection;
