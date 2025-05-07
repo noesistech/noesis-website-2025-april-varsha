@@ -28,7 +28,7 @@ const Solutions = () => {
 
         {/* Solutions Section - Changed title for display */}
         <SolutionsSection 
-          title="AI-Powered Solutions Portfolio" 
+          title="Core AI Product Offerings" 
           subtitle={solutionsSection.subtitle} 
           solutions={solutionItems} 
         />
