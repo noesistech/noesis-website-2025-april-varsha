@@ -26,11 +26,12 @@ const Solutions = () => {
           backgroundEffect="green"
         />
 
-        {/* Solutions Section - Changed title for display */}
+        {/* Solutions Section - Changed styling to match other pages */}
         <SolutionsSection 
           title="Core AI Product Offerings" 
           subtitle={solutionsSection.subtitle} 
           solutions={solutionItems} 
+          highlightLastWord={true}
         />
 
         {/* Industry-Specific Solutions Section */}
