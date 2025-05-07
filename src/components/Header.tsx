@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight } from 'lucide-react';
@@ -178,7 +179,7 @@ const Header = () => {
         
         <nav className="hidden sm:flex items-center gap-2 md:gap-4 lg:gap-6">
           <NavigationMenu>
-            <NavigationMenuList>
+            <NavigationMenuList className="space-x-2 md:space-x-4 lg:space-x-6">
               {navStructure.map((item) => (
                 <NavigationMenuItem key={item.name}>
                   {item.hasSubmenu ? (
@@ -195,7 +196,7 @@ const Header = () => {
                     <NavigationMenuLink asChild>
                       <Link
                         to={item.href}
-                        className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center px-4 py-2"
+                        className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center"
                       >
                         {item.name}
                       </Link>
@@ -204,7 +205,7 @@ const Header = () => {
                     <NavigationMenuLink asChild>
                       <a
                         href={item.href}
-                        className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center px-4 py-2"
+                        className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center"
                       >
                         {item.name}
                       </a>
@@ -327,3 +328,4 @@ const Header = () => {
 };
 
 export default Header;
+
