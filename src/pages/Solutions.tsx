@@ -26,9 +26,9 @@ const Solutions = () => {
           backgroundEffect="green"
         />
 
-        {/* Solutions Section */}
+        {/* Solutions Section - Changed title for display */}
         <SolutionsSection 
-          title={solutionsSection.title} 
+          title="AI-Powered Solutions Portfolio" 
           subtitle={solutionsSection.subtitle} 
           solutions={solutionItems} 
         />
