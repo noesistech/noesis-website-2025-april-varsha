@@ -183,9 +183,14 @@ const Header = () => {
               {navStructure.map((item) => (
                 <NavigationMenuItem key={item.name}>
                   {item.hasSubmenu ? (
-                    <NavigationMenuTrigger className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white bg-transparent">
-                      {item.name}
-                    </NavigationMenuTrigger>
+                    <>
+                      <Link to={item.href} className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white bg-transparent inline-flex h-10 items-center px-4 py-2">
+                        {item.name}
+                      </Link>
+                      <NavigationMenuTrigger className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white bg-transparent ml-[-10px] pl-0">
+                        ▼
+                      </NavigationMenuTrigger>
+                    </>
                   ) : item.href.startsWith('/') ? (
                     <NavigationMenuLink asChild>
                       <Link
@@ -254,9 +259,13 @@ const Header = () => {
                     <div key={item.name} className="w-full">
                       {item.hasSubmenu ? (
                         <div className="w-full">
-                          <div className="text-white py-3 md:py-2 text-lg text-center w-full transition-colors animate-in fade-in duration-300 font-semibold">
+                          <Link 
+                            to={item.href}
+                            className="text-white py-3 md:py-2 text-lg text-center w-full transition-colors animate-in fade-in duration-300 font-semibold block"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
                             {item.name}
-                          </div>
+                          </Link>
                           <div className="pl-4 space-y-2 mb-2">
                             {item.submenu?.map((subItem) => (
                               <Link
