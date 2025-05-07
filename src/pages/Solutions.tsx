@@ -22,6 +22,7 @@ const Solutions = () => {
           title="Our Solutions"
           gradientText="Solutions"
           backgroundEffect="green"
+          subtitle="Transformative AI technologies built to drive innovation and efficiency for your business"
         />
 
         {/* Solutions Section */}
