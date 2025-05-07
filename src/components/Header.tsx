@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight } from 'lucide-react';
@@ -183,16 +182,15 @@ const Header = () => {
               {navStructure.map((item) => (
                 <NavigationMenuItem key={item.name}>
                   {item.hasSubmenu ? (
-                    <>
+                    <NavigationMenuTrigger className="group text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white bg-transparent border-none shadow-none focus:shadow-none p-0">
                       <Link 
                         to={item.href}
-                        className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center px-4 py-2"
+                        className="hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         {item.name}
                       </Link>
-                      <NavigationMenuTrigger className="ml-[-15px] text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] bg-transparent border-none shadow-none focus:shadow-none text-white/60 hover:text-white/80 p-0">
-                      </NavigationMenuTrigger>
-                    </>
+                    </NavigationMenuTrigger>
                   ) : item.href.startsWith('/') ? (
                     <NavigationMenuLink asChild>
                       <Link
