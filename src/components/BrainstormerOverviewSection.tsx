@@ -4,7 +4,6 @@ import { MessageSquare, Users, Globe, Code, Database, BarChart } from 'lucide-re
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { Card, CardContent } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 interface PlatformFeature {
   icon: React.ReactNode;
@@ -88,11 +87,13 @@ const BrainstormerOverviewSection = () => {
             <div className="flex flex-col h-full">
               {/* Logo & Overview */}
               <div className="mb-6">
-                <img 
-                  src="/public/images/brainstormer-pro-logo.svg" 
-                  alt="Brainstormer Pro logo" 
-                  className="h-14 mb-4"
-                />
+                <div className="h-14 mb-4 flex items-center">
+                  <img 
+                    src="/images/brainstormer-pro-logo.svg" 
+                    alt="Brainstormer Pro logo" 
+                    className="h-full"
+                  />
+                </div>
                 <p className="text-gray-300">
                   Leverage Brainstormer Pro to enhance workflow and drive productivity within a secure, collaborative environment. Make your organization AI-enabled with our enterprise-grade solution.
                 </p>
@@ -101,7 +102,7 @@ const BrainstormerOverviewSection = () => {
               {/* Features */}
               <div className="mb-6">
                 <h3 className="text-xl font-semibold text-white mb-4">Key Features</h3>
-                <div className="space-y-4">
+                <div className="grid gap-4">
                   {brainstormerProFeatures.map((feature, index) => (
                     <div key={index} className="flex items-start gap-3 bg-[#1D212B]/60 p-3 rounded-lg border border-white/5">
                       <div className="bg-noesis-purple/20 p-2 rounded-lg shrink-0">
@@ -118,27 +119,21 @@ const BrainstormerOverviewSection = () => {
               
               {/* Use Cases */}
               <div className="mb-6">
-                <Accordion type="single" collapsible className="bg-[#1D212B]/40 rounded-lg border border-white/5">
-                  <AccordionItem value="use-cases" className="border-b-0">
-                    <AccordionTrigger className="px-4 py-3 text-white hover:no-underline hover:bg-white/5">
-                      <span className="text-sm font-medium">Common Use Cases</span>
-                    </AccordionTrigger>
-                    <AccordionContent className="px-4 pb-3 pt-1">
-                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        {proUseCases.map((useCase, index) => (
-                          <li key={index} className="text-gray-300 text-xs flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 bg-noesis-purple rounded-full"></span>
-                            {useCase}
-                          </li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
+                <h3 className="text-sm font-semibold text-white mb-2">Common Use Cases</h3>
+                <div className="bg-[#1D212B]/40 rounded-lg border border-white/5 p-4">
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {proUseCases.map((useCase, index) => (
+                      <li key={index} className="text-gray-300 text-xs flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 bg-noesis-purple rounded-full"></span>
+                        {useCase}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
               
               {/* CTA */}
-              <div className="mt-auto">
+              <div className="mt-auto pt-2">
                 <Button 
                   variant="noesis" 
                   size="lg"
@@ -158,11 +153,13 @@ const BrainstormerOverviewSection = () => {
             <div className="flex flex-col h-full">
               {/* Logo & Overview */}
               <div className="mb-6">
-                <img 
-                  src="/public/images/brainstormer-studio-logo.svg" 
-                  alt="Brainstormer Studio logo" 
-                  className="h-14 mb-4"
-                />
+                <div className="h-14 mb-4 flex items-center">
+                  <img 
+                    src="/images/brainstormer-studio-logo.svg" 
+                    alt="Brainstormer Studio logo" 
+                    className="h-full"
+                  />
+                </div>
                 <p className="text-gray-300">
                   Your gateway to effortless AI agent creation. Build, iterate, and deploy AI text and voice agents with our intuitive low-code/no-code platform for creative and enterprise environments.
                 </p>
@@ -171,7 +168,7 @@ const BrainstormerOverviewSection = () => {
               {/* Features */}
               <div className="mb-6">
                 <h3 className="text-xl font-semibold text-white mb-4">Key Features</h3>
-                <div className="space-y-4">
+                <div className="grid gap-4">
                   {brainstormerStudioFeatures.map((feature, index) => (
                     <div key={index} className="flex items-start gap-3 bg-[#1D212B]/60 p-3 rounded-lg border border-white/5">
                       <div className="bg-noesis-purple/20 p-2 rounded-lg shrink-0">
@@ -188,27 +185,21 @@ const BrainstormerOverviewSection = () => {
               
               {/* Use Cases */}
               <div className="mb-6">
-                <Accordion type="single" collapsible className="bg-[#1D212B]/40 rounded-lg border border-white/5">
-                  <AccordionItem value="use-cases" className="border-b-0">
-                    <AccordionTrigger className="px-4 py-3 text-white hover:no-underline hover:bg-white/5">
-                      <span className="text-sm font-medium">Common Use Cases</span>
-                    </AccordionTrigger>
-                    <AccordionContent className="px-4 pb-3 pt-1">
-                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        {studioUseCases.map((useCase, index) => (
-                          <li key={index} className="text-gray-300 text-xs flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 bg-noesis-purple rounded-full"></span>
-                            {useCase}
-                          </li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
+                <h3 className="text-sm font-semibold text-white mb-2">Common Use Cases</h3>
+                <div className="bg-[#1D212B]/40 rounded-lg border border-white/5 p-4">
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {studioUseCases.map((useCase, index) => (
+                      <li key={index} className="text-gray-300 text-xs flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 bg-noesis-purple rounded-full"></span>
+                        {useCase}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
               
               {/* CTA */}
-              <div className="mt-auto">
+              <div className="mt-auto pt-2">
                 <Button 
                   variant="noesis" 
                   size="lg"
