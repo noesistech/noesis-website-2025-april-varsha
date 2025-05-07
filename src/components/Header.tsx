@@ -65,7 +65,12 @@ const Header = () => {
     { name: "AI-Enhanced Staff Solutions", href: "/services#staff" }
   ];
 
-  // Updated navigation structure with About dropdown
+  // Solutions submenu items
+  const solutionsSubmenu = [
+    { name: "Brainstormer Suite", href: "/#brainstormer" }
+  ];
+
+  // Updated navigation structure with Solutions dropdown
   const navStructure = [
     { 
       name: 'About',
@@ -82,7 +87,8 @@ const Header = () => {
     { 
       name: 'Solutions',
       href: '/solutions',
-      hasSubmenu: false
+      hasSubmenu: true,
+      submenu: solutionsSubmenu
     },
     { 
       name: 'Noesis AI Assistant',
@@ -328,4 +334,3 @@ const Header = () => {
 };
 
 export default Header;
-
