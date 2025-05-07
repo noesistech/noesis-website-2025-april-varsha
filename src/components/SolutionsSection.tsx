@@ -4,12 +4,14 @@ import { cn } from '@/lib/utils';
 import { SolutionItem } from '@/types/supabase';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+
 interface SolutionsSectionProps {
   title: string;
   subtitle?: string;
   solutions: SolutionItem[];
   highlightLastWord?: boolean;
 }
+
 const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   title,
   subtitle,
@@ -194,6 +196,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       </div>
     </section>;
 };
+
 const getIconByName = (iconName: string) => {
   const normalizedIconName = iconName.toLowerCase();
   switch (normalizedIconName) {
@@ -228,4 +231,5 @@ const getIconByName = (iconName: string) => {
       return <Cpu className="h-10 w-10" />;
   }
 };
+
 export default SolutionsSection;

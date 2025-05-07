@@ -23,7 +23,6 @@ const Solutions = () => {
         {/* Hero section */}
         <SubpageHero
           title="Our Solutions"
-          subtitle="Tailored AI solutions designed to solve your most complex business challenges."
           gradientText="Solutions"
           backgroundEffect="green"
         />
@@ -31,19 +30,17 @@ const Solutions = () => {
         {/* Solutions Section */}
         <SolutionsSection 
           title="Core AI Product Offerings" 
-          subtitle={solutionsSection.subtitle} 
           solutions={solutionItems} 
           highlightLastWord={true}
         />
 
-        {/* Industry-Specific Solutions Section - MOVED UP */}
+        {/* Industry-Specific Solutions Section */}
         <IndustrySection 
           title={industrySpecificSolutionsData.title}
-          subtitle={industrySpecificSolutionsData.subtitle}
           industries={industrySpecificSolutionsData.industries}
         />
 
-        {/* Brainstormer Platform Overview Section - MOVED DOWN */}
+        {/* Brainstormer Platform Overview Section */}
         <BrainstormerOverviewSection />
 
         {/* CTA Section */}
