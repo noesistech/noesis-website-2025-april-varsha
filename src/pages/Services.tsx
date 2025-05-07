@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -37,7 +36,6 @@ import WhyChooseSection from '@/components/WhyChooseSection';
 import ServiceGrid from '@/components/ServiceGrid';
 import AIProductCard from '@/components/AIProductCard';
 import ContactBanner from '@/components/ContactBanner';
-import ChatBotSection from '@/components/ChatBotSection';
 import ServiceDetailSection from '@/components/ServiceDetailSection';
 
 const Services = () => {
