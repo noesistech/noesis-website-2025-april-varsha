@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { MessageSquare, Users, Globe, Code, Database, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -76,9 +75,6 @@ const BrainstormerOverviewSection = () => {
             Brainstormer Platform <span className="text-noesis-purple">Overview</span>
           </h2>
           <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-6"></div>
-          <p className="text-gray-300">
-            Our flagship AI platforms designed to transform workflow efficiency and enhance AI capabilities across your organization.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
