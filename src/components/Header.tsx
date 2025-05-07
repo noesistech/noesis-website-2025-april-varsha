@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight } from 'lucide-react';
@@ -184,11 +183,8 @@ const Header = () => {
                 <NavigationMenuItem key={item.name}>
                   {item.hasSubmenu ? (
                     <>
-                      <Link to={item.href} className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white bg-transparent inline-flex h-10 items-center px-4 py-2">
+                      <NavigationMenuTrigger className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white bg-transparent">
                         {item.name}
-                      </Link>
-                      <NavigationMenuTrigger className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white bg-transparent ml-[-10px] pl-0">
-                        ▼
                       </NavigationMenuTrigger>
                     </>
                   ) : item.href.startsWith('/') ? (
