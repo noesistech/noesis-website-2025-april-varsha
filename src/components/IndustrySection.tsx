@@ -3,10 +3,6 @@ import React from 'react';
 import { Heart, Briefcase, ShoppingCart, Factory, GraduationCap, Building } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-interface IndustryFeature {
-  text: string;
-}
-
 interface Industry {
   id: string;
   title: string;
@@ -53,18 +49,9 @@ const IndustrySection: React.FC<IndustrySectionProps> = ({
               <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-noesis-purple transition-colors duration-300">
                 {industry.title}
               </h3>
-              <p className="text-gray-300 text-sm mb-4">
+              <p className="text-gray-300 text-sm">
                 {industry.description}
               </p>
-
-              <ul className="space-y-2">
-                {industry.features.map((feature, index) => (
-                  <li key={index} className="text-gray-300 text-sm flex items-start">
-                    <span className="text-noesis-purple mr-2">•</span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
             </div>
           ))}
         </div>
