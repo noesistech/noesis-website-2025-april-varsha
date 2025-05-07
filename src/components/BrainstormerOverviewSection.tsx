@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Brain, Sparkles, Code } from 'lucide-react';
+import { MessageSquare, Users, FileCode, Database, Globe, Brain, Code, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { 
@@ -10,48 +10,65 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
+import AIProductCard from './AIProductCard';
 
-interface FeatureItem {
+interface PlatformFeature {
+  icon: React.ReactNode;
   title: string;
   description: string;
-  icon: React.ReactNode;
 }
 
 const BrainstormerOverviewSection = () => {
-  const features: FeatureItem[] = [
+  const brainstormerProFeatures: PlatformFeature[] = [
     {
-      title: "AI-Powered Content Generation",
-      description: "Create high-quality content in seconds with our advanced AI algorithms trained on diverse datasets.",
-      icon: <Brain className="h-6 w-6 text-noesis-purple" />
+      icon: <MessageSquare className="h-6 w-6 text-noesis-purple" />,
+      title: "AI-Enhanced Group Chat",
+      description: "Foster real-time collaboration with AI-assisted conversations for creative brainstorming."
     },
     {
-      title: "Natural Language Processing",
-      description: "Analyze and understand text with sophisticated language models that capture context and meaning.",
-      icon: <Sparkles className="h-6 w-6 text-noesis-purple" />
+      icon: <Users className="h-6 w-6 text-noesis-purple" />,
+      title: "Customizable AI Solutions",
+      description: "Tailor AI bots to meet specific team requirements for personalized assistance."
     },
     {
-      title: "Custom Integration APIs",
-      description: "Connect Brainstormer with your existing tools and workflows for seamless productivity.",
-      icon: <Code className="h-6 w-6 text-noesis-purple" />
+      icon: <Globe className="h-6 w-6 text-noesis-purple" />,
+      title: "Integrated Internet Access",
+      description: "Incorporate external internet resources into discussions for up-to-date information."
     }
   ];
 
-  const useCases = [
+  const brainstormerStudioFeatures: PlatformFeature[] = [
     {
-      id: "marketing",
-      title: "Marketing & Content",
-      content: "Create engaging blog posts, social media content, email campaigns, and ad copy that resonates with your target audience."
+      icon: <Code className="h-6 w-6 text-noesis-purple" />,
+      title: "Low-Code Development",
+      description: "Create AI agents with minimal coding, accessible to all teams."
     },
     {
-      id: "business",
-      title: "Business Strategy",
-      content: "Generate business plans, SWOT analyses, market research summaries, and competitive insights to drive strategic decisions."
+      icon: <Database className="h-6 w-6 text-noesis-purple" />,
+      title: "Data Integration",
+      description: "Connect documents, databases, and third-party systems seamlessly."
     },
     {
-      id: "product",
-      title: "Product Development",
-      content: "Draft product descriptions, feature specifications, user stories, and documentation to accelerate your development cycle."
+      icon: <BarChart className="h-6 w-6 text-noesis-purple" />,
+      title: "Bot Monitoring & Analytics",
+      description: "Track, analyze, and improve AI agent performance with comprehensive tools."
     }
+  ];
+
+  const proUseCases = [
+    "Marketing & Content Creation",
+    "Employee Onboarding & HR",
+    "Campaign Development",
+    "Team Collaboration",
+    "Market Research"
+  ];
+
+  const studioUseCases = [
+    "HR Automation",
+    "IT Support",
+    "Customer Service",
+    "Sales & Lead Generation",
+    "Healthcare Assistance"
   ];
 
   return (
@@ -67,67 +84,121 @@ const BrainstormerOverviewSection = () => {
           </h2>
           <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-6"></div>
           <p className="text-gray-300">
-            Our flagship AI platform designed to accelerate ideation, content creation, and problem-solving across your organization.
+            Our flagship AI platforms designed to transform workflow efficiency and enhance AI capabilities across your organization.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* Platform Overview */}
+          {/* Brainstormer Pro */}
+          <AIProductCard 
+            title="Brainstormer Pro"
+            description="Leverage Brainstormer Pro to enhance workflow and drive productivity within a secure, collaborative environment. Make your organization AI-enabled with our enterprise-grade solution."
+            logoUrl="/public/images/brainstormer-pro-logo.svg"
+            ctaText="Explore Brainstormer Pro"
+            ctaUrl="/brainstormer-pro"
+          />
+
+          {/* Brainstormer Studio */}
+          <AIProductCard 
+            title="Brainstormer Studio"
+            description="Your gateway to effortless AI agent creation. Build, iterate, and deploy AI text and voice agents with our intuitive low-code/no-code platform for creative and enterprise environments."
+            logoUrl="/public/images/brainstormer-studio-logo.svg"
+            ctaText="Explore Brainstormer Studio"
+            ctaUrl="/brainstormer-studio"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto mt-12">
+          {/* Pro Features & Use Cases */}
           <div>
             <div className="bg-gradient-to-b from-[#222732]/90 to-[#1D212B]/80 backdrop-blur-sm rounded-xl p-8 border border-white/10 shadow-xl h-full">
-              <h3 className="text-2xl font-semibold text-white mb-4">Overview</h3>
-              <p className="text-gray-300 mb-6">
-                Brainstormer is our proprietary AI platform that combines cutting-edge machine learning with human-centered design to deliver powerful creative and analytical capabilities.
-              </p>
-              <p className="text-gray-300 mb-6">
-                Built on transformer-based neural networks and fine-tuned with industry-specific data, Brainstormer can generate ideas, content, and solutions tailored to your unique business challenges.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-                {features.map((feature, index) => (
+              <h3 className="text-2xl font-semibold text-white mb-4">Brainstormer Pro Features</h3>
+              
+              <div className="grid grid-cols-1 gap-4 mb-8">
+                {brainstormerProFeatures.map((feature, index) => (
                   <Card key={index} className="bg-[#1D212B]/80 border border-white/10 shadow-lg">
                     <CardContent className="p-4">
-                      <div className="bg-noesis-purple/20 p-3 rounded-lg w-fit mb-3">
-                        {feature.icon}
+                      <div className="flex items-start gap-4">
+                        <div className="bg-noesis-purple/20 p-3 rounded-lg w-fit">
+                          {feature.icon}
+                        </div>
+                        <div>
+                          <h4 className="text-white font-medium mb-1">{feature.title}</h4>
+                          <p className="text-gray-400 text-sm">{feature.description}</p>
+                        </div>
                       </div>
-                      <h4 className="text-white font-medium mb-2">{feature.title}</h4>
-                      <p className="text-gray-400 text-sm">{feature.description}</p>
                     </CardContent>
                   </Card>
                 ))}
               </div>
-            </div>
-          </div>
 
-          {/* Features & Use Cases */}
-          <div>
-            <div className="bg-gradient-to-b from-[#222732]/90 to-[#1D212B]/80 backdrop-blur-sm rounded-xl p-8 border border-white/10 shadow-xl h-full">
-              <h3 className="text-2xl font-semibold text-white mb-4">Features & Use Cases</h3>
-              <p className="text-gray-300 mb-6">
-                Discover how Brainstormer can transform your workflows and unleash creativity across your organization.
-              </p>
-              
-              <Accordion type="single" collapsible className="w-full">
-                {useCases.map((useCase) => (
-                  <AccordionItem key={useCase.id} value={useCase.id} className="border-white/10">
-                    <AccordionTrigger className="text-white hover:text-noesis-purple">
-                      {useCase.title}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-gray-300">
-                      {useCase.content}
-                    </AccordionContent>
-                  </AccordionItem>
+              <h4 className="text-xl font-semibold text-white mb-3">Common Use Cases</h4>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-6">
+                {proUseCases.map((useCase, index) => (
+                  <li key={index} className="text-gray-300 text-sm flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-noesis-purple rounded-full"></span>
+                    {useCase}
+                  </li>
                 ))}
-              </Accordion>
+              </ul>
               
-              <div className="mt-8 flex justify-center">
+              <div className="flex justify-center mt-6">
                 <Button 
                   variant="noesis" 
                   size="lg"
                   className="shadow-lg hover:shadow-noesis-purple/50"
                   asChild
                 >
-                  <Link to="/brainstormer" className="inline-flex items-center gap-2">
-                    Explore Brainstormer
+                  <Link to="/brainstormer-pro">
+                    Explore Brainstormer Pro
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Studio Features & Use Cases */}
+          <div>
+            <div className="bg-gradient-to-b from-[#222732]/90 to-[#1D212B]/80 backdrop-blur-sm rounded-xl p-8 border border-white/10 shadow-xl h-full">
+              <h3 className="text-2xl font-semibold text-white mb-4">Brainstormer Studio Features</h3>
+              
+              <div className="grid grid-cols-1 gap-4 mb-8">
+                {brainstormerStudioFeatures.map((feature, index) => (
+                  <Card key={index} className="bg-[#1D212B]/80 border border-white/10 shadow-lg">
+                    <CardContent className="p-4">
+                      <div className="flex items-start gap-4">
+                        <div className="bg-noesis-purple/20 p-3 rounded-lg w-fit">
+                          {feature.icon}
+                        </div>
+                        <div>
+                          <h4 className="text-white font-medium mb-1">{feature.title}</h4>
+                          <p className="text-gray-400 text-sm">{feature.description}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              <h4 className="text-xl font-semibold text-white mb-3">Common Use Cases</h4>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-6">
+                {studioUseCases.map((useCase, index) => (
+                  <li key={index} className="text-gray-300 text-sm flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-noesis-purple rounded-full"></span>
+                    {useCase}
+                  </li>
+                ))}
+              </ul>
+              
+              <div className="flex justify-center mt-6">
+                <Button 
+                  variant="noesis" 
+                  size="lg"
+                  className="shadow-lg hover:shadow-noesis-purple/50"
+                  asChild
+                >
+                  <Link to="/brainstormer-studio">
+                    Explore Brainstormer Studio
                   </Link>
                 </Button>
               </div>
