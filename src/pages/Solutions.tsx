@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SolutionsSection from '@/components/SolutionsSection';
 import IndustrySection from '@/components/IndustrySection';
+import BrainstormerOverviewSection from '@/components/BrainstormerOverviewSection';
 import { useContent } from '@/contexts/ContentContext';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -26,13 +27,16 @@ const Solutions = () => {
           backgroundEffect="green"
         />
 
-        {/* Solutions Section - Changed styling to match other pages */}
+        {/* Solutions Section */}
         <SolutionsSection 
           title="Core AI Product Offerings" 
           subtitle={solutionsSection.subtitle} 
           solutions={solutionItems} 
           highlightLastWord={true}
         />
+
+        {/* Brainstormer Platform Overview Section */}
+        <BrainstormerOverviewSection />
 
         {/* Industry-Specific Solutions Section */}
         <IndustrySection 
