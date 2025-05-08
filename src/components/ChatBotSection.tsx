@@ -11,7 +11,6 @@ const ChatBotSection: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             Chat with Our <span className="text-noesis-purple">AI Assistant</span>
           </h2>
-          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-6"></div>
           <p className="text-gray-300 mb-6">
             Have questions? Our AI assistant is available 24/7 to help answer your inquiries.
           </p>
