@@ -39,7 +39,13 @@ const Solutions = () => {
         />
 
         {/* Brainstormer Platform Overview Section */}
-        <section id="brainstormer">
+        <section id="brainstormer" className="py-12 border-t border-white/10">
+          <div className="container mx-auto px-4 mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
+              The <span className="text-noesis-purple">Brainstormer Suite</span>
+            </h2>
+            <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
+          </div>
           <BrainstormerOverviewSection />
         </section>
         
