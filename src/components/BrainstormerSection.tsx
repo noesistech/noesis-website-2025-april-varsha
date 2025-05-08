@@ -40,7 +40,6 @@ const BrainstormerSection: React.FC<BrainstormerSectionProps> = ({
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             Brainstormer <span className="text-noesis-purple">Suite</span>
           </h2>
-          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
           <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg">
             {subtitle}
           </p>

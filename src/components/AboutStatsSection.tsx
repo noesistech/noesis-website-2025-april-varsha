@@ -24,7 +24,6 @@ const AboutStatsSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             Our <span className="text-noesis-purple">Impact</span> By The Numbers
           </h2>
-          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">

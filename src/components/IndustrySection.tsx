@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Heart, Briefcase, ShoppingCart, Factory, GraduationCap, Building } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -28,7 +29,6 @@ const IndustrySection: React.FC<IndustrySectionProps> = ({
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             {title.split(' ').slice(0, -1).join(' ')} <span className="text-noesis-purple">{title.split(' ').pop()}</span>
           </h2>
-          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-6"></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
