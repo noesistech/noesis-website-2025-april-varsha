@@ -9,6 +9,9 @@ const API_URL = 'https://bot.brainstormer.dev';
 const BOT_API_KEY = 'Vyhn1VFWqwM2LLvnaPpG';
 const ASSETS_URL = 'https://studio.brainstormer.dev';
 
+// Define a proper type for prompt objects
+type Prompt = string | { Question?: string; question?: string; [key: string]: any };
+
 export const useChatSetup = () => {
   const {
     messages,
@@ -86,11 +89,12 @@ export const useChatSetup = () => {
             console.log("Setting starter prompts:", bot.StarterPrompts);
             
             // Ensure prompts are in the correct format regardless of what the API returns
-            const formattedPrompts = bot.StarterPrompts.map((prompt: any) => {
+            const formattedPrompts: Prompt[] = bot.StarterPrompts.map((prompt: any) => {
               if (typeof prompt === 'string') {
                 return prompt;
               } else if (typeof prompt === 'object' && prompt) {
-                return prompt.Question || prompt.question || JSON.stringify(prompt);
+                // Return the original object, our helper functions will extract the right property
+                return prompt;
               }
               return "What can you help me with?";
             });

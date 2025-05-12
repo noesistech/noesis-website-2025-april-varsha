@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, KeyboardEvent, useEffect } from 'react';
 import { Send, WifiOff, RefreshCw } from 'lucide-react';
 import { useMessageContext } from '@/contexts/MessageContext';
@@ -25,6 +24,19 @@ const MessageInput = ({ sendMessage, handlePromptClick, customPrompts = [] }: Me
   } = useMessageContext();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   
+  // Helper function to extract prompt text safely
+  const getPromptText = (prompt: string | { Question?: string; question?: string; [key: string]: any }): string => {
+    if (typeof prompt === 'string') {
+      return prompt;
+    }
+    
+    if (prompt && typeof prompt === 'object') {
+      return prompt.Question || prompt.question || JSON.stringify(prompt);
+    }
+    
+    return "What can I help you with?";
+  };
+
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -99,11 +111,11 @@ const MessageInput = ({ sendMessage, handlePromptClick, customPrompts = [] }: Me
             {displayPrompts.map((prompt, index) => (
               <button
                 key={index}
-                onClick={() => handlePromptClick(typeof prompt === "object" && prompt ? prompt.Question || prompt.question : prompt)}
+                onClick={() => handlePromptClick(getPromptText(prompt))}
                 className="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full text-xs whitespace-nowrap text-white/90 transition-colors"
                 disabled={isDisabled}
               >
-                {typeof prompt === "object" && prompt ? prompt.Question || prompt.question : prompt}
+                {getPromptText(prompt)}
               </button>
             ))}
           </div>

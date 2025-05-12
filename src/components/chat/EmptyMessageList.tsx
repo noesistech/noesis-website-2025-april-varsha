@@ -22,6 +22,19 @@ const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
   // Make sure we always have prompts to display
   const displayPrompts = prompts && prompts.length > 0 ? prompts : defaultPrompts;
 
+  // Helper function to extract prompt text safely
+  const getPromptText = (prompt: string | { Question?: string; question?: string; [key: string]: any }): string => {
+    if (typeof prompt === 'string') {
+      return prompt;
+    }
+    
+    if (prompt && typeof prompt === 'object') {
+      return prompt.Question || prompt.question || JSON.stringify(prompt);
+    }
+    
+    return "What can I help you with?";
+  };
+
   return (
     <div className="flex flex-col h-full justify-center items-center px-4 py-6">
       <div className="text-center mb-4">
@@ -33,11 +46,11 @@ const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
         {displayPrompts.map((prompt, index) => (
           <button
             key={index}
-            onClick={() => handleSuggestionClick(prompt)}
+            onClick={() => handleSuggestionClick(getPromptText(prompt))}
             className="p-2 bg-white/10 hover:bg-white/20 rounded-lg text-left text-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={connectionStatus !== 'connected'}
           >
-            {typeof prompt === "object" && prompt ? prompt.Question || prompt.question : prompt}
+            {getPromptText(prompt)}
           </button>
         ))}
       </div>

@@ -12,6 +12,9 @@ interface Message {
   content: string;
 }
 
+// Define a proper type for prompt objects
+type Prompt = string | { Question?: string; question?: string; [key: string]: any };
+
 type ConnectionStatus = 'connected' | 'connecting' | 'disconnected';
 
 interface MessageContextProps {
@@ -23,8 +26,8 @@ interface MessageContextProps {
   setMessageStreaming: React.Dispatch<React.SetStateAction<boolean>>;
   bot: Bot | null;
   setBot: React.Dispatch<React.SetStateAction<Bot | null>>;
-  prompts: string[];
-  setPrompts: React.Dispatch<React.SetStateAction<string[]>>;
+  prompts: Prompt[];
+  setPrompts: React.Dispatch<React.SetStateAction<Prompt[]>>;
   chatId: string;
   setChatId: React.Dispatch<React.SetStateAction<string>>;
   connectWebsocket: boolean;
@@ -44,7 +47,7 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
   const [isTyping, setIsTyping] = useState(false);
   const [messageStreaming, setMessageStreaming] = useState(false);
   const [bot, setBot] = useState<Bot | null>(null);
-  const [prompts, setPrompts] = useState<string[]>([]);
+  const [prompts, setPrompts] = useState<Prompt[]>([]);
   const [chatId, setChatId] = useState("");
   const [connectWebsocket, setConnectWebsocket] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('connecting');
