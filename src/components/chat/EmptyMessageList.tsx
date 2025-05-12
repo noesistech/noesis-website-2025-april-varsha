@@ -38,7 +38,7 @@ const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
   return (
     <div className="flex flex-col h-full justify-center items-center px-4 py-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold mb-2 text-white">Welcome to Noesis AI Assistant</h3>
+        <h3 className="text-2xl font-bold mb-2 text-white">Welcome</h3>
         <p className="text-white/70 mb-4">Choose a question below to start your conversation, or type your own question</p>
         
         {bot && bot.description && (

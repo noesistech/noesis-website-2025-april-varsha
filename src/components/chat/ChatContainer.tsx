@@ -46,6 +46,7 @@ const ChatContainer = ({
           </div>
         ) : null}
         
+        {/* Message input is always visible now */}
         <div className={`p-3 bg-noesis-darker/50 ${minimized ? 'rounded-lg' : ''}`} onClick={(e) => e.stopPropagation()}>
           <MessageInput 
             sendMessage={handleMessageSend} 
