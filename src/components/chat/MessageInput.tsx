@@ -99,11 +99,11 @@ const MessageInput = ({ sendMessage, handlePromptClick, customPrompts = [] }: Me
             {displayPrompts.map((prompt, index) => (
               <button
                 key={index}
-                onClick={() => handlePromptClick(typeof prompt === "object" && prompt ? prompt["Question"] : prompt)}
+                onClick={() => handlePromptClick(typeof prompt === "object" && prompt ? prompt.Question || prompt.question : prompt)}
                 className="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full text-xs whitespace-nowrap text-white/90 transition-colors"
                 disabled={isDisabled}
               >
-                {typeof prompt === "object" && prompt ? prompt["Question"] : prompt}
+                {typeof prompt === "object" && prompt ? prompt.Question || prompt.question : prompt}
               </button>
             ))}
           </div>

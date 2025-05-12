@@ -16,7 +16,7 @@ const ChatBotSection: React.FC = () => {
           </p>
         </div>
         
-        <div className="max-w-3xl mx-auto" style={{ height: 'calc(80vh - 120px)', minHeight: '500px', maxHeight: '700px' }}>
+        <div className="max-w-4xl mx-auto" style={{ height: 'calc(80vh - 120px)', minHeight: '500px', maxHeight: '700px' }}>
           <MessageProvider>
             <ChatBot embedded={true} minimized={false} />
           </MessageProvider>

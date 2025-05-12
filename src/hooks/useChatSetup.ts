@@ -81,10 +81,32 @@ export const useChatSetup = () => {
             setMessages([{ role: 'assistant', content: bot.WelcomeMessage }]);
           }
           
-          // Set starter prompts if available
+          // Set starter prompts if available and make sure they're processed correctly
           if (bot.StarterPrompts && bot.StarterPrompts.length > 0) {
             console.log("Setting starter prompts:", bot.StarterPrompts);
-            setPrompts(bot.StarterPrompts);
+            
+            // Ensure prompts are in the correct format regardless of what the API returns
+            const formattedPrompts = bot.StarterPrompts.map((prompt: any) => {
+              if (typeof prompt === 'string') {
+                return prompt;
+              } else if (typeof prompt === 'object' && prompt) {
+                return prompt.Question || prompt.question || JSON.stringify(prompt);
+              }
+              return "What can you help me with?";
+            });
+            
+            setPrompts(formattedPrompts);
+          } else {
+            // Set default prompts if none returned from API
+            setPrompts([
+              "What services does Noesis offer?",
+              "How can I join the Noesis team?",
+              "I'm interested in partnering with Noesis",
+              "Tell me about your AI & Cloud solutions",
+              "How can I contact the team?",
+              "What makes Noesis different?",
+              "Show me recent success stories"
+            ]);
           }
         }
       } catch (error) {
