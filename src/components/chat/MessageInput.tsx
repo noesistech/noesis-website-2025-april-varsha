@@ -1,8 +1,8 @@
+
 import React, { useState, useRef, KeyboardEvent, useEffect } from 'react';
 import { Send, WifiOff, RefreshCw } from 'lucide-react';
 import { useMessageContext } from '@/contexts/MessageContext';
 import { toast } from 'sonner';
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 interface MessageInputProps {
   sendMessage: (text: string) => void;
@@ -91,31 +91,20 @@ const MessageInput = ({ sendMessage, handlePromptClick, customPrompts = [] }: Me
     ? 'bg-noesis-purple text-white'
     : 'bg-gray-800/50 text-gray-500';
 
-  // Determine which prompts to display
-  const displayPrompts = customPrompts.length > 0 
-    ? customPrompts 
-    : prompts && prompts.length > 0 
-      ? prompts.slice(0, 4) 
-      : [
-          "What AI services do you offer?",
-          "How can AI improve my business processes?",
-          "Tell me about your tech stack",
-          "What makes Noesis different from other agencies?"
-        ];
-
   return (
     <div className="relative">
-      {(!message || message.length < 2) && displayPrompts.length > 0 && (
+      {/* Only show the quick prompts if there's no active typing or it's a very short message */}
+      {(!message || message.length < 2) && customPrompts.length > 0 && (
         <div className="thin-scrollbar flex overflow-x-auto gap-2 px-1 py-2 mb-2">
           <div className="flex gap-2">
-            {displayPrompts.map((prompt, index) => (
+            {customPrompts.map((prompt, index) => (
               <button
                 key={index}
-                onClick={() => handlePromptClick(getPromptText(prompt))}
+                onClick={() => handlePromptClick(prompt)}
                 className="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full text-xs whitespace-nowrap text-white/90 transition-colors"
                 disabled={isDisabled}
               >
-                {getPromptText(prompt)}
+                {prompt}
               </button>
             ))}
           </div>

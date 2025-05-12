@@ -49,13 +49,13 @@ const ChatContainer = ({
           </div>
         ) : null}
         
-        {/* Message input is only visible when user has already interacted or in minimized mode */}
-        {(minimized || hasInteracted) && (
+        {/* Message input is only visible when minimized or when user has already interacted */}
+        {minimized && (
           <div className={`p-3 bg-noesis-darker/50 ${minimized ? 'rounded-lg' : ''}`} onClick={(e) => e.stopPropagation()}>
             <MessageInput 
               sendMessage={handleMessageSend} 
               handlePromptClick={handlePromptClick}
-              customPrompts={minimized ? [
+              customPrompts={[
                 "What services does Noesis offer?",
                 "How can I join the Noesis team?",
                 "I'm interested in partnering with Noesis",
@@ -63,7 +63,7 @@ const ChatContainer = ({
                 "How can I contact the team?",
                 "What makes Noesis different?",
                 "Show me recent success stories"
-              ] : []}
+              ]}
             />
           </div>
         )}

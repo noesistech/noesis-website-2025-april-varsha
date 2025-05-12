@@ -38,20 +38,24 @@ const EmptyMessageList = ({ handleSuggestionClick, handleMessageSend }: EmptyMes
   };
 
   return (
-    <div className="flex flex-col h-full justify-between px-4 py-6">
-      <div className="flex-1 flex flex-col items-center justify-center">
-        <div className="text-center mb-8">
-          <h3 className="text-2xl font-bold mb-2 text-white">Welcome</h3>
-          <p className="text-white/70 mb-4">Choose a question below to start your conversation, or type your own question</p>
-          
-          {bot && bot.description && (
-            <div className="bg-white/10 p-4 rounded-lg mb-6 max-w-lg mx-auto">
-              <p className="text-white/90 text-sm">{bot.description}</p>
-            </div>
-          )}
-        </div>
+    <div className="flex flex-col h-full px-4 py-6">
+      {/* Welcome message at the top */}
+      <div className="text-center mb-8">
+        <h3 className="text-2xl font-bold mb-2 text-white">Welcome</h3>
         
-        <div className="w-full max-w-xl grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+        {/* Bot description/welcome message */}
+        {bot && bot.description && (
+          <div className="bg-white/10 p-4 rounded-lg mb-6 max-w-lg mx-auto">
+            <p className="text-white/90 text-sm">{bot.description}</p>
+          </div>
+        )}
+        
+        <p className="text-white/70 mb-4">Choose a question below to start your conversation, or type your own question</p>
+      </div>
+      
+      {/* Prompts in the middle */}
+      <div className="flex-1">
+        <div className="w-full max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
           {displayPrompts.map((prompt, index) => (
             <button
               key={index}
@@ -65,8 +69,8 @@ const EmptyMessageList = ({ handleSuggestionClick, handleMessageSend }: EmptyMes
         </div>
       </div>
       
-      {/* Input field at the bottom of the welcome screen */}
-      <div className="w-full max-w-xl mx-auto">
+      {/* Message input at the bottom */}
+      <div className="w-full max-w-xl mx-auto mt-4">
         <MessageInput 
           sendMessage={handleMessageSend} 
           handlePromptClick={handleSuggestionClick}
