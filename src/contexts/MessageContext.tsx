@@ -38,6 +38,8 @@ interface MessageContextProps {
   setLastActiveTimestamp: React.Dispatch<React.SetStateAction<number>>;
   reconnectionAttempts: number;
   setReconnectionAttempts: React.Dispatch<React.SetStateAction<number>>;
+  hasInteracted: boolean;
+  setHasInteracted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const MessageContext = createContext<MessageContextProps | undefined>(undefined);
@@ -53,6 +55,7 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('connecting');
   const [lastActiveTimestamp, setLastActiveTimestamp] = useState(Date.now());
   const [reconnectionAttempts, setReconnectionAttempts] = useState(0);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   // Initialize chat if we have a stored chatId
   useEffect(() => {
@@ -106,7 +109,9 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
         lastActiveTimestamp,
         setLastActiveTimestamp,
         reconnectionAttempts,
-        setReconnectionAttempts
+        setReconnectionAttempts,
+        hasInteracted,
+        setHasInteracted
       }}
     >
       {children}

@@ -23,7 +23,7 @@ const ChatContainer = ({
   embedded = false,
   minimized = false
 }: ChatContainerProps) => {
-  const { messages } = useMessageContext();
+  const { messages, hasInteracted } = useMessageContext();
 
   return (
     <div className={`bg-gradient-to-b from-noesis-dark to-noesis-darker border border-noesis-purple/30 rounded-lg shadow-lg ${embedded ? 'w-full h-full' : 'w-full max-w-5xl h-[600px]'} flex flex-col overflow-hidden ${!embedded ? 'animate-fade-in' : ''}`}>
@@ -36,11 +36,11 @@ const ChatContainer = ({
       )}
       
       <div className="flex-1 overflow-hidden flex flex-col">
-        {!minimized && messages.length > 0 ? (
+        {!minimized && hasInteracted && messages.length > 0 ? (
           <div className="flex-1 overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <Messages handlePromptClick={handlePromptClick} />
           </div>
-        ) : !minimized && messages.length === 0 ? (
+        ) : !minimized ? (
           <div className="flex-1 overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <EmptyMessageList handleSuggestionClick={handlePromptClick} />
           </div>

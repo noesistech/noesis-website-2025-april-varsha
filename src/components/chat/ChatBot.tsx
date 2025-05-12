@@ -23,9 +23,9 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
     setMessageStreaming, 
     chatId,
     connectWebsocket,
+    setHasInteracted
   } = useMessageContext();
   
-  const [hasInteracted, setHasInteracted] = useState(false);
   const [isExpanded, setIsExpanded] = useState(!minimized);
   
   // Initialize chat setup (bot info, chat history, etc.)
@@ -92,7 +92,7 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
   // Floating chat UI - just showing the button that navigates to homepage chatbot section
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      <FloatingChatButton pulseAnimation={!hasInteracted} />
+      <FloatingChatButton pulseAnimation={true} />
     </div>
   );
 };

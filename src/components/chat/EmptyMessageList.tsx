@@ -7,7 +7,7 @@ interface EmptyMessageListProps {
 }
 
 const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
-  const { prompts, connectionStatus } = useMessageContext();
+  const { prompts, connectionStatus, bot } = useMessageContext();
 
   const defaultPrompts = [
     "What services does Noesis offer?",
@@ -37,17 +37,23 @@ const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
 
   return (
     <div className="flex flex-col h-full justify-center items-center px-4 py-6">
-      <div className="text-center mb-4">
-        <h4 className="text-lg font-semibold mb-2">Get Started</h4>
-        <p className="text-white/70 text-sm">Ask me anything about Noesis.tech's services or AI solutions</p>
+      <div className="text-center mb-6">
+        <h3 className="text-2xl font-bold mb-2 text-white">Welcome to Noesis AI Assistant</h3>
+        <p className="text-white/70 mb-4">Choose a question below to start your conversation, or type your own question</p>
+        
+        {bot && bot.description && (
+          <div className="bg-white/10 p-4 rounded-lg mb-6 max-w-lg mx-auto">
+            <p className="text-white/90 text-sm">{bot.description}</p>
+          </div>
+        )}
       </div>
       
-      <div className="w-full max-w-md grid grid-cols-1 sm:grid-cols-2 gap-2">
+      <div className="w-full max-w-xl grid grid-cols-1 sm:grid-cols-2 gap-3">
         {displayPrompts.map((prompt, index) => (
           <button
             key={index}
             onClick={() => handleSuggestionClick(getPromptText(prompt))}
-            className="p-2 bg-white/10 hover:bg-white/20 rounded-lg text-left text-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-3 bg-white/10 hover:bg-noesis-purple/50 hover:scale-[1.02] rounded-lg text-left text-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={connectionStatus !== 'connected'}
           >
             {getPromptText(prompt)}

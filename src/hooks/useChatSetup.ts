@@ -20,7 +20,8 @@ export const useChatSetup = () => {
     setPrompts,
     chatId,
     setChatId,
-    setConnectWebsocket
+    setConnectWebsocket,
+    hasInteracted
   } = useMessageContext();
 
   // Initialize bot and fetch information
@@ -75,13 +76,13 @@ export const useChatSetup = () => {
             image: botImage ? `${ASSETS_URL}${botImage}` : ''
           });
           
-          // Set messages from chat history if available
-          if (responseData.chat && responseData.chat.chat_history && responseData.chat.chat_history.length > 0) {
+          // Only set messages from chat history if user has already interacted
+          // or if they have a chat history from before
+          if (responseData.chat && responseData.chat.chat_history && 
+              responseData.chat.chat_history.length > 0 && 
+              (hasInteracted || responseData.chat.chat_history.length > 1)) {
             console.log("Setting messages from chat history:", responseData.chat.chat_history);
             setMessages([...responseData.chat.chat_history]);
-          } else if (bot.WelcomeMessage && messages.length === 0) {
-            console.log("Setting welcome message:", bot.WelcomeMessage);
-            setMessages([{ role: 'assistant', content: bot.WelcomeMessage }]);
           }
           
           // Set starter prompts if available and make sure they're processed correctly
@@ -120,7 +121,7 @@ export const useChatSetup = () => {
     };
     
     fetchBotInfo();
-  }, []);
+  }, [hasInteracted]);
   
   // Enable websocket connection when we have a chatId
   useEffect(() => {
