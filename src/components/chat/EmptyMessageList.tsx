@@ -1,12 +1,14 @@
 
 import React from 'react';
 import { useMessageContext } from '@/contexts/MessageContext';
+import MessageInput from './MessageInput';
 
 interface EmptyMessageListProps {
   handleSuggestionClick: (text: string) => void;
+  handleMessageSend: (text: string) => void;
 }
 
-const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
+const EmptyMessageList = ({ handleSuggestionClick, handleMessageSend }: EmptyMessageListProps) => {
   const { prompts, connectionStatus, bot } = useMessageContext();
 
   const defaultPrompts = [
@@ -36,29 +38,40 @@ const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
   };
 
   return (
-    <div className="flex flex-col h-full justify-center items-center px-4 py-6">
-      <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold mb-2 text-white">Welcome</h3>
-        <p className="text-white/70 mb-4">Choose a question below to start your conversation, or type your own question</p>
+    <div className="flex flex-col h-full justify-between px-4 py-6">
+      <div className="flex-1 flex flex-col items-center justify-center">
+        <div className="text-center mb-8">
+          <h3 className="text-2xl font-bold mb-2 text-white">Welcome</h3>
+          <p className="text-white/70 mb-4">Choose a question below to start your conversation, or type your own question</p>
+          
+          {bot && bot.description && (
+            <div className="bg-white/10 p-4 rounded-lg mb-6 max-w-lg mx-auto">
+              <p className="text-white/90 text-sm">{bot.description}</p>
+            </div>
+          )}
+        </div>
         
-        {bot && bot.description && (
-          <div className="bg-white/10 p-4 rounded-lg mb-6 max-w-lg mx-auto">
-            <p className="text-white/90 text-sm">{bot.description}</p>
-          </div>
-        )}
+        <div className="w-full max-w-xl grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+          {displayPrompts.map((prompt, index) => (
+            <button
+              key={index}
+              onClick={() => handleSuggestionClick(getPromptText(prompt))}
+              className="p-3 bg-white/10 hover:bg-noesis-purple/50 hover:scale-[1.02] rounded-lg text-left text-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={connectionStatus !== 'connected'}
+            >
+              {getPromptText(prompt)}
+            </button>
+          ))}
+        </div>
       </div>
       
-      <div className="w-full max-w-xl grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {displayPrompts.map((prompt, index) => (
-          <button
-            key={index}
-            onClick={() => handleSuggestionClick(getPromptText(prompt))}
-            className="p-3 bg-white/10 hover:bg-noesis-purple/50 hover:scale-[1.02] rounded-lg text-left text-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={connectionStatus !== 'connected'}
-          >
-            {getPromptText(prompt)}
-          </button>
-        ))}
+      {/* Input field at the bottom of the welcome screen */}
+      <div className="w-full max-w-xl mx-auto">
+        <MessageInput 
+          sendMessage={handleMessageSend} 
+          handlePromptClick={handleSuggestionClick}
+          customPrompts={[]}
+        />
       </div>
     </div>
   );

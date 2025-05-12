@@ -42,26 +42,31 @@ const ChatContainer = ({
           </div>
         ) : !minimized ? (
           <div className="flex-1 overflow-hidden" onClick={(e) => e.stopPropagation()}>
-            <EmptyMessageList handleSuggestionClick={handlePromptClick} />
+            <EmptyMessageList 
+              handleSuggestionClick={handlePromptClick} 
+              handleMessageSend={handleMessageSend}
+            />
           </div>
         ) : null}
         
-        {/* Message input is always visible now */}
-        <div className={`p-3 bg-noesis-darker/50 ${minimized ? 'rounded-lg' : ''}`} onClick={(e) => e.stopPropagation()}>
-          <MessageInput 
-            sendMessage={handleMessageSend} 
-            handlePromptClick={handlePromptClick}
-            customPrompts={minimized ? [
-              "What services does Noesis offer?",
-              "How can I join the Noesis team?",
-              "I'm interested in partnering with Noesis",
-              "Tell me about your AI & Cloud solutions",
-              "How can I contact the team?",
-              "What makes Noesis different?",
-              "Show me recent success stories"
-            ] : []}
-          />
-        </div>
+        {/* Message input is only visible when user has already interacted or in minimized mode */}
+        {(minimized || hasInteracted) && (
+          <div className={`p-3 bg-noesis-darker/50 ${minimized ? 'rounded-lg' : ''}`} onClick={(e) => e.stopPropagation()}>
+            <MessageInput 
+              sendMessage={handleMessageSend} 
+              handlePromptClick={handlePromptClick}
+              customPrompts={minimized ? [
+                "What services does Noesis offer?",
+                "How can I join the Noesis team?",
+                "I'm interested in partnering with Noesis",
+                "Tell me about your AI & Cloud solutions",
+                "How can I contact the team?",
+                "What makes Noesis different?",
+                "Show me recent success stories"
+              ] : []}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
