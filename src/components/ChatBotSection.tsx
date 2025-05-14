@@ -2,10 +2,14 @@
 import React from 'react';
 import ChatBot from './chat/ChatBot';
 import { MessageProvider } from '@/contexts/MessageContext';
+import { useMessageContext } from '@/contexts/MessageContext';
 
 const ChatBotSection: React.FC = () => {
+  const { messages } = useMessageContext();
+  const hasMessages = messages.length > 1;
+
   return (
-    <section id="chatbot" className="py-12 bg-gradient-to-b from-gray-900/90 to-noesis-dark/80">
+    <section id="chatbot" className="py-12 bg-gradient-to-b from-gray-900/90 to-noesis-dark/80 pb-6">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
@@ -15,11 +19,11 @@ const ChatBotSection: React.FC = () => {
             Have questions? Our AI assistant is available 24/7 to help answer your inquiries.
           </p>
         </div>
-        
-        <div className="max-w-4xl mx-auto" style={{ height: 'calc(80vh - 120px)', minHeight: '500px', maxHeight: '700px' }}>
-          <MessageProvider>
-            <ChatBot embedded={true} minimized={false} />
-          </MessageProvider>
+
+        <div className={` mx-auto `} style={{ minHeight: '500px', maxHeight: '700px' }}>
+            <MessageProvider>
+              <ChatBot embedded={true} />
+            </MessageProvider>
         </div>
       </div>
     </section>

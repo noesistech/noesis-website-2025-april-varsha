@@ -12,9 +12,6 @@ interface Message {
   content: string;
 }
 
-// Define a proper type for prompt objects
-type Prompt = string | { Question?: string; question?: string; [key: string]: any };
-
 type ConnectionStatus = 'connected' | 'connecting' | 'disconnected';
 
 interface MessageContextProps {
@@ -26,8 +23,8 @@ interface MessageContextProps {
   setMessageStreaming: React.Dispatch<React.SetStateAction<boolean>>;
   bot: Bot | null;
   setBot: React.Dispatch<React.SetStateAction<Bot | null>>;
-  prompts: Prompt[];
-  setPrompts: React.Dispatch<React.SetStateAction<Prompt[]>>;
+  prompts: string[];
+  setPrompts: React.Dispatch<React.SetStateAction<string[]>>;
   chatId: string;
   setChatId: React.Dispatch<React.SetStateAction<string>>;
   connectWebsocket: boolean;
@@ -38,8 +35,6 @@ interface MessageContextProps {
   setLastActiveTimestamp: React.Dispatch<React.SetStateAction<number>>;
   reconnectionAttempts: number;
   setReconnectionAttempts: React.Dispatch<React.SetStateAction<number>>;
-  hasInteracted: boolean;
-  setHasInteracted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const MessageContext = createContext<MessageContextProps | undefined>(undefined);
@@ -49,13 +44,12 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
   const [isTyping, setIsTyping] = useState(false);
   const [messageStreaming, setMessageStreaming] = useState(false);
   const [bot, setBot] = useState<Bot | null>(null);
-  const [prompts, setPrompts] = useState<Prompt[]>([]);
+  const [prompts, setPrompts] = useState<string[]>([]);
   const [chatId, setChatId] = useState("");
   const [connectWebsocket, setConnectWebsocket] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('connecting');
   const [lastActiveTimestamp, setLastActiveTimestamp] = useState(Date.now());
   const [reconnectionAttempts, setReconnectionAttempts] = useState(0);
-  const [hasInteracted, setHasInteracted] = useState(false);
 
   // Initialize chat if we have a stored chatId
   useEffect(() => {
@@ -109,9 +103,7 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
         lastActiveTimestamp,
         setLastActiveTimestamp,
         reconnectionAttempts,
-        setReconnectionAttempts,
-        hasInteracted,
-        setHasInteracted
+        setReconnectionAttempts
       }}
     >
       {children}

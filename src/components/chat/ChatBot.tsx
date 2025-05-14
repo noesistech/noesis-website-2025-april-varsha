@@ -10,10 +10,9 @@ import useChatWebSocket from '@/hooks/useChatWebSocket';
 
 interface ChatBotProps {
   embedded?: boolean;
-  minimized?: boolean;
 }
 
-const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
+const ChatBot = ({ embedded = false }: ChatBotProps) => {
   const { 
     messages, 
     setMessages, 
@@ -23,10 +22,9 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
     setMessageStreaming, 
     chatId,
     connectWebsocket,
-    setHasInteracted
   } = useMessageContext();
   
-  const [isExpanded, setIsExpanded] = useState(!minimized);
+  const [isOpen, setIsOpen] = useState(false);
   
   // Initialize chat setup (bot info, chat history, etc.)
   useChatSetup();
@@ -36,15 +34,9 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
   
   const handleMessageSend = (text: string) => {
     if (isTyping || messageStreaming || !text.trim()) {
+      console.log("Message not sent due to conditions:", { isTyping, messageStreaming, emptyText: !text.trim() });
       return;
     }
-    
-    // Expand the chat interface if it's minimized
-    if (!isExpanded) {
-      setIsExpanded(true);
-    }
-    
-    setHasInteracted(true);
     
     // Add user message to the chat
     setMessages(prev => [...prev, { role: 'user', content: text }]);
@@ -54,6 +46,7 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
     setMessageStreaming(true);
     
     // Send message via WebSocket
+    console.log("Attempting to send message:", text, "WebSocket ready state:", readyState);
     const success = sendMessage(text);
     
     if (!success) {
@@ -65,31 +58,40 @@ const ChatBot = ({ embedded = false, minimized = false }: ChatBotProps) => {
   };
   
   const handlePromptClick = (text: string) => {
+    console.log("Prompt clicked:", text, "WebSocket connected:", wsConnected);
     handleMessageSend(text);
   };
   
   const handleDrop = (files: File[]) => {
     toast.info(`File functionality has been disabled.`);
   };
+  
+  const toggleChat = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // Log WebSocket status changes for debugging
+  useEffect(() => {
+    console.log("WebSocket ready state changed:", readyState, "Connected:", wsConnected, "ChatId:", chatId);
+  }, [readyState, wsConnected, chatId]);
 
   // Embedded chat UI
   if (embedded) {
     return (
-      <div className="w-full h-full">
+      <div className="w-full">
         <Dropzone onDrop={handleDrop}>
           <ChatContainer
             handlePromptClick={handlePromptClick}
             handleMessageSend={handleMessageSend}
             handleDrop={handleDrop}
             embedded={true}
-            minimized={minimized}
           />
         </Dropzone>
       </div>
     );
   }
   
-  // Floating chat UI - just showing the button that navigates to homepage chatbot section
+  // Floating chat UI
   return (
     <div className="fixed bottom-6 right-6 z-50">
       <FloatingChatButton pulseAnimation={true} />

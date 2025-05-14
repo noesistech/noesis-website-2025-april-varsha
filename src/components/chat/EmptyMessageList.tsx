@@ -1,15 +1,13 @@
 
 import React from 'react';
 import { useMessageContext } from '@/contexts/MessageContext';
-import MessageInput from './MessageInput';
 
 interface EmptyMessageListProps {
   handleSuggestionClick: (text: string) => void;
-  handleMessageSend: (text: string) => void;
 }
 
-const EmptyMessageList = ({ handleSuggestionClick, handleMessageSend }: EmptyMessageListProps) => {
-  const { prompts, connectionStatus, bot } = useMessageContext();
+const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
+  const { prompts, connectWebsocket } = useMessageContext();
 
   const defaultPrompts = [
     "What services does Noesis offer?",
@@ -17,65 +15,29 @@ const EmptyMessageList = ({ handleSuggestionClick, handleMessageSend }: EmptyMes
     "I'm interested in partnering with Noesis",
     "Tell me about your AI & Cloud solutions",
     "How can I contact the team?",
-    "What makes Noesis different?",
-    "Show me recent success stories"
+    "What makes Noesis different?"
   ];
 
-  // Make sure we always have prompts to display
-  const displayPrompts = prompts && prompts.length > 0 ? prompts : defaultPrompts;
-
-  // Helper function to extract prompt text safely
-  const getPromptText = (prompt: string | { Question?: string; question?: string; [key: string]: any }): string => {
-    if (typeof prompt === 'string') {
-      return prompt;
-    }
-    
-    if (prompt && typeof prompt === 'object') {
-      return prompt.Question || prompt.question || JSON.stringify(prompt);
-    }
-    
-    return "What can I help you with?";
-  };
+  const displayPrompts = prompts && prompts.length > 0 ? prompts.slice(0, 4) : defaultPrompts;
 
   return (
-    <div className="flex flex-col h-full px-4 py-6">
-      {/* Welcome message at the top */}
-      <div className="text-center mb-8">
-        <h3 className="text-2xl font-bold mb-2 text-white">Welcome</h3>
-        
-        {/* Bot description/welcome message */}
-        {bot && bot.description && (
-          <div className="bg-white/10 p-4 rounded-lg mb-6 max-w-lg mx-auto">
-            <p className="text-white/90 text-sm">{bot.description}</p>
-          </div>
-        )}
-        
-        <p className="text-white/70 mb-4">Choose a question below to start your conversation, or type your own question</p>
+    <div className="flex flex-col !h-[450px] justify-start items-center px-4 py-12">
+      <div className="text-center mb-6">
+        <h4 className="text-xl font-semibold mb-2">Welcome</h4>
+        <p className="text-white/70">Choose a question below to start your conversation, or type your own question</p>
       </div>
       
-      {/* Prompts in the middle */}
-      <div className="flex-1">
-        <div className="w-full max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-          {displayPrompts.map((prompt, index) => (
-            <button
-              key={index}
-              onClick={() => handleSuggestionClick(getPromptText(prompt))}
-              className="p-3 bg-white/10 hover:bg-noesis-purple/50 hover:scale-[1.02] rounded-lg text-left text-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={connectionStatus !== 'connected'}
-            >
-              {getPromptText(prompt)}
-            </button>
-          ))}
-        </div>
-      </div>
-      
-      {/* Message input at the bottom */}
-      <div className="w-full max-w-xl mx-auto mt-4">
-        <MessageInput 
-          sendMessage={handleMessageSend} 
-          handlePromptClick={handleSuggestionClick}
-          customPrompts={[]}
-        />
+      <div className="w-full max-w-xl grid grid-cols-1 sm:grid-cols-2 gap-2">
+        {displayPrompts.map((prompt, index) => (
+          <button
+            key={index}
+            onClick={() => handleSuggestionClick(typeof prompt === "object" && prompt ? prompt["Question"] : prompt)}
+            className="p-3 bg-white/10 hover:bg-white/20 rounded-lg text-left text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={!connectWebsocket}
+          >
+            {prompt}
+          </button>
+        ))}
       </div>
     </div>
   );

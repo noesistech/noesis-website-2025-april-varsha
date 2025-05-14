@@ -3,14 +3,14 @@ import React, { useState, useRef, KeyboardEvent, useEffect } from 'react';
 import { Send, WifiOff, RefreshCw } from 'lucide-react';
 import { useMessageContext } from '@/contexts/MessageContext';
 import { toast } from 'sonner';
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 interface MessageInputProps {
   sendMessage: (text: string) => void;
   handlePromptClick: (text: string) => void;
-  customPrompts?: string[];
 }
 
-const MessageInput = ({ sendMessage, handlePromptClick, customPrompts = [] }: MessageInputProps) => {
+const MessageInput = ({ sendMessage, handlePromptClick }: MessageInputProps) => {
   const [message, setMessage] = useState('');
   const { 
     isTyping, 
@@ -24,19 +24,6 @@ const MessageInput = ({ sendMessage, handlePromptClick, customPrompts = [] }: Me
   } = useMessageContext();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   
-  // Helper function to extract prompt text safely
-  const getPromptText = (prompt: string | { Question?: string; question?: string; [key: string]: any }): string => {
-    if (typeof prompt === 'string') {
-      return prompt;
-    }
-    
-    if (prompt && typeof prompt === 'object') {
-      return prompt.Question || prompt.question || JSON.stringify(prompt);
-    }
-    
-    return "What can I help you with?";
-  };
-
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -51,6 +38,7 @@ const MessageInput = ({ sendMessage, handlePromptClick, customPrompts = [] }: Me
         return;
       }
       
+      console.log("Sending message:", message);
       sendMessage(message.trim());
       setMessage('');
       if (textareaRef.current) {
@@ -64,11 +52,10 @@ const MessageInput = ({ sendMessage, handlePromptClick, customPrompts = [] }: Me
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
     
-    // Auto-resize textarea but limit height
+    // Auto-resize textarea
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
-      const newHeight = Math.min(textareaRef.current.scrollHeight, 100);
-      textareaRef.current.style.height = `${newHeight}px`;
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   };
 
@@ -91,27 +78,37 @@ const MessageInput = ({ sendMessage, handlePromptClick, customPrompts = [] }: Me
     ? 'bg-noesis-purple text-white'
     : 'bg-gray-800/50 text-gray-500';
 
+  const displayPrompts = prompts && prompts.length > 0 
+    ? prompts.slice(0, 4) 
+    : [
+      "What services does Noesis offer?",
+      "How can I join the Noesis team?",
+      "I'm interested in partnering with Noesis",
+      "Tell me about your AI & Cloud solutions",
+      "How can I contact the team?",
+      "What makes Noesis different?"
+    ];
+
   return (
     <div className="relative">
-      {/* Only show the quick prompts if there's no active typing or it's a very short message */}
-      {(!message || message.length < 2) && customPrompts.length > 0 && (
-        <div className="thin-scrollbar flex overflow-x-auto gap-2 px-1 py-2 mb-2">
-          <div className="flex gap-2">
-            {customPrompts.map((prompt, index) => (
-              <button
-                key={index}
-                onClick={() => handlePromptClick(prompt)}
-                className="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full text-xs whitespace-nowrap text-white/90 transition-colors"
-                disabled={isDisabled}
-              >
-                {prompt}
-              </button>
-            ))}
-          </div>
+     
+      {(!message || message.length < 2) && (displayPrompts.length > 0 && displayPrompts.some(p => (p && p["Question"])))  && (
+        
+        <div className="thin-scrollbar absolute -top-12 left-0 right-0 flex overflow-auto gap-2 px-2 py-2 z-10 bg-noesis-darker/95 backdrop-blur-md rounded border-noesis-purple/30 shadow-lg mb-4">
+         {displayPrompts.map((prompt, index) => 
+            <button
+              key={index}
+              onClick={() => handlePromptClick(typeof prompt === "object" && prompt ? prompt["Question"] : prompt)}
+              className="px-3 pt-[4px] py-[6px] bg-white/10 hover:bg-white/20 rounded-full text-sm sm:text-md text-white/90 transition-colors whitespace-nowrap"
+              disabled={isDisabled}
+            >
+              {typeof prompt === "object" && prompt ? prompt["Question"] : prompt}
+            </button>
+          )}
         </div>
       )}
       
-      <div className="border-t border-gray-700/50 px-0 py-2">
+      <div className="border-t border-gray-700/50 px-0 py-3 sm:p-3 sm:px-0">
         <div className="relative flex items-end rounded-lg bg-white/10 p-2">
           <textarea
             ref={textareaRef}

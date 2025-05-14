@@ -9,9 +9,6 @@ const API_URL = 'https://bot.brainstormer.dev';
 const BOT_API_KEY = 'Vyhn1VFWqwM2LLvnaPpG';
 const ASSETS_URL = 'https://studio.brainstormer.dev';
 
-// Define a proper type for prompt objects
-type Prompt = string | { Question?: string; question?: string; [key: string]: any };
-
 export const useChatSetup = () => {
   const {
     messages,
@@ -20,8 +17,7 @@ export const useChatSetup = () => {
     setPrompts,
     chatId,
     setChatId,
-    setConnectWebsocket,
-    hasInteracted
+    setConnectWebsocket
   } = useMessageContext();
 
   // Initialize bot and fetch information
@@ -76,42 +72,19 @@ export const useChatSetup = () => {
             image: botImage ? `${ASSETS_URL}${botImage}` : ''
           });
           
-          // Only set messages from chat history if user has already interacted
-          // or if they have a chat history from before
-          if (responseData.chat && responseData.chat.chat_history && 
-              responseData.chat.chat_history.length > 0 && 
-              (hasInteracted || responseData.chat.chat_history.length > 1)) {
+          // Set messages from chat history if available
+          if (responseData.chat && responseData.chat.chat_history && responseData.chat.chat_history.length > 0) {
             console.log("Setting messages from chat history:", responseData.chat.chat_history);
             setMessages([...responseData.chat.chat_history]);
+          } else if (bot.WelcomeMessage && messages.length === 0) {
+            console.log("Setting welcome message:", bot.WelcomeMessage);
+            setMessages([{ role: 'assistant', content: bot.WelcomeMessage }]);
           }
           
-          // Set starter prompts if available and make sure they're processed correctly
+          // Set starter prompts if available
           if (bot.StarterPrompts && bot.StarterPrompts.length > 0) {
             console.log("Setting starter prompts:", bot.StarterPrompts);
-            
-            // Ensure prompts are in the correct format regardless of what the API returns
-            const formattedPrompts: Prompt[] = bot.StarterPrompts.map((prompt: any) => {
-              if (typeof prompt === 'string') {
-                return prompt;
-              } else if (typeof prompt === 'object' && prompt) {
-                // Return the original object, our helper functions will extract the right property
-                return prompt;
-              }
-              return "What can you help me with?";
-            });
-            
-            setPrompts(formattedPrompts);
-          } else {
-            // Set default prompts if none returned from API
-            setPrompts([
-              "What services does Noesis offer?",
-              "How can I join the Noesis team?",
-              "I'm interested in partnering with Noesis",
-              "Tell me about your AI & Cloud solutions",
-              "How can I contact the team?",
-              "What makes Noesis different?",
-              "Show me recent success stories"
-            ]);
+            setPrompts(bot.StarterPrompts);
           }
         }
       } catch (error) {
@@ -121,7 +94,7 @@ export const useChatSetup = () => {
     };
     
     fetchBotInfo();
-  }, [hasInteracted]);
+  }, []);
   
   // Enable websocket connection when we have a chatId
   useEffect(() => {

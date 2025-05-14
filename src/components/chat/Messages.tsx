@@ -17,55 +17,58 @@ const Messages = ({ handlePromptClick }: MessagesProps) => {
   const { messages, isTyping, connectionStatus } = useMessageContext();
   const messageListRef = useRef(null);
 
+    
   // Modified scroll function to prevent page scrolling
   const scrollToEnd = () => {
-    if (messageListRef.current) {
-      requestAnimationFrame(() => {
-        messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
-      });
-    }
+      if (messageListRef.current) {
+        requestAnimationFrame(() => {
+            messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+        });
+      }
   };
 
   // Ensure scroll happens after messages update or typing indicator changes
   useEffect(() => {
-    scrollToEnd();
+      scrollToEnd();
+      console.log("Messages updated or typing state changed, isTyping:", isTyping);
   }, [messages, isTyping]);
 
   const syntaxTheme = oneDark;
 
   const MarkdownComponents = {
-    code({ node, inline, className, children, ...props }) {
-      const hasLang = /language-(\w+)/.exec(className || '');
+      code({ node, inline, className, children, ...props }) {
+          const hasLang = /language-(\w+)/.exec(className || '');
 
-      return hasLang ? (
-        <SyntaxHighlighter
-          style={syntaxTheme}
-          language={hasLang[1]}
-          PreTag="div"
-          className="codeStyle"
-          showLineNumbers={true}
-          useInlineStyles={true}
-          children={children}
-        />
-      ) : (
-        <code className={className} {...props} children={children} />
-      )
-    },
-    a({ node, ...props }) {
-      return <a target="_blank" {...props} />;
-    },
-    table({ node, ...props }) {
-      return (
-        <div className='table-responsive'>
-          <table className="table table-bordered" {...props} />
-        </div>
-      );
-    }
+          return hasLang ? (
+              <SyntaxHighlighter
+                  style={syntaxTheme}
+                  language={hasLang[1]}
+                  PreTag="div"
+                  className="codeStyle"
+                  showLineNumbers={true}
+                  useInlineStyles={true}
+                  children={children}
+              />
+          ) : (
+              <code className={className} {...props} children={children} />
+          )
+      },
+      a({ node, ...props }) {
+          return <a target="_blank" {...props} />;
+      },
+      table({ node, ...props }) {
+          return (
+              <div className='table-responsive'>
+                  <table className="table table-bordered" {...props} />
+              </div>
+          );
+      }
   }
 
+
   return (
-    <div className="h-full flex flex-col">
-      <div className="flex-1 p-4 h-full overflow-auto thin-y-scrollbar" ref={messageListRef}>
+    <div className="h-full flex flex-col !h-[450px] sm:!h-[550px] !overflow-auto thin-y-scrollbar pb-20" ref={messageListRef} >
+      <div className="flex-1 p-4 "  >
         {connectionStatus === 'disconnected' && (
           <Alert variant="destructive" className="mb-4 bg-red-900/40 border-red-700 text-white">
             <WifiOff className="h-4 w-4 mr-2" />
@@ -81,8 +84,8 @@ const Messages = ({ handlePromptClick }: MessagesProps) => {
             </AlertDescription>
           </Alert>
         )}
-        <div className="space-y-4 pb-4">
-          {messages.map((msg, index) => (
+        <div className="space-y-6 pb-8" >
+        {messages.map((msg, index) => (
             <div
               key={index}
               className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
@@ -104,9 +107,11 @@ const Messages = ({ handlePromptClick }: MessagesProps) => {
           ))}
           
           {/* The Typing component now internally checks isTyping state */}
-          <div className="flex justify-start">
+          <div className="flex justify-start mt-6">
             <Typing />
           </div>
+          
+          <div className="h-1" />
         </div>
       </div>
     </div>
