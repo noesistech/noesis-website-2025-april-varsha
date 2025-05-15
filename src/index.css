@@ -29,7 +29,7 @@
 
 @layer components {
   .section-title {
-    @apply text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6;
+    @apply text-center text-5xl font-bold mb-6;
   }
   
   .section-subtitle {
@@ -95,15 +95,15 @@ html {
 /* Improved responsiveness for mobile devices */
 @media (max-width: 640px) {
   .section-title {
-    @apply text-2xl font-bold;
+    @apply text-3xl font-bold;
   }
   
   .section-subtitle {
     font-size: 1rem; /* Using direct CSS instead of @apply text-base */
   }
   
-  h2.text-3xl {
-    @apply text-2xl font-bold;
+  h2.text-3xl, h2.text-4xl {
+    @apply text-3xl font-bold;
   }
   
   h3.text-base {
@@ -123,7 +123,31 @@ html {
 /* Improved responsiveness for tablets */
 @media (min-width: 641px) and (max-width: 1024px) {
   .section-title {
-    @apply text-2xl sm:text-3xl;
+    @apply text-4xl;
+  }
+}
+
+/* Override for all section titles on the homepage */
+.home-section-title, 
+h2.text-3xl, 
+h2.text-4xl, 
+section h2.text-3xl, 
+section h2.text-4xl, 
+main section h2.text-3xl, 
+main section h2.text-4xl {
+  font-size: 48px !important;
+}
+
+/* Ensure proper scaling on mobile */
+@media (max-width: 640px) {
+  .home-section-title, 
+  h2.text-3xl, 
+  h2.text-4xl, 
+  section h2.text-3xl, 
+  section h2.text-4xl, 
+  main section h2.text-3xl, 
+  main section h2.text-4xl {
+    font-size: 32px !important;  /* Slightly smaller for mobile readability */
   }
 }
 
