@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -95,7 +96,8 @@ html {
 /* Improved responsiveness for mobile devices */
 @media (max-width: 640px) {
   .section-title {
-    @apply text-3xl font-bold;
+    font-size: 1.875rem; /* text-3xl equivalent */
+    font-weight: 700; /* bold equivalent */
   }
   
   .section-subtitle {
@@ -103,7 +105,8 @@ html {
   }
   
   h2.text-3xl, h2.text-4xl {
-    @apply text-3xl font-bold;
+    font-size: 1.875rem !important; /* text-3xl equivalent */
+    font-weight: 700; /* bold equivalent */
   }
   
   h3.text-base {
@@ -116,14 +119,15 @@ html {
   }
   
   .page-section {
-    @apply py-8 sm:py-12;
+    padding-top: 2rem; /* py-8 equivalent */
+    padding-bottom: 2rem; /* py-8 equivalent */
   }
 }
 
 /* Improved responsiveness for tablets */
 @media (min-width: 641px) and (max-width: 1024px) {
   .section-title {
-    @apply text-4xl;
+    font-size: 2.25rem; /* text-4xl equivalent */
   }
 }
 
@@ -151,7 +155,8 @@ main section h2.text-4xl {
   }
 }
 
-/* Custom thin scrollbar */
+/* ... keep existing code (custom scrollbar styles) */
+
 .thin-scrollbar::-webkit-scrollbar {
   width: 10px;  /* Width of vertical scrollbar */
   height: 10px; /* Height of horizontal scrollbar */
@@ -194,6 +199,8 @@ main section h2.text-4xl {
 .thin-y-scrollbar::-webkit-scrollbar-track {
   background: rgba(83, 83, 83, 0.2); /* Track background */
 }
+
+/* ... keep existing code (loader animation styles) */
 
 .loader {
   display: flex;
@@ -245,6 +252,8 @@ main section h2.text-4xl {
     }
   }
 }
+
+/* ... keep existing code (markdown text styling) */
 
 .markdown-text ol{
   list-style-type: upper-greek;
