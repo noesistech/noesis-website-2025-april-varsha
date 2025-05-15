@@ -127,26 +127,25 @@ html {
   }
 }
 
-@media(min-width:800px){
-  /* Custom thin scrollbar */
-  .thin-scrollbar::-webkit-scrollbar {
-    width: 10px;  /* Width of vertical scrollbar */
-    height: 10px; /* Height of horizontal scrollbar */
-  }
-
-  .thin-scrollbar::-webkit-scrollbar-thumb {
-    background: #3f3f3f; /* Color of the scrollbar thumb */
-    border-radius: 0px; /* Roundness of the scrollbar thumb */
-  }
-
-  .thin-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Darker shade on hover */
-  }
-
-  .thin-scrollbar::-webkit-scrollbar-track {
-    background: rgba(83, 83, 83, 0.2); /* Background of the scrollbar track */
-  }
+/* Custom thin scrollbar */
+.thin-scrollbar::-webkit-scrollbar {
+  width: 10px;  /* Width of vertical scrollbar */
+  height: 10px; /* Height of horizontal scrollbar */
 }
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: #3f3f3f; /* Color of the scrollbar thumb */
+  border-radius: 0px; /* Roundness of the scrollbar thumb */
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker shade on hover */
+}
+
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: rgba(83, 83, 83, 0.2); /* Background of the scrollbar track */
+}
+
 /* Custom Thin Vertical Scrollbar */
 .thin-y-scrollbar {
   overflow-y: auto; /* Enable vertical scrolling */

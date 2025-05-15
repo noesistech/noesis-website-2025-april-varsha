@@ -8,9 +8,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 interface MessageInputProps {
   sendMessage: (text: string) => void;
   handlePromptClick: (text: string) => void;
+  initialMsg: boolean;
 }
 
-const MessageInput = ({ sendMessage, handlePromptClick }: MessageInputProps) => {
+const MessageInput = ({ sendMessage, handlePromptClick, initialMsg }: MessageInputProps) => {
   const [message, setMessage] = useState('');
   const { 
     isTyping, 
@@ -84,15 +85,13 @@ const MessageInput = ({ sendMessage, handlePromptClick }: MessageInputProps) => 
       "What services does Noesis offer?",
       "How can I join the Noesis team?",
       "I'm interested in partnering with Noesis",
-      "Tell me about your AI & Cloud solutions",
-      "How can I contact the team?",
-      "What makes Noesis different?"
+      "Tell me about your AI & Cloud solutions"
     ];
 
   return (
     <div className="relative">
      
-      {(!message || message.length < 2) && (displayPrompts.length > 0 && displayPrompts.some(p => (p && p["Question"])))  && (
+      {(!message || message.length < 2) && (displayPrompts.length > 0 && displayPrompts.some(p => (p && p["Question"])))  &&  initialMsg && (
         
         <div className="thin-scrollbar absolute -top-12 left-0 right-0 flex overflow-auto gap-2 px-2 py-2 z-10 bg-noesis-darker/95 backdrop-blur-md rounded border-noesis-purple/30 shadow-lg mb-4">
          {displayPrompts.map((prompt, index) => 

@@ -22,6 +22,7 @@ const ChatContainer = ({
   embedded = false
 }: ChatContainerProps) => {
   const { messages } = useMessageContext();
+  const initialMsg = messages?.length > 1 ;
 
   return (
     <div className={`transition-all duration-500 ease-in-out ${messages.length > 1 ? 'max-w-full' : 'max-w-4xl'} mx-auto relative bg-gradient-to-b from-noesis-dark to-noesis-darker border border-noesis-purple/30 rounded-lg shadow-lg ${embedded ? 'w-full' : 'w-full max-w-4xl h-[600px]'} flex flex-col overflow-hidden ${!embedded ? 'animate-fade-in' : ''}`}>
@@ -42,7 +43,8 @@ const ChatContainer = ({
         <div className="p-3 bg-noesis-darker/100 absolute bottom-0 w-full pb-0" onClick={(e) => e.stopPropagation()}>
           <MessageInput 
             sendMessage={handleMessageSend} 
-            handlePromptClick={handlePromptClick} 
+            handlePromptClick={handlePromptClick}
+            initialMsg={initialMsg} 
           />
         </div>
       </div>

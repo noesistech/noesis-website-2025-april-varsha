@@ -13,15 +13,13 @@ const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
     "What services does Noesis offer?",
     "How can I join the Noesis team?",
     "I'm interested in partnering with Noesis",
-    "Tell me about your AI & Cloud solutions",
-    "How can I contact the team?",
-    "What makes Noesis different?"
+    "Tell me about your AI & Cloud solutions"
   ];
 
   const displayPrompts = prompts && prompts.length > 0 ? prompts.slice(0, 4) : defaultPrompts;
 
   return (
-    <div className="flex flex-col !h-[450px] justify-start items-center px-4 py-12">
+    <div className="flex flex-col !h-[450px] justify-start items-center px-4 pt-6 pb-20 !overflow-auto thin-y-scrollbar sm:pt-14 sm:pb-12">
       <div className="text-center mb-6">
         <h4 className="text-xl font-semibold mb-2">Welcome</h4>
         <p className="text-white/70">Choose a question below to start your conversation, or type your own question</p>
@@ -35,7 +33,7 @@ const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
             className="p-3 bg-white/10 hover:bg-white/20 rounded-lg text-left text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={!connectWebsocket}
           >
-            {prompt}
+            {typeof prompt === "object" && prompt ? prompt["Question"] : prompt}
           </button>
         ))}
       </div>
