@@ -16,7 +16,8 @@ import {
   ClientsSection,
   ClientLogo,
   PartnerLogo,
-  Testimonial
+  Testimonial,
+  ContactSection
 } from '@/types/contentTypes';
 import { AICapability, AIProduct } from '@/components/AICapabilitiesSection';
 import { TeamMember } from '@/components/TeamSection';
@@ -41,6 +42,7 @@ import {
   testimonialsData 
 } from '@/data/content/clients';
 import { teamSectionData, teamMembersData } from '@/data/content/team';
+import { contactSectionData } from '@/data/content/contact';
 
 interface ContentContextType {
   heroSection: HeroSection;
@@ -81,6 +83,7 @@ interface ContentContextType {
   clientLogos: ClientLogo[];
   partnerLogos: PartnerLogo[];
   testimonials: Testimonial[];
+  contactSection: ContactSection;
   loading: boolean;
   error: string | null;
   refreshContent: () => void;
@@ -114,6 +117,7 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   const [clientLogos] = useState<ClientLogo[]>(clientLogosData);
   const [partnerLogos] = useState<PartnerLogo[]>(partnerLogosData);
   const [testimonials] = useState<Testimonial[]>(testimonialsData);
+  const [contactSection] = useState<ContactSection>(contactSectionData);
 
   // Simplified refresh function that just shows a toast
   const refreshContent = () => {
@@ -148,6 +152,7 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
         clientLogos,
         partnerLogos,
         testimonials,
+        contactSection,
         loading,
         error,
         refreshContent

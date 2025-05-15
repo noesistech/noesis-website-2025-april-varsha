@@ -17,7 +17,7 @@ const Contact = () => {
       <main className="pt-16 sm:pt-20 md:pt-16">
         <SubpageHero
           title="Get in Touch"
-          subtitle="Ready to transform your business with AI-powered solutions?"
+          subtitle={contactSection.subtitle}
           gradientText="Touch"
           backgroundEffect="orange"
         />
