@@ -7,7 +7,7 @@ interface EmptyMessageListProps {
 }
 
 const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
-  const { prompts, connectWebsocket } = useMessageContext();
+  const { prompts, connectWebsocket, connectionStatus } = useMessageContext();
 
   const defaultPrompts = [
     "What services does Noesis offer?",
@@ -31,7 +31,7 @@ const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
             key={index}
             onClick={() => handleSuggestionClick(typeof prompt === "object" && prompt ? prompt["Question"] : prompt)}
             className="p-3 bg-white/10 hover:bg-white/20 rounded-lg text-left text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={!connectWebsocket}
+            disabled={connectionStatus!="connected"}
           >
             {typeof prompt === "object" && prompt ? prompt["Question"] : prompt}
           </button>
