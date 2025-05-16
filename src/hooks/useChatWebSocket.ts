@@ -87,7 +87,7 @@ export const useChatWebSocket = () => {
           // Additional check to ensure typing indicator is hidden after response
           if (response.message && !response.continue) {
             // If there's no 'continue' flag, assume it's the end of the message
-            setMessageStreaming(false);
+            // setMessageStreaming(false);
             setIsTyping(false);
             console.log("Response received without continue flag, hiding typing indicator");
           }

@@ -98,8 +98,8 @@ const MessageInput = ({ sendMessage, handlePromptClick, initialMsg }: MessageInp
             <button
               key={index}
               onClick={() => handlePromptClick(typeof prompt === "object" && prompt ? prompt["Question"] : prompt)}
-              className="px-3 pt-[4px] py-[6px] bg-white/10 hover:bg-white/20 rounded-full text-sm sm:text-md text-white/90 transition-colors whitespace-nowrap"
-              disabled={isDisabled}
+              className="px-3 pt-[4px] py-[6px] bg-white/10 hover:bg-white/20 rounded-full text-sm sm:text-md text-white/90 transition-colors whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={isDisabled && messageStreaming}
             >
               {typeof prompt === "object" && prompt ? prompt["Question"] : prompt}
             </button>
@@ -124,7 +124,7 @@ const MessageInput = ({ sendMessage, handlePromptClick, initialMsg }: MessageInp
             onKeyDown={handleKeyDown}
             rows={1}
             style={{ maxHeight: '100px' }}
-            disabled={isDisabled}
+            disabled={isDisabled && messageStreaming}
           />
           
           {connectionStatus === 'disconnected' ? (
