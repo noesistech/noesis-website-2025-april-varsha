@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useContent } from '@/contexts/ContentContext';
 import { Link } from 'react-router-dom';
@@ -10,24 +9,12 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [isHoveringDropdown, setIsHoveringDropdown] = useState(false);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -120,6 +107,99 @@ const Header = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Handle hover events for dropdowns with improved flickering prevention
+  const handleMouseEnter = (itemName) => {
+    setOpenDropdown(itemName);
+  };
+
+  const handleMouseLeave = (itemName) => {
+    // Only close if we're not hovering the dropdown itself
+    if (!isHoveringDropdown) {
+      setOpenDropdown(null);
+    }
+  };
+
+  const handleDropdownMouseEnter = () => {
+    setIsHoveringDropdown(true);
+  };
+
+  const handleDropdownMouseLeave = () => {
+    setIsHoveringDropdown(false);
+    setOpenDropdown(null);
+  };
+
+  // Custom Navigation Component
+  const CustomNavigationMenu = () => {
+    return (
+      <nav className="flex items-center space-x-2 md:space-x-4 lg:space-x-6">
+        {navStructure.map((item) => (
+          <div
+            key={item.name}
+            className="relative"
+            onMouseEnter={() => item.hasSubmenu && handleMouseEnter(item.name)}
+            onMouseLeave={() => item.hasSubmenu && handleMouseLeave(item.name)}
+          >
+            {item.hasSubmenu ? (
+              <>
+                <Link
+                  to={item.href}
+                  className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center group"
+                >
+                  {item.name}
+                  <ChevronDown 
+                    className={`ml-1 h-3 w-3 lg:h-4 lg:w-4 transition-transform duration-200 ${
+                      openDropdown === item.name ? 'rotate-180' : ''
+                    }`}
+                  />
+                </Link>
+                
+                {/* Dropdown */}
+                {openDropdown === item.name && (
+                  <div
+                    className="absolute top-full left-0 z-50 w-[200px] bg-[#1A1F2C] border border-white/10 rounded-md shadow-lg"
+                    onMouseEnter={handleDropdownMouseEnter}
+                    onMouseLeave={handleDropdownMouseLeave}
+                  >
+                    <ul className="py-2">
+                      {item.submenu?.map((subItem) => (
+                        <li key={subItem.name}>
+                          <Link
+                            to={subItem.href}
+                            className="block px-4 py-2 text-[10px] sm:text-[10px] md:text-[10px] lg:text-[14px] text-white/80 hover:bg-white/10 hover:text-white transition-colors"
+                            onClick={() => {
+                              setOpenDropdown(null);
+                              setIsHoveringDropdown(false);
+                            }}
+                          >
+                            {subItem.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </>
+            ) : item.href.startsWith('/') ? (
+              <Link
+                to={item.href}
+                className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center"
+              >
+                {item.name}
+              </Link>
+            ) : (
+              <a
+                href={item.href}
+                className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center"
+              >
+                {item.name}
+              </a>
+            )}
+          </div>
+        ))}
+      </nav>
+    );
+  };
+
   return (
     <header 
       className={cn(
@@ -183,70 +263,8 @@ const Header = () => {
           </svg>
         </Link>
         
-        <nav className="hidden sm:flex items-center gap-2 md:gap-4 lg:gap-6">
-          <NavigationMenu>
-            <NavigationMenuList className="space-x-2 md:space-x-4 lg:space-x-6">
-              {navStructure.map((item) => (
-                <NavigationMenuItem key={item.name}>
-                  {item.hasSubmenu ? (
-                    <NavigationMenuTrigger className="group text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white bg-transparent border-none shadow-none focus:shadow-none p-0">
-                      <Link 
-                        to={item.href}
-                        className="hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center"
-                        onClick={(e) => {
-                          // Only prevent the default action for dropdown triggers
-                          e.preventDefault();
-                          window.location.href = item.href;
-                        }}
-                      >
-                        {item.name}
-                      </Link>
-                    </NavigationMenuTrigger>
-                  ) : item.href.startsWith('/') ? (
-                    <NavigationMenuLink asChild>
-                      <Link
-                        to={item.href}
-                        className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center"
-                      >
-                        {item.name}
-                      </Link>
-                    </NavigationMenuLink>
-                  ) : (
-                    <NavigationMenuLink asChild>
-                      <a
-                        href={item.href}
-                        className="text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px] text-white/80 hover:text-white transition-colors relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-noesis-purple after:transition-all whitespace-nowrap inline-flex h-10 w-max items-center justify-center"
-                      >
-                        {item.name}
-                      </a>
-                    </NavigationMenuLink>
-                  )}
-                  
-                  {/* Dropdown content for items with submenus */}
-                  {item.hasSubmenu && (
-                    <NavigationMenuContent>
-                      <ul className="grid w-[200px] gap-1 p-2 bg-[#1A1F2C] border border-white/10 rounded-md">
-                        {item.submenu?.map((subItem) => (
-                          <li key={subItem.name}>
-                            <Link 
-                              to={subItem.href}
-                              className="block select-none space-y-1 rounded-md p-2 text-white/80 hover:bg-white/10 hover:text-white transition-colors text-[10px] sm:text-[10px] md:text-[10px] lg:text-[14px]"
-                              onClick={() => {
-                                // Close any open navigation menus
-                                document.body.click();
-                              }}
-                            >
-                              {subItem.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
-                  )}
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+        <div className="hidden sm:flex items-center gap-2 md:gap-4 lg:gap-6">
+          <CustomNavigationMenu />
           
           <Link to="/contact">
             <Button className="group text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px]" variant="noesis" size="sm">
@@ -254,7 +272,7 @@ const Header = () => {
               <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300 h-2 w-2 md:h-4 md:w-4 lg:h-4 lg:w-4 ml-1" />
             </Button>
           </Link>
-        </nav>
+        </div>
         
         <div className="sm:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
