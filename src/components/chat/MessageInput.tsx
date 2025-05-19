@@ -124,7 +124,6 @@ const MessageInput = ({ sendMessage, handlePromptClick, initialMsg }: MessageInp
             onKeyDown={handleKeyDown}
             rows={1}
             style={{ maxHeight: '100px' }}
-            disabled={isDisabled && messageStreaming}
           />
           
           {connectionStatus === 'disconnected' ? (
@@ -133,6 +132,7 @@ const MessageInput = ({ sendMessage, handlePromptClick, initialMsg }: MessageInp
               className="p-2 rounded-full bg-amber-600 hover:bg-amber-700 ml-2 flex-shrink-0 transition-colors"
               aria-label="Reconnect"
               title="Try to reconnect"
+              disabled={isDisabled && messageStreaming}
             >
               <RefreshCw size={18} />
             </button>
