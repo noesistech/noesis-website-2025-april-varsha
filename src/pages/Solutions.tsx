@@ -28,6 +28,7 @@ const Solutions = () => {
         {/* Solutions Section */}
         <SolutionsSection 
           title="Core AI Product Offerings" 
+          subtitle="Carefully crafted solutions powered by AI to solve your most complex business challenges"
           solutions={solutionItems} 
           highlightLastWord={true}
         />
@@ -44,6 +45,9 @@ const Solutions = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
               The <span className="text-noesis-purple">Brainstormer Suite</span>
             </h2>
+            <p className="text-center text-gray-300 mt-4 text-base sm:text-lg max-w-3xl mx-auto">
+              Our flagship AI platform built to transform how businesses leverage artificial intelligence
+            </p>
           </div>
           <BrainstormerOverviewSection />
         </section>

@@ -143,13 +143,19 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
             {words.join(' ')} <span className="text-noesis-purple">{lastWord}</span>
           </h2>
           <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-6"></div>
+          {subtitle && <p className="text-center text-gray-300 max-w-3xl mx-auto text-base sm:text-lg">{subtitle}</p>}
         </>;
     }
     const words = title.split(' ');
     const lastWordIndex = words.length - 1;
-    return <h2 className="text-3xl md:text-4xl font-bold text-white">
-        {words.slice(0, lastWordIndex).join(' ')} <span className="gradient-text">{words[lastWordIndex]}</span>
-      </h2>;
+    return (
+      <>
+        <h2 className="text-3xl md:text-4xl font-bold text-white">
+          {words.slice(0, lastWordIndex).join(' ')} <span className="gradient-text">{words[lastWordIndex]}</span>
+        </h2>
+        {subtitle && <p className="text-center text-gray-300 max-w-3xl mx-auto text-base sm:text-lg mt-4">{subtitle}</p>}
+      </>
+    );
   };
   const solutionRows = [];
   for (let i = 0; i < enhancedDisplaySolutions.length; i += 3) {
@@ -159,7 +165,6 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto mb-12">
           {renderTitle()}
-          {subtitle}
         </div>
 
         {isMobile ? <Carousel className="mx-auto max-w-md">
