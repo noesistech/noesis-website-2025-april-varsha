@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useContent } from '@/contexts/ContentContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,12 +10,18 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger
+} from "@/components/ui/collapsible";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isHoveringDropdown, setIsHoveringDropdown] = useState(false);
+  const [expandedMobileMenus, setExpandedMobileMenus] = useState<Record<string, boolean>>({});
   
   const navigate = useNavigate();
 
@@ -130,6 +136,14 @@ const Header = () => {
   const handleDropdownMouseLeave = () => {
     setIsHoveringDropdown(false);
     setOpenDropdown(null);
+  };
+
+  // Toggle mobile submenu expansion
+  const toggleMobileSubmenu = (itemName) => {
+    setExpandedMobileMenus(prev => ({
+      ...prev,
+      [itemName]: !prev[itemName]
+    }));
   };
 
   // Custom Navigation Component
@@ -295,27 +309,32 @@ const Header = () => {
                   {navStructure.map((item, index) => (
                     <div key={item.name} className="w-full">
                       {item.hasSubmenu ? (
-                        <div className="w-full">
-                          <Link 
-                            to={item.href}
-                            className="text-white py-3 md:py-2 text-lg text-center w-full transition-colors animate-in fade-in duration-300 font-semibold block"
-                            onClick={() => setMobileMenuOpen(false)}
+                        <Collapsible className="w-full">
+                          <CollapsibleTrigger 
+                            className="flex justify-between items-center w-full text-white py-3 md:py-2 text-lg text-center transition-colors animate-in fade-in duration-300 font-semibold"
+                            onClick={() => toggleMobileSubmenu(item.name)}
                           >
-                            {item.name}
-                          </Link>
-                          <div className="pl-4 space-y-2 mb-2">
-                            {item.submenu?.map((subItem) => (
-                              <Link
-                                key={subItem.name}
-                                to={subItem.href}
-                                className="text-white/80 py-2 text-base text-center w-full transition-colors animate-in fade-in duration-300 block hover:text-white"
-                                onClick={() => setMobileMenuOpen(false)}
-                              >
-                                {subItem.name}
-                              </Link>
-                            ))}
-                          </div>
-                        </div>
+                            <span>{item.name}</span>
+                            {expandedMobileMenus[item.name] ? 
+                              <ChevronUp className="h-5 w-5" /> : 
+                              <ChevronDown className="h-5 w-5" />
+                            }
+                          </CollapsibleTrigger>
+                          <CollapsibleContent>
+                            <div className="pl-4 space-y-2 mb-2 animate-in fade-in duration-200">
+                              {item.submenu?.map((subItem) => (
+                                <Link
+                                  key={subItem.name}
+                                  to={subItem.href}
+                                  className="text-white/80 py-2 text-base w-full transition-colors animate-in fade-in duration-300 block hover:text-white"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                >
+                                  {subItem.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </CollapsibleContent>
+                        </Collapsible>
                       ) : item.href.startsWith('/') ? (
                         <Link 
                           to={item.href} 
