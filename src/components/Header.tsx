@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
@@ -304,29 +303,30 @@ const Header = () => {
               className="bg-[#1A1F2C] border-b border-white/10 h-screen p-0 rounded-none"
               style={{ marginTop: HEADER_HEIGHT }}
             >
-              <div className="flex flex-col items-center justify-center px-4 py-4 md:py-2 h-full mt-[-60px]">
-                <div className="flex flex-col items-center justify-center w-full h-full max-w-md mx-auto space-y-4 md:space-y-2">
+              {/* Improved mobile menu layout with better spacing and alignment */}
+              <div className="flex flex-col items-center justify-start px-6 py-8 h-full mt-[-60px] overflow-y-auto">
+                <div className="flex flex-col w-full h-full max-w-sm mx-auto space-y-3">
                   {navStructure.map((item, index) => (
-                    <div key={item.name} className="w-full">
+                    <div key={item.name} className="w-full border-b border-gray-800/50">
                       {item.hasSubmenu ? (
-                        <Collapsible className="w-full">
+                        <Collapsible className="w-full py-1">
                           <CollapsibleTrigger 
-                            className="flex justify-between items-center w-full text-white py-3 md:py-2 text-lg text-center transition-colors animate-in fade-in duration-300 font-semibold"
+                            className="flex justify-between items-center w-full text-white py-4 text-xl transition-colors duration-300 font-medium"
                             onClick={() => toggleMobileSubmenu(item.name)}
                           >
                             <span>{item.name}</span>
                             {expandedMobileMenus[item.name] ? 
-                              <ChevronUp className="h-5 w-5" /> : 
-                              <ChevronDown className="h-5 w-5" />
+                              <ChevronUp className="h-5 w-5 text-noesis-purple" /> : 
+                              <ChevronDown className="h-5 w-5 text-noesis-purple" />
                             }
                           </CollapsibleTrigger>
                           <CollapsibleContent>
-                            <div className="pl-4 space-y-2 mb-2 animate-in fade-in duration-200">
+                            <div className="pl-4 space-y-3 py-2 mb-1 border-l border-gray-700/30">
                               {item.submenu?.map((subItem) => (
                                 <Link
                                   key={subItem.name}
                                   to={subItem.href}
-                                  className="text-white/80 py-2 text-base w-full transition-colors animate-in fade-in duration-300 block hover:text-white"
+                                  className="text-white/80 py-2 text-lg block hover:text-white transition-all duration-200"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {subItem.name}
@@ -335,42 +335,33 @@ const Header = () => {
                             </div>
                           </CollapsibleContent>
                         </Collapsible>
-                      ) : item.href.startsWith('/') ? (
+                      ) : (
                         <Link 
                           to={item.href} 
-                          className="text-white py-3 md:py-2 text-lg text-center w-full transition-colors animate-in fade-in duration-300 block"
-                          style={{ animationDelay: `${index * 50}ms` }}
+                          className="text-white py-4 text-xl font-medium block transition-colors duration-300"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {item.name}
                         </Link>
-                      ) : (
-                        <a 
-                          href={item.href} 
-                          className="text-white py-3 md:py-2 text-lg text-center w-full transition-colors animate-in fade-in duration-300 block"
-                          style={{ animationDelay: `${index * 50}ms` }}
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {item.name}
-                        </a>
                       )}
                     </div>
                   ))}
-                  <div className="mt-4 md:mt-2 w-full flex justify-center">
+                  
+                  {/* Centered CTA button with better spacing */}
+                  <div className="mt-6 py-4 w-full flex justify-center">
                     <button 
                       onClick={() => {
                         setMobileMenuOpen(false);
                         handleContactClick();
-                      }} 
-                      className="inline-block"
+                      }}
+                      className="w-full"
                     >
                       <Button 
-                        className="animate-in fade-in duration-300 group"
-                        style={{ animationDelay: `${navStructure.length * 50}ms` }}
+                        className="w-full justify-center py-6 text-lg animate-in fade-in duration-300 group"
                         variant="noesis"
                       >
                         Get in Touch
-                        <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
+                        <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300 ml-2" />
                       </Button>
                     </button>
                   </div>
