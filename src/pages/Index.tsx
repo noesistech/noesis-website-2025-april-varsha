@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
@@ -88,7 +87,11 @@ const Index = () => {
           </div>
         </section>
         
-        <SolutionsSection title={solutionsSection.title} solutions={solutionItems} />
+        <SolutionsSection 
+          title={solutionsSection.title} 
+          subtitle={solutionsSection.subtitle}
+          solutions={solutionItems} 
+        />
         <ClientsSection />
       </main>
       

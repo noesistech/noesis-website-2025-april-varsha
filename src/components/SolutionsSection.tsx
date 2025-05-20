@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { GraduationCap, Cpu, ShoppingBag, MessageSquare, Wand2, Code2, Heart, Briefcase, ShoppingCart, Factory, Building } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -139,6 +140,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   
   const renderTitle = () => {
     if (!title) return "Our Solutions";
+    
     if (highlightLastWord) {
       const words = title.split(' ');
       const lastWord = words.pop();
