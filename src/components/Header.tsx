@@ -57,7 +57,7 @@ const Header = () => {
     { name: "Brainstormer Suite", href: "/solutions#brainstormer" }
   ];
 
-  // Updated navigation structure with Solutions dropdown
+  // Updated navigation structure - removed Contact item
   const navStructure = [
     { 
       name: 'About',
@@ -80,11 +80,6 @@ const Header = () => {
     { 
       name: 'Noesis AI Assistant',
       href: '#chatbot',
-      hasSubmenu: false
-    },
-    { 
-      name: 'Contact',
-      href: '/contact',
       hasSubmenu: false
     }
   ];
