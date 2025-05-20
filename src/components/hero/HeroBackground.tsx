@@ -32,7 +32,7 @@ const HeroBackground = () => {
         ></div>
       </div>
       
-      {/* Add animation keyframes to index.css */}
+      {/* Add animation keyframes as inline styles */}
       <style>
         {`
           @keyframes float {
