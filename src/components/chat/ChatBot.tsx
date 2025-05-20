@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useMessageContext } from '@/contexts/MessageContext';
 import Dropzone from './Dropzone';
 import { toast } from 'sonner';
-import FloatingChatButton from './FloatingChatButton';
 import ChatContainer from './ChatContainer';
 import useChatSetup from '@/hooks/useChatSetup';
 import useChatWebSocket from '@/hooks/useChatWebSocket';
@@ -23,8 +22,6 @@ const ChatBot = ({ embedded = false }: ChatBotProps) => {
     chatId,
     connectWebsocket,
   } = useMessageContext();
-  
-  const [isOpen, setIsOpen] = useState(false);
   
   // Initialize chat setup (bot info, chat history, etc.)
   useChatSetup();
@@ -65,10 +62,6 @@ const ChatBot = ({ embedded = false }: ChatBotProps) => {
   const handleDrop = (files: File[]) => {
     toast.info(`File functionality has been disabled.`);
   };
-  
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-  };
 
   // Log WebSocket status changes for debugging
   useEffect(() => {
@@ -91,12 +84,8 @@ const ChatBot = ({ embedded = false }: ChatBotProps) => {
     );
   }
   
-  // Floating chat UI
-  return (
-    <div className="fixed bottom-6 right-6 z-50">
-      <FloatingChatButton pulseAnimation={true} />
-    </div>
-  );
+  // For non-embedded usage, we'll return null since we're using the FloatingChatButton instead
+  return null;
 };
 
 export default ChatBot;

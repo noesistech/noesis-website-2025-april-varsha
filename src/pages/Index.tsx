@@ -1,4 +1,6 @@
-import React from 'react';
+
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
@@ -22,6 +24,22 @@ const Index = () => {
     solutionsSection,
     solutionItems,
   } = useContent();
+  
+  const location = useLocation();
+  
+  // Check for scroll-to-chat parameter in the URL
+  useEffect(() => {
+    // Handle direct links to chat section from URL parameters
+    const urlParams = new URLSearchParams(location.search);
+    if (urlParams.get('scrollToChat') === 'true') {
+      setTimeout(() => {
+        const chatbotElement = document.getElementById('chatbot');
+        if (chatbotElement) {
+          chatbotElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [location.search]);
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
