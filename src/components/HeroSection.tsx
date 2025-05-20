@@ -11,6 +11,9 @@ const HeroSection = () => {
   const isMobile = useIsMobile();
   
   useEffect(() => {
+    // Only apply mouse move effect on non-mobile devices
+    if (isMobile) return;
+    
     const handleMouseMove = (e: MouseEvent) => {
       const hero = heroRef.current;
       if (!hero) return;
@@ -46,7 +49,7 @@ const HeroSection = () => {
         cancelAnimationFrame(requestId);
       }
     };
-  }, []);
+  }, [isMobile]);
   
   return (
     <div 
@@ -58,20 +61,21 @@ const HeroSection = () => {
     >
       <HeroBackground />
       
-      <div className="container mx-auto px-3 sm:px-6 md:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-5 lg:gap-10 items-center">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
           <HeroContent />
-          <div className="block sm:block">
+          <div className="block">
             <ServiceCardsContainer />
           </div>
         </div>
       </div>
       
       {/* Scroll arrow with enhanced styling - Updated href to point to chatbot section */}
-      <div className="absolute bottom-4 left-0 right-0 flex justify-center animate-bounce z-20">
+      <div className="absolute bottom-6 left-0 right-0 flex justify-center animate-bounce z-20">
         <a 
           href="#chatbot" 
-          className="text-white/70 hover:text-white transition-colors bg-noesis-dark/40 p-2 rounded-full backdrop-blur-sm shadow-lg border border-white/10 hover:border-white/20"
+          className="text-white/80 hover:text-white transition-colors bg-noesis-dark/50 p-2 rounded-full backdrop-blur-sm shadow-lg border border-white/10 hover:border-white/20"
+          aria-label="Scroll to chatbot section"
         >
           <ArrowDown className="h-5 w-5 sm:h-6 sm:w-6" />
         </a>

@@ -48,19 +48,22 @@ const AboutSection = () => {
     };
   }, []);
 
-  return <section id="about" className="relative py-20 bg-noesis-dark overflow-hidden">
+  return (
+    <section id="about" className="relative py-12 sm:py-20 bg-noesis-dark overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-          {/* Left side - P5 Animation with square aspect ratio on mobile */}
-          <div ref={leftContainerRef} className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden animate-fade-in aspect-square md:aspect-auto" style={{
-          minHeight: '500px'
-        }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+          {/* Left side - P5 Animation with proper aspect ratio */}
+          <div 
+            ref={leftContainerRef} 
+            className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden aspect-square lg:aspect-auto animate-fade-in"
+            style={{ minHeight: '300px', maxHeight: '600px' }}
+          >
             <P5Animation className="w-full h-full absolute inset-0" />
             <div className="absolute inset-0 grid-pattern opacity-20"></div>
           </div>
           
           {/* Right side - Content */}
-          <div ref={rightContainerRef} className="space-y-8">
+          <div ref={rightContainerRef} className="space-y-6 sm:space-y-8">
             {/* Heading */}
             <div className="space-y-2">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight animate-fade-in">
@@ -68,19 +71,19 @@ const AboutSection = () => {
               </h2>
             </div>
             
-            {/* Description paragraph - Updated to ensure text-xl (20px) */}
+            {/* Description paragraph */}
             <div className="space-y-4">
-              <p className="text-white/80 text-xl animate-fade-in" style={{
-              animationDelay: '0.2s'
-            }}>
+              <p className="text-white/80 text-lg sm:text-xl animate-fade-in" style={{
+                animationDelay: '0.2s'
+              }}>
                 With over a decade of experience in digital innovation, we've grown alongside emerging technologies to establish ourselves as leaders in AI-enhanced digital services.
               </p>
             </div>
             
             {/* CTA Button to About Page */}
-            <div className="flex justify-start mt-6 animate-fade-in" style={{
-            animationDelay: '0.3s'
-          }}>
+            <div className="flex justify-start mt-4 sm:mt-6 animate-fade-in" style={{
+              animationDelay: '0.3s'
+            }}>
               <Link to="/about">
                 <Button variant="noesis" className="px-6 py-2 text-base">
                   Learn More About Noesis
@@ -88,14 +91,23 @@ const AboutSection = () => {
               </Link>
             </div>
             
-            {/* Stats Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat, index) => <StatCard key={stat.id} icon={getIconComponent(stat.icon_name)} value={stat.value} label={stat.label} delay={`${0.4 + index * 0.1}s`} />)}
+            {/* Stats Grid - Made responsive for mobile */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-4 sm:mt-6">
+              {stats.map((stat, index) => (
+                <StatCard 
+                  key={stat.id} 
+                  icon={getIconComponent(stat.icon_name)} 
+                  value={stat.value} 
+                  label={stat.label} 
+                  delay={`${0.4 + index * 0.1}s`} 
+                />
+              ))}
             </div>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 
 const getIconComponent = (iconName: string) => {
@@ -168,17 +180,24 @@ const StatCard = ({
     };
   }, [value]);
   
-  return <div className="bg-noesis-darker rounded-xl p-6 flex flex-col items-center animate-fade-in" style={{
-    animationDelay: delay
-  }}>
-      <div className="bg-purple-900/30 p-3 rounded-full mb-4">
+  return (
+    <div 
+      className="bg-noesis-darker rounded-xl p-4 sm:p-6 flex flex-col items-center animate-fade-in" 
+      style={{ animationDelay: delay }}
+    >
+      <div className="bg-purple-900/30 p-2 sm:p-3 rounded-full mb-2 sm:mb-4">
         {icon}
       </div>
-      <div ref={counterRef} className="text-3xl md:text-4xl font-bold text-center text-purple-300" data-value={value}>
+      <div 
+        ref={counterRef} 
+        className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-purple-300" 
+        data-value={value}
+      >
         {value.startsWith('>') ? '> 0' : '0'}
       </div>
-      <p className="text-sm text-center text-gray-400 mt-1">{label}</p>
-    </div>;
+      <p className="text-xs sm:text-sm text-center text-gray-400 mt-1">{label}</p>
+    </div>
+  );
 };
 
 export default AboutSection;

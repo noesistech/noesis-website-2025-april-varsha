@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import Sketch from 'react-p5';
 import p5Types from 'p5';
@@ -10,19 +11,20 @@ interface P5AnimationProps {
 const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
   // Track the container size for responsive canvas
   const containerRef = useRef<HTMLDivElement>(null);
-  const [dimensions, setDimensions] = useState({ width: 300, height: 500 });
+  const [dimensions, setDimensions] = useState({ width: 300, height: 300 });
   const isMobile = useIsMobile();
+  const [isVisible, setIsVisible] = useState(false);
   
   // Update dimensions when container size changes
   useEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
         const containerWidth = containerRef.current.offsetWidth || 300;
-        let containerHeight = containerRef.current.offsetHeight || 500;
+        let containerHeight = containerRef.current.offsetHeight || 300;
         
-        // On mobile, limit the height to 50vh maximum
-        if (isMobile && containerHeight > window.innerHeight * 0.5) {
-          containerHeight = window.innerHeight * 0.5;
+        // On mobile, make it square
+        if (isMobile) {
+          containerHeight = containerWidth;
         }
         
         setDimensions({
@@ -34,6 +36,7 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
     
     // Initial size
     updateDimensions();
+    setIsVisible(true);
     
     // Add resize listener
     window.addEventListener('resize', updateDimensions);
@@ -59,7 +62,7 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
   }, [isMobile]);
   
   // Animation configuration
-  const particleCount = 100;
+  const particleCount = isMobile ? 50 : 100; // Reduce particles for mobile
   const particles: { x: number; y: number; size: number; color: string; speedX: number; speedY: number }[] = [];
   const colors = [
     '#a074ff', // noesis-purple
@@ -80,7 +83,7 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
       particles.push({
         x: p5.random(p5.width),
         y: p5.random(p5.height),
-        size: p5.random(5, 15),
+        size: p5.random(2, isMobile ? 8 : 15),
         color: colors[Math.floor(p5.random(colors.length))],
         speedX: p5.random(-0.5, 0.5),
         speedY: p5.random(-0.5, 0.5),
@@ -106,7 +109,7 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
     // Draw grid with increased visibility
     p5.stroke(255, 255, 255, 20);
     p5.strokeWeight(1);
-    const gridSize = 30;
+    const gridSize = isMobile ? 20 : 30;
     for (let x = 0; x < p5.width; x += gridSize) {
       p5.line(x, 0, x, p5.height);
     }
@@ -139,8 +142,9 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
       for (let j = i + 1; j < particles.length; j++) {
         const other = particles[j];
         const d = p5.dist(p.x, p.y, other.x, other.y);
-        if (d < 100) {
-          p5.stroke(255, 255, 255, p5.map(d, 0, 100, 80, 10));
+        const connectionDistance = isMobile ? 60 : 100;
+        if (d < connectionDistance) {
+          p5.stroke(255, 255, 255, p5.map(d, 0, connectionDistance, 80, 10));
           p5.line(p.x, p.y, other.x, other.y);
         }
       }
@@ -152,7 +156,7 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
     
     const time = p5.frameCount * 0.02;
     const sides = 6;
-    const radius = Math.min(p5.width, p5.height) * 0.15 + Math.sin(time) * 20;
+    const radius = Math.min(p5.width, p5.height) * (isMobile ? 0.1 : 0.15) + Math.sin(time) * (isMobile ? 10 : 20);
     
     for (let i = 0; i < sides; i++) {
       const angle = p5.TWO_PI / sides * i;
@@ -160,14 +164,14 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
       const y = Math.sin(angle) * radius;
       
       p5.noFill();
-      p5.strokeWeight(2);
+      p5.strokeWeight(isMobile ? 1 : 2);
       p5.stroke(colors[i % colors.length]);
       
       // Draw circular patterns at each vertex
       p5.push();
       p5.translate(x, y);
       p5.rotate(time + i);
-      const innerRadius = Math.min(p5.width, p5.height) * 0.05 + Math.sin(time * 2) * 10;
+      const innerRadius = Math.min(p5.width, p5.height) * (isMobile ? 0.03 : 0.05) + Math.sin(time * 2) * (isMobile ? 5 : 10);
       p5.ellipse(0, 0, innerRadius * 2, innerRadius * 2);
       p5.pop();
       
@@ -192,8 +196,7 @@ const P5Animation: React.FC<P5AnimationProps> = ({ className }) => {
   return (
     <div 
       ref={containerRef} 
-      className={`w-full ${isMobile ? 'max-h-[50vh]' : 'h-full'} ${className || ''}`}
-      style={{ height: isMobile ? '50vh' : '100%' }}
+      className={`w-full h-full ${className || ''} ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
     >
       {dimensions.width > 0 && dimensions.height > 0 && (
         <Sketch setup={setup} draw={draw} />
