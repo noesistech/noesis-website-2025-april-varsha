@@ -21,6 +21,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
   const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  
   const displaySolutions = solutions && solutions.length > 0 ? solutions.map(solution => {
     if (solution.id === 'solution-item-6') {
       return {
@@ -99,6 +100,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
         </ul>,
     color: 'from-yellow-500/20 to-yellow-600/20'
   }];
+  
   const enhancedDisplaySolutions = displaySolutions.map(solution => {
     if (solution.id === 'solution-item-6') {
       return {
@@ -110,6 +112,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
     }
     return solution;
   });
+  
   useEffect(() => {
     if (isMobile) return; // Skip animation setup on mobile since we'll use carousel
 
@@ -133,19 +136,23 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       });
     };
   }, [isMobile]);
+  
   const renderTitle = () => {
     if (!title) return "Our Solutions";
     if (highlightLastWord) {
       const words = title.split(' ');
       const lastWord = words.pop();
-      return <>
+      return (
+        <>
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             {words.join(' ')} <span className="text-noesis-purple">{lastWord}</span>
           </h2>
           <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-6"></div>
           {subtitle && <p className="text-center text-gray-300 max-w-3xl mx-auto text-base sm:text-lg">{subtitle}</p>}
-        </>;
+        </>
+      );
     }
+    
     const words = title.split(' ');
     const lastWordIndex = words.length - 1;
     return (
@@ -157,11 +164,14 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
       </>
     );
   };
+  
   const solutionRows = [];
   for (let i = 0; i < enhancedDisplaySolutions.length; i += 3) {
     solutionRows.push(enhancedDisplaySolutions.slice(i, i + 3));
   }
-  return <section id="solutions" ref={sectionRef} className="page-section py-16">
+  
+  return (
+    <section id="solutions" ref={sectionRef} className="page-section py-16">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto mb-12">
           {renderTitle()}
@@ -199,7 +209,8 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
               </div>)}
           </div>}
       </div>
-    </section>;
+    </section>
+  );
 };
 
 const getIconByName = (iconName: string) => {
