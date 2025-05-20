@@ -33,13 +33,15 @@ const HeroBackground = () => {
       </div>
       
       {/* Add animation keyframes to index.css */}
-      <style jsx>{`
-        @keyframes float {
-          0% { transform: translate(0, 0) rotate(0deg); }
-          50% { transform: translate(-10px, -15px) rotate(5deg); }
-          100% { transform: translate(0, 0) rotate(0deg); }
-        }
-      `}</style>
+      <style>
+        {`
+          @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-10px, -15px) rotate(5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+          }
+        `}
+      </style>
       
       {/* Gradient overlay for smooth section transition */}
       <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-b from-transparent to-noesis-dark pointer-events-none"></div>
