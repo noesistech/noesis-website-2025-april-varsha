@@ -39,16 +39,14 @@ const Index = () => {
         <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
         <BrainstormerSection products={aiProducts} />
         
-        {/* Founder Section with styling matching other sections */}
-        <section className="page-section py-16 sm:py-24 overflow-hidden relative">
+        {/* Updated Founder Section with consistent styling */}
+        <section className="page-section py-16 sm:py-20 overflow-hidden relative">
           <div className="container mx-auto px-4 sm:px-6 relative z-10">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+            <div className="text-center max-w-3xl mx-auto mb-8">
+              <h2 className="section-title">
                 Meet Our <span className="gradient-text">Founder</span>
               </h2>
-              
-              {/* Updated subtitle to 20px (text-xl) */}
-              <p className="text-gray-300 text-xl">Learn about the visionary behind Noesis.tech</p>
+              <p className="section-subtitle">Learn about the visionary behind Noesis.tech</p>
             </div>
             
             <div className="flex flex-col lg:flex-row items-center gap-8 max-w-5xl mx-auto">
