@@ -7,7 +7,11 @@ const ContactBanner = () => {
   const navigate = useNavigate();
 
   const handleContactFormClick = () => {
-    navigate('/contact');
+    // Navigate to the contact page
+    navigate('/contact', { 
+      // Add state to indicate we need to scroll to the contact form
+      state: { scrollToContactForm: true }
+    });
   };
 
   const handleAssistantClick = () => {

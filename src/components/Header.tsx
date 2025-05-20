@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useNavigate } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -16,6 +16,14 @@ const Header = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isHoveringDropdown, setIsHoveringDropdown] = useState(false);
   
+  const navigate = useNavigate();
+
+  const handleContactClick = () => {
+    navigate('/contact', { 
+      state: { scrollToContactForm: true }
+    });
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
@@ -261,12 +269,12 @@ const Header = () => {
         <div className="hidden sm:flex items-center gap-2 md:gap-4 lg:gap-6">
           <CustomNavigationMenu />
           
-          <Link to="/contact">
+          <button onClick={handleContactClick}>
             <Button className="group text-[10px] sm:text-[10px] md:text-[10px] lg:text-[16px]" variant="noesis" size="sm">
               Get in Touch
               <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300 h-2 w-2 md:h-4 md:w-4 lg:h-4 lg:w-4 ml-1" />
             </Button>
-          </Link>
+          </button>
         </div>
         
         <div className="sm:hidden">
@@ -329,10 +337,12 @@ const Header = () => {
                     </div>
                   ))}
                   <div className="mt-4 md:mt-2 w-full flex justify-center">
-                    <Link 
-                      to="/contact" 
+                    <button 
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        handleContactClick();
+                      }} 
                       className="inline-block"
-                      onClick={() => setMobileMenuOpen(false)}
                     >
                       <Button 
                         className="animate-in fade-in duration-300 group"
@@ -342,7 +352,7 @@ const Header = () => {
                         Get in Touch
                         <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
                       </Button>
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
