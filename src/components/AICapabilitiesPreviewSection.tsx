@@ -71,7 +71,7 @@ const AICapabilitiesPreviewSection: React.FC<AICapabilitiesPreviewSectionProps> 
             asChild
             className="shadow-lg hover:shadow-noesis-purple/50"
           >
-            <Link to="/solutions#ai-capabilities" className="inline-flex items-center gap-2">
+            <Link to="/services#ai-capabilities" className="inline-flex items-center gap-2">
               Explore AI Capabilities <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
