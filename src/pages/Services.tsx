@@ -201,9 +201,9 @@ const Services = () => {
             products={aiProducts || []}
             productsSection={aiProductsSection || {title: "AI Products", subtitle: "Our suite of AI products"}}
           />
-        </div>
+        </section>
         
-        <div id="tech-stack" className="py-16 sm:py-24 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
+        <section id="tech-stack" className="py-16 sm:py-24 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
           <div className="container mx-auto px-4 sm:px-6 mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">
@@ -218,7 +218,7 @@ const Services = () => {
             title={techStackSection?.title || "Our Technology Stack"} 
             categories={techCategories}
           />
-        </div>
+        </section>
         
         <ContactBanner />
       </main>
