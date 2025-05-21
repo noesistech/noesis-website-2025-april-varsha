@@ -1,14 +1,17 @@
+
 import React from 'react';
 import { ServiceItem } from '@/types/supabase';
 import { getIconByName } from '@/components/hero/ServiceCard';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
 interface ServiceFeature {
   icon: React.ReactNode;
   title: string;
   description: string;
 }
+
 interface ServiceDetailSectionProps {
   service: ServiceItem;
   features: ServiceFeature[];
@@ -17,6 +20,7 @@ interface ServiceDetailSectionProps {
   accentColor?: string;
   imageUrl?: string;
 }
+
 const ServiceDetailSection: React.FC<ServiceDetailSectionProps> = ({
   service,
   features,
@@ -25,7 +29,8 @@ const ServiceDetailSection: React.FC<ServiceDetailSectionProps> = ({
   accentColor = "border-noesis-purple/30",
   imageUrl
 }) => {
-  return <div className="container mx-auto px-4 sm:px-6">
+  return (
+    <div className="container mx-auto px-4 sm:px-6">
       <div className={cn("flex flex-col gap-8", isAlternate ? "lg:flex-row-reverse" : "lg:flex-row")}>
         {/* Service Info Card */}
         <div className="lg:w-1/2">
@@ -42,19 +47,27 @@ const ServiceDetailSection: React.FC<ServiceDetailSectionProps> = ({
             <p className="text-gray-300 text-lg leading-relaxed mb-8">
               {service.description}
             </p>
-            
-            
           </div>
         </div>
         
         {/* Features */}
         <div className="lg:w-1/2">
-          {imageUrl && <div className="mb-6 rounded-2xl overflow-hidden">
-              
-            </div>}
+          {imageUrl && (
+            <div className="mb-6 rounded-2xl overflow-hidden">
+              {/* Image would go here */}
+            </div>
+          )}
           
           <div className="grid gap-4">
-            {features.map((feature, index) => <div key={index} className={cn("bg-[#1A1F2C]/50 backdrop-blur-sm rounded-xl p-6 border transition-all duration-300", accentColor, "hover:shadow-lg hover:border-white/20 transform hover:-translate-y-1")}>
+            {features.map((feature, index) => (
+              <div 
+                key={index} 
+                className={cn(
+                  "bg-[#1A1F2C]/50 backdrop-blur-sm rounded-xl p-6 border transition-all duration-300", 
+                  accentColor, 
+                  "hover:shadow-lg hover:border-white/20 transform hover:-translate-y-1"
+                )}
+              >
                 <div className="flex items-start">
                   <div className="bg-[#222732] p-3 rounded-lg shadow-inner mr-4 border border-white/5">
                     {feature.icon}
@@ -64,10 +77,13 @@ const ServiceDetailSection: React.FC<ServiceDetailSectionProps> = ({
                     <p className="text-gray-300">{feature.description}</p>
                   </div>
                 </div>
-              </div>)}
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default ServiceDetailSection;
