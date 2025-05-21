@@ -27,11 +27,11 @@ const Index = () => {
   
   const location = useLocation();
   
-  // Check for scroll-to-chat parameter in the URL
+  // Only scroll to chatbot if explicitly requested in the URL
   useEffect(() => {
     // Handle direct links to chat section from URL parameters
     const urlParams = new URLSearchParams(location.search);
-    if (urlParams.get('scrollToChat') === 'true') {
+    if (urlParams.get('scrollToChat') === 'true' || location.hash === '#chatbot') {
       setTimeout(() => {
         const chatbotElement = document.getElementById('chatbot');
         if (chatbotElement) {
@@ -39,7 +39,7 @@ const Index = () => {
         }
       }, 100);
     }
-  }, [location.search]);
+  }, [location.search, location.hash]);
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">

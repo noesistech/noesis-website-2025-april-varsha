@@ -16,7 +16,7 @@ const AppContent = () => {
   const location = useLocation();
   
   useEffect(() => {
-    // Check for hash navigation to the chat section
+    // Check for hash navigation to the chat section - only if hash exists
     if (location.hash === '#chatbot') {
       setTimeout(() => {
         const chatbotSection = document.getElementById('chatbot');
@@ -25,7 +25,7 @@ const AppContent = () => {
         }
       }, 300); // Small delay to ensure the section is loaded
     }
-  }, [location]);
+  }, [location.hash]); // Only trigger when hash changes, not on every location change
   
   return (
     <>

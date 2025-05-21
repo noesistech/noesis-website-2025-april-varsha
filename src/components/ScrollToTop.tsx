@@ -1,47 +1,21 @@
 
-import React, { useState, useEffect } from 'react';
-import { ArrowUp } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-export const ScrollToTop = () => {
-  const [isVisible, setIsVisible] = useState(false);
+// This component ensures that when a new page is loaded/navigated to,
+// the browser scrolls to the top of the page instead of maintaining
+// the scroll position from the previous page
+const ScrollToTop = () => {
+  const { pathname, hash } = useLocation();
 
-  // Show button when scrolling down 300px
   useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
+    // Only scroll to top if there's no hash in the URL
+    if (!hash) {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
 
-    window.addEventListener('scroll', toggleVisibility);
-
-    return () => window.removeEventListener('scroll', toggleVisibility);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
-  return (
-    <Button
-      variant="noesis"
-      className={cn(
-        'fixed bottom-24 right-6 z-40 h-12 w-12 sm:h-14 sm:w-14 rounded-full p-2 shadow-lg transition-all duration-300',
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
-      )}
-      onClick={scrollToTop}
-      aria-label="Scroll to top"
-    >
-      <ArrowUp className="h-4 w-4 sm:h-5 sm:w-5" />
-    </Button>
-  );
+  return null;
 };
 
 export default ScrollToTop;
