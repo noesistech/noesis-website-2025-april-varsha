@@ -3,12 +3,13 @@ import React from 'react';
 import { Mail, Phone, MapPin, Instagram, Linkedin } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const isMobile = useIsMobile();
 
   return (
-    <footer className="bg-[#111319] py-12 mt-0">  {/* Changed margin-top to 0 */}
+    <footer className="bg-[#111319] py-12 mt-0">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Company Logo, Description, and Social Links */}
@@ -50,14 +51,14 @@ const Footer = () => {
             <h3 className="text-white text-xl font-bold mb-4">Quick Links</h3>
             <div className="grid grid-cols-2 gap-x-4 gap-y-2">
               <div>
-                <a href="#about" className="text-white/70 hover:text-white transition-colors block">About</a>
-                <a href="#mission" className="text-white/70 hover:text-white transition-colors block">Mission & Vision</a>
-                <a href="#services" className="text-white/70 hover:text-white transition-colors block">Services</a>
+                <Link to="/about" className="text-white/70 hover:text-white transition-colors block">About</Link>
+                <Link to="/about#mission-vision" className="text-white/70 hover:text-white transition-colors block">Mission & Vision</Link>
+                <Link to="/services" className="text-white/70 hover:text-white transition-colors block">Services</Link>
               </div>
               <div>
-                <a href="#solutions" className="text-white/70 hover:text-white transition-colors block">Solutions</a>
-                <a href="#tech-stack" className="text-white/70 hover:text-white transition-colors block">Tech Stack</a>
-                <a href="#contact" className="text-white/70 hover:text-white transition-colors block">Contact</a>
+                <Link to="/solutions" className="text-white/70 hover:text-white transition-colors block">Solutions</Link>
+                <Link to="/services#tech-stack" className="text-white/70 hover:text-white transition-colors block">Tech Stack</Link>
+                <Link to="/contact" className="text-white/70 hover:text-white transition-colors block">Contact</Link>
               </div>
             </div>
           </div>
