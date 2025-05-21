@@ -26,21 +26,6 @@ const ClientsSection = () => {
       <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-noesis-blue/20 rounded-full filter blur-[100px] opacity-30"></div>
       
       <div className="container mx-auto px-4">
-        {/* Client Logos Scrolling Section */}
-        <div className="relative overflow-hidden w-full mb-16">
-          <div className="overflow-hidden">
-            <div className="flex animate-[scroll_40s_linear_infinite] items-center">
-              {repeatedLogos.map((logo, index) => <div key={`${logo.id}-${index}`} className="flex-shrink-0 mx-4 sm:mx-6 md:mx-8 w-[100px] sm:w-[120px] md:w-[140px] h-[50px] sm:h-[60px] flex items-center justify-center my-0">
-                  <img src={logo.image_url} alt={logo.name} className="max-h-full max-w-full opacity-70 hover:opacity-100 transition-opacity duration-300" />
-                </div>)}
-            </div>
-          </div>
-          
-          {/* Gradient overlays for smooth fade effect on edges */}
-          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-noesis-darker to-transparent z-10"></div>
-          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-noesis-darker to-transparent z-10"></div>
-        </div>
-        
         {/* Testimonials Section */}
         {clientsSection && <div className="text-center mb-6 pt-6 md:pt-8">
             <h2 className="section-title py-0 my-0">
@@ -52,7 +37,7 @@ const ClientsSection = () => {
           </div>}
         
         {/* Testimonials - Carousel for mobile/tablet, grid for desktop */}
-        {testimonials && testimonials.length > 0 && <div>
+        {testimonials && testimonials.length > 0 && <div className="mb-16">
             {showCarousel ? <Carousel opts={{
           align: "center",
           loop: true
@@ -86,6 +71,21 @@ const ClientsSection = () => {
                   </div>)}
               </div>}
           </div>}
+          
+        {/* Client Logos Scrolling Section - moved below testimonials */}
+        <div className="relative overflow-hidden w-full mt-8">
+          <div className="overflow-hidden">
+            <div className="flex animate-[scroll_40s_linear_infinite] items-center">
+              {repeatedLogos.map((logo, index) => <div key={`${logo.id}-${index}`} className="flex-shrink-0 mx-4 sm:mx-6 md:mx-8 w-[100px] sm:w-[120px] md:w-[140px] h-[50px] sm:h-[60px] flex items-center justify-center my-0">
+                  <img src={logo.image_url} alt={logo.name} className="max-h-full max-w-full opacity-70 hover:opacity-100 transition-opacity duration-300" />
+                </div>)}
+            </div>
+          </div>
+          
+          {/* Gradient overlays for smooth fade effect on edges */}
+          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-noesis-darker to-transparent z-10"></div>
+          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-noesis-darker to-transparent z-10"></div>
+        </div>
       </div>
     </section>
   );
