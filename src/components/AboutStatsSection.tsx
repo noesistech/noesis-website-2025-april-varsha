@@ -12,7 +12,7 @@ const AboutStatsSection = () => {
   const { stats } = useContent();
 
   return (
-    <section className="w-full py-16 md:py-24 bg-[#1A1F2C]">
+    <section className="w-full py-12 md:py-16 bg-[#1A1F2C]">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="absolute inset-0 overflow-hidden">
           <P5Animation
@@ -20,7 +20,7 @@ const AboutStatsSection = () => {
           />
         </div>
         
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             Our <span className="text-noesis-purple">Impact</span> By The Numbers
           </h2>

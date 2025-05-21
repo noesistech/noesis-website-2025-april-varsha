@@ -7,10 +7,10 @@ const ChatBotSection: React.FC = () => {
   return (
     <section 
       id="chatbot" 
-      className="py-12 sm:py-20 bg-gradient-to-b from-gray-900/90 to-noesis-dark/80 pb-6"
+      className="page-section bg-gradient-to-b from-gray-900/90 to-noesis-dark/80"
     >
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="text-center max-w-3xl mx-auto mb-8">
+        <div className="text-center max-w-3xl mx-auto mb-6">
           <h2 className="section-title">
             Chat with Our <span className="text-noesis-purple">AI Assistant</span>
           </h2>

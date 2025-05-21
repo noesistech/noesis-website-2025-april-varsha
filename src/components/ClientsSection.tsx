@@ -19,7 +19,7 @@ const ClientsSection = () => {
   const repeatedLogos = [...clientLogos, ...clientLogos];
 
   return (
-    <section id="clients" className="page-section py-12 sm:py-16 overflow-hidden relative">
+    <section id="clients" className="page-section overflow-hidden relative">
       {/* Background gradients similar to BrainstormerSection */}
       <div className="absolute inset-0 bg-gradient-to-b from-noesis-dark/0 via-noesis-purple/5 to-noesis-dark/0 pointer-events-none"></div>
       <div className="absolute top-1/3 left-0 w-72 h-72 bg-noesis-purple/20 rounded-full filter blur-[120px] opacity-20"></div>
@@ -27,17 +27,17 @@ const ClientsSection = () => {
       
       <div className="container mx-auto px-4">
         {/* Testimonials Section */}
-        {clientsSection && <div className="text-center mb-6 pt-6 md:pt-8">
+        {clientsSection && <div className="text-center mb-6">
             <h2 className="section-title py-0 my-0">
               <span className="text-white">Client</span> <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#997aff] to-[#987aff]">Testimonials</span>
             </h2>
-            {clientsSection.subtitle && <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mt-3 mb-8">
+            {clientsSection.subtitle && <p className="text-center text-gray-300 max-w-3xl mx-auto text-lg mt-3 mb-6">
                 {clientsSection.subtitle}
               </p>}
           </div>}
         
         {/* Testimonials - Carousel for mobile/tablet, grid for desktop */}
-        {testimonials && testimonials.length > 0 && <div className="mb-16">
+        {testimonials && testimonials.length > 0 && <div className="mb-10">
             {showCarousel ? <Carousel opts={{
           align: "center",
           loop: true
@@ -73,7 +73,7 @@ const ClientsSection = () => {
           </div>}
           
         {/* Client Logos Scrolling Section - moved below testimonials */}
-        <div className="relative overflow-hidden w-full mt-8">
+        <div className="relative overflow-hidden w-full">
           <div className="overflow-hidden">
             <div className="flex animate-[scroll_40s_linear_infinite] items-center">
               {repeatedLogos.map((logo, index) => <div key={`${logo.id}-${index}`} className="flex-shrink-0 mx-4 sm:mx-6 md:mx-8 w-[100px] sm:w-[120px] md:w-[140px] h-[50px] sm:h-[60px] flex items-center justify-center my-0">

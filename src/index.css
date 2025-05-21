@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -45,7 +46,7 @@
     margin-left: auto;
     margin-right: auto;
     font-size: 1.125rem; /* text-lg */
-    margin-bottom: 2.5rem; /* mb-10 */
+    margin-bottom: 2rem; /* reduced from 2.5rem */
   }
   
   .gradient-text {
@@ -60,8 +61,9 @@
     @apply p-6 rounded-xl bg-[#1A1F2C]/50 backdrop-blur-md border border-white/10 transition duration-300 hover:border-white/20;
   }
   
+  /* Updated page-section for more consistent spacing */
   .page-section {
-    @apply py-12 sm:py-16;
+    @apply py-10 sm:py-12;
     scroll-margin-top: 80px;
   }
   
@@ -129,9 +131,10 @@ html {
     font-size: 1rem;
   }
   
+  /* Updated mobile spacing */
   .page-section {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
   }
 }
 
@@ -139,6 +142,12 @@ html {
 @media (min-width: 641px) and (max-width: 1024px) {
   .section-title {
     font-size: 36px;
+  }
+  
+  /* Updated tablet spacing */
+  .page-section {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
   }
 }
 
@@ -160,7 +169,7 @@ main section h2.text-4xl,
 section p:not(.section-title) + p,
 main section h2 + p {
   font-size: 1.125rem !important;
-  margin-bottom: 2.5rem !important;
+  margin-bottom: 2rem !important; /* reduced from 2.5rem */
 }
 
 /* Ensure proper scaling on mobile */

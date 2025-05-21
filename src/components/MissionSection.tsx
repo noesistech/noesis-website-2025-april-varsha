@@ -39,15 +39,15 @@ const MissionSection = ({
   const gridCols = 24;
 
   return (
-    <section id="mission" ref={sectionRef} className="page-section relative overflow-hidden bg-[#1A1F2C] sm:py-16 py-[60px]">
+    <section id="mission" ref={sectionRef} className="page-section relative overflow-hidden bg-[#1A1F2C]">
       <BackgroundPattern gridRows={gridRows} gridCols={gridCols} />
       <div className="container mx-auto px-6 relative z-10 py-0">
-        <div className="text-center max-w-4xl mx-auto">
+        <div className="text-center max-w-4xl mx-auto mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             Our <span className="text-noesis-purple">Mission & Vision</span>
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 max-w-6xl mx-auto mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-6xl mx-auto mb-10">
           <MissionCard title={missionSectionData.mission_title} description={missionSectionData.mission_description} />
           <VisionCard title={missionSectionData.vision_title} description={missionSectionData.vision_description} />
         </div>
