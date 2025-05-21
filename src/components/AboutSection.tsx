@@ -59,7 +59,7 @@ const AboutSection = () => {
             style={{ minHeight: '300px', maxHeight: '600px' }}
           >
             <P5Animation className="w-full h-full absolute inset-0" />
-            <div className="absolute inset-0 grid-pattern opacity-20"></div>
+            <div className="absolute inset-0 grid-pattern opacity-20 w-full h-full"></div>
           </div>
           
           {/* Right side - Content */}
