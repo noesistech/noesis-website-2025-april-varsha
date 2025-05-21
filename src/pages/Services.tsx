@@ -231,22 +231,22 @@ const Services = () => {
               Click on any service to learn more
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
               {serviceItems.map((service, index) => (
                 <a 
                   href={`#${service.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`} 
                   key={service.id} 
-                  className="bg-[#222732]/90 border border-white/10 hover:border-noesis-purple/30 rounded-xl p-8 transition-all duration-300 hover:shadow-lg group"
+                  className="bg-[#222732]/90 border border-white/10 hover:border-noesis-purple/30 rounded-xl p-4 sm:p-8 transition-all duration-300 hover:shadow-lg group"
                 >
                   <div className="flex flex-col items-center">
-                    <div className="bg-[#1A1F2C] p-5 rounded-full mb-6">
-                      {getIconByName(service.icon_name, "h-8 w-8")}
+                    <div className="bg-[#1A1F2C] p-3 sm:p-5 rounded-full mb-3 sm:mb-6">
+                      {getIconByName(service.icon_name, "h-6 w-6 sm:h-8 sm:w-8")}
                     </div>
-                    <h3 className="text-xl font-bold mb-6 text-white">
+                    <h3 className="text-sm sm:text-xl font-bold mb-3 sm:mb-6 text-white">
                       {service.title}
                     </h3>
-                    <span className="text-noesis-purple group-hover:opacity-80 flex items-center">
-                      View details <Sparkles className="ml-2 h-4 w-4" />
+                    <span className="text-noesis-purple group-hover:opacity-80 flex items-center text-xs sm:text-base">
+                      View details <Sparkles className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                     </span>
                   </div>
                 </a>
