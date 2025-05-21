@@ -69,10 +69,10 @@ const FloatingChatButton = ({ onClick, pulseAnimation = true }: FloatingChatButt
   };
   
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-center">
       {/* Back to top button - vertically aligned above chat button */}
       <div className={cn(
-        "transition-all duration-300",
+        "transition-all duration-300 w-full flex justify-center",
         showBackToTop ? "opacity-100" : "opacity-0 pointer-events-none"
       )}>
         <Button 
@@ -86,7 +86,7 @@ const FloatingChatButton = ({ onClick, pulseAnimation = true }: FloatingChatButt
       
       {/* Chat button - always visible */}
       <div className={cn(
-        "transition-all duration-300",
+        "transition-all duration-300 w-full flex justify-center",
         isVisible ? "opacity-100" : "opacity-0"
       )}>
         <div className="relative">
