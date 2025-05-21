@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SolutionsSection from '@/components/SolutionsSection';
@@ -10,9 +10,26 @@ import { useContent } from '@/contexts/ContentContext';
 import { industrySpecificSolutionsData } from '@/data/content/solutions';
 import SubpageHero from '@/components/SubpageHero';
 import ContactBanner from '@/components/ContactBanner';
+import { useLocation } from 'react-router-dom';
 
 const Solutions = () => {
   const { solutionsSection, solutionItems, aiCapabilities, aiProducts, aiProductsSection } = useContent();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check if there's a hash in the URL and scroll to that element
+    if (location.hash) {
+      const id = location.hash.substring(1); // remove the # character
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300); // Add a slight delay to ensure DOM is fully loaded
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
@@ -34,7 +51,7 @@ const Solutions = () => {
           highlightLastWord={true}
         />
 
-        {/* AI Capabilities Section - Added here */}
+        {/* AI Capabilities Section */}
         <section id="ai-capabilities" className="py-16 border-t border-white/10">
           <div className="container mx-auto px-4 mb-8">
             <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
