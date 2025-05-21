@@ -97,7 +97,7 @@ const ContactSection = () => {
   };
   
   return (
-    <section id="contact" className="py-16 sm:py-24 bg-gray-900/30 overflow-hidden relative">
+    <section id="contact" className="py-8 sm:py-16 bg-gray-900/30 overflow-hidden relative">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {/* Contact Form */}
