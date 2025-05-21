@@ -83,11 +83,67 @@ const Services = () => {
     }
   ];
   
+  const cloudFeatures = [
+    {
+      icon: <Cloud className="h-6 w-6 text-cyan-400" />,
+      title: "Cloud Infrastructure",
+      description: "Robust cloud solutions optimized for performance and scalability."
+    },
+    {
+      icon: <Check className="h-6 w-6 text-teal-400" />,
+      title: "DevOps Integration",
+      description: "Streamlined development operations with CI/CD pipelines."
+    },
+    {
+      icon: <Bot className="h-6 w-6 text-blue-400" />,
+      title: "AI-Powered Scaling",
+      description: "Smart resource allocation based on predictive usage patterns."
+    }
+  ];
+  
+  const aiFeatures = [
+    {
+      icon: <BrainCircuit className="h-6 w-6 text-purple-400" />,
+      title: "Custom AI Models",
+      description: "Tailored artificial intelligence solutions that address your unique business challenges."
+    },
+    {
+      icon: <Sparkles className="h-6 w-6 text-pink-400" />,
+      title: "Data Analysis",
+      description: "Extract meaningful insights from your data with our AI-powered analytics tools."
+    },
+    {
+      icon: <Bot className="h-6 w-6 text-indigo-400" />,
+      title: "Natural Language Processing",
+      description: "Advanced text analysis and language processing for enhanced customer interactions."
+    }
+  ];
+  
+  const staffingFeatures = [
+    {
+      icon: <Users className="h-6 w-6 text-orange-400" />,
+      title: "Expert Talent Pool",
+      description: "Access to 500+ high-quality professionals trained in AI-human collaboration methodologies."
+    },
+    {
+      icon: <Check className="h-6 w-6 text-amber-400" />,
+      title: "Flexible Staffing",
+      description: "Scale your team up or down based on project requirements with our flexible staffing solutions."
+    },
+    {
+      icon: <Sparkles className="h-6 w-6 text-yellow-400" />,
+      title: "Specialized Expertise",
+      description: "Teams skilled in AI integration across Frontend, Backend, Fullstack, ML, DevOps and cloud technologies."
+    }
+  ];
+  
   // Find the specific services
   const uiuxService = serviceItems.find(service => service.title === "UI/UX") || serviceItems[0];
   const webDevService = serviceItems.find(service => service.title === "Web and Application Development") || serviceItems[1];
   const graphicsService = serviceItems.find(service => service.title === "Graphics and Content Creation") || serviceItems[2];
   const cloudService = serviceItems.find(service => service.title === "Cloud Services & DevOps") || serviceItems[3];
+  const aiService = serviceItems.find(service => service.title === "AI Customized Solutions") || serviceItems[4];
+  const staffService = serviceItems.find(service => service.title === "AI-Enhanced Staff Solutions") || serviceItems[5];
   
   return (
     <div className="flex flex-col min-h-screen bg-[#1A1F2C]">
@@ -144,27 +200,34 @@ const Services = () => {
         <section id="cloud" className="py-16 sm:py-20 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
           <ServiceDetailSection 
             service={cloudService}
-            features={[
-              {
-                icon: <Cloud className="h-6 w-6 text-cyan-400" />,
-                title: "Cloud Infrastructure",
-                description: "Robust cloud solutions optimized for performance and scalability."
-              },
-              {
-                icon: <Check className="h-6 w-6 text-teal-400" />,
-                title: "DevOps Integration",
-                description: "Streamlined development operations with CI/CD pipelines."
-              },
-              {
-                icon: <Bot className="h-6 w-6 text-blue-400" />,
-                title: "AI-Powered Scaling",
-                description: "Smart resource allocation based on predictive usage patterns."
-              }
-            ]}
+            features={cloudFeatures}
             isAlternate={true}
             bgColor="from-[#151a25]/80 to-[#1c212e]"
             accentColor="border-cyan-500/30"
             imageUrl="/lovable-uploads/9974d449-5315-4593-aa82-cae4ebd2c8cb.png"
+          />
+        </section>
+        
+        {/* AI Solutions Section */}
+        <section id="ai-solutions" className="py-16 sm:py-20 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
+          <ServiceDetailSection 
+            service={aiService}
+            features={aiFeatures}
+            bgColor="from-[#1c212e]/80 to-[#151a25]"
+            accentColor="border-purple-500/30"
+            imageUrl="/lovable-uploads/b2d0275a-2da4-4059-aec3-c772f2449a67.png"
+          />
+        </section>
+        
+        {/* AI-Enhanced Staff Solutions Section */}
+        <section id="staffing" className="py-16 sm:py-20 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
+          <ServiceDetailSection 
+            service={staffService}
+            features={staffingFeatures}
+            isAlternate={true}
+            bgColor="from-[#151a25]/80 to-[#1c212e]"
+            accentColor="border-orange-500/30"
+            imageUrl="/lovable-uploads/1c24be48-3404-422d-8078-2c2a0696f12c.png"
           />
         </section>
         
