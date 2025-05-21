@@ -51,12 +51,12 @@ const AboutSection = () => {
   return (
     <section id="about" className="relative py-12 sm:py-20 bg-noesis-dark overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-start">
           {/* Left side - P5 Animation with grid background */}
           <div 
             ref={leftContainerRef} 
             className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden"
-            style={{ minHeight: '300px', maxHeight: '600px' }}
+            style={{ minHeight: '300px' }}
           >
             <P5Animation className="w-full h-full absolute inset-0" />
             <div className="absolute inset-0 grid-pattern opacity-20 w-full h-full"></div>
