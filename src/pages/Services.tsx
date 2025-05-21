@@ -360,8 +360,24 @@ const Services = () => {
           />
         </section>
         
-        {/* AI Products Section */}
-        <section id="ai-products" className="py-16 sm:py-24 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
+        {/* Tech Stack Section - MOVED ABOVE AI PRODUCTS */}
+        <section id="tech-stack" className="py-16 sm:py-24 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
+          <div className="container mx-auto px-4 sm:px-6 mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              <span className="text-white">Our</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">Tech Stack</span>
+            </h2>
+            <p className="text-center text-gray-300 max-w-3xl mx-auto mb-8">
+              We use cutting-edge technologies to build powerful, scalable solutions
+            </p>
+          </div>
+          <TechStackSection 
+            title={techStackSection?.title || "Our Technology Stack"} 
+            categories={techCategories}
+          />
+        </section>
+        
+        {/* AI Products Section - NOW BELOW TECH STACK */}
+        <section id="ai-products" className="py-16 sm:py-24 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
           <div className="container mx-auto px-4 sm:px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               <span className="text-white">Our</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">AI Products</span>
@@ -399,21 +415,6 @@ const Services = () => {
               ))}
             </div>
           </div>
-        </section>
-        
-        <section id="tech-stack" className="py-16 sm:py-24 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
-          <div className="container mx-auto px-4 sm:px-6 mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              <span className="text-white">Our</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">Tech Stack</span>
-            </h2>
-            <p className="text-center text-gray-300 max-w-3xl mx-auto mb-8">
-              We use cutting-edge technologies to build powerful, scalable solutions
-            </p>
-          </div>
-          <TechStackSection 
-            title={techStackSection?.title || "Our Technology Stack"} 
-            categories={techCategories}
-          />
         </section>
         
         <ContactBanner />
