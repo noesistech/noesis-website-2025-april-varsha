@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
@@ -301,10 +302,10 @@ const Header = () => {
             <SheetContent 
               side="top" 
               className="bg-[#1A1F2C] border-b border-white/10 h-screen p-0 rounded-none"
-              style={{ marginTop: HEADER_HEIGHT }}
+              style={{ marginTop: HEADER_HEIGHT, paddingTop: "env(safe-area-inset-top, 20px)" }}
             >
               {/* Improved mobile menu layout with better spacing and alignment */}
-              <div className="flex flex-col items-center justify-start px-6 py-8 h-full mt-[-60px] overflow-y-auto">
+              <div className="flex flex-col items-center justify-start px-6 py-8 h-full mt-[-60px] pt-[calc(env(safe-area-inset-top,20px)+60px)] overflow-y-auto">
                 <div className="flex flex-col w-full h-full max-w-sm mx-auto space-y-3">
                   {navStructure.map((item, index) => (
                     <div key={item.name} className="w-full border-b border-gray-800/50">

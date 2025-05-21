@@ -1,4 +1,5 @@
 
+
 #root {
   max-width: 100%;
   margin: 0 auto;
@@ -47,3 +48,15 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+/* Add safe area inset padding for mobile devices */
+@supports (padding-top: env(safe-area-inset-top)) {
+  body {
+    padding-top: env(safe-area-inset-top, 0);
+  }
+  
+  .has-safe-area {
+    padding-top: env(safe-area-inset-top, 20px);
+  }
+}
+
