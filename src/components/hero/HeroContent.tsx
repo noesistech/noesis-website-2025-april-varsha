@@ -24,7 +24,7 @@ const HeroContent = () => {
     }
   };
   
-  return <div className={`${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'} transition-all duration-700 ease-out pt-16 md:pt-24 lg:pt-10`}>
+  return <div className={`${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'} transition-all duration-700 ease-out pt-8 md:pt-12 lg:pt-6`}>
       <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
         {isMobile ? (
           <>
