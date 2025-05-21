@@ -59,7 +59,7 @@ const ServiceDetailSection: React.FC<ServiceDetailSectionProps> = ({
         <div className="lg:w-1/2">
           {imageUrl && (
             <div className="mb-6 rounded-2xl overflow-hidden">
-              {/* Image would go here */}
+              <img src={imageUrl} alt={service.title} className="w-full h-auto object-cover" />
             </div>
           )}
           
