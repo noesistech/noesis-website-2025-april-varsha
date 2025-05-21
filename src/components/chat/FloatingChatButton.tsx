@@ -34,13 +34,14 @@ const FloatingChatButton = ({ onClick, pulseAnimation = true }: FloatingChatButt
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollTop]);
   
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
     if (onClick) {
       onClick();
       return;
     }
     
     if (location.pathname === '/') {
+      e.preventDefault();
       // If already on homepage, scroll to the chatbot section
       const chatbotElement = document.getElementById('chatbot');
       if (chatbotElement) {

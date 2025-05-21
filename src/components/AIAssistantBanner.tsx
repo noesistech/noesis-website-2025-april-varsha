@@ -8,7 +8,8 @@ const AIAssistantBanner = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleAIAssistantClick = () => {
+  const handleAIAssistantClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     if (location.pathname === '/') {
       // If already on homepage, scroll to the chatbot section
       const chatbotSection = document.getElementById('chatbot');

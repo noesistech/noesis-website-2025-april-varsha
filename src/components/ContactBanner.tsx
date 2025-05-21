@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { Bot } from 'lucide-react';
 
 const ContactBanner = () => {
   const navigate = useNavigate();
@@ -14,11 +15,15 @@ const ContactBanner = () => {
     });
   };
 
-  const handleAssistantClick = () => {
+  const handleAssistantClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     // Scroll to the chatbot section
     const chatbotSection = document.getElementById('chatbot');
     if (chatbotSection) {
       chatbotSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // If we're not on the home page, navigate to homepage chatbot section
+      navigate('/#chatbot');
     }
   };
 
@@ -38,9 +43,7 @@ const ContactBanner = () => {
               onClick={handleAssistantClick}
               className="bg-noesis-purple hover:bg-noesis-purple/90 text-white px-6 py-3 rounded-md flex items-center justify-center"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
+              <Bot className="h-5 w-5 mr-2" />
               Chat with AI Assistant
             </Button>
             
