@@ -24,8 +24,10 @@ const AboutSection = () => {
       }
     };
 
-    // Initial adjustment with a slight delay to ensure content is rendered
+    // Initial adjustment with multiple attempts to ensure content is fully rendered
     const initialTimer = setTimeout(adjustHeight, 100);
+    const secondTimer = setTimeout(adjustHeight, 300);
+    const thirdTimer = setTimeout(adjustHeight, 500);
 
     // Listen for window resize to readjust
     window.addEventListener('resize', adjustHeight);
@@ -36,7 +38,8 @@ const AboutSection = () => {
       observer.observe(rightContainerRef.current, {
         childList: true,
         subtree: true,
-        characterData: true
+        characterData: true,
+        attributes: true
       });
     }
 
@@ -44,6 +47,8 @@ const AboutSection = () => {
     return () => {
       window.removeEventListener('resize', adjustHeight);
       clearTimeout(initialTimer);
+      clearTimeout(secondTimer);
+      clearTimeout(thirdTimer);
       observer.disconnect();
     };
   }, []);
