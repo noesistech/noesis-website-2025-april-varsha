@@ -47,6 +47,11 @@ const ServiceDetailSection: React.FC<ServiceDetailSectionProps> = ({
             <p className="text-gray-300 text-lg leading-relaxed mb-8">
               {service.description}
             </p>
+            
+            <Button variant="ghost" className="group text-white hover:text-white hover:bg-white/10 mt-4">
+              Learn more 
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
           </div>
         </div>
         
