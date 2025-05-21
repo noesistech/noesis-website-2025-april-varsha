@@ -52,10 +52,10 @@ const AboutSection = () => {
     <section id="about" className="relative py-12 sm:py-20 bg-noesis-dark overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
-          {/* Left side - P5 Animation with proper aspect ratio */}
+          {/* Left side - P5 Animation with grid background */}
           <div 
             ref={leftContainerRef} 
-            className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden aspect-square lg:aspect-auto animate-fade-in"
+            className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden"
             style={{ minHeight: '300px', maxHeight: '600px' }}
           >
             <P5Animation className="w-full h-full absolute inset-0" />
@@ -64,14 +64,14 @@ const AboutSection = () => {
           
           {/* Right side - Content */}
           <div ref={rightContainerRef} className="space-y-6 sm:space-y-8">
-            {/* Heading */}
+            {/* Heading - Updated to match screenshot */}
             <div className="space-y-2">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight animate-fade-in">
                 Evolving Since <span className="text-purple-400">2009</span>, Leading in AI Today
               </h2>
             </div>
             
-            {/* Description paragraph */}
+            {/* Description paragraph - Updated to match screenshot */}
             <div className="space-y-4">
               <p className="text-white/80 text-lg sm:text-xl animate-fade-in" style={{
                 animationDelay: '0.2s'
@@ -80,7 +80,7 @@ const AboutSection = () => {
               </p>
             </div>
             
-            {/* CTA Button to About Page */}
+            {/* CTA Button to About Page - Updated to match screenshot */}
             <div className="flex justify-start mt-4 sm:mt-6 animate-fade-in" style={{
               animationDelay: '0.3s'
             }}>
@@ -91,7 +91,7 @@ const AboutSection = () => {
               </Link>
             </div>
             
-            {/* Stats Grid - Made responsive for mobile */}
+            {/* Stats Grid - Made responsive for mobile and updated to match screenshot */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-4 sm:mt-6">
               {stats.map((stat, index) => (
                 <StatCard 
