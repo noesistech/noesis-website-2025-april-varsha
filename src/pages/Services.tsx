@@ -155,6 +155,7 @@ const Services = () => {
           backgroundEffect="purple"
         />
         
+        {/* Services Section */}
         <section className="py-16 sm:py-24">
           <ServicesSection 
             title="Our Services"
@@ -162,7 +163,7 @@ const Services = () => {
           />
         </section>
         
-        {/* UI/UX Service Detail Section */}
+        {/* Service Detail Sections */}
         <section id="uiux" className="py-16 sm:py-20 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
           <ServiceDetailSection 
             service={uiuxService}
