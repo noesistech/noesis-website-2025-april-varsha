@@ -56,19 +56,13 @@ const AboutSection = () => {
   return (
     <section id="about" className="relative py-12 sm:py-20 bg-noesis-dark overflow-hidden">
       <div className="container mx-auto px-4">
+        {/* Modified grid to reverse column order on mobile */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-start">
-          {/* Left side - P5 Animation with grid background */}
+          {/* Content first on mobile - With order-2 for larger screens */}
           <div 
-            ref={leftContainerRef} 
-            className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden"
-            style={{ minHeight: '300px' }}
+            ref={rightContainerRef} 
+            className="space-y-6 sm:space-y-8 order-1 lg:order-2"
           >
-            <P5Animation className="w-full h-full absolute inset-0" />
-            <div className="absolute inset-0 grid-pattern opacity-20 w-full h-full"></div>
-          </div>
-          
-          {/* Right side - Content */}
-          <div ref={rightContainerRef} className="space-y-6 sm:space-y-8">
             {/* Heading - Updated to match screenshot */}
             <div className="space-y-2">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight animate-fade-in">
@@ -108,6 +102,16 @@ const AboutSection = () => {
                 />
               ))}
             </div>
+          </div>
+          
+          {/* Animation second on mobile - With order-1 for larger screens */}
+          <div 
+            ref={leftContainerRef} 
+            className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden order-2 lg:order-1"
+            style={{ minHeight: '300px' }}
+          >
+            <P5Animation className="w-full h-full absolute inset-0" />
+            <div className="absolute inset-0 grid-pattern opacity-20 w-full h-full"></div>
           </div>
         </div>
       </div>
