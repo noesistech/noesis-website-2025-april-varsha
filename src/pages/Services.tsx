@@ -408,7 +408,7 @@ const Services = () => {
                   <div className="flex justify-center">
                     <a 
                       href={product.ctaUrl} 
-                      className="inline-flex items-center px-5 py-2 rounded-md bg-noesis-purple hover:bg-noesis-purple/90 text-white transition-colors"
+                      className="inline-flex items-center px-5 py-2 rounded-md bg-noesis-purple hover:bg-noesis-purple/90 text-white transition-colors leading-tight"
                     >
                       {product.ctaText}
                       <span className="ml-2">→</span>
