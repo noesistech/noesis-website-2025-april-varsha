@@ -17,13 +17,23 @@ const ContactBanner = () => {
 
   const handleAssistantClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    // Scroll to the chatbot section
-    const chatbotSection = document.getElementById('chatbot');
-    if (chatbotSection) {
-      chatbotSection.scrollIntoView({ behavior: 'smooth' });
+    
+    // Check if we're on homepage
+    if (window.location.pathname === '/') {
+      // If already on homepage, scroll to the chatbot section
+      const chatbotElement = document.getElementById('chatbot');
+      if (chatbotElement) {
+        chatbotElement.scrollIntoView({ behavior: 'smooth' });
+      }
     } else {
-      // If we're not on the home page, navigate to homepage chatbot section
-      navigate('/#chatbot');
+      // If on another page, navigate to homepage then scroll
+      navigate('/');
+      setTimeout(() => {
+        const chatbotElement = document.getElementById('chatbot');
+        if (chatbotElement) {
+          chatbotElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
     }
   };
 

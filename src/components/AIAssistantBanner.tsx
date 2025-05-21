@@ -17,8 +17,14 @@ const AIAssistantBanner = () => {
         chatbotSection.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      // Navigate to homepage chatbot section
-      navigate('/#chatbot');
+      // Navigate to homepage then scroll to chatbot section
+      navigate('/');
+      setTimeout(() => {
+        const chatbotSection = document.getElementById('chatbot');
+        if (chatbotSection) {
+          chatbotSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
     }
   };
 

@@ -16,6 +16,14 @@ const HeroContent = () => {
     return () => clearTimeout(timer);
   }, []);
   
+  const scrollToChatbot = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const chatbotElement = document.getElementById('chatbot');
+    if (chatbotElement) {
+      chatbotElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+  
   return <div className={`${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'} transition-all duration-700 ease-out pt-16 sm:pt-20 md:py-0`}>
       <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
         {isMobile ? (
@@ -35,7 +43,11 @@ const HeroContent = () => {
         As an AI-native agency, we combine cutting-edge artificial intelligence with human expertise to deliver digital solutions that transform businesses and exceed expectations.
       </p>
       <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-        <a href="#chatbot" className="inline-block">
+        <a 
+          href="#chatbot" 
+          className="inline-block"
+          onClick={scrollToChatbot}
+        >
           <Button className="text-white text-md sm:text-lg py-2 sm:py-3 md:py-4 px-5 sm:px-6 md:px-8 w-full" variant="noesis">
             <BrainCircuit className="mr-1" /> Try AI Assistant
           </Button>

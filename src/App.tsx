@@ -16,14 +16,14 @@ const AppContent = () => {
   const location = useLocation();
   
   useEffect(() => {
-    // Check if we need to scroll to the chat section
-    if (location.search.includes('scrollToChat=true')) {
+    // Check for hash navigation to the chat section
+    if (location.hash === '#chatbot') {
       setTimeout(() => {
         const chatbotSection = document.getElementById('chatbot');
         if (chatbotSection) {
           chatbotSection.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 500); // Small delay to ensure the section is loaded
+      }, 300); // Small delay to ensure the section is loaded
     }
   }, [location]);
   

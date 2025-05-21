@@ -35,21 +35,30 @@ const FloatingChatButton = ({ onClick, pulseAnimation = true }: FloatingChatButt
   }, [lastScrollTop]);
   
   const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    
     if (onClick) {
       onClick();
       return;
     }
     
     if (location.pathname === '/') {
-      e.preventDefault();
       // If already on homepage, scroll to the chatbot section
       const chatbotElement = document.getElementById('chatbot');
       if (chatbotElement) {
         chatbotElement.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      // If on another page, navigate to homepage chatbot section
-      navigate('/?scrollToChat=true');
+      // If on another page, navigate to homepage without using query params
+      navigate('/');
+      
+      // Set a small timeout to wait for navigation to complete before scrolling
+      setTimeout(() => {
+        const chatbotElement = document.getElementById('chatbot');
+        if (chatbotElement) {
+          chatbotElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
     }
   };
   
