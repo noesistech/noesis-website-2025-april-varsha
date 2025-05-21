@@ -1,12 +1,15 @@
+
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TechCategory } from '@/types/supabase';
 import { Card } from '@/components/ui/card';
+
 export interface TechStackSectionProps {
   title: string;
   categories: TechCategory[];
   subtitle?: string;
 }
+
 const TechStackSection: React.FC<TechStackSectionProps> = ({
   title,
   categories = [],
@@ -17,7 +20,9 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
   // Add null check before filtering
   const techStack = categories?.filter(category => !category.is_cloud_stack) || [];
   const cloudStack = categories?.filter(category => category.is_cloud_stack) || [];
-  return <section className="page-section overflow-hidden relative">
+
+  return (
+    <section id="tech-stack" className="page-section overflow-hidden relative">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <Tabs defaultValue="tech" value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">
           <div className="flex justify-center py-[8px]">
@@ -58,6 +63,8 @@ const TechStackSection: React.FC<TechStackSectionProps> = ({
           </TabsContent>
         </Tabs>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default TechStackSection;
