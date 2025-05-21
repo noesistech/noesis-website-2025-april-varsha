@@ -18,7 +18,7 @@ const Services = () => {
         <SubpageHero 
           title="Our Services" 
           subtitle="Discover the comprehensive range of services we offer"
-          gradient="from-noesis-purple to-noesis-blue"
+          backgroundEffect="purple"
         />
         
         <ServicesSection 
@@ -26,7 +26,6 @@ const Services = () => {
           services={serviceItems}
         />
         
-        {/* Add the id attribute to ensure the anchor works */}
         <div id="tech-stack">
           <TechStackSection 
             title={techStackSection?.title || "Our Technology Stack"} 
