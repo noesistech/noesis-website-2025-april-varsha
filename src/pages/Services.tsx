@@ -32,6 +32,28 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+// Helper function to get icon with specific size
+const getIconByName = (iconName: string, className: string = "h-6 w-6") => {
+  const iconProps = { className };
+  
+  switch (iconName) {
+    case 'Palette':
+      return <Palette {...iconProps} className={`${className} text-blue-400`} />;
+    case 'Globe':
+      return <Globe {...iconProps} className={`${className} text-green-400`} />;
+    case 'Image':
+      return <Image {...iconProps} className={`${className} text-yellow-400`} />;
+    case 'Cloud':
+      return <Cloud {...iconProps} className={`${className} text-cyan-400`} />;
+    case 'BrainCircuit':
+      return <BrainCircuit {...iconProps} className={`${className} text-purple-400`} />;
+    case 'Users':
+      return <Users {...iconProps} className={`${className} text-orange-400`} />;
+    default:
+      return <Sparkles {...iconProps} className={`${className} text-noesis-purple`} />;
+  }
+};
+
 const Services = () => {
   const { serviceItems, techCategories, techStackSection, aiCapabilities, aiProducts, aiCapabilitiesSection, aiProductsSection } = useContent();
   
@@ -298,7 +320,7 @@ const Services = () => {
         <section className="py-16 sm:py-24 bg-[#1A1F2C]">
           <div className="container mx-auto px-4 sm:px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              <span className="text-white">Why Choose</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">Noesis</span><span className="text-white">?</span>
+              <span className="text-white">Why Choose</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">Noesis</span><span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">?</span>
             </h2>
             <p className="text-center text-gray-300 max-w-3xl mx-auto mb-12">
               Our unique approach delivers premium results through our human-AI collaboration
@@ -400,28 +422,6 @@ const Services = () => {
       <Footer />
     </div>
   );
-};
-
-// Helper function to get icon with specific size
-const getIconByName = (iconName: string, className: string = "h-6 w-6") => {
-  const iconProps = { className };
-  
-  switch (iconName) {
-    case 'Palette':
-      return <Palette {...iconProps} className={`${className} text-blue-400`} />;
-    case 'Globe':
-      return <Globe {...iconProps} className={`${className} text-green-400`} />;
-    case 'Image':
-      return <Image {...iconProps} className={`${className} text-yellow-400`} />;
-    case 'Cloud':
-      return <Cloud {...iconProps} className={`${className} text-cyan-400`} />;
-    case 'BrainCircuit':
-      return <BrainCircuit {...iconProps} className={`${className} text-purple-400`} />;
-    case 'Users':
-      return <Users {...iconProps} className={`${className} text-orange-400`} />;
-    default:
-      return <Sparkles {...iconProps} className={`${className} text-noesis-purple`} />;
-  }
 };
 
 export default Services;
