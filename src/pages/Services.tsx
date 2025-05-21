@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 import ContactBanner from '../components/ContactBanner';
 import { useContent } from '@/contexts/ContentContext';
 import AICapabilitiesSection from '@/components/AICapabilitiesSection';
+import HowWeWorkSection from '@/components/HowWeWorkSection';
 import { 
   Palette, 
   Globe, 
@@ -316,22 +317,7 @@ const Services = () => {
               Our systematic approach ensures quality results for every project
             </p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {processSteps.map((step, index) => (
-                <div 
-                  key={index}
-                  className="bg-[#222732] rounded-xl p-6 shadow-lg border border-[#2A2F3C] transition-all duration-300 hover:shadow-xl hover:border-noesis-purple/30"
-                >
-                  <div className="flex flex-col items-center">
-                    <div className="bg-[#1A1F2C] p-3 rounded-full mb-4">
-                      {step.icon}
-                    </div>
-                    <h3 className="text-xl font-bold mb-3 text-white text-center">{step.title}</h3>
-                    <p className="text-gray-300 text-center text-sm">{step.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <HowWeWorkSection />
           </div>
         </section>
         
