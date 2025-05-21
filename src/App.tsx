@@ -37,7 +37,7 @@ const AppContent = () => {
         <Route path="/contact" element={<Contact />} />
       </Routes>
       
-      {/* Floating Chat Button - appears on all pages */}
+      {/* Floating Chat Button - always visible on all pages */}
       <FloatingChatButton />
     </>
   );

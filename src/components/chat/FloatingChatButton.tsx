@@ -15,34 +15,26 @@ const FloatingChatButton = ({ onClick, pulseAnimation = true }: FloatingChatButt
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(true);
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const [lastScrollTop, setLastScrollTop] = useState(0);
   
-  // Handle scroll behavior - always show buttons when scrolling up or at the top
+  // Always show the buttons, only conditionally show back-to-top based on scroll position
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollTop = window.scrollY;
       
       // Show back-to-top button when scrolled past threshold
-      if (currentScrollTop > 500) {
+      if (currentScrollTop > 300) {
         setShowBackToTop(true);
       } else {
         setShowBackToTop(false);
       }
       
-      // Always show buttons when scrolling up
-      if (currentScrollTop < lastScrollTop || currentScrollTop < 300) {
-        setIsVisible(true);
-      } else if (currentScrollTop > lastScrollTop && currentScrollTop > 300) {
-        // Only hide when actively scrolling down and past threshold
-        setIsVisible(false);
-      }
-      
-      setLastScrollTop(currentScrollTop);
+      // Always show the chat button regardless of scroll
+      setIsVisible(true);
     };
     
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollTop]);
+  }, []);
   
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -78,24 +70,24 @@ const FloatingChatButton = ({ onClick, pulseAnimation = true }: FloatingChatButt
   
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
-      {/* Back to top button */}
+      {/* Back to top button - vertically aligned above chat button */}
       <div className={cn(
         "transition-all duration-300",
-        showBackToTop ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0 pointer-events-none"
+        showBackToTop ? "opacity-100" : "opacity-0 pointer-events-none"
       )}>
         <Button 
           onClick={scrollToTop}
-          className="h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white shadow-lg flex items-center justify-center border border-white/10"
+          className="h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white shadow-lg flex items-center justify-center border border-white/10"
           aria-label="Back to top"
         >
-          <ArrowUp size={20} />
+          <ArrowUp size={22} />
         </Button>
       </div>
       
-      {/* Chat button */}
+      {/* Chat button - always visible */}
       <div className={cn(
         "transition-all duration-300",
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"
+        isVisible ? "opacity-100" : "opacity-0"
       )}>
         <div className="relative">
           {pulseAnimation && (
