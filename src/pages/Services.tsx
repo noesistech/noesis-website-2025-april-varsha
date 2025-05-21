@@ -30,6 +30,7 @@ import {
   Upload,
   Users2
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Services = () => {
   const { serviceItems, techCategories, techStackSection, aiCapabilities, aiProducts, aiCapabilitiesSection, aiProductsSection } = useContent();
@@ -197,14 +198,41 @@ const Services = () => {
         
         {/* Services Section with "What We Offer" title */}
         <section className="py-16 sm:py-24">
-          <ServicesSection 
-            title="What We Offer"
-            services={serviceItems}
-          />
+          <div className="container mx-auto px-4 sm:px-6 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="text-white">What We</span> <span className="text-noesis-purple">Offer</span>
+            </h2>
+            <div className="w-24 h-1 bg-noesis-purple mx-auto mb-8"></div>
+            <p className="text-gray-300 max-w-2xl mx-auto mb-16">
+              Click on any service to learn more
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {serviceItems.map((service, index) => (
+                <Link 
+                  to={`#${service.title.toLowerCase().replace(/\s+/g, '-')}`} 
+                  key={service.id} 
+                  className="bg-[#222732]/90 border border-white/10 hover:border-noesis-purple/30 rounded-xl p-8 transition-all duration-300 hover:shadow-lg group"
+                >
+                  <div className="flex flex-col items-center">
+                    <div className="bg-[#1A1F2C] p-5 rounded-full mb-6">
+                      {getIconByName(service.icon_name, "h-8 w-8")}
+                    </div>
+                    <h3 className="text-xl font-bold mb-6 text-white">
+                      {service.title}
+                    </h3>
+                    <span className="text-noesis-purple group-hover:opacity-80 flex items-center">
+                      View details <Sparkles className="ml-2 h-4 w-4" />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
         </section>
         
         {/* Service Detail Sections */}
-        <section id="uiux" className="py-16 sm:py-20 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
+        <section id="ui-ux" className="py-16 sm:py-20 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
           <ServiceDetailSection 
             service={uiuxService}
             features={uiuxFeatures}
@@ -215,7 +243,7 @@ const Services = () => {
         </section>
         
         {/* Web Development Service Detail Section */}
-        <section id="webdev" className="py-16 sm:py-20 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
+        <section id="web-and-application-development" className="py-16 sm:py-20 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
           <ServiceDetailSection 
             service={webDevService}
             features={webDevFeatures}
@@ -227,7 +255,7 @@ const Services = () => {
         </section>
         
         {/* Graphics Service Detail Section */}
-        <section id="graphics" className="py-16 sm:py-20 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
+        <section id="graphics-and-content-creation" className="py-16 sm:py-20 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
           <ServiceDetailSection 
             service={graphicsService}
             features={graphicsFeatures}
@@ -238,7 +266,7 @@ const Services = () => {
         </section>
         
         {/* Cloud Services Section */}
-        <section id="cloud" className="py-16 sm:py-20 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
+        <section id="cloud-services-&-devops" className="py-16 sm:py-20 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
           <ServiceDetailSection 
             service={cloudService}
             features={cloudFeatures}
@@ -250,7 +278,7 @@ const Services = () => {
         </section>
         
         {/* AI Solutions Section */}
-        <section id="ai-solutions" className="py-16 sm:py-20 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
+        <section id="ai-customized-solutions" className="py-16 sm:py-20 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
           <ServiceDetailSection 
             service={aiService}
             features={aiFeatures}
@@ -261,7 +289,7 @@ const Services = () => {
         </section>
         
         {/* AI-Enhanced Staff Solutions Section */}
-        <section id="staffing" className="py-16 sm:py-20 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
+        <section id="ai-enhanced-staff-solutions" className="py-16 sm:py-20 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
           <ServiceDetailSection 
             service={staffService}
             features={staffingFeatures}
@@ -393,6 +421,28 @@ const Services = () => {
       <Footer />
     </div>
   );
+};
+
+// Helper function to get icon with specific size
+const getIconByName = (iconName: string, className: string = "h-6 w-6") => {
+  const iconProps = { className };
+  
+  switch (iconName) {
+    case 'Palette':
+      return <Palette {...iconProps} className={`${className} text-blue-400`} />;
+    case 'Globe':
+      return <Globe {...iconProps} className={`${className} text-green-400`} />;
+    case 'Image':
+      return <Image {...iconProps} className={`${className} text-yellow-400`} />;
+    case 'Cloud':
+      return <Cloud {...iconProps} className={`${className} text-cyan-400`} />;
+    case 'BrainCircuit':
+      return <BrainCircuit {...iconProps} className={`${className} text-purple-400`} />;
+    case 'Users':
+      return <Users {...iconProps} className={`${className} text-orange-400`} />;
+    default:
+      return <Sparkles {...iconProps} className={`${className} text-noesis-purple`} />;
+  }
 };
 
 export default Services;
