@@ -84,7 +84,7 @@ const HowWeWorkSection: React.FC = () => {
     <>
       {/* Desktop & Tablet Process Steps */}
       <div className="hidden md:block">
-        <div className="relative mb-16 mt-12">
+        <div className="relative mb-16 mt-20">
           {/* Progress line */}
           <div className="absolute top-10 left-0 w-full h-1 bg-gradient-to-r from-noesis-purple/30 via-noesis-purple to-noesis-purple/30 rounded-full"></div>
           
@@ -122,7 +122,7 @@ const HowWeWorkSection: React.FC = () => {
           autoplay={true}
           interval={5000}
         >
-          <div className="relative mb-8 mt-10">
+          <div className="relative mb-8 mt-16">
             {/* Progress line */}
             <div className="absolute top-10 left-0 w-full h-1 bg-gradient-to-r from-noesis-purple/30 via-noesis-purple to-noesis-purple/30 rounded-full"></div>
             
