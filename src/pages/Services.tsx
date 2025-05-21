@@ -224,7 +224,6 @@ const Services = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               <span className="text-white">What We</span> <span className="text-noesis-purple">Offer</span>
             </h2>
-            <div className="w-24 h-1 bg-noesis-purple mx-auto mb-8"></div>
             <p className="text-gray-300 max-w-2xl mx-auto mb-16">
               Click on any service to learn more
             </p>
