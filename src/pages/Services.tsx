@@ -313,7 +313,7 @@ const Services = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               <span className="text-white">Our</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">Process</span>
             </h2>
-            <p className="text-center text-gray-300 max-w-3xl mx-auto mb-12">
+            <p className="text-center text-gray-300 max-w-3xl mx-auto mb-16">
               Our systematic approach ensures quality results for every project
             </p>
             
