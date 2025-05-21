@@ -209,8 +209,8 @@ const Services = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {serviceItems.map((service, index) => (
-                <Link 
-                  to={`#${service.title.toLowerCase().replace(/\s+/g, '-')}`} 
+                <a 
+                  href={`#${service.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`} 
                   key={service.id} 
                   className="bg-[#222732]/90 border border-white/10 hover:border-noesis-purple/30 rounded-xl p-8 transition-all duration-300 hover:shadow-lg group"
                 >
@@ -225,7 +225,7 @@ const Services = () => {
                       View details <Sparkles className="ml-2 h-4 w-4" />
                     </span>
                   </div>
-                </Link>
+                </a>
               ))}
             </div>
           </div>
@@ -266,7 +266,7 @@ const Services = () => {
         </section>
         
         {/* Cloud Services Section */}
-        <section id="cloud-services-&-devops" className="py-16 sm:py-20 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
+        <section id="cloud-services-and-devops" className="py-16 sm:py-20 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
           <ServiceDetailSection 
             service={cloudService}
             features={cloudFeatures}
