@@ -208,6 +208,9 @@ const Services = () => {
   const aiService = serviceItems.find(service => service.title === "AI Customized Solutions") || serviceItems[4];
   const staffService = serviceItems.find(service => service.title === "AI-Enhanced Staff Solutions") || serviceItems[5];
   
+  // Define consistent section spacing
+  const sectionClassName = "py-20";
+  
   return (
     <div className="flex flex-col min-h-screen bg-[#1A1F2C]">
       <Header />
@@ -219,7 +222,7 @@ const Services = () => {
         />
         
         {/* Services Section with "What We Offer" title */}
-        <section className="py-16 sm:py-24">
+        <section className={sectionClassName}>
           <div className="container mx-auto px-4 sm:px-6 text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               <span className="text-white">What We</span> <span className="text-noesis-purple">Offer</span>
@@ -253,7 +256,7 @@ const Services = () => {
         </section>
         
         {/* Service Detail Sections */}
-        <section id="ui-ux" className="py-16 sm:py-20 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
+        <section id="ui-ux" className={`${sectionClassName} bg-gradient-to-b from-[#1A1F2C] to-[#151a25]`}>
           <ServiceDetailSection 
             service={uiuxService}
             features={uiuxFeatures}
@@ -263,7 +266,7 @@ const Services = () => {
         </section>
         
         {/* Web Development Service Detail Section */}
-        <section id="web-and-application-development" className="py-16 sm:py-20 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
+        <section id="web-and-application-development" className={`${sectionClassName} bg-gradient-to-b from-[#151a25] to-[#1A1F2C]`}>
           <ServiceDetailSection 
             service={webDevService}
             features={webDevFeatures}
@@ -274,7 +277,7 @@ const Services = () => {
         </section>
         
         {/* Graphics Service Detail Section */}
-        <section id="graphics-and-content-creation" className="py-16 sm:py-20 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
+        <section id="graphics-and-content-creation" className={`${sectionClassName} bg-gradient-to-b from-[#1A1F2C] to-[#151a25]`}>
           <ServiceDetailSection 
             service={graphicsService}
             features={graphicsFeatures}
@@ -284,7 +287,7 @@ const Services = () => {
         </section>
         
         {/* Cloud Services Section */}
-        <section id="cloud-services-and-devops" className="py-16 sm:py-20 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
+        <section id="cloud-services-and-devops" className={`${sectionClassName} bg-gradient-to-b from-[#151a25] to-[#1A1F2C]`}>
           <ServiceDetailSection 
             service={cloudService}
             features={cloudFeatures}
@@ -295,7 +298,7 @@ const Services = () => {
         </section>
         
         {/* AI Solutions Section */}
-        <section id="ai-customized-solutions" className="py-16 sm:py-20 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
+        <section id="ai-customized-solutions" className={`${sectionClassName} bg-gradient-to-b from-[#1A1F2C] to-[#151a25]`}>
           <ServiceDetailSection 
             service={aiService}
             features={aiFeatures}
@@ -305,7 +308,7 @@ const Services = () => {
         </section>
         
         {/* AI-Enhanced Staff Solutions Section */}
-        <section id="ai-enhanced-staff-solutions" className="py-16 sm:py-20 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
+        <section id="ai-enhanced-staff-solutions" className={`${sectionClassName} bg-gradient-to-b from-[#151a25] to-[#1A1F2C]`}>
           <ServiceDetailSection 
             service={staffService}
             features={staffingFeatures}
@@ -316,7 +319,7 @@ const Services = () => {
         </section>
         
         {/* Why Choose Us Section */}
-        <section className="py-16 sm:py-24 bg-[#1A1F2C]">
+        <section className={`${sectionClassName} bg-[#1A1F2C]`}>
           <div className="container mx-auto px-4 sm:px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               <span className="text-white">Why Choose</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">Noesis</span><span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">?</span>
@@ -329,7 +332,7 @@ const Services = () => {
         </section>
         
         {/* Our Process Section */}
-        <section className="py-16 sm:py-24 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
+        <section className={`${sectionClassName} bg-gradient-to-b from-[#1A1F2C] to-[#151a25]`}>
           <div className="container mx-auto px-4 sm:px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               <span className="text-white">Our</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">Process</span>
@@ -343,7 +346,7 @@ const Services = () => {
         </section>
         
         {/* AI Capabilities Section */}
-        <section id="ai-capabilities" className="py-16 sm:py-24 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
+        <section id="ai-capabilities" className={`${sectionClassName} bg-gradient-to-b from-[#151a25] to-[#1A1F2C]`}>
           <div className="container mx-auto px-4 sm:px-6 mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               <span className="text-white">Our</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">AI Capabilities</span>
@@ -360,8 +363,8 @@ const Services = () => {
           />
         </section>
         
-        {/* Tech Stack Section - MOVED ABOVE AI PRODUCTS */}
-        <section id="tech-stack" className="py-16 sm:py-24 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
+        {/* Tech Stack Section */}
+        <section id="tech-stack" className={`${sectionClassName} bg-gradient-to-b from-[#1A1F2C] to-[#151a25]`}>
           <div className="container mx-auto px-4 sm:px-6 mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               <span className="text-white">Our</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">Tech Stack</span>
@@ -376,8 +379,8 @@ const Services = () => {
           />
         </section>
         
-        {/* AI Products Section - NOW BELOW TECH STACK */}
-        <section id="ai-products" className="py-16 sm:py-24 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
+        {/* AI Products Section */}
+        <section id="ai-products" className={`${sectionClassName} bg-gradient-to-b from-[#151a25] to-[#1A1F2C]`}>
           <div className="container mx-auto px-4 sm:px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               <span className="text-white">Our</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">AI Products</span>
