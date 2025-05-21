@@ -22,7 +22,13 @@ import {
   Bot,
   LayoutGrid,
   Code,
-  PaintBucket
+  PaintBucket,
+  MessageSquare,
+  Lightbulb,
+  FileCode,
+  RefreshCcw,
+  Upload,
+  Users2
 } from 'lucide-react';
 
 const Services = () => {
@@ -136,6 +142,40 @@ const Services = () => {
       description: "Teams skilled in AI integration across Frontend, Backend, Fullstack, ML, DevOps and cloud technologies."
     }
   ];
+
+  // Process steps
+  const processSteps = [
+    {
+      icon: <MessageSquare className="h-10 w-10 text-noesis-purple" />,
+      title: "Discovery & Consultation",
+      description: "We begin by understanding your business goals, challenges, and requirements through in-depth consultation."
+    },
+    {
+      icon: <Lightbulb className="h-10 w-10 text-noesis-blue" />,
+      title: "Strategy & Planning",
+      description: "Our team develops a comprehensive plan that combines human expertise with AI capabilities to meet your objectives."
+    },
+    {
+      icon: <FileCode className="h-10 w-10 text-noesis-green" />,
+      title: "Design & Development",
+      description: "We create solutions using our hybrid human-AI approach, ensuring both creativity and technical excellence."
+    },
+    {
+      icon: <RefreshCcw className="h-10 w-10 text-yellow-400" />,
+      title: "Testing & Refinement",
+      description: "Rigorous testing ensures your solution performs flawlessly across all platforms and use cases."
+    },
+    {
+      icon: <Upload className="h-10 w-10 text-teal-400" />,
+      title: "Deployment & Support",
+      description: "We handle the launch process and provide ongoing support to ensure continued success."
+    },
+    {
+      icon: <Users2 className="h-10 w-10 text-pink-400" />,
+      title: "Collaboration & Growth",
+      description: "We maintain an ongoing partnership, continuously improving your solution as your business evolves."
+    }
+  ];
   
   // Find the specific services
   const uiuxService = serviceItems.find(service => service.title === "UI/UX") || serviceItems[0];
@@ -155,10 +195,10 @@ const Services = () => {
           backgroundEffect="purple"
         />
         
-        {/* Services Section */}
+        {/* Services Section with "What We Offer" title */}
         <section className="py-16 sm:py-24">
           <ServicesSection 
-            title="Our Services"
+            title="What We Offer"
             services={serviceItems}
           />
         </section>
@@ -236,9 +276,7 @@ const Services = () => {
         <section className="py-16 sm:py-24 bg-[#1A1F2C]">
           <div className="container mx-auto px-4 sm:px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">
-                Why Choose Noesis
-              </span>
+              <span className="text-white">Why Choose</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">Noesis</span><span className="text-white">?</span>
             </h2>
             <p className="text-center text-gray-300 max-w-3xl mx-auto mb-12">
               Our unique approach delivers premium results through our human-AI collaboration
@@ -247,13 +285,40 @@ const Services = () => {
           </div>
         </section>
         
+        {/* Our Process Section */}
+        <section className="py-16 sm:py-24 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
+          <div className="container mx-auto px-4 sm:px-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              <span className="text-white">Our</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">Process</span>
+            </h2>
+            <p className="text-center text-gray-300 max-w-3xl mx-auto mb-12">
+              Our systematic approach ensures quality results for every project
+            </p>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {processSteps.map((step, index) => (
+                <div 
+                  key={index}
+                  className="bg-[#222732] rounded-xl p-6 shadow-lg border border-[#2A2F3C] transition-all duration-300 hover:shadow-xl hover:border-noesis-purple/30"
+                >
+                  <div className="flex flex-col items-center">
+                    <div className="bg-[#1A1F2C] p-3 rounded-full mb-4">
+                      {step.icon}
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-white text-center">{step.title}</h3>
+                    <p className="text-gray-300 text-center text-sm">{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
         {/* AI Capabilities Section */}
-        <section id="ai-capabilities" className="py-16 sm:py-24 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
+        <section id="ai-capabilities" className="py-16 sm:py-24 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
           <div className="container mx-auto px-4 sm:px-6 mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">
-                {aiCapabilitiesSection?.title || "Our AI Capabilities"}
-              </span>
+              <span className="text-white">Our</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">AI Capabilities</span>
             </h2>
             <p className="text-center text-gray-300 max-w-3xl mx-auto mb-8">
               Leveraging artificial intelligence to enhance every aspect of our services
@@ -267,12 +332,51 @@ const Services = () => {
           />
         </section>
         
+        {/* AI Products Section */}
+        <section id="ai-products" className="py-16 sm:py-24 bg-gradient-to-b from-[#1A1F2C] to-[#151a25]">
+          <div className="container mx-auto px-4 sm:px-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              <span className="text-white">Our</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">AI Products</span>
+            </h2>
+            <p className="text-center text-gray-300 max-w-3xl mx-auto mb-12">
+              Our suite of AI-powered products designed to transform your business
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {aiProducts.map((product, index) => (
+                <div 
+                  key={index}
+                  className="bg-[#1e1e24]/90 border border-white/10 rounded-xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:border-noesis-purple/20"
+                >
+                  <div className="flex justify-center mb-6">
+                    <img 
+                      src={product.logoUrl}
+                      alt={product.title}
+                      className="h-16 object-contain"
+                    />
+                  </div>
+                  <p className="text-gray-300 text-center mb-6">
+                    {product.description}
+                  </p>
+                  <div className="flex justify-center">
+                    <a 
+                      href={product.ctaUrl} 
+                      className="inline-flex items-center px-5 py-2 rounded-md bg-noesis-purple hover:bg-noesis-purple/90 text-white transition-colors"
+                    >
+                      {product.ctaText}
+                      <span className="ml-2">→</span>
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
         <section id="tech-stack" className="py-16 sm:py-24 bg-gradient-to-b from-[#151a25] to-[#1A1F2C]">
           <div className="container mx-auto px-4 sm:px-6 mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">
-                {techStackSection?.title || "Our Technology Stack"}
-              </span>
+              <span className="text-white">Our</span> <span className="bg-gradient-to-r from-[#a074ff] to-[#8257e6] bg-clip-text text-transparent">Tech Stack</span>
             </h2>
             <p className="text-center text-gray-300 max-w-3xl mx-auto mb-8">
               We use cutting-edge technologies to build powerful, scalable solutions
