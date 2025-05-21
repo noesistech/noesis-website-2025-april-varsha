@@ -150,7 +150,7 @@ const Services = () => {
       <Header />
       <main className="flex-grow">
         <SubpageHero 
-          title="Our Services" 
+          title="Our Services & Capabilities" 
           subtitle="Discover the comprehensive range of services we offer"
           backgroundEffect="purple"
         />
