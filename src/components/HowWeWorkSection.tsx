@@ -82,8 +82,8 @@ const HowWeWorkSection: React.FC = () => {
 
   return (
     <>
-      {/* Desktop & Tablet Process Steps */}
-      <div className="hidden md:block">
+      {/* Desktop Process Steps */}
+      <div className="hidden lg:block">
         <div className="relative mb-16 mt-20">
           {/* Progress line */}
           <div className="absolute top-10 left-0 w-full h-1 bg-gradient-to-r from-noesis-purple/30 via-noesis-purple to-noesis-purple/30 rounded-full"></div>
@@ -103,6 +103,28 @@ const HowWeWorkSection: React.FC = () => {
                     <h3 className="text-xl font-bold text-white text-center mb-3">{step.title}</h3>
                   </div>
                   <p className="text-gray-300 text-center">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      {/* Tablet Process Steps - New 3x2 Grid Layout */}
+      <div className="hidden md:block lg:hidden">
+        <div className="relative mb-16 mt-20">
+          <div className="grid grid-cols-3 gap-6">
+            {workSteps.map((step, index) => (
+              <div key={step.id} className="relative mb-8">
+                <div className="bg-[#222732] rounded-xl p-6 shadow-lg shadow-noesis-purple/10 border border-[#2A2F3C]
+                              transform transition-all duration-300 hover:shadow-xl hover:shadow-noesis-purple/20 h-full">
+                  <div className="flex flex-col items-center mb-3">
+                    <div className="bg-[#1A1F2C] p-4 rounded-full mb-4 border border-noesis-purple/30">
+                      {step.icon}
+                    </div>
+                    <h3 className="text-lg font-bold text-white text-center leading-tight mb-2">{step.title}</h3>
+                  </div>
+                  <p className="text-gray-300 text-center text-sm">{step.description}</p>
                 </div>
               </div>
             ))}
