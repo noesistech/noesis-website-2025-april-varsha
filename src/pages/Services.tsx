@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import SubpageHero from '../components/SubpageHero';
@@ -238,7 +237,6 @@ const Services = () => {
             features={uiuxFeatures}
             bgColor="from-[#1c212e]/80 to-[#151a25]"
             accentColor="border-blue-500/30"
-            imageUrl="/lovable-uploads/83d6e966-1792-4d06-8a94-2e4840a6f17a.png"
           />
         </section>
         
@@ -250,7 +248,6 @@ const Services = () => {
             isAlternate={true}
             bgColor="from-[#151a25]/80 to-[#1c212e]"
             accentColor="border-green-500/30"
-            imageUrl="/lovable-uploads/b1889f4a-cdf6-40f8-907c-386a883fbeb6.png"
           />
         </section>
         
@@ -261,7 +258,6 @@ const Services = () => {
             features={graphicsFeatures}
             bgColor="from-[#1c212e]/80 to-[#151a25]"
             accentColor="border-pink-500/30"
-            imageUrl="/lovable-uploads/af4dc9fd-e708-4fc8-b6e5-d4dee4f5961d.png"
           />
         </section>
         
@@ -273,7 +269,6 @@ const Services = () => {
             isAlternate={true}
             bgColor="from-[#151a25]/80 to-[#1c212e]"
             accentColor="border-cyan-500/30"
-            imageUrl="/lovable-uploads/9974d449-5315-4593-aa82-cae4ebd2c8cb.png"
           />
         </section>
         
@@ -284,7 +279,6 @@ const Services = () => {
             features={aiFeatures}
             bgColor="from-[#1c212e]/80 to-[#151a25]"
             accentColor="border-purple-500/30"
-            imageUrl="/lovable-uploads/b2d0275a-2da4-4059-aec3-c772f2449a67.png"
           />
         </section>
         
@@ -296,7 +290,6 @@ const Services = () => {
             isAlternate={true}
             bgColor="from-[#151a25]/80 to-[#1c212e]"
             accentColor="border-orange-500/30"
-            imageUrl="/lovable-uploads/1c24be48-3404-422d-8078-2c2a0696f12c.png"
           />
         </section>
         
