@@ -51,7 +51,7 @@ const PromiseSection = () => {
         
         <div className="max-w-3xl mx-auto">
           <div ref={promiseCardRef} className="bg-[#1d2130]/80 backdrop-blur-sm rounded-xl p-6 md:p-10 transition-transform duration-300 ease-out shadow-xl border border-white/5 hover:border-white/10">
-            <p className="text-2xl sm:text-3xl lg:text-3xl font-light tracking-wide text-white text-center">
+            <p className="text-2xl sm:text-3xl lg:text-3xl font-light tracking-wide text-white text-center leading-relaxed">
               <span>Human </span>
               <span className="text-noesis-blue">creativity</span>
               <span>, AI </span>

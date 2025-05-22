@@ -70,10 +70,10 @@ const PromisePanel = ({
         <div className="refraction-layer"></div>
         <div className="glass-highlight"></div>
         
-        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">{title}</h3>
-        {subtitle && <p className="text-lg text-gray-300 mb-6">{subtitle}</p>}
+        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">{title}</h3>
+        {subtitle && <p className="text-lg text-gray-300 mb-6 leading-relaxed">{subtitle}</p>}
         
-        <p ref={promiseTextRef} className="promise-text text-3xl md:text-5xl lg:text-6xl font-bold">
+        <p ref={promiseTextRef} className="promise-text text-3xl md:text-5xl lg:text-6xl font-bold leading-tight">
           {renderPromiseText()}
         </p>
       </div>

@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -48,6 +49,13 @@
     margin-bottom: 2rem; /* reduced from 2.5rem */
   }
   
+  /* New standard text class for consistent body text */
+  .text-standard {
+    font-size: 1rem; /* 16px base font size */
+    line-height: 1.6; /* 1.6 is a good readable line height */
+    color: #e5e7eb; /* text-gray-200 - slightly off-white for better readability */
+  }
+  
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-[#997aff] to-[#987aff];
   }
@@ -96,6 +104,16 @@
 @layer base {
   body {
     @apply bg-[#1A1F2C] text-white;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  
+  /* Base styles for all paragraphs to ensure consistency */
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #e5e7eb; /* text-gray-200 */
+    margin-bottom: 1rem;
   }
 }
 
@@ -126,8 +144,9 @@ html {
     font-weight: 500;
   }
   
-  p.text-xl, .text-xl {
-    font-size: 1rem;
+  p, .text-standard, p.text-xl, .text-xl {
+    font-size: 0.9375rem; /* Slightly smaller on mobile for better fit */
+    line-height: 1.6;
   }
   
   /* Standardized mobile section spacing */
@@ -169,6 +188,7 @@ section p:not(.section-title) + p,
 main section h2 + p {
   font-size: 1.125rem !important;
   margin-bottom: 2rem !important; /* reduced from 2.5rem */
+  line-height: 1.6 !important;
 }
 
 /* Ensure proper scaling on mobile */

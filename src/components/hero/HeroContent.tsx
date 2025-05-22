@@ -39,7 +39,7 @@ const HeroContent = () => {
           </>
         )}
       </h1>
-      <p className="text-standard mb-6 sm:mb-7 md:mb-8 max-w-2xl mx-0 py-0 px-0 text-xl">
+      <p className="text-standard mb-6 sm:mb-7 md:mb-8 max-w-2xl mx-0 py-0 px-0">
         As an AI-native agency, we combine cutting-edge artificial intelligence with human expertise to deliver digital solutions that transform businesses and exceed expectations.
       </p>
       <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">

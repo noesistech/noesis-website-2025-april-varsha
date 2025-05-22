@@ -38,7 +38,7 @@ const AIAssistantBanner = () => {
                 <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
                   Try Our <span className="text-noesis-purple">AI Assistant</span>
                 </h2>
-                <p className="text-gray-300">
+                <p className="text-standard">
                   Get immediate answers to your questions with our AI assistant. Available 24/7 to help with your inquiries.
                 </p>
               </div>

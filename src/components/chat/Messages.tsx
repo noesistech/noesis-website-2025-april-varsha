@@ -62,6 +62,10 @@ const Messages = ({ handlePromptClick }: MessagesProps) => {
                   <table className="table table-bordered" {...props} />
               </div>
           );
+      },
+      p({ node, ...props }) {
+          // Adding line-height to markdown paragraphs
+          return <p className="leading-relaxed" style={{ lineHeight: '1.6' }} {...props} />;
       }
   }
 
