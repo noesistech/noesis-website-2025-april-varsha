@@ -56,7 +56,9 @@ const About = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-white">
                 Our <span className="text-noesis-purple">Leadership</span>
               </h2>
-              <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
+              <p className="section-subtitle mt-4">
+                Meet the visionaries driving innovation at Noesis
+              </p>
             </div>
             
             <FounderSection />

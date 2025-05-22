@@ -1,7 +1,9 @@
+
 import React, { useEffect, useRef } from 'react';
 import { useContent } from '@/contexts/ContentContext';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
+
 const CompanyHistory = () => {
   const {
     aboutSection
@@ -13,7 +15,9 @@ const CompanyHistory = () => {
             Our <span className="text-noesis-purple">Journey</span> Since 2009
           </h2>
           
-          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full"></div>
+          <p className="section-subtitle">
+            Evolving from digital pioneers to AI innovation leaders
+          </p>
           
           <div className="prose prose-lg prose-invert max-w-none">
             <p className="text-gray-300 leading-relaxed text-base">
@@ -41,6 +45,7 @@ const CompanyHistory = () => {
       </div>
     </section>;
 };
+
 interface TimelineItemProps {
   year: string;
   leftContent: string;
@@ -48,6 +53,7 @@ interface TimelineItemProps {
   dotColor: string;
   index: number;
 }
+
 const TimelineItem = ({
   year,
   leftContent,
@@ -186,4 +192,5 @@ const TimelineItem = ({
       </div>
     </div>;
 };
+
 export default CompanyHistory;
