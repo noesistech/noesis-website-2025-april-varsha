@@ -29,7 +29,7 @@ const AIAssistantBanner = () => {
   };
 
   return (
-    <section className="py-12 bg-gradient-to-r from-noesis-purple/20 to-noesis-blue/20 overflow-hidden relative">
+    <section className="page-section bg-gradient-to-r from-noesis-purple/20 to-noesis-blue/20 overflow-hidden relative">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="bg-gray-900/80 backdrop-blur-md border border-gray-800/50 rounded-lg p-8">

@@ -40,9 +40,9 @@ const PromiseSection = () => {
   }, [isMobile]);
 
   return (
-    <section className="py-4 sm:py-16">
+    <section className="page-section">
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-8">
+        <div className="text-center max-w-3xl mx-auto mb-8">
           <h2 className="section-title">
             Our <span className="text-noesis-purple">Promise</span>
           </h2>

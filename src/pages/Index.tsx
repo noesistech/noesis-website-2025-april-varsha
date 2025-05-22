@@ -55,8 +55,8 @@ const Index = () => {
         <AICapabilitiesPreviewSection capabilities={aiCapabilities} />
         <BrainstormerSection products={aiProducts} />
         
-        {/* Updated Founder Section with consistent styling */}
-        <section className="page-section py-16 sm:py-20 overflow-hidden relative">
+        {/* Founder Section with consistent spacing */}
+        <section className="page-section relative overflow-hidden">
           <div className="container mx-auto px-4 sm:px-6 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-8">
               <h2 className="section-title">
@@ -77,7 +77,7 @@ const Index = () => {
         <ClientsSection />
       </main>
       
-      {/* Remove margin from container and update comment */}
+      {/* Contact footer container */}
       <div className="contact-footer-container" style={{ marginBottom: 0, paddingBottom: 0 }}>
         <ContactBanner />
         <Footer />

@@ -54,7 +54,7 @@ const HeroSection = () => {
   return (
     <div 
       ref={heroRef}
-      className="min-h-[85vh] md:min-h-[90vh] flex flex-col justify-center relative overflow-hidden pt-16 md:pt-20"
+      className="min-h-[90vh] flex flex-col justify-center relative overflow-hidden pt-16 md:pt-20"
       style={{
         background: 'linear-gradient(135deg, rgba(15,17,26,1) 0%, rgba(40,24,64,1) 100%)'
       }}
