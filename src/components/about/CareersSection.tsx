@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { Briefcase, FileText, User, Mail } from 'lucide-react';
+import React, { useState } from 'react';
+import { Briefcase, FileText, User, Mail, Upload } from 'lucide-react';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "@/components/ui/use-toast";
+import Dropzone from "@/components/chat/Dropzone";
 
 const applicationFormSchema = z.object({
   fullName: z.string().min(2, {
@@ -31,6 +32,8 @@ const applicationFormSchema = z.object({
 type ApplicationFormValues = z.infer<typeof applicationFormSchema>;
 
 const CareersSection = () => {
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+
   // Define default values for the form
   const defaultValues: Partial<ApplicationFormValues> = {
     fullName: "",
@@ -46,9 +49,32 @@ const CareersSection = () => {
     defaultValues
   });
 
+  // Handle file drop
+  const handleFileDrop = (files: File[]) => {
+    if (files.length > 0) {
+      const file = files[0];
+      setResumeFile(file);
+      
+      // You could also update the form value if needed
+      form.setValue("resume", file.name);
+      
+      toast({
+        title: "Resume uploaded",
+        description: `File "${file.name}" is ready to be submitted with your application.`,
+        variant: "default"
+      });
+    }
+  };
+
   // Handle form submission
   const onSubmit = (data: ApplicationFormValues) => {
-    console.log("Form data submitted:", data);
+    // Include the file in the submission data
+    const submissionData = {
+      ...data,
+      resumeFile
+    };
+    
+    console.log("Form data submitted:", submissionData);
 
     // Show success toast notification
     toast({
@@ -57,7 +83,8 @@ const CareersSection = () => {
       variant: "default"
     });
 
-    // Reset the form after submission
+    // Reset the form and file after submission
+    setResumeFile(null);
     form.reset();
   };
   
@@ -138,14 +165,30 @@ const CareersSection = () => {
                 field
               }) => <FormItem>
                       <FormLabel className="text-white flex items-center">
-                        <FileText className="h-4 w-4 mr-2 inline" />
-                        Resume Link
+                        <Upload className="h-4 w-4 mr-2 inline" />
+                        Resume
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder="Link to your resume (Google Drive, Dropbox, etc.)" {...field} className="bg-[#242938] border-purple-500/20 focus:border-purple-500/50 text-white" />
+                        <Dropzone onDrop={handleFileDrop}>
+                          <div className="border-2 border-dashed border-purple-500/30 rounded-lg p-6 cursor-pointer hover:border-purple-500/50 transition-colors text-center bg-[#242938]">
+                            <Upload className="h-8 w-8 mx-auto text-gray-400 mb-2" />
+                            <p className="text-gray-300">
+                              {resumeFile ? (
+                                <span className="text-green-400">{resumeFile.name} selected</span>
+                              ) : (
+                                <>
+                                  <span className="font-medium">Click to upload</span> or drag and drop your resume
+                                </>
+                              )}
+                            </p>
+                            <p className="text-xs text-gray-500 mt-2">
+                              Supported formats: PDF, DOC, DOCX (Max 5MB)
+                            </p>
+                          </div>
+                        </Dropzone>
                       </FormControl>
                       <FormDescription className="text-gray-400">
-                        Provide a link to your resume or portfolio
+                        Upload your resume or CV
                       </FormDescription>
                       <FormMessage />
                     </FormItem>} />
