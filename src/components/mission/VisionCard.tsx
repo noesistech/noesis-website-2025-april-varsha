@@ -1,12 +1,9 @@
-
 import React from 'react';
 import { Gem } from 'lucide-react';
-
 interface VisionCardProps {
   title: string;
   description: string;
 }
-
 const VisionCard = ({
   title,
   description
@@ -15,7 +12,7 @@ const VisionCard = ({
     animationDelay: '0.2s'
   }}>
       {/* Icon positioned on left edge of card consistently for all devices */}
-      <div className="z-20 absolute top-8 -left-6 bg-noesis-blue/15 text-noesis-blue rounded-full p-4 md:p-6 shadow-lg">
+      <div className="z-20 absolute top-8 -left-6 bg-noesis-blue/15 text-noesis-blue rounded-full p-4 md:p-6 shadow-lg my-0 mx-[40px]">
         <Gem className="h-8 w-8 md:h-12 md:w-12" />
       </div>
       {/* Card content */}
@@ -30,5 +27,4 @@ const VisionCard = ({
       </div>
     </div>;
 };
-
 export default VisionCard;
