@@ -6,6 +6,16 @@ import { Button } from '@/components/ui/button';
 import { useContent } from '@/contexts/ContentContext';
 import { getIconByName, serviceIconColors } from '@/components/hero/ServiceCard';
 
+// Map service titles to their corresponding section IDs on the services page
+const serviceToSectionMap = {
+  'UI/UX': 'uiux',
+  'Web and Application Development': 'webdev',
+  'Graphics and Content Creation': 'graphics',
+  'Cloud Services & DevOps': 'cloud',
+  'AI Customized Solutions': 'ai',
+  'AI-Enhanced Staff Solutions': 'staff'
+};
+
 const ServicesPreviewSection = () => {
   const {
     serviceItems
@@ -24,16 +34,27 @@ deliver exceptional solutions tailored to your needs.
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
-          {serviceItems.map((service, index) => <Link to="/services#services" key={service.id} className="bg-gradient-to-b from-[#222732]/90 to-[#1D212B]/80 backdrop-blur-sm rounded-xl p-5 border border-white/10 shadow-xl hover:shadow-noesis-purple/30 transition-all duration-300 flex flex-col items-center text-center hover:border-noesis-purple/30 hover:scale-105 group">
-              <div className={`bg-[#1A1F2C]/90 p-3 rounded-full w-fit mb-3 group-hover:bg-noesis-purple/20 transition-colors duration-300 border border-white/5 group-hover:border-noesis-purple/30`}>
-                <div className={`${serviceIconColors[service.icon_name as keyof typeof serviceIconColors] || 'text-noesis-purple'} group-hover:text-white transition-colors duration-300`}>
-                  {getIconByName(service.icon_name)}
+          {serviceItems.map((service, index) => {
+            // Get the correct section ID for this service
+            const sectionId = serviceToSectionMap[service.title] || '';
+            
+            return (
+              <Link 
+                to={`/services#${sectionId}`} 
+                key={service.id} 
+                className="bg-gradient-to-b from-[#222732]/90 to-[#1D212B]/80 backdrop-blur-sm rounded-xl p-5 border border-white/10 shadow-xl hover:shadow-noesis-purple/30 transition-all duration-300 flex flex-col items-center text-center hover:border-noesis-purple/30 hover:scale-105 group"
+              >
+                <div className={`bg-[#1A1F2C]/90 p-3 rounded-full w-fit mb-3 group-hover:bg-noesis-purple/20 transition-colors duration-300 border border-white/5 group-hover:border-noesis-purple/30`}>
+                  <div className={`${serviceIconColors[service.icon_name as keyof typeof serviceIconColors] || 'text-noesis-purple'} group-hover:text-white transition-colors duration-300`}>
+                    {getIconByName(service.icon_name)}
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-base font-semibold text-white group-hover:text-noesis-purple transition-colors duration-300">
-                {service.title}
-              </h3>
-            </Link>)}
+                <h3 className="text-base font-semibold text-white group-hover:text-noesis-purple transition-colors duration-300">
+                  {service.title}
+                </h3>
+              </Link>
+            );
+          })}
         </div>
 
         <div className="text-center">
