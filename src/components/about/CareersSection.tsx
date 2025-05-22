@@ -72,17 +72,8 @@ const CareersSection = () => {
           </p>
         </div>
 
-        {/* General Application Form */}
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-white">
-              General <span className="text-noesis-purple">Application</span>
-            </h3>
-            <p className="text-center text-gray-300 max-w-3xl mx-auto text-base sm:text-lg mt-4">
-              Don't see a perfect match? Submit your resume for future opportunities
-            </p>
-          </div>
-          
+        {/* Application Form */}
+        <div className="max-w-3xl mx-auto">          
           <div className="bg-gradient-to-br from-purple-900/10 to-indigo-900/10 border border-purple-500/20 rounded-xl p-6 md:p-8 py-[30px] my-[70px]">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
