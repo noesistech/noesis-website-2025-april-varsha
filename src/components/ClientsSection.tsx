@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useContent } from '@/contexts/ContentContext';
 import { useDeviceType } from '@/hooks/use-mobile';
@@ -81,9 +82,7 @@ const ClientsSection = () => {
             </div>
           </div>
           
-          {/* Gradient overlays for smooth fade effect on edges */}
-          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-noesis-darker to-transparent z-10"></div>
-          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-noesis-darker to-transparent z-10"></div>
+          {/* Removing the gradient overlays as requested */}
         </div>
       </div>
     </section>
