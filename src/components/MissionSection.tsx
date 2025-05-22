@@ -41,15 +41,19 @@ const MissionSection = ({
   return (
     <section id="mission" ref={sectionRef} className="page-section relative overflow-hidden bg-[#1A1F2C]">
       <BackgroundPattern gridRows={gridRows} gridCols={gridCols} />
-      <div className="container mx-auto px-6 relative z-10 py-0">
-        <div className="text-center max-w-4xl mx-auto mb-8">
+      <div className="container mx-auto px-6 relative z-10 py-12 md:py-16">
+        <div className="text-center max-w-4xl mx-auto mb-8 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             Our <span className="text-noesis-purple">Mission & Vision</span>
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-6xl mx-auto mb-10">
-          <MissionCard title={missionSectionData.mission_title} description={missionSectionData.mission_description} />
-          <VisionCard title={missionSectionData.vision_title} description={missionSectionData.vision_description} />
+          <div className="h-full flex">
+            <MissionCard title={missionSectionData.mission_title} description={missionSectionData.mission_description} />
+          </div>
+          <div className="h-full flex">
+            <VisionCard title={missionSectionData.vision_title} description={missionSectionData.vision_description} />
+          </div>
         </div>
         {showPromisePanel && <PromisePanel title={missionSectionData.promise_title} subtitle={missionSectionData.promise_subtitle} text={missionSectionData.promise_text} />}
       </div>
