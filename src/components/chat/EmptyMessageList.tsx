@@ -25,7 +25,7 @@ const EmptyMessageList = ({ handleSuggestionClick }: EmptyMessageListProps) => {
         <p className="text-white/70">Choose a question below to start your conversation, or type your own question</p>
       </div>
       
-      <div className="w-full max-w-xl grid grid-cols-1 sm:grid-cols-2 gap-2">
+      <div className="w-full max-w-xl grid grid-cols-1 sm:grid-cols-2 gap-2 pb-10 sm:pb-12">
         {displayPrompts.map((prompt, index) => (
           <button
             key={index}
