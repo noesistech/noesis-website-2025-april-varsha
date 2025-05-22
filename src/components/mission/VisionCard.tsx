@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Gem } from 'lucide-react';
 interface VisionCardProps {
@@ -13,7 +12,7 @@ const VisionCard = ({
     animationDelay: '0.2s'
   }}>
       {/* Icon positioned on top edge of card */}
-      <div className="z-20 absolute -top-6 left-0 -translate-x-1/2 bg-noesis-blue/15 text-noesis-blue rounded-full p-4 md:p-6 shadow-lg">
+      <div className="z-20 absolute -top-6 left-0 -translate-x-1/2 bg-noesis-blue/15 text-noesis-blue rounded-full p-4 md:p-6 shadow-lg my-[32px] mx-[66px]">
         <Gem className="h-8 w-8 md:h-12 md:w-12" />
       </div>
       {/* Card content */}
