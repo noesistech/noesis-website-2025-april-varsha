@@ -37,7 +37,7 @@ const ClientsSection = () => {
           </div>}
         
         {/* Testimonials - Carousel for mobile/tablet, grid for desktop */}
-        {testimonials && testimonials.length > 0 && <div className="mb-10">
+        {testimonials && testimonials.length > 0 && <div className="mb-16">
             {showCarousel ? <Carousel opts={{
           align: "center",
           loop: true
