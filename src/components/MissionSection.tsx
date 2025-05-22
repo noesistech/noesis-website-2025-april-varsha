@@ -47,7 +47,8 @@ const MissionSection = ({
             Our <span className="text-noesis-purple">Mission & Vision</span>
           </h2>
           <p className="section-subtitle mt-4">
-            {missionSectionData.mission_subtitle} and {missionSectionData.vision_subtitle}
+            {missionSectionData.mission_subtitle} <br />
+            {missionSectionData.vision_subtitle}
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-6xl mx-auto mb-10">
