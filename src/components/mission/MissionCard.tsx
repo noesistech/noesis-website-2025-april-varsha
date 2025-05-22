@@ -1,19 +1,16 @@
-
 import React from 'react';
 import { Flag } from 'lucide-react';
-
 interface MissionCardProps {
   title: string;
   description: string;
 }
-
 const MissionCard = ({
   title,
   description
 }: MissionCardProps) => {
   return <div className="relative flex flex-col items-center h-full">
       {/* Icon positioned on left edge of card consistently for all devices */}
-      <div className="z-20 absolute top-8 -left-6 bg-noesis-purple/15 text-noesis-purple rounded-full p-4 md:p-6 shadow-lg">
+      <div className="z-20 absolute top-8 -left-6 bg-noesis-purple/15 text-noesis-purple rounded-full p-4 md:p-6 shadow-lg mx-[40px]">
         <Flag className="h-8 w-8 md:h-12 md:w-12" />
       </div>
       {/* Card content */}
@@ -28,5 +25,4 @@ const MissionCard = ({
       </div>
     </div>;
 };
-
 export default MissionCard;
