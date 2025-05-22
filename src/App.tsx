@@ -16,16 +16,19 @@ const AppContent = () => {
   const location = useLocation();
   
   useEffect(() => {
-    // Only scroll to chatbot section if explicitly requested with hash
-    if (location.hash === '#chatbot') {
+    // Handle hash-based navigation
+    if (location.hash) {
       setTimeout(() => {
-        const chatbotSection = document.getElementById('chatbot');
-        if (chatbotSection) {
-          chatbotSection.scrollIntoView({ behavior: 'smooth' });
+        const element = document.getElementById(location.hash.substring(1));
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
         }
       }, 300);
+    } else {
+      // If no hash, scroll to top
+      window.scrollTo(0, 0);
     }
-  }, [location.hash]); 
+  }, [location.pathname, location.hash]); 
   
   return (
     <>

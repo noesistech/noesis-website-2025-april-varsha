@@ -222,7 +222,7 @@ const Services = () => {
         />
         
         {/* Services Section with "What We Offer" title */}
-        <section className={sectionClassName}>
+        <section id="what-we-offer" className={sectionClassName}>
           <div className="container mx-auto px-4 sm:px-6 text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               <span className="text-white">What We</span> <span className="text-noesis-purple">Offer</span>

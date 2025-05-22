@@ -7,13 +7,14 @@ import { useContent } from '@/contexts/ContentContext';
 import { getIconByName, serviceIconColors } from '@/components/hero/ServiceCard';
 
 // Map service titles to their corresponding section IDs on the services page
+// These IDs must match exactly with the section IDs on the services page
 const serviceToSectionMap = {
-  'UI/UX': 'uiux',
-  'Web and Application Development': 'webdev',
-  'Graphics and Content Creation': 'graphics',
-  'Cloud Services & DevOps': 'cloud',
-  'AI Customized Solutions': 'ai',
-  'AI-Enhanced Staff Solutions': 'staff'
+  'UI/UX': 'ui-ux',
+  'Web and Application Development': 'web-and-application-development',
+  'Graphics and Content Creation': 'graphics-and-content-creation',
+  'Cloud Services & DevOps': 'cloud-services-and-devops',
+  'AI Customized Solutions': 'ai-customized-solutions',
+  'AI-Enhanced Staff Solutions': 'ai-enhanced-staff-solutions'
 };
 
 const ServicesPreviewSection = () => {
@@ -59,7 +60,7 @@ deliver exceptional solutions tailored to your needs.
 
         <div className="text-center">
           <Button variant="noesis" size="lg" className="shadow-lg hover:shadow-noesis-purple/50" asChild>
-            <Link to="/services#services" className="inline-flex items-center gap-2">
+            <Link to="/services#what-we-offer" className="inline-flex items-center gap-2">
               View All Services 
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Link>
