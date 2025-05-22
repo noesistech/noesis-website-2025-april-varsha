@@ -159,7 +159,7 @@ const CultureSection = () => {
           </p>
         </div>
 
-        {/* Culture highlights cards */}
+        {/* Culture highlights cards - adjusted for better responsive layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {/* Culture Highlights Card */}
           <div className="bg-gradient-to-br from-purple-900/30 to-indigo-900/30 border border-purple-500/20 rounded-xl p-6 hover:border-purple-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10">
@@ -167,7 +167,7 @@ const CultureSection = () => {
               <div className="bg-purple-500/20 p-3 rounded-xl">
                 <Award className="h-6 w-6 text-purple-300" />
               </div>
-              <h3 className="text-xl font-bold text-white">Culture Highlights</h3>
+              <h3 className="text-lg sm:text-xl font-bold text-white">Culture Highlights</h3>
             </div>
             <p className="text-gray-300 leading-relaxed">
               Our culture is built on innovation, trust, and continuous learning. 
@@ -182,7 +182,7 @@ const CultureSection = () => {
               <div className="bg-indigo-500/20 p-3 rounded-xl">
                 <Building className="h-6 w-6 text-indigo-300" />
               </div>
-              <h3 className="text-xl font-bold text-white">Work Culture</h3>
+              <h3 className="text-lg sm:text-xl font-bold text-white">Work Culture</h3>
             </div>
             <p className="text-gray-300 leading-relaxed">
               We value work-life balance and provide flexible schedules. 
@@ -191,13 +191,13 @@ const CultureSection = () => {
             </p>
           </div>
 
-          {/* Remote/Hybrid Work Card */}
+          {/* Remote/Hybrid Work Card - Fixed title to avoid overflow on small screens */}
           <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/20 rounded-xl p-6 hover:border-blue-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10">
             <div className="flex items-center gap-4 mb-4">
               <div className="bg-blue-500/20 p-3 rounded-xl">
                 <Laptop className="h-6 w-6 text-blue-300" />
               </div>
-              <h3 className="text-xl font-bold text-white">Remote/Hybrid Work</h3>
+              <h3 className="text-lg sm:text-xl font-bold text-white whitespace-normal">Remote/Hybrid</h3>
             </div>
             <p className="text-gray-300 leading-relaxed">
               We embrace a flexible approach to work, supporting both in-office 
