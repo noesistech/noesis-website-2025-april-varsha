@@ -12,8 +12,8 @@ const VisionCard = ({
   return <div className="relative flex flex-col items-center h-full" style={{
     animationDelay: '0.2s'
   }}>
-      {/* Icon above card and overlapping on the left */}
-      <div className="z-20 absolute -top-10 left-0 -translate-x-1/2 bg-noesis-blue/15 text-noesis-blue rounded-full p-4 md:p-6 shadow-lg">
+      {/* Icon positioned on top edge of card */}
+      <div className="z-20 absolute -top-6 left-0 -translate-x-1/2 bg-noesis-blue/15 text-noesis-blue rounded-full p-4 md:p-6 shadow-lg">
         <Gem className="h-8 w-8 md:h-12 md:w-12" />
       </div>
       {/* Card content */}
