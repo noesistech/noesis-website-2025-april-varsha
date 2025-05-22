@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -10,11 +9,12 @@ import { industrySpecificSolutionsData } from '@/data/content/solutions';
 import SubpageHero from '@/components/SubpageHero';
 import ContactBanner from '@/components/ContactBanner';
 import { useLocation } from 'react-router-dom';
-
 const Solutions = () => {
-  const { solutionsSection, solutionItems } = useContent();
+  const {
+    solutionsSection,
+    solutionItems
+  } = useContent();
   const location = useLocation();
-
   useEffect(() => {
     // Check if there's a hash in the URL and scroll to that element
     if (location.hash) {
@@ -22,48 +22,31 @@ const Solutions = () => {
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({
+            behavior: 'smooth'
+          });
         }
       }, 300); // Add a slight delay to ensure DOM is fully loaded
     } else {
       window.scrollTo(0, 0);
     }
   }, [location]);
-
-  return (
-    <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
+  return <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
       <Header />
       <main>
         {/* Hero section */}
-        <SubpageHero
-          title="Our Solutions"
-          gradientText="Solutions"
-          backgroundEffect="green"
-          subtitle="Transformative AI technologies built to drive innovation and efficiency for your business"
-        />
+        <SubpageHero title="Our Solutions" gradientText="Solutions" backgroundEffect="green" subtitle="Transformative AI technologies built to drive innovation and efficiency for your business" />
 
         {/* Solutions Section */}
-        <SolutionsSection 
-          title="Core AI Product Offerings" 
-          subtitle="Carefully crafted solutions powered by AI to solve your most complex business challenges"
-          solutions={solutionItems} 
-          highlightLastWord={true}
-        />
+        <SolutionsSection title="Core AI Product Offerings" subtitle="Carefully crafted solutions powered by AI to solve your most complex business challenges" solutions={solutionItems} highlightLastWord={true} />
 
         {/* Industry-Specific Solutions Section */}
-        <IndustrySection 
-          title={industrySpecificSolutionsData.title}
-          industries={industrySpecificSolutionsData.industries}
-        />
+        <IndustrySection title={industrySpecificSolutionsData.title} industries={industrySpecificSolutionsData.industries} />
 
         {/* Brainstormer Platform Overview Section */}
         <section id="brainstormer" className="py-12 border-t border-white/10">
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
-            The <span className="text-noesis-purple">Brainstormer Suite</span>
-          </h2>
-          <p className="text-center text-gray-300 mt-4 text-base sm:text-lg max-w-3xl mx-auto">
-            Our flagship AI platform built to transform how businesses leverage artificial intelligence
-          </p>
+          
+          
           <BrainstormerOverviewSection />
         </section>
         
@@ -71,8 +54,6 @@ const Solutions = () => {
         <ContactBanner />
       </main>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Solutions;
