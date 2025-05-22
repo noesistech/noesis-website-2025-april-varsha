@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Heart, Briefcase, ShoppingCart, Factory, GraduationCap, Building } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 interface Industry {
   id: string;
@@ -18,64 +19,101 @@ interface IndustrySectionProps {
   industries: Industry[];
 }
 
-const IndustrySection: React.FC<IndustrySectionProps> = ({
-  title,
-  industries
+const IndustrySection: React.FC<IndustrySectionProps> = ({ 
+  title, 
+  subtitle,
+  industries 
 }) => {
+  const [activeIndustry, setActiveIndustry] = useState(industries[0]?.id || '');
+
+  const getIconByName = (iconName: string) => {
+    const normalizedIconName = iconName.toLowerCase();
+    switch (normalizedIconName) {
+      case 'heart':
+        return <Heart className="h-6 w-6 text-red-400" />;
+      case 'briefcase':
+        return <Briefcase className="h-6 w-6 text-blue-400" />;
+      case 'shoppingcart':
+        return <ShoppingCart className="h-6 w-6 text-purple-400" />;
+      case 'factory':
+        return <Factory className="h-6 w-6 text-green-400" />;
+      case 'graduationcap':
+        return <GraduationCap className="h-6 w-6 text-yellow-400" />;
+      case 'building':
+        return <Building className="h-6 w-6 text-orange-400" />;
+      default:
+        return <Heart className="h-6 w-6 text-purple-400" />;
+    }
+  };
+
+  const selectedIndustry = industries.find(industry => industry.id === activeIndustry) || industries[0];
+
   return (
-    <section className="py-16 bg-[#1A1F2C]/95">
+    <section className="py-16 border-t border-white/10">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
-            {title.split(' ').slice(0, -1).join(' ')} <span className="text-noesis-purple">{title.split(' ').pop()}</span>
+            Industry-Specific <span className="text-noesis-purple">Solutions</span>
           </h2>
+          <p className="text-center text-gray-300 mt-4 max-w-3xl mx-auto text-base sm:text-lg">
+            AI-powered solutions tailored for your industry's unique challenges
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {industries.map(industry => (
-            <div 
+        {/* Industry tabs */}
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8">
+          {industries.map((industry) => (
+            <Button
               key={industry.id}
-              className={cn(
-                "bg-gradient-to-b from-[#222732]/95 to-[#1D212B]/85 backdrop-blur-sm rounded-xl p-6 border border-white/10 shadow-xl hover:shadow-noesis-purple/30 transition-all duration-300",
-                "hover:border-noesis-purple/30 hover:scale-105 group"
-              )}
+              variant={activeIndustry === industry.id ? "noesis" : "secondary"}
+              size="sm"
+              className="text-xs sm:text-sm"
+              onClick={() => setActiveIndustry(industry.id)}
             >
-              <div className={`bg-[#1A1F2C]/90 p-4 rounded-full w-fit mb-4 group-hover:${industry.color.split(' ')[0]} transition-colors duration-300 border border-white/5 group-hover:border-noesis-purple/30`}>
-                {getIndustryIcon(industry.icon_name)}
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-noesis-purple transition-colors duration-300">
-                {industry.title}
-              </h3>
-              <p className="text-gray-300 text-sm">
-                {industry.description}
-              </p>
-            </div>
+              {industry.title}
+            </Button>
           ))}
         </div>
+
+        {/* Selected industry details */}
+        {selectedIndustry && (
+          <div className={`bg-gradient-radial ${selectedIndustry.color} to-transparent p-1 rounded-xl`}>
+            <div className="bg-[#222732] rounded-xl p-6 sm:p-8">
+              <div className="flex flex-col md:flex-row gap-6 items-start">
+                {/* Industry description */}
+                <div className="w-full md:w-1/2">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-white/10 p-2 rounded mr-3">
+                      {getIconByName(selectedIndustry.icon_name)}
+                    </div>
+                    <h3 className="text-xl font-bold text-white">{selectedIndustry.title}</h3>
+                  </div>
+                  <p className="text-gray-300 mb-6">{selectedIndustry.description}</p>
+                  
+                  <Button variant="noesis" asChild>
+                    <Link to="/contact">Get Industry Solution</Link>
+                  </Button>
+                </div>
+                
+                {/* Industry features */}
+                <div className="w-full md:w-1/2 bg-[#1A1F2C]/40 rounded-xl p-4 sm:p-6">
+                  <h4 className="text-white font-semibold mb-4">Key Capabilities</h4>
+                  <ul className="grid grid-cols-1 gap-3">
+                    {selectedIndustry.features.map((feature, index) => (
+                      <li key={index} className="flex items-center text-gray-300">
+                        <span className="w-2 h-2 bg-noesis-purple rounded-full mr-2"></span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
-};
-
-const getIndustryIcon = (iconName: string) => {
-  const iconClass = "h-8 w-8";
-
-  switch (iconName.toLowerCase()) {
-    case 'heart':
-      return <Heart className={`${iconClass} text-red-400`} />;
-    case 'briefcase':
-      return <Briefcase className={`${iconClass} text-blue-400`} />;
-    case 'shoppingcart':
-      return <ShoppingCart className={`${iconClass} text-purple-400`} />;
-    case 'factory':
-      return <Factory className={`${iconClass} text-green-400`} />;
-    case 'graduationcap':
-      return <GraduationCap className={`${iconClass} text-yellow-400`} />;
-    case 'building':
-      return <Building className={`${iconClass} text-orange-400`} />;
-    default:
-      return <Building className={`${iconClass} text-noesis-purple`} />;
-  }
 };
 
 export default IndustrySection;
