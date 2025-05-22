@@ -76,7 +76,7 @@ const ClientsSection = () => {
         <div className="relative overflow-hidden w-full">
           <div className="overflow-hidden">
             <div className="flex animate-[scroll_40s_linear_infinite] items-center">
-              {repeatedLogos.map((logo, index) => <div key={`${logo.id}-${index}`} className="flex-shrink-0 mx-4 sm:mx-6 md:mx-8 w-[100px] sm:w-[120px] md:w-[140px] h-[50px] sm:h-[60px] flex items-center justify-center my-0">
+              {repeatedLogos.map((logo, index) => <div key={`${logo.id}-${index}`} className="flex-shrink-0 mx-4 sm:mx-6 md:mx-8 w-[120px] sm:w-[140px] md:w-[160px] h-[60px] sm:h-[70px] flex items-center justify-center my-0">
                   <img src={logo.image_url} alt={logo.name} className="max-h-full max-w-full opacity-70 hover:opacity-100 transition-opacity duration-300" />
                 </div>)}
             </div>
