@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Award, Users, Building, Laptop, GalleryVertical } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -155,7 +154,9 @@ const CultureSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             Our <span className="text-noesis-purple">Culture</span>
           </h2>
-          <div className="h-1 w-24 bg-noesis-purple/60 mx-auto rounded-full mt-4 mb-8"></div>
+          <p className="section-subtitle mt-4">
+            Creating an environment where innovation thrives and people grow
+          </p>
         </div>
 
         {/* Culture highlights cards */}
