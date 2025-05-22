@@ -10,7 +10,7 @@ const MissionCard = ({
 }: MissionCardProps) => {
   return <div className="relative flex flex-col items-center h-full">
       {/* Icon positioned on top edge of card */}
-      <div className="z-20 absolute -top-6 left-0 -translate-x-1/2 bg-noesis-purple/15 text-noesis-purple rounded-full p-4 md:p-6 shadow-lg my-[30px] mx-[60px]">
+      <div className="z-20 absolute -top-6 left-0 -translate-x-1/2 bg-noesis-purple/15 text-noesis-purple rounded-full p-4 md:p-6 shadow-lg my-[40px] mx-[40px]">
         <Flag className="h-8 w-8 md:h-12 md:w-12" />
       </div>
       {/* Card content */}
