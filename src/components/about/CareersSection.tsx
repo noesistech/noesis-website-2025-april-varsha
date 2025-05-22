@@ -60,24 +60,6 @@ const CareersSection = () => {
     // Reset the form after submission
     form.reset();
   };
-
-  // Career opportunities
-  const opportunities = [{
-    title: "AI Research Engineer",
-    department: "Research & Development",
-    type: "Full-time",
-    description: "Join our R&D team to develop cutting-edge AI models and solutions for our clients."
-  }, {
-    title: "Frontend Developer",
-    department: "Engineering",
-    type: "Full-time",
-    description: "Build beautiful, responsive interfaces for our AI-powered applications."
-  }, {
-    title: "AI Product Manager",
-    department: "Product",
-    type: "Full-time",
-    description: "Bridge the gap between business needs and technical implementation of AI solutions."
-  }];
   
   return <section className="bg-[#1A1F2C] py-0">
       <div className="container mx-auto px-4 my-0 py-0">
@@ -88,31 +70,6 @@ const CareersSection = () => {
           <p className="section-subtitle mt-4">
             Build your career with us and shape the future of AI
           </p>
-        </div>
-
-        {/* Current Opportunities */}
-        <div className="mb-16">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-white">
-              Current <span className="text-noesis-purple">Opportunities</span>
-            </h3>
-            <p className="text-center text-gray-300 max-w-3xl mx-auto text-base sm:text-lg mt-4">
-              Explore open positions and join our innovative team
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {opportunities.map((job, index) => (
-              <div key={index} className="bg-gradient-to-br from-purple-900/10 to-indigo-900/10 border border-purple-500/20 rounded-xl p-6">
-                <h4 className="text-xl font-bold text-white mb-2">{job.title}</h4>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="bg-purple-500/20 text-purple-300 text-xs px-2 py-1 rounded-full">{job.department}</span>
-                  <span className="bg-indigo-500/20 text-indigo-300 text-xs px-2 py-1 rounded-full">{job.type}</span>
-                </div>
-                <p className="text-gray-300 text-sm">{job.description}</p>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* General Application Form */}
