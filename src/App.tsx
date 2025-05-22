@@ -16,16 +16,16 @@ const AppContent = () => {
   const location = useLocation();
   
   useEffect(() => {
-    // Check for hash navigation to the chat section - only if hash exists
+    // Only scroll to chatbot section if explicitly requested with hash
     if (location.hash === '#chatbot') {
       setTimeout(() => {
         const chatbotSection = document.getElementById('chatbot');
         if (chatbotSection) {
           chatbotSection.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 300); // Small delay to ensure the section is loaded
+      }, 300);
     }
-  }, [location.hash]); // Only trigger when hash changes, not on every location change
+  }, [location.hash]); 
   
   return (
     <>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
@@ -72,7 +71,7 @@ const Header = () => {
     { name: "Brainstormer Suite", href: "/solutions#brainstormer" }
   ];
 
-  // Updated navigation structure - removed Contact item
+  // Updated navigation structure without linking Noesis AI Assistant to chatbot
   const navStructure = [
     { 
       name: 'About',
@@ -94,7 +93,7 @@ const Header = () => {
     },
     { 
       name: 'Noesis AI Assistant',
-      href: '#chatbot',
+      href: '/#chatbot',
       hasSubmenu: false
     }
   ];

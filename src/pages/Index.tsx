@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
@@ -27,11 +26,10 @@ const Index = () => {
   
   const location = useLocation();
   
-  // Only scroll to chatbot if explicitly requested in the URL
+  // Only scroll to chatbot if explicitly requested via hash
   useEffect(() => {
-    // Handle direct links to chat section from URL parameters
-    const urlParams = new URLSearchParams(location.search);
-    if (urlParams.get('scrollToChat') === 'true' || location.hash === '#chatbot') {
+    // Only handle hash-based navigation
+    if (location.hash === '#chatbot') {
       setTimeout(() => {
         const chatbotElement = document.getElementById('chatbot');
         if (chatbotElement) {
@@ -39,7 +37,7 @@ const Index = () => {
         }
       }, 100);
     }
-  }, [location.search, location.hash]);
+  }, [location.hash]);
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#1A1F2C]">
