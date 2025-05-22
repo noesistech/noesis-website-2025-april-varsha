@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useContent } from '@/contexts/ContentContext';
 import { useDeviceType } from '@/hooks/use-mobile';
@@ -37,7 +36,7 @@ const ClientsSection = () => {
           </div>}
         
         {/* Testimonials - Carousel for mobile/tablet, grid for desktop */}
-        {testimonials && testimonials.length > 0 && <div className="mb-16">
+        {testimonials && testimonials.length > 0 && <div className="mb-24">
             {showCarousel ? <Carousel opts={{
           align: "center",
           loop: true
