@@ -14,9 +14,9 @@ const FounderSection = ({ showCta = false }: FounderSectionProps) => {
     <div className="container mx-auto px-4 mb-20">
       <div className="flex flex-col lg:flex-row gap-8 items-center">
         <div className="lg:w-1/3">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 gradient-text text-left">
+          <h3 className="text-2xl md:text-3xl font-bold mb-6 gradient-text text-left">
             Meet Our Founder
-          </h2>
+          </h3>
           <div className="relative mb-4 overflow-hidden rounded-2xl">
             {/* Base image */}
             <img src="/lovable-uploads/af4dc9fd-e708-4fc8-b6e5-d4dee4f5961d.png" alt="Sidd - Founder of Noesis.tech" className="w-full h-auto relative z-[1]" />
