@@ -40,9 +40,9 @@ const PromiseSection = () => {
   }, [isMobile]);
 
   return (
-    <section className="py-16 sm:py-20">
+    <section className="py-8 sm:py-20">
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-8">
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
           <h2 className="section-title">
             Our <span className="text-noesis-purple">Promise</span>
           </h2>
@@ -50,8 +50,8 @@ const PromiseSection = () => {
         </div>
         
         <div className="max-w-3xl mx-auto">
-          <div ref={promiseCardRef} className="bg-[#1d2130]/80 backdrop-blur-sm rounded-xl p-8 md:p-10 transition-transform duration-300 ease-out shadow-xl border border-white/5 hover:border-white/10">
-            <p className="text-3xl lg:text-3xl font-light tracking-wide text-white text-center">
+          <div ref={promiseCardRef} className="bg-[#1d2130]/80 backdrop-blur-sm rounded-xl p-6 md:p-10 transition-transform duration-300 ease-out shadow-xl border border-white/5 hover:border-white/10">
+            <p className="text-2xl sm:text-3xl lg:text-3xl font-light tracking-wide text-white text-center">
               <span>Human </span>
               <span className="text-noesis-blue">creativity</span>
               <span>, AI </span>
