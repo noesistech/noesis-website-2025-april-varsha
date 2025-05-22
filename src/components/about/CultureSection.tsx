@@ -191,13 +191,13 @@ const CultureSection = () => {
             </p>
           </div>
 
-          {/* Remote/Hybrid Work Card - Fixed title to avoid overflow on small screens */}
+          {/* Remote/Hybrid Work Card - Modified to ensure title wraps properly on iPad Mini */}
           <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/20 rounded-xl p-6 hover:border-blue-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="bg-blue-500/20 p-3 rounded-xl">
+            <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-4">
+              <div className="bg-blue-500/20 p-3 rounded-xl w-fit">
                 <Laptop className="h-6 w-6 text-blue-300" />
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-white whitespace-normal">Remote/Hybrid</h3>
+              <h3 className="text-lg sm:text-xl font-bold text-white">Remote/Hybrid Work</h3>
             </div>
             <p className="text-gray-300 leading-relaxed">
               We embrace a flexible approach to work, supporting both in-office 
