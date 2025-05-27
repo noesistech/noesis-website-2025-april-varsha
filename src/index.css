@@ -366,3 +366,11 @@ main section h2 + p {
 .markdown-text ol li p strong, .markdown-text ul li p strong {
   font-weight: 700;
 }
+.markdown-text p, section p:not(.section-title) + p {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1rem !important;
+}
+.markdown-text p a {
+  text-decoration: underline !important;
+}
