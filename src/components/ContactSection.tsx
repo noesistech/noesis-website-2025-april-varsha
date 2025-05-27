@@ -44,44 +44,95 @@ const ContactSection = () => {
     }
   });
 
+  // const onSubmit = async (data: ContactFormValues) => {
+  //   try {
+  //     setIsSubmitting(true);
+      
+  //     const brevoResult = await supabase.functions.invoke('submit-contact-form', {
+  //       body: {
+  //         name: data.name,
+  //         email: data.email,
+  //         message: data.message
+  //       }
+  //     });
+      
+  //     if (brevoResult.error) {
+  //       throw new Error(`Error saving to Brevo: ${brevoResult.error.message}`);
+  //     }
+      
+  //     console.log("Successfully saved to Brevo:", brevoResult);
+      
+  //     const emailResult = await supabase.functions.invoke('send-contact-email', {
+  //       body: {
+  //         name: data.name,
+  //         email: data.email,
+  //         subject: data.subject,
+  //         message: data.message
+  //       }
+  //     });
+      
+  //     if (emailResult.error) {
+  //       throw new Error(`Error sending email: ${emailResult.error.message}`);
+  //     }
+      
+  //     console.log("Email sent successfully:", emailResult);
+      
+  //     toast({
+  //       title: "Message sent successfully!",
+  //       description: "We'll get back to you soon."
+  //     });
+      
+  //     setShowSuccessDialog(true);
+  //     form.reset();
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //     toast({
+  //       title: "Submission Failed",
+  //       description: "There was a problem sending your message. Please try again.",
+  //       variant: "destructive"
+  //     });
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+  
+
   const onSubmit = async (data: ContactFormValues) => {
     try {
       setIsSubmitting(true);
-      
-      const brevoResult = await supabase.functions.invoke('submit-contact-form', {
-        body: {
-          name: data.name,
-          email: data.email,
-          message: data.message
-        }
+  
+      const params = {
+        from: "Noesis.tech <invites@brainstormer.io>",
+        to: "sales@noesis.tech",
+        subject: "New Contact Form Submission",
+        html: `
+          <div>
+            <h1>New Contact Message Received</h1>
+            <p><strong>Name:</strong> ${data.name}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Subject:</strong> ${data.subject}</p>
+            <p><strong>Message:</strong><br/>${data.message.replace(/\n/g, "<br/>")}</p>
+          </div>
+        `,
+      };
+  
+      const response = await fetch("https://botnew.brainstormer.io/resendTesting", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(params)
       });
-      
-      if (brevoResult.error) {
-        throw new Error(`Error saving to Brevo: ${brevoResult.error.message}`);
-      }
-      
-      console.log("Successfully saved to Brevo:", brevoResult);
-      
-      const emailResult = await supabase.functions.invoke('send-contact-email', {
-        body: {
-          name: data.name,
-          email: data.email,
-          subject: data.subject,
-          message: data.message
-        }
-      });
-      
-      if (emailResult.error) {
-        throw new Error(`Error sending email: ${emailResult.error.message}`);
-      }
-      
-      console.log("Email sent successfully:", emailResult);
-      
+  
+      // if (!response.ok) {
+      //   throw new Error("Email sending failed");
+      // }
+  
       toast({
         title: "Message sent successfully!",
         description: "We'll get back to you soon."
       });
-      
+  
       setShowSuccessDialog(true);
       form.reset();
     } catch (error) {
@@ -94,8 +145,9 @@ const ContactSection = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
-  
+  };  
+
+
   return (
     <section id="contact" className="py-8 sm:py-16 bg-gray-900/30 overflow-hidden relative">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">

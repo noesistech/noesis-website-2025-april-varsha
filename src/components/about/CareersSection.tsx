@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Briefcase, FileText, User, Mail, Upload } from 'lucide-react';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -33,6 +32,7 @@ type ApplicationFormValues = z.infer<typeof applicationFormSchema>;
 
 const CareersSection = () => {
   const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Define default values for the form
   const defaultValues: Partial<ApplicationFormValues> = {
@@ -49,14 +49,32 @@ const CareersSection = () => {
     defaultValues
   });
 
-  // Handle file drop
+  // Handle file drop and file input change
   const handleFileDrop = (files: File[]) => {
     if (files.length > 0) {
       const file = files[0];
-      setResumeFile(file);
       
-      // You could also update the form value if needed
+      // Add file size validation (5MB = 5 * 1024 * 1024 bytes)
+      if (file.size > 5 * 1024 * 1024) {
+        form.setError('resume', { message: 'File size must be less than 5MB' });
+        return;
+      }
+      
+      // Check file type
+      const allowedTypes = [
+        'application/pdf',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      ];
+      
+      if (!allowedTypes.includes(file.type)) {
+        form.setError('resume', { message: 'Please upload a PDF, DOC, or DOCX file' });
+        return;
+      }
+      
+      setResumeFile(file);
       form.setValue("resume", file.name);
+      form.clearErrors('resume');
       
       toast({
         title: "Resume uploaded",
@@ -66,27 +84,95 @@ const CareersSection = () => {
     }
   };
 
-  // Handle form submission
-  const onSubmit = (data: ApplicationFormValues) => {
-    // Include the file in the submission data
-    const submissionData = {
-      ...data,
-      resumeFile
-    };
-    
-    console.log("Form data submitted:", submissionData);
-
-    // Show success toast notification
-    toast({
-      title: "Application Submitted",
-      description: "Thank you for your interest! We'll review your application and get back to you soon.",
-      variant: "default"
-    });
-
-    // Reset the form and file after submission
-    setResumeFile(null);
-    form.reset();
+  // Function to handle file input change
+  const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      handleFileDrop(Array.from(files));
+    }
   };
+
+  // Function to trigger file picker
+  const triggerFilePicker = () => {
+    fileInputRef.current?.click();
+  };
+
+  const onSubmit = async (data: ApplicationFormValues) => {
+    if (!resumeFile) {
+      toast({
+        title: "Resume Required",
+        description: "Please upload your resume before submitting.",
+        variant: "destructive"
+      });
+      return;
+    }
+  
+    // Convert resume file to base64
+    const fileBase64 = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result as string;
+        // Strip off the "data:...base64," prefix
+        const base64Content = result.split(',')[1];
+        resolve(base64Content);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(resumeFile);
+    });
+  
+    const filename = resumeFile.name;
+  
+    const params = {
+      from: "Noesis.tech <invites@brainstormer.io>",
+      to: "sales@noesis.tech",
+      subject: `New Career Application for ${data.position}`,
+      html: `
+        <div style="margin:0;padding:0">
+          <h1 style="text-align:center;">New Application Received</h1>
+          <p><strong>Name:</strong> ${data.fullName}</p>
+          <p><strong>Email:</strong> ${data.email}</p>
+          <p><strong>Position:</strong> ${data.position}</p>
+          <p><strong>Cover Letter:</strong> ${data.message}</p>
+          <p><strong>Resume:</strong> ${filename}</p>
+          <p>The resume has been attached as a downloadable file.</p>
+        </div>
+      `,
+      attachments: [
+        {
+          filename: filename,
+          content: fileBase64
+        }
+      ]
+    };
+  
+    try {
+      const response = await fetch("https://botnew.brainstormer.io/resendTesting", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(params)
+      });
+  
+      // if (response.ok) {
+        toast({
+          title: "Application Submitted",
+          description: "We've received your application. Thank you!",
+          variant: "default"
+        });
+        form.reset();
+        setResumeFile(null);
+      // } else {
+      //   throw new Error("Email sending failed");
+      // }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was a problem sending your application.",
+        variant: "destructive"
+      });
+    }
+  }; 
   
   return <section className="bg-[#1A1F2C] py-0">
       <div className="container mx-auto px-4 my-0 py-0">
@@ -169,23 +255,38 @@ const CareersSection = () => {
                         Resume
                       </FormLabel>
                       <FormControl>
-                        <Dropzone onDrop={handleFileDrop}>
-                          <div className="border-2 border-dashed border-purple-500/30 rounded-lg p-6 cursor-pointer hover:border-purple-500/50 transition-colors text-center bg-[#242938]">
-                            <Upload className="h-8 w-8 mx-auto text-gray-400 mb-2" />
-                            <p className="text-gray-300">
-                              {resumeFile ? (
-                                <span className="text-green-400">{resumeFile.name} selected</span>
-                              ) : (
-                                <>
-                                  <span className="font-medium">Click to upload</span> or drag and drop your resume
-                                </>
-                              )}
-                            </p>
-                            <p className="text-xs text-gray-500 mt-2">
-                              Supported formats: PDF, DOC, DOCX (Max 5MB)
-                            </p>
-                          </div>
-                        </Dropzone>
+                        <div>
+                          {/* Hidden file input */}
+                          <input
+                            ref={fileInputRef}
+                            type="file"
+                            accept=".pdf,.doc,.docx"
+                            onChange={handleFileInputChange}
+                            style={{ display: 'none' }}
+                          />
+                          
+                          {/* Dropzone with click handler */}
+                          <Dropzone onDrop={handleFileDrop}>
+                            <div 
+                              className="border-2 border-dashed border-purple-500/30 rounded-lg p-6 cursor-pointer hover:border-purple-500/50 transition-colors text-center bg-[#242938]"
+                              onClick={triggerFilePicker}
+                            >
+                              <Upload className="h-8 w-8 mx-auto text-gray-400 mb-2" />
+                              <p className="text-gray-300">
+                                {resumeFile ? (
+                                  <span className="text-green-400">{resumeFile.name} selected</span>
+                                ) : (
+                                  <>
+                                    <span className="font-medium">Click to upload</span> or drag and drop your resume
+                                  </>
+                                )}
+                              </p>
+                              <p className="text-xs text-gray-500 mt-2">
+                                Supported formats: PDF, DOC, DOCX (Max 5MB)
+                              </p>
+                            </div>
+                          </Dropzone>
+                        </div>
                       </FormControl>
                       <FormDescription className="text-gray-400">
                         Upload your resume or CV
