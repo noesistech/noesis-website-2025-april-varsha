@@ -239,17 +239,17 @@ const CultureSection = () => {
                 </p>
                 
                 <div className="flex flex-wrap gap-3">
-                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 py-1 rounded-full border border-purple-500/20 flex items-center justify-center">
-                    <p className="text-purple-300 font-medium text-xs">Collaboration</p>
+                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 py-1 rounded-full border border-purple-500/20 min-h-[28px] flex items-center justify-center">
+                    <span className="text-purple-300 font-medium text-xs leading-none">Collaboration</span>
                   </div>
-                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 py-1 rounded-full border border-purple-500/20 flex items-center justify-center">
-                    <p className="text-purple-300 font-medium text-xs">Innovation</p>
+                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 py-1 rounded-full border border-purple-500/20 min-h-[28px] flex items-center justify-center">
+                    <span className="text-purple-300 font-medium text-xs leading-none">Innovation</span>
                   </div>
-                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 py-1 rounded-full border border-purple-500/20 flex items-center justify-center">
-                    <p className="text-purple-300 font-medium text-xs">Respect</p>
+                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 py-1 rounded-full border border-purple-500/20 min-h-[28px] flex items-center justify-center">
+                    <span className="text-purple-300 font-medium text-xs leading-none">Respect</span>
                   </div>
-                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 py-1 rounded-full border border-purple-500/20 flex items-center justify-center">
-                    <p className="text-purple-300 font-medium text-xs">Growth Mindset</p>
+                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 py-1 rounded-full border border-purple-500/20 min-h-[28px] flex items-center justify-center">
+                    <span className="text-purple-300 font-medium text-xs leading-none">Growth Mindset</span>
                   </div>
                 </div>
               </div>
