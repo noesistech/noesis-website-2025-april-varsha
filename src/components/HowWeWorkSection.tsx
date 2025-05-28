@@ -91,8 +91,8 @@ const HowWeWorkSection: React.FC = () => {
 
   return (
     <>
-      {/* Desktop Process Steps */}
-      <div className="hidden lg:block">
+      {/* Desktop Process Steps - Only for desktop */}
+      <div className="hidden xl:block">
         <div className="relative mb-16 mt-20">
           {/* Progress line */}
           <div className="absolute top-10 left-0 w-full h-1 bg-gradient-to-r from-noesis-purple/30 via-noesis-purple to-noesis-purple/30 rounded-full"></div>
@@ -119,8 +119,8 @@ const HowWeWorkSection: React.FC = () => {
         </div>
       </div>
       
-      {/* Tablet & Mobile Steps Carousel/Slider */}
-      <div className="lg:hidden">
+      {/* Mobile, Tablet & iPad Steps Carousel/Slider */}
+      <div className="xl:hidden">
         <Carousel
           opts={{
             align: 'start',
