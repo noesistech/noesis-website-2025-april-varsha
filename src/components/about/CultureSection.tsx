@@ -239,17 +239,17 @@ const CultureSection = () => {
                 </p>
                 
                 <div className="flex flex-wrap gap-3">
-                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 rounded-full border border-purple-500/20">
-                    <p className="text-purple-300 font-medium text-xs text-center">Collaboration</p>
+                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 py-1 rounded-full border border-purple-500/20 flex items-center justify-center">
+                    <p className="text-purple-300 font-medium text-xs">Collaboration</p>
                   </div>
-                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 rounded-full border border-purple-500/20">
-                    <p className="text-purple-300 font-medium text-xs text-center">Innovation</p>
+                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 py-1 rounded-full border border-purple-500/20 flex items-center justify-center">
+                    <p className="text-purple-300 font-medium text-xs">Innovation</p>
                   </div>
-                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 rounded-full border border-purple-500/20">
-                    <p className="text-purple-300 font-medium text-xs text-center">Respect</p>
+                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 py-1 rounded-full border border-purple-500/20 flex items-center justify-center">
+                    <p className="text-purple-300 font-medium text-xs">Respect</p>
                   </div>
-                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 rounded-full border border-purple-500/20">
-                    <p className="text-purple-300 font-medium text-xs text-center">Growth Mindset</p>
+                  <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-3 py-1 rounded-full border border-purple-500/20 flex items-center justify-center">
+                    <p className="text-purple-300 font-medium text-xs">Growth Mindset</p>
                   </div>
                 </div>
               </div>
