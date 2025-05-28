@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Award, Users, Building, Laptop, GalleryVertical } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -240,16 +241,16 @@ const CultureSection = () => {
                 
                 <div className="flex flex-wrap gap-3">
                   <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-4 py-2 rounded-full border border-purple-500/20">
-                    <p className="text-purple-300 font-medium text-sm">Collaboration</p>
+                    <p className="text-purple-300 font-medium text-sm text-center">Collaboration</p>
                   </div>
                   <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-4 py-2 rounded-full border border-purple-500/20">
-                    <p className="text-purple-300 font-medium text-sm">Innovation</p>
+                    <p className="text-purple-300 font-medium text-sm text-center">Innovation</p>
                   </div>
                   <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-4 py-2 rounded-full border border-purple-500/20">
-                    <p className="text-purple-300 font-medium text-sm">Respect</p>
+                    <p className="text-purple-300 font-medium text-sm text-center">Respect</p>
                   </div>
                   <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/10 px-4 py-2 rounded-full border border-purple-500/20">
-                    <p className="text-purple-300 font-medium text-sm">Growth Mindset</p>
+                    <p className="text-purple-300 font-medium text-sm text-center">Growth Mindset</p>
                   </div>
                 </div>
               </div>
