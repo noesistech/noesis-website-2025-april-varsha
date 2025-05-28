@@ -107,7 +107,7 @@ const HowWeWorkSection: React.FC = () => {
                 </div>
                 
                 {/* Content card - positioned below the icon, showing only title and description */}
-                <div className="bg-[#222732] rounded-xl p-4 shadow-lg shadow-noesis-purple/10 border border-[#2A2F3C] mt-20 h-48
+                <div className="bg-[#222732] rounded-xl p-4 shadow-lg shadow-noesis-purple/10 border border-[#2A2F3C] mt-20 h-60
                               transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-noesis-purple/20">
                   <div className="flex flex-col items-center">
                     <h3 className="text-lg font-bold text-white text-center mb-3">{step.title}</h3>
