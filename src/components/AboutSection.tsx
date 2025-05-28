@@ -103,10 +103,10 @@ const AboutSection = () => {
             </div>
           </div>
           
-          {/* Animation second on mobile - With order-1 for larger screens - Made square on mobile */}
+          {/* Animation second on mobile - With order-1 for larger screens - Made compact square on mobile */}
           <div 
             ref={leftContainerRef} 
-            className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden order-2 lg:order-1 w-full aspect-square sm:aspect-auto mb-0"
+            className="relative bg-noesis-darker/80 rounded-2xl overflow-hidden order-2 lg:order-1 w-full max-w-sm mx-auto aspect-square sm:max-w-none sm:aspect-auto mb-0"
             style={{ minHeight: '300px' }}
           >
             <P5Animation className="w-full h-full absolute inset-0" />
