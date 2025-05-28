@@ -1,122 +1,218 @@
 
-import React from 'react';
-import { 
-  MessageSquare, 
-  Lightbulb, 
-  FileCode, 
-  RefreshCcw, 
-  Upload, 
-  Users2 
-} from 'lucide-react';
+import React, { useState } from 'react';
+import { Check, CircleUser, CodeXml, Lightbulb, MessageSquare, RefreshCw, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi
+} from './ui/carousel';
 import { useIsMobile, useIsTablet } from '@/hooks/use-mobile';
-import { 
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from "@/components/ui/accordion";
-import { Card, CardContent } from "@/components/ui/card";
+import { cn } from '@/lib/utils';
+import { Button } from './ui/button';
+import { Slider } from './ui/slider';
 
-const HowWeWorkSection = () => {
+interface WorkStep {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+}
+
+const HowWeWorkSection: React.FC = () => {
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
+  const [currentStep, setCurrentStep] = useState(0);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   
-  // Use mobile layout for both mobile and tablet
-  const useMobileLayout = isMobile || isTablet;
+  // Update current step when carousel changes
+  React.useEffect(() => {
+    if (!carouselApi) return;
+    
+    const onSelect = () => {
+      setCurrentStep(carouselApi.selectedScrollSnap());
+    };
+    
+    carouselApi.on("select", onSelect);
+    
+    // Cleanup
+    return () => {
+      carouselApi.off("select", onSelect);
+    };
+  }, [carouselApi]);
 
-  const processSteps = [
+  // Handle slider value change
+  const handleSliderChange = (value: number[]) => {
+    if (carouselApi) {
+      carouselApi.scrollTo(value[0]);
+    }
+  };
+  
+  const workSteps: WorkStep[] = [
     {
-      id: 'discovery',
-      icon: <MessageSquare className="h-10 w-10 text-noesis-purple" />,
-      title: "Discovery & Consultation",
-      description: "We begin by understanding your business goals, challenges, and requirements through in-depth consultation."
+      id: 'step-1',
+      title: 'Discovery & Consultation',
+      description: 'We begin by understanding your business goals, challenges, and requirements through in-depth consultation.',
+      icon: <MessageSquare className="h-10 w-10 text-noesis-purple" />
     },
     {
-      id: 'strategy',
-      icon: <Lightbulb className="h-10 w-10 text-noesis-blue" />,
-      title: "Strategy & Planning",
-      description: "Our team develops a comprehensive plan that combines human expertise with AI capabilities to meet your objectives."
+      id: 'step-2',
+      title: 'Strategy & Planning',
+      description: 'Our team develops a comprehensive plan that combines human expertise with AI capabilities to meet your objectives.',
+      icon: <Lightbulb className="h-10 w-10 text-blue-400" />
     },
     {
-      id: 'design',
-      icon: <FileCode className="h-10 w-10 text-noesis-green" />,
-      title: "Design & Development",
-      description: "We create solutions using our hybrid human-AI approach, ensuring both creativity and technical excellence."
+      id: 'step-3',
+      title: 'Design & Development',
+      description: 'We create solutions using our hybrid human-AI approach, ensuring both creativity and technical excellence.',
+      icon: <CodeXml className="h-10 w-10 text-green-400" />
     },
     {
-      id: 'testing',
-      icon: <RefreshCcw className="h-10 w-10 text-yellow-400" />,
-      title: "Testing & Refinement",
-      description: "Rigorous testing ensures your solution performs flawlessly across all platforms and use cases."
+      id: 'step-4',
+      title: 'Testing & Refinement',
+      description: 'Rigorous testing ensures your solution performs flawlessly across all platforms and use cases.',
+      icon: <RefreshCw className="h-10 w-10 text-amber-400" />
     },
     {
-      id: 'deployment',
-      icon: <Upload className="h-10 w-10 text-teal-400" />,
-      title: "Deployment & Support",
-      description: "We handle the launch process and provide ongoing support to ensure continued success."
+      id: 'step-5',
+      title: 'Deployment & Support',
+      description: 'We handle the launch process and provide ongoing support to ensure continued success.',
+      icon: <Check className="h-10 w-10 text-teal-400" />
     },
     {
-      id: 'collaboration',
-      icon: <Users2 className="h-10 w-10 text-pink-400" />,
-      title: "Collaboration & Growth",
-      description: "We maintain an ongoing partnership, continuously improving your solution as your business evolves."
+      id: 'step-6',
+      title: 'Collaboration & Growth',
+      description: 'We maintain an ongoing partnership, continuously improving your solution as your business evolves.',
+      icon: <CircleUser className="h-10 w-10 text-pink-400" />
     }
   ];
 
   return (
-    <div className="w-full">
-      {useMobileLayout ? (
-        <Accordion type="single" collapsible className="w-full">
-          {processSteps.map((step, index) => (
-            <AccordionItem 
-              key={step.id} 
-              value={step.id} 
-              className="mb-4 rounded-2xl overflow-hidden border-none"
-            >
-              <Card className="overflow-hidden bg-gradient-to-br from-[#222732] to-[#1e232d] border border-white/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.01]">
-                <AccordionTrigger className="px-6 py-4 flex items-center hover:no-underline">
-                  <div className="flex items-center">
-                    <div className="bg-[#1A1F2C]/80 p-3 rounded-full mr-4 shadow-inner">
+    <>
+      {/* Desktop Process Steps */}
+      <div className="hidden lg:block">
+        <div className="relative mb-16 mt-20">
+          {/* Progress line */}
+          <div className="absolute top-10 left-0 w-full h-1 bg-gradient-to-r from-noesis-purple/30 via-noesis-purple to-noesis-purple/30 rounded-full"></div>
+          
+          <div className="grid grid-cols-6 gap-4">
+            {workSteps.map((step, index) => (
+              <div key={step.id} className="relative">
+                {/* Icon instead of number in circular badge */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-[#222732] border-2 border-noesis-purple flex items-center justify-center z-10 shadow-lg shadow-noesis-purple/20">
+                  {step.icon}
+                </div>
+                
+                {/* Content card - positioned below the icon, showing only title and description */}
+                <div className="bg-[#222732] rounded-xl p-6 shadow-lg shadow-noesis-purple/10 border border-[#2A2F3C] mt-20
+                              transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-noesis-purple/20 h-full">
+                  <div className="flex flex-col items-center">
+                    <h3 className="text-xl font-bold text-white text-center mb-3">{step.title}</h3>
+                  </div>
+                  <p className="text-gray-300 text-center">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      {/* Tablet & Mobile Steps Carousel/Slider */}
+      <div className="lg:hidden">
+        <Carousel
+          opts={{
+            align: 'start',
+            loop: true,
+          }}
+          className="w-full"
+          setApi={setCarouselApi}
+        >
+          {/* Step indicators */}
+          <div className="relative mb-8">
+            {/* Progress line */}
+            <div className="absolute top-12 left-0 w-full h-1 bg-gradient-to-r from-noesis-purple/30 via-noesis-purple to-noesis-purple/30 rounded-full"></div>
+            
+            {/* Step indicators - show icons */}
+            <div className="flex justify-between mb-16">
+              {workSteps.map((step, index) => (
+                <button 
+                  key={`indicator-${step.id}`}
+                  onClick={() => carouselApi?.scrollTo(index)}
+                  className={cn(
+                    "w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center z-10 shadow-lg shadow-noesis-purple/20 transition-all duration-300",
+                    currentStep === index 
+                      ? "bg-noesis-purple border-2 border-white transform scale-110" 
+                      : "bg-[#222732] border-2 border-noesis-purple"
+                  )}
+                >
+                  {React.cloneElement(step.icon as React.ReactElement, { 
+                    className: cn(
+                      "h-5 w-5 sm:h-7 sm:w-7", 
+                      currentStep === index ? "text-white" : "text-noesis-purple"
+                    )
+                  })}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <CarouselContent>
+            {workSteps.map((step) => (
+              <CarouselItem key={step.id}>
+                <div className="bg-[#222732] rounded-xl p-6 shadow-lg shadow-noesis-purple/10 border border-[#2A2F3C]
+                            transform transition-all duration-300 hover:shadow-xl hover:shadow-noesis-purple/20">
+                  <div className="flex flex-col items-center mb-4">
+                    <div className="bg-[#1A1F2C] p-4 rounded-full mb-3">
                       {step.icon}
                     </div>
-                    <div className="text-left">
-                      <div className="text-sm text-purple-400 font-medium mb-1">Step {index + 1}</div>
-                      <h3 className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">{step.title}</h3>
-                    </div>
+                    <h3 className="text-xl font-bold text-white text-center leading-tight">{step.title}</h3>
                   </div>
-                </AccordionTrigger>
-                <AccordionContent className="pb-0">
-                  <CardContent className="p-4 pt-0 pb-6 bg-[#222732]/50 text-gray-300 backdrop-blur-sm">
-                    {step.description}
-                  </CardContent>
-                </AccordionContent>
-              </Card>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-          {processSteps.map((step, index) => (
-            <Card 
-              key={step.id} 
-              className="bg-gradient-to-br from-[#222732] to-[#1e232d] border border-white/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] overflow-hidden rounded-2xl relative group"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#8257e6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <CardContent className="p-6 relative">
-                <div className="text-sm text-purple-400 font-medium mb-3">Step {index + 1}</div>
-                <div className="bg-[#1A1F2C]/90 p-4 rounded-full w-fit mb-4 shadow-md border border-white/5 group-hover:border-white/10 transition-all">
-                  <div className="transform group-hover:scale-110 transition-transform duration-300">
-                    {step.icon}
-                  </div>
+                  <p className="text-gray-300 text-center">{step.description}</p>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-left bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">{step.title}</h3>
-                <p className="text-gray-300 text-left">{step.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      )}
-    </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          
+          {/* Custom navigation controls */}
+          <div className="flex justify-center items-center gap-4 mt-8">
+            <Button 
+              variant="outline" 
+              size="icon" 
+              className="rounded-full" 
+              onClick={() => carouselApi?.scrollPrev()}
+              disabled={!carouselApi?.canScrollPrev()}
+            >
+              <ChevronLeft className="h-4 w-4" />
+              <span className="sr-only">Previous step</span>
+            </Button>
+            
+            {/* Slider for step indication */}
+            <div className="w-1/2 mx-2">
+              <Slider
+                value={[currentStep]}
+                max={workSteps.length - 1}
+                step={1}
+                onValueChange={handleSliderChange}
+                className="w-full"
+              />
+            </div>
+            
+            <Button 
+              variant="outline" 
+              size="icon" 
+              className="rounded-full" 
+              onClick={() => carouselApi?.scrollNext()}
+              disabled={!carouselApi?.canScrollNext()}
+            >
+              <ChevronRight className="h-4 w-4" />
+              <span className="sr-only">Next step</span>
+            </Button>
+          </div>
+        </Carousel>
+      </div>
+    </>
   );
 };
 
