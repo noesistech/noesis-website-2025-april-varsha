@@ -21,7 +21,7 @@ const HowWeWorkSection = () => {
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
   
-  // Use mobile layout for mobile, tablet, and iPad (but not desktop)
+  // Use mobile layout for both mobile and tablet
   const useMobileLayout = isMobile || isTablet;
 
   const processSteps = [
