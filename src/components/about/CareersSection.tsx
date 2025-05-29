@@ -25,7 +25,9 @@ const applicationFormSchema = z.object({
   }).max(1000, {
     message: "Cover letter should not exceed 1000 characters."
   }),
-  resume: z.string().optional()
+  resume: z.string().min(1, {
+    message: "Please upload your resume."
+  })
 });
 
 type ApplicationFormValues = z.infer<typeof applicationFormSchema>;
@@ -56,7 +58,12 @@ const CareersSection = () => {
       
       // Add file size validation (5MB = 5 * 1024 * 1024 bytes)
       if (file.size > 5 * 1024 * 1024) {
-        form.setError('resume', { message: 'File size must be less than 5MB' });
+        form.setError('resume', { 
+          type: 'manual',
+          message: 'File size must be less than 5MB' 
+        });
+        setResumeFile(null);
+        form.setValue("resume", "");
         return;
       }
       
@@ -68,7 +75,12 @@ const CareersSection = () => {
       ];
       
       if (!allowedTypes.includes(file.type)) {
-        form.setError('resume', { message: 'Please upload a PDF, DOC, or DOCX file' });
+        form.setError('resume', { 
+          type: 'manual',
+          message: 'Please upload a PDF, DOC, or DOCX file' 
+        });
+        setResumeFile(null);
+        form.setValue("resume", "");
         return;
       }
       
@@ -99,6 +111,10 @@ const CareersSection = () => {
 
   const onSubmit = async (data: ApplicationFormValues) => {
     if (!resumeFile) {
+      form.setError('resume', { 
+        type: 'manual',
+        message: 'Please upload your resume before submitting.' 
+      });
       toast({
         title: "Resume Required",
         description: "Please upload your resume before submitting.",
@@ -268,7 +284,11 @@ const CareersSection = () => {
                           {/* Dropzone with click handler */}
                           <Dropzone onDrop={handleFileDrop}>
                             <div 
-                              className="border-2 border-dashed border-purple-500/30 rounded-lg p-6 cursor-pointer hover:border-purple-500/50 transition-colors text-center bg-[#242938]"
+                              className={`border-2 border-dashed rounded-lg p-6 cursor-pointer transition-colors text-center bg-[#242938] ${
+                                form.formState.errors.resume 
+                                  ? 'border-red-500/50 hover:border-red-500/70' 
+                                  : 'border-purple-500/30 hover:border-purple-500/50'
+                              }`}
                               onClick={triggerFilePicker}
                             >
                               <Upload className="h-8 w-8 mx-auto text-gray-400 mb-2" />

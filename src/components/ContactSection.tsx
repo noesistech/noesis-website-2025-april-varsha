@@ -312,7 +312,7 @@ const ContactSection = () => {
           </div>
         </div>
         
-        <AlertDialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        {/* <AlertDialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
           <AlertDialogContent className="bg-gray-800 border border-gray-700">
             <AlertDialogHeader>
               <AlertDialogTitle className="flex items-center text-white">
@@ -332,7 +332,7 @@ const ContactSection = () => {
               </Button>
             </div>
           </AlertDialogContent>
-        </AlertDialog>
+        </AlertDialog> */}
       </div>
     </section>
   );

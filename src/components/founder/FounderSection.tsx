@@ -11,7 +11,7 @@ interface FounderSectionProps {
 
 const FounderSection = ({ showCta = false }: FounderSectionProps) => {
   return (
-    <div className="container mx-auto px-4 mb-20">
+    <div className="container mx-auto px-4 mb-4 sm:mb-20">
       <div className="flex flex-col lg:flex-row gap-8 items-center">
         <div className="lg:w-1/3">
           <h2 className="section-title text-left gradient-text mb-6">

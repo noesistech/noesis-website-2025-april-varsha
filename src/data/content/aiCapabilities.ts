@@ -83,7 +83,7 @@ export const aiProductsData: AIProduct[] = [
     logoUrl: '/images/brainstormer-pro-logo.svg',
     logoWidth: 300, // Increased from default
     logoHeight: 80, // Increased from default
-    ctaUrl: '/brainstormer-pro',
+    ctaUrl: 'https://pro.brainstormer.io/',
     ctaText: 'Explore Pro'
   },
   {
@@ -95,6 +95,6 @@ export const aiProductsData: AIProduct[] = [
     logoWidth: 300, // Increased from default
     logoHeight: 80, // Increased from default
     ctaText: 'Try Studio',
-    ctaUrl: '/brainstormer-studio'
+    ctaUrl: 'https://brainstormer.io/'
   }
 ];
