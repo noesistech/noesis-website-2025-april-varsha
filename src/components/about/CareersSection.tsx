@@ -148,7 +148,7 @@ const CareersSection = () => {
           <p><strong>Name:</strong> ${data.fullName}</p>
           <p><strong>Email:</strong> ${data.email}</p>
           <p><strong>Position:</strong> ${data.position}</p>
-          <p><strong>Cover Letter:</strong> ${data.message}</p>
+          <p><strong>Cover Letter:</strong> <pre style="font: small/1.5 Arial, Helvetica, sans-serif; white-space: pre-wrap;">${data.message}</pre></p>
           <p><strong>Resume:</strong> ${filename}</p>
           <p>The resume has been attached as a downloadable file.</p>
         </div>
