@@ -87,9 +87,9 @@ const BrainstormerSection: React.FC<BrainstormerSectionProps> = ({
                     className="shadow-lg hover:shadow-noesis-purple/50"
                     asChild
                   >
-                    <Link to={product.ctaUrl} className="inline-flex items-center gap-2">
+                    <a href={product.ctaUrl} className="inline-flex items-center gap-2" target='_blank'>
                       {product.ctaText} <ArrowRight className="h-4 w-4" />
-                    </Link>
+                    </a>
                   </Button>
                 </div>
               </div>
