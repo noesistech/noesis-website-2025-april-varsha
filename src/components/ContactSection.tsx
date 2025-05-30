@@ -111,7 +111,7 @@ const ContactSection = () => {
             <p><strong>Name:</strong> ${data.name}</p>
             <p><strong>Email:</strong> ${data.email}</p>
             <p><strong>Subject:</strong> ${data.subject}</p>
-            <p><strong>Message:</strong><br/>${data.message.replace(/\n/g, "<br/>")}</p>
+            <p><strong>Message:</strong><pre style="font: small/1.5 Arial, Helvetica, sans-serif; white-space: pre-wrap;">${data.message}</pre></p>
           </div>
         `,
       };

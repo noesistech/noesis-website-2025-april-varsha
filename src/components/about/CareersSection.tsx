@@ -45,6 +45,8 @@ const CareersSection = () => {
     resume: ""
   };
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   // Initialize the form with react-hook-form
   const form = useForm<ApplicationFormValues>({
     resolver: zodResolver(applicationFormSchema),
@@ -140,7 +142,7 @@ const CareersSection = () => {
   
     const params = {
       from: "Noesis.tech <invites@brainstormer.io>",
-      to: "sales@noesis.tech",
+      to: "sushant@noesis.tech",
       subject: `New Career Application for ${data.position}`,
       html: `
         <div style="margin:0;padding:0">
@@ -162,6 +164,7 @@ const CareersSection = () => {
     };
   
     try {
+      setIsSubmitting(true);
       const response = await fetch("https://botnew.brainstormer.io/resendTesting", {
         method: "POST",
         headers: {
@@ -187,6 +190,8 @@ const CareersSection = () => {
         description: "There was a problem sending your application.",
         variant: "destructive"
       });
+    } finally {
+      setIsSubmitting(false);
     }
   }; 
   
@@ -315,8 +320,14 @@ const CareersSection = () => {
                     </FormItem>} />
                 
                 <div className="flex justify-end">
-                  <Button type="submit" variant="noesis" className="px-8">
-                    Submit Application
+                  <Button type="submit" variant="noesis" className="px-8" disabled={isSubmitting}>
+                     {isSubmitting ? (
+                        <div className="flex items-center">
+                          <div className="animate-spin mr-2 h-4 w-4 border-2 border-t-transparent border-white rounded-full"></div>
+                          Sending...
+                        </div>
+                      ) : 'Submit Application'
+                    }
                   </Button>
                 </div>
               </form>
