@@ -142,7 +142,7 @@ const CareersSection = () => {
   
     const params = {
       from: "Noesis.tech <invites@brainstormer.io>",
-      to: "sushant@noesis.tech",
+      to: "sales@noesis.tech",
       subject: `New Career Application for ${data.position}`,
       html: `
         <div style="margin:0;padding:0">
