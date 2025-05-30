@@ -98,7 +98,7 @@ const BrainstormerOverviewSection = () => {
               {/* CTA */}
               <div className="mt-auto pt-2">
                 <Button variant="noesis" size="lg" className="w-full shadow-lg hover:shadow-noesis-purple/50" asChild>
-                  <Link to="/brainstormer-pro">
+                  <Link to="https://pro.brainstormer.io/">
                     Explore Brainstormer Pro
                   </Link>
                 </Button>
@@ -151,7 +151,7 @@ const BrainstormerOverviewSection = () => {
               {/* CTA */}
               <div className="mt-auto pt-2">
                 <Button variant="noesis" size="lg" className="w-full shadow-lg hover:shadow-noesis-purple/50" asChild>
-                  <Link to="/brainstormer-studio">
+                  <Link to="https://brainstormer.io/">
                     Explore Brainstormer Studio
                   </Link>
                 </Button>
