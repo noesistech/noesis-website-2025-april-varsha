@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ChatBot from './chat/ChatBot';
 import { MessageProvider } from '@/contexts/MessageContext';
@@ -8,7 +9,7 @@ const ChatBotSection: React.FC = () => {
           <h2 className="section-title">
             Chat with <span className="text-noesis-purple">Neo, our homegrown AI agent</span>
           </h2>
-          <p className="section-subtitle">Powered by Brainstormer technology,
+          <p className="section-subtitle">Powered by Brainstormer technology.<br />
 Neo is available 24/7 to help answer your questions and assist with your inquiries.</p>
         </div>
 
