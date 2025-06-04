@@ -234,7 +234,7 @@ const Services = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
               {serviceItems.map((service, index) => (
                 <a 
-                  href={`#${service.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`} 
+                  href={`#uiux-service`} 
                   key={service.id} 
                   className="bg-[#222732]/90 border border-white/10 hover:border-noesis-purple/30 rounded-xl p-4 sm:p-8 transition-all duration-300 hover:shadow-lg group"
                 >
@@ -256,7 +256,7 @@ const Services = () => {
         </section>
         
         {/* Service Detail Sections */}
-        <section id="ui-ux" className={`${sectionClassName} bg-gradient-to-b from-[#1A1F2C] to-[#151a25]`}>
+        <section id="uiux-service" className={`${sectionClassName} bg-gradient-to-b from-[#1A1F2C] to-[#151a25]`}>
           <ServiceDetailSection 
             service={uiuxService}
             features={uiuxFeatures}
