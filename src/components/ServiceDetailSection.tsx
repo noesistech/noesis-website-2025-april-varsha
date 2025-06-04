@@ -37,7 +37,7 @@ const ServiceDetailSection: React.FC<ServiceDetailSectionProps> = ({
               <div className="bg-[#1A1F2C]/80 p-4 rounded-full mr-4 shadow-lg border border-white/5">
                 {getIconByName(service.icon_name)}
               </div>
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent leading-tight">
                 {service.title}
               </h2>
             </div>
