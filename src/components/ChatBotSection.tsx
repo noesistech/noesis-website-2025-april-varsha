@@ -2,6 +2,7 @@
 import React from 'react';
 import ChatBot from './chat/ChatBot';
 import { MessageProvider } from '@/contexts/MessageContext';
+
 const ChatBotSection: React.FC = () => {
   return <section id="chatbot" className="page-section bg-gradient-to-b from-gray-900/90 to-noesis-dark/80">
       <div className="container mx-auto px-4 sm:px-6">
@@ -9,8 +10,10 @@ const ChatBotSection: React.FC = () => {
           <h2 className="section-title">
             Chat with <span className="text-noesis-purple">Neo, our homegrown AI agent</span>
           </h2>
-          <p className="section-subtitle">Powered by Brainstormer technology.<br />
-Neo is available 24/7 to help answer your questions and assist with your inquiries.</p>
+          <p className="section-subtitle flex items-center justify-center gap-2">
+            Powered by <img src="/images/brainstormer-pro-logo.svg" alt="Brainstormer" className="h-6" />.<br />
+            Neo is available 24/7 to help answer your questions and assist with your inquiries.
+          </p>
         </div>
 
         <div className="mx-auto" style={{
