@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import ChatBot from './chat/ChatBot';
 import { MessageProvider } from '@/contexts/MessageContext';
@@ -9,7 +10,7 @@ const ChatBotSection: React.FC = () => {
           <h2 className="section-title">
             Chat with <span className="text-noesis-purple">Neo, our homegrown AI agent</span>
           </h2>
-          <p className="section-subtitle flex items-center justify-center gap-2">
+          <p className="section-subtitle flex items-center justify-center gap-2 mb-2">
             Powered by <img src="/lovable-uploads/24e53c8a-718d-4f88-a554-d21b1d882516.png" alt="Brainstormer" className="h-16" />
           </p>
           <p className="section-subtitle my-0">
@@ -29,3 +30,4 @@ const ChatBotSection: React.FC = () => {
     </section>;
 };
 export default ChatBotSection;
+
