@@ -12,7 +12,7 @@ const ChatBotSection: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto mb-6">
           <h2 className="section-title">
-            Chat with Our <span className="text-noesis-purple">AI Assistant</span>
+            Chat with <span className="text-noesis-purple">Neo, our homegrown AI agent</span>
           </h2>
           <p className="section-subtitle">
             Have questions? Our AI assistant is available 24/7 to help answer your inquiries.
