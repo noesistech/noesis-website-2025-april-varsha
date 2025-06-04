@@ -15,7 +15,7 @@ const ChatBotSection: React.FC = () => {
             Chat with <span className="text-noesis-purple">Neo, our homegrown AI agent</span>
           </h2>
           <p className="section-subtitle">
-            Have questions? Our AI assistant is available 24/7 to help answer your inquiries.
+            Powered by Brainstormer technology, Neo is available 24/7 to help answer your questions and assist with your inquiries.
           </p>
         </div>
 
