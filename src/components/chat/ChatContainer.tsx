@@ -27,7 +27,7 @@ const ChatContainer = ({
   return (
     <div className={`transition-all duration-500 ease-in-out ${messages.length > 1 ? 'max-w-full' : 'max-w-4xl'} mx-auto relative bg-gradient-to-b from-noesis-dark to-noesis-darker border border-noesis-purple/30 rounded-lg shadow-lg ${embedded ? 'w-full' : 'w-full max-w-4xl h-[600px]'} flex flex-col overflow-hidden ${!embedded ? 'animate-fade-in' : ''}`}>
       <ChatHeader 
-        title="Noesis AI Assistant" 
+        title="Neo AI Assistant" 
         onClose={onClose}
         showCloseButton={!embedded}
       />

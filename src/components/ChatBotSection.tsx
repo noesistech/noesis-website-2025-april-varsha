@@ -4,14 +4,14 @@ import { MessageProvider } from '@/contexts/MessageContext';
 const ChatBotSection: React.FC = () => {
   return <section id="chatbot" className="page-section bg-gradient-to-b from-gray-900/90 to-noesis-dark/80">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="text-center max-w-3xl mx-auto">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:!mb-12">
           <h2 className="section-title">
             Chat with <span className="text-noesis-purple">Neo, our homegrown AI agent</span>
           </h2>
-          <p className="flex items-center justify-center gap-2 text-center text-gray-300 max-w-2xl mx-auto text-lg">
-            Powered by <img src="/lovable-uploads/24e53c8a-718d-4f88-a554-d21b1d882516.png" alt="Brainstormer" className="h-12" />
+          <p className="flex items-center justify-center gap-2 text-center text-gray-300 max-w-2xl mx-auto text-lg !mb-0">
+            Powered by <img src="/lovable-uploads/24e53c8a-718d-4f88-a554-d21b1d882516.png" alt="Brainstormer" className="h-10 sm:h-12" />
           </p>
-          <p className="text-center text-gray-300 max-w-2xl mx-auto text-lg mt-5">
+          <p className="text-center text-gray-300 max-w-2xl mx-auto text-lg !mt-[4px]">
             Neo is available 24/7 to help answer your questions and assist with your inquiries.
           </p>
         </div>

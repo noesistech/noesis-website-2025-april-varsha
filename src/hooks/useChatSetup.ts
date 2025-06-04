@@ -67,7 +67,7 @@ export const useChatSetup = () => {
           
           // Set bot info
           setBot({
-            name: bot.Name || "Noesis AI Assistant",
+            name: bot.Name || "Neo AI Assistant",
             description: bot.Description || "How can I help you today?",
             image: botImage ? `${ASSETS_URL}${botImage}` : ''
           });

@@ -58,12 +58,12 @@ const Header = () => {
 
   // Services submenu items
   const servicesSubmenu = [
-    { name: "UI/UX", href: "/services#uiux" },
-    { name: "Web and Application Development", href: "/services#webdev" },
-    { name: "Graphics and Content Creation", href: "/services#graphics" },
-    { name: "Cloud Services & DevOps", href: "/services#cloud" },
-    { name: "AI Customized Solutions", href: "/services#ai" },
-    { name: "AI-Enhanced Staff Solutions", href: "/services#staff" }
+    { name: "UI/UX", href: "/services#uiux-service" },
+    { name: "Web and Application Development", href: "/services#web-and-application-development" },
+    { name: "Graphics and Content Creation", href: "/services#graphics-and-content-creation" },
+    { name: "Cloud Services & DevOps", href: "/services#cloud-services-and-devops" },
+    { name: "AI Customized Solutions", href: "/services#ai-customized-solutions" },
+    { name: "AI-Enhanced Staff Solutions", href: "/services#ai-enhanced-staff-solutions" }
   ];
 
   // Solutions submenu items
@@ -92,7 +92,7 @@ const Header = () => {
       submenu: solutionsSubmenu
     },
     { 
-      name: 'Noesis AI Assistant',
+      name: 'Neo AI Assistant',
       href: '/#chatbot',
       hasSubmenu: false
     }

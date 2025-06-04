@@ -374,3 +374,7 @@ main section h2 + p {
 .markdown-text p a {
   text-decoration: underline !important;
 }
+
+#chatbot .section-title {
+  margin-bottom: 5px !important;
+}
