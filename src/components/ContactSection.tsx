@@ -272,8 +272,8 @@ const ContactSection = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-white mb-1">Email</h3>
-                      <a href="mailto:yukti@noesis.tech" className="text-white/80 hover:text-noesis-purple transition-colors block">
-                        yukti@noesis.tech
+                      <a href="mailto:jaimin@noesis.tech" className="text-white/80 hover:text-noesis-purple transition-colors block">
+                        jaimin@noesis.tech
                       </a>
                       <a href="mailto:sales@noesis.tech" className="text-white/80 hover:text-noesis-purple transition-colors block">
                         sales@noesis.tech
@@ -287,8 +287,8 @@ const ContactSection = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-white mb-1">Phone</h3>
-                      <a href="tel:+916378652266" className="text-white/80 hover:text-noesis-purple transition-colors">
-                        +91 6378652266
+                      <a href="tel:+918286126270" className="text-white/80 hover:text-noesis-purple transition-colors">
+                        +91 8286126270
                       </a>
                     </div>
                   </div>
