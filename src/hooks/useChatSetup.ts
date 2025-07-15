@@ -4,10 +4,10 @@ import { useMessageContext } from '@/contexts/MessageContext';
 import { toast } from 'sonner';
 
 // Constants
-const BOT_ID = '69e0cdcc_7477_4179_99e9_876e48adba3b';
-const API_URL = 'https://bot.brainstormer.dev';
-const BOT_API_KEY = 'Vyhn1VFWqwM2LLvnaPpG';
-const ASSETS_URL = 'https://studio.brainstormer.dev';
+const BOT_ID = 'c59b7102_209e_4047_994d_1d40efdfff3f';
+const API_URL = 'https://botnew.brainstormer.io';
+const BOT_API_KEY = 'a5yq99EA07SxF9k4qmqC';
+const ASSETS_URL = 'https://studio.brainstormer.io';
 
 export const useChatSetup = () => {
   const {
