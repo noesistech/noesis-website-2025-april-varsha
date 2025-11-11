@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,7 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { supabase } from "@/integrations/supabase/client";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, {
@@ -33,6 +32,12 @@ type ContactFormValues = z.infer<typeof contactFormSchema>;
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [captchaValue, setCaptchaValue] = useState<string | null>(null);
+  const [captchaError, setCaptchaError] = useState(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  // Get reCAPTCHA site key from environment variable
+  const RECAPTCHA_SITE_KEY = "6Lf32wcsAAAAAOzaKASxV2aPVgbOAQ4lX8BUZM0p";
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -44,60 +49,25 @@ const ContactSection = () => {
     }
   });
 
-  // const onSubmit = async (data: ContactFormValues) => {
-  //   try {
-  //     setIsSubmitting(true);
-      
-  //     const brevoResult = await supabase.functions.invoke('submit-contact-form', {
-  //       body: {
-  //         name: data.name,
-  //         email: data.email,
-  //         message: data.message
-  //       }
-  //     });
-      
-  //     if (brevoResult.error) {
-  //       throw new Error(`Error saving to Brevo: ${brevoResult.error.message}`);
-  //     }
-      
-  //     console.log("Successfully saved to Brevo:", brevoResult);
-      
-  //     const emailResult = await supabase.functions.invoke('send-contact-email', {
-  //       body: {
-  //         name: data.name,
-  //         email: data.email,
-  //         subject: data.subject,
-  //         message: data.message
-  //       }
-  //     });
-      
-  //     if (emailResult.error) {
-  //       throw new Error(`Error sending email: ${emailResult.error.message}`);
-  //     }
-      
-  //     console.log("Email sent successfully:", emailResult);
-      
-  //     toast({
-  //       title: "Message sent successfully!",
-  //       description: "We'll get back to you soon."
-  //     });
-      
-  //     setShowSuccessDialog(true);
-  //     form.reset();
-  //   } catch (error) {
-  //     console.error("Error submitting form:", error);
-  //     toast({
-  //       title: "Submission Failed",
-  //       description: "There was a problem sending your message. Please try again.",
-  //       variant: "destructive"
-  //     });
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
-  
+  const onCaptchaChange = (value: string | null) => {
+    setCaptchaValue(value);
+    if (value) {
+      setCaptchaError(false);
+    }
+  };
 
   const onSubmit = async (data: ContactFormValues) => {
+    // Validate captcha before submission
+    if (!captchaValue) {
+      setCaptchaError(true);
+      toast({
+        title: "Verification Required",
+        description: "Please complete the reCAPTCHA verification.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     try {
       setIsSubmitting(true);
   
@@ -114,6 +84,7 @@ const ContactSection = () => {
             <p><strong>Message:</strong><pre style="font: small/1.5 Arial, Helvetica, sans-serif; white-space: pre-wrap;">${data.message}</pre></p>
           </div>
         `,
+        captchaToken: captchaValue // Include captcha token for backend verification
       };
   
       const response = await fetch("https://botnew.brainstormer.io/resendTesting", {
@@ -124,10 +95,6 @@ const ContactSection = () => {
         body: JSON.stringify(params)
       });
   
-      // if (!response.ok) {
-      //   throw new Error("Email sending failed");
-      // }
-  
       toast({
         title: "Message sent successfully!",
         description: "We'll get back to you soon."
@@ -135,6 +102,8 @@ const ContactSection = () => {
   
       setShowSuccessDialog(true);
       form.reset();
+      setCaptchaValue(null);
+      recaptchaRef.current?.reset();
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
@@ -145,8 +114,7 @@ const ContactSection = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };  
-
+  };
 
   return (
     <section id="contact" className="py-8 sm:py-16 bg-gray-900/30 overflow-hidden relative">
@@ -155,7 +123,7 @@ const ContactSection = () => {
           {/* Contact Form */}
           <div>
             <Card className="bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 overflow-hidden h-full">
-              <div className="p-8">
+              <div className="p-4 sm:p-8">
                 <h2 className="text-2xl md:text-3xl font-bold text-noesis-purple mb-8">
                   Start The Conversation
                 </h2>
@@ -235,10 +203,25 @@ const ContactSection = () => {
                       )}
                     />
                     
+                    {/* reCAPTCHA */}
+                    <div className="flex flex-col">
+                      <ReCAPTCHA
+                        ref={recaptchaRef}
+                        sitekey={RECAPTCHA_SITE_KEY}
+                        onChange={onCaptchaChange}
+                        theme="dark"
+                      />
+                      {captchaError && (
+                        <p className="text-sm text-red-500 mt-2">
+                          Please complete the reCAPTCHA verification
+                        </p>
+                      )}
+                    </div>
+                    
                     <Button 
                       type="submit" 
-                      disabled={isSubmitting}
-                      className="bg-noesis-purple hover:bg-noesis-purple/90 text-white"
+                      disabled={isSubmitting || !captchaValue}
+                      className="bg-noesis-purple hover:bg-noesis-purple/90 text-white disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <div className="flex items-center">
@@ -311,28 +294,6 @@ const ContactSection = () => {
             </Card>
           </div>
         </div>
-        
-        {/* <AlertDialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
-          <AlertDialogContent className="bg-gray-800 border border-gray-700">
-            <AlertDialogHeader>
-              <AlertDialogTitle className="flex items-center text-white">
-                <CheckCircle className="mr-2 h-5 w-5 text-green-500" />
-                Message Sent Successfully
-              </AlertDialogTitle>
-              <AlertDialogDescription className="text-gray-300">
-                Thank you for contacting us! We'll get back to you as soon as possible.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <div className="flex justify-end">
-              <Button 
-                onClick={() => setShowSuccessDialog(false)}
-                className="bg-noesis-purple hover:bg-noesis-purple/90"
-              >
-                Close
-              </Button>
-            </div>
-          </AlertDialogContent>
-        </AlertDialog> */}
       </div>
     </section>
   );
