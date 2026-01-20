@@ -90,17 +90,19 @@ const Footer = () => {
               </div>
               
               <div className="flex">
-                <a href="https://maps.app.goo.gl/CkqvvqT73buV1keWA" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group transition-colors">
+                <a href="https://maps.app.goo.gl/nn2kthLwid3usFzW7" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group transition-colors">
                   <div className="h-10 w-10 rounded-full bg-noesis-purple/20 flex items-center justify-center group-hover:bg-noesis-purple/30 transition-colors flex-shrink-0 mt-0.5">
                     <MapPin className="h-5 w-5 text-noesis-purple" />
                   </div>
                   <div>
                     <p className="text-white font-medium">Visit Us</p>
-                    <p className="text-white/70 group-hover:text-white transition-colors md:pr-2">4th Floor, Block No. 5,<br/>
+                    <p className="text-white/70 group-hover:text-white transition-colors md:pr-2">
+                        4th Floor, Block no 5,<br/>
                         Second Avenue, Atul Projects,<br/>
-                        Subhash Nagar Road, Subhash Nagar,<br/>
-                        MIDC, Andheri East,<br/>
-                        Mumbai – 400069</p>
+                        Road no 23, Subhash Nagar,<br/>
+                        MIDC, Andheri (East),<br/>
+                        Mumbai - 400093
+                    </p>
                   </div>
                 </a>
               </div>

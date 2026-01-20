@@ -283,11 +283,11 @@ const ContactSection = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-white mb-1">Address</h3>
                       <p className="text-white/80">
-                        4th Floor, Block No. 5,<br/>
+                        4th Floor, Block no 5,<br/>
                         Second Avenue, Atul Projects,<br/>
-                        Subhash Nagar Road, Subhash Nagar,<br/>
-                        MIDC, Andheri East,<br/>
-                        Mumbai – 400069
+                        Road no 23, Subhash Nagar,<br/>
+                        MIDC, Andheri (East),<br/>
+                        Mumbai - 400093
                       </p>
                     </div>
                   </div>
