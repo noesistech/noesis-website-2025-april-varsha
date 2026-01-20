@@ -96,7 +96,11 @@ const Footer = () => {
                   </div>
                   <div>
                     <p className="text-white font-medium">Visit Us</p>
-                    <p className="text-white/70 group-hover:text-white transition-colors md:pr-2">Unit 209, 2nd Floor, C Wing, Floral Deck Plaza, MIDC Road, Andheri (East), Mumbai 400093</p>
+                    <p className="text-white/70 group-hover:text-white transition-colors md:pr-2">4th Floor, Block No. 5,<br/>
+                        Second Avenue, Atul Projects,<br/>
+                        Subhash Nagar Road, Subhash Nagar,<br/>
+                        MIDC, Andheri East,<br/>
+                        Mumbai – 400069</p>
                   </div>
                 </a>
               </div>

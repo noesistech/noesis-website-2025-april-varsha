@@ -283,9 +283,11 @@ const ContactSection = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-white mb-1">Address</h3>
                       <p className="text-white/80">
-                        C, Wing, 209, Floral Deck Plaza, 23rd Rd, M.I.D.C.,<br />
-                        Santacruz Electronic Export Processing Zone,<br />
-                        Andheri East, Mumbai, Maharashtra 400093
+                        4th Floor, Block No. 5,<br/>
+                        Second Avenue, Atul Projects,<br/>
+                        Subhash Nagar Road, Subhash Nagar,<br/>
+                        MIDC, Andheri East,<br/>
+                        Mumbai – 400069
                       </p>
                     </div>
                   </div>
