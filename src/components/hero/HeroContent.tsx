@@ -58,15 +58,6 @@ const HeroContent = () => {
           </Button>
         </a>
       </div>
-      <div className="websummit-wrapper w-full flex items-center justify-start flex-col gap-4 lg:flex-row lg:gap-0 py-0 mt-10 sm:mt-14 mb-8">
-          <a href="https://qatar.websummit.com/appearances/qat26/f7874402-30dc-4df3-82fc-a2247cc0bdff/brainstormer-innovations-llc/?utm_source=sharing&utm_campaign=social-cards&utm_medium=url" target="_blank" rel="noopener noreferrer" className="block">
-              <img src="/images/websummit.png" alt="Websummit" className="w-full max-w-[220px] h-full object-cover lg:border-r-2 lg:pr-3 xl:pr-5 border-[#ffffff99]" />
-          </a>
-          <div className="pl-0 lg:pl-3 xl:pl-5">
-            <span className="block text-center lg:text-left font-thin">Join us at</span>
-            <p className="font-bold text-[15px] lg:text-[12px] xl:text-[15px] mb-0">Booth A4-51 on 4th February 2026</p>
-          </div>
-      </div>
     </div>;
 };
 
