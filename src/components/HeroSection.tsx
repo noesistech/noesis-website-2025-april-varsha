@@ -71,7 +71,7 @@ const HeroSection = () => {
       </div>
       
       {/* Scroll arrow with enhanced styling - Updated href to point to chatbot section */}
-      <div className="absolute bottom-0 left-0 right-0 flex justify-center animate-bounce z-20 w-fit mx-auto">
+      <div className="absolute bottom-6 left-0 right-0 flex justify-center animate-bounce z-20">
         <a 
           href="#chatbot" 
           className="text-white/80 hover:text-white transition-colors bg-noesis-dark/50 p-2 rounded-full backdrop-blur-sm shadow-lg border border-white/10 hover:border-white/20"
