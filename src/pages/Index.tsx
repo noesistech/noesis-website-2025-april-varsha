@@ -77,6 +77,7 @@ const Index = () => {
           solutions={solutionItems} 
         />
         <ClientsSection />
+        <PartnerBadgeSection />
       </main>
       
       {/* Contact footer container */}
@@ -84,6 +85,7 @@ const Index = () => {
         <ContactBanner />
         <Footer />
       </div>
+
     </div>
   );
 };
