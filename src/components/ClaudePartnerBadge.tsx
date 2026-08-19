@@ -27,7 +27,7 @@ const ClaudePartnerBadge = () => {
   return (
     <div className="flex justify-center">
       <div
-        className="w-[225px] h-[405px] overflow-hidden flex items-start justify-center [&>iframe]:scale-[1.5] [&>iframe]:origin-top-left"
+        className="w-[225px] h-[405px] overflow-hidden flex items-start justify-center rounded-lg shadow-lg bg-white [&>iframe]:scale-[1.5] [&>iframe]:origin-top-left [&>iframe]:bg-white"
       >
         <div
           ref={containerRef}
