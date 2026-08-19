@@ -22,7 +22,7 @@ const ClaudePartnerBadge = () => {
 
   return (
     <div className="flex justify-center px-4">
-      <Card className="w-full max-w-[400px] h-[270px] overflow-hidden p-0 rounded-lg shadow-lg border border-border/50 bg-card">
+      <Card className="w-full max-w-[400px] h-[270px] overflow-hidden p-0 rounded-lg shadow-lg border border-border/50 bg-[hsl(var(--badge-surface))]">
         <div
           ref={containerRef}
           className="w-full h-full"
