@@ -12,7 +12,9 @@ import AICapabilitiesPreviewSection from '../components/AICapabilitiesPreviewSec
 import BrainstormerSection from '../components/BrainstormerSection';
 import ClientsSection from '../components/ClientsSection';
 import ContactBanner from '../components/ContactBanner';
+import PartnerBadgeSection from '../components/PartnerBadgeSection';
 import FounderSection from '@/components/founder/FounderSection';
+
 import PromiseSection from '@/components/PromiseSection';
 import { useContent } from '@/contexts/ContentContext';
 
