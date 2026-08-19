@@ -12,7 +12,9 @@ import AICapabilitiesPreviewSection from '../components/AICapabilitiesPreviewSec
 import BrainstormerSection from '../components/BrainstormerSection';
 import ClientsSection from '../components/ClientsSection';
 import ContactBanner from '../components/ContactBanner';
+import PartnerBadgeSection from '../components/PartnerBadgeSection';
 import FounderSection from '@/components/founder/FounderSection';
+
 import PromiseSection from '@/components/PromiseSection';
 import { useContent } from '@/contexts/ContentContext';
 
@@ -75,6 +77,7 @@ const Index = () => {
           solutions={solutionItems} 
         />
         <ClientsSection />
+        <PartnerBadgeSection />
       </main>
       
       {/* Contact footer container */}
@@ -82,6 +85,7 @@ const Index = () => {
         <ContactBanner />
         <Footer />
       </div>
+
     </div>
   );
 };

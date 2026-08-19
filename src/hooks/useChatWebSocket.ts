@@ -25,8 +25,9 @@ export const useChatWebSocket = () => {
   
   const [wsConnected, setWsConnected] = useState(false);
   const lastPongRef = useRef<number>(Date.now());
-  const connectionCheckInterval = useRef<NodeJS.Timeout | null>(null);
-  const pingInterval = useRef<NodeJS.Timeout | null>(null);
+  const connectionCheckInterval = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pingInterval = useRef<ReturnType<typeof setInterval> | null>(null);
+
   
   // Clean up intervals on unmount
   useEffect(() => {
